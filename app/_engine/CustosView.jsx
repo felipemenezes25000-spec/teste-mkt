@@ -49,11 +49,11 @@ export default function CustosView({ calc }) {
       </div>
       <div className="mt-4 text-sm rounded-xl border border-line bg-paper2/50 p-3">
         {calc.orcamento <= 0 ? (
-          <p className="text-[#9a3b27]">Defina seu orçamento lá em cima pra ver o fôlego.</p>
+          <p className="text-danger">Defina seu orçamento lá em cima pra ver o fôlego.</p>
         ) : f.cobreTudo ? (
-          <p className="text-[#1f6b48]">Orçamento de <b>{fmtMoeda(calc.orcamento, cur)}</b> cobre a viagem toda. Sobra <b>{fmtMoeda(f.sobra, cur)}</b> — cerca de <b>{f.diasExtras} dias</b> a mais no ritmo de vida ({fmtMoeda(calc.mediaDia, cur)}/dia). Fim previsto: {fmtData(f.fimViagem)}.</p>
+          <p className="text-success">Orçamento de <b>{fmtMoeda(calc.orcamento, cur)}</b> cobre a viagem toda. Sobra <b>{fmtMoeda(f.sobra, cur)}</b> — cerca de <b>{f.diasExtras} dias</b> a mais no ritmo de vida ({fmtMoeda(calc.mediaDia, cur)}/dia). Fim previsto: {fmtData(f.fimViagem)}.</p>
         ) : (
-          <p className="text-[#9a3b27]">A grana acaba em <b>{fmtData(f.dataQuebra)}</b> — faltam <b>{fmtMoeda(f.falta, cur)}</b> pra fechar ({f.diasDescobertos} dias da viagem descobertos).</p>
+          <p className="text-danger">A grana acaba em <b>{fmtData(f.dataQuebra)}</b> — faltam <b>{fmtMoeda(f.falta, cur)}</b> pra fechar ({f.diasDescobertos} dias da viagem descobertos).</p>
         )}
         <p className="text-xs text-inksoft mt-1">Valores na moeda base ({cur}); trechos em outras moedas são convertidos pelo câmbio aproximado.</p>
       </div>

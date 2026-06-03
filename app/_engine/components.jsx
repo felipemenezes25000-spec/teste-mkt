@@ -3,20 +3,20 @@ import { fmtMoeda, fmtData, clamp, num } from './utils.js';
 
 // Cores por nível (strings completas pro Tailwind detectar no build).
 export const ESTACAO_UI = {
-  bom:     { dot:'bg-sage',     chip:'bg-[#E7F1EA] text-[#1f6b48] border-[#bfe0cd]', label:'Boa época' },
-  parcial: { dot:'bg-amberx',   chip:'bg-[#F7EDD6] text-[#8a5e12] border-[#e7d3a3]', label:'Época parcial' },
-  ruim:    { dot:'bg-clay',     chip:'bg-[#F6E2DB] text-[#9a3b27] border-[#e7c1b6]', label:'Fora de época' },
+  bom:     { dot:'bg-sage',     chip:'bg-success-bg text-success border-success-bd', label:'Boa época' },
+  parcial: { dot:'bg-amberx',   chip:'bg-warn-bg text-warn border-warn-bd', label:'Época parcial' },
+  ruim:    { dot:'bg-clay',     chip:'bg-danger-bg text-danger border-danger-bd', label:'Fora de época' },
   na:      { dot:'bg-stone-400',chip:'bg-stone-100 text-stone-500 border-stone-200', label:'Sem dado' },
 };
 export const VISTO_UI = {
-  ok:   { chip:'bg-[#E7F1EA] text-[#1f6b48] border-[#bfe0cd]' },
-  over: { chip:'bg-[#F6E2DB] text-[#9a3b27] border-[#e7c1b6]' },
+  ok:   { chip:'bg-success-bg text-success border-success-bd' },
+  over: { chip:'bg-danger-bg text-danger border-danger-bd' },
   na:   { chip:'bg-stone-100 text-stone-500 border-stone-200' },
 };
 export const NIVEL_FOLEGO = {
-  verde:    { barra:'bg-sage',  texto:'text-[#1f6b48]', tag:'Folgado',  bgtile:'bg-[#E7F1EA] border-[#bfe0cd]' },
-  amarelo:  { barra:'bg-amberx',texto:'text-[#8a5e12]', tag:'Apertado', bgtile:'bg-[#F7EDD6] border-[#e7d3a3]' },
-  vermelho: { barra:'bg-clay',  texto:'text-[#9a3b27]', tag:'Não fecha', bgtile:'bg-[#F6E2DB] border-[#e7c1b6]' },
+  verde:    { barra:'bg-sage',  texto:'text-success', tag:'Folgado',  bgtile:'bg-success-bg border-success-bd' },
+  amarelo:  { barra:'bg-amberx',texto:'text-warn', tag:'Apertado', bgtile:'bg-warn-bg border-warn-bd' },
+  vermelho: { barra:'bg-clay',  texto:'text-danger', tag:'Não fecha', bgtile:'bg-danger-bg border-danger-bd' },
 };
 
 export function Toasts({ items, onClose }) {
@@ -24,7 +24,7 @@ export function Toasts({ items, onClose }) {
     <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 w-[min(92vw,360px)]" aria-live="polite">
       {items.map(t => (
         <div key={t.id} role={t.tipo === 'erro' ? 'alert' : 'status'}
-          className={`rise rounded-xl border px-4 py-3 shadow-lg text-sm flex items-start gap-2 ${t.tipo === 'erro' ? 'bg-[#F6E2DB] border-[#e7c1b6] text-[#9a3b27]' : 'bg-[#E7F1EA] border-[#bfe0cd] text-[#1f6b48]'}`}>
+          className={`rise rounded-xl border px-4 py-3 shadow-lg text-sm flex items-start gap-2 ${t.tipo === 'erro' ? 'bg-danger-bg border-danger-bd text-danger' : 'bg-success-bg border-success-bd text-success'}`}>
           <span className="font-bold" aria-hidden>{t.tipo === 'erro' ? '⚠' : '✓'}</span>
           <span className="flex-1">{t.msg}</span>
           <button onClick={() => onClose(t.id)} className="opacity-60 hover:opacity-100 focusring" aria-label="Fechar aviso">✕</button>
@@ -36,7 +36,7 @@ export function Toasts({ items, onClose }) {
 
 export function NumberInput({ value, onChange, min = 0, max = 100000, step = 1, suffix, className = '', ariaLabel }) {
   return (
-    <div className={`flex items-center rounded-lg border border-line bg-white overflow-hidden ${className}`}>
+    <div className={`flex items-center rounded-lg border border-line bg-input overflow-hidden ${className}`}>
       <input type="number" inputMode="decimal" min={min} max={max} step={step} value={value} aria-label={ariaLabel}
         onChange={(e) => onChange(clamp(num(e.target.value, min), min, max))}
         className="w-full px-2.5 py-1.5 bg-transparent text-ink tnum focusring rounded-lg" />
@@ -55,7 +55,7 @@ export function MesesPicker({ value, onChange }) {
           <button key={mn} type="button" aria-pressed={on}
             aria-label={`${MESES_PT_LONGO[i]}${on ? ' (marcado como boa época)' : ''}`}
             onClick={() => { const ns = new Set(set); on ? ns.delete(mn) : ns.add(mn); onChange([...ns].sort((a, b) => a - b)); }}
-            className={`px-2 py-1 rounded-md text-xs border transition focusring ${on ? 'bg-pine text-white border-pine' : 'bg-white text-inksoft border-line hover:border-pine/50'}`}>
+            className={`px-2 py-1 rounded-md text-xs border transition focusring ${on ? 'bg-pine text-white border-pine' : 'bg-input text-inksoft border-line hover:border-pine/50'}`}>
             {m}
           </button>
         );
@@ -110,8 +110,8 @@ export function Tripe({ calc }) {
               </div>
             ) : (
               <div>
-                <div className="font-display text-3xl sm:text-4xl leading-tight text-[#9a3b27]">A grana acaba em {fmtData(f.dataQuebra)}.</div>
-                <p className="mt-2 text-[15px] text-[#9a3b27]">
+                <div className="font-display text-3xl sm:text-4xl leading-tight text-danger">A grana acaba em {fmtData(f.dataQuebra)}.</div>
+                <p className="mt-2 text-[15px] text-danger">
                   Faltam <b>{fmtMoeda(f.falta, base)}</b> pra fechar — cerca de <b>{f.diasDescobertos} dias</b> da viagem ficam descobertos.
                   {calc.orcamento <= 0 && ' Defina seu orçamento ali em cima.'}
                 </p>

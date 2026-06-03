@@ -5,7 +5,7 @@ const VARIANTS = {
   secondary: 'border border-line bg-card text-inksoft hover:text-pine',
   ghost: 'text-inksoft hover:text-pine',
   danger: 'border border-clay/40 bg-white text-clay hover:bg-clay/5',
-  accent: 'bg-ochre text-ink shadow-md hover:brightness-95',
+  accent: 'bg-ochre text-onochre shadow-md hover:brightness-95',
 };
 
 export function Button({ variant = 'primary', size = 'md', loading = false, className = '', children, ...props }) {

@@ -59,7 +59,7 @@ export default function LoginModal({ onClose, onSubmit }) {
               onChange={(e) => { setEmail(e.target.value); if (erro) setErro(''); }}
               placeholder="voce@exemplo.com"
               aria-invalid={email && !valido ? true : undefined}
-              className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-white text-ink focusring"
+              className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-input text-ink focusring"
             />
           </label>
           {email && !valido && <p className="text-xs text-clay">Digite um e-mail válido.</p>}

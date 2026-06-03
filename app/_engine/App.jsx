@@ -16,6 +16,7 @@ import CustosView from './CustosView.jsx';
 import { supabaseConfigurado, usuarioAtual, carregarViagemNuvem, salvarViagemNuvem, entrarComEmail, sair } from './supabase.js';
 import LoginModal from './LoginModal.jsx';
 import { useConfirm } from './useConfirm.jsx';
+import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
 
 // Quando o backend (Render) tem a chave de IA, a IA funciona sem chave do usuário.
 const AI_SERVIDOR = process.env.NEXT_PUBLIC_AI_SERVER === '1';
@@ -26,7 +27,7 @@ function AdicionarPais({ onAdd }) {
     <div className="rise rounded-2xl border border-dashed border-pine/40 bg-pine/5 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
       <div className="text-sm text-pine font-semibold shrink-0">➕ Adicionar país</div>
       <select value={code} onChange={(e) => setCode(e.target.value)} aria-label="Escolher país para adicionar"
-        className="flex-1 px-3 py-2 rounded-lg border border-line bg-white text-ink focusring">
+        className="flex-1 px-3 py-2 rounded-lg border border-line bg-input text-ink focusring">
         <option value="">Escolha um país (já vem pré-preenchido)…</option>
         {PAISES_REF.map(p => <option key={p.code} value={p.code}>{p.nome} — {p.regiao}</option>)}
         <option value="__custom">+ Outro país (manual)</option>
@@ -34,6 +35,58 @@ function AdicionarPais({ onAdd }) {
       <button onClick={() => { if (!code) return; onAdd(code); setCode(''); }} disabled={!code}
         className="px-4 py-2 rounded-lg bg-pine text-white font-semibold hover:bg-pinedk disabled:opacity-50 focusring shrink-0">Adicionar à rota</button>
     </div>
+  );
+}
+
+// Parâmetros globais da viagem, separados das ações do cabeçalho (reduz a densidade
+// do topo). Recolhível e persistido; quando fechado mostra um resumo de uma linha.
+function ParametrosViagem({ settings, base, onSet, onBase, onPassaporte }) {
+  const [aberto, setAberto] = useState(() => {
+    try { return localStorage.getItem('mundosemfim.params.collapsed') !== '1'; } catch (e) { return true; }
+  });
+  function toggle() {
+    setAberto(a => {
+      const nv = !a;
+      try { localStorage.setItem('mundosemfim.params.collapsed', nv ? '0' : '1'); } catch (e) {}
+      return nv;
+    });
+  }
+  const campo = 'mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring';
+  return (
+    <section className="rise rounded-2xl border border-line bg-card overflow-hidden" aria-label="Parâmetros da viagem">
+      <button type="button" onClick={toggle} aria-expanded={aberto}
+        className="w-full flex items-center gap-3 px-4 py-3 text-left focusring">
+        <span className="font-display text-lg text-ink whitespace-nowrap">⚙ Parâmetros da viagem</span>
+        {!aberto && (
+          <span className="text-xs text-inksoft truncate">
+            Início {settings.dataInicio} · Orçamento {fmtMoeda(num(settings.orcamento), base)} · Base {base} · {PASSAPORTES[settings.passaporte]}
+          </span>
+        )}
+        <span className="ml-auto text-inksoft text-sm shrink-0" aria-hidden>{aberto ? '▲ recolher' : '▼ editar'}</span>
+      </button>
+      {aberto && (
+        <div className="px-4 pb-4 pt-3 border-t border-line grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <label className="block text-xs text-inksoft font-medium">Início (1º trecho)
+            <input type="date" value={settings.dataInicio} onChange={(e) => onSet({ dataInicio: e.target.value })}
+              aria-label="Data de início da viagem" className={`${campo} tnum`} />
+          </label>
+          <label className="block text-xs text-inksoft font-medium">Orçamento total
+            <input type="number" min="0" value={settings.orcamento} onChange={(e) => onSet({ orcamento: clamp(num(e.target.value), 0, 1e12) })}
+              aria-label="Orçamento total disponível" className={`${campo} tnum`} />
+          </label>
+          <label className="block text-xs text-inksoft font-medium" title="Moeda em que totais, orçamento e fôlego são exibidos.">Moeda base
+            <select value={base} onChange={(e) => onBase(e.target.value)} aria-label="Moeda base de exibição" className={campo}>
+              {MOEDAS.map(m => <option key={m.code} value={m.code}>{m.code} — {m.nome}</option>)}
+            </select>
+          </label>
+          <label className="block text-xs text-inksoft font-medium" title="Regras de visto mudam conforme o seu passaporte.">Passaporte
+            <select value={settings.passaporte} onChange={(e) => onPassaporte(e.target.value)} aria-label="Seu passaporte (define as regras de visto)" className={campo}>
+              {Object.entries(PASSAPORTES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+            </select>
+          </label>
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -276,37 +329,23 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <label className="text-xs text-inksoft flex items-center gap-1.5 bg-card border border-line rounded-lg px-2 py-1">
-              Início
-              <input type="date" value={plan.settings.dataInicio} onChange={(e) => setSettings({ dataInicio: e.target.value })} aria-label="Data de início da viagem" className="bg-transparent text-ink focusring tnum" />
-            </label>
-            <label className="text-xs text-inksoft flex items-center gap-1.5 bg-card border border-line rounded-lg px-2 py-1">
-              Orçamento
-              <input type="number" min="0" value={plan.settings.orcamento} onChange={(e) => setSettings({ orcamento: clamp(num(e.target.value), 0, 1e12) })} aria-label="Orçamento total disponível" className="w-24 bg-transparent text-ink tnum focusring" />
-            </label>
-            <label className="text-xs text-inksoft flex items-center gap-1.5 bg-card border border-line rounded-lg px-2 py-1" title="Moeda em que totais, orçamento e fôlego são exibidos.">
-              Moeda base
-              <select value={base} onChange={(e) => trocarBase(e.target.value)} aria-label="Moeda base de exibição" className="bg-transparent text-ink focusring">
-                {MOEDAS.map(m => <option key={m.code} value={m.code}>{m.code}</option>)}
-              </select>
-            </label>
-            <label className="text-xs text-inksoft flex items-center gap-1.5 bg-card border border-line rounded-lg px-2 py-1" title="Regras de visto mudam conforme o seu passaporte.">
-              Passaporte
-              <select value={plan.settings.passaporte} onChange={(e) => trocarPassaporte(e.target.value)} aria-label="Seu passaporte (define as regras de visto)" className="bg-transparent text-ink focusring">
-                {Object.entries(PASSAPORTES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-              </select>
-            </label>
-          </div>
-
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center justify-end gap-1.5">
+            <ThemeToggle />
             {supabaseConfigurado && (user
               ? <Button variant="secondary" size="sm" onClick={deslogar} title={user.email}>Sair</Button>
               : <Button variant="secondary" size="sm" onClick={entrar}>Entrar</Button>)}
             <Button variant="ghost" size="sm" onClick={() => setAjuda(a => a + 1)} aria-label="Ajuda / como funciona">Ajuda</Button>
             <Button size="sm" onClick={() => setShowConfig(true)}>IA / Config</Button>
-            <Button variant="secondary" size="sm" onClick={() => exportarPlano(plan)}>Exportar</Button>
-            <Button variant="secondary" size="sm" onClick={() => importRef.current && importRef.current.click()}>Importar</Button>
+            <details className="relative">
+              <summary aria-label="Mais ações: exportar e importar" title="Mais ações"
+                className="list-none cursor-pointer inline-flex items-center justify-center w-9 h-9 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring [&::-webkit-details-marker]:hidden">
+                <span aria-hidden className="text-lg leading-none">⋯</span>
+              </summary>
+              <div className="absolute right-0 mt-1 w-48 rounded-lg border border-line bg-card shadow-lg p-1 z-40 flex flex-col">
+                <button onClick={() => exportarPlano(plan)} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">⬇ Exportar JSON</button>
+                <button onClick={() => importRef.current && importRef.current.click()} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">⬆ Importar JSON</button>
+              </div>
+            </details>
             <input ref={importRef} type="file" accept="application/json,.json" onChange={handleImport} className="hidden" aria-hidden tabIndex={-1} />
           </div>
         </div>
@@ -323,6 +362,8 @@ export default function App() {
           </p>
         </div>
 
+        <ParametrosViagem settings={plan.settings} base={base} onSet={setSettings} onBase={trocarBase} onPassaporte={trocarPassaporte} />
+
         <Tripe calc={calc} />
 
         {plan.legs.length > 0 && (
@@ -331,7 +372,7 @@ export default function App() {
         )}
 
         {optResumo && (
-          <div className="rise rounded-xl border border-[#e7d3a3] bg-[#F7EDD6] text-[#8a5e12] px-4 py-3 text-sm flex items-start gap-2">
+          <div className="rise rounded-xl border border-warn-bd bg-warn-bg text-warn px-4 py-3 text-sm flex items-start gap-2">
             <span aria-hidden>🧭</span><div className="flex-1"><b>Otimizador:</b> {optResumo}</div>
             <button onClick={() => setOptResumo('')} aria-label="Fechar resumo" className="opacity-60 hover:opacity-100 focusring">✕</button>
           </div>

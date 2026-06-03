@@ -36,10 +36,16 @@ export const metadata = {
 
 export const viewport = { themeColor: '#0E5A4E' };
 
+// Anti-flash: aplica o tema salvo (ou o do sistema) ANTES do paint, no topo do body.
+const themeInit = `(function(){try{var k='mundosemfim.theme',t=localStorage.getItem(k);if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();`;
+
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR" className={`${fraunces.variable} ${hanken.variable}`}>
-      <body>{children}</body>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        {children}
+      </body>
     </html>
   );
 }

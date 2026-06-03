@@ -21,7 +21,7 @@ export default function ConfigIA({ ai, onSaveAi, onClose, fx, moedasEmUso, onAtu
       footer={<Button variant="secondary" onClick={onClose}>Fechar</Button>}>
       <p className="text-sm text-inksoft">As features de IA chamam o provedor que você escolher, com a <b>sua própria chave</b> — guardada só no seu navegador, nada vai pra servidor nenhum.</p>
 
-      <div className="text-xs bg-[#E7F1EA] border border-[#bfe0cd] text-[#1f6b48] rounded-lg p-3">
+      <div className="text-xs bg-success-bg border border-success-bd text-success rounded-lg p-3">
         <p className="font-semibold mb-1">🎁 Não tem chave? Pegue uma de graça (Groq, ~2 min):</p>
         <ol className="list-decimal pl-4 space-y-0.5">
           <li>Crie conta em <b>console.groq.com</b> (gratuito).</li>
@@ -32,22 +32,22 @@ export default function ConfigIA({ ai, onSaveAi, onClose, fx, moedasEmUso, onAtu
       </div>
 
       <label className="block text-sm text-ink font-medium">Provedor
-        <select value={draft.provider} onChange={(e) => setProvider(e.target.value)} className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-white focusring">
+        <select value={draft.provider} onChange={(e) => setProvider(e.target.value)} className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-input focusring">
           {Object.entries(AI_PROVIDERS).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
         </select>
       </label>
       <label className="block text-sm text-ink font-medium">Chave de API
         <input type="password" value={draft.apiKey} placeholder={prov.keyHint} onChange={(e) => setDraft(d => ({ ...d, apiKey: e.target.value }))}
-          className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-white focusring" />
+          className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-input focusring" />
       </label>
       <div className="grid sm:grid-cols-2 gap-3">
         <label className="block text-sm text-ink font-medium">Endpoint (base URL)
           <input value={draft.baseUrl} placeholder={prov.baseUrl || 'https://...'} onChange={(e) => setDraft(d => ({ ...d, baseUrl: e.target.value }))}
-            className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-white focusring text-sm" />
+            className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-input focusring text-sm" />
         </label>
         <label className="block text-sm text-ink font-medium">Modelo
           <input value={draft.model} placeholder={prov.model || 'modelo'} onChange={(e) => setDraft(d => ({ ...d, model: e.target.value }))}
-            className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-white focusring text-sm" />
+            className="mt-1 w-full px-3 py-2 rounded-lg border border-line bg-input focusring text-sm" />
         </label>
       </div>
       <div className="flex justify-end">
@@ -66,11 +66,11 @@ export default function ConfigIA({ ai, onSaveAi, onClose, fx, moedasEmUso, onAtu
         </p>
         <div className="mt-2 grid sm:grid-cols-2 gap-2">
           {moedasEmUso.map(code => (
-            <label key={code} className="text-xs text-inksoft flex items-center gap-2 bg-white border border-line rounded-lg px-2 py-1.5">
+            <label key={code} className="text-xs text-inksoft flex items-center gap-2 bg-input border border-line rounded-lg px-2 py-1.5">
               <span className="w-10 font-semibold text-ink">{code}</span>
               <span className="text-[11px]">1 USD =</span>
               <input type="number" step="any" min="0" value={rates[code] ?? ''} onChange={(e) => onSetRate(code, num(e.target.value))}
-                aria-label={`Taxa de ${nomeMoeda(code)} por dólar`} className="flex-1 w-full px-2 py-1 rounded border border-line bg-white text-ink tnum focusring" />
+                aria-label={`Taxa de ${nomeMoeda(code)} por dólar`} className="flex-1 w-full px-2 py-1 rounded border border-line bg-input text-ink tnum focusring" />
             </label>
           ))}
         </div>

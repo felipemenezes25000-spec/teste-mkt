@@ -20,9 +20,9 @@ export default function TrechoCard(props) {
   const est = ESTACAO_UI[t.estacao.nivel];
   const vis = VISTO_UI[t.visto.nivel];
   const sym = simbolo(t.moeda);
-  const estTxt = t.estacao.nivel === 'ruim' ? 'text-[#9a3b27]'
-    : t.estacao.nivel === 'bom' ? 'text-[#1f6b48]'
-    : t.estacao.nivel === 'parcial' ? 'text-[#8a5e12]' : 'text-inksoft';
+  const estTxt = t.estacao.nivel === 'ruim' ? 'text-danger'
+    : t.estacao.nivel === 'bom' ? 'text-success'
+    : t.estacao.nivel === 'parcial' ? 'text-warn' : 'text-inksoft';
 
   const voos = linksVoo({ origemCidade, origemIata, destinoCidade: t.cidadePrincipal || t.nome, destinoIata: t.iata, dataISO: toISO(t.chegada) });
 
@@ -56,9 +56,9 @@ export default function TrechoCard(props) {
             <div className="stamp w-11 h-11 rounded-full grid place-items-center font-display text-lg bg-card select-none" aria-hidden>{index + 1}</div>
             <div className="flex flex-col">
               <button onClick={() => onMove(index, index - 1)} disabled={index === 0} aria-label={`Subir ${t.nome}`} title="Subir"
-                className="w-7 h-6 grid place-items-center rounded-t-md border border-line bg-white text-inksoft disabled:opacity-30 hover:text-pine focusring">▲</button>
+                className="w-7 h-6 grid place-items-center rounded-t-md border border-line bg-input text-inksoft disabled:opacity-30 hover:text-pine focusring">▲</button>
               <button onClick={() => onMove(index, index + 1)} disabled={index === total - 1} aria-label={`Descer ${t.nome}`} title="Descer"
-                className="w-7 h-6 rounded-b-md border border-t-0 border-line bg-white text-inksoft disabled:opacity-30 hover:text-pine focusring">▼</button>
+                className="w-7 h-6 rounded-b-md border border-t-0 border-line bg-input text-inksoft disabled:opacity-30 hover:text-pine focusring">▼</button>
             </div>
           </div>
 
@@ -79,7 +79,7 @@ export default function TrechoCard(props) {
               <span className="text-[11px] uppercase tracking-wider text-inksoft bg-paper2 border border-line rounded-full px-2 py-0.5">{t.regiao || 'região?'}</span>
               <label className="text-[11px] text-inksoft flex items-center gap-1">moeda
                 <select value={t.moeda} onChange={(e) => onPatch({ moeda: e.target.value })} aria-label={`Moeda dos custos em ${t.nome}`}
-                  className="bg-white border border-line rounded-md px-1.5 py-0.5 text-ink focusring">
+                  className="bg-input border border-line rounded-md px-1.5 py-0.5 text-ink focusring">
                   {MOEDAS.map(m => <option key={m.code} value={m.code}>{m.code}</option>)}
                 </select>
               </label>
@@ -110,22 +110,22 @@ export default function TrechoCard(props) {
             </div>
 
             {t.economiaLabel && (
-              <div className="mt-2 text-xs text-[#1f6b48]">✓ Economia aplicada: <b>{t.economiaLabel}</b> (−{sym} {num(t.economiaDia)}/dia) · <button className="underline hover:no-underline focusring" onClick={() => onPatch({ economiaDia: 0, economiaLabel: '' })}>remover</button></div>
+              <div className="mt-2 text-xs text-success">✓ Economia aplicada: <b>{t.economiaLabel}</b> (−{sym} {num(t.economiaDia)}/dia) · <button className="underline hover:no-underline focusring" onClick={() => onPatch({ economiaDia: 0, economiaLabel: '' })}>remover</button></div>
             )}
 
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <StatusChip ui={est.chip}><span className={`w-1.5 h-1.5 rounded-full ${est.dot}`} aria-hidden></span>{est.label}</StatusChip>
               <StatusChip ui={vis.chip}>🛂 {t.visto.nivel === 'over' ? `Fura +${t.visto.excesso}d` : (t.visto.nivel === 'ok' ? `${t.dias}/${t.vistoDias}d` : 'sem limite')} <span className="opacity-60">· {t.vistoTipo}</span></StatusChip>
-              {ehQuebra && <StatusChip ui="bg-[#F6E2DB] text-[#9a3b27] border-[#e7c1b6]">💸 A grana acaba aqui ({fmtData(dataQuebra)})</StatusChip>}
+              {ehQuebra && <StatusChip ui="bg-danger-bg text-danger border-danger-bd">💸 A grana acaba aqui ({fmtData(dataQuebra)})</StatusChip>}
             </div>
 
             <div className="mt-2 space-y-0.5 text-xs">
               <p className={estTxt}>🌤️ {t.estacao.texto}</p>
-              {t.visto.nivel === 'over' && <p className="text-[#9a3b27]">🛂 {t.visto.texto}</p>}
+              {t.visto.nivel === 'over' && <p className="text-danger">🛂 {t.visto.texto}</p>}
             </div>
 
             {rationale && (
-              <div className="mt-2 text-xs bg-[#F7EDD6] border border-[#e7d3a3] text-[#8a5e12] rounded-lg px-3 py-2">
+              <div className="mt-2 text-xs bg-warn-bg border border-warn-bd text-warn rounded-lg px-3 py-2">
                 <b>Por que aqui (IA):</b> {rationale}
               </div>
             )}
@@ -133,21 +133,21 @@ export default function TrechoCard(props) {
             {/* Ações */}
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <a href={voos.google} target="_blank" rel="noopener noreferrer"
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-ochre/15 border border-ochre/40 text-[#8a5e12] hover:bg-ochre/25 focusring"
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-ochre/15 border border-ochre/40 text-warn hover:bg-ochre/25 focusring"
                 title={`Buscar voo ${origemCidade || ''} → ${t.cidadePrincipal || t.nome} em ${fmtData(t.chegada)}`}>
                 ✈ Buscar voo até aqui
               </a>
               {voos.skyscanner && <a href={voos.skyscanner} target="_blank" rel="noopener noreferrer" className="text-[11px] text-pine hover:underline focusring">Skyscanner ↗</a>}
               <button onClick={() => setLugaresAberto(a => !a)} aria-expanded={lugaresAberto}
-                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-white text-inksoft hover:text-pine focusring">📍 Cidades & comida</button>
+                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-input text-inksoft hover:text-pine focusring">📍 Cidades & comida</button>
               <button onClick={() => { setOppAberto(true); onBuscarOpp(); }} disabled={oppBusy}
                 className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-pine/30 bg-pine/5 text-pine hover:bg-pine/10 disabled:opacity-50 focusring">
                 {oppBusy ? 'Buscando…' : (t.oportunidades ? '↻ Oportunidades (IA)' : '✨ Oportunidades (IA)')}
               </button>
               <button onClick={() => setAjustes(a => !a)} aria-expanded={ajustes}
-                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-white text-inksoft hover:text-pine focusring">{ajustes ? 'Fechar ajustes' : '⚙ Visto & estação'}</button>
+                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-input text-inksoft hover:text-pine focusring">{ajustes ? 'Fechar ajustes' : '⚙ Visto & estação'}</button>
               <button onClick={onRemove} aria-label={`Remover ${t.nome}`}
-                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-white text-inksoft hover:text-clay hover:border-clay/40 focusring ml-auto">Remover</button>
+                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-input text-inksoft hover:text-clay hover:border-clay/40 focusring ml-auto">Remover</button>
             </div>
 
             {/* Cidades & comida */}
@@ -173,7 +173,7 @@ export default function TrechoCard(props) {
                 <div>
                   <div className="text-xs font-semibold text-ink mb-1.5">🍽️ Comida típica</div>
                   <div className="flex flex-wrap gap-1.5">
-                    {(t.comidas || []).map(f => <span key={f} className="text-xs bg-white border border-line rounded-full px-2.5 py-1 text-ink">{f}</span>)}
+                    {(t.comidas || []).map(f => <span key={f} className="text-xs bg-input border border-line rounded-full px-2.5 py-1 text-ink">{f}</span>)}
                     {(t.comidas || []).length === 0 && <span className="text-xs text-inksoft">Sem pratos cadastrados.</span>}
                   </div>
                 </div>
@@ -191,7 +191,7 @@ export default function TrechoCard(props) {
                       <div key={i} className="rounded-lg bg-card border border-line p-3">
                         <div className="flex items-center justify-between gap-2">
                           <h4 className="font-semibold text-sm text-ink">{o.tipo}</h4>
-                          <span className="text-xs font-bold text-[#1f6b48] whitespace-nowrap">−{sym} {o.economiaDiaEstimada}/dia</span>
+                          <span className="text-xs font-bold text-success whitespace-nowrap">−{sym} {o.economiaDiaEstimada}/dia</span>
                         </div>
                         <p className="mt-1 text-xs text-inksoft">{o.descricao}</p>
                         {o.comoComecar && <p className="mt-1 text-xs text-inksoft"><b>Começa assim:</b> {o.comoComecar}</p>}
@@ -206,10 +206,10 @@ export default function TrechoCard(props) {
             )}
 
             {ajustes && (
-              <div className="mt-3 rounded-xl border border-line bg-white p-3 space-y-3">
+              <div className="mt-3 rounded-xl border border-line bg-input p-3 space-y-3">
                 <div className="grid sm:grid-cols-3 gap-2.5">
                   <label className="text-xs text-inksoft">Tipo de visto
-                    <select value={t.vistoTipo} onChange={(e) => onPatch({ vistoTipo: e.target.value })} className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-white text-ink focusring">
+                    <select value={t.vistoTipo} onChange={(e) => onPatch({ vistoTipo: e.target.value })} className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring">
                       <option value="isento">isento</option>
                       <option value="e-visa">e-visa</option>
                       <option value="on-arrival">on-arrival</option>
@@ -221,12 +221,12 @@ export default function TrechoCard(props) {
                     <NumberInput value={t.vistoDias} min={0} max={3650} onChange={(v) => onPatch({ vistoDias: v })} suffix="d" className="mt-1" ariaLabel="Dias de visto permitidos" />
                   </label>
                   <label className="text-xs text-inksoft">Região (p/ otimizador)
-                    <input value={t.regiao} onChange={(e) => onPatch({ regiao: e.target.value })} className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-white text-ink focusring" />
+                    <input value={t.regiao} onChange={(e) => onPatch({ regiao: e.target.value })} className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring" />
                   </label>
                 </div>
                 <label className="block text-xs text-inksoft">✈ Observação do transporte (voo/ônibus)
                   <input value={t.transporteNota} onChange={(e) => onPatch({ transporteNota: e.target.value })} placeholder="ex.: voo Bangkok → Hanói"
-                    className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-white text-ink focusring" />
+                    className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring" />
                 </label>
                 <div>
                   <div className="text-xs text-inksoft mb-1">Melhores meses (clima) — clique pra alternar</div>
