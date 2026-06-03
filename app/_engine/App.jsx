@@ -10,6 +10,9 @@ import ConfigIA from './ConfigIA.jsx';
 import RouteMap from './RouteMap.jsx';
 import { EmptyState } from '../_ui/EmptyState.jsx';
 import { Button } from '../_ui/Button.jsx';
+import { Tabs } from '../_ui/Tabs.jsx';
+import Onboarding from './Onboarding.jsx';
+import CustosView from './CustosView.jsx';
 import { supabaseConfigurado, usuarioAtual, carregarViagemNuvem, salvarViagemNuvem, entrarComEmail, sair } from './supabase.js';
 
 // Quando o backend (Render) tem a chave de IA, a IA funciona sem chave do usuário.
@@ -48,6 +51,8 @@ export default function App() {
   const [user, setUser] = useState(null);       // Supabase (null se não logado/não configurado)
   const [tripId, setTripId] = useState(null);
   const _cloudInit = useRef(false);
+  const [aba, setAba] = useState('rota');        // navegação multi-tela: rota | mapa | custos
+  const [ajuda, setAjuda] = useState(0);         // reabre o onboarding ao incrementar
 
   const calc = useMemo(() => calcular(plan), [plan]);
   const base = plan.settings.moedaBase;
@@ -220,6 +225,7 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <Toasts items={toasts} onClose={(id) => setToasts(t => t.filter(x => x.id !== id))} />
+      <Onboarding forcado={ajuda} />
       {showConfig && (
         <ConfigIA ai={plan.settings.ai} onClose={() => setShowConfig(false)}
           onSaveAi={(ai) => { setSettings({ ai }); toast('Configurações de IA salvas.'); }}
@@ -261,11 +267,12 @@ export default function App() {
 
           <div className="flex items-center gap-1.5">
             {supabaseConfigurado && (user
-              ? <button onClick={deslogar} title={user.email} className="text-xs px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">Sair</button>
-              : <button onClick={entrar} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-pine/40 bg-pine/5 text-pine hover:bg-pine/10 focusring">Entrar</button>)}
-            <button onClick={() => setShowConfig(true)} className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-pine text-white hover:bg-pinedk focusring">IA / Config</button>
-            <button onClick={() => exportarPlano(plan)} className="text-xs px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">Exportar</button>
-            <button onClick={() => importRef.current && importRef.current.click()} className="text-xs px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">Importar</button>
+              ? <Button variant="secondary" size="sm" onClick={deslogar} title={user.email}>Sair</Button>
+              : <Button variant="secondary" size="sm" onClick={entrar}>Entrar</Button>)}
+            <Button variant="ghost" size="sm" onClick={() => setAjuda(a => a + 1)} aria-label="Ajuda / como funciona">Ajuda</Button>
+            <Button size="sm" onClick={() => setShowConfig(true)}>IA / Config</Button>
+            <Button variant="secondary" size="sm" onClick={() => exportarPlano(plan)}>Exportar</Button>
+            <Button variant="secondary" size="sm" onClick={() => importRef.current && importRef.current.click()}>Importar</Button>
             <input ref={importRef} type="file" accept="application/json,.json" onChange={handleImport} className="hidden" aria-hidden tabIndex={-1} />
           </div>
         </div>
@@ -284,7 +291,10 @@ export default function App() {
 
         <Tripe calc={calc} />
 
-        {plan.legs.length > 0 && <RouteMap trechos={calc.trechos} onSelect={(id) => { const el = document.getElementById('leg-' + id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }} />}
+        {plan.legs.length > 0 && (
+          <Tabs value={aba} onChange={setAba}
+            tabs={[{ id: 'rota', icon: '🧭', label: 'Rota' }, { id: 'mapa', icon: '🗺️', label: 'Mapa' }, { id: 'custos', icon: '💰', label: 'Custos' }]} />
+        )}
 
         {optResumo && (
           <div className="rise rounded-xl border border-[#e7d3a3] bg-[#F7EDD6] text-[#8a5e12] px-4 py-3 text-sm flex items-start gap-2">
@@ -293,59 +303,64 @@ export default function App() {
           </div>
         )}
 
-        <section aria-label="Construtor de rota">
-          <div className="flex flex-wrap items-center gap-3 mb-3">
-            <h2 className="font-display text-2xl text-ink mr-auto">Sua rota <span className="text-inksoft text-base font-sans">· {plan.legs.length} trecho(s) · {dur(calc.diasTotais)}</span></h2>
-            <label className="text-xs text-inksoft flex items-center gap-1 bg-card border border-line rounded-lg px-2 py-1" title="Origem do 1º voo (busca de passagem).">
-              ✈ Saindo de
-              <input value={plan.settings.origemCidade} onChange={(e) => setSettings({ origemCidade: e.target.value })} aria-label="Cidade de origem" className="w-20 bg-transparent text-ink focusring" />
-              <input value={plan.settings.origemIata} onChange={(e) => setSettings({ origemIata: e.target.value.toUpperCase().slice(0, 3) })} aria-label="Aeroporto de origem (código IATA)" placeholder="IATA" className="w-12 bg-transparent text-ink focusring uppercase" />
-            </label>
-            <button onClick={handleOtimizar} disabled={otimizando}
-              className="px-4 py-2 rounded-xl bg-ochre text-white font-semibold shadow-md hover:brightness-95 disabled:opacity-60 focusring flex items-center gap-2">
-              {otimizando ? <><span className="inline-block w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" aria-hidden></span> Otimizando rota…</> : <>🧭 Otimizar rota (IA)</>}
-            </button>
-            <div className="flex items-center gap-1.5">
-              <button onClick={carregarExemplo} className="text-xs px-3 py-2 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">Exemplo</button>
-              <button onClick={limparTudo} className="text-xs px-3 py-2 rounded-lg border border-line bg-card text-inksoft hover:text-clay focusring">Limpar</button>
-            </div>
-          </div>
+        {plan.legs.length > 0 && aba === 'mapa' && (
+          <RouteMap trechos={calc.trechos} onSelect={(id) => { setAba('rota'); setTimeout(() => { const el = document.getElementById('leg-' + id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 80); }} />
+        )}
 
-          {plan.legs.length === 0 ? (
-            <EmptyState title="Sua rota está vazia." action={<Button variant="secondary" onClick={carregarExemplo}>Carregar exemplo</Button>}>
-              Adicione países abaixo (já vêm com custo, estação e visto estimados) ou carregue o exemplo de demonstração.
-            </EmptyState>
-          ) : (
-            <div role="list">
-              {calc.trechos.map((t, i) => (
-                <div key={t.id} id={'leg-' + t.id}>
-                  <TrechoCard
-                    t={t} index={i} total={calc.trechos.length} base={base} passaporte={plan.settings.passaporte}
-                    origemCidade={i === 0 ? plan.settings.origemCidade : (calc.trechos[i - 1].cidadePrincipal || '')}
-                    origemIata={i === 0 ? plan.settings.origemIata : (calc.trechos[i - 1].iata || '')}
-                    onPatch={(patch) => patchLeg(t.id, patch)} onRemove={() => removeLeg(t.id)} onMove={moveLeg}
-                    onBuscarOpp={() => handleOpp(t)} oppBusy={!!oppBusy[t.id]} rationale={rationales[t.id]}
-                    ehQuebra={!calc.folego.cobreTudo && calc.folego.trechoQuebraId === t.id} dataQuebra={calc.folego.dataQuebra}
-                    dragHandlers={dragHandlersFor(i)} dragging={drag.from === i}
-                    dropTarget={drag.from !== null && drag.over === i && drag.from !== i}
-                  />
-                  {i < calc.trechos.length - 1 && (
-                    <div className="route-line py-1.5" aria-hidden>
-                      {calc.trechos[i + 1].custoTransporte > 0 && (
-                        <span className="ml-3 inline-flex items-center gap-1 text-[11px] text-inksoft bg-paper2 border border-line rounded-full px-2 py-0.5 tnum">
-                          ✈ {fmtMoeda(calc.trechos[i + 1].custoTransporte, base)}
-                          {calc.trechos[i + 1].transporteNota ? ` · ${calc.trechos[i + 1].transporteNota}` : ''}
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+        {plan.legs.length > 0 && aba === 'custos' && <CustosView calc={calc} />}
 
-          <div className="mt-4"><AdicionarPais onAdd={addPais} /></div>
-        </section>
+        {(plan.legs.length === 0 || aba === 'rota') && (
+          <section aria-label="Construtor de rota">
+            <div className="flex flex-wrap items-center gap-3 mb-3">
+              <h2 className="font-display text-2xl text-ink mr-auto">Sua rota <span className="text-inksoft text-base font-sans">· {plan.legs.length} trecho(s) · {dur(calc.diasTotais)}</span></h2>
+              <label className="text-xs text-inksoft flex items-center gap-1 bg-card border border-line rounded-lg px-2 py-1" title="Origem do 1º voo (busca de passagem).">
+                ✈ Saindo de
+                <input value={plan.settings.origemCidade} onChange={(e) => setSettings({ origemCidade: e.target.value })} aria-label="Cidade de origem" className="w-20 bg-transparent text-ink focusring" />
+                <input value={plan.settings.origemIata} onChange={(e) => setSettings({ origemIata: e.target.value.toUpperCase().slice(0, 3) })} aria-label="Aeroporto de origem (código IATA)" placeholder="IATA" className="w-12 bg-transparent text-ink focusring uppercase" />
+              </label>
+              <Button variant="accent" onClick={handleOtimizar} loading={otimizando}>{otimizando ? 'Otimizando rota…' : '🧭 Otimizar rota (IA)'}</Button>
+              <div className="flex items-center gap-1.5">
+                <Button variant="secondary" size="sm" onClick={carregarExemplo}>Exemplo</Button>
+                <Button variant="ghost" size="sm" onClick={limparTudo}>Limpar</Button>
+              </div>
+            </div>
+
+            {plan.legs.length === 0 ? (
+              <EmptyState title="Sua rota está vazia." action={<Button variant="secondary" onClick={carregarExemplo}>Carregar exemplo</Button>}>
+                Adicione países abaixo (já vêm com custo, estação e visto estimados) ou carregue o exemplo de demonstração.
+              </EmptyState>
+            ) : (
+              <div role="list">
+                {calc.trechos.map((t, i) => (
+                  <div key={t.id} id={'leg-' + t.id}>
+                    <TrechoCard
+                      t={t} index={i} total={calc.trechos.length} base={base} passaporte={plan.settings.passaporte}
+                      origemCidade={i === 0 ? plan.settings.origemCidade : (calc.trechos[i - 1].cidadePrincipal || '')}
+                      origemIata={i === 0 ? plan.settings.origemIata : (calc.trechos[i - 1].iata || '')}
+                      onPatch={(patch) => patchLeg(t.id, patch)} onRemove={() => removeLeg(t.id)} onMove={moveLeg}
+                      onBuscarOpp={() => handleOpp(t)} oppBusy={!!oppBusy[t.id]} rationale={rationales[t.id]}
+                      ehQuebra={!calc.folego.cobreTudo && calc.folego.trechoQuebraId === t.id} dataQuebra={calc.folego.dataQuebra}
+                      dragHandlers={dragHandlersFor(i)} dragging={drag.from === i}
+                      dropTarget={drag.from !== null && drag.over === i && drag.from !== i}
+                    />
+                    {i < calc.trechos.length - 1 && (
+                      <div className="route-line py-1.5" aria-hidden>
+                        {calc.trechos[i + 1].custoTransporte > 0 && (
+                          <span className="ml-3 inline-flex items-center gap-1 text-[11px] text-inksoft bg-paper2 border border-line rounded-full px-2 py-0.5 tnum">
+                            ✈ {fmtMoeda(calc.trechos[i + 1].custoTransporte, base)}
+                            {calc.trechos[i + 1].transporteNota ? ` · ${calc.trechos[i + 1].transporteNota}` : ''}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="mt-4"><AdicionarPais onAdd={addPais} /></div>
+          </section>
+        )}
 
         <footer className="pt-4 pb-10 text-xs text-inksoft space-y-2 border-t border-line">
           <p>

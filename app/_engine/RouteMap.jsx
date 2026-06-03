@@ -43,7 +43,11 @@ export default function RouteMap({ trechos, onSelect }) {
           {pts.map((t, i) => {
             const x = px(t.coords[0]); const y = py(t.coords[1]);
             return (
-              <g key={t.id} onClick={() => onSelect && onSelect(t.id)} style={{ cursor: 'pointer' }}>
+              <g key={t.id} role="button" tabIndex={0}
+                aria-label={`${i + 1}. ${t.nome} — chega ${fmtData(t.chegada)}. Ir ao trecho.`}
+                onClick={() => onSelect && onSelect(t.id)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect && onSelect(t.id); } }}
+                style={{ cursor: 'pointer' }}>
                 <title>{`${i + 1}. ${t.nome} — chega ${fmtData(t.chegada)}`}</title>
                 <circle cx={x} cy={y} r="4.4" fill="#C98A2B" stroke="#FFFDF7" strokeWidth="1" />
                 <text x={x} y={y + 1.6} fontSize="4.2" fill="#fff" textAnchor="middle" fontWeight="700" fontFamily="Hanken Grotesk, sans-serif">{i + 1}</text>
