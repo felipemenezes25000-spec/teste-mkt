@@ -33,6 +33,8 @@ As variáveis você adiciona com `npx vercel env add NOME` (ou no painel).
 | `OPENAI_API_KEY` | *sua chave NOVA (rotacionada)* | **segredo** — só no painel, nunca no git |
 | `AI_MODEL` | `gpt-4o-mini` | opcional |
 | `AI_BASE_URL` | *(vazio)* | opcional (ex.: Groq/OpenRouter) |
+| `AI_DAILY_LIMIT` | `50` | opcional — cota diária de IA por usuário logado |
+| `NEXT_PUBLIC_SITE_URL` | `https://SEU-APP.vercel.app` | p/ canonical e og:url corretos |
 
 > `NEXT_PUBLIC_*` são embutidas no build → ao mudar, faça **Redeploy**. Marque as variáveis para os ambientes **Production** e **Preview**.
 

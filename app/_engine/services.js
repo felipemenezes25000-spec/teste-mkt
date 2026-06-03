@@ -1,5 +1,6 @@
 import { AI_PROVIDERS, SYSTEM_PROMPT_OTIMIZADOR, SYSTEM_PROMPT_OPORTUNIDADES, MESES_PT, MESES_PT_LONGO } from './data.js';
 import { num } from './utils.js';
+import { tokenAtual } from './supabase.js';
 
 /* ===== Câmbio (FX) — API gratuita, sem chave, com timeout e degradação segura ===== */
 export async function buscarCambio() {
@@ -64,12 +65,17 @@ export async function chamarLLM(ai, systemPrompt, userPrompt) {
     const ctrlS = new AbortController();
     const tS = setTimeout(() => ctrlS.abort(), 60000);
     try {
+      // IA do servidor exige login: manda o token do Supabase (se houver sessão).
+      const token = await tokenAtual();
       const res = await fetch('/api/ai', {
-        method: 'POST', headers: { 'content-type': 'application/json' },
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...(token ? { authorization: `Bearer ${token}` } : {}) },
         body: JSON.stringify({ system: systemPrompt, user: userPrompt, model: ai && ai.model }),
         signal: ctrlS.signal,
       });
-      if (res.status === 503) throw new Error('Sem chave de IA: configure no servidor (Render) ou cole a sua em "IA / Config".');
+      if (res.status === 401) throw new Error('Entre pra usar a IA do servidor (ou cole sua chave em "IA / Config").');
+      if (res.status === 429) { let d = {}; try { d = await res.json(); } catch (e) {} throw new Error(d.error || 'Você atingiu o limite diário de IA. Tente amanhã ou use sua própria chave.'); }
+      if (res.status === 503) throw new Error('IA do servidor indisponível: configure a chave no servidor, ou cole a sua em "IA / Config".');
       if (!res.ok) { let d = {}; try { d = await res.json(); } catch (e) {} throw new Error(d.error || `Erro do servidor de IA (${res.status}).`); }
       const d = await res.json();
       return d.text || '';

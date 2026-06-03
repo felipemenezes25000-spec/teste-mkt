@@ -5,7 +5,7 @@ const VARIANTS = {
   secondary: 'border border-line bg-card text-inksoft hover:text-pine',
   ghost: 'text-inksoft hover:text-pine',
   danger: 'border border-clay/40 bg-white text-clay hover:bg-clay/5',
-  accent: 'bg-ochre text-white shadow-md hover:brightness-95',
+  accent: 'bg-ochre text-ink shadow-md hover:brightness-95',
 };
 
 export function Button({ variant = 'primary', size = 'md', loading = false, className = '', children, ...props }) {
@@ -15,7 +15,7 @@ export function Button({ variant = 'primary', size = 'md', loading = false, clas
       aria-busy={loading || undefined}
       {...props}
     >
-      {loading && <span className="inline-block w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" aria-hidden />}
+      {loading && <span className="inline-block w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin opacity-70" aria-hidden />}
       {children}
     </button>
   );

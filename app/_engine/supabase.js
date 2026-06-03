@@ -17,9 +17,19 @@ export async function usuarioAtual() {
   const { data } = await supabase.auth.getUser();
   return data?.user || null;
 }
+// Token de acesso (JWT) da sessão atual — enviado ao /api/ai para autenticar.
+export async function tokenAtual() {
+  if (!supabase) return null;
+  const { data } = await supabase.auth.getSession();
+  return data?.session?.access_token || null;
+}
 export async function entrarComEmail(email) {
   if (!supabase) throw new Error('Supabase não configurado.');
-  return supabase.auth.signInWithOtp({ email }); // magic link
+  // signInWithOtp envia o magic link e cria a conta se o e-mail for novo.
+  // IMPORTANTE: supabase-js devolve o erro em { error }, NÃO lança — então
+  // precisamos checar e relançar, senão o erro passa despercebido.
+  const { error } = await supabase.auth.signInWithOtp({ email });
+  if (error) throw new Error(error.message || 'Falha ao enviar o link de acesso.');
 }
 export async function sair() { if (supabase) await supabase.auth.signOut(); }
 

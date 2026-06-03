@@ -22,7 +22,8 @@ git push -u origin main
    - `OPENAI_API_KEY` = sua chave **nova** (rotacionada) da OpenAI (ou Groq, etc.)
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = a chave *publishable* do Supabase
    - (opcional) `AI_BASE_URL` se usar Groq/OpenRouter; `AI_MODEL` já vem `gpt-4o-mini`
-   - `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_AI_SERVER=1` já vêm no Blueprint.
+   - `NEXT_PUBLIC_SITE_URL` = a URL pública (ex.: `https://mundo-sem-fim.onrender.com`) — p/ canonical/OG
+   - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_AI_SERVER=1` e `AI_DAILY_LIMIT=50` já vêm no Blueprint.
 4. **Create** → aguarde o build. A URL fica tipo `https://mundo-sem-fim.onrender.com`.
 
 ## Importante

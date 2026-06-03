@@ -14,6 +14,8 @@ import { Tabs } from '../_ui/Tabs.jsx';
 import Onboarding from './Onboarding.jsx';
 import CustosView from './CustosView.jsx';
 import { supabaseConfigurado, usuarioAtual, carregarViagemNuvem, salvarViagemNuvem, entrarComEmail, sair } from './supabase.js';
+import LoginModal from './LoginModal.jsx';
+import { useConfirm } from './useConfirm.jsx';
 
 // Quando o backend (Render) tem a chave de IA, a IA funciona sem chave do usuário.
 const AI_SERVIDOR = process.env.NEXT_PUBLIC_AI_SERVER === '1';
@@ -53,6 +55,8 @@ export default function App() {
   const _cloudInit = useRef(false);
   const [aba, setAba] = useState('rota');        // navegação multi-tela: rota | mapa | custos
   const [ajuda, setAjuda] = useState(0);         // reabre o onboarding ao incrementar
+  const [showLogin, setShowLogin] = useState(false);
+  const { confirm, confirmElement } = useConfirm();
 
   const calc = useMemo(() => calcular(plan), [plan]);
   const base = plan.settings.moedaBase;
@@ -120,13 +124,24 @@ export default function App() {
     return () => clearTimeout(t);
   }, [plan, user]);
 
-  async function entrar() {
-    const email = prompt('Seu e-mail (enviaremos um link mágico de acesso):');
-    if (!email) return;
-    try { await entrarComEmail(email.trim()); toast('Link de acesso enviado pro seu e-mail. Confira a caixa de entrada.'); }
-    catch (e) { toast('Erro ao entrar: ' + e.message, 'erro'); }
-  }
+  function entrar() { setShowLogin(true); }
   async function deslogar() { await sair(); setUser(null); setTripId(null); toast('Você saiu.'); }
+
+  // IA disponível? Regra: (usuário tem chave própria) OU (modo servidor ligado E logado).
+  // A trava de verdade está no /api/ai (servidor); aqui é só UX — leva pro caminho certo.
+  const aiServidorOk = AI_SERVIDOR && supabaseConfigurado;
+  function exigirIA() {
+    if (plan.settings.ai.apiKey) return true;
+    if (aiServidorOk && user) return true;
+    if (aiServidorOk && !user) {
+      toast('Entre pra usar a IA do servidor — ou cole sua chave em "IA / Config".', 'erro');
+      setShowLogin(true);
+    } else {
+      toast('Cole sua chave em "IA / Config" pra usar a IA.', 'erro');
+      setShowConfig(true);
+    }
+    return false;
+  }
 
   // ---- mutações ----
   const setSettings = (patch) => setPlan(p => ({ ...p, settings: { ...p.settings, ...patch } }));
@@ -151,9 +166,13 @@ export default function App() {
   };
 
   // Troca o passaporte e reaplica as regras de visto nos trechos com país conhecido.
-  const trocarPassaporte = (p) => {
+  const trocarPassaporte = async (p) => {
     const temCodigos = plan.legs.some(l => l.code);
-    if (temCodigos && !confirm(`Aplicar as regras de visto do passaporte "${PASSAPORTES[p]}" a todos os trechos? Isso sobrescreve ajustes manuais de visto (custo, dias e clima ficam intactos).`)) return;
+    if (temCodigos && !(await confirm({
+      title: 'Aplicar regras de visto?',
+      message: `Aplicar as regras de visto do passaporte "${PASSAPORTES[p]}" a todos os trechos? Isso sobrescreve ajustes manuais de visto (custo, dias e clima ficam intactos).`,
+      confirmLabel: 'Aplicar', variant: 'primary',
+    }))) return;
     setPlan(prev => ({
       ...prev,
       settings: { ...prev.settings, passaporte: p },
@@ -173,7 +192,7 @@ export default function App() {
 
   async function handleOtimizar() {
     if (plan.legs.length < 2) { toast('Adicione pelo menos 2 países pra otimizar.', 'erro'); return; }
-    if (!plan.settings.ai.apiKey && !AI_SERVIDOR) { toast('Cole sua chave em "IA / Config" — ou configure a chave no servidor (Render).', 'erro'); setShowConfig(true); return; }
+    if (!exigirIA()) return;
     setOtimizando(true);
     try {
       const { order, rationales: rats, resumo } = await otimizarRota(plan, calc);
@@ -185,7 +204,7 @@ export default function App() {
   }
 
   async function handleOpp(leg) {
-    if (!plan.settings.ai.apiKey && !AI_SERVIDOR) { toast('Cole sua chave em "IA / Config" — ou configure a chave no servidor (Render).', 'erro'); setShowConfig(true); return; }
+    if (!exigirIA()) return;
     setOppBusy(b => ({ ...b, [leg.id]: true }));
     try {
       const ops = await buscarOportunidades(plan.settings.ai, leg, leg.moeda || base);
@@ -211,8 +230,16 @@ export default function App() {
     reader.readAsText(file);
   }
 
-  function carregarExemplo() { if (confirm('Substituir a rota atual pelo exemplo de demonstração?')) { setPlan(normalizarPlano(planoExemplo())); setRationales({}); setOptResumo(''); } }
-  function limparTudo() { if (confirm('Apagar todos os trechos e começar do zero?')) { setPlan(p => ({ ...p, legs: [] })); setRationales({}); setOptResumo(''); } }
+  async function carregarExemplo() {
+    if (await confirm({ title: 'Carregar exemplo?', message: 'Substituir a rota atual pelo exemplo de demonstração?', confirmLabel: 'Substituir', variant: 'primary' })) {
+      setPlan(normalizarPlano(planoExemplo())); setRationales({}); setOptResumo('');
+    }
+  }
+  async function limparTudo() {
+    if (await confirm({ title: 'Limpar tudo?', message: 'Apagar todos os trechos e começar do zero? Isso não dá pra desfazer.', confirmLabel: 'Apagar tudo' })) {
+      setPlan(p => ({ ...p, legs: [] })); setRationales({}); setOptResumo('');
+    }
+  }
 
   const dragHandlersFor = (index) => ({
     draggable: true,
@@ -226,6 +253,13 @@ export default function App() {
     <div className="min-h-screen">
       <Toasts items={toasts} onClose={(id) => setToasts(t => t.filter(x => x.id !== id))} />
       <Onboarding forcado={ajuda} />
+      {confirmElement}
+      {showLogin && (
+        <LoginModal
+          onClose={() => setShowLogin(false)}
+          onSubmit={async (email) => { await entrarComEmail(email); }}
+        />
+      )}
       {showConfig && (
         <ConfigIA ai={plan.settings.ai} onClose={() => setShowConfig(false)}
           onSaveAi={(ai) => { setSettings({ ai }); toast('Configurações de IA salvas.'); }}
@@ -367,7 +401,7 @@ export default function App() {
             <b>Importante:</b> as regras de visto são uma <b>referência para o passaporte {PASSAPORTES[plan.settings.passaporte]}, revisada em junho de 2026</b>.
             Custos diários e melhores meses são estimativas (perfil mochileiro). Tudo <b>varia por ponto de entrada e mudanças de política — confira sempre na fonte oficial</b> (consulado/embaixada e imigração do país). Todos os valores são editáveis.
           </p>
-          <p>Cada trecho usa a moeda que você escolher; os totais aparecem na moeda base ({base}) usando câmbio aproximado (atualizável e editável em IA / Config — não use como cotação exata). O custo de voo/transporte entre países entra no total e no fôlego. Os dados ficam salvos só neste navegador — exporte o JSON para backup. As features de IA usam a sua chave e rodam direto do navegador.</p>
+          <p>Cada trecho usa a moeda que você escolher; os totais aparecem na moeda base ({base}) usando câmbio aproximado (atualizável e editável em IA / Config — não use como cotação exata). O custo de voo/transporte entre países entra no total e no fôlego. Os dados ficam salvos neste navegador (e na nuvem, se você entrar) — exporte o JSON para backup. As features de IA usam a sua chave, rodando direto do navegador, ou — se você fizer login — a chave do servidor.</p>
         </footer>
       </main>
     </div>

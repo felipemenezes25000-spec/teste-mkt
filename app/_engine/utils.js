@@ -22,6 +22,13 @@ export function fmtData(date) { return date.toLocaleDateString('pt-BR', { day: '
 export function num(v, fallback = 0) { const n = parseFloat(v); return isNaN(n) ? fallback : n; }
 export function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
+// Validação básica de e-mail (UX, não segurança): algo@algo.tld, sem espaços,
+// TLD com 2+ caracteres. Seguro com entradas não-string.
+export function emailValido(s) {
+  if (typeof s !== 'string') return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s.trim());
+}
+
 const _nf = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
 
 // Formata um valor monetário numa moeda ISO. Cai num formato simples se a moeda

@@ -29,3 +29,7 @@ services:
         sync: false                 # opcional (ex.: https://api.groq.com/openai/v1)
       - key: AI_MODEL
         value: gpt-4o-mini
+      - key: AI_DAILY_LIMIT
+        value: "50"                 # cota diária de IA por usuário logado
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false                 # cole a URL pública (ex.: https://mundo-sem-fim.onrender.com) p/ canonical/OG
