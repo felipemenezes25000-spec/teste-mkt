@@ -1,0 +1,31 @@
+# Render Blueprint — deploy 1-clique do app (frontend + backend de API juntos).
+# No Render: New + → "Blueprint" → conecte o repositório com este arquivo.
+# Segredos (sync:false) você preenche no painel do Render; NUNCA ficam no git.
+services:
+  - type: web
+    name: mundo-sem-fim
+    runtime: node
+    plan: free                      # suba pra 'starter' depois (free hiberna após inatividade)
+    region: oregon
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npx next start -p $PORT
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20.18.0"
+      # Supabase (públicas — protegidas por RLS):
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        value: https://vemfwnhjdzscqqthegvh.supabase.co
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false                 # cole no painel: chave publishable do Supabase
+      # IA no servidor (a chave fica AQUI, escondida do navegador):
+      - key: NEXT_PUBLIC_AI_SERVER
+        value: "1"
+      - key: OPENAI_API_KEY
+        sync: false                 # cole no painel: sua chave NOVA (rotacionada)
+      - key: AI_BASE_URL
+        sync: false                 # opcional (ex.: https://api.groq.com/openai/v1)
+      - key: AI_MODEL
+        value: gpt-4o-mini

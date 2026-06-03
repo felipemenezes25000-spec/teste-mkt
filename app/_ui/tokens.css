@@ -1,0 +1,25 @@
+/* ============================================================================
+   Design tokens — fonte única da verdade (cor, espaço, raio, elevação, motion).
+   Importado no layout. Use estes tokens nos componentes do _ui/.
+   ============================================================================ */
+:root {
+  /* Marca */
+  --c-paper: #F4EDDE; --c-paper-2: #ECE2CD; --c-card: #FFFDF7;
+  --c-ink: #222D2B; --c-ink-soft: #54605B; --c-line: #E4D9C2;
+  --c-pine: #0E5A4E; --c-pine-dk: #0A453B; --c-ochre: #C98A2B; --c-clay: #B6452E;
+
+  /* Semânticas de status (texto/fundo/borda) — pares com contraste AA */
+  --c-success: #1f6b48; --c-success-bg: #E7F1EA; --c-success-bd: #bfe0cd;
+  --c-warn: #8a5e12;    --c-warn-bg: #F7EDD6;    --c-warn-bd: #e7d3a3;
+  --c-danger: #9a3b27;  --c-danger-bg: #F6E2DB;  --c-danger-bd: #e7c1b6;
+
+  /* Espaçamento (escala 4/8) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
+  /* Raio */
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-full: 999px;
+  /* Elevação */
+  --e-1: 0 14px 36px -26px rgba(34,45,43,.5);
+  --e-2: 0 24px 60px -30px rgba(34,45,43,.45);
+  /* Motion */
+  --motion-fast: .18s; --motion: .4s; --ease: cubic-bezier(.2,.7,.3,1);
+}
