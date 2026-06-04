@@ -13,9 +13,13 @@ import { calcExemploDestino, resumoVitrineVsReal } from '../../../_engine/custoT
 import { dicasDe, SECOES_DICAS } from '../../../_engine/dicas.js';
 
 export const revalidate = 86400;
+// Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
+// sob demanda (ISR) e fica cacheado — build rápido mesmo com 150+ países.
+export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return DESTINOS.map((d) => ({ slug: d.slug }));
+  const destaques = DESTINOS.filter((d) => d.destaque);
+  return (destaques.length ? destaques : DESTINOS.slice(0, 12)).map((d) => ({ slug: d.slug }));
 }
 
 export async function generateMetadata({ params }) {

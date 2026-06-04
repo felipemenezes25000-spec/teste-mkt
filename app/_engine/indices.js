@@ -15,7 +15,10 @@
      aventura   – trekking, mergulho, esportes, adrenalina
    ========================================================================== */
 
+import { INDICES_EXTRA } from './paisesMundo.js';
+
 export const INDICES_PAIS = {
+  ...INDICES_EXTRA, // catálogo mundial (base abaixo vence em conflito)
   TH: { seguranca: 7, gastronomia: 9, natureza: 8, cultura: 8, praia: 9, vidaNoturna: 8, aventura: 7 },
   VN: { seguranca: 7, gastronomia: 9, natureza: 8, cultura: 8, praia: 7, vidaNoturna: 6, aventura: 7 },
   KH: { seguranca: 6, gastronomia: 6, natureza: 7, cultura: 9, praia: 6, vidaNoturna: 5, aventura: 6 },

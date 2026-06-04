@@ -8,6 +8,8 @@
    Tudo é editável no app.
    ========================================================================== */
 
+import { PAISES_EXTRA, VISTOS_EXTRA_BR, MOEDAS_EXTRA, FX_EXTRA } from './paisesMundo.js';
+
 export const STORAGE_KEY = 'mundosemfim.plan.v3';
 export const REVISADO_EM = 'junho de 2026';
 
@@ -17,7 +19,7 @@ export const MESES_PT_LONGO = ['janeiro','fevereiro','março','abril','maio','ju
 // Custo/dia em US$ (referência; cada trecho pode usar a moeda que quiser).
 // coords = [lng, lat] da cidade-hub (p/ o mapa). iata = aeroporto principal (p/ links de voo).
 // fotoQuery = título na Wikipedia que rende uma boa foto. cidades/comidas = curadoria (editável).
-export const PAISES_REF = [
+const PAISES_BASE = [
   { code:'TH', nome:'Tailândia',     regiao:'Sudeste Asiático', custoDia:28, moeda:'THB', melhoresMeses:[11,12,1,2,3], estacao:'Seca: nov–mar (monção mai–out)', iata:'BKK', cidadePrincipal:'Bangkok', coords:[100.50,13.75], fotoQuery:'Bangkok', cidades:['Bangkok','Chiang Mai','Phuket','Krabi'], comidas:['Pad Thai','Tom Yum','Curry verde','Mango sticky rice'] },
   { code:'VN', nome:'Vietnã',        regiao:'Sudeste Asiático', custoDia:26, moeda:'VND', melhoresMeses:[10,11,12,1,2,3], estacao:'Varia N/S; seca out–abr', iata:'HAN', cidadePrincipal:'Hanói', coords:[105.85,21.03], fotoQuery:'Baía de Ha Long', cidades:['Hanói','Ho Chi Minh','Hoi An','Da Nang'], comidas:['Pho','Banh mi','Bun cha','Café vietnamita'] },
   { code:'KH', nome:'Camboja',       regiao:'Sudeste Asiático', custoDia:25, moeda:'USD', melhoresMeses:[11,12,1,2], estacao:'Seca: nov–fev', iata:'PNH', cidadePrincipal:'Phnom Penh', coords:[104.92,11.56], fotoQuery:'Angkor Wat', cidades:['Siem Reap','Phnom Penh','Sihanoukville'], comidas:['Amok','Lok lak','Num banh chok'] },
@@ -42,6 +44,9 @@ export const PAISES_REF = [
   { code:'ZA', nome:'África do Sul', regiao:'África',           custoDia:35, moeda:'ZAR', melhoresMeses:[5,6,7,8,9], estacao:'Inverno seco (melhor p/ safári)', iata:'CPT', cidadePrincipal:'Cidade do Cabo', coords:[18.42,-33.92], fotoQuery:'Cidade do Cabo', cidades:['Cidade do Cabo','Joanesburgo','Kruger','Garden Route'], comidas:['Braai','Bobotie','Biltong','Bunny chow'] },
 ];
 
+// Catálogo final = 22 países curados + catálogo mundial gerado (base vence em conflito).
+export const PAISES_REF = [...PAISES_BASE, ...PAISES_EXTRA];
+
 export function refDe(code) { return PAISES_REF.find(p => p.code === code); }
 
 export const PASSAPORTES = { BR:'Brasileiro 🇧🇷', US:'Americano 🇺🇸', UE:'UE / Portugal 🇪🇺', generico:'Outro / genérico' };
@@ -49,6 +54,7 @@ export const PASSAPORTES = { BR:'Brasileiro 🇧🇷', US:'Americano 🇺🇸', 
 // Regras de visto turístico por passaporte → país. { tipo, dias, nota }.
 export const VISTOS = {
   BR: {
+    ...VISTOS_EXTRA_BR,
     TH:{tipo:'isento',dias:90,nota:'Acordo bilateral Brasil–Tailândia: isenção de ~90d p/ turismo. Vacina de febre amarela (CIVP) exigida.'},
     VN:{tipo:'e-visa',dias:90,nota:'e-visa obrigatório (evisa.gov.vn), até 90d (~US$25). Preencha o Arrival Card antes de embarcar.'},
     KH:{tipo:'e-visa',dias:30,nota:'e-visa ou visto on-arrival ~30d, extensível.'},
@@ -169,6 +175,7 @@ export const MOEDAS = [
   { code:'PHP', nome:'Peso (Filipinas)' }, { code:'KHR', nome:'Riel (Camboja)' },
   { code:'LAK', nome:'Kip (Laos)' }, { code:'JPY', nome:'Iene (Japão)' },
   { code:'AUD', nome:'Dólar australiano' },
+  ...MOEDAS_EXTRA,
 ];
 
 // Câmbio inicial aproximado (base USD), revisado jun/2026. Atualizado automaticamente
@@ -177,6 +184,7 @@ export const SEED_FX = {
   base: 'USD',
   atualizadoEm: 0,
   rates: {
+    ...FX_EXTRA,
     USD:1, BRL:5.5, EUR:0.92, GBP:0.78, THB:36, VND:25400, IDR:16200, INR:85,
     NPR:136, LKR:300, PEN:3.75, BOB:6.9, COP:4100, ARS:950, CLP:950, MXN:18,
     GTQ:7.8, GEL:2.7, TRY:38, MAD:10, ZAR:18.5, MYR:4.6, PHP:57, KHR:4100,

@@ -1,5 +1,6 @@
 import { PAISES_REF } from '../_engine/data.js';
 import { slugify } from './slug.js';
+import { WIKIDATA_EXTRA } from '../_engine/paisesMundo.js';
 
 // Catálogo base de destinos derivado dos países de referência do motor. Cada um
 // vira uma página /destino/[slug]; o conteúdo rico (fatos, fotos, atrações) é
@@ -8,6 +9,7 @@ const DESTAQUES = ['PT', 'TH', 'PE', 'MX', 'TR', 'ID', 'MA', 'VN'];
 
 // QID do país na Wikidata — usado pra puxar pontos turísticos reais (SPARQL).
 const WIKIDATA = {
+  ...WIKIDATA_EXTRA,
   TH: 'Q869', VN: 'Q881', KH: 'Q424', LA: 'Q819', ID: 'Q252', MY: 'Q833',
   PH: 'Q928', IN: 'Q668', NP: 'Q837', LK: 'Q854', PE: 'Q419', BO: 'Q750',
   CO: 'Q739', AR: 'Q414', CL: 'Q298', MX: 'Q96', GT: 'Q774', PT: 'Q45',

@@ -5,7 +5,9 @@ export function novoTrechoDeRef(ref, passaporte) {
   const v = vistoDe(ref.code, passaporte);
   return {
     id: uid(), code: ref.code, nome: ref.nome, regiao: ref.regiao,
-    dias: 30, custoDia: ref.custoDia, moeda: ref.moeda || 'USD',
+    // custoDia é referência em US$ → o trecho nasce em USD (consistente com o
+    // motor). O usuário pode trocar a moeda do trecho depois (o app converte o valor).
+    dias: 30, custoDia: ref.custoDia, moeda: 'USD',
     economiaDia: 0, economiaLabel: '', transporte: 0, transporteNota: '',
     melhoresMeses: [...ref.melhoresMeses], estacaoLabel: ref.estacao,
     vistoTipo: v.tipo, vistoDias: v.dias, vistoNota: v.nota,
