@@ -1,5 +1,7 @@
 import { MESES_PT, MESES_PT_LONGO } from './data.js';
 import { fmtMoeda, fmtData, clamp, num } from './utils.js';
+import { Badge } from '../_ui/Badge.jsx';
+import { rotuloSalvamento } from './saveStatus.js';
 
 // Cores por nível (strings completas pro Tailwind detectar no build).
 export const ESTACAO_UI = {
@@ -31,6 +33,46 @@ export function Toasts({ items, onClose }) {
         </div>
       ))}
     </div>
+  );
+}
+
+// Indicador de "salvo" no cabeçalho: reforça que nada se perde. Distingue salvo no
+// navegador (deslogado) de salvo na nuvem (logado), e expõe falha de sincronização de
+// forma honesta — sem assustar, porque o dado local segue intacto. A lógica de texto/cor
+// fica na função pura rotuloSalvamento (testada); aqui só desenha.
+export function SaveStatus({ estado = 'saved', naNuvem = false, onRetry }) {
+  const r = rotuloSalvamento(naNuvem, estado);
+  const podeTentar = estado === 'error' && naNuvem && typeof onRetry === 'function';
+  const dica = estado === 'error'
+    ? (naNuvem
+        ? 'Seus dados seguem salvos neste navegador. Toque para tentar sincronizar de novo.'
+        : 'Não consegui salvar neste navegador (aba anônima ou armazenamento cheio?).')
+    : r.texto;
+
+  const conteudo = (
+    <Badge tone={r.tone} className={podeTentar ? 'cursor-pointer hover:brightness-95' : ''}>
+      {r.spinner
+        ? <span className="inline-block w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin opacity-70" aria-hidden />
+        : <span aria-hidden>{r.icone}</span>}
+      <span className="sm:hidden">{r.textoCurto}</span>
+      <span className="hidden sm:inline">{r.texto}</span>
+    </Badge>
+  );
+
+  if (podeTentar) {
+    return (
+      <span role="status" aria-live="polite" className="inline-flex">
+        <button type="button" onClick={onRetry} title={dica}
+          aria-label={`${r.texto}. Tentar sincronizar de novo.`} className="focusring rounded-full">
+          {conteudo}
+        </button>
+      </span>
+    );
+  }
+  return (
+    <span role="status" aria-live="polite" title={dica} aria-label={r.texto} className="inline-flex">
+      {conteudo}
+    </span>
   );
 }
 

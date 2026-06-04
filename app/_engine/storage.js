@@ -84,7 +84,12 @@ export function carregarPlano() {
   } catch (e) { return planoExemplo(); }
 }
 
-export function salvarPlano(plan) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)); } catch (e) {} }
+// Retorna true se gravou, false se o navegador recusou (aba anônima, cota cheia) —
+// o indicador "Salvo" usa esse sinal pra ser honesto em vez de falhar em silêncio.
+export function salvarPlano(plan) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)); return true; }
+  catch (e) { return false; }
+}
 
 export function exportarPlano(plan) {
   // Nunca exporta a chave de API (é segredo). Zera antes de salvar o arquivo.

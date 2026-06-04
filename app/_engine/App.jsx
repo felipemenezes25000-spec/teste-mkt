@@ -4,7 +4,7 @@ import { uid, num, clamp, dur, fmtMoeda, converter } from './utils.js';
 import { calcular } from './calc.js';
 import { otimizarRota, buscarOportunidades, buscarCambio } from './services.js';
 import { carregarPlano, salvarPlano, normalizarPlano, planoExemplo, exportarPlano, novoTrechoDeRef } from './storage.js';
-import { Toasts, Tripe } from './components.jsx';
+import { Toasts, Tripe, SaveStatus } from './components.jsx';
 import TrechoCard from './TrechoCard.jsx';
 import ConfigIA from './ConfigIA.jsx';
 import RouteMap from './RouteMap.jsx';
@@ -100,6 +100,7 @@ function ParametrosViagem({ settings, base, onSet, onBase, onPassaporte }) {
 export default function App() {
   const [plan, setPlan] = useState(carregarPlano);
   const [toasts, setToasts] = useState([]);
+  const [saveState, setSaveState] = useState('saved'); // 'saving' | 'saved' | 'error' — alimenta o indicador "Salvo"
   const [showConfig, setShowConfig] = useState(false);
   const [otimizando, setOtimizando] = useState(false);
   const [oppBusy, setOppBusy] = useState({});
@@ -110,6 +111,7 @@ export default function App() {
   const importRef = useRef(null);
   const _tid = useRef(0);
   const _fxDone = useRef(false);
+  const _firstLocal = useRef(true);  // ignora o 1º salvamento (montagem) no indicador "Salvo"
   const [user, setUser] = useState(null);       // Supabase (null se não logado/não configurado)
   const [tripId, setTripId] = useState(null);
   const _cloudInit = useRef(false);
@@ -126,7 +128,21 @@ export default function App() {
     const s = new Set([base]); plan.legs.forEach(l => s.add(l.moeda || 'USD')); return [...s];
   }, [plan.legs, base]);
 
-  useEffect(() => { salvarPlano(plan); }, [plan]);
+  // Há nuvem ativa? Decide quem "manda" no indicador de salvo (local x sincronização).
+  const naNuvem = supabaseConfigurado && !!user;
+
+  // Persistência local: instantânea e à prova de falha. Dirige o indicador "Salvo"
+  // quando NÃO há nuvem (logado, quem comanda o status é o efeito de sync abaixo).
+  // Ignora o 1º disparo (montagem) pra não piscar "Salvando" sem o usuário ter mexido.
+  useEffect(() => {
+    const ok = salvarPlano(plan);
+    if (_firstLocal.current) { _firstLocal.current = false; return; }
+    if (naNuvem) return;
+    if (!ok) { setSaveState('error'); return; }
+    setSaveState('saving');
+    const t = setTimeout(() => setSaveState('saved'), 500);
+    return () => clearTimeout(t);
+  }, [plan, naNuvem]);
   useEffect(() => { salvarCenarios(cenarios); }, [cenarios]);
   useEffect(() => { salvarCheck(check); }, [check]);
 
@@ -179,11 +195,14 @@ export default function App() {
     });
   }, []);
 
-  // Salva na nuvem (debounce) quando há usuário logado.
+  // Salva na nuvem (debounce) quando há usuário logado — e reflete o status no indicador.
   useEffect(() => {
     if (!supabaseConfigurado || !user) return;
+    setSaveState('saving');
     const t = setTimeout(() => {
-      salvarViagemNuvem(user.id, tripId, plan).then((id) => { if (id && id !== tripId) setTripId(id); }).catch(() => {});
+      salvarViagemNuvem(user.id, tripId, plan)
+        .then((id) => { if (id && id !== tripId) setTripId(id); setSaveState('saved'); })
+        .catch(() => setSaveState('error'));
     }, 1500);
     return () => clearTimeout(t);
   }, [plan, user]);
@@ -209,6 +228,15 @@ export default function App() {
 
   function entrar() { setShowLogin(true); }
   async function deslogar() { await sair(); setUser(null); setTripId(null); toast('Você saiu.'); }
+
+  // "Tentar de novo" do indicador quando a sincronização com a nuvem falha.
+  function tentarSincronizar() {
+    if (!supabaseConfigurado || !user) return;
+    setSaveState('saving');
+    salvarViagemNuvem(user.id, tripId, plan)
+      .then((id) => { if (id && id !== tripId) setTripId(id); setSaveState('saved'); })
+      .catch(() => setSaveState('error'));
+  }
 
   // IA disponível? Regra: (usuário tem chave própria) OU (modo servidor ligado E logado).
   // A trava de verdade está no /api/ai (servidor); aqui é só UX — leva pro caminho certo.
@@ -395,6 +423,7 @@ export default function App() {
           </div>
 
           <div className="flex flex-wrap items-center justify-end gap-1.5">
+            <SaveStatus estado={saveState} naNuvem={naNuvem} onRetry={tentarSincronizar} />
             <ThemeToggle />
             {supabaseConfigurado && (user
               ? <Button variant="secondary" size="sm" onClick={deslogar} title={user.email}>Sair</Button>
