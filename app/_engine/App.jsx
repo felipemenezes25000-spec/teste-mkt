@@ -20,6 +20,8 @@ import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
 import BudgetPanel from './BudgetPanel.jsx';
 import { aplicarCortes } from './budget.js';
 import { encodePlan, decodePlan } from './share.js';
+import CenariosView from './CenariosView.jsx';
+import { carregarCenarios, salvarCenarios, snapshotCenario } from './cenarios.js';
 
 // Quando o backend (Render) tem a chave de IA, a IA funciona sem chave do usuário.
 const AI_SERVIDOR = process.env.NEXT_PUBLIC_AI_SERVER === '1';
@@ -113,6 +115,7 @@ export default function App() {
   const [ajuda, setAjuda] = useState(0);         // reabre o onboarding ao incrementar
   const [showLogin, setShowLogin] = useState(false);
   const { confirm, confirmElement } = useConfirm();
+  const [cenarios, setCenarios] = useState(carregarCenarios);  // "Rota A vs B" — snapshots comparáveis
 
   const calc = useMemo(() => calcular(plan), [plan]);
   const base = plan.settings.moedaBase;
@@ -121,6 +124,7 @@ export default function App() {
   }, [plan.legs, base]);
 
   useEffect(() => { salvarPlano(plan); }, [plan]);
+  useEffect(() => { salvarCenarios(cenarios); }, [cenarios]);
 
   function toast(msg, tipo = 'ok') {
     const id = ++_tid.current;
@@ -335,6 +339,21 @@ export default function App() {
     }
   }
 
+  // ---- Cenários (Rota A vs B) ----
+  function salvarCenario(nome) {
+    setCenarios(cs => [...cs, snapshotCenario(plan, nome)]);
+    toast(`Cenário "${nome}" salvo.`);
+  }
+  async function carregarCenario(c) {
+    if (plan.legs.length && !(await confirm({ title: 'Carregar cenário?', message: `Substituir a rota atual por "${c.nome}"? Se quiser manter a atual, salve-a como cenário antes.`, confirmLabel: 'Carregar', variant: 'primary' }))) return;
+    setPlan(normalizarPlano(c.plan)); setRationales({}); setOptResumo('');
+    toast(`Cenário "${c.nome}" carregado.`);
+  }
+  function removerCenario(id) {
+    setCenarios(cs => cs.filter(x => x.id !== id));
+    toast('Cenário removido.');
+  }
+
   const dragHandlersFor = (index) => ({
     draggable: true,
     onDragStart: (e) => { setDrag({ from: index, over: index }); e.dataTransfer.effectAllowed = 'move'; },
@@ -410,7 +429,7 @@ export default function App() {
 
         {plan.legs.length > 0 && (
           <Tabs value={aba} onChange={setAba}
-            tabs={[{ id: 'rota', icon: '🧭', label: 'Rota' }, { id: 'mapa', icon: '🗺️', label: 'Mapa' }, { id: 'custos', icon: '💰', label: 'Custos' }]} />
+            tabs={[{ id: 'rota', icon: '🧭', label: 'Rota' }, { id: 'mapa', icon: '🗺️', label: 'Mapa' }, { id: 'custos', icon: '💰', label: 'Custos' }, { id: 'cenarios', icon: '⚖️', label: 'Cenários' }]} />
         )}
 
         {optResumo && (
@@ -429,6 +448,10 @@ export default function App() {
             <CustosView calc={calc} />
             <BudgetPanel calc={calc} onAplicarCortes={handleAplicarCortes} />
           </div>
+        )}
+
+        {plan.legs.length > 0 && aba === 'cenarios' && (
+          <CenariosView plan={plan} cenarios={cenarios} onSalvar={salvarCenario} onCarregar={carregarCenario} onRemover={removerCenario} />
         )}
 
         {(plan.legs.length === 0 || aba === 'rota') && (
