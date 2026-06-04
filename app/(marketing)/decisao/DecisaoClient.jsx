@@ -10,7 +10,7 @@ import { escanearOportunidades } from '../../_engine/oportunidades.js';
 import { CustoVitrineVsReal } from '../../_components/CustoVitrineVsReal.jsx';
 import { ServicosDaViagem } from '../../_components/ServicosDaViagem.jsx';
 import { recomendarDestinos } from '../../_engine/decisao.js';
-import { carregarPerfil, salvarPerfil, perfilDoPreset, pesosScore, topInteresses, PERFIS_PRONTOS, INTERESSE_LABEL } from '../../_engine/perfil.js';
+import { carregarPerfil, salvarPerfil, perfilDoPreset, pesosScore, topInteresses, PERFIS_PRONTOS, INTERESSE_LABEL, PERFIL_EVENT } from '../../_engine/perfil.js';
 import { fmtMoeda } from '../../_engine/utils.js';
 import { FavoriteButton } from '../../_components/FavoriteButton.jsx';
 
@@ -73,6 +73,11 @@ export function DecisaoClient({ destinos }) {
       setCalc(calcular(pl));
       setRates((pl.settings && pl.settings.fx && pl.settings.fx.rates) || null);
     } catch {}
+
+    // Re-renderiza quando o perfil muda (ex.: favoritou um destino recomendado).
+    const onPerfil = () => { const p = carregarPerfil(); if (p) setPerfil(p); };
+    window.addEventListener(PERFIL_EVENT, onPerfil);
+    return () => window.removeEventListener(PERFIL_EVENT, onPerfil);
   }, []);
 
   function escolherPreset(id) {

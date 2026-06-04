@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
@@ -17,6 +18,29 @@ const LINKS = [
 
 export default function AppNav() {
   const path = usePathname() || '/';
+  const [alerta, setAlerta] = useState(0);
+
+  // Alerta "que salva a viagem": conta problemas P0 (furo de visto / orçamento
+  // estoura) da rota SALVA do usuário. Motor carregado sob demanda (não infla o
+  // bundle das páginas leves). Silencioso se não houver plano salvo.
+  useEffect(() => {
+    let vivo = true;
+    (async () => {
+      try {
+        if (!localStorage.getItem('mundosemfim.plan.v3')) return; // só o plano do usuário
+        const [{ carregarPlano }, { calcular }, { escanearOportunidades }] = await Promise.all([
+          import('../_engine/storage.js'),
+          import('../_engine/calc.js'),
+          import('../_engine/oportunidades.js'),
+        ]);
+        const ops = escanearOportunidades(calcular(carregarPlano()));
+        const urgentes = ops.filter((o) => o.prioridade === 'P0').length;
+        if (vivo) setAlerta(urgentes);
+      } catch { /* sem alerta */ }
+    })();
+    return () => { vivo = false; };
+  }, [path]);
+
   return (
     <header className="sticky top-0 z-40 backdrop-blur bg-paper/80 border-b border-line">
       <nav className="max-w-6xl mx-auto px-3 sm:px-6 h-14 flex items-center gap-2">
@@ -37,6 +61,15 @@ export default function AppNav() {
             );
           })}
         </div>
+        {alerta > 0 && (
+          <Link
+            href="/decisao" aria-label={`${alerta} alerta(s) na sua rota`}
+            title="Sua rota tem alertas (visto/orçamento) que podem estragar a viagem"
+            className="shrink-0 ml-1 inline-flex items-center gap-1 rounded-lg bg-danger-bg text-danger border border-danger-bd px-2 py-1 text-xs font-bold focusring"
+          >
+            ⚠ {alerta}
+          </Link>
+        )}
         <ThemeToggle className="shrink-0 ml-1" />
       </nav>
     </header>

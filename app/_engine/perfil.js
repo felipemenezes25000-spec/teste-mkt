@@ -8,6 +8,8 @@
    ele demonstra preferir. Núcleo PURO (testável); persistência isolada no fim.
    ========================================================================== */
 import { clamp, num } from './utils.js';
+import { indiceDe } from './indices.js';
+import { refDe } from './data.js';
 
 export const INTERESSES = ['economia', 'conforto', 'natureza', 'gastronomia', 'praia', 'cultura', 'vidaNoturna', 'seguranca', 'aventura'];
 
@@ -92,6 +94,7 @@ export function topInteresses(perfil, n = 3) {
 
 /* ===== Persistência (isolada — só no browser) ===== */
 export const PERFIL_KEY = 'mundosemfim.perfil.v1';
+export const PERFIL_EVENT = 'msf:perfil'; // dispara quando o perfil muda (UI re-renderiza)
 
 export function carregarPerfil() {
   try {
@@ -103,6 +106,21 @@ export function carregarPerfil() {
 }
 
 export function salvarPerfil(perfil, presetId) {
-  try { localStorage.setItem(PERFIL_KEY, JSON.stringify({ pesos: perfil, preset: presetId || null, v: 1 })); return true; }
-  catch { return false; }
+  let ok = false;
+  try { localStorage.setItem(PERFIL_KEY, JSON.stringify({ pesos: perfil, preset: presetId || null, v: 1 })); ok = true; }
+  catch { ok = false; }
+  try { window.dispatchEvent(new CustomEvent(PERFIL_EVENT)); } catch {}
+  return ok;
+}
+
+// Aprende com uma AÇÃO do usuário (favoritar um destino): empurra o perfil na
+// direção dos índices+custo daquele país e persiste. Falha em silêncio.
+export function aprenderComFavorito(code) {
+  try {
+    const ref = refDe(code);
+    const alvo = destinoParaInteresses(indiceDe(code), ref && ref.custoDia);
+    const novo = aprender(carregarPerfil() || perfilPadrao(), alvo);
+    salvarPerfil(novo);
+    return novo;
+  } catch { return null; }
 }
