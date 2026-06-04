@@ -49,7 +49,7 @@ export default function AppNav() {
           <span className="w-9 h-9 rounded-xl bg-pine text-white grid place-items-center font-display text-lg shadow-md" aria-hidden>∞</span>
           <span className="font-display text-lg text-ink leading-none hidden md:block">Mundo Sem Fim</span>
         </Link>
-        <GlobalSearch />
+        <div className="hidden lg:block shrink-0"><GlobalSearch /></div>
         <div className="flex items-center gap-0.5 overflow-x-auto no-scrollbar ml-auto">
           {LINKS.map((l) => {
             const active = path === l.href || path.startsWith(l.href + '/');

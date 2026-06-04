@@ -35,16 +35,62 @@ export async function resumoWiki(query, { revalidate = DIA } = {}) {
 
 const imgDe = (d) => (d && d.type !== 'disambiguation' ? ((d.originalimage && d.originalimage.source) || (d.thumbnail && d.thumbnail.source) || null) : null);
 
+// Lixo comum na media-list (bandeiras, ícones, mapas, brasões, áudio, svg).
+const RUIM = /\.svg|\.ogg|\.pdf|flag|logo|icon|coat[_ ]of[_ ]arms|locator|_map|map_|wiki(media|pedia)-logo/i;
+
+async function pegarMediaList(query, revalidate, lang) {
+  if (!query) return null;
+  try {
+    const url = `https://${lang}.wikipedia.org/api/rest_v1/page/media-list/` + encodeURIComponent(String(query).replace(/ /g, '_'));
+    const res = await fetch(url, { headers: { accept: 'application/json', 'user-agent': UA }, next: { revalidate }, signal: AbortSignal.timeout(8000) });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch { return null; }
+}
+
+// Várias imagens "do local": junta as fotos do ARTIGO (media-list pt+en),
+// filtrando bandeiras/ícones/mapas. É o banco de fotos por atração/destino.
+export async function imagensDe(query, { n = 4, revalidate = DIA } = {}) {
+  const urls = [];
+  for (const lang of ['pt', 'en']) {
+    const d = await pegarMediaList(query, revalidate, lang);
+    for (const it of (d && d.items) || []) {
+      if (it.type !== 'image') continue;
+      const src = it.srcset && it.srcset[0] && it.srcset[0].src;
+      if (!src || RUIM.test(src)) continue;
+      const full = src.startsWith('//') ? 'https:' + src : src;
+      if (!urls.includes(full)) urls.push(full);
+      if (urls.length >= n) return urls;
+    }
+    if (urls.length >= n) break;
+  }
+  return urls;
+}
+
 export async function imagemWiki(query, { revalidate = DIA } = {}) {
-  // Tenta pt.wikipedia; se não houver imagem, tenta en.wikipedia (cobertura de
-  // imagens muito maior pra atrações menos famosas). Imagem independe do idioma.
+  // 1) thumbnail do resumo (pt→en). 2) fallback: 1ª foto da media-list do artigo
+  // (pt→en) — enche muito mais e elimina os placeholders.
   const ptImg = imgDe(await pegarResumo(query, revalidate, 'pt'));
   if (ptImg) return ptImg;
-  return imgDe(await pegarResumo(query, revalidate, 'en'));
+  const enImg = imgDe(await pegarResumo(query, revalidate, 'en'));
+  if (enImg) return enImg;
+  const ml = await imagensDe(query, { n: 1, revalidate });
+  return ml[0] || null;
 }
 
 function stripHtml(s) {
   return String(s).replace(/<[^>]*>/g, '').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim().slice(0, 90);
+}
+
+// Filtra autores-lixo/placeholder do Commons (ex.: "hoge asdf", "test", "unknown").
+// Num produto cuja proposta é confiança/neutralidade, um crédito-lixo é veneno.
+function autorLimpo(valor) {
+  if (!valor) return null;
+  const t = stripHtml(valor);
+  if (!t || t.length < 2) return null;
+  if (/\b(hoge|fuga|piyo|asdf|qwer|zxcv|test|teste|lorem|ipsum|example|unknown|desconhecido|n\/?a|none|null)\b/i.test(t)) return null;
+  if (!/[a-zA-ZÀ-ÿ]{2,}/.test(t)) return null; // precisa ter letras de verdade
+  return t;
 }
 
 // Nome do arquivo no Commons a partir da URL da imagem (lida com thumbs).
@@ -80,7 +126,7 @@ export async function creditoImagem(imgUrl, { revalidate = DIA } = {}) {
     const page = Object.values(pages)[0];
     const meta = (page && page.imageinfo && page.imageinfo[0] && page.imageinfo[0].extmetadata) || {};
     return {
-      autor: meta.Artist && meta.Artist.value ? stripHtml(meta.Artist.value) : null,
+      autor: autorLimpo(meta.Artist && meta.Artist.value),
       licenca: (meta.LicenseShortName && meta.LicenseShortName.value) || null,
       fileUrl: 'https://commons.wikimedia.org/wiki/' + encodeURIComponent('File:' + file),
     };

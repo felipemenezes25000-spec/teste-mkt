@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DESTINOS, destinoPorSlug } from '../../../_lib/destinos.js';
-import { resumoWiki, imagemWiki, creditoImagem } from '../../../_lib/wiki.js';
+import { resumoWiki, imagemWiki, imagensDe, creditoImagem } from '../../../_lib/wiki.js';
 import { atracoesDe } from '../../../_lib/places.js';
 import { MESES_PT } from '../../../_engine/data.js';
 import { FavoriteButton } from '../../../_components/FavoriteButton.jsx';
@@ -12,6 +12,7 @@ import { CustoVitrineVsReal } from '../../../_components/CustoVitrineVsReal.jsx'
 import { calcExemploDestino, resumoVitrineVsReal } from '../../../_engine/custoTotal.js';
 import { dicasDe, SECOES_DICAS } from '../../../_engine/dicas.js';
 import { atracoesDoPais } from '../../../_engine/atracoes.js';
+import { comidasDoPais, COMIDA_ICON } from '../../../_engine/comidas.js';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -65,13 +66,20 @@ export default async function DestinoPage({ params }) {
     Promise.all(pontos.map((a) => imagemWiki(a.wiki || a.nome))),
     Promise.all((d.cidades || []).slice(0, 4).map((c) => imagemWiki(c))),
   ]);
-  const credito = wiki?.img ? await creditoImagem(wiki.img) : null;
+  // Herói: thumbnail do resumo OU 1ª foto da media-list (mata o placeholder).
+  const heroImg = wiki?.img || (await imagensDe(d.fotoQuery || d.nome, { n: 1 }))[0] || null;
+  const credito = heroImg ? await creditoImagem(heroImg) : null;
 
   // Galeria de pontos turísticos: prioriza a lista CURADA (foto buscada por atração),
   // com fallback pro Wikidata. Garante cobertura em todos os 167 países.
   const galeria = pontos.length
     ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: pontosImgs[i] }))
     : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: a.img }));
+
+  // Comidas: lista curada (com tipo: salgado/doce/bebida) ou fallback dos dados base.
+  const comidas = comidasDoPais(d.code).length
+    ? comidasDoPais(d.code)
+    : (d.comidas || []).map((f) => ({ nome: f, tipo: 'salgado' }));
 
   const meses = (d.melhoresMeses || []).map((m) => MESES_PT[m - 1]).join(' · ') || '—';
   const fatos = [
@@ -88,9 +96,9 @@ export default async function DestinoPage({ params }) {
     <main>
       {/* HERO */}
       <section className="relative h-[42vh] min-h-[260px] max-h-[440px] overflow-hidden bg-paper2">
-        {wiki?.img ? (
+        {heroImg ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={wiki.img} alt={d.nome} className="w-full h-full object-cover" />
+          <img src={heroImg} alt={d.nome} className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-pine/20 to-ochre/20" aria-hidden />
         )}
@@ -205,12 +213,22 @@ export default async function DestinoPage({ params }) {
           </section>
         )}
 
-        {/* COMIDA */}
-        {(d.comidas || []).length > 0 && (
+        {/* COMIDA — comidas obrigatórias com tipo (salgado/doce/bebida/lanche) */}
+        {comidas.length > 0 && (
           <section>
-            <h2 className="font-display text-2xl text-ink mb-2">🍽️ Comida típica</h2>
+            <div className="flex items-baseline justify-between gap-2 mb-2">
+              <h2 className="font-display text-2xl text-ink">🍽️ Comidas obrigatórias</h2>
+              <span className="text-xs text-inksoft">{comidas.length} pra provar</span>
+            </div>
             <div className="flex flex-wrap gap-2">
-              {d.comidas.map((f) => <span key={f} className="text-sm bg-card border border-line rounded-full px-3 py-1.5 text-ink">{f}</span>)}
+              {comidas.map((c, i) => (
+                <span
+                  key={i}
+                  className={`text-sm rounded-full px-3 py-1.5 border ${c.tipo === 'doce' ? 'bg-clay/10 border-clay/30' : c.tipo === 'bebida' ? 'bg-pine/8 border-pine/25' : 'bg-card border-line'} text-ink`}
+                >
+                  <span aria-hidden className="mr-1">{COMIDA_ICON[c.tipo] || '🍽️'}</span>{c.nome}
+                </span>
+              ))}
             </div>
           </section>
         )}
