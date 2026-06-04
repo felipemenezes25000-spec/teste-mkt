@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { PlanosCta } from './PlanosCta.jsx';
 
 export const metadata = {
   title: 'Planos — Mundo Sem Fim',
@@ -42,12 +42,9 @@ export default function PlanosPage() {
             <ul className="mt-4 space-y-2 text-sm text-inksoft flex-1">
               {p.bullets.map((b) => <li key={b} className="flex gap-2"><span className="text-pine shrink-0" aria-hidden>✓</span>{b}</li>)}
             </ul>
-            <Link
-              href={p.href}
-              className={`mt-6 inline-flex items-center justify-center rounded-xl px-4 py-2.5 font-semibold transition focusring ${p.destaque ? 'bg-pine text-white hover:bg-pinedk' : 'border border-line bg-card text-ink hover:text-pine'}`}
-            >
-              {p.cta}
-            </Link>
+            <div className="mt-6">
+              <PlanosCta plano={p.id} label={p.cta} destaque={p.destaque} freeHref={p.id === 'free' ? p.href : undefined} />
+            </div>
           </div>
         ))}
       </div>

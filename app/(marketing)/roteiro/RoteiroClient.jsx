@@ -6,6 +6,7 @@ import { DESTINOS, destinoPorSlug } from '../../_lib/destinos.js';
 import { carregarPlano } from '../../_engine/storage.js';
 import { gerarRoteiro } from '../../_engine/services.js';
 import { MOEDAS } from '../../_engine/data.js';
+import { useLibera } from '../../_components/Gate.jsx';
 
 const RITMOS = [{ id: 'tranquilo', label: 'Tranquilo' }, { id: 'equilibrado', label: 'Equilibrado' }, { id: 'intenso', label: 'Intenso' }];
 const CONFORTOS = [{ id: 'mochila', label: 'Mochila' }, { id: 'médio', label: 'Médio' }, { id: 'conforto', label: 'Conforto' }];
@@ -140,6 +141,7 @@ function Segmented({ options, value, onChange }) {
 }
 
 function RoteiroView({ roteiro, destino, onRegerar }) {
+  const { libera: liberaPdf } = useLibera('roteiro-pdf');
   return (
     <div className="mt-6">
       <div className="rounded-2xl border border-line bg-gradient-to-br from-pine/5 to-ochre/5 p-5">
@@ -152,7 +154,11 @@ function RoteiroView({ roteiro, destino, onRegerar }) {
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
           <button onClick={onRegerar} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">↻ Gerar de novo</button>
-          <button onClick={() => window.print()} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">⬇ Exportar PDF</button>
+          {liberaPdf ? (
+            <button onClick={() => window.print()} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">⬇ Exportar PDF</button>
+          ) : (
+            <Link href="/planos" title="Exportar PDF é um recurso premium" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-ochre/40 bg-ochre/5 text-ochre hover:brightness-95 focusring">🔒 Exportar PDF (Premium)</Link>
+          )}
         </div>
       </div>
 
