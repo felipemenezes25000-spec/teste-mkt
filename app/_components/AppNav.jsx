@@ -10,6 +10,7 @@ const LINKS = [
   { href: '/planejar', label: 'Planejar', icon: '🗺️' },
   { href: '/roteiro', label: 'Roteiro IA', icon: '✨' },
   { href: '/voos', label: 'Voos', icon: '✈' },
+  { href: '/salvos', label: 'Salvos', icon: '♥' },
   { href: '/planos', label: 'Planos', icon: '⭐' },
 ];
 

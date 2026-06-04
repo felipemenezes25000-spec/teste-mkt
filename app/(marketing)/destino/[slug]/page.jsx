@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DESTINOS, destinoPorSlug } from '../../../_lib/destinos.js';
-import { resumoWiki, imagemWiki } from '../../../_lib/wiki.js';
+import { resumoWiki, imagemWiki, creditoImagem } from '../../../_lib/wiki.js';
+import { atracoesDe } from '../../../_lib/places.js';
 import { MESES_PT } from '../../../_engine/data.js';
+import { FavoriteButton } from '../../../_components/FavoriteButton.jsx';
+import { AddToRouteButton } from '../../../_components/AddToRouteButton.jsx';
 
 export const revalidate = 86400;
 
@@ -27,10 +30,12 @@ export default async function DestinoPage({ params }) {
   const d = destinoPorSlug(params.slug);
   if (!d) notFound();
 
-  const [wiki, ...cidadeImgs] = await Promise.all([
+  const [wiki, atracoes, ...cidadeImgs] = await Promise.all([
     resumoWiki(d.fotoQuery || d.nome),
+    atracoesDe(d.wikidataId, { limite: 8 }),
     ...(d.cidades || []).slice(0, 4).map((c) => imagemWiki(c)),
   ]);
+  const credito = wiki?.img ? await creditoImagem(wiki.img) : null;
 
   const meses = (d.melhoresMeses || []).map((m) => MESES_PT[m - 1]).join(' · ') || '—';
   const fatos = [
@@ -39,6 +44,9 @@ export default async function DestinoPage({ params }) {
     { k: 'Custo médio', v: `~US$ ${d.custoDia}/dia` },
     { k: 'Melhor época', v: meses },
   ];
+
+  const btnPrimary = 'inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-white font-semibold px-4 py-2.5 hover:bg-pinedk transition focusring shrink-0';
+  const btnGhost = 'inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2.5 hover:text-pine transition focusring shrink-0';
 
   return (
     <main>
@@ -51,6 +59,7 @@ export default async function DestinoPage({ params }) {
           <div className="w-full h-full bg-gradient-to-br from-pine/20 to-ochre/20" aria-hidden />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+        <FavoriteButton code={d.code} nome={d.nome} className="absolute top-3 right-3 z-20 w-10 h-10 text-lg" />
         <div className="absolute bottom-0 left-0 right-0">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-5">
             <Link href="/explorar" className="text-white/85 hover:text-white text-sm focusring">← Explorar</Link>
@@ -58,8 +67,14 @@ export default async function DestinoPage({ params }) {
             <p className="text-white/85 text-sm">{d.estacao}</p>
           </div>
         </div>
-        {wiki?.url && (
-          <a href={wiki.url} target="_blank" rel="noopener noreferrer" className="absolute top-3 right-3 text-[11px] bg-ink/55 text-white px-2 py-0.5 rounded focusring">Foto: Wikipédia ↗</a>
+        {(credito?.fileUrl || wiki?.url) && (
+          <a
+            href={credito?.fileUrl || wiki.url} target="_blank" rel="noopener noreferrer"
+            className="absolute top-3 left-3 z-20 text-[11px] bg-ink/55 text-white px-2 py-0.5 rounded focusring max-w-[70%] truncate"
+            title="Fonte e licença da imagem"
+          >
+            Foto: {credito?.autor ? credito.autor : 'Wikimedia'}{credito?.licenca ? ` · ${credito.licenca}` : ''} ↗
+          </a>
         )}
       </section>
 
@@ -83,10 +98,35 @@ export default async function DestinoPage({ params }) {
           </section>
         )}
 
+        {/* PONTOS TURÍSTICOS (Wikidata) */}
+        {atracoes.length > 0 && (
+          <section>
+            <h2 className="font-display text-2xl text-ink mb-3">Pontos turísticos</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {atracoes.map((a) => (
+                <a
+                  key={a.nome} href={mapsUrl(`${a.nome}, ${d.nome}`)} target="_blank" rel="noopener noreferrer"
+                  className="group rounded-xl overflow-hidden border border-line bg-card hover:border-pine/50 hover:shadow-[var(--e-1)] transition focusring"
+                >
+                  <div className="h-28 bg-paper2 overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={a.img} alt={a.nome} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                  </div>
+                  <div className="p-2.5">
+                    <div className="text-sm font-semibold text-ink line-clamp-1">{a.nome}</div>
+                    {a.descricao && <div className="text-[11px] text-inksoft line-clamp-2 mt-0.5">{a.descricao}</div>}
+                  </div>
+                </a>
+              ))}
+            </div>
+            <p className="mt-2 text-[11px] text-inksoft">Fonte: Wikidata/Wikimedia. Toque para abrir no Google Maps.</p>
+          </section>
+        )}
+
         {/* CIDADES */}
         {(d.cidades || []).length > 0 && (
           <section>
-            <h2 className="font-display text-2xl text-ink mb-3">Cidades & lugares</h2>
+            <h2 className="font-display text-2xl text-ink mb-3">Cidades & bases</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {d.cidades.slice(0, 4).map((c, i) => (
                 <a key={c} href={mapsUrl(`${c}, ${d.nome}`)} target="_blank" rel="noopener noreferrer" className="group rounded-xl overflow-hidden border border-line bg-card hover:border-pine/50 focusring">
@@ -119,14 +159,14 @@ export default async function DestinoPage({ params }) {
         <section className="rounded-2xl border border-line bg-gradient-to-br from-pine/5 to-ochre/5 p-6 flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="mr-auto">
             <h3 className="font-display text-xl text-ink">Pronto pra colocar {d.nome} na rota?</h3>
-            <p className="text-sm text-inksoft">Monte a ordem dos países ou gere um roteiro dia a dia com IA.</p>
+            <p className="text-sm text-inksoft">Adicione à sua rota (já vem com custo, estação e visto) ou gere um roteiro dia a dia com IA.</p>
           </div>
-          <Link href="/planejar" className="inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-white font-semibold px-4 py-2.5 hover:bg-pinedk transition focusring shrink-0">🗺️ Planejar rota</Link>
-          <Link href="/roteiro" className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2.5 hover:text-pine transition focusring shrink-0">✨ Gerar roteiro</Link>
+          <AddToRouteButton code={d.code} nome={d.nome} className={btnPrimary}>🗺️ Adicionar à rota</AddToRouteButton>
+          <Link href={`/roteiro?destino=${d.slug}`} className={btnGhost}>✨ Gerar roteiro</Link>
         </section>
 
         <p className="text-xs text-inksoft border-t border-line pt-4">
-          Custos e melhor época são estimativas (perfil econômico) — confira na fonte oficial. Texto e fotos: Wikipédia/Wikimedia, com link para a origem.
+          Custos e melhor época são estimativas (perfil econômico) — confira na fonte oficial. Conteúdo e fotos: Wikipédia/Wikidata/Wikimedia Commons, com autoria e licença na origem.
         </p>
       </div>
     </main>
