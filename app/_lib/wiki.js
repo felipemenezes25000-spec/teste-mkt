@@ -4,10 +4,10 @@
 const DIA = 86400;
 const UA = 'MundoSemFim/1.0 (planejador de viagem; +https://mundo-sem-fim.vercel.app)';
 
-async function pegarResumo(query, revalidate) {
+async function pegarResumo(query, revalidate, lang = 'pt') {
   if (!query) return null;
   try {
-    const url = 'https://pt.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(String(query).replace(/ /g, '_'));
+    const url = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/` + encodeURIComponent(String(query).replace(/ /g, '_'));
     const res = await fetch(url, {
       headers: { accept: 'application/json', 'user-agent': UA },
       next: { revalidate },
@@ -33,9 +33,14 @@ export async function resumoWiki(query, { revalidate = DIA } = {}) {
   };
 }
 
-export async function imagemWiki(query, opts) {
-  const r = await resumoWiki(query, opts);
-  return r ? r.img || r.thumb : null;
+const imgDe = (d) => (d && d.type !== 'disambiguation' ? ((d.originalimage && d.originalimage.source) || (d.thumbnail && d.thumbnail.source) || null) : null);
+
+export async function imagemWiki(query, { revalidate = DIA } = {}) {
+  // Tenta pt.wikipedia; se não houver imagem, tenta en.wikipedia (cobertura de
+  // imagens muito maior pra atrações menos famosas). Imagem independe do idioma.
+  const ptImg = imgDe(await pegarResumo(query, revalidate, 'pt'));
+  if (ptImg) return ptImg;
+  return imgDe(await pegarResumo(query, revalidate, 'en'));
 }
 
 function stripHtml(s) {

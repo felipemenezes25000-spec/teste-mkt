@@ -11,6 +11,7 @@ import { CustoTiers } from '../../../_components/CustoTiers.jsx';
 import { CustoVitrineVsReal } from '../../../_components/CustoVitrineVsReal.jsx';
 import { calcExemploDestino, resumoVitrineVsReal } from '../../../_engine/custoTotal.js';
 import { dicasDe, SECOES_DICAS } from '../../../_engine/dicas.js';
+import { atracoesDoPais } from '../../../_engine/atracoes.js';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -57,12 +58,20 @@ export default async function DestinoPage({ params }) {
   const d = destinoPorSlug(params.slug);
   if (!d) notFound();
 
-  const [wiki, atracoes, ...cidadeImgs] = await Promise.all([
+  const pontos = atracoesDoPais(d.code);
+  const [wiki, atracoes, pontosImgs, cidadeImgs] = await Promise.all([
     resumoWiki(d.fotoQuery || d.nome),
     atracoesDe(d.wikidataId, { limite: 8 }),
-    ...(d.cidades || []).slice(0, 4).map((c) => imagemWiki(c)),
+    Promise.all(pontos.map((a) => imagemWiki(a.wiki || a.nome))),
+    Promise.all((d.cidades || []).slice(0, 4).map((c) => imagemWiki(c))),
   ]);
   const credito = wiki?.img ? await creditoImagem(wiki.img) : null;
+
+  // Galeria de pontos turísticos: prioriza a lista CURADA (foto buscada por atração),
+  // com fallback pro Wikidata. Garante cobertura em todos os 167 países.
+  const galeria = pontos.length
+    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: pontosImgs[i] }))
+    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: a.img }));
 
   const meses = (d.melhoresMeses || []).map((m) => MESES_PT[m - 1]).join(' · ') || '—';
   const fatos = [
@@ -142,28 +151,35 @@ export default async function DestinoPage({ params }) {
           </section>
         )}
 
-        {/* PONTOS TURÍSTICOS (Wikidata) */}
-        {atracoes.length > 0 && (
+        {/* PONTOS TURÍSTICOS — galeria curada (uma foto por atração, todos os 167) */}
+        {galeria.length > 0 && (
           <section>
-            <h2 className="font-display text-2xl text-ink mb-3">Pontos turísticos</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {atracoes.map((a) => (
+            <div className="flex items-baseline justify-between gap-2 mb-3">
+              <h2 className="font-display text-2xl text-ink">📸 Pontos turísticos</h2>
+              <span className="text-xs text-inksoft">{galeria.length} lugares</span>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {galeria.map((a, i) => (
                 <a
-                  key={a.nome} href={mapsUrl(`${a.nome}, ${d.nome}`)} target="_blank" rel="noopener noreferrer"
+                  key={`${a.nome}-${i}`} href={mapsUrl(`${a.nome}, ${d.nome}`)} target="_blank" rel="noopener noreferrer"
                   className="group rounded-xl overflow-hidden border border-line bg-card hover:border-pine/50 hover:shadow-[var(--e-1)] transition focusring"
                 >
-                  <div className="h-28 bg-paper2 overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={a.img} alt={a.nome} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                  <div className="h-28 sm:h-32 bg-paper2 overflow-hidden">
+                    {a.img ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={a.img} alt={a.nome} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                    ) : (
+                      <div className="w-full h-full grid place-items-center bg-gradient-to-br from-pine/15 to-ochre/15 text-2xl" aria-hidden>📍</div>
+                    )}
                   </div>
                   <div className="p-2.5">
                     <div className="text-sm font-semibold text-ink line-clamp-1">{a.nome}</div>
-                    {a.descricao && <div className="text-[11px] text-inksoft line-clamp-2 mt-0.5">{a.descricao}</div>}
+                    {a.sub && <div className="text-[11px] text-inksoft line-clamp-1 mt-0.5">{a.sub}</div>}
                   </div>
                 </a>
               ))}
             </div>
-            <p className="mt-2 text-[11px] text-inksoft">Fonte: Wikidata/Wikimedia. Toque para abrir no Google Maps.</p>
+            <p className="mt-2 text-[11px] text-inksoft">Fotos: Wikipédia/Wikimedia Commons. Toque para abrir no Google Maps.</p>
           </section>
         )}
 
