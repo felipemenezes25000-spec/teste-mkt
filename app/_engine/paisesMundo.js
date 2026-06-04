@@ -1,10 +1,7 @@
 /* =============================================================================
-   CATÁLOGO MUNDIAL DE PAÍSES (gerado por pesquisa multiagente — jun/2026)
-   ---------------------------------------------------------------------------
-   145 países ALÉM dos 22 curados na base (data.js). Mesclados via spread
-   em data.js (PAISES_REF, VISTOS.BR), indices.js (INDICES_PAIS) e destinos.js
-   (WIKIDATA). ESTIMATIVAS de referência — confira visto/vacina na fonte oficial.
-   Não editar à mão: regerar pelo workflow "paises-do-mundo".
+   CATÁLOGO MUNDIAL DE PAÍSES (gerado + enriquecido por pesquisa multiagente, jun/2026)
+   145 países além dos 22 curados. Visto-BR e cidades/comidas revisados.
+   ESTIMATIVAS de referência — confira visto/vacina na fonte oficial. Não editar à mão.
    ========================================================================== */
 export const PAISES_EXTRA = [
  {
@@ -31,13 +28,17 @@ export const PAISES_EXTRA = [
    "Tirana",
    "Sarandë",
    "Berat",
-   "Gjirokastër"
+   "Gjirokastër",
+   "Shkodër",
+   "Vlorë"
   ],
   "comidas": [
-   "Tavë kosi",
-   "Byrek",
-   "Fërgesë",
-   "Qofte"
+   "Tavë kosi (cordeiro com iogurte)",
+   "Byrek (folhado salgado)",
+   "Fërgesë (ensopado de pimentão e queijo)",
+   "Qofte (almôndegas)",
+   "Petulla (massa frita)",
+   "Baklava"
   ]
  },
  {
@@ -66,13 +67,17 @@ export const PAISES_EXTRA = [
    "Berlim",
    "Munique",
    "Hamburgo",
-   "Colônia"
+   "Colônia",
+   "Frankfurt",
+   "Dresden"
   ],
   "comidas": [
-   "Bratwurst",
-   "Schnitzel",
+   "Salsicha (Bratwurst)",
    "Pretzel",
-   "Sauerkraut"
+   "Schnitzel",
+   "Chucrute (Sauerkraut)",
+   "Eisbein (joelho de porco)",
+   "Strudel de maçã"
   ]
  },
  {
@@ -97,16 +102,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Andorra la Vella",
   "cidades": [
-   "Andorra-a-Velha",
-   "Escaldes-Engordany",
+   "Andorra-a-Velha (Andorra la Vella)",
    "Encamp",
-   "La Massana"
+   "Canillo",
+   "Ordino",
+   "La Massana",
+   "Soldeu (estação de esqui)"
   ],
   "comidas": [
-   "Trinxat",
-   "Escudella",
-   "Cargols",
-   "Coca"
+   "Trinxat (repolho com batata e bacon)",
+   "Escudella (cozido)",
+   "Cunillo (coelho)",
+   "Truita de riu (truta de rio)",
+   "Embotits (embutidos)",
+   "Coca (bolo/torta catalã)"
   ]
  },
  {
@@ -132,14 +141,18 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Luanda",
   "cidades": [
    "Luanda",
-   "Lobito",
    "Benguela",
-   "Lubango"
+   "Lubango",
+   "Namibe",
+   "Cabinda",
+   "Huambo"
   ],
   "comidas": [
    "Muamba de galinha",
-   "Funje com calulu",
-   "Mufete de peixe",
+   "Funge",
+   "Calulu",
+   "Moamba de ginguba (amendoim)",
+   "Mufete (peixe grelhado)",
    "Cocada amarela"
   ]
  },
@@ -164,16 +177,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "St. John's, Antigua and Barbuda",
   "cidades": [
-   "Saint John's",
-   "English Harbour",
+   "St. John's",
    "Jolly Harbour",
-   "Codrington (Barbuda)"
+   "Dickenson Bay",
+   "English Harbour",
+   "Falmouth",
+   "Ilha de Barbuda (Codrington)"
   ],
   "comidas": [
-   "Fungie e pepperpot (prato nacional)",
-   "Ducana (bolinho doce de batata-doce)",
-   "Saltfish (bacalhau salgado)",
-   "Conch (caracol-do-mar)"
+   "Fungie com pepperpot (prato nacional)",
+   "Ducana",
+   "Saltfish (bacalhau)",
+   "Conch",
+   "Goat water (ensopado de cabrito)",
+   "Johnny cakes"
   ]
  },
  {
@@ -198,16 +215,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Hegra",
   "cidades": [
-   "Riade",
-   "Jidá",
+   "Riad",
+   "Jidá (Jeddah)",
    "AlUla",
+   "Meca*",
+   "Medina*",
    "Abha"
   ],
   "comidas": [
-   "Kabsa",
+   "Kabsa (arroz com carne especiado)",
    "Mandi",
+   "Mutabbaq (massa recheada)",
    "Jareesh",
-   "Kunafa"
+   "Shawarma",
+   "Tâmaras e café árabe (qahwa)"
   ]
  },
  {
@@ -232,16 +253,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Casbah de Argel",
   "cidades": [
-   "Argel",
-   "Orã",
-   "Constantina",
-   "Tamanrasset"
+   "Argel (Alger)",
+   "Orã (Oran)",
+   "Constantine",
+   "Tamanrasset",
+   "Ghardaïa",
+   "Tlemcen"
   ],
   "comidas": [
-   "Couscous",
-   "Chorba",
-   "Mechoui",
-   "Makroud"
+   "Cuscuz",
+   "Chorba (sopa)",
+   "Mechoui (cordeiro assado)",
+   "Dolma",
+   "Bourek",
+   "Makroud (doce)"
   ]
  },
  {
@@ -266,15 +291,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Mount Ararat",
   "cidades": [
    "Yerevan",
-   "Dilijan",
    "Gyumri",
-   "Goris"
+   "Dilijan",
+   "Goris",
+   "Lago Sevan (Sevanavank)",
+   "Vagharshapat (Echmiadzin)"
   ],
   "comidas": [
-   "Khorovats",
-   "Dolma",
-   "Lavash",
-   "Khash"
+   "Khorovats (churrasco armênio)",
+   "Dolma (folhas de uva recheadas)",
+   "Lavash (pão fino)",
+   "Khash (sopa)",
+   "Harissa (mingau de trigo e carne)",
+   "Gata (doce)"
   ]
  },
  {
@@ -299,15 +328,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Oranjestad",
   "cidades": [
    "Oranjestad",
-   "Palm Beach (Noord)",
+   "Palm Beach",
+   "Eagle Beach",
+   "Noord",
    "San Nicolas",
-   "Eagle Beach"
+   "Baby Beach"
   ],
   "comidas": [
-   "Keshi yena (queijo recheado)",
-   "Pastechi (pastel frito)",
-   "Sopi di pisca (sopa de peixe)",
-   "Pan bati (panqueca de milho)"
+   "Keshi yena",
+   "Pastechi",
+   "Stoba (ensopado de cabrito)",
+   "Funchi",
+   "Pan bati",
+   "Sopi di pisca (sopa de peixe)"
   ]
  },
  {
@@ -335,14 +368,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Sydney",
    "Melbourne",
+   "Brisbane",
    "Cairns",
-   "Brisbane"
+   "Gold Coast",
+   "Perth"
   ],
   "comidas": [
-   "Meat pie",
+   "Meat pie (torta de carne)",
    "Barramundi grelhado",
-   "Lamington",
-   "Pavlova"
+   "Lamingtons",
+   "Vegemite na torrada",
+   "Pavlova",
+   "Fish and chips"
   ]
  },
  {
@@ -372,13 +409,17 @@ export const PAISES_EXTRA = [
    "Viena",
    "Salzburgo",
    "Innsbruck",
-   "Hallstatt"
+   "Hallstatt",
+   "Graz",
+   "Salzkammergut"
   ],
   "comidas": [
    "Wiener Schnitzel",
    "Sachertorte",
    "Apfelstrudel",
-   "Tafelspitz"
+   "Tafelspitz",
+   "Käsespätzle",
+   "Knödel"
   ]
  },
  {
@@ -404,15 +445,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Flame Towers",
   "cidades": [
    "Baku",
-   "Sheki",
    "Gabala",
-   "Lahij"
+   "Sheki",
+   "Quba",
+   "Lankaran",
+   "Gobustan"
   ],
   "comidas": [
-   "Plov",
+   "Plov (arroz com açafrão e carne)",
    "Dolma",
-   "Qutab",
-   "Dushbara"
+   "Kebab",
+   "Qutab (panqueca recheada)",
+   "Dushbara (sopa de trouxinhas)",
+   "Pakhlava (doce)"
   ]
  },
  {
@@ -438,15 +483,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Nassau, Bahamas",
   "cidades": [
    "Nassau",
-   "Freeport",
+   "Paradise Island",
+   "Freeport (Grand Bahama)",
    "Exuma",
-   "Harbour Island"
+   "Harbour Island",
+   "Bimini"
   ],
   "comidas": [
-   "Conch fritters",
+   "Conch fritters (caracol frito)",
    "Cracked conch",
-   "Rock lobster",
-   "Johnnycake"
+   "Rock lobster (lagosta)",
+   "Peas and rice",
+   "Guava duff (sobremesa)",
+   "Johnny cake"
   ]
  },
  {
@@ -474,13 +523,17 @@ export const PAISES_EXTRA = [
    "Manama",
    "Muharraq",
    "Riffa",
-   "Forte do Bahrein"
+   "Forte do Bahrein (Qal'at al-Bahrain)",
+   "Ilha Hawar",
+   "Zallaq"
   ],
   "comidas": [
    "Machboos",
-   "Muhammar",
+   "Harees",
+   "Muhammar (arroz doce)",
    "Balaleet",
-   "Halwa"
+   "Samboosa",
+   "Halwa do Bahrein"
   ]
  },
  {
@@ -504,16 +557,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Sundarbans",
   "cidades": [
-   "Daca",
+   "Daca (Dhaka)",
    "Chittagong",
    "Cox's Bazar",
-   "Sylhet"
+   "Sylhet",
+   "Sundarbans (Khulna)",
+   "Srimangal"
   ],
   "comidas": [
-   "Biryani",
-   "Hilsa (ilish)",
+   "Biryani (Kacchi biryani)",
+   "Hilsa (ilish) curry",
    "Bhuna khichuri",
-   "Pitha"
+   "Pitha",
+   "Panta bhat",
+   "Mishti doi"
   ]
  },
  {
@@ -539,15 +596,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Bridgetown",
   "cidades": [
    "Bridgetown",
+   "St. Lawrence Gap",
    "Holetown",
    "Oistins",
+   "Speightstown",
    "Bathsheba"
   ],
   "comidas": [
-   "Cou-cou and flying fish",
-   "Macaroni pie",
+   "Flying fish com cou-cou (prato nacional)",
+   "Macarrão de pudim (macaroni pie)",
    "Fish cakes",
-   "Pudding and souse"
+   "Pudding and souse",
+   "Cutters (sanduíche)",
+   "Bajan fried chicken"
   ]
  },
  {
@@ -574,14 +635,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Minsk",
    "Brest",
-   "Hrodna",
-   "Vitebsk"
+   "Vitebsk",
+   "Grodno (Hrodna)",
+   "Mir (castelo)",
+   "Nesvizh (Niasvizh)"
   ],
   "comidas": [
-   "Draniki",
-   "Machanka",
-   "Kolduny",
-   "Kvass"
+   "Draniki (panqueca de batata)",
+   "Machanka (ensopado de carne)",
+   "Kolduny (bolinho recheado)",
+   "Borscht",
+   "Kvas (bebida fermentada)",
+   "Babka de batata"
   ]
  },
  {
@@ -609,13 +674,17 @@ export const PAISES_EXTRA = [
    "Bruxelas",
    "Bruges",
    "Antuérpia",
-   "Gante"
+   "Gante",
+   "Lovaina",
+   "Dinant"
   ],
   "comidas": [
+   "Moules-frites (mexilhão com batata frita)",
    "Waffle belga",
-   "Moules-frites",
    "Chocolate belga",
-   "Carbonade flamande"
+   "Cerveja trapista",
+   "Carbonnade flamande",
+   "Frites (batata frita belga)"
   ]
  },
  {
@@ -640,16 +709,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Great Blue Hole",
   "cidades": [
-   "Cidade de Belize",
    "San Pedro (Ambergris Caye)",
    "Caye Caulker",
-   "San Ignacio"
+   "Cidade de Belize",
+   "Belmopan",
+   "San Ignacio",
+   "Placencia"
   ],
   "comidas": [
-   "Rice and beans",
-   "Stew chicken",
+   "Arroz com feijão (rice and beans)",
+   "Frango guisado (stew chicken)",
+   "Garnaches",
+   "Salpicão (ceviche)",
    "Fry jacks",
-   "Conch ceviche"
+   "Conch fritters (caracol frito)"
   ]
  },
  {
@@ -676,13 +749,17 @@ export const PAISES_EXTRA = [
    "Cotonou",
    "Porto-Novo",
    "Ouidah",
-   "Abomey"
+   "Ganvié (vila lacustre)",
+   "Abomey",
+   "Grand-Popo"
   ],
   "comidas": [
-   "Pâte (akassa) com molho",
-   "Frango com molho de amendoim",
-   "Akara (bolinho de feijão)",
-   "Wagasi (queijo frito)"
+   "Pâte (massa de milho/mandioca)",
+   "Akassa",
+   "Amiwo",
+   "Moyo (molho)",
+   "Wagasi (queijo frito)",
+   "Aloko (plátano frito)"
   ]
  },
  {
@@ -709,13 +786,17 @@ export const PAISES_EXTRA = [
    "Sarajevo",
    "Mostar",
    "Banja Luka",
-   "Trebinje"
+   "Trebinje",
+   "Jajce",
+   "Počitelj"
   ],
   "comidas": [
-   "Ćevapi",
-   "Burek",
-   "Begova čorba",
-   "Tufahija"
+   "Ćevapi (com pão somun)",
+   "Burek (folhado de carne)",
+   "Begova čorba (sopa bósnia)",
+   "Japrak/sarma",
+   "Tufahija (maçã recheada)",
+   "Café bósnio"
   ]
  },
  {
@@ -743,14 +824,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Gaborone",
    "Maun",
+   "Kasane",
+   "Francistown",
    "Delta do Okavango",
-   "Parque Nacional de Chobe"
+   "Parque Nacional Chobe"
   ],
   "comidas": [
-   "Seswaa",
-   "Bogobe",
-   "Morogo",
-   "Vetkoek"
+   "Seswaa (carne desfiada salgada)",
+   "Pap (massa de milho)",
+   "Bogobe (mingau de sorgo)",
+   "Morogo (folhas verdes refogadas)",
+   "Phane (lagarta mopane)",
+   "Carne grelhada de caça"
   ]
  },
  {
@@ -778,13 +863,17 @@ export const PAISES_EXTRA = [
    "Rio de Janeiro",
    "São Paulo",
    "Salvador",
-   "Foz do Iguaçu"
+   "Foz do Iguaçu",
+   "Florianópolis",
+   "Manaus"
   ],
   "comidas": [
    "Feijoada",
    "Pão de queijo",
+   "Moqueca",
    "Acarajé",
-   "Moqueca"
+   "Brigadeiro",
+   "Coxinha"
   ]
  },
  {
@@ -807,16 +896,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Sultan Omar Ali Saifuddien Mosque",
   "cidades": [
-   "Bandar Seri Begawan",
-   "Kampong Ayer",
-   "Jerudong",
-   "Bangar (Temburong)"
+   "Bandar Seri Begawan (capital)",
+   "Kampong Ayer (vila sobre as águas)",
+   "Bangar (Temburong)",
+   "Tutong",
+   "Seria",
+   "Muara"
   ],
   "comidas": [
-   "Ambuyat",
-   "Nasi katok",
+   "Ambuyat (prato nacional, à base de sagu)",
+   "Nasi Katok",
+   "Nasi Lemak",
    "Satay",
-   "Hati buyah"
+   "Soto",
+   "Kelupis (arroz glutinoso embrulhado)"
   ]
  },
  {
@@ -843,13 +936,17 @@ export const PAISES_EXTRA = [
    "Sófia",
    "Plovdiv",
    "Varna",
-   "Veliko Tarnovo"
+   "Burgas",
+   "Veliko Tarnovo",
+   "Nessebar"
   ],
   "comidas": [
-   "Banitsa",
-   "Shopska salata",
-   "Kavarma",
-   "Tarator"
+   "Shopska salata (salada búlgara)",
+   "Banitsa (folhado de queijo)",
+   "Kebapche (linguiça grelhada)",
+   "Tarator (sopa fria de pepino)",
+   "Kavarma (ensopado)",
+   "Iogurte búlgaro"
   ]
  },
  {
@@ -875,16 +972,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Taktsang Palphug Monastery",
   "cidades": [
-   "Timphu",
+   "Timphu (Thimphu)",
    "Paro",
    "Punakha",
-   "Bumthang"
+   "Bumthang",
+   "Wangdue Phodrang",
+   "Phobjikha"
   ],
   "comidas": [
    "Ema datshi",
-   "Momo",
-   "Red rice",
-   "Jasha maru"
+   "Kewa datshi",
+   "Shakam datshi",
+   "Momos",
+   "Red rice (arroz vermelho)",
+   "Suja (chá com manteiga)"
   ]
  },
  {
@@ -911,16 +1012,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Sal (Cabo Verde)",
   "cidades": [
-   "Praia",
-   "Ilha do Sal",
-   "Ilha da Boa Vista",
-   "Mindelo (São Vicente)"
+   "Praia (Santiago)",
+   "Mindelo (São Vicente)",
+   "Sal (Santa Maria)",
+   "Boa Vista (Sal Rei)",
+   "Fogo (São Filipe)",
+   "Santo Antão"
   ],
   "comidas": [
-   "Cachupa",
-   "Pastel com diabo dentro",
-   "Caldeirada de peixe",
-   "Grogue"
+   "Cachupa (cozido de milho e feijão, prato nacional)",
+   "Lagosta grelhada",
+   "Buzio / cracas (mariscos)",
+   "Pastel com diabo dentro (pastel de atum)",
+   "Grogue (aguardente de cana)",
+   "Caldo de peixe"
   ]
  },
  {
@@ -947,13 +1052,17 @@ export const PAISES_EXTRA = [
    "Yaoundé",
    "Douala",
    "Kribi",
-   "Limbe"
+   "Limbe",
+   "Bafoussam",
+   "Buea (Monte Camarões)"
   ],
   "comidas": [
    "Ndolé",
    "Poulet DG",
-   "Eru com water fufu",
-   "Brochettes (suya)"
+   "Eru",
+   "Achu",
+   "Brochettes (soya)",
+   "Plátano frito (plantain)"
   ]
  },
  {
@@ -980,13 +1089,17 @@ export const PAISES_EXTRA = [
    "Toronto",
    "Vancouver",
    "Montreal",
+   "Quebec",
+   "Niágara (Niagara Falls)",
    "Banff"
   ],
   "comidas": [
    "Poutine",
-   "Xarope de bordo (maple)",
+   "Xarope de bordo (maple syrup)",
    "Tourtière",
-   "Bacon canadense"
+   "Bacon canadense (peameal)",
+   "Nanaimo bar",
+   "Cauda de castor (BeaverTails)"
   ]
  },
  {
@@ -1012,15 +1125,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Museum of Islamic Art, Doha",
   "cidades": [
    "Doha",
-   "Al Khor",
    "Al Wakrah",
-   "Zekreet"
+   "Al Khor",
+   "Dukhan",
+   "Zekreet",
+   "Mesaieed"
   ],
   "comidas": [
-   "Machboos",
-   "Harees",
-   "Balaleet",
-   "Luqaimat"
+   "Machboos (machbous)",
+   "Harees (trigo com carne)",
+   "Thareed",
+   "Shawarma",
+   "Luqaimat",
+   "Karak (chá com leite)"
   ]
  },
  {
@@ -1046,15 +1163,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Almaty",
   "cidades": [
    "Almaty",
-   "Astana",
+   "Astana (Nur-Sultan)",
    "Shymkent",
-   "Turquistão"
+   "Turquestão (Turkistan)",
+   "Lago Kaindy / Charyn Canyon (base em Almaty)",
+   "Aktau"
   ],
   "comidas": [
-   "Beshbarmak",
-   "Plov",
-   "Manti",
-   "Kazy (linguiça de cavalo)"
+   "Beshbarmak (carne com massa)",
+   "Kazy (linguiça de cavalo)",
+   "Plov (arroz com carne)",
+   "Manti (pastéis cozidos no vapor)",
+   "Baursak (massa frita)",
+   "Kumis (leite de égua fermentado)"
   ]
  },
  {
@@ -1080,14 +1201,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Pequim",
    "Xangai",
-   "Xi'an",
-   "Guilin"
+   "Xian",
+   "Guilin",
+   "Chengdu",
+   "Hong Kong (porta de entrada)"
   ],
   "comidas": [
    "Pato laqueado de Pequim",
    "Dim sum",
+   "Hotpot (fondue chinês)",
    "Mapo tofu",
-   "Xiaolongbao"
+   "Xiaolongbao (sopa em pastéis)",
+   "Chow mein (macarrão frito)"
   ]
  },
  {
@@ -1115,13 +1240,17 @@ export const PAISES_EXTRA = [
    "Nicósia",
    "Limassol",
    "Pafos",
-   "Lárnaca"
+   "Larnaca",
+   "Ayia Napa",
+   "Protaras"
   ],
   "comidas": [
-   "Halloumi",
+   "Halloumi (queijo grelhado)",
    "Souvlaki",
-   "Meze",
-   "Kleftiko"
+   "Meze cipriota",
+   "Kleftiko (cordeiro assado)",
+   "Sheftalia",
+   "Loukoumades (bolinho com mel)"
   ]
  },
  {
@@ -1148,13 +1277,17 @@ export const PAISES_EXTRA = [
    "Seul",
    "Busan",
    "Jeju",
-   "Gyeongju"
+   "Incheon",
+   "Gyeongju",
+   "Jeonju"
   ],
   "comidas": [
    "Kimchi",
    "Bibimbap",
-   "Churrasco coreano (bulgogi)",
-   "Tteokbokki"
+   "Bulgogi",
+   "Tteokbokki",
+   "Samgyeopsal (barriga de porco grelhada)",
+   "Korean fried chicken"
   ]
  },
  {
@@ -1179,16 +1312,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Basílica de Nossa Senhora da Paz de Yamoussoukro",
   "cidades": [
-   "Abidjã",
+   "Abidjan",
    "Yamoussoukro",
    "Grand-Bassam",
+   "San-Pédro",
+   "Man",
    "Assinie"
   ],
   "comidas": [
-   "Attiéké",
-   "Garba",
-   "Kedjenou",
-   "Alloco"
+   "Attiéké (semolina de mandioca)",
+   "Garba (attiéké com atum frito)",
+   "Kedjenou (frango ensopado em folha)",
+   "Alloco (banana-da-terra frita)",
+   "Foutou (massa de banana/inhame)",
+   "Sauce graine (molho de palma)"
   ]
  },
  {
@@ -1214,15 +1351,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Arenal Volcano",
   "cidades": [
    "San José",
-   "La Fortuna (Arenal)",
+   "La Fortuna (vulcão Arenal)",
+   "Manuel Antonio",
    "Monteverde",
-   "Manuel Antonio"
+   "Tamarindo",
+   "Puerto Viejo de Talamanca"
   ],
   "comidas": [
    "Gallo pinto",
    "Casado",
    "Olla de carne",
-   "Ceviche"
+   "Ceviche",
+   "Arroz con pollo",
+   "Patacones (banana frita)"
   ]
  },
  {
@@ -1247,15 +1388,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Dubrovnik",
   "cidades": [
    "Dubrovnik",
-   "Split",
    "Zagreb",
-   "Plitvice"
+   "Split",
+   "Zadar",
+   "Rovinj",
+   "Plitvice (Parque dos Lagos)"
   ],
   "comidas": [
-   "Peka",
-   "Crni rižot",
-   "Ćevapi",
-   "Pašticada"
+   "Peka (carne/peixe assado sob campânula)",
+   "Ćevapi (linguiças grelhadas)",
+   "Black risotto (risoto de lula)",
+   "Pašticada (carne ensopada)",
+   "Štrukli (massa com queijo)",
+   "Frutos do mar do Adriático"
   ]
  },
  {
@@ -1284,13 +1429,17 @@ export const PAISES_EXTRA = [
    "Havana",
    "Varadero",
    "Trinidad",
-   "Viñales"
+   "Viñales",
+   "Cienfuegos",
+   "Santiago de Cuba"
   ],
   "comidas": [
    "Ropa vieja",
-   "Moros y cristianos",
+   "Arroz congrí (moros y cristianos)",
+   "Lechón asado",
    "Tostones",
-   "Lechón asado"
+   "Picadillo a la habanera",
+   "Yuca con mojo"
   ]
  },
  {
@@ -1317,13 +1466,17 @@ export const PAISES_EXTRA = [
    "Willemstad",
    "Jan Thiel",
    "Westpunt",
-   "Sint Willibrordus"
+   "Pietermaai",
+   "Mambo Beach",
+   "Spaanse Water"
   ],
   "comidas": [
-   "Keshi yena (queijo recheado)",
-   "Stoba (ensopado de cabra)",
-   "Funchi (polenta de milho)",
-   "Kabritu stoba"
+   "Keshi yena",
+   "Stoba",
+   "Funchi",
+   "Pastechi",
+   "Karni stoba (ensopado de carne)",
+   "Sopi di pisca"
   ]
  },
  {
@@ -1350,13 +1503,17 @@ export const PAISES_EXTRA = [
    "Copenhague",
    "Aarhus",
    "Odense",
-   "Aalborg"
+   "Aalborg",
+   "Helsingør",
+   "Skagen"
   ],
   "comidas": [
-   "Smørrebrød",
+   "Smørrebrød (sanduíche aberto)",
    "Frikadeller (almôndegas)",
-   "Cachorro-quente dinamarquês (pølser)",
-   "Wienerbrød (folhado dinamarquês)"
+   "Wienerbrød (folhado dinamarquês)",
+   "Stegt flæsk (barriga de porco frita)",
+   "Rødgrød med fløde",
+   "Cachorro-quente dinamarquês"
   ]
  },
  {
@@ -1382,14 +1539,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Roseau",
    "Portsmouth",
-   "Marigot",
-   "Soufrière"
+   "Calibishie",
+   "Soufrière",
+   "Mero",
+   "Trafalgar (cataratas)"
   ],
   "comidas": [
-   "Mountain chicken (rã, prato nacional)",
-   "Callaloo (sopa de folhas)",
-   "Bakes (pão frito)",
-   "Sancocho (ensopado)"
+   "Mountain chicken (sapo, prato tradicional)",
+   "Callaloo soup",
+   "Bakes",
+   "Sancoche",
+   "Peas and rice",
+   "Breadfruit (fruta-pão)"
   ]
  },
  {
@@ -1417,14 +1578,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Cairo",
    "Luxor",
-   "Aswan",
-   "Hurghada"
+   "Assuão (Aswan)",
+   "Hurghada",
+   "Sharm el-Sheikh",
+   "Alexandria"
   ],
   "comidas": [
-   "Koshari",
+   "Koshary",
    "Ful medames",
-   "Ta'meya",
-   "Molokheya"
+   "Taameya (falafel egipcio)",
+   "Molokhia",
+   "Hamam mahshi (pombo recheado)",
+   "Baklava"
   ]
  },
  {
@@ -1450,15 +1615,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Joya de Cerén",
   "cidades": [
    "San Salvador",
-   "El Tunco",
+   "Santa Ana",
+   "El Tunco (praia)",
    "Suchitoto",
-   "Santa Ana"
+   "La Libertad",
+   "Ruta de las Flores (Juayúa)"
   ],
   "comidas": [
    "Pupusas",
    "Yuca frita",
+   "Pastelitos",
    "Sopa de pata",
-   "Pastelitos"
+   "Tamales",
+   "Curtido (repolho fermentado)"
   ]
  },
  {
@@ -1486,13 +1655,17 @@ export const PAISES_EXTRA = [
    "Dubai",
    "Abu Dhabi",
    "Sharjah",
-   "Ras al-Khaimah"
+   "Ras Al Khaimah",
+   "Al Ain",
+   "Fujairah"
   ],
   "comidas": [
    "Shawarma",
-   "Machboos",
-   "Luqaimat",
-   "Harees"
+   "Hummus",
+   "Machboos (arroz com carne/peixe especiado)",
+   "Manakish",
+   "Luqaimat (bolinhos doces)",
+   "Tâmaras"
   ]
  },
  {
@@ -1521,13 +1694,17 @@ export const PAISES_EXTRA = [
    "Quito",
    "Guayaquil",
    "Cuenca",
-   "Baños"
+   "Galápagos (Puerto Ayora)",
+   "Baños",
+   "Otavalo"
   ],
   "comidas": [
-   "Ceviche",
+   "Ceviche de camarón",
    "Encebollado",
    "Llapingachos",
-   "Hornado"
+   "Hornado",
+   "Bolón de verde",
+   "Locro de papa"
   ]
  },
  {
@@ -1552,15 +1729,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Bratislava",
   "cidades": [
    "Bratislava",
-   "Alto Tatras",
    "Košice",
-   "Banská Štiavnica"
+   "Banská Štiavnica",
+   "Žilina",
+   "Poprad (Altos Tatras)",
+   "Trenčín"
   ],
   "comidas": [
-   "Bryndzové halušky",
-   "Kapustnica",
-   "Goulash",
-   "Lokše"
+   "Bryndzové halušky (nhoque com queijo de ovelha)",
+   "Kapustnica (sopa de chucrute)",
+   "Vyprážaný syr (queijo frito)",
+   "Lokše (panqueca de batata)",
+   "Segedínsky guláš",
+   "Trdelník"
   ]
  },
  {
@@ -1587,13 +1768,17 @@ export const PAISES_EXTRA = [
    "Liubliana",
    "Bled",
    "Piran",
-   "Bohinj"
+   "Maribor",
+   "Bohinj",
+   "Postojna (gruta)"
   ],
   "comidas": [
-   "Potica",
-   "Štruklji",
-   "Kranjska klobasa",
-   "Jota"
+   "Potica (rocambole recheado)",
+   "Štruklji (massa enrolada)",
+   "Kranjska klobasa (linguiça da Carníola)",
+   "Jota (sopa de chucrute e feijão)",
+   "Idrijski žlikrofi (massa recheada)",
+   "Prekmurska gibanica (torta em camadas)"
   ]
  },
  {
@@ -1621,13 +1806,17 @@ export const PAISES_EXTRA = [
    "Madri",
    "Barcelona",
    "Sevilha",
-   "Granada"
+   "Granada",
+   "Valência",
+   "Málaga"
   ],
   "comidas": [
    "Paella",
    "Tapas",
    "Jamón ibérico",
-   "Gazpacho"
+   "Gazpacho",
+   "Tortilla española",
+   "Churros com chocolate"
   ]
  },
  {
@@ -1653,15 +1842,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Mbabane",
   "cidades": [
    "Mbabane",
+   "Ezulwini Valley",
    "Manzini",
    "Lobamba",
-   "Ezulwini"
+   "Hlane (parque)",
+   "Malolotja"
   ],
   "comidas": [
-   "Sishwala (mingau de milho)",
-   "Carne grelhada (braai)",
+   "Sishwala (mingau espesso)",
    "Emasi (leite fermentado)",
-   "Sidvudvu (abóbora)"
+   "Sitfubi",
+   "Carne grelhada (braai)",
+   "Pap (milho)",
+   "Tjwala (cerveja tradicional)"
   ]
  },
  {
@@ -1687,15 +1880,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Estátua da Liberdade",
   "cidades": [
    "Nova York",
+   "Orlando",
+   "Miami",
    "Los Angeles",
-   "São Francisco",
-   "Las Vegas"
+   "Las Vegas",
+   "San Francisco"
   ],
   "comidas": [
    "Hambúrguer",
-   "Costela barbecue (BBQ)",
-   "Bagel",
-   "Mac and cheese"
+   "Hot dog",
+   "Bife (steak)",
+   "Costela barbecue (BBQ ribs)",
+   "Mac and cheese",
+   "Cheesecake de Nova York"
   ]
  },
  {
@@ -1721,13 +1918,17 @@ export const PAISES_EXTRA = [
    "Tallinn",
    "Tartu",
    "Pärnu",
-   "Parque Nacional de Lahemaa"
+   "Narva",
+   "Haapsalu",
+   "Kuressaare (Saaremaa)"
   ],
   "comidas": [
    "Verivorst (linguiça de sangue)",
-   "Mulgipuder (purê com cevada)",
-   "Kiluvõileib (sanduíche de espadilha)",
-   "Kama (sobremesa de cereais)"
+   "Mulgipuder (purê de batata e cevada)",
+   "Kama (mistura de cereais)",
+   "Sült (geleia de carne)",
+   "Pão preto (leib)",
+   "Kohuke (doce de quark)"
   ]
  },
  {
@@ -1756,13 +1957,17 @@ export const PAISES_EXTRA = [
    "Adis Abeba",
    "Lalibela",
    "Gondar",
-   "Axum"
+   "Axum (Aksum)",
+   "Bahir Dar",
+   "Vale do Omo"
   ],
   "comidas": [
    "Injera",
-   "Doro wat",
-   "Kitfo",
-   "Tibs"
+   "Doro wat (frango apimentado)",
+   "Tibs",
+   "Kitfo (carne crua temperada)",
+   "Shiro",
+   "Café etíope (cerimônia)"
   ]
  },
  {
@@ -1788,16 +1993,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Mamanuca Islands",
   "cidades": [
-   "Nadi",
    "Suva",
-   "Ilhas Mamanuca",
-   "Ilhas Yasawa"
+   "Nadi",
+   "Ilha Denarau",
+   "Sigatoka",
+   "Levuka",
+   "Ilhas Mamanuca"
   ],
   "comidas": [
-   "Kokoda (peixe no leite de coco)",
-   "Lovo",
-   "Rourou",
-   "Kava"
+   "Kokoda (ceviche fijiano de peixe no leite de coco)",
+   "Lovo (banquete cozido na terra)",
+   "Rourou (folhas de taro no coco)",
+   "Kava (bebida cerimonial)",
+   "Curry fijiano",
+   "Cassava (mandioca)"
   ]
  },
  {
@@ -1822,15 +2031,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Catedral de Helsínquia",
   "cidades": [
    "Helsinque",
-   "Rovaniemi",
+   "Rovaniemi (Lapônia)",
    "Turku",
-   "Tampere"
+   "Tampere",
+   "Espoo",
+   "Porvoo"
   ],
   "comidas": [
-   "Salmão grelhado (loimulohi)",
-   "Karjalanpiirakka (empada da Carélia)",
-   "Almôndegas finlandesas",
-   "Korvapuusti (pão de canela)"
+   "Karjalanpiirakka (torta da Carélia)",
+   "Salmão (lohikeitto, sopa)",
+   "Reindeer/rena assada",
+   "Ruisleipä (pão de centeio)",
+   "Korvapuusti (rocambole de canela)",
+   "Mämmi"
   ]
  },
  {
@@ -1857,13 +2070,17 @@ export const PAISES_EXTRA = [
    "Paris",
    "Nice",
    "Lyon",
-   "Bordeaux"
+   "Marselha",
+   "Bordeaux",
+   "Estrasburgo"
   ],
   "comidas": [
    "Croissant",
-   "Coq au vin",
+   "Baguete",
    "Ratatouille",
-   "Crêpe"
+   "Coq au vin",
+   "Crème brûlée",
+   "Quiche Lorraine"
   ]
  },
  {
@@ -1889,14 +2106,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Libreville",
    "Port-Gentil",
+   "Parque Nacional de Loango",
    "Lambaréné",
-   "Franceville"
+   "Franceville",
+   "Parque de Lopé"
   ],
   "comidas": [
-   "Poulet nyembwe",
-   "Peixe braseado com banana-da-terra",
-   "Atanga (safou)",
-   "Maboké"
+   "Poulet nyembwe (frango no óleo de palma)",
+   "Peixe braseado",
+   "Maboké",
+   "Mandioca (manioc)",
+   "Plátano",
+   "Nyembwe sauce"
   ]
  },
  {
@@ -1922,15 +2143,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Banjul",
   "cidades": [
    "Banjul",
-   "Serrekunda",
+   "Serekunda",
+   "Kololi",
    "Bakau",
-   "Brikama"
+   "Reserva de Abuko",
+   "Janjanbureh"
   ],
   "comidas": [
-   "Benachin (jollof)",
+   "Benachin (jollof rice)",
    "Domoda (ensopado de amendoim)",
-   "Yassa de frango",
-   "Peixe grelhado com arroz"
+   "Yassa (frango/peixe com cebola e limão)",
+   "Superkanja (quiabo)",
+   "Plasas",
+   "Chura gerteh (mingau de amendoim)"
   ]
  },
  {
@@ -1956,15 +2181,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Castelo de Cape Coast",
   "cidades": [
    "Acra",
-   "Cape Coast",
    "Kumasi",
-   "Parque Nacional de Kakum"
+   "Cape Coast (Castelo)",
+   "Elmina",
+   "Takoradi",
+   "Parque Nacional Kakum"
   ],
   "comidas": [
-   "Jollof rice",
-   "Banku",
-   "Fufu",
-   "Waakye"
+   "Jollof rice (arroz temperado)",
+   "Fufu (massa de mandioca/inhame com sopa)",
+   "Banku (massa de milho fermentado)",
+   "Kelewele (banana-da-terra frita apimentada)",
+   "Waakye (arroz com feijão)",
+   "Red red (feijão com óleo de palma)"
   ]
  },
  {
@@ -1988,16 +2217,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "St. George's, Grenada",
   "cidades": [
-   "Saint George's",
+   "St. George's",
    "Grand Anse",
+   "Grand Anse Beach",
    "Gouyave",
-   "Grenville"
+   "Carriacou",
+   "Morne Rouge"
   ],
   "comidas": [
    "Oil down (prato nacional)",
-   "Callaloo (sopa de folhas)",
+   "Callaloo soup",
+   "Roti",
    "Nutmeg ice cream (sorvete de noz-moscada)",
-   "Roti (panqueca recheada)"
+   "Lambi (caracol)",
+   "Saltfish souse"
   ]
  },
  {
@@ -2024,13 +2257,17 @@ export const PAISES_EXTRA = [
    "Atenas",
    "Santorini",
    "Mykonos",
-   "Creta"
+   "Tessalônica",
+   "Creta (Heraклion/Chania)",
+   "Rodes"
   ],
   "comidas": [
-   "Souvlaki",
    "Moussaka",
-   "Gyros",
-   "Tzatziki"
+   "Souvlaki/gyros",
+   "Salada grega (horiatiki)",
+   "Tzatziki",
+   "Dolmades (folhas de uva recheadas)",
+   "Baklava"
   ]
  },
  {
@@ -2056,15 +2293,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Kaieteur Falls",
   "cidades": [
    "Georgetown",
-   "Lethem",
    "Bartica",
-   "Mahdia"
+   "Lethem",
+   "Kaieteur (parque)",
+   "Linden",
+   "Annai (Rupununi)"
   ],
   "comidas": [
    "Pepperpot",
-   "Curry de frango",
-   "Roti",
-   "Cook-up rice"
+   "Cook-up rice",
+   "Roti com curry",
+   "Metemgee",
+   "Garlic pork",
+   "Cassava bread"
   ]
  },
  {
@@ -2089,16 +2330,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Citadelle Laferrière",
   "cidades": [
-   "Porto Príncipe",
+   "Porto Príncipe (Port-au-Prince)",
    "Cap-Haïtien",
    "Jacmel",
-   "Labadee"
+   "Labadee",
+   "Pétion-Ville",
+   "Les Cayes"
   ],
   "comidas": [
-   "Griot",
+   "Griot (porco frito)",
    "Riz djon djon",
+   "Tassot",
+   "Pikliz (conserva picante)",
    "Soup joumou",
-   "Tassot"
+   "Banann peze (banana frita)"
   ]
  },
  {
@@ -2122,16 +2367,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Copán",
   "cidades": [
+   "Roatán (Ilhas da Baía)",
    "Tegucigalpa",
-   "Roatán",
-   "Copán Ruinas",
+   "San Pedro Sula",
+   "Copán (ruínas)",
+   "Útila",
    "La Ceiba"
   ],
   "comidas": [
-   "Baleadas",
+   "Baleada",
+   "Plato típico (com carne, feijão, banana)",
    "Sopa de caracol",
-   "Plato típico",
-   "Tajadas"
+   "Tajadas (banana frita)",
+   "Pastelitos",
+   "Yuca con chicharrón"
   ]
  },
  {
@@ -2155,16 +2404,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Victoria Harbour",
   "cidades": [
-   "Central",
+   "Hong Kong (Ilha)",
    "Kowloon",
    "Tsim Sha Tsui",
-   "Lantau"
+   "Causeway Bay",
+   "Lantau (Big Buddha)",
+   "Stanley"
   ],
   "comidas": [
    "Dim sum",
+   "Egg tart (tartelete de ovo)",
    "Wonton noodles",
-   "Egg tart",
-   "Char siu"
+   "Char siu (porco assado)",
+   "Egg waffle (bubble waffle)",
+   "Roast goose (ganso assado)"
   ]
  },
  {
@@ -2190,14 +2443,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Budapeste",
    "Eger",
+   "Debrecen",
    "Pécs",
-   "Lago Balaton"
+   "Szentendre",
+   "Lago Balaton (Siófok)"
   ],
   "comidas": [
-   "Goulash",
-   "Lángos",
-   "Paprikás csirke",
-   "Tortas Dobos"
+   "Gulyás (goulash, sopa)",
+   "Pörkölt (ensopado)",
+   "Lángos (massa frita)",
+   "Chicken paprikash",
+   "Tölött káposzta (charuto de repolho)",
+   "Dobos torta"
   ]
  },
  {
@@ -2224,16 +2481,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Aitutaki",
   "cidades": [
-   "Avarua",
-   "Rarotonga",
-   "Aitutaki",
-   "Atiu"
+   "Avarua (Rarotonga)",
+   "Ilha Aitutaki",
+   "Ilha Atiu",
+   "Muri Beach",
+   "Ilha Mangaia",
+   "Lagoa de Aitutaki"
   ],
   "comidas": [
-   "Ika mata",
-   "Rukau",
-   "Umukai",
-   "Poke"
+   "Ika mata (ceviche de peixe no coco)",
+   "Umukai (banquete cozido na terra)",
+   "Rukau (folhas de taro)",
+   "Poke (pudim de banana/mamao)",
+   "Curry de frango das ilhas",
+   "Frutos do mar grelhados"
   ]
  },
  {
@@ -2257,16 +2518,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Honiara",
   "cidades": [
-   "Honiara",
+   "Honiara (Guadalcanal)",
    "Gizo",
-   "Auki",
-   "Munda"
+   "Ilha Munda",
+   "Lagoa Marovo",
+   "Ilha Malaita (Auki)",
+   "Ilhas Florida"
   ],
   "comidas": [
    "Poi (pasta de taro)",
-   "Kokoda (peixe cru em leite de coco)",
+   "Kokoda de peixe no coco",
    "Cassava pudding (pudim de mandioca)",
-   "Pana (inhame assado)"
+   "Peixe grelhado no leite de coco",
+   "Nali (castanha local)",
+   "Slippery cabbage (couve local refogada)"
   ]
  },
  {
@@ -2294,13 +2559,17 @@ export const PAISES_EXTRA = [
    "Teerã",
    "Isfahan",
    "Shiraz",
-   "Yazd"
+   "Yazd",
+   "Persépolis",
+   "Kashan"
   ],
   "comidas": [
-   "Chelo kebab",
-   "Ghormeh sabzi",
-   "Fesenjan",
-   "Tahchin"
+   "Chelo kabab (arroz com kebab)",
+   "Ghormeh sabzi (ensopado de ervas)",
+   "Fesenjan (frango com nozes e romã)",
+   "Tahdig (crosta de arroz)",
+   "Dizi/Abgoosht",
+   "Doogh (bebida de iogurte)"
   ]
  },
  {
@@ -2328,13 +2597,17 @@ export const PAISES_EXTRA = [
    "Dublin",
    "Galway",
    "Cork",
-   "Killarney"
+   "Killarney",
+   "Cliffs of Moher",
+   "Kilkenny"
   ],
   "comidas": [
    "Irish stew",
-   "Boxty",
    "Soda bread",
-   "Colcannon"
+   "Boxty",
+   "Colcannon",
+   "Full Irish breakfast",
+   "Seafood chowder"
   ]
  },
  {
@@ -2361,13 +2634,17 @@ export const PAISES_EXTRA = [
    "Reykjavík",
    "Akureyri",
    "Vík",
-   "Höfn"
+   "Húsavík",
+   "Keflavík",
+   "Hafnarfjörður"
   ],
   "comidas": [
-   "Sopa de cordeiro (kjötsúpa)",
-   "Skyr",
-   "Pylsur (cachorro-quente islandês)",
-   "Hákarl (tubarão fermentado)"
+   "Cordeiro islandês",
+   "Skyr (laticínio)",
+   "Plokkfiskur (peixe com purê)",
+   "Pylsur (cachorro-quente)",
+   "Hákarl (tubarão fermentado)",
+   "Pão de centeio cozido em fonte termal (rúgbrauð)"
   ]
  },
  {
@@ -2394,14 +2671,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Jerusalém",
    "Tel Aviv",
-   "Mar Morto",
-   "Nazaré"
+   "Haifa",
+   "Mar Morto (Ein Bokek)",
+   "Nazaré",
+   "Eilat"
   ],
   "comidas": [
    "Falafel",
    "Hummus",
-   "Shakshuka",
-   "Sabich"
+   "Shakshuka (ovos em molho de tomate)",
+   "Sabich (sanduíche)",
+   "Shawarma",
+   "Rugelach (doce)"
   ]
  },
  {
@@ -2427,15 +2708,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Coliseu",
   "cidades": [
    "Roma",
-   "Florença",
    "Veneza",
-   "Nápoles"
+   "Florença",
+   "Milão",
+   "Nápoles",
+   "Cinque Terre"
   ],
   "comidas": [
    "Pizza napolitana",
    "Pasta carbonara",
+   "Risotto",
    "Gelato",
-   "Risoto"
+   "Lasanha",
+   "Tiramisù"
   ]
  },
  {
@@ -2461,16 +2746,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Dunn's River Falls",
   "cidades": [
-   "Kingston",
    "Montego Bay",
    "Negril",
-   "Ocho Rios"
+   "Ocho Rios",
+   "Kingston",
+   "Port Antonio",
+   "Falmouth"
   ],
   "comidas": [
-   "Jerk chicken",
-   "Ackee and saltfish",
-   "Curry goat",
-   "Rice and peas"
+   "Jerk chicken (frango jerk)",
+   "Ackee com bacalhau (ackee and saltfish)",
+   "Arroz com ervilhas (rice and peas)",
+   "Patty jamaicano",
+   "Curry goat (cabrito ao curry)",
+   "Festival (bolinho frito doce)"
   ]
  },
  {
@@ -2497,13 +2786,17 @@ export const PAISES_EXTRA = [
    "Tóquio",
    "Quioto",
    "Osaka",
-   "Hiroshima"
+   "Hiroshima",
+   "Nara",
+   "Sapporo"
   ],
   "comidas": [
-   "Sushi",
+   "Sushi e sashimi",
    "Ramen",
    "Tempura",
-   "Okonomiyaki"
+   "Takoyaki",
+   "Okonomiyaki",
+   "Yakitori"
   ]
  },
  {
@@ -2529,15 +2822,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Al-Khazneh",
   "cidades": [
    "Amã",
-   "Petra",
+   "Petra (Wadi Musa)",
    "Wadi Rum",
-   "Aqaba"
+   "Mar Morto",
+   "Aqaba",
+   "Jerash"
   ],
   "comidas": [
-   "Mansaf",
+   "Mansaf (cordeiro com iogurte e arroz)",
    "Falafel",
-   "Maqluba",
-   "Knafeh"
+   "Hummus",
+   "Maqluba (arroz invertido)",
+   "Knafeh (doce de queijo)",
+   "Mezze"
   ]
  },
  {
@@ -2563,14 +2860,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Pristina",
    "Prizren",
-   "Peja",
-   "Gjakova"
+   "Peja (Peć)",
+   "Gjakova",
+   "Mitrovica",
+   "Gjilan"
   ],
   "comidas": [
-   "Flia",
-   "Tavë Kosi",
+   "Flia (massa folhada em camadas)",
    "Burek",
-   "Pite"
+   "Tavë kosi (cordeiro com iogurte)",
+   "Pite (torta recheada)",
+   "Qebapa (almôndegas grelhadas)",
+   "Ajvar (pasta de pimentão)"
   ]
  },
  {
@@ -2598,13 +2899,17 @@ export const PAISES_EXTRA = [
    "Cidade do Kuwait",
    "Hawalli",
    "Salmiya",
-   "Ilha de Failaka"
+   "Ahmadi",
+   "Ilha Failaka",
+   "Jahra"
   ],
   "comidas": [
    "Machboos",
-   "Gabout",
    "Harees",
-   "Balaleet"
+   "Murabyan (arroz com camarão)",
+   "Gabout",
+   "Balaleet",
+   "Khabeesa (doce)"
   ]
  },
  {
@@ -2630,15 +2935,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Maseru",
   "cidades": [
    "Maseru",
-   "Teyateyaneng",
-   "Leribe",
-   "Mokhotlong"
+   "Semonkong (cachoeira Maletsunyane)",
+   "Malealea",
+   "Thaba-Bosiu",
+   "Ts'ehlanyane (parque)",
+   "Sani Pass"
   ],
   "comidas": [
    "Papa (pap de milho)",
    "Moroho (folhas verdes)",
-   "Likhobe (mistura de grãos)",
-   "Carne grelhada"
+   "Likhobe",
+   "Carne grelhada",
+   "Motoho (mingau azedo)",
+   "Sorgo"
   ]
  },
  {
@@ -2664,13 +2973,17 @@ export const PAISES_EXTRA = [
    "Riga",
    "Jūrmala",
    "Sigulda",
-   "Cēsis"
+   "Cēsis",
+   "Liepāja",
+   "Daugavpils"
   ],
   "comidas": [
-   "Grey peas with bacon (pelēkie zirņi)",
-   "Sopa fria de beterraba (aukstā zupa)",
-   "Sklandrausis (torta de cenoura)",
-   "Rupjmaize (pão de centeio escuro)"
+   "Grey peas with bacon (ervilhas cinzentas com toucinho)",
+   "Rupjmaize (pão de centeio escuro)",
+   "Sklandrausis (torta de cenoura e batata)",
+   "Pīrāgi (pãezinhos de bacon)",
+   "Bukstiņputra",
+   "Black Balsam (licor de ervas)"
   ]
  },
  {
@@ -2696,15 +3009,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Baalbek",
   "cidades": [
    "Beirute",
-   "Biblos",
+   "Biblos (Jbeil)",
    "Baalbek",
-   "Trípoli"
+   "Trípoli",
+   "Sidon (Saida)",
+   "Vale do Bekaa"
   ],
   "comidas": [
    "Tabule",
    "Hummus",
-   "Kibbeh",
-   "Manakish"
+   "Kibe (kibbeh)",
+   "Manakish (pão achatado)",
+   "Shawarma",
+   "Baklava"
   ]
  },
  {
@@ -2731,13 +3048,17 @@ export const PAISES_EXTRA = [
    "Vaduz",
    "Schaan",
    "Balzers",
-   "Triesenberg"
+   "Triesenberg",
+   "Malbun (estação de esqui)",
+   "Triesen"
   ],
   "comidas": [
-   "Käsknöpfle",
-   "Ribel",
-   "Hafalaab",
-   "Törtchen"
+   "Käsknöpfle (nhoque de queijo)",
+   "Ribel (sêmola de milho)",
+   "Hafalaab (bolinho de farinha de milho)",
+   "Tortta (bolo de nozes)",
+   "Rösti",
+   "Fondue de queijo"
   ]
  },
  {
@@ -2763,13 +3084,17 @@ export const PAISES_EXTRA = [
    "Vilnius",
    "Kaunas",
    "Klaipėda",
-   "Trakai"
+   "Šiauliai",
+   "Trakai",
+   "Nida (Curônia)"
   ],
   "comidas": [
-   "Cepelinai (bolinhos de batata)",
+   "Cepelinai (bolinhos de batata recheados)",
    "Šaltibarščiai (sopa fria de beterraba)",
-   "Kibinai (pastel recheado)",
-   "Kugelis (gratinado de batata)"
+   "Kibinai (pastéis)",
+   "Kugelis (pudim de batata)",
+   "Skilandis (embutido)",
+   "Šakotis (bolo em camadas)"
   ]
  },
  {
@@ -2794,16 +3119,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Cidade de Luxemburgo",
   "cidades": [
-   "Luxemburgo",
+   "Luxemburgo (cidade)",
    "Vianden",
    "Echternach",
-   "Esch-sur-Alzette"
+   "Esch-sur-Sûre",
+   "Clervaux",
+   "Mullerthal"
   ],
   "comidas": [
-   "Judd mat Gaardebounen",
-   "Bouneschlupp",
-   "Gromperekichelcher",
-   "Quetschentaart"
+   "Judd mat Gaardebounen (pescoço de porco defumado com favas)",
+   "Gromperekichelcher (bolinho de batata)",
+   "Bouneschlupp (sopa de feijão verde)",
+   "Kachkéis (queijo cremoso)",
+   "Quetschentaart (torta de ameixa)",
+   "Träipen (linguiça de sangue)"
   ]
  },
  {
@@ -2827,16 +3156,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Ruínas de São Paulo (Macau)",
   "cidades": [
-   "Península de Macau",
+   "Macau (Península)",
    "Taipa",
    "Cotai",
-   "Coloane"
+   "Coloane",
+   "Ruínas de São Paulo (centro histórico)",
+   "Vila de Taipa"
   ],
   "comidas": [
    "Galinha à africana",
-   "Bacalhau",
+   "Bacalhau (influência portuguesa)",
    "Pastel de nata",
-   "Minchi"
+   "Porco bafassá",
+   "Minchi (carne moída macaense)",
+   "Pork chop bun (sanduíche de costeleta)"
   ]
  },
  {
@@ -2860,16 +3193,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Lago Ohrid",
   "cidades": [
-   "Escópia",
+   "Skopje",
    "Ohrid",
    "Bitola",
-   "Mavrovo"
+   "Mavrovo",
+   "Tetovo",
+   "Kruševo"
   ],
   "comidas": [
-   "Tavče gravče",
-   "Ajvar",
+   "Tavče gravče (feijão ao forno)",
+   "Ajvar (pasta de pimentão)",
+   "Ćevapi",
+   "Shopska salata",
    "Burek",
-   "Shopska salata"
+   "Pastrmajlija (pão com carne)"
   ]
  },
  {
@@ -2899,14 +3236,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Antananarivo",
    "Nosy Be",
-   "Morondava (Baobás)",
-   "Parque Nacional de Andasibe"
+   "Morondava (Avenida dos Baobás)",
+   "Toamasina (Tamatave)",
+   "Andasibe (Parque Nacional)",
+   "Île Sainte-Marie"
   ],
   "comidas": [
-   "Romazava",
-   "Ravitoto",
-   "Koba",
-   "Mofo gasy"
+   "Romazava (ensopado de carne com folhas, prato nacional)",
+   "Ravitoto (folhas de mandioca com carne de porco)",
+   "Vary amin'anana (arroz com verduras)",
+   "Mofo gasy (pão de arroz)",
+   "Koba (bolo de amendoim e arroz)",
+   "Henakisoa sy amalona (porco com enguia)"
   ]
  },
  {
@@ -2933,15 +3274,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Lago Malawi",
   "cidades": [
    "Lilongwe",
-   "Lago Malawi",
-   "Cape Maclear",
-   "Parque Nacional de Liwonde"
+   "Blantyre",
+   "Lago Malawi (Cape Maclear)",
+   "Mzuzu",
+   "Zomba",
+   "Parque Nacional Liwonde"
   ],
   "comidas": [
-   "Nsima",
-   "Chambo",
-   "Ndiwo",
-   "Mandasi"
+   "Nsima (massa de fubá, base da dieta)",
+   "Chambo (tilápia do Lago Malawi)",
+   "Mandasi (bolinho frito)",
+   "Thobwa (bebida de milho/sorgo)",
+   "Nthochi (pão de banana)",
+   "Kachumbari (salada de tomate e cebola)"
   ]
  },
  {
@@ -2970,13 +3315,17 @@ export const PAISES_EXTRA = [
    "Malé",
    "Maafushi",
    "Hulhumalé",
-   "Atol de Ari"
+   "Atol Ari",
+   "Atol Baa",
+   "Addu (Gan)"
   ],
   "comidas": [
    "Mas huni",
    "Garudhiya",
-   "Fihunu mas",
-   "Bis keemiya"
+   "Fihunu mas (peixe grelhado)",
+   "Bis keemiya",
+   "Rihaakuru",
+   "Hedhikaa (petiscos)"
   ]
  },
  {
@@ -3004,13 +3353,17 @@ export const PAISES_EXTRA = [
    "Valeta",
    "Mdina",
    "Sliema",
-   "Gozo"
+   "St. Julian's",
+   "Ilha de Gozo",
+   "Marsaxlokk"
   ],
   "comidas": [
    "Pastizzi",
-   "Fenkata (coelho)",
+   "Rabbit stew (Fenkata)",
    "Ftira",
-   "Lampuki"
+   "Lampuki pie",
+   "Kapunata",
+   "Imqaret (doce de tâmara)"
   ]
  },
  {
@@ -3039,14 +3392,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Port Louis",
    "Grand Baie",
-   "Flic-en-Flac",
-   "Le Morne"
+   "Flic en Flac",
+   "Belle Mare",
+   "Le Morne",
+   "Trou aux Biches"
   ],
   "comidas": [
-   "Dholl puri",
-   "Curry de polvo",
-   "Gateaux piment",
-   "Rougaille"
+   "Dholl puri (panqueca de grão-de-bico, ícone de rua)",
+   "Curry mauriciano",
+   "Rougaille (molho de tomate com peixe/carne)",
+   "Gateau piment (bolinho de lentilha picante)",
+   "Mine frite (yakisoba local)",
+   "Boulettes (almôndegas no caldo)"
   ]
  },
  {
@@ -3070,16 +3427,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Bagan",
   "cidades": [
-   "Yangon",
+   "Yangon (Rangum)",
    "Bagan",
    "Mandalay",
-   "Lago Inle"
+   "Lago Inle (Nyaung Shwe)",
+   "Naypyidaw",
+   "Ngapali (praia)"
   ],
   "comidas": [
-   "Mohinga",
-   "Lahpet thoke (salada de chá)",
-   "Curry birmanês",
-   "Shan noodles"
+   "Mohinga (sopa de peixe — prato nacional)",
+   "Salada de folha de chá (Lahpet Thoke)",
+   "Curry birmanês (Hin)",
+   "Shan Noodles",
+   "Ohn No Khao Swè (macarrão com coco)",
+   "Samusa Thoke (salada de samosa)"
   ]
  },
  {
@@ -3106,15 +3467,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Arquipélago de Bazaruto",
   "cidades": [
    "Maputo",
-   "Tofo",
+   "Tofo (Inhambane)",
+   "Vilankulo",
    "Arquipélago de Bazaruto",
-   "Ilha de Moçambique"
+   "Ilha de Moçambique",
+   "Pemba"
   ],
   "comidas": [
    "Frango à zambeziana",
-   "Camarão LM",
-   "Matapa",
-   "Pãozinho"
+   "Camarão grelhado / LM prawns",
+   "Matapa (folhas de mandioca com amendoim e coco)",
+   "Peri-peri (molho picante)",
+   "Pão (influência portuguesa)",
+   "Caril de caju"
   ]
  },
  {
@@ -3139,15 +3504,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Chișinău",
   "cidades": [
    "Chișinău",
-   "Tiraspol",
-   "Bălți",
-   "Orhei"
+   "Orhei (Orheiul Vechi)",
+   "Cricova (adegas)",
+   "Tiraspol (Transnístria)",
+   "Soroca",
+   "Mileștii Mici (adegas)"
   ],
   "comidas": [
-   "Mămăligă",
-   "Sarmale",
-   "Plăcintă",
-   "Zeamă"
+   "Mămăligă (polenta)",
+   "Sarmale (charuto de repolho)",
+   "Plăcintă (torta salgada/doce)",
+   "Zeamă (sopa de galinha)",
+   "Mititei (linguiça grelhada)",
+   "Vinho moldavo"
   ]
  },
  {
@@ -3172,15 +3541,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Monaco",
   "cidades": [
    "Monte Carlo",
+   "Mônaco-Ville (a Rocha)",
    "La Condamine",
    "Fontvieille",
-   "Monaco-Ville"
+   "Larvotto",
+   "Port Hercule"
   ],
   "comidas": [
-   "Barbagiuan",
-   "Socca",
-   "Stocafi",
-   "Fougasse"
+   "Barbagiuan (pastel frito recheado)",
+   "Socca (panqueca de grão-de-bico)",
+   "Fougasse monégasque",
+   "Stocafi (bacalhau ao molho de tomate)",
+   "Pissaladière",
+   "Pan-bagnat"
   ]
  },
  {
@@ -3205,15 +3578,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Deserto de Gobi",
   "cidades": [
    "Ulan Bator",
-   "Kharkhorin",
+   "Kharkhorin (antiga Karakorum)",
    "Deserto de Gobi",
-   "Lago Khövsgöl"
+   "Lago Khövsgöl",
+   "Parque Nacional Terelj",
+   "Bayan-Ölgii"
   ],
   "comidas": [
-   "Buuz",
-   "Khuushuur",
-   "Khorkhog",
-   "Airag"
+   "Buuz (bolinhos cozidos no vapor)",
+   "Khuushuur (pastéis fritos de carne)",
+   "Tsuivan (macarrão frito com carne)",
+   "Boodog (cabrito/marmota assado)",
+   "Airag (leite de égua fermentado)",
+   "Khorkhog (carneiro com pedras quentes)"
   ]
  },
  {
@@ -3240,13 +3617,17 @@ export const PAISES_EXTRA = [
    "Kotor",
    "Budva",
    "Podgorica",
-   "Durmitor"
+   "Cetinje",
+   "Žabljak (Durmitor)",
+   "Sveti Stefan"
   ],
   "comidas": [
-   "Njeguški pršut",
-   "Kačamak",
+   "Njeguški pršut (presunto curado)",
+   "Kačamak (polenta com queijo)",
+   "Black risotto",
    "Ćevapi",
-   "Black risotto"
+   "Riblja čorba (sopa de peixe)",
+   "Priganice (bolinhos fritos)"
   ]
  },
  {
@@ -3274,14 +3655,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Windhoek",
    "Swakopmund",
-   "Sossusvlei",
-   "Parque Nacional de Etosha"
+   "Walvis Bay",
+   "Sossusvlei (Sesriem)",
+   "Etosha (Okaukuejo)",
+   "Lüderitz"
   ],
   "comidas": [
-   "Kapana",
+   "Kapana (carne grelhada de rua)",
    "Biltong",
-   "Game meat (carne de caça)",
-   "Potjiekos"
+   "Potjiekos (ensopado de panela de ferro)",
+   "Carne de caça (oryx, kudu)",
+   "Vetkoek (massa frita)",
+   "Mahangu (mingau de milheto)"
   ]
  },
  {
@@ -3306,16 +3691,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Granada, Nicaragua",
   "cidades": [
-   "Manágua",
    "Granada",
+   "San Juan del Sur",
+   "Manágua",
    "León",
-   "Ilha de Ometepe"
+   "Ilha de Ometepe",
+   "Ilhas do Milho (Corn Islands)"
   ],
   "comidas": [
    "Gallo pinto",
    "Nacatamal",
    "Vigorón",
-   "Quesillo"
+   "Quesillo",
+   "Indio viejo",
+   "Vaho"
   ]
  },
  {
@@ -3342,13 +3731,17 @@ export const PAISES_EXTRA = [
    "Lagos",
    "Abuja",
    "Calabar",
-   "Montes de Idanre"
+   "Port Harcourt",
+   "Ibadan",
+   "Kano"
   ],
   "comidas": [
    "Jollof rice",
-   "Suya",
-   "Egusi soup",
-   "Pounded yam"
+   "Egusi soup (sopa de semente de melão)",
+   "Suya (espetinho apimentado)",
+   "Pounded yam (inhame pilado)",
+   "Pepper soup (sopa apimentada)",
+   "Akara (bolinho de feijão)"
   ]
  },
  {
@@ -3375,13 +3768,17 @@ export const PAISES_EXTRA = [
    "Oslo",
    "Bergen",
    "Tromsø",
-   "Stavanger"
+   "Stavanger",
+   "Trondheim",
+   "Ålesund"
   ],
   "comidas": [
    "Salmão norueguês",
-   "Fårikål (cordeiro com repolho)",
+   "Bacalhau (klippfisk)",
    "Brunost (queijo marrom)",
-   "Lutefisk"
+   "Fårikål (ensopado de cordeiro)",
+   "Lutefisk",
+   "Kjøttkaker (almôndegas)"
   ]
  },
  {
@@ -3408,16 +3805,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Lagon de Nouvelle-Calédonie",
   "cidades": [
-   "Numeá",
-   "Ilha dos Pinheiros",
-   "Ilhas Loyauté",
-   "Bourail"
+   "Noumea",
+   "Ilha dos Pinheiros (Ile des Pins)",
+   "Ilha Lifou",
+   "Ilha Mare",
+   "Bourail",
+   "Hienghene"
   ],
   "comidas": [
-   "Bougna",
-   "Cerf (carne de veado)",
-   "Langouste",
-   "Poisson cru"
+   "Bougna (prato kanak de tuberculos e carne no coco)",
+   "Cerf (carne de cervo)",
+   "Lagosta da Nova Caledonia",
+   "Civet de roussette (morcego-da-fruta)",
+   "Caranguejo-do-coco",
+   "Baguete e patisserie francesa"
   ]
  },
  {
@@ -3442,15 +3843,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Milford Sound",
   "cidades": [
    "Auckland",
-   "Queenstown",
    "Wellington",
-   "Rotorua"
+   "Queenstown",
+   "Rotorua",
+   "Christchurch",
+   "Cidade de Cook (Mount Cook)"
   ],
   "comidas": [
-   "Hangi",
-   "Cordeiro neozelandês",
+   "Hangi (cozido no forno de terra maori)",
    "Pavlova",
-   "Fish and chips"
+   "Cordeiro neozelandes",
+   "Fish and chips",
+   "Kumara (batata-doce)",
+   "Whitebait fritters"
   ]
  },
  {
@@ -3476,16 +3881,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Sultan Qaboos Grand Mosque",
   "cidades": [
-   "Mascate",
+   "Mascate (Muscat)",
    "Nizwa",
    "Salalah",
-   "Sur"
+   "Sur",
+   "Wahiba Sands",
+   "Jebel Akhdar"
   ],
   "comidas": [
-   "Shuwa",
-   "Majboos",
-   "Halwa",
-   "Mishkak"
+   "Shuwa (carne assada lentamente)",
+   "Majboos (arroz especiado)",
+   "Mashuai (peixe)",
+   "Harees",
+   "Halwa omanense",
+   "Tâmaras"
   ]
  },
  {
@@ -3514,13 +3923,17 @@ export const PAISES_EXTRA = [
    "Amsterdã",
    "Roterdã",
    "Haia",
-   "Utrecht"
+   "Utrecht",
+   "Keukenhof/Lisse",
+   "Maastricht"
   ],
   "comidas": [
    "Stroopwafel",
    "Bitterballen",
-   "Arenque",
-   "Poffertjes"
+   "Haring (arenque cru)",
+   "Poffertjes",
+   "Queijo Gouda",
+   "Patatje met (batata frita com maionese)"
   ]
  },
  {
@@ -3545,15 +3958,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Koror",
   "cidades": [
    "Koror",
-   "Ngerulmud",
-   "Airai",
-   "Melekeok"
+   "Melekeok (Ngerulmud)",
+   "Ilhas Rochosas (Rock Islands)",
+   "Peleliu",
+   "Lago das Aguas-vivas (Jellyfish Lake)",
+   "Ilha Babeldaob"
   ],
   "comidas": [
    "Tinola (sopa de frango)",
-   "Fruit bat soup (sopa de morcego)",
-   "Taro (inhame)",
-   "Pichi-pichi (doce de mandioca)"
+   "Fruit bat soup (sopa de morcego-da-fruta)",
+   "Taro e tapioca",
+   "Peixe cru no leite de coco",
+   "Ulkoy (bolinho de abobora e camarao)",
+   "Frutos do mar grelhados"
   ]
  },
  {
@@ -3581,13 +3998,17 @@ export const PAISES_EXTRA = [
    "Cidade do Panamá",
    "Bocas del Toro",
    "Boquete",
-   "Arquipélago de San Blas"
+   "Cidade do Panamá Velho (Casco Viejo)",
+   "San Blas (Guna Yala)",
+   "El Valle de Antón"
   ],
   "comidas": [
    "Sancocho",
    "Ropa vieja",
    "Patacones",
-   "Ceviche"
+   "Ceviche",
+   "Carimañola",
+   "Hojaldre (massa frita)"
   ]
  },
  {
@@ -3616,13 +4037,17 @@ export const PAISES_EXTRA = [
    "Port Moresby",
    "Mount Hagen",
    "Lae",
-   "Ilha Nova Bretanha"
+   "Madang",
+   "Ilha Nova Bretanha (Rabaul/Kokopo)",
+   "Rio Sepik"
   ],
   "comidas": [
-   "Mumu",
+   "Mumu (banquete cozido na terra)",
+   "Kokoda de peixe",
+   "Sago (sagu, alimento basico)",
    "Kaukau (batata-doce)",
-   "Sago",
-   "Saksak"
+   "Saksak (pudim de sagu)",
+   "Bunia (peixe no leite de coco)"
   ]
  },
  {
@@ -3649,12 +4074,16 @@ export const PAISES_EXTRA = [
    "Islamabad",
    "Lahore",
    "Karachi",
-   "Hunza"
+   "Multan",
+   "Peshawar",
+   "Skardu"
   ],
   "comidas": [
    "Biryani",
    "Nihari",
    "Karahi",
+   "Seekh kebab",
+   "Haleem",
    "Chapli kebab"
   ]
  },
@@ -3683,12 +4112,16 @@ export const PAISES_EXTRA = [
    "Assunção",
    "Ciudad del Este",
    "Encarnación",
-   "Areguá"
+   "Luque",
+   "San Bernardino",
+   "Filadelfia (Chaco)"
   ],
   "comidas": [
    "Sopa paraguaya",
-   "Chipá",
+   "Chipa",
    "Mbejú",
+   "Bori-bori",
+   "Vori-vori",
    "Tereré"
   ]
  },
@@ -3715,16 +4148,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Bora Bora",
   "cidades": [
-   "Papeete",
+   "Papeete (Tahiti)",
    "Bora Bora",
    "Moorea",
-   "Taiti"
+   "Huahine",
+   "Rangiroa",
+   "Taha'a"
   ],
   "comidas": [
-   "Poisson cru",
-   "Po'e",
+   "Poisson cru (ceviche de atum no leite de coco)",
+   "Po'e (sobremesa de frutas)",
    "Fafaru",
-   "Ma'a tinito"
+   "Frango fafa (com folhas de taro)",
+   "Uru (fruta-pao assada)",
+   "Chevrettes (camaroes de agua doce)"
   ]
  },
  {
@@ -3751,14 +4188,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Varsóvia",
    "Cracóvia",
-   "Gdansk",
-   "Wroclaw"
+   "Gdańsk",
+   "Wrocław",
+   "Poznań",
+   "Zakopane"
   ],
   "comidas": [
-   "Pierogi",
-   "Bigos",
-   "Zurek",
-   "Kielbasa"
+   "Pierogi (massas recheadas)",
+   "Bigos (ensopado de chucrute)",
+   "Żurek (sopa azeda de centeio)",
+   "Kotlet schabowy (bisteca empanada)",
+   "Gołąbki (charuto de repolho)",
+   "Pączki (sonhos)"
   ]
  },
  {
@@ -3784,15 +4225,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Castillo San Felipe del Morro",
   "cidades": [
    "San Juan",
+   "Velho San Juan (Old San Juan)",
    "Ponce",
    "Rincón",
+   "Fajardo",
    "Vieques"
   ],
   "comidas": [
    "Mofongo",
-   "Lechón asado",
    "Arroz con gandules",
-   "Tostones"
+   "Lechón asado",
+   "Tostones",
+   "Alcapurrias",
+   "Pasteles"
   ]
  },
  {
@@ -3820,15 +4265,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Maasai Mara",
   "cidades": [
    "Nairóbi",
-   "Mombaça",
-   "Maasai Mara",
-   "Diani Beach"
+   "Mombasa",
+   "Masai Mara",
+   "Diani Beach",
+   "Nakuru",
+   "Malindi"
   ],
   "comidas": [
-   "Nyama choma",
+   "Nyama choma (carne grelhada)",
    "Ugali",
    "Sukuma wiki",
-   "Pilau"
+   "Chapati",
+   "Pilau",
+   "Samosa"
   ]
  },
  {
@@ -3852,15 +4301,19 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Issyk-Kul",
   "cidades": [
-   "Bisqueque",
-   "Karakol",
+   "Bishkek",
    "Osh",
-   "Lago Issyk-Kul"
+   "Lago Issyk-Kul (Cholpon-Ata / Karakol)",
+   "Karakol",
+   "Naryn (porta da Pamir/Tash Rabat)",
+   "Jalal-Abad"
   ],
   "comidas": [
-   "Beshbarmak",
-   "Lagman",
-   "Manti",
+   "Beshbarmak (carne de cavalo/cordeiro com massa)",
+   "Lagman (macarrão puxado com carne)",
+   "Manti (pastéis no vapor)",
+   "Plov (arroz com carne)",
+   "Shorpo (sopa de carne)",
    "Kumis (leite de égua fermentado)"
   ]
  },
@@ -3888,14 +4341,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Londres",
    "Edimburgo",
-   "Oxford",
-   "Bath"
+   "Manchester",
+   "Liverpool",
+   "Bath",
+   "York"
   ],
   "comidas": [
    "Fish and chips",
+   "English breakfast",
    "Sunday roast",
-   "Full English breakfast",
-   "Afternoon tea"
+   "Shepherd's pie",
+   "Scones com clotted cream",
+   "Sticky toffee pudding"
   ]
  },
  {
@@ -3920,16 +4377,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Colonial City of Santo Domingo",
   "cidades": [
-   "Santo Domingo",
    "Punta Cana",
+   "Santo Domingo",
    "Puerto Plata",
-   "Samaná"
+   "Samaná",
+   "La Romana",
+   "Bávaro"
   ],
   "comidas": [
-   "La bandera",
+   "La bandera (arroz, feijão e carne)",
    "Mangú",
    "Sancocho",
-   "Tostones"
+   "Tostones",
+   "Mofongo",
+   "Pollo guisado"
   ]
  },
  {
@@ -3956,13 +4417,17 @@ export const PAISES_EXTRA = [
    "Bucareste",
    "Brașov",
    "Sibiu",
-   "Cluj-Napoca"
+   "Cluj-Napoca",
+   "Sighișoara",
+   "Timișoara"
   ],
   "comidas": [
-   "Sarmale",
-   "Mămăligă",
-   "Mici",
-   "Ciorbă"
+   "Sarmale (charutos de repolho)",
+   "Mămăligă (polenta)",
+   "Mici/mititei (linguiças grelhadas)",
+   "Ciorbă (sopa azeda)",
+   "Cozonac (pão doce)",
+   "Papanași (sonhos com creme)"
   ]
  },
  {
@@ -3990,15 +4455,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Volcanoes National Park",
   "cidades": [
    "Kigali",
-   "Musanze",
+   "Parque Nacional dos Vulcões (gorilas)",
+   "Lago Kivu",
    "Gisenyi",
-   "Nyungwe"
+   "Musanze",
+   "Floresta Nyungwe"
   ],
   "comidas": [
-   "Brochette",
+   "Brochettes (espetinhos)",
    "Ugali",
-   "Isombe",
-   "Ibihaza"
+   "Isombe (mandioca)",
+   "Ibihaza (abóbora)",
+   "Akabenz (porco)",
+   "Plátano cozido"
   ]
  },
  {
@@ -4027,13 +4496,17 @@ export const PAISES_EXTRA = [
    "Apia",
    "Ilha Upolu",
    "Ilha Savai'i",
-   "Lalomanu"
+   "Lalomanu",
+   "Manase",
+   "Piscinas de Sua (To Sua Ocean Trench)"
   ],
   "comidas": [
-   "Palusami",
-   "Oka (peixe cru)",
-   "Umu",
-   "Panikeke"
+   "Palusami (folhas de taro no leite de coco)",
+   "Oka (ceviche samoano)",
+   "Umu (banquete cozido em forno de pedras)",
+   "Sapasui (chop suey samoano)",
+   "Panipopo (paes doces no coco)",
+   "Faiai eleni (arenque no coco)"
   ]
  },
  {
@@ -4058,15 +4531,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "City of San Marino",
   "cidades": [
    "Cidade de San Marino",
-   "Serravalle",
    "Borgo Maggiore",
-   "Domagnano"
+   "Serravalle",
+   "Domagnano",
+   "Fiorentino",
+   "Monte Titano"
   ],
   "comidas": [
    "Piadina",
-   "Torta Tre Monti",
-   "Strozzapreti",
-   "Bustrengo"
+   "Torta Tre Monti (bolo de wafer)",
+   "Cappelletti (massa recheada)",
+   "Nido di rondine (massa ao forno)",
+   "Bustrengo (bolo rústico)",
+   "Passatelli"
   ]
  },
  {
@@ -4091,15 +4568,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Castries",
   "cidades": [
    "Castries",
-   "Soufrière",
-   "Rodney Bay (Gros Islet)",
+   "Rodney Bay",
+   "Soufrière (Pitons)",
+   "Gros Islet",
+   "Marigot Bay",
    "Vieux Fort"
   ],
   "comidas": [
    "Green fig and saltfish (prato nacional)",
-   "Bouyon (caldo grosso)",
-   "Callaloo (sopa de folhas)",
-   "Accra (bolinho de bacalhau)"
+   "Callaloo",
+   "Bouyon",
+   "Accra (bolinho de peixe)",
+   "Pumpkin soup",
+   "Breadfruit (fruta-pão assada)"
   ]
  },
  {
@@ -4126,15 +4607,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Anse Source d'Argent",
   "cidades": [
    "Victoria (Mahé)",
-   "Praslin",
-   "La Digue",
-   "Beau Vallon"
+   "Beau Vallon",
+   "Praslin (Anse Lazio)",
+   "La Digue (Anse Source d'Argent)",
+   "Eden Island",
+   "Anse Intendance"
   ],
   "comidas": [
-   "Curry de peixe",
-   "Octopus curry",
-   "Ladob",
-   "Grilled fish"
+   "Curry de peixe com leite de coco",
+   "Octopus curry (caril de polvo)",
+   "Grilled fish (peixe grelhado crioulo)",
+   "Ladob (sobremesa de banana/mandioca no coco)",
+   "Satini reken (chutney de tubarão)",
+   "Bat curry (caril de morcego, tradicional)"
   ]
  },
  {
@@ -4160,16 +4645,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Ilha de Gorée",
   "cidades": [
-   "Dacar",
+   "Dakar",
    "Saint-Louis",
    "Ilha de Gorée",
-   "Saly"
+   "Saly",
+   "Ziguinchor (Casamança)",
+   "Reserva de Bandia / Lago Rosa"
   ],
   "comidas": [
-   "Thieboudienne",
-   "Yassa",
-   "Mafé",
-   "Dibi"
+   "Thieboudienne (arroz com peixe, prato nacional)",
+   "Yassa (frango ou peixe com cebola e limão)",
+   "Mafé (ensopado com pasta de amendoim)",
+   "Dibi (carne grelhada)",
+   "Pastels (pastéis de peixe)",
+   "Bissap (suco de hibisco)"
   ]
  },
  {
@@ -4196,13 +4685,17 @@ export const PAISES_EXTRA = [
    "Belgrado",
    "Novi Sad",
    "Niš",
-   "Zlatibor"
+   "Subotica",
+   "Zlatibor",
+   "Kragujevac"
   ],
   "comidas": [
-   "Ćevapi",
-   "Pljeskavica",
-   "Ajvar",
-   "Sarma"
+   "Ćevapi (linguiças grelhadas)",
+   "Pljeskavica (hambúrguer sérvio)",
+   "Ajvar (pasta de pimentão)",
+   "Sarma (charuto de repolho)",
+   "Kajmak (creme lácteo)",
+   "Karađorđeva šnicla"
   ]
  },
  {
@@ -4225,16 +4718,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Gardens by the Bay",
   "cidades": [
-   "Singapura (Marina Bay)",
-   "Chinatown",
+   "Cingapura (cidade-Estado)",
+   "Marina Bay",
    "Sentosa",
-   "Little India"
+   "Chinatown",
+   "Little India",
+   "Orchard Road"
   ],
   "comidas": [
-   "Chili crab",
-   "Hainanese chicken rice",
+   "Hainanese Chicken Rice",
+   "Chili Crab",
    "Laksa",
-   "Char kway teow"
+   "Char Kway Teow",
+   "Satay",
+   "Kaya Toast"
   ]
  },
  {
@@ -4261,13 +4758,17 @@ export const PAISES_EXTRA = [
    "Estocolmo",
    "Gotemburgo",
    "Malmö",
-   "Kiruna"
+   "Uppsala",
+   "Kiruna (Lapônia)",
+   "Visby (Gotland)"
   ],
   "comidas": [
    "Köttbullar (almôndegas suecas)",
-   "Gravlax",
+   "Gravlax (salmão curado)",
    "Smörgåsbord",
-   "Pão de canela (kanelbulle)"
+   "Kanelbulle (pão de canela)",
+   "Surströmming (arenque fermentado)",
+   "Raggmunk (panqueca de batata)"
   ]
  },
  {
@@ -4297,13 +4798,17 @@ export const PAISES_EXTRA = [
    "Zurique",
    "Genebra",
    "Lucerna",
-   "Interlaken"
+   "Interlaken",
+   "Zermatt",
+   "Berna"
   ],
   "comidas": [
-   "Fondue",
+   "Fondue de queijo",
    "Raclette",
    "Rösti",
-   "Chocolate suíço"
+   "Chocolate suíço",
+   "Älplermagronen",
+   "Birchermüesli"
   ]
  },
  {
@@ -4331,15 +4836,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Paramaribo",
   "cidades": [
    "Paramaribo",
+   "Nieuw Nickerie",
    "Brownsberg",
    "Galibi",
-   "Nieuw Nickerie"
+   "Commewijne",
+   "Brokopondo"
   ],
   "comidas": [
-   "Roti",
+   "Roti com curry",
    "Pom",
    "Moksi alesi",
-   "Bami"
+   "Bami",
+   "Pastei",
+   "Saoto soup"
   ]
  },
  {
@@ -4363,16 +4872,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Taipei 101",
   "cidades": [
-   "Taipé",
+   "Taipei",
+   "Kaohsiung",
    "Taichung",
    "Tainan",
-   "Kaohsiung"
+   "Hualien (Desfiladeiro de Taroko)",
+   "Jiufen"
   ],
   "comidas": [
-   "Beef noodle soup",
-   "Bubble tea",
-   "Xiao long bao",
-   "Gua bao"
+   "Beef noodle soup (lámen de carne)",
+   "Xiaolongbao",
+   "Bubble tea (chá com tapioca)",
+   "Stinky tofu (tofu fermentado)",
+   "Gua bao (sanduíche de porco)",
+   "Comida de mercado noturno (oyster omelet)"
   ]
  },
  {
@@ -4396,16 +4909,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Pamir Mountains",
   "cidades": [
-   "Duchambé",
-   "Khorog",
+   "Dushanbe",
    "Khujand",
-   "Lago Iskanderkul"
+   "Khorog (porta de entrada do Pamir/GBAO)",
+   "Murghab (Pamir Highway)",
+   "Lago Iskanderkul",
+   "Penjikent"
   ],
   "comidas": [
-   "Qurutob",
-   "Plov",
-   "Shashlik",
-   "Sambusa"
+   "Qurutob (prato nacional: pão folhado com qurut e legumes)",
+   "Plov (osh, arroz com carne)",
+   "Shashlik (espetinhos)",
+   "Lagman (macarrão com carne)",
+   "Manti (pastéis no vapor)",
+   "Sambusa (pastel assado)"
   ]
  },
  {
@@ -4432,16 +4949,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Kilimanjaro",
   "cidades": [
-   "Arusha",
    "Zanzibar",
+   "Arusha",
+   "Dar es Salaam",
    "Serengeti",
-   "Dar es Salaam"
+   "Moshi (Kilimanjaro)",
+   "Stone Town"
   ],
   "comidas": [
    "Ugali",
    "Nyama choma",
    "Pilau",
-   "Zanzibar pizza"
+   "Mishkaki (espetinho)",
+   "Zanzibar pizza",
+   "Mandazi"
   ]
  },
  {
@@ -4468,13 +4989,17 @@ export const PAISES_EXTRA = [
    "Praga",
    "Český Krumlov",
    "Brno",
-   "Karlovy Vary"
+   "Karlovy Vary",
+   "Kutná Hora",
+   "Olomouc"
   ],
   "comidas": [
-   "Svíčková",
-   "Goulash",
-   "Trdelník",
-   "Knedlíky"
+   "Svíčková (carne com molho cremoso)",
+   "Goulash com knedlíky",
+   "Vepřo knedlo zelo (porco, bolinho e chucrute)",
+   "Trdelník (doce em espiral)",
+   "Smažený sýr (queijo frito)",
+   "Cerveja pilsner"
   ]
  },
  {
@@ -4500,14 +5025,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Lomé",
    "Kpalimé",
+   "Aného",
    "Sokodé",
-   "Kara"
+   "Kara",
+   "Togoville"
   ],
   "comidas": [
-   "Fufu com molho",
-   "Pâte com molho de gombo",
-   "Frango grelhado",
-   "Koklo meme (frango apimentado)"
+   "Fufu",
+   "Pâte (massa)",
+   "Akumè",
+   "Gboma dessi (ensopado de espinafre)",
+   "Koklo meme (frango grelhado)",
+   "Aloko (plátano frito)"
   ]
  },
  {
@@ -4534,15 +5063,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Nuku'alofa",
   "cidades": [
    "Nuku'alofa",
-   "Ilha Vava'u",
+   "Ilha Tongatapu",
+   "Vava'u (Neiafu)",
    "Ilha Ha'apai",
-   "Ilha Tongatapu"
+   "Ilha 'Eua",
+   "Praia de Ha'atafu"
   ],
   "comidas": [
-   "Lu pulu",
-   "Ota ika",
-   "Faikakai",
-   "Umu"
+   "Lu pulu (carne e folhas de taro no coco)",
+   "Ota ika (ceviche tonganes)",
+   "Umu (forno de terra)",
+   "Faikakai (sobremesa de coco)",
+   "Lu sipi (cordeiro com folhas de taro)",
+   "Feke (polvo no leite de coco)"
   ]
  },
  {
@@ -4567,16 +5100,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Maracas Bay",
   "cidades": [
-   "Porto de Espanha",
+   "Porto da Espanha (Port of Spain)",
    "Scarborough (Tobago)",
+   "Crown Point (Tobago)",
    "Chaguaramas",
-   "San Fernando"
+   "San Fernando",
+   "Pigeon Point (Tobago)"
   ],
   "comidas": [
    "Doubles",
    "Roti",
    "Callaloo",
-   "Bake and shark"
+   "Bake and shark",
+   "Pelau",
+   "Curry crab and dumpling"
   ]
  },
  {
@@ -4604,13 +5141,17 @@ export const PAISES_EXTRA = [
    "Túnis",
    "Sidi Bou Said",
    "Cartago",
-   "Djerba"
+   "Sousse",
+   "Djerba",
+   "Hammamet"
   ],
   "comidas": [
-   "Couscous",
-   "Brik",
+   "Cuscuz",
+   "Brik (pastel de ovo)",
    "Harissa",
-   "Lablabi"
+   "Lablabi (sopa de grão-de-bico)",
+   "Mechouia (salada grelhada)",
+   "Makroudh (doce de tâmara)"
   ]
  },
  {
@@ -4634,16 +5175,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Darvaza gas crater",
   "cidades": [
-   "Asgabate",
-   "Cratera de Darvaza",
-   "Mary",
-   "Konye-Urgench"
+   "Asgabate (Ashgabat)",
+   "Cratera de Darvaza ('Portão do Inferno')",
+   "Mary (próxima às ruínas de Merv)",
+   "Turkmenabat",
+   "Konye-Urgench (sítio UNESCO)",
+   "Avaza (resort no Mar Cáspio)"
   ],
   "comidas": [
-   "Plov",
-   "Shashlik",
-   "Dograma",
-   "Manty"
+   "Plov (palaw, arroz com carne de carneiro)",
+   "Shashlik (espetinhos grelhados)",
+   "Manti (pastéis no vapor)",
+   "Dograma (prato de pão, carne e cebola)",
+   "Chorba (sopa de carne)",
+   "Ichlekli (torta de carne assada na areia/forno)"
   ]
  },
  {
@@ -4667,16 +5212,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Lavra de Kiev-Pechersk",
   "cidades": [
-   "Kiev",
+   "Kiev (Kyiv)",
    "Lviv",
    "Odessa",
-   "Cárpatos"
+   "Kharkiv",
+   "Cárpatos (Bukovel)",
+   "Chernivtsi"
   ],
   "comidas": [
-   "Borscht",
-   "Varenyky",
-   "Salo",
-   "Holubtsi"
+   "Borscht (sopa de beterraba)",
+   "Varenyky (massas recheadas)",
+   "Salo (toucinho curado)",
+   "Holubtsi (charuto de repolho)",
+   "Deruny (panqueca de batata)",
+   "Kyiv cutlet (filé à Kiev)"
   ]
  },
  {
@@ -4703,16 +5252,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Bwindi Impenetrable National Park",
   "cidades": [
-   "Campala",
+   "Kampala",
    "Entebbe",
-   "Bwindi",
-   "Jinja"
+   "Jinja",
+   "Bwindi (gorilas)",
+   "Parque Rainha Elizabeth",
+   "Fort Portal"
   ],
   "comidas": [
-   "Matoke",
-   "Rolex",
+   "Matoke (banana-da-terra)",
    "Luwombo",
-   "Posho"
+   "Rolex (omelete enrolado em chapati)",
+   "Posho",
+   "Nyama choma",
+   "Groundnut sauce (molho de amendoim)"
   ]
  },
  {
@@ -4738,14 +5291,18 @@ export const PAISES_EXTRA = [
   "cidades": [
    "Montevidéu",
    "Punta del Este",
-   "Colônia do Sacramento",
+   "Colonia del Sacramento",
+   "Piriápolis",
+   "La Paloma",
    "Cabo Polonio"
   ],
   "comidas": [
    "Asado",
    "Chivito",
    "Milanesa",
-   "Dulce de leche"
+   "Choripán",
+   "Dulce de leche",
+   "Chajá"
   ]
  },
  {
@@ -4770,16 +5327,20 @@ export const PAISES_EXTRA = [
   ],
   "fotoQuery": "Registan",
   "cidades": [
-   "Samarcanda",
-   "Bucara",
+   "Tashkent",
+   "Samarcanda (Samarkand)",
+   "Bukhara (Bukhara)",
    "Khiva",
-   "Tashkent"
+   "Shakhrisabz",
+   "Vale de Fergana (Fergana)"
   ],
   "comidas": [
-   "Plov",
-   "Shashlik",
-   "Manti",
-   "Lagman"
+   "Plov (osh, prato nacional de arroz)",
+   "Shashlik (espetinhos grelhados)",
+   "Manti (pastéis no vapor)",
+   "Lagman (macarrão com carne e legumes)",
+   "Samsa (pastel assado no forno tandoor)",
+   "Non (pão redondo tradicional)"
   ]
  },
  {
@@ -4807,15 +5368,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Mount Yasur",
   "cidades": [
    "Port Vila",
-   "Ilha Tanna",
-   "Espiritu Santo",
-   "Luganville"
+   "Luganville",
+   "Ilha Tanna (vulcao Yasur)",
+   "Ilha Espiritu Santo",
+   "Ilha Pentecost",
+   "Ilha Efate"
   ],
   "comidas": [
-   "Laplap",
+   "Laplap (prato nacional de tuberculos assados)",
    "Tuluk",
-   "Coconut crab",
-   "Kava"
+   "Coconut crab (caranguejo-do-coco)",
+   "Nalot",
+   "Simboro",
+   "Kava (bebida tradicional)"
   ]
  },
  {
@@ -4841,15 +5406,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Salto Ángel",
   "cidades": [
    "Caracas",
-   "Isla Margarita",
    "Mérida",
-   "Canaima"
+   "Ilha de Margarita",
+   "Maracaibo",
+   "Canaima (Salto Ángel)",
+   "Los Roques"
   ],
   "comidas": [
    "Arepa",
    "Pabellón criollo",
+   "Cachapa",
    "Hallaca",
-   "Cachapa"
+   "Tequeños",
+   "Empanadas"
   ]
  },
  {
@@ -4876,15 +5445,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Cataratas Vitória",
   "cidades": [
    "Lusaka",
-   "Livingstone",
+   "Livingstone (Cataratas Vitória)",
    "Parque Nacional South Luangwa",
-   "Cataratas Vitória"
+   "Ndola",
+   "Kitwe",
+   "Lago Kariba (Siavonga)"
   ],
   "comidas": [
-   "Nshima",
-   "Ifisashi",
-   "Kapenta",
-   "Village chicken"
+   "Nshima (massa de fubá, prato nacional)",
+   "Ifisashi (verduras com amendoim)",
+   "Kapenta (peixinho seco)",
+   "Village chicken (frango caipira)",
+   "Chikanda (terrina de orquídea, 'polony africano')",
+   "Munkoyo (bebida fermentada)"
   ]
  },
  {
@@ -4911,15 +5484,19 @@ export const PAISES_EXTRA = [
   "fotoQuery": "Cataratas Vitória",
   "cidades": [
    "Harare",
-   "Cataratas Vitória",
    "Bulawayo",
-   "Parque Nacional de Hwange"
+   "Vitória Falls (Cataratas Vitória)",
+   "Victoria Falls (cidade)",
+   "Hwange (Parque Nacional)",
+   "Great Zimbabwe (Masvingo)"
   ],
   "comidas": [
-   "Sadza",
-   "Nyama",
-   "Muriwo",
-   "Biltong"
+   "Sadza (massa de fubá, prato nacional)",
+   "Nyama (carne grelhada)",
+   "Mopane worms (lagartas mopane)",
+   "Muriwo une dovi (verduras com pasta de amendoim)",
+   "Biltong",
+   "Maheu (bebida fermentada de milho)"
   ]
  }
 ];
@@ -4928,727 +5505,727 @@ export const VISTOS_EXTRA_BR = {
  "SG": {
   "tipo": "isento",
   "dias": 30,
-  "nota": "Brasileiros entram sem visto para turismo por até 30 dias. Exige preencher o SG Arrival Card online antes da chegada. Confira na fonte oficial."
+  "nota": "Brasileiro entra SEM visto a turismo/negócios por até 30 dias (não são 90). Obrigatório preencher o SG Arrival Card (SGAC) com a declaração eletrônica de saúde, gratuito, até 3 dias antes da entrada (site da ICA). Passaporte válido por 6+ meses e comprovante de passagem de saída. Quem pretende ficar mais de 30 dias por vez, mais de 180 dias/ano ou trabalhar precisa de visto/work pass. Sem febre amarela obrigatória (exigida só para quem chega de país de risco)."
  },
  "MM": {
   "tipo": "e-visa",
   "dias": 28,
-  "nota": "e-visa de turismo (28 dias) disponível online para brasileiros. Atenção à instabilidade política — verifique avisos de viagem e a fonte oficial antes de ir."
+  "nota": "Brasileiro PRECISA de visto. O e-visa de turismo permite estadia de 28 dias (entrada única, NÃO extensível), válido por 90 dias da emissão, online no site oficial evisa.moip.gov.mm, aprovação em ~3 dias úteis. Exige: scan da página de dados do passaporte (válido por 6+ meses), comprovante de passagem de volta e reserva de hotel. Entrada só por aeroportos/fronteiras designados. Sem febre amarela obrigatória (só se vier de país de risco). Atenção à situação de segurança interna — confira avisos de viagem antes de ir."
  },
  "BN": {
   "tipo": "visto",
-  "dias": 14,
-  "nota": "Brasileiros normalmente precisam de visto para turismo no Brunei (verifique opção de visto na chegada/e-visa conforme o caso). Confira na fonte oficial."
+  "dias": 30,
+  "nota": "Brasileiro PRECISA de visto — o Brasil NÃO está na lista de isenção nem de visto-on-arrival de Brunei (confirmado pela lista oficial do Ministério das Relações Exteriores de Brunei). Solicite o visto de turismo na embaixada/consulado de Brunei mais próximo ANTES de viajar (processamento ~3 dias úteis). Exigências típicas: passaporte válido por 6+ meses, passagem de saída, comprovante de hospedagem e de fundos, fotos. A estadia concedida costuma ser curta (geralmente até 30 dias, definida pelo visto). Sem febre amarela obrigatória (só se vier de país de risco). Confira na fonte oficial (mfa.gov.bn) por ser um caso menos comum."
  },
  "CN": {
   "tipo": "visto",
   "dias": 30,
-  "nota": "Brasileiros precisam de visto de turismo (L) obtido antecipadamente; isenção de trânsito de 144h em cidades selecionadas. Confira na fonte oficial."
+  "nota": "Brasileiro PRECISA de visto de turismo (categoria L) para entrar na China continental — solicite com antecedência no Consulado/Centro de Vistos Chinês (CVASC) no Brasil; exige passaporte com validade minima de 6 meses, formulario, foto, comprovantes de hospedagem e passagens (ida e volta). Custo aprox. US$ 30-60 + taxa de serviço do centro. ATENÇÃO ÀS ISENÇÕES DE TRÂNSITO: a China oferece trânsito sem visto de até 240 horas (10 dias) em aeroportos/cidades elegíveis para quem segue a um TERCEIRO país com passagem confirmada; também há isenção total para Hainan e regimes regionais (ex.: cruzeiros e grupos por Xangai). Confira sempre a regra vigente na fonte oficial (Embaixada da China / CVASC) antes de viajar."
  },
  "JP": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros isentos de visto para turismo por até 90 dias."
+  "nota": "Brasileiro é ISENTO de visto para turismo no Japão por até 90 dias (acordo de isenção de vistos de curta duração). Não há taxa nem autorização eletrônica prévia. Exige-se passaporte válido por todo o período da estadia, passagem de saída (ida e volta ou continuação) e comprovação de meios de subsistência/hospedagem; a imigração pode solicitar esses documentos na chegada. Observação: o Japão estuda implantar um sistema eletrônico de pré-viagem (tipo JESTA) no futuro — ainda não obrigatório em 2026; confira na fonte oficial antes de viajar."
  },
  "KR": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros isentos de visto para turismo por até 90 dias; recomenda-se verificar exigência de K-ETA na fonte oficial."
+  "nota": "Brasileiro é ISENTO de visto para turismo na Coreia do Sul por até 90 dias (acordo de isenção). Sobre o K-ETA (autorização eletrônica de viagem, ~KRW 10.000): a Coreia concedeu ISENÇÃO TEMPORÁRIA de K-ETA para vários países, incluindo o Brasil, com prorrogações sucessivas — em 2026 verifique no site oficial k-eta.go.kr se a isenção continua válida; se exigido, solicite o K-ETA online com no mínimo 72h de antecedência. Exige passaporte válido, passagem de saída e comprovante de hospedagem. Recomenda-se também preencher a declaração eletrônica de chegada (e-Arrival Card). Confira sempre a fonte oficial."
  },
  "TW": {
-  "tipo": "isento",
-  "dias": 90,
-  "nota": "Brasileiros isentos de visto para turismo por até 90 dias. Confira na fonte oficial."
+  "tipo": "e-visa",
+  "dias": 30,
+  "nota": "Taiwan NÃO inclui o Brasil na sua lista de isenção de vistos para turismo, portanto o brasileiro precisa de VISTO. A via mais prática é o eVisa de Taiwan, solicitado online no portal oficial (visawebapp.boca.gov.tw), normalmente válido para estadia de até 30 dias; também é possível o visto de visitante no escritório/representação de Taipei (não há embaixada formal). Exige passaporte com validade de pelo menos 6 meses, foto, passagem de ida e volta e comprovante de hospedagem; taxa aprox. US$ 50 (varia). Confira requisitos e elegibilidade atualizados na fonte oficial (Bureau of Consular Affairs / BOCA) antes de viajar."
  },
  "HK": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros isentos de visto para turismo por até 90 dias em Hong Kong (regime separado da China continental)."
+  "nota": "Hong Kong é Região Administrativa Especial com política de imigração própria: brasileiro é ISENTO de visto para turismo por até 90 dias. Não há taxa nem autorização prévia. Exige-se passaporte com validade recomendada de pelo menos 1 mês além da estadia (idealmente 6 meses), passagem de saída e meios de subsistência. Importante: entrar em Hong Kong NÃO dá acesso à China continental — para a China continental é preciso visto separado. Confira na fonte oficial (Hong Kong Immigration Department) antes de viajar."
  },
  "MO": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros isentos de visto para turismo por até 90 dias em Macau (regime separado da China continental)."
+  "nota": "Macau é Região Administrativa Especial com imigração própria: brasileiro é ISENTO de visto para turismo por até 90 dias. Não há taxa nem autorização prévia; recebe-se autorização de permanência na chegada. Exige passaporte válido (recomenda-se 6 meses), passagem de saída e meios de subsistência. Observação: Macau e Hong Kong são jurisdições separadas entre si e da China continental — cada uma tem sua própria regra de entrada, e Macau não dá acesso à China continental (esta exige visto). Confira na fonte oficial (Macao Public Security Police / imigração) antes de viajar."
  },
  "MN": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros isentos de visto para turismo por até 90 dias. Confira na fonte oficial."
+  "nota": "Brasileiro é ISENTO de visto para turismo na Mongólia por até 90 dias (acordo de isenção de vistos entre Mongólia e Brasil). Não há taxa para a isenção. Exige passaporte com validade de pelo menos 6 meses na entrada e, geralmente, comprovante de saída do país (passagem de retorno/continuação). Caso pretenda ficar mais de 30 dias, pode ser exigido registro junto à imigração mongol — verifique o prazo de registro vigente. Se a regra de isenção mudar, há sistema de e-visa oficial (evisa.mn). Confira na fonte oficial antes de viajar."
  },
  "BD": {
-  "tipo": "on-arrival",
+  "tipo": "visto",
   "dias": 30,
-  "nota": "Visto na chegada possível para turismo em alguns casos; recomenda-se visto prévio. Confira na fonte oficial."
+  "nota": "Brasileiro precisa de visto de turismo para Bangladesh. Há visto na chegada (visa on arrival, em geral até 30 dias) disponível em aeroportos internacionais como Daca, mas com critérios discricionários do oficial — o mais seguro é solicitar o visto previamente em missão diplomática/consulado de Bangladesh ou pelo sistema online quando disponível. Passaporte válido por no mínimo 6 meses, comprovante de hospedagem, passagem de saída e, em geral, comprovação de recursos. Confira exigências atuais na fonte oficial (Departamento de Imigração e Passaportes de Bangladesh) antes de viajar."
  },
  "PK": {
   "tipo": "e-visa",
-  "dias": 30,
-  "nota": "e-Visa online (sistema NADRA). Verifique recomendações de segurança em algumas regiões. Confira na fonte oficial."
+  "dias": 90,
+  "nota": "Paquistão exige visto de turismo; brasileiro pode solicitar o e-Visa pelo portal oficial visa.nadra.gov.pk (sistema NADRA). Geralmente concede até 90 dias. Exige carta-convite OU reserva de hotel confirmada, itinerário e comprovantes; taxa em torno de US$ 8 (varia). Também é possível visto em consulado. Passaporte válido por no mínimo 6 meses. Para algumas regiões de montanha (ex.: Gilgit-Baltistan) pode haver permissões adicionais. Confira o status e requisitos atuais no portal oficial antes de viajar."
  },
  "BT": {
   "tipo": "visto",
-  "dias": 30,
-  "nota": "Visto obrigatório + taxa diária de desenvolvimento sustentável (SDF, ~US$100/dia); viagem geralmente via operadora autorizada. Confira na fonte oficial."
+  "dias": 90,
+  "nota": "Butão exige visto para brasileiros e cobra a SDF (Sustainable Development Fee) — taxa diária de desenvolvimento sustentável de cerca de US$ 100 por pessoa/dia (valor reduzido em relação ao passado; crianças têm desconto). Solicita-se o visto online no portal oficial (visit.doityourself.bt) pagando a SDF e a taxa de visto (cerca de US$ 40), ou por meio de operador autorizado. Passaporte válido por no mínimo 6 meses. A entrada aérea é feita pela Drukair/Bhutan Airlines (Paro). Não há turismo verdadeiramente independente sem o pagamento da SDF. Confira valores atuais na fonte oficial."
  },
  "MV": {
   "tipo": "on-arrival",
   "dias": 30,
-  "nota": "Visto gratuito na chegada (free visa on arrival) para turismo; exige passagem de saída e reserva de hospedagem. Confira na fonte oficial."
+  "nota": "Maldivas concede visto gratuito na chegada por 30 dias para todas as nacionalidades, incluindo brasileiros. É obrigatório preencher o formulário online IMUGA (Traveller Declaration) até 96 horas (3 dias) antes da chegada e da partida. Exige-se passaporte válido por no mínimo 6 meses (recomendado), reserva de hospedagem confirmada (hotel/resort/guesthouse) e passagem de saída/recursos suficientes. Não é cobrada taxa de visto na entrada (o turista paga taxas/impostos embutidos na hospedagem)."
  },
  "KZ": {
   "tipo": "isento",
   "dias": 30,
-  "nota": "Isenção de visto para turismo até 30 dias por entrada; confira na fonte oficial."
+  "nota": "Brasileiro entra SEM visto para turismo por até 30 dias dentro de cada período de 1 ano (acordo bilateral). Exigências: passaporte válido por pelo menos 6 meses e comprovante de passagem de saída do país. Não exige febre amarela. Para estadias mais longas, solicitar visto no consulado."
  },
  "UZ": {
   "tipo": "isento",
   "dias": 30,
-  "nota": "Isenção de visto para turismo até 30 dias; confira na fonte oficial."
+  "nota": "Brasileiro é isento de visto para turismo por até 30 dias (Brasil incluído na lista de isenção desde fevereiro de 2019). Exigências: passaporte válido por 6 meses além da estadia e comprovante de saída. Isenção vale só para turismo/visita, não para trabalho. Não exige febre amarela. Há também e-visa oficial (e-visa.gov.uz) para outros fins ou estadias maiores."
  },
  "KG": {
   "tipo": "isento",
-  "dias": 60,
-  "nota": "Isenção de visto para turismo até 60 dias; confira na fonte oficial."
+  "dias": 30,
+  "nota": "ATENÇÃO - regra mudou em 31/12/2025 (Resolução nº 855 do Conselho de Ministros): brasileiro continua ISENTO de visto, mas agora o limite é de até 30 dias dentro de cada período de 60 dias (contagem móvel a partir da entrada). Antes eram 60 dias. Passaporte válido por 6 meses. Não exige febre amarela. Para ficar mais que 30 dias ou para trabalho, é preciso e-visa (evisa.e-gov.kg) ou registro. Confira na fonte oficial (mfa.gov.kg) antes de viajar."
  },
  "TJ": {
-  "tipo": "e-visa",
-  "dias": 60,
-  "nota": "e-Visa para turismo (com permissão GBAO separada p/ o Pamir); confira na fonte oficial."
+  "tipo": "isento",
+  "dias": 30,
+  "nota": "Brasileiro é ISENTO de visto por até 30 dias (Brasil está na lista unilateral de 52 países com isenção). Alternativa: e-visa de turismo por até 60 dias (em até 90), pelo portal oficial (evisa.tj) — cerca de US$30 (entrada única) ou US$50 (múltiplas entradas). IMPORTANTE: para visitar a região de Gorno-Badakhshan (GBAO/Pamir Highway) é obrigatória uma PERMISSÃO GBAO separada (~US$20, marcada no pedido do e-visa), além do visto/isenção. Não exige febre amarela. Levar cópia impressa nas fronteiras."
  },
  "TM": {
   "tipo": "visto",
   "dias": 10,
-  "nota": "Visto exige carta-convite (LOI) e geralmente tour guiado; entrada turística restrita. Confira na fonte oficial."
+  "nota": "Exige VISTO - NÃO há isenção. Turista precisa primeiro de uma Carta-Convite (LOI) emitida por agência de turismo licenciada no Turcomenistão e aprovada pelo Serviço de Migração (processo de ~15-20 dias úteis, contate a agência com 3 meses de antecedência). Com a LOI aprovada, o visto pode ser pego no consulado ou na chegada (visto on-arrival de até 10 dias, prorrogável por mais 10). Passaporte válido por 6 meses. Uma nova lei (abr/2025) prevê e-visa sem LOI, mas a plataforma NÃO tinha data de lançamento confirmada até 2026 — confira na fonte oficial (migration.gov.tm / embaixada) antes de viajar."
  },
  "AM": {
   "tipo": "isento",
   "dias": 180,
-  "nota": "Isenção de visto para turismo até 180 dias por ano; confira na fonte oficial antes da viagem"
+  "nota": "Brasileiros estão ISENTOS de visto para turismo: até 180 dias por ano. Apenas passaporte válido é exigido. Não há exigência de febre amarela. Entrada por via aérea ou terrestre permitida; recomenda-se passagem de retorno."
  },
  "AZ": {
   "tipo": "e-visa",
   "dias": 30,
-  "nota": "Visto eletrônico (ASAN Visa) obtido online antes da viagem; estadia de até 30 dias"
+  "nota": "Brasileiros PRECISAM de visto eletrônico (ASAN Visa) solicitado em evisa.gov.az antes da viagem. Custo aprox. US$ 26 (taxa padrão; há opção urgente mais cara). Permite estadia turística de até 30 dias, entrada única. Passaporte válido por pelo menos 3 meses além da estadia. Não exige febre amarela. Imprima o e-visa para apresentar na imigração."
  },
  "IL": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isenção de visto para turismo até 90 dias; situação de segurança regional pode mudar, confira na fonte oficial"
+  "nota": "Brasileiros estão ISENTOS de visto para turismo: até 90 dias. Atenção: desde 2025 Israel passou a exigir autorização eletrônica de viagem (ETA-IL) para isentos — solicite online antes de embarcar (taxa baixa, ~25 NIS). Passaporte válido por 6 meses. Carimbo em folha separada disponível (relevante para quem visitará países que vetam carimbo israelense). Não exige febre amarela."
  },
  "JO": {
   "tipo": "on-arrival",
   "dias": 30,
-  "nota": "Visto na chegada (visa on arrival) ou Jordan Pass que inclui o visto e entradas; estadia até 30 dias"
+  "nota": "Brasileiros obtêm visto na chegada (visa on-arrival) nos aeroportos por ~40 dinares jordanianos (≈US$ 56), ou e-visa antecipado. DICA: o Jordan Pass (comprado online antes da viagem) isenta a taxa de visto e dá entrada a Petra e outros sítios — vale a pena. Estadia turística de 30 dias. Passaporte válido por 6 meses. Não exige febre amarela. Entrada por Aqaba/ZEEA pode ter visto gratuito."
  },
  "LB": {
   "tipo": "on-arrival",
-  "dias": 30,
-  "nota": "Visto gratuito na chegada para turismo até 30 dias; situação de segurança volátil, confira na fonte oficial"
+  "dias": 90,
+  "nota": "Brasileiros recebem visto de turismo GRATUITO na chegada no aeroporto de Beirute, válido por até 90 dias (renovável). IMPORTANTE: é negada a entrada a quem tenha carimbo ou visto de Israel no passaporte. Passaporte válido por 6 meses. Não exige febre amarela. Recomenda-se ter passagem de saída e comprovante de hospedagem; situação de segurança pode afetar regras — confira na fonte oficial antes de viajar."
  },
  "AE": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isenção de visto para turismo até 90 dias em período de 180 dias; passaporte válido por no mínimo 6 meses"
+  "nota": "Brasileiros têm ISENÇÃO de visto: visto de turismo gratuito concedido na chegada, válido por até 90 dias dentro de 180 dias (graças ao acordo Brasil-Emirados). Passaporte válido por pelo menos 6 meses. Não exige febre amarela. Recomenda-se passagem de saída e reserva de hotel. Regras de conduta locais (álcool, comportamento público) são rígidas."
  },
  "QA": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isenção de visto para turismo (registro gratuito na chegada) por até 90 dias em 180 dias"
+  "nota": "Brasileiros têm ISENÇÃO (visa waiver): registro de isenção gratuito na chegada, permitindo até 90 dias dentro de 180 dias. Passaporte válido por 6 meses. Não exige febre amarela. Exige-se passagem de retorno/saída e, por vezes, comprovante de hospedagem. Pode-se registrar previamente no Hayya (sistema digital do Catar)."
  },
  "OM": {
-  "tipo": "e-visa",
-  "dias": 30,
-  "nota": "Visto eletrônico online (eVisa); há isenção para estadias curtas em alguns casos, confira na fonte oficial"
+  "tipo": "isento",
+  "dias": 14,
+  "nota": "Omã isenta de visto, por até 14 dias, turistas de várias nacionalidades — confira se o Brasil consta na lista atual de isenção. Para estadias maiores, há e-visa pelo portal evisa.rop.gov.om (~OMR 20 / US$ 52, até 30 dias). Passaporte válido por 6 meses. Não exige febre amarela. Por haver mudanças frequentes nessa política, confira na fonte oficial (Royal Oman Police) antes de viajar."
  },
  "SA": {
   "tipo": "e-visa",
   "dias": 90,
-  "nota": "Visto eletrônico de turismo (eVisa) online, válido 1 ano com estadias de até 90 dias; Meca/Medina restritas a muçulmanos"
+  "nota": "Brasileiros PRECISAM de visto. O e-Visa de turismo (visa.visitsaudi.com) custa ~SAR 300-535 (≈US$ 80-145, inclui seguro), é múltiplas entradas, válido 1 ano, com estadias de até 90 dias. Passaporte válido por 6 meses. Não exige febre amarela (salvo se vindo de país endêmico). Meca e Medina são restritas a muçulmanos; o e-visa turístico NÃO serve para Hajj/Umrah (visto próprio). Mulheres podem viajar sozinhas. Regras de conduta islâmicas rígidas."
  },
  "BH": {
   "tipo": "e-visa",
   "dias": 14,
-  "nota": "Visto eletrônico (eVisa) ou na chegada para turismo, em geral 14 dias prorrogáveis; confira na fonte oficial"
+  "nota": "Brasileiros PRECISAM de visto: e-visa pelo portal oficial (evisa.gov.bh) ou visto na chegada. O visto de visita de 2 semanas custa ~BHD 9 (≈US$ 25); há opções de 1 mês/3 meses mais caras. Passaporte válido por 6 meses. Exige-se passagem de saída e comprovante de hospedagem. Não exige febre amarela. Imprima o e-visa aprovado."
  },
  "KW": {
   "tipo": "e-visa",
   "dias": 90,
-  "nota": "Visto eletrônico (eVisa) online para turismo até 90 dias; confira disponibilidade na fonte oficial"
+  "nota": "Brasileiros PRECISAM de visto: e-visa pelo portal oficial (evisa.moi.gov.kw), com estadia turística de até 90 dias. Taxa aproximada de KWD 3 (≈US$ 10). Passaporte válido por 6 meses. Exige-se passagem de saída e comprovante de hospedagem. Não exige febre amarela. A emissão do e-visa pode oscilar conforme a política vigente — confira na fonte oficial."
  },
  "IR": {
-  "tipo": "on-arrival",
+  "tipo": "visto",
   "dias": 30,
-  "nota": "Visto na chegada ou eVisa para turismo até 30 dias; câmbio paralelo é muito mais favorável; confira a situação atual na fonte oficial"
+  "nota": "Brasileiros PRECISAM de visto. Solicita-se autorização (código de referência) no portal e-visa do MFA iraniano (e_visa.mfa.ir), normalmente via agência, e o visto é retirado em consulado ou na chegada (on-arrival, sujeito a restrições). Custo ~€75 + seguro de viagem obrigatório com cobertura no Irã. Passaporte válido por 6 meses. ATENÇÃO: carimbo/visto de Israel impede a entrada; desde 2024 o Irã emite o visto em folha avulsa para não carimbar o passaporte (evita problemas para entrar nos EUA depois). Mulheres devem usar véu (hijab). Cartões internacionais não funcionam no país; leve dinheiro em espécie. Confira sempre a fonte oficial e a orientação do Itamaraty antes de viajar."
  },
  "ES": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180. ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "Espanha é Schengen: brasileiro fica isento de visto para turismo por até 90 dias em cada 180 dias. Passaporte deve ter validade mínima de 3 meses após a saída prevista (ideal 6 meses). Podem ser exigidos comprovante de hospedagem, passagem de retorno e prova de recursos financeiros (a Espanha é rigorosa nesse ponto na imigração). ETIAS previsto para entrar em vigor a partir de 2026 (~€20, autorização eletrônica obrigatória, não é visto). Sem exigência de febre amarela. Confira a data de início do ETIAS na fonte oficial."
  },
  "FR": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180. ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "França pertence ao Schengen: turista brasileiro entra sem visto por até 90 dias em cada período de 180 dias. Passaporte com validade mínima de 3 meses além da saída (recomenda-se 6 meses). Podem pedir comprovante de hospedagem, passagem de retorno e meios de subsistência. ETIAS previsto a partir de 2026 (autorização eletrônica online, ~€20, válida ~3 anos — não é visto, mas obrigatória antes de embarcar). Sem exigência de febre amarela. Confirme o início do ETIAS na fonte oficial."
  },
  "IT": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180. ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "Itália é Schengen: brasileiro isento de visto de turismo por até 90 dias em cada 180 dias. Passaporte válido por no mínimo 3 meses após a data prevista de saída (ideal 6 meses). Podem ser solicitados comprovante de hospedagem, passagem de volta e prova de recursos. ETIAS previsto para 2026 (autorização eletrônica, ~€20, obrigatória antes da viagem, não substitui passaporte nem é visto). Sem exigência de febre amarela. Confira a data oficial de início do ETIAS."
  },
  "DE": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180. ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "Alemanha pertence ao Schengen: turista brasileiro fica isento de visto por até 90 dias a cada 180 dias. Passaporte com validade mínima de 3 meses após a saída prevista (recomenda-se 6 meses). Podem exigir comprovante de hospedagem, passagem de retorno e meios financeiros. ETIAS previsto a partir de 2026 (~€20, autorização eletrônica online obrigatória antes do embarque — não é visto). Sem exigência de febre amarela. Verifique a data de entrada em vigor do ETIAS na fonte oficial."
  },
  "NL": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180. ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "Países Baixos (Holanda) é Schengen: brasileiro isento de visto de turismo por até 90 dias em cada 180 dias. Passaporte válido por pelo menos 3 meses além da saída prevista (ideal 6 meses). Podem pedir comprovante de hospedagem, passagem de volta e recursos. ETIAS previsto para 2026 (autorização eletrônica, ~€20, obrigatória antes de viajar, não é visto). Sem exigência de febre amarela. Confira a data oficial do ETIAS."
  },
  "BE": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180. ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "Bélgica é Schengen: turista brasileiro fica isento de visto por até 90 dias em cada 180 dias. Passaporte com validade mínima de 3 meses após a saída (recomenda-se 6 meses). Podem ser exigidos comprovante de hospedagem, passagem de retorno e meios de subsistência. ETIAS previsto a partir de 2026 (~€20, autorização eletrônica obrigatória antes do embarque, não é visto). Sem exigência de febre amarela. Confirme o início do ETIAS na fonte oficial."
  },
  "CH": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180 (Suíça é Schengen, mas não é UE). ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "A Suíça não é da UE, mas é membro do Espaço Schengen: brasileiro isento de visto de turismo por até 90 dias em cada 180 dias (o tempo conta junto com os demais países Schengen). Passaporte válido por no mínimo 3 meses após a saída prevista (ideal 6 meses). Podem pedir comprovante de hospedagem, passagem de volta e prova de recursos (país caro — exigência de meios é levada a sério). ETIAS previsto para 2026 e aplicável também à Suíça (~€20, autorização eletrônica, não é visto). Sem exigência de febre amarela. Confira a data oficial do ETIAS."
  },
  "AT": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180. ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "Áustria é Schengen: turista brasileiro fica isento de visto por até 90 dias em cada 180 dias. Passaporte com validade mínima de 3 meses além da saída prevista (recomenda-se 6 meses). Podem exigir comprovante de hospedagem, passagem de retorno e meios financeiros. ETIAS previsto a partir de 2026 (~€20, autorização eletrônica online obrigatória antes do embarque, não é visto). Sem exigência de febre amarela. Verifique a data de início do ETIAS na fonte oficial."
  },
  "GB": {
   "tipo": "eta",
   "dias": 180,
-  "nota": "Fora do Schengen. Desde 2025 brasileiros precisam de ETA (autorização eletrônica de viagem) para turismo até 6 meses; confira na fonte oficial."
+  "nota": "O Reino Unido NÃO faz parte do Schengen (saiu da UE). Brasileiro é isento de visto para turismo por até 6 meses (180 dias), MAS passou a ser obrigatória a ETA (Electronic Travel Authorisation) a partir de 2025 para a maioria dos visitantes isentos de visto: solicita-se online ou pelo app oficial 'UK ETA', custa cerca de £16, válida por 2 anos (ou até o vencimento do passaporte) e permite múltiplas entradas. Passaporte deve estar válido para toda a estadia. O tempo no Reino Unido é INDEPENDENTE do contador de 90 dias do Schengen. Sem exigência de febre amarela. Confirme valor e regras atuais da ETA no gov.uk."
  },
  "IE": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Irlanda é UE mas NÃO faz parte do Schengen; brasileiros isentos por até 90 dias. Não exige ETIAS; confira na fonte oficial."
+  "nota": "A Irlanda é da UE, mas NÃO faz parte do Espaço Schengen: brasileiro é isento de visto para turismo por até 90 dias, com o prazo concedido pelo oficial de imigração na entrada. O tempo na Irlanda é INDEPENDENTE do contador Schengen. Passaporte válido para todo o período da estadia. Podem pedir comprovante de hospedagem, passagem de retorno e meios de subsistência. A Irlanda NÃO adota o ETIAS nem a ETA britânica (mantém seu próprio sistema). Sem exigência de febre amarela. Confira detalhes no site oficial de imigração irlandês (irishimmigration.ie)."
  },
  "LU": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180. ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "Luxemburgo é Schengen: turista brasileiro fica isento de visto por até 90 dias em cada 180 dias. Passaporte válido por pelo menos 3 meses após a saída prevista (ideal 6 meses). Podem ser solicitados comprovante de hospedagem, passagem de volta e meios financeiros. ETIAS previsto a partir de 2026 (~€20, autorização eletrônica obrigatória antes do embarque, não é visto). Sem exigência de febre amarela. Confirme a data de início do ETIAS na fonte oficial."
  },
  "MT": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: 90 dias dentro de 180. ETIAS previsto a partir de 2025; confira na fonte oficial."
+  "nota": "Malta é da UE e Schengen: brasileiro isento de visto de turismo por até 90 dias em cada 180 dias. Passaporte com validade mínima de 3 meses após a saída prevista (recomenda-se 6 meses). Podem pedir comprovante de hospedagem, passagem de retorno e recursos. ETIAS previsto para 2026 (~€20, autorização eletrônica obrigatória, não é visto). Sem exigência de febre amarela. Confira a data oficial do ETIAS."
  },
  "SE": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: isento até 90 dias dentro de qualquer período de 180 dias. ETIAS pode passar a ser exigido em 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen: brasileiro entra SEM visto para turismo por até 90 dias dentro de qualquer período de 180 dias. Passaporte deve ter validade mínima de 3 meses além da data prevista de saída e ter sido emitido há menos de 10 anos. Pode ser pedido comprovante de hospedagem, passagem de volta/saída e meios de subsistência. ATENÇÃO 2026: o ETIAS (autorização eletrônica, ~€20, válida 3 anos) deve passar a ser exigido a partir do último trimestre de 2026 — NÃO é visto, mas será obrigatório antes do embarque. Confira a data exata de início na fonte oficial (travel-europe.europa.eu/etias)."
  },
  "NO": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: isento até 90 dias dentro de qualquer período de 180 dias. ETIAS pode passar a ser exigido em 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (país associado, fora da UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte com validade de pelo menos 3 meses além da saída e emitido há menos de 10 anos. Noruega é cara — pode ser pedido comprovante de recursos. ATENÇÃO 2026: ETIAS (~€20, autorização eletrônica, não visto) previsto a partir do fim de 2026; confira a data oficial antes de viajar."
  },
  "DK": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: isento até 90 dias dentro de qualquer período de 180 dias. ETIAS pode passar a ser exigido em 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen: brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por no mínimo 3 meses após a saída e emitido há menos de 10 anos. As Ilhas Faroé e a Groenlândia (territórios dinamarqueses) NÃO fazem parte de Schengen — regras próprias. ATENÇÃO 2026: ETIAS (~€20) previsto a partir do fim de 2026; confira a fonte oficial."
  },
  "FI": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: isento até 90 dias dentro de qualquer período de 180 dias. ETIAS pode passar a ser exigido em 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen: brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por ao menos 3 meses além da saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20, autorização eletrônica, não é visto) previsto a partir do último trimestre de 2026; confira a data oficial antes de embarcar."
  },
  "IS": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: isento até 90 dias dentro de qualquer período de 180 dias. ETIAS pode passar a ser exigido em 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (país associado, fora da UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por no mínimo 3 meses após a saída e emitido há menos de 10 anos. Islândia é destino caro; pode ser pedido comprovante de recursos e de saída. ATENÇÃO 2026: ETIAS (~€20) previsto a partir do fim de 2026; confira a fonte oficial."
  },
  "EE": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: isento até 90 dias dentro de qualquer período de 180 dias. ETIAS pode passar a ser exigido em 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (Estônia, UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por ao menos 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20, autorização eletrônica, não é visto) previsto a partir do fim de 2026; confira a data oficial."
  },
  "LV": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: isento até 90 dias dentro de qualquer período de 180 dias. ETIAS pode passar a ser exigido em 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (Letônia, UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por no mínimo 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20) previsto a partir do fim de 2026; confira a fonte oficial."
  },
  "LT": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: isento até 90 dias dentro de qualquer período de 180 dias. ETIAS pode passar a ser exigido em 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (Lituânia, UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por ao menos 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20, autorização, não é visto) previsto a partir do fim de 2026; confira a data oficial."
  },
  "PL": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: até 90 dias em cada 180. ETIAS deve passar a ser exigido em 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (Polônia, UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por no mínimo 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20) previsto a partir do fim de 2026; confira a fonte oficial."
  },
  "CZ": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: até 90 dias em cada 180. ETIAS previsto para 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (República Tcheca, UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por ao menos 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20, autorização eletrônica, não é visto) previsto a partir do fim de 2026; confira a data oficial."
  },
  "SK": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: até 90 dias em cada 180. ETIAS previsto para 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (Eslováquia, UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por no mínimo 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20) previsto a partir do fim de 2026; confira a fonte oficial."
  },
  "HU": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: até 90 dias em cada 180. ETIAS previsto para 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (Hungria, UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por ao menos 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20, autorização, não é visto) previsto a partir do fim de 2026; confira a data oficial."
  },
  "RO": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Schengen desde 2024: até 90 dias em cada 180. ETIAS previsto para 2026 — confira na fonte oficial."
+  "nota": "Romênia é membro da UE e desde 1º de janeiro de 2025 integra PLENAMENTE o Espaço Schengen (fronteiras aéreas e marítimas desde março/2024; terrestres desde jan/2025). Brasileiro entra SEM visto para turismo por até 90 dias em 180 — agora computados junto com o restante de Schengen. Passaporte válido por ao menos 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20) previsto a partir do fim de 2026; confira a fonte oficial."
  },
  "BG": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Schengen e euro desde 2025/2026: até 90 dias em cada 180. ETIAS previsto para 2026 — confira na fonte oficial."
+  "nota": "Bulgária é membro da UE e desde 1º de janeiro de 2025 integra PLENAMENTE o Espaço Schengen (fronteiras aéreas/marítimas desde março/2024; terrestres desde jan/2025). Brasileiro entra SEM visto para turismo por até 90 dias em 180, agora somados ao restante de Schengen. Passaporte válido por ao menos 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20) previsto a partir do fim de 2026; confira a fonte oficial."
  },
  "HR": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Schengen e euro desde 2023: até 90 dias em cada 180. ETIAS previsto para 2026 — confira na fonte oficial."
+  "nota": "Croácia é membro da UE e integra o Espaço Schengen desde 1º de janeiro de 2023. Brasileiro entra SEM visto para turismo por até 90 dias em 180, computados com o restante de Schengen. Passaporte válido por ao menos 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20, autorização, não é visto) previsto a partir do fim de 2026; confira a data oficial."
  },
  "SI": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: até 90 dias em cada 180. ETIAS previsto para 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (Eslovênia, UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por no mínimo 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20) previsto a partir do fim de 2026; confira a fonte oficial."
  },
  "RS": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo: até 90 dias em cada 180 (fora do Schengen). Confira na fonte oficial."
+  "nota": "Sérvia NÃO faz parte da UE nem de Schengen, mas isenta brasileiros de visto para turismo por até 90 dias em um período de 180 dias (contagem independente de Schengen). Passaporte deve estar válido por toda a estadia (recomenda-se 6 meses). Pode ser pedido comprovante de hospedagem e de meios de subsistência. Sem exigência de vacina para viajantes vindos do Brasil em condições normais."
  },
  "BA": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo: até 90 dias em cada 180. Confira na fonte oficial."
+  "nota": "Bósnia e Herzegovina NÃO integra a UE nem Schengen, mas isenta brasileiros de visto para turismo por até 90 dias em 180 (contagem independente de Schengen). Passaporte com validade recomendada de 6 meses além da saída. Pode haver pedido de registro de hospedagem junto à polícia (geralmente feito pelo hotel). Confira detalhes na fonte oficial antes de viajar."
  },
  "ME": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo: até 90 dias em cada 180 (usa euro, mas fora do Schengen). Confira na fonte oficial."
+  "nota": "Montenegro NÃO faz parte da UE nem de Schengen (embora use o euro), mas isenta brasileiros de visto para turismo por até 90 dias em 180 (contagem independente de Schengen). Passaporte válido por toda a estadia (recomenda-se 6 meses). É obrigatório o registro de hospedagem em até 24h da chegada — normalmente feito pelo hotel/anfitrião. Confira na fonte oficial."
  },
  "MK": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo: até 90 dias em cada 180. Confira na fonte oficial."
+  "nota": "Macedônia do Norte NÃO integra a UE nem Schengen, mas isenta brasileiros de visto para turismo por até 90 dias em 180 (contagem independente de Schengen). Passaporte com validade recomendada de 6 meses. Pode ser pedido registro de hospedagem (em geral feito pelo hotel). Confira detalhes na fonte oficial antes de viajar."
  },
  "AL": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo: até 90 dias em cada 180. Confira na fonte oficial."
+  "nota": "Albânia NÃO faz parte da UE nem de Schengen, mas isenta brasileiros de visto para turismo por até 90 dias em 180 (contagem independente de Schengen). Passaporte válido por toda a estadia (recomenda-se 6 meses). Sem exigência de vacina para quem vem do Brasil em condições normais. Confira a fonte oficial antes de viajar."
  },
  "GR": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Espaço Schengen: até 90 dias em cada 180. ETIAS previsto para 2026 — confira na fonte oficial."
+  "nota": "Membro do Espaço Schengen (Grécia, UE): brasileiro entra SEM visto para turismo por até 90 dias em 180. Passaporte válido por ao menos 3 meses após a saída e emitido há menos de 10 anos. ATENÇÃO 2026: ETIAS (~€20, autorização eletrônica, não é visto) previsto a partir do fim de 2026; confira a data oficial antes de embarcar."
  },
  "UA": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo (até 90 em 180), mas há alerta de guerra: Itamaraty desaconselha a viagem. Confira na fonte oficial."
+  "nota": "Ucrânia isenta brasileiros de visto para turismo por até 90 dias em 180 (NÃO é Schengen; contagem independente). Passaporte válido por toda a estadia. ALERTA IMPORTANTE 2026: o país está em guerra; vigora lei marcial, há toque de recolher, fechamento de espaço aéreo e risco à segurança. O Itamaraty desaconselha viagens não essenciais à Ucrânia. Verifique a situação atual e os alertas de viagem na fonte oficial antes de qualquer deslocamento."
  },
  "US": {
   "tipo": "visto",
   "dias": 180,
-  "nota": "Exige visto de turismo B1/B2 com entrevista no consulado; ESTA NÃO vale para brasileiros. Confira na fonte oficial."
+  "nota": "Brasileiro NÃO usa ESTA. É preciso visto de turismo B1/B2, solicitado no consulado dos EUA (formulário DS-160 online + taxa de US$185 + entrevista presencial). O visto costuma ser válido por 10 anos, mas a estadia em cada entrada é definida pelo oficial na chegada (geralmente até 180 dias). Passaporte válido. Confira agendamento e prazos em ustraveldocs.com/br."
  },
  "CA": {
-  "tipo": "eta",
+  "tipo": "visto",
   "dias": 180,
-  "nota": "Brasileiros precisam de eTA (autorização eletrônica) para voar ao Canadá; estadia turística até 6 meses. Confira na fonte oficial."
+  "nota": "Regra padrão para brasileiro é VISTO de visitante (TRV). PORÉM, quem tem visto americano válido (não imigrante) ou já teve visto canadense nos últimos 10 anos pode entrar só com eTA (autorização eletrônica, CAD$7, via Canada.ca). Sem isso, precisa do visto completo. Estadia turística normalmente até 6 meses. Passaporte válido por todo o período."
  },
  "BZ": {
   "tipo": "isento",
-  "dias": 30,
-  "nota": "Isento para turismo até 30 dias, prorrogável. Confira na fonte oficial."
+  "dias": 90,
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias (geralmente carimbado 30 dias na entrada, prorrogável). Passaporte válido por no mínimo 6 meses, comprovante de passagem de saída e de hospedagem/recursos podem ser exigidos. Há taxa de saída do país no aeroporto."
  },
  "SV": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo até 90 dias (CA-4). Taxa de turismo na entrada pode ser cobrada."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias (acordo CA-4, somado com Guatemala, Honduras e Nicarágua). Há uma TAXA DE TURISMO/cartão de entrada paga na chegada (cerca de US$12). Passaporte válido por no mínimo 6 meses."
  },
  "HN": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo até 90 dias (CA-4). Confira na fonte oficial."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias (acordo CA-4, tempo somado com Guatemala, El Salvador e Nicarágua). Passaporte válido por no mínimo 6 meses. Pode haver pequena taxa de entrada/saída no aeroporto."
  },
  "NI": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo até 90 dias (CA-4). Taxa de cartão de turismo na entrada."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias (acordo CA-4, somado com Guatemala, El Salvador e Honduras). Cobra-se um cartão de turismo na chegada (cerca de US$10). Passaporte válido por no mínimo 6 meses; comprovante de saída e recursos podem ser pedidos."
  },
  "CR": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo até 90 dias. Pode pedir comprovante de saída e fundos."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias. Exige passaporte com validade mínima de 1 dia para a estadia (recomenda-se 6 meses), comprovante de passagem de saída e prova de recursos financeiros. Há taxa de saída do país (geralmente já inclusa na passagem aérea)."
  },
  "PA": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo até 90 dias. Pode exigir prova de fundos e passagem de saída."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias. Passaporte válido por no mínimo 3 a 6 meses, comprovante de passagem de saída e de recursos financeiros (cerca de US$500) podem ser exigidos na imigração."
  },
  "CU": {
-  "tipo": "visto",
+  "tipo": "e-visa",
   "dias": 90,
-  "nota": "Exige cartão de turista (tarjeta del turista). Seguro-saúde obrigatório. Confira na fonte oficial."
+  "nota": "ATENÇÃO: mudou. Desde jul/2025 o brasileiro precisa de e-Visa (substituiu o antigo cartão de turista), válido para até 90 dias, prorrogável uma vez (total 180). Solicite em evisacuba.cu. Também é obrigatório preencher o formulário D'Viajeros (dviajeros.mitrans.gob.cu) até 7 dias antes da chegada e levar o QR code. Exige seguro-viagem com cobertura médica e passaporte válido por 6 meses."
  },
  "DO": {
   "tipo": "isento",
-  "dias": 30,
-  "nota": "Isento para turismo até 30 dias. Cartão de embarque/desembarque eletrônico (e-Ticket)."
+  "dias": 90,
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias. NÃO se cobra mais o cartão de turista à parte (foi incluído na passagem aérea desde 2018). É obrigatório preencher o formulário eletrônico de entrada/saída (e-Ticket) em eticket.migracion.gob.do antes de embarcar. Passaporte válido."
  },
  "JM": {
   "tipo": "isento",
-  "dias": 90,
-  "nota": "Isento para turismo até 90 dias. Confira na fonte oficial."
+  "dias": 180,
+  "nota": "Brasileiro é ISENTO de visto para turismo (entrada permitida geralmente por até 90 dias, podendo chegar a 6 meses a critério da imigração). É obrigatório preencher o formulário de embarque/desembarque online (Jamaica Immigration/Customs - enterjamaica.com) antes de chegar. Passaporte válido, comprovante de hospedagem e passagem de saída."
  },
  "PR": {
   "tipo": "visto",
-  "dias": 90,
-  "nota": "Território dos EUA: exige visto americano (B1/B2). ESTA não vale para brasileiros."
+  "dias": 180,
+  "nota": "Porto Rico é território dos EUA: aplica-se a MESMA regra americana. Brasileiro precisa de VISTO de turismo B1/B2 dos Estados Unidos (NÃO usa ESTA). Solicite no consulado dos EUA (DS-160 + taxa US$185 + entrevista). Estadia conforme definido na chegada (até 180 dias). Confira em ustraveldocs.com/br."
  },
  "HT": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo até 90 dias, mas há alerta de segurança grave. Confira na fonte oficial."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias. Cobra-se uma taxa de turismo na chegada (cerca de US$10). Passaporte válido por no mínimo 6 meses. ATENÇÃO À SEGURANÇA: o Haiti enfrenta grave instabilidade — consulte os alertas de viagem do Itamaraty/MRE antes de ir. Confira na fonte oficial."
  },
  "TT": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo até 90 dias. Confira na fonte oficial."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias. Passaporte válido por no mínimo 6 meses, comprovante de passagem de saída, de hospedagem e de recursos financeiros podem ser exigidos na imigração."
  },
  "BS": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo até 90 dias. Confira na fonte oficial."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 90 dias (geralmente carimbado até 3 meses). É obrigatório preencher o Bahamas Travel Health Visa / formulário de imigração online conforme exigência vigente. Passaporte válido, comprovante de passagem de saída e de hospedagem. Há taxa de embarque na saída."
  },
  "BB": {
   "tipo": "isento",
-  "dias": 90,
-  "nota": "Isento para turismo até 90 dias. Confira na fonte oficial."
+  "dias": 180,
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 6 meses (180 dias). Recomenda-se preencher o formulário de imigração online (BIM / Barbados Travel Form) antes da chegada. Passaporte válido, comprovante de passagem de saída e de hospedagem podem ser solicitados."
  },
  "BR": {
   "tipo": "isento",
   "dias": 0,
-  "nota": "País de origem do passaporte brasileiro — não se aplica visto."
+  "nota": "É o próprio país de origem do passaporte: brasileiro não precisa de visto para entrar/permanecer no Brasil. Para circular internamente basta o RG ou outro documento oficial com foto; o passaporte só é necessário em viagens internacionais. Vacina de febre amarela recomendada para muitas regiões (Amazônia, Centro-Oeste, áreas de mata) ao viajar internamente."
  },
  "EC": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo, até 90 dias por ano. Moeda local é o dólar americano. Vacina de febre amarela recomendada para Amazônia; confira na fonte oficial."
+  "nota": "Brasileiro entra sem visto para turismo (Estado associado ao Mercosul). Permitido até 90 dias por ano (prorrogável até 180). Exige passaporte válido. Pode ser solicitado comprovante de meios econômicos e passagem de saída. Para Galápagos há taxa de entrada ao parque e cartão de trânsito (INGALA). Vacina de febre amarela recomendada para a Amazônia."
  },
  "UY": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Entrada com RG ou passaporte para turismo (Mercosul), até 90 dias."
+  "nota": "Brasileiro entra sem visto para turismo (membro pleno do Mercosul). Permitido até 90 dias, prorrogável por mais 90 na Migración. Aceita a cédula de identidade (RG) ou passaporte. Não exige febre amarela. Brasileiro pode, inclusive, fazer compras com benefícios fiscais (free shop de fronteira)."
  },
  "PY": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Entrada com RG ou passaporte para turismo (Mercosul), até 90 dias."
+  "nota": "Brasileiro entra sem visto para turismo (membro pleno do Mercosul). Permitido até 90 dias, prorrogável. Aceita a cédula de identidade (RG) ou passaporte. Não exige febre amarela como regra, mas a vacina (CIVP) é recomendada e pode ser pedida; tenha o certificado ao circular pela região e ao retornar ao Brasil."
  },
  "VE": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo, até 90 dias. Situação local instável — confira recomendações de viagem e a fonte oficial. Vacina de febre amarela recomendada."
+  "nota": "Brasileiro está isento de visto para turismo (Venezuela é Estado associado ao Mercosul; tem adesão suspensa, mas a isenção de turismo segue valendo). Permitido até 90 dias, prorrogável. Exige passaporte válido. Vacina de febre amarela (CIVP) recomendada/exigida para áreas de risco (Canaima, sul e Amazônia). ATENÇÃO: situação do país é instável — confira condições e segurança na fonte oficial (Itamaraty) antes de viajar."
  },
  "GY": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo, até 90 dias. Vacina de febre amarela (CIVP) exigida na entrada; confira na fonte oficial."
+  "nota": "Brasileiro entra sem visto para turismo (Guiana é Estado associado ao Mercosul). Permanência turística usualmente concedida por até 90 dias na entrada. Exige passaporte válido. ATENÇÃO: vacina de febre amarela (CIVP) é OBRIGATÓRIA — o país é área de risco e exige o certificado, inclusive para quem chega do Brasil. Tenha o comprovante impresso."
  },
  "SR": {
   "tipo": "e-visa",
   "dias": 90,
-  "nota": "Exige Tourist Card / e-Visa para turismo (obtido online antes da viagem). Vacina de febre amarela (CIVP) exigida; confira na fonte oficial."
+  "nota": "Para turismo, o brasileiro deve obter a 'Tourist Card' / e-Visa do Suriname online (site oficial e-visa.sr) ANTES de viajar; custo aproximado de US$ 25 a US$ 60 conforme a modalidade (válida geralmente para estadia de até 90 dias). Exige passaporte com validade mínima de 6 meses. ATENÇÃO: vacina de febre amarela (CIVP) é OBRIGATÓRIA — país de área de risco, certificado exigido na entrada. Confira valores e regras atualizadas na fonte oficial."
  },
  "EG": {
   "tipo": "e-visa",
   "dias": 30,
-  "nota": "Brasileiros precisam de visto: e-visa online ou visto na chegada (~US$25), estadia de até 30 dias. CIVP de febre amarela exigido para quem chega do Brasil."
+  "nota": "Brasileiro precisa de visto. Mais pratico: e-Visa online (visa2egypt.gov.eg), ~US$25 entrada unica, aprovacao em 2-3 dias uteis; tambem existe visto na chegada (on-arrival) nos aeroportos. Passaporte valido por 6 meses e 1 pagina em branco. Febre amarela (CIVP) exigida apenas se vier de/transitar por area de risco. Confira na fonte oficial."
  },
  "TN": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros isentos de visto para turismo por até 90 dias. Passaporte válido por pelo menos 6 meses."
+  "nota": "Brasileiro NAO precisa de visto para turismo: isento por ate 3 meses (90 dias) por visita. Exige passaporte valido por 6 meses; podem pedir comprovante de hospedagem e passagem de saida. Febre amarela NAO e exigida (so se vier de area de risco). Confira na fonte oficial antes de viajar."
  },
  "DZ": {
   "tipo": "visto",
   "dias": 90,
-  "nota": "Brasileiros precisam de visto consular obtido com antecedência na embaixada/consulado da Argélia. Confira na fonte oficial."
+  "nota": "Brasileiro PRECISA de visto consular, obtido com antecedencia na Embaixada/Consulado da Argelia (nao ha e-visa de turismo geral). Exige passaporte valido por 6 meses, comprovante de hospedagem, passagem de saida e fundos. Para o sul do pais ha possibilidade de visto na chegada via agencia autorizada (tour organizado). Confira na fonte oficial."
  },
  "KE": {
   "tipo": "eta",
   "dias": 90,
-  "nota": "Brasileiros precisam de eTA (autorização eletrônica de viagem) online, ~US$30. CIVP de febre amarela exigido para quem chega do Brasil (país endêmico)."
+  "nota": "Brasileiro precisa de eTA (autorizacao eletronica), nao visto. Solicite SO no portal oficial etakenya.go.ke, custo US$30, aprovacao em 3-5 dias uteis (peca com 1 semana de antecedencia). Quenia aboliu o visto e exige eTA de todos. Febre amarela (CIVP) na pratica exigida para quem chega do Brasil (pais de risco) - leve o certificado. Passaporte valido por 6 meses."
  },
  "TZ": {
   "tipo": "e-visa",
   "dias": 90,
-  "nota": "Brasileiros precisam de e-visa (online, ~US$50) ou visto na chegada. CIVP de febre amarela exigido para quem chega do Brasil (país endêmico)."
+  "nota": "Brasileiro precisa de visto. Mais pratico: e-Visa no portal oficial visa.immigration.go.tz, US$50 entrada unica (validade ate 90 dias), aprovacao em 24-72h; tambem ha visto na chegada (on-arrival) US$50. Passaporte valido por 6 meses. Febre amarela (CIVP) exigida para quem vem do Brasil/area de risco - leve o certificado. Confira na fonte oficial."
  },
  "UG": {
   "tipo": "e-visa",
   "dias": 90,
-  "nota": "Brasileiros precisam de e-visa (online, ~US$50). CIVP de febre amarela OBRIGATÓRIO para todos os visitantes (inclusive vindos do Brasil)."
+  "nota": "Brasileiro precisa de visto. Solicite o e-Visa no portal oficial (visas.immigration.go.ug), US$50 entrada unica (ate 3 meses), aprovacao em 3-7 dias uteis. Febre amarela (CIVP) OBRIGATORIA para todos - e preciso anexar o certificado no pedido e apresentar na chegada (tome a vacina com 10+ dias de antecedencia). Passaporte valido por 6 meses. Existe ainda o East Africa Tourist Visa (Quenia+Uganda+Ruanda)."
  },
  "RW": {
-  "tipo": "on-arrival",
+  "tipo": "e-visa",
   "dias": 30,
-  "nota": "Ruanda concede visto na chegada a todas as nacionalidades (~US$50); também há e-visa. CIVP de febre amarela exigido para quem chega do Brasil (país endêmico)."
+  "nota": "Brasileiro precisa de visto, mas o processo e simples: e-Visa no portal oficial irembo.gov.rw OU visto na chegada (Ruanda concede on-arrival a todas as nacionalidades). Visto turistico V1: US$50 (entrada unica, 30 dias) ou US$70 (multipla, 90 dias). Passaporte valido por 6 meses. Febre amarela exigida se vier de area de risco (leve o certificado). Existe tambem o East Africa Tourist Visa."
  },
  "ET": {
   "tipo": "e-visa",
   "dias": 30,
-  "nota": "Brasileiros precisam de e-visa (online, ~US$82) ou visto na chegada em Adis Abeba. CIVP de febre amarela exigido para quem chega do Brasil (país endêmico)."
+  "nota": "Brasileiro precisa de visto. Solicite o e-Visa no portal oficial evisa.gov.et, ~US$62 turismo (validade 30 dias), aprovacao em ~3 dias; tambem ha visto na chegada em Adis Abeba. Passaporte valido por 6 meses. Febre amarela (CIVP) exigida para quem chega do Brasil/area de risco - leve o certificado. Confira na fonte oficial."
  },
  "NA": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isenção de visto p/ turismo até 90d/ano. Recomenda-se CIVP de febre amarela; confira na fonte oficial."
+  "nota": "Brasileiros são isentos de visto para turismo por até 90 dias em período de 12 meses (acordo de isenção). Passaporte válido por no mínimo 6 meses e com 2 páginas em branco. Recomenda-se levar comprovante de hospedagem, passagem de saída e fundos. Febre amarela exigida apenas se vier de/transitar por país endêmico; confira na fonte oficial (Ministry of Home Affairs)."
  },
  "BW": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isenção de visto p/ turismo até 90d. Pode exigir CIVP de febre amarela vindo do Brasil; confira na fonte oficial."
+  "nota": "Brasileiros entram sem visto para turismo por até 90 dias em 12 meses (isenção bilateral confirmada). Passaporte válido por pelo menos 6 meses. Para ficar além de 90 dias é preciso solicitar visto na Alta Comissão. Febre amarela exigida apenas se chegar de país endêmico; confira na fonte oficial (gov.bw)."
  },
  "ZW": {
   "tipo": "on-arrival",
-  "dias": 90,
-  "nota": "Visto on-arrival ou e-visa (~US$30 entrada única). CIVP de febre amarela exigida vindo do Brasil. Considere o KAZA Univisa (ZW+ZM)."
+  "dias": 30,
+  "nota": "Brasil é Categoria B: visto na chegada (Visa on Arrival) nos pontos de entrada OU eVisa pelo site oficial (evisa.gov.zw), em geral 1 mês, entrada única. Custo aproximado US$30 (entrada única). Alternativa: KAZA UNIVISA (~US$50, 30 dias) permite circular entre Zimbábue e Zâmbia. Leve passagem de saída, hospedagem e taxa em dólar em espécie. ATENÇÃO febre amarela: CIVP obrigatório para quem chega do Brasil (país endêmico) — leve o certificado. Confira na fonte oficial."
  },
  "MZ": {
-  "tipo": "isento",
+  "tipo": "e-visa",
   "dias": 30,
-  "nota": "Isenção de visto p/ turismo até 30d (desde 2023). CIVP de febre amarela exigida vindo do Brasil; confira na fonte oficial."
+  "nota": "Brasileiros precisam de eVisa (evisa.gov.mz) OU visto na chegada, em geral até 30 dias, turismo. Desde 2026 há sistema de pré-autorização (ETA) recomendada antes de embarcar — sem ela pode haver recusa de embarque. Passaporte válido por 6 meses, passagem de saída e hospedagem. Febre amarela exigida se vier de país de risco (Brasil é endêmico) — leve o CIVP. Confira na fonte oficial."
  },
  "ZM": {
-  "tipo": "isento",
+  "tipo": "e-visa",
   "dias": 90,
-  "nota": "Isenção de visto p/ turismo (até 90d). CIVP de febre amarela exigida vindo do Brasil. KAZA Univisa (ZM+ZW) cobre as Cataratas Vitória."
+  "nota": "Brasileiros: eVisa (zambiaimmigration.gov.zm) OU visto na chegada; turismo permite até 90 dias em período de 1 ano. Alternativa KAZA UNIVISA (~US$50, 30 dias) para Zâmbia + Zimbábue. Passaporte válido por 6 meses. ATENÇÃO febre amarela: CIVP obrigatório para quem chega do Brasil (país endêmico) — leve o certificado. Confira na fonte oficial (há relatos divergentes; o portal de imigração é a referência)."
  },
  "MW": {
-  "tipo": "isento",
+  "tipo": "e-visa",
   "dias": 90,
-  "nota": "Isenção de visto p/ turismo até 90d. CIVP de febre amarela exigida vindo do Brasil; confira na fonte oficial."
+  "nota": "Desde 02/01/2026 a maioria das nacionalidades, incluindo brasileiros, precisa de visto. Opções: eVisa (evisa.gov.mw) — recomendado antecipar — OU visto na chegada (eVisa on Arrival), disponível só em alguns postos; até 90 dias. Passaporte válido por 6 meses. Febre amarela exigida se vier de país endêmico (Brasil) — leve o CIVP. Confira o posto de entrada e a fonte oficial antes."
  },
  "SN": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isenção de visto p/ turismo até 90d. CIVP de febre amarela exigida; confira na fonte oficial."
+  "nota": "Brasileiros são isentos de visto para turismo por até 90 dias. Passaporte válido por pelo menos 6 meses além da estadia e comprovante de passagem de saída. Febre amarela é fortemente recomendada e pode ser exigida na chegada (região de risco) — leve o CIVP. Confira na fonte oficial."
  },
  "GH": {
   "tipo": "e-visa",
   "dias": 90,
-  "nota": "Visto exigido (e-visa ou consular). CIVP de febre amarela obrigatória na entrada. Confira na fonte oficial."
+  "nota": "Brasileiros precisam de visto. Ghana tem eVisa (evisa.immigration.gov.gh), mas em muitos casos é preciso visto consular na embaixada/consulado — confira qual está disponível. Visto de entrada única costuma valer 90 dias a partir da emissão. ATENÇÃO febre amarela: CIVP obrigatório para TODOS os viajantes (apresentar na imigração). Passaporte válido por 6 meses e passagem de saída. Confira na fonte oficial."
  },
  "NG": {
-  "tipo": "visto",
-  "dias": 90,
-  "nota": "Visto exigido (e-visa/consular). CIVP de febre amarela obrigatória na entrada. Confira na fonte oficial."
+  "tipo": "e-visa",
+  "dias": 30,
+  "nota": "Brasileiros precisam de visto. Nigéria tem eVisa (evisa.immigration.gov.ng) e visto consular; o visto de turismo permite entrada única, em geral até 30 dias (aprovação pode levar ~15 dias úteis). Passaporte válido por 6 meses, 2 páginas em branco, passagem de volta, comprovante de fundos e hospedagem/anfitrião. Febre amarela exigida (leve o CIVP). Confira na fonte oficial."
  },
  "CI": {
   "tipo": "e-visa",
   "dias": 90,
-  "nota": "e-visa exigido (snedai.gouv.ci), retirado na chegada em Abidjã. CIVP de febre amarela obrigatória. Confira na fonte oficial."
+  "nota": "Brasileiros precisam de visto. Use o eVisa oficial (snedai.gouv.ci): aprovação em ~48h, taxa em torno de €73, válido por até 90 dias; o visto é RETIRADO/finalizado APENAS no Aeroporto de Port-Bouët (Abidjan), então deve-se entrar por lá. ATENÇÃO febre amarela: CIVP obrigatório para todos a partir de 9 meses, qualquer origem. Passaporte válido por 6 meses. Confira na fonte oficial."
  },
  "CV": {
   "tipo": "isento",
   "dias": 30,
-  "nota": "Isento de visto p/ turismo até 30d, mas exige TASE (pré-registro/taxa aeroportuária) online antes de embarcar. Não exige febre amarela. Confira na fonte oficial."
+  "nota": "Brasileiros são isentos de VISTO, mas desde 01/01/2026 é OBRIGATÓRIO o pré-registro online na plataforma EASE (ease.gov.cv) ANTES de embarcar e o pagamento da Taxa de Segurança Aeroportuária (TSA), cerca de 3.400 CVE (~€31), para estadias de até 30 dias. Sem o registro/pagamento pode haver recusa de embarque. Passaporte válido por 6 meses. Confira na fonte oficial (EASE)."
  },
  "MU": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isenção de visto p/ turismo até 90d (autorização de entrada na chegada). Comprovante de hospedagem e passagem de volta. Confira na fonte oficial."
+  "nota": "Brasileiros entram sem visto para turismo por até 90 dias. Passaporte válido por pelo menos 6 meses, passagem de volta/onward, hospedagem confirmada e comprovante de fundos na chegada. Febre amarela exigida apenas se chegar de país endêmico; confira na fonte oficial (Passport and Immigration Office)."
  },
  "SC": {
   "tipo": "eta",
   "dias": 90,
-  "nota": "Sem visto, mas exige Seychelles Travel Authorisation (ETA) online antes de embarcar + Visitor's Permit na chegada (até 90d, renovável). Confira na fonte oficial."
+  "nota": "Não há visto, mas desde 2024/2025 TODOS os visitantes precisam de Autorização Eletrônica de Viagem (Travel Authorisation/ETA) no sistema oficial seychelles.govtas.com ANTES de embarcar; depois recebe-se o Visitor's Permit gratuito na chegada, até 90 dias. Taxa da ETA a partir de ~€10 (processamento padrão). Leve passagem de volta, hospedagem e fundos. Confira na fonte oficial."
  },
  "MG": {
-  "tipo": "on-arrival",
-  "dias": 90,
-  "nota": "Visto on-arrival ou e-visa (até 90d, ~US$10–45 por faixa). CIVP de febre amarela exigida vindo do Brasil. Confira na fonte oficial."
- },
- "AU": {
   "tipo": "e-visa",
   "dias": 90,
-  "nota": "Brasileiros precisam de eVisitor (subclasse 651) ou ETA, solicitado online antes da viagem; turismo até 90 dias. Confira na fonte oficial (Home Affairs)."
+  "nota": "Brasileiros precisam de visto: eVisa (evisamada-mg.com) OU visto na chegada nos aeroportos internacionais. Taxas 2026 (após 16/02): até 15 dias €30/US$35; 16–30 dias €35; 31–60 dias €40; 90 dias €50. Passaporte válido por 6 meses. ATENÇÃO febre amarela: CIVP obrigatório para quem chega do Brasil (país listado), inclusive em trânsito acima de 12h — leve o certificado. Confira na fonte oficial."
+ },
+ "AU": {
+  "tipo": "eVisa",
+  "dias": 90,
+  "nota": "Brasileiro precisa de autorizacao eletronica eVisitor (subclasse 651), GRATUITA, solicitada online no site da Home Affairs (immi.gov.au) antes do embarque. Permite multiplas entradas com estadia de ate 3 meses por entrada dentro de 12 meses. Passaporte valido por toda a estadia; exige-se passagem de saida e fundos. NAO existe ESTA na Australia (isso e dos EUA)."
  },
  "NZ": {
   "tipo": "eta",
   "dias": 90,
-  "nota": "Brasileiros são isentos de visto, mas precisam da NZeTA (autorização eletrônica) antes de embarcar; turismo até 3 meses. Confira na fonte oficial (Immigration NZ)."
+  "nota": "Brasileiro NAO precisa de visto, mas E OBRIGATORIO solicitar a NZeTA (autorizacao eletronica) online/app antes de viajar, custo ~NZ$17 (app) ou NZ$23 (site) + IVL (taxa turistica ambiental ~NZ$100). Validade ate 2 anos, estadia de ate 90 dias. Exige passaporte valido por 3 meses alem da saida, passagem de retorno e fundos."
  },
  "FJ": {
-  "tipo": "on-arrival",
+  "tipo": "isento",
   "dias": 120,
-  "nota": "Brasileiros recebem permissão de turismo na chegada (visitor permit) por até 120 dias; passagem de saída e passaporte válido exigidos. Confira na fonte oficial."
+  "nota": "Brasileiro entra SEM visto para turismo, recebendo permissao de ate 4 meses (120 dias) no carimbo de entrada, prorrogavel por mais 2 meses (maximo 6 meses). Exige passaporte valido por 6 meses, passagem de saida/retorno e comprovacao de fundos/hospedagem."
  },
  "PF": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Território francês de ultramar; brasileiros isentos para turismo até 90 dias (regra tipo Schengen, mas a Polinésia não integra Schengen — controle próprio). Confira na fonte oficial."
+  "nota": "Polinesia Francesa e territorio ultramarino frances, NAO faz parte de Schengen nem da UE. Brasileiro e ISENTO de visto para turismo por ate 90 dias. ATENCAO: visto Schengen NAO vale aqui. Nao se aplica ETIAS. Exige passaporte valido por 6 meses alem da saida e passagem de retorno."
  },
  "VU": {
   "tipo": "isento",
-  "dias": 30,
-  "nota": "Brasileiros isentos de visto para turismo por até 30 dias; passaporte válido e passagem de saída exigidos. Confira na fonte oficial."
+  "dias": 120,
+  "nota": "Brasileiro e ISENTO de visto para turismo em Vanuatu, com estadia de ate 120 dias (turismo, visita familiar ou conferencia). Exige passaporte valido por 6 meses, passagem de saida/retorno e comprovacao de fundos/hospedagem."
  },
  "WS": {
-  "tipo": "on-arrival",
+  "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros recebem permissão de entrada de turismo na chegada por até 90 dias; passagem de saída e passaporte válido exigidos. Confira na fonte oficial."
+  "nota": "Brasileiro e ISENTO de visto: recebe Entry Permit (permissao de visitante) de ate 90 dias gratuitamente na chegada. Exige passaporte valido por 6 meses, passagem de retorno/onward, comprovante de hospedagem e fundos; sem historico de deportacao."
  },
  "TO": {
   "tipo": "on-arrival",
   "dias": 31,
-  "nota": "Brasileiros recebem visto de turismo na chegada por até 31 dias; passagem de saída e passaporte válido exigidos. Confira na fonte oficial."
+  "nota": "Brasileiro recebe visto na chegada (visa on arrival) GRATUITO, valido por 31 dias, prorrogavel ate 6 meses junto a Imigracao. Exige passaporte valido por 6 meses, passagem de saida/retorno e comprovacao de fundos. Confirme detalhes na fonte oficial antes de viajar."
  },
  "PG": {
   "tipo": "e-visa",
   "dias": 60,
-  "nota": "Brasileiros precisam de visto eletrônico (e-visa) ou visto na chegada para turismo, geralmente até 60 dias; vacina de febre amarela exigida se vindo de área de risco. Confira na fonte oficial."
+  "nota": "Brasileiro PRECISA de visto. O mais pratico e a eVisa (Visitor Visa) solicitada online no portal da ICA (evisa.ica.gov.pg), taxa ~US$50, entrada unica com estadia de ate 60 dias. Exige passaporte valido por 6 meses, passagem de saida e fundos. Verifique exigencias sanitarias na fonte oficial."
  },
  "NC": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Território francês de ultramar; brasileiros isentos para turismo até 90 dias (controle migratório próprio, não integra Schengen). Confira na fonte oficial."
+  "nota": "Nova Caledonia e territorio ultramarino frances, NAO faz parte de Schengen. Brasileiro e ISENTO de visto para turismo por ate 90 dias (3 meses em 6). ATENCAO: visto Schengen NAO vale aqui e ETIAS nao se aplica. Exige passaporte valido por 6 meses alem da saida e passagem de retorno."
  },
  "CK": {
   "tipo": "isento",
   "dias": 31,
-  "nota": "Brasileiros isentos de visto para turismo por até 31 dias; comprovante de hospedagem e passagem de saída exigidos na entrada. Confira na fonte oficial."
+  "nota": "Brasileiro e ISENTO de visto: recebe automaticamente permissao de visitante de ate 31 dias na chegada, prorrogavel em Avarua ate maximo de 6 meses. Exige passaporte valido por 6 meses alem da estadia, passagem de saida/retorno confirmada e comprovante de hospedagem."
  },
  "CY": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros entram sem visto para turismo por até 90 dias dentro de um período de 180 dias. Chipre é membro da UE mas ainda não integra plenamente Schengen; confira na fonte oficial antes de viajar."
+  "nota": "Chipre é membro da UE, mas AINDA NÃO integra plenamente o Espaço Schengen (está em processo de adesão). Brasileiro é isento de visto para turismo por até 90 dias em cada 180 dias. Atenção: por enquanto, a estadia em Chipre pode contar separadamente do contador Schengen, mas o limite de 90/180 se aplica do mesmo modo. Passaporte válido por pelo menos 3 meses após a saída. Quando Chipre entrar plenamente no Schengen, passará a valer o contador único e o ETIAS. Evite cruzar para a parte norte (autoproclamada 'República Turca de Chipre do Norte') por pontos não oficiais. Sem exigência de febre amarela. Confirme o status atual na fonte oficial."
  },
  "MD": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros estão isentos de visto para turismo por até 90 dias em 180 dias. Passaporte com validade mínima recomendada; confira na fonte oficial antes de viajar."
+  "nota": "A Moldávia NÃO é da UE nem do Schengen, mas tem acordo de isenção: brasileiro entra sem visto para turismo por até 90 dias em cada período de 180 dias. Passaporte válido por toda a estadia (recomenda-se 6 meses). Podem pedir comprovante de hospedagem e meios de subsistência. Atenção à região da Transnístria (Tiraspol): território de controle separatista, com regras próprias de registro na fronteira interna e situação de segurança instável — informe-se antes. Sem exigência de febre amarela. Confira na fonte oficial / consulado da Moldávia."
  },
  "BY": {
   "tipo": "isento",
-  "dias": 90,
-  "nota": "Brasileiros têm isenção de visto por até 90 dias por ano (até 30 dias por estada) para turismo. Regras de entrada e situação geopolítica mudam com frequência; confira na fonte oficial antes de viajar."
+  "dias": 30,
+  "nota": "ATENÇÃO: Belarus tem regras específicas e instáveis. Existe acordo de isenção de visto entre Brasil e Belarus para turismo (até cerca de 30 dias), mas há também o regime de entrada SEM visto por até 30 dias EXCLUSIVAMENTE pelo Aeroporto Nacional de Minsk (não vale para entradas terrestres e há restrições de origem/destino do voo). Exige-se seguro-saúde válido na entrada e passaporte válido. Importante: entrar/sair de Belarus pela fronteira terrestre com a UE pode ter restrições, e o contexto geopolítico atual (proximidade com a Rússia e a guerra na Ucrânia) traz alerta de segurança — vários governos desaconselham a viagem. NÃO há exigência de febre amarela. Por ser área sensível e mutável, confira OBRIGATORIAMENTE na fonte oficial / embaixada de Belarus antes de viajar."
  },
  "XK": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros estão isentos de visto para turismo por até 90 dias em 180 dias. Kosovo usa o euro mas não integra a zona do euro nem Schengen; entrada via Sérvia pode gerar restrições. Confira na fonte oficial antes de viajar."
+  "nota": "Kosovo (XK) NÃO é da UE nem do Schengen e tem reconhecimento internacional parcial. Brasileiro é isento de visto para turismo por até 90 dias em cada 180 dias. Passaporte válido por toda a estadia (recomenda-se 6 meses). Atenção importante: o Brasil NÃO reconhece o Kosovo como Estado independente, e a Sérvia considera o território como sua província — se você pretende ENTRAR no Kosovo e depois ir à Sérvia, pode haver problema se a entrada não tiver carimbo sérvio; o ideal é entrar pelo Kosovo e sair pela mesma fronteira, ou entrar via Sérvia. Sem exigência de febre amarela. Confirme a rota e os carimbos na fonte oficial antes de viajar."
  },
  "AD": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros não precisam de visto para turismo por até 90 dias. Andorra não tem aeroporto comercial; o acesso costuma ser por terra a partir de Barcelona (BCN) ou Toulouse (TLS). Confira na fonte oficial antes de viajar."
+  "nota": "Andorra é um microestado entre Espanha e França. NÃO é da UE nem membro formal do Schengen, mas NÃO possui aeroporto nem fronteira internacional própria: o acesso é SEMPRE por terra atravessando a Espanha ou a França (ambos Schengen). Na prática, você precisa cumprir as regras Schengen para entrar na Espanha/França — brasileiro é isento até 90 dias em 180. Andorra não carimba passaporte na entrada. O tempo em Andorra conta dentro da sua estadia Schengen. Quando o ETIAS entrar em vigor (2026), ele será necessário para cruzar Espanha/França. Sem exigência de febre amarela. Confira na fonte oficial."
  },
  "MC": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros entram sem visto para turismo por até 90 dias em 180 dias (regra Schengen, à qual Mônaco está associada). Não há aeroporto; acesso pelo aeroporto de Nice (NCE), a cerca de 30 km. Confira na fonte oficial antes de viajar."
+  "nota": "Mônaco é um microestado que NÃO é da UE, mas faz parte do Espaço Schengen de fato (mantém união aduaneira e de fronteiras com a França). O acesso é feito pela França. Brasileiro é isento de visto por até 90 dias em cada 180 dias, dentro do contador Schengen. Passaporte válido por pelo menos 3 meses após a saída (ideal 6 meses). Quando o ETIAS entrar em vigor (2026), será exigido para a entrada no espaço (via França). Sem exigência de febre amarela. Confira na fonte oficial."
  },
  "LI": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros não precisam de visto para turismo por até 90 dias em 180 dias (área Schengen). Não há aeroporto; acesso pelo aeroporto de Zurique (ZRH), na Suíça, a cerca de 120 km. Confira na fonte oficial antes de viajar."
+  "nota": "Liechtenstein é um microestado membro do Espaço Schengen (via associação, ligado à Suíça por união aduaneira). NÃO possui aeroporto internacional — o acesso é por terra via Suíça ou Áustria. Brasileiro é isento de visto por até 90 dias em cada 180 dias, dentro do contador Schengen. Passaporte válido por pelo menos 3 meses após a saída (ideal 6 meses). Quando o ETIAS entrar em vigor (2026), será exigido para a entrada no espaço Schengen. Sem exigência de febre amarela. Confira na fonte oficial."
  },
  "SM": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Brasileiros entram sem visto para turismo por até 90 dias em 180 dias (acesso de fato pela Itália, área Schengen). Não há aeroporto; acesso pelo aeroporto de Rimini (RMI) ou Bolonha (BLQ). Confira na fonte oficial antes de viajar."
+  "nota": "San Marino é um microestado cercado pela Itália. NÃO é da UE nem membro formal do Schengen, mas NÃO tem aeroporto nem fronteira internacional própria: o acesso é SEMPRE pela Itália (Schengen). Na prática, você cumpre as regras Schengen ao entrar na Itália — brasileiro é isento até 90 dias em 180. San Marino não carimba passaporte (há carimbo turístico opcional pago, sem valor migratório). O tempo conta dentro da estadia Schengen. Com o ETIAS (2026), será necessário para entrar na Itália. Sem exigência de febre amarela. Confira na fonte oficial."
  },
  "AO": {
-  "tipo": "eVisa",
+  "tipo": "isento",
   "dias": 30,
-  "nota": "Brasileiros precisam de visto; eVisa de turismo solicitado 100% online antes da viagem. Certificado de febre amarela obrigatório. Confira na fonte oficial."
+  "nota": "Brasileiro NAO precisa de visto para turismo: isento por ate 30 dias por entrada (prorrogavel, ate 90 dias por ano). Exige passaporte valido por 6 meses; podem pedir comprovante de hospedagem e passagem de saida. Febre amarela (CIVP) OBRIGATORIA para entrar em Angola - leve o certificado. Confira na fonte oficial (SME Angola)."
  },
  "CM": {
-  "tipo": "eVisa",
-  "dias": 30,
-  "nota": "Brasileiros precisam de visto; eVisa de turismo disponível online. Certificado de febre amarela obrigatório. Confira na fonte oficial."
+  "tipo": "e-visa",
+  "dias": 90,
+  "nota": "Brasileiro precisa de visto. Ha e-Visa online (curta duracao para turismo, ate 90 dias por visita); passaporte valido por 6 meses com 2 paginas em branco, passagem ida e volta, reserva de hotel e comprovante de fundos. Febre amarela (CIVP) OBRIGATORIA - anexar certificado no pedido e apresentar na chegada (vacina com 10+ dias). Confira na fonte oficial."
  },
  "GA": {
-  "tipo": "eVisa",
-  "dias": 30,
-  "nota": "Brasileiros precisam de visto; eVisa solicitado online (aprovação e retirada no aeroporto de Libreville). Certificado de febre amarela obrigatório. Confira na fonte oficial."
+  "tipo": "e-visa",
+  "dias": 90,
+  "nota": "Brasileiro precisa de visto. Solicite o e-Visa no portal oficial (evisa.dgdi.ga), valido por ate 90 dias e emitido para quem chega pelo Aeroporto Internacional Leon Mba (Libreville); aprovacao em ~72h. Passaporte valido por 6 meses. Febre amarela (CIVP) OBRIGATORIA para todos os passageiros - leve o certificado. Confira na fonte oficial."
  },
  "SZ": {
   "tipo": "isento",
   "dias": 30,
-  "nota": "Brasileiros entram sem visto para turismo (até 30 dias). Passaporte válido por pelo menos 6 meses. Confira na fonte oficial."
+  "nota": "Brasileiro NAO precisa de visto para turismo em Essuatini (ex-Suazilandia): isento por ate 30 dias, prorrogavel por mais 30 no Ministerio do Interior. Exige passaporte valido por 6 meses (1 pagina em branco), passagem de saida e fundos (~US$50/dia). Febre amarela so se vier de area de risco. Confira na fonte oficial."
  },
  "LS": {
-  "tipo": "isento",
-  "dias": 14,
-  "nota": "Brasileiros entram sem visto para turismo por curta estadia. Passaporte válido por pelo menos 6 meses. Confira na fonte oficial."
+  "tipo": "e-visa",
+  "dias": 90,
+  "nota": "Brasileiro precisa de visto. O previsto e o e-Visa no portal oficial (eservices.gov.ls / homeaffairs.gov.ls), valido por ate 3 meses - mas o sistema online ja teve suspensoes, entao confira na fonte oficial; alternativa e o visto adesivo (sticker) via embaixada do Lesoto. Passaporte valido por 6 meses. Acesso terrestre normalmente via Africa do Sul (observe regras sul-africanas). Febre amarela so se vier de area de risco."
  },
  "BJ": {
-  "tipo": "eVisa",
+  "tipo": "e-visa",
   "dias": 30,
-  "nota": "Brasileiros precisam de visto; e-Visa do Benin solicitado online antes do embarque. Certificado de febre amarela obrigatório. Confira na fonte oficial."
+  "nota": "Brasileiro precisa de visto. Solicite o e-Visa no portal oficial evisa.bj, entrada unica 30 dias (~50 euros) ate multipla 90 dias; aprovacao em ate ~10 dias uteis. Passaporte valido por 6 meses. Febre amarela (CIVP) OBRIGATORIA para todos acima de 9 meses - leve o certificado. Confira na fonte oficial."
  },
  "TG": {
-  "tipo": "eVisa",
+  "tipo": "e-visa",
   "dias": 15,
-  "nota": "Brasileiros precisam de visto; e-Visa do Togo solicitado online (também há visto na chegada em Lomé). Certificado de febre amarela obrigatório. Confira na fonte oficial."
+  "nota": "Brasileiro precisa de visto. O Togo usa e-Visa (portal oficial voyage.gouv.tg) - nao se emite mais visto na chegada de forma geral; visto de turismo costuma ser concedido por ate 15 dias (renovavel localmente). Passaporte valido por 6 meses. Febre amarela (CIVP) OBRIGATORIA para todos - leve o certificado (vacina com 10+ dias). Confira na fonte oficial."
  },
  "GM": {
-  "tipo": "isento",
+  "tipo": "visto",
   "dias": 90,
-  "nota": "Brasileiros entram sem visto para turismo. Certificado de febre amarela recomendado/exigido conforme procedência. Confira na fonte oficial."
+  "nota": "Brasileiro PRECISA de visto (Brasil nao tem isencao com a Gambia - sao isentos so Commonwealth, UE, ECOWAS e paises com acordo). Na pratica costuma-se obter visto na chegada/no consulado, mas confirme antes na fonte oficial pois a regra varia. Passaporte valido por 6 meses. Febre amarela (CIVP) exigida para quem chega de area de risco como o Brasil - leve o certificado."
  },
  "AW": {
   "tipo": "isento",
-  "dias": 90,
-  "nota": "Isento para turismo (Reino dos Países Baixos, Caribe). Permanência até 90 dias; passaporte com 6 meses de validade e passagem de saida. Certificado de febre amarela pode ser exigido se a viagem partir de area de risco no Brasil. Confira na fonte oficial."
+  "dias": 30,
+  "nota": "Aruba NÃO faz parte de Schengen (ETIAS não se aplica). Brasileiro é ISENTO de visto: a entrada é carimbada por 30 dias, prorrogável até 180 dias no ano. É obrigatório preencher o cartão de embarque digital (Aruba ED Card) em edcardaruba.aw antes da chegada. Passaporte válido por toda a estadia, comprovante de hospedagem e de passagem de saída."
  },
  "CW": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo (país constituinte do Reino dos Países Baixos). Permanência até 90 dias; exige passaporte válido, passagem de saída e comprovante de hospedagem. Febre amarela pode ser exigida se vier de área de risco. Confira na fonte oficial."
+  "nota": "Curaçao NÃO faz parte de Schengen (ETIAS não se aplica). Brasileiro é ISENTO de visto para turismo (até 90 dias em 180). É obrigatório preencher o cartão de imigração digital (Curaçao Digital Immigration Card) antes da chegada. O passaporte não pode ter mais de 10 anos e deve estar válido por toda a estadia; comprovante de hospedagem e de saída podem ser pedidos."
  },
  "AG": {
   "tipo": "isento",
   "dias": 180,
-  "nota": "Isento para turismo; permanência usual de até 180 dias, mediante passaporte válido, passagem de retorno e comprovante de meios. Certificado de febre amarela exigido se vier de país de risco. Confira na fonte oficial."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 6 meses (180 dias). Recomenda-se preencher o formulário de entrada/saúde online (Antigua & Barbuda) antes da chegada. Passaporte válido, comprovante de passagem de saída e de hospedagem podem ser exigidos."
  },
  "LC": {
   "tipo": "isento",
-  "dias": 90,
-  "nota": "Isento para turismo; permanência usual de até 90 dias (prorrogável), com passaporte válido, passagem de saída e meios de subsistência. Febre amarela exigida para quem vem de área de risco. Confira na fonte oficial."
+  "dias": 42,
+  "nota": "Brasileiro é ISENTO de visto para turismo (entrada normalmente concedida por até 6 semanas, cerca de 42 dias, prorrogável a critério da imigração). Recomenda-se preencher o formulário de imigração online antes de chegar. Passaporte válido, comprovante de passagem de saída e de hospedagem podem ser solicitados."
  },
  "GD": {
   "tipo": "isento",
   "dias": 90,
-  "nota": "Isento para turismo; permanência usual de até 90 dias, com passaporte válido, passagem de retorno e comprovante de hospedagem. Certificado de febre amarela exigido se vier de área de risco. Confira na fonte oficial."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 3 meses (90 dias). Recomenda-se preencher o formulário de imigração/saúde online antes da chegada. Passaporte válido, comprovante de passagem de saída e de hospedagem podem ser exigidos."
  },
  "DM": {
   "tipo": "isento",
   "dias": 180,
-  "nota": "Isento para turismo; permanência usual de até 180 dias, com passaporte válido, passagem de saída e meios de subsistência. Certificado de febre amarela exigido para quem vem de área de risco. Confira na fonte oficial."
+  "nota": "Brasileiro é ISENTO de visto para turismo por até 6 meses (180 dias). Recomenda-se preencher o formulário de imigração online (Dominica) antes de chegar. Passaporte válido, comprovante de passagem de saída e de hospedagem podem ser solicitados. (Trata-se da Dominica/Commonwealth of Dominica, não da República Dominicana.)"
  },
  "PW": {
-  "tipo": "visto_na_chegada",
+  "tipo": "on-arrival",
   "dias": 30,
-  "nota": "Entrada de turismo concedida na chegada por até 30 dias (gratuita), com passaporte válido por 6 meses e passagem de saída. Pode haver taxa ambiental/de saída (Palau Pristine Paradise). Confira na fonte oficial."
+  "nota": "Brasileiro recebe visto na chegada (visa on arrival) valido por 30 dias, prorrogavel 2 vezes mediante taxa. Exige passaporte valido por 6 meses, passagem de saida, comprovacao de fundos (~US$200 por semana) e preenchimento do Palau Entry Form online (palautravel.pw) ate 72h antes do embarque."
  },
  "SB": {
-  "tipo": "visto_na_chegada",
+  "tipo": "on-arrival",
   "dias": 90,
-  "nota": "Permissão de visitante (visitor permit) emitida na chegada por até 90 dias, com passaporte válido, passagem de retorno e meios de subsistência. Certificado de febre amarela exigido se vier de área de risco. Confira na fonte oficial."
+  "nota": "Brasileiro recebe Visitor Permit (permissao de visitante) GRATUITA na chegada, valida por ate 3 meses dentro de um periodo de 1 ano. Exige passaporte valido por 6 meses, passagem de saida/retorno e comprovacao de fundos/hospedagem. Confira exigencias sanitarias na fonte oficial."
  }
 };
 
