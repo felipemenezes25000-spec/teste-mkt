@@ -7,6 +7,7 @@ import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
 // planos). O planner (/planejar) tem o próprio cabeçalho com as ações da viagem.
 const LINKS = [
   { href: '/explorar', label: 'Explorar', icon: '🧭' },
+  { href: '/decisao', label: 'Decisão', icon: '🧠' },
   { href: '/planejar', label: 'Planejar', icon: '🗺️' },
   { href: '/roteiro', label: 'Roteiro IA', icon: '✨' },
   { href: '/voos', label: 'Voos', icon: '✈' },

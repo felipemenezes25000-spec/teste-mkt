@@ -1,0 +1,800 @@
+{
+  "totalPlayers": 37,
+  "gaps": [
+    {
+      "titulo": "Custo TOTAL realista da viagem (não só voo + hotel)",
+      "descricao": "Praticamente todo o mercado mostra apenas o preço do que ELE vende (passagem, diária, tour, carro, câmbio), nunca a soma realista de tudo que custa VIVER a viagem: hospedagem + comida + transporte local + atrações + seguro + câmbio + taxas + imprevistos, somados por dia e por destino. O viajante sai de cada app sabendo 'quanto custa a passagem' ou 'quanto custa a diária', mas não consegue responder a pergunta que realmente importa — 'quanto essa viagem inteira vai custar de verdade e cabe no meu bolso?'. Resultado universal: todo mundo abre uma planilha por fora. É a dor nº 1 e o ponto cego mais transversal de todos os 37 players.",
+      "playersQueFalham": [
+        "Booking.com",
+        "Expedia",
+        "Tripadvisor",
+        "Google Travel",
+        "Google Flights",
+        "Google Maps",
+        "Skyscanner",
+        "KAYAK",
+        "Hopper",
+        "Airbnb",
+        "Rome2Rio",
+        "Wanderlog",
+        "TripIt",
+        "Stippl",
+        "GetYourGuide",
+        "Viator",
+        "Klook",
+        "Civitatis",
+        "Amadeus",
+        "Duffel",
+        "Kiwi.com",
+        "Omio",
+        "Hostelworld",
+        "Agoda",
+        "Trivago",
+        "Rentalcars.com",
+        "Uber Travel",
+        "Wise",
+        "Splitwise",
+        "Revolut",
+        "Lonely Planet",
+        "Atlas Obscura",
+        "Roadtrippers"
+      ],
+      "evidencia": "Os próprios perfis dizem: Booking 'NÃO calcula o custo TOTAL realista — não soma comida, transporte local, atividades, câmbio, taxas, gorjetas ou imprevistos'; Google Flights 'mostra só o preço da PASSAGEM... o explorar dentro do orçamento filtra só por valor de voo, induzindo a decisão errada (voo barato para destino caro)'; Skyscanner/KAYAK 'o usuário sai sem saber quanto a viagem inteira vai custar de verdade'; Wanderlog 'gap crítico: não calcula custo total realista... Pro explicitamente pula planejamento budget-aware e câmbio'; Splitwise 'faz a conta mas não dá um budget — só registra gasto JÁ realizado'; Wise/Revolut cobrem só o câmbio, 'mostram o custo real do dinheiro, mas não o custo real da viagem'.",
+      "nossoDiferencial": "É o coração do produto e já está no código: o motor `calc.js` soma custo de vida diário (por moeda nativa de cada trecho, convertido pro câmbio do dia via open.er-api) + transporte entre países, em custoTotal, custoTerraTotal, custoTransporteTotal e mediaDia na moeda base; `custos.js` quebra o gasto diário em 5 categorias reais (hospedagem 40%, comida 28%, transporte local 12%, atrações 12%, extras 8%) em 3 níveis (mochila/médio/conforto); o estimador de voo (`utils.js` Haversine + estimarPrecoVoo) dá a faixa de passagem, e seguro entra por dia. O número que entregamos é 'a viagem inteira custa X', não 'a diária custa X'.",
+      "impacto": "alto"
+    },
+    {
+      "titulo": "Decisão de DESTINO ('para onde vou'), não lista de opções dentro de um destino já escolhido",
+      "descricao": "Todo o mercado assume que o viajante JÁ decidiu o destino e só ajuda a comparar fornecedores DENTRO dele (hotel A vs B, voo X vs Y, tour 1 vs 2). Ninguém cobre o topo do funil: 'Peru vs Tailândia vs Portugal — qual faz mais sentido pra MIM, neste mês, com este orçamento e este estilo?', cruzando custo total, melhor época, visto, segurança, tempo de voo e vibe lado a lado. O viajante mais indeciso — justamente quem mais precisa de ajuda — fica completamente descoberto e decide no escuro ou por achismo de blog.",
+      "playersQueFalham": [
+        "Booking.com",
+        "Expedia",
+        "Tripadvisor",
+        "Google Travel",
+        "Google Flights",
+        "Google Maps",
+        "Skyscanner",
+        "KAYAK",
+        "Hopper",
+        "Airbnb",
+        "Rome2Rio",
+        "Wanderlog",
+        "Stippl",
+        "GetYourGuide",
+        "Viator",
+        "Klook",
+        "Civitatis",
+        "Duffel",
+        "Kiwi.com",
+        "Omio",
+        "Hostelworld",
+        "Agoda",
+        "Trivago",
+        "Revolut",
+        "OpenTable",
+        "Michelin Guide",
+        "TheFork",
+        "Lonely Planet",
+        "Culture Trip",
+        "Atlas Obscura",
+        "Roadtrippers"
+      ],
+      "evidencia": "Perfis: Tripadvisor 'compara PREÇOS de um mesmo hotel entre OTAs, mas NÃO compara DESTINOS... deixa todo o topo do funil descoberto'; Skyscanner 'o Everywhere ordena por tarifa mais barata, ignorando clima, segurança, vibe, custo de vida'; Agoda 'a decisão de PARA ONDE ir acontece toda fora — exatamente o gap de topo de funil'; KAYAK 'o Explore chega perto mas é inspiração por preço de passagem, não decisão multifator'; Lonely Planet 'não compara destinos de forma quantitativa lado a lado... o usuário tem que ler vários artigos e concluir sozinho'.",
+      "nossoDiferencial": "A página `/comparar` já monta a TABELA de decisão de destinos lado a lado a partir dos favoritos: região, moeda, custo médio/dia, custo de 7 dias (via custoEstadia), melhor época (melhoresMeses), visto datado por passaporte (vistoDe) e bases sugeridas. E o motor vai além de uma tabela estática: cruza estação × visto × fôlego pra dizer se aquele destino 'fecha' no seu mês e orçamento. É comparação de SONHOS de viagem por adequação ao perfil, não comparação de fornecedores por preço.",
+      "impacto": "alto"
+    },
+    {
+      "titulo": "Roteiro vivo que RECALCULA (logística real), não itinerário estático ou lista de POIs salvos",
+      "descricao": "O mercado se divide entre quem só ORGANIZA o que você já reservou em ordem cronológica (itinerário de compras) e quem entrega uma lista bonita de pontos turísticos sem logística. Quase ninguém gera um roteiro dia-a-dia EXECUTÁVEL — sequência por proximidade, tempo de deslocamento real, horários de funcionamento, ritmo equilibrado (dias intensos vs leves), plano B de chuva, alternativas grátis — e que RECALCULA quando algo muda (você corta um dia, troca a ordem, estoura o orçamento). É 'lista de salvos', não plano logístico que responde a mudanças.",
+      "playersQueFalham": [
+        "Booking.com",
+        "Expedia",
+        "Tripadvisor",
+        "Google Travel",
+        "Google Maps",
+        "KAYAK",
+        "Hopper",
+        "Airbnb",
+        "Wanderlog",
+        "TripIt",
+        "Stippl",
+        "GetYourGuide",
+        "Viator",
+        "Klook",
+        "Civitatis",
+        "Uber Travel",
+        "Lonely Planet",
+        "Culture Trip",
+        "Atlas Obscura"
+      ],
+      "evidencia": "Perfis: Google AI Mode 'monta esboços de itinerário... mas sem otimização logística (ordem por proximidade, traslado, horários, ritmo realista). Resultado é uma lista bonita, não um plano executável'; TripIt 'coloca em ordem cronológica o que você já reservou, mas não ajuda a DECIDIR o que incluir'; Wanderlog 'route optimization é Pro, opcional e frequentemente quebrado por erro de billing... otimiza dentro de um dia já montado pelo usuário'; Viator 'não sabe se dois tours comprados conflitam de horário'; Lonely Planet 'roteiros editoriais ESTÁTICOS... não ajusta por duração nem orçamento'.",
+      "nossoDiferencial": "Dois níveis acoplados. (1) `/roteiro` (gerarRoteiro + SYSTEM_PROMPT_ROTEIRO via /api/ai) gera o dia-a-dia com hora, local, duração, custo por item, categoria, planoB de chuva, alternativa grátis, mais checklist/documentos/segurança — sanitizado pra nunca quebrar a UI. (2) o roteiro NÃO é estático: o motor `calc.js` re-deriva datas de chegada, estação, visto e fôlego sempre que você muda dias/ordem; o `budget.js` corta e `aplicarCortes` reescreve o plano; `cenarios.js` versiona Rota A vs B. Mudou um input, tudo recalcula — é roteiro vivo, não PDF morto.",
+      "impacto": "alto"
+    },
+    {
+      "titulo": "Orçamento PRESCRITIVO ('trave em X e me diga onde cortar'), não descritivo depois do fato",
+      "descricao": "Quando existe alguma noção de orçamento, ela é sempre DESCRITIVA e tardia: um filtro de preço de passagem, um split de despesas DEPOIS de gastar, ou um tracker de quanto já saiu. Ninguém faz o caminho inverso e mais útil — o PRESCRITIVO: 'meu teto é R$ X; esta viagem estoura; me diga EXATAMENTE onde cortar (quais dias, em quais países) pra caber, sem eu ter que adivinhar'. O viajante recebe o diagnóstico de que estourou, mas tem que resolver o quebra-cabeça de corte sozinho, na mão, na planilha.",
+      "playersQueFalham": [
+        "Booking.com",
+        "Expedia",
+        "Google Flights",
+        "Skyscanner",
+        "KAYAK",
+        "Hopper",
+        "Wanderlog",
+        "Stippl",
+        "Splitwise",
+        "Roadtrippers",
+        "Wise",
+        "Revolut",
+        "Agoda",
+        "Trivago"
+      ],
+      "evidencia": "Perfis: Splitwise 'só registra gasto JÁ realizado e não oferece framework de orçamento prospectivo... o mercado aponta que ele faz a conta mas não dá um budget'; Roadtrippers 'o orçamento do Autopilot é um input qualitativo para filtrar sugestões, não um output financeiro realista que ajude a decidir se a viagem cabe no bolso'; Google Flights 'o explorar dentro do orçamento filtra só por valor de voo'; Wanderlog 'só split manual de despesas e checklist, sem orçamento agregado'. Nenhum perfil descreve um motor que diga ONDE cortar.",
+      "nossoDiferencial": "É literalmente o que `budget.js` faz e está plugado na UI (BudgetPanel, aba Custos). `sugerirOrcamento(calc)`: se custoTotal > orçamento, calcula o excesso e prioriza o corte de forma inteligente — primeiro países que JÁ são problema (furando visto > estadia fora de época > maior custo/dia), respeitando piso de 5 dias/país, e lista quantos dias cortar em cada um com a economia exata. `aplicarCortes(plan)` reescreve o plano num clique (imutável). É prescrição acionável: 'corte 6 dias na Argentina e 4 na Indonésia → cabe', não só 'você estourou'.",
+      "impacto": "alto"
+    },
+    {
+      "titulo": "Transparência de custos OCULTOS (o número que você vê é o número que você paga)",
+      "descricao": "A reclamação mais repetida e corrosiva de TODO o mercado transacional é o 'bait-and-switch' de preço: a tarifa anunciada sobe no checkout por taxas, câmbio e fees que aparecem tarde; surcharges de balcão; markup cambial escondido; 'no hidden costs' que contraria a experiência real. O viajante nunca confia no número exibido e descobre o custo real só quando já está comprometido — ou pior, no balcão do destino. Ninguém entrega um número honesto e estável desde o início porque o modelo de receita de quase todos depende de empurrar a reserva.",
+      "playersQueFalham": [
+        "Booking.com",
+        "Expedia",
+        "Google Flights",
+        "Skyscanner",
+        "KAYAK",
+        "Hopper",
+        "Airbnb",
+        "Rome2Rio",
+        "Viator",
+        "Klook",
+        "Kiwi.com",
+        "Omio",
+        "Agoda",
+        "Trivago",
+        "Rentalcars.com",
+        "Uber Travel",
+        "GetYourGuide"
+      ],
+      "evidencia": "Perfis: Google Flights '~22% dos casos a tarifa menor desaparece ao somar taxas obrigatórias'; Skyscanner 'preço anunciado dobra/triplica ao clicar — sensação de isca (bait price)'; Rentalcars 'selo No Hidden Costs contraria a experiência real (surcharges no balcão)... preço final até 3x o anunciado'; Rome2Rio 'bilhete de EUR 12,50 cobrado a EUR 35... markup de ~15%'; Agoda/Trivago 'preço sobe do anúncio até o checkout; taxas e câmbio inesperados'; Viator 'taxa de entrada exibida como incluída mas o voucher dizia excluída'.",
+      "nossoDiferencial": "Nosso modelo não vende a reserva, então não há conflito de interesse pra esconder fee — somos a camada de DECISÃO neutra. O custo é construído item a item e exibido por categoria (custos.js) e por trecho (calc.js), com câmbio explícito do dia (open.er-api, com fallback transparente 'usando taxas salvas'). Cada estimativa é rotulada honestamente como ESTIMATIVA (faixa de voo por distância, custo/dia de referência) e o app repete o disclaimer 'confira na fonte oficial'. Visto, comprovante de saída e extensão entram como custo/atrito visível, não como surpresa no balcão.",
+      "impacto": "alto"
+    },
+    {
+      "titulo": "Super-perfil do viajante que APRENDE e é portátil (não personalização a serviço de vender estoque)",
+      "descricao": "Quase ninguém mantém um perfil rico, persistente e PORTÁTIL do viajante — estilo (mochilão vs conforto), ritmo, orçamento real, com quem viaja, restrições alimentares/mobilidade, tolerância a escala/risco, passaporte. Onde 'personalização' existe, ela serve ao funil: recomenda o que tem maior take-rate/comissão, não o que é objetivamente melhor pra aquela pessoa. Cada busca recomeça do zero, as preferências ficam presas no ecossistema de cada fornecedor, e nada orquestra a viagem inteira de forma neutra. Não há 'DNA do viajante'.",
+      "playersQueFalham": [
+        "Booking.com",
+        "Expedia",
+        "Tripadvisor",
+        "Google Travel",
+        "Google Flights",
+        "Google Maps",
+        "Skyscanner",
+        "KAYAK",
+        "Hopper",
+        "Airbnb",
+        "Rome2Rio",
+        "Wanderlog",
+        "TripIt",
+        "Stippl",
+        "GetYourGuide",
+        "Viator",
+        "Klook",
+        "Civitatis",
+        "Agoda",
+        "Trivago",
+        "Hostelworld",
+        "Uber Travel",
+        "Wise",
+        "Revolut",
+        "OpenTable",
+        "Michelin Guide",
+        "Culture Trip",
+        "Atlas Obscura"
+      ],
+      "evidencia": "Perfis: Booking 'personalização a serviço de VENDER estoque... não há super-perfil persistente e portável, sem um DNA do viajante que orquestre a viagem de forma neutra'; Expedia 'recomendações refletem inventário com melhor take rate e advertising pago, não o que é melhor pra o usuário'; Google Flights 'cada busca começa do zero... o Google sabe tudo de você não se traduz em recomendação personalizada'; Skyscanner 'trata todos os usuários igual... decide por preço, não por adequação ao viajante'.",
+      "nossoDiferencial": "O 'tripé' (estação × visto × fôlego) já É um perfil estrutural e persistente: passaporte (define visto datado por país), orçamento (define fôlego/runway), datas e ritmo (definem estação) moldam TODA a saída — e o plano é salvo (localStorage + sync Supabase na nuvem) e exportável/compartilhável (encodePlan → URL #r=, share.js). Como não vendemos estoque, a curadoria é neutra por construção: o app otimiza pela adequação ao viajante, não pela comissão. É a base de um DNA do viajante portátil — o oposto da personalização presa-ao-fornecedor.",
+      "impacto": "medio"
+    },
+    {
+      "titulo": "Roteiro VIVO ao clima/lotação/janela de visto (estação, monção, época certa) — não plano cego ao calendário",
+      "descricao": "O mercado trata a viagem como atemporal: vende o destino e a logística sem cruzar a DATA com a realidade do lugar — melhor época, monção/estação seca, janela de visto que expira, alta vs baixa temporada. O viajante reserva 7 dias num lugar em plena monção, ou planeja ficar mais dias do que o visto permite, e ninguém avisa. Falta a camada que torna o plano 'consciente do calendário': este destino está na época certa no seu mês? esta estadia fura seu visto? a estação muda se eu reordenar?",
+      "playersQueFalham": [
+        "Booking.com",
+        "Expedia",
+        "Google Travel",
+        "Google Flights",
+        "Skyscanner",
+        "KAYAK",
+        "Hopper",
+        "Airbnb",
+        "Wanderlog",
+        "TripIt",
+        "Stippl",
+        "GetYourGuide",
+        "Viator",
+        "Klook",
+        "Civitatis",
+        "Kiwi.com",
+        "Hostelworld",
+        "Agoda",
+        "Trivago",
+        "Lonely Planet",
+        "Culture Trip",
+        "Atlas Obscura"
+      ],
+      "evidencia": "Perfis: Skyscanner 'o Everywhere ignora clima na data, melhor época, custo de vida no destino'; KAYAK 'não compara custo-de-vida no destino nem trade-offs de experiência'; Google AI Mode 'sem raciocínio de viabilidade: não respeita orçamento total, não casa voo+hotel+atrações'; quase todos os planejadores (Wanderlog/Stippl/TripIt) 'assumem que o usuário JÁ escolheu' e não consideram clima/visto/época como variável da decisão. Nenhum perfil descreve alerta de monção ou de janela de visto.",
+      "nossoDiferencial": "É exatamente o eixo central de `calc.js`: `statusEstacao` classifica cada estadia em bom/parcial/ruim cruzando a chegada (derivada da ordem dos trechos) com os melhoresMeses do país, e `statusVisto` marca 'over' quando os dias planejados furam o limite do visto daquele passaporte — com contagem de conflitosEstacao, parciaisEstacao e furosVisto. Reordenou os países? As datas e a estação recalculam. data.js traz melhor época + notas de estação (ex.: 'Seca nov–mar, monção mai–out') e visto datado por passaporte. É o plano consciente do calendário que ninguém entrega.",
+      "impacto": "alto"
+    },
+    {
+      "titulo": "Neutralidade: conselho do lado do VIAJANTE, não IA/ranking enviesado pela comissão",
+      "descricao": "Mesmo na nova onda de IA, quase todo player tem um conflito de interesse estrutural: a 'inteligência' serve ao funil de venda (empurrar o inventário que monetiza), não à melhor decisão neutra do viajante. Rankings sofrem viés comercial (quem paga aparece melhor), 'comparações' empurram o destino/fornecedor mais lucrativo, e os assistentes de IA são camada conversacional sobre a mesma metabusca de preço. Falta um copiloto que responda 'qual opção faz sentido pra MIM' sem estar sendo pago pra te empurrar uma resposta específica.",
+      "playersQueFalham": [
+        "Booking.com",
+        "Expedia",
+        "Tripadvisor",
+        "Google Travel",
+        "KAYAK",
+        "Hopper",
+        "Airbnb",
+        "Stippl",
+        "GetYourGuide",
+        "Viator",
+        "Klook",
+        "Agoda",
+        "Trivago",
+        "Skyscanner",
+        "Wise",
+        "Civitatis"
+      ],
+      "evidencia": "Perfis: Booking 'AI Trip Planner com conflito de interesse estrutural: a IA empurra o que a Booking monetiza, não o melhor roteiro neutro'; Expedia 'a IA serve ao funil de booking, não ao objetivo do viajante'; Tripadvisor/Trivago 'o sistema favorece quem paga por exposição... o ranking sofre viés comercial, a melhor oferta exibida pode não ser a mais barata'; Stippl 'não compara de forma imparcial, só empurra Booking/GYG via afiliado'; Wise 'a API de afiliado retorna SÓ as taxas da própria Wise... serve para vender a Wise, não para o usuário decidir'.",
+      "nossoDiferencial": "Nosso modelo de receita é assinatura (Stripe) + IA atrás do login, NÃO comissão de reserva — então o incentivo é a melhor decisão do usuário, não empurrar estoque. A IA (otimizarRota, gerarRoteiro, buscarOportunidades) raciocina sobre estação/visto/fôlego e custo total pra recomendar o que cabe no SEU perfil; deep-links pra Booking/Airbnb/GYG/Viator/Rome2Rio existem como conveniência de execução depois da decisão, não como o produto. A comparação de destinos é por adequação (custo/época/visto/vibe), estruturalmente neutra entre fornecedores.",
+      "impacto": "medio"
+    },
+    {
+      "titulo": "A viagem como UM projeto contínuo (workspace), não 3-5 ferramentas costuradas na mão",
+      "descricao": "O viajante é forçado a costurar a jornada em silos desconectados: decide destino num blog, acha voo num metasearch, hotel em outro, atividades num terceiro, transporte terrestre num quarto, divide despesas num quinto, e organiza tudo numa planilha. Nenhum player oferece um workspace único onde 'descobrir destino → comparar → montar roteiro → ver custo total → ajustar orçamento → executar' vive num lugar só, com continuidade entre as etapas. Até dentro de uma mesma marca, os módulos (busca, mapa, atividades) são abas que não conversam, e o handoff pro parceiro quebra o fluxo.",
+      "playersQueFalham": [
+        "Google Travel",
+        "Google Flights",
+        "Google Maps",
+        "Booking.com",
+        "Expedia",
+        "Tripadvisor",
+        "Skyscanner",
+        "KAYAK",
+        "Hopper",
+        "Rome2Rio",
+        "GetYourGuide",
+        "Viator",
+        "Klook",
+        "Civitatis",
+        "Omio",
+        "Kiwi.com",
+        "Uber Travel",
+        "Splitwise",
+        "OpenTable",
+        "TheFork",
+        "Michelin Guide"
+      ],
+      "evidencia": "Perfis: Google Travel 'o usuário salta entre Flights, Hotels e Things to do como abas desconectadas... não há fluxo único descobrir→montar→ver custo→reservar coeso'; Google Flights 'obriga o usuário a costurar 3 produtos separados na mão... nossa plataforma pode ser o workspace da viagem inteira'; Tripadvisor 'as três marcas são experiências desconectadas... o viajante monta a viagem mentalmente'; TheFork/OpenTable 'cada reserva é um evento isolado, o trabalho de juntar num plano fica 100% com o usuário'.",
+      "nossoDiferencial": "Mundo Sem Fim É o workspace: rotas reais Next (/explorar → /destino/[slug] → /comparar → /planejar → /roteiro → /voos → /custos) onde tudo escreve no MESMO plano. 'Adicionar à rota' (AddToRouteButton) joga um destino direto no planner; favoritos alimentam /comparar; o plano sincroniza na nuvem (Supabase), versiona cenários (Rota A vs B), gera checklist a partir da rota e exporta/compartilha por link. A viagem é um projeto contínuo e persistente — não uma sequência de abas e planilhas avulsas.",
+      "impacto": "medio"
+    },
+    {
+      "titulo": "Suporte e pós-venda que não abandonam o viajante (e a dependência de terceiros)",
+      "descricao": "A falha operacional mais universal e dolorosa do mercado: reembolsos que demoram meses ou nunca chegam, impossibilidade de falar com humano (muro de chatbot/IA), reservas que 'somem' ou viram overbooking na chegada, e o jogo de empurra-empurra de responsabilidade entre plataforma + fornecedor + cliente quando algo dá errado. Como quase todos terceirizam a entrega e ganham por intermediar, ninguém assume a dor quando a viagem quebra — e isso destrói a confiança justamente no momento mais crítico (já em viagem).",
+      "playersQueFalham": [
+        "Booking.com",
+        "Expedia",
+        "Tripadvisor",
+        "Google Flights",
+        "Skyscanner",
+        "KAYAK",
+        "Hopper",
+        "Airbnb",
+        "Rome2Rio",
+        "GetYourGuide",
+        "Viator",
+        "Klook",
+        "Civitatis",
+        "Duffel",
+        "Kiwi.com",
+        "Omio",
+        "Hostelworld",
+        "Agoda",
+        "Trivago",
+        "Rentalcars.com",
+        "Uber Travel",
+        "Wise",
+        "Revolut",
+        "OpenTable",
+        "TheFork"
+      ],
+      "evidencia": "Perfis: Booking 'reembolsos de 71+ dias vs ~2 semanas de concorrentes... sistemas de IA bloqueiam o contato'; Kiwi 'reembolsos prometidos que nunca chegam, espera de até 3 meses, impossível falar com suporte sem pagar tier premium'; Omio 'zero suporte humano, só bots que te mandam em círculos... Omio lava as mãos e manda resolver com a ferroviária, que manda de volta pra Omio'; Agoda/Revolut 'disputa de responsabilidade entre plataforma e fornecedor, deixando o usuário sem canal claro'.",
+      "nossoDiferencial": "Não somos o intermediário da transação, então removemos a própria fonte do empurra-empurra: a decisão e o plano são nossos (e ficam salvos/sincronizados, recuperáveis offline), e a reserva é executada direto na fonte/parceiro escolhido pelo viajante — sem uma camada de revenda nossa pra travar reembolso. O checklist deriva da rota documentos/comprovante de saída/seguro pra reduzir o que dá errado ANTES de acontecer, e o app reforça 'confira na fonte oficial'. Em vez de capturar a transação e abandonar no pós-venda, entregamos a clareza e deixamos o viajante no controle da execução.",
+      "impacto": "medio"
+    }
+  ],
+  "oportunidades": [
+    {
+      "titulo": "Custo Total Honesto vs. 'preço de vitrine' das OTAs — o gancho de conversao #1",
+      "descricao": "Toda OTA/metabusca (Booking, Expedia, Kayak, Skyscanner, Hopper, Wanderlog) para no 'voo + hotel' e esconde o resto. Voce JA tem o motor que ninguem tem (custoTotal.js): vida diaria + transporte entre trechos + seguro + eSIM + vistos + 12% de contingencia, em 3 niveis. Transforme isso na HEADLINE do produto: em /destino, /decisao e /roteiro, mostre lado a lado 'preco que o Booking te mostra' vs 'quanto VOCE realmente vai gastar', com a diferenca em destaque (ex: 'as OTAs te mostram US$890; a viagem inteira custa US$2.310'). Esse 'choque de realidade' e o que gera intencao de compra do plano: o usuario percebe que so aqui ele nao toma susto. Defensavel porque o numero sai de um motor proprio (calc.js + custoTotal.js + indices), nao de um feed que qualquer um licencia.",
+      "featureNossa": "custoTotal.js + custos.js (3 tiers) ja existentes; novo componente comparativo 'Custo de vitrine vs Custo real' em DestinoPage, DecisaoClient e RoteiroView",
+      "esforco": "baixo",
+      "retorno": "alto",
+      "prioridade": "P0"
+    },
+    {
+      "titulo": "Ligar a monetizacao de afiliado que ja esta stubada (deep-links → receita)",
+      "descricao": "links.js diz explicitamente 'sem afiliado, trocaveis quando houver conta', e linksVoo/linksDestino nao carregam NENHUMA tag (aid=, marker=, campaign). Voce ja manda trafego de altissima intencao (pagina de destino, resultado de voo, 'onde ficar & reservar') de graca. Centralize a atribuicao: uma funcao withAffiliate(url, parceiro) que injeta as tags via env (Booking AID/Awin, GetYourGuide/Viator partner, Skyscanner Impact, Kiwi/Trivago/Civitatis via Travelpayouts 'marker', Rome2Rio, Wise). Mantenha o padrao 'nao configurado = link cru seguro'. Isso vira receita recorrente sobre trafego que voce JA gera, sem nova tela. Civitatis (8-10% in-house, lider PT/LatAm/ES) e Viator (8% in-house, PayPal semanal) sao os de melhor payout pro seu publico pt-BR.",
+      "featureNossa": "_lib/links.js + _engine/utils.js (linksVoo) — adicionar camada withAffiliate(url) lida de env e cobrir Booking/Airbnb/GYG/Viator/Skyscanner/Kiwi/Rome2Rio/Civitatis",
+      "esforco": "baixo",
+      "retorno": "alto",
+      "prioridade": "P0"
+    },
+    {
+      "titulo": "Previsao 'compre agora vs. espere' de voo — roubar o unico moat real do Hopper",
+      "descricao": "O ativo defensavel do Hopper e dizer 'o preco vai SUBIR, compre agora' (e isso vende fintech de 70% de margem). Hoje seu /voos tem alerta local que nao preve nada. Usando seu provider deterministico (flights.js: hash+mulberry32 ja gera serie estavel por rota/data) voce pode emitir um veredito honesto: gere a curva de preco por data ao redor da data alvo + dias-ate-a-viagem e classifique 'Bom momento de comprar' / 'Tende a subir, garanta' / 'Pode cair, espere'. Combine com a faixa estimada por distancia (estimarPrecoVoo) que ja existe. E o tipo de 'conselho que decide' que justifica o Premium e diferencia de Skyscanner/Kayak (que so listam). Quando plugar Amadeus/Kiwi no seam, a mesma UI passa a usar preco real — zero retrabalho de tela.",
+      "featureNossa": "_lib/flights.js (curva deterministica) + VoosClient — novo veredito 'comprar/esperar' e mini-grafico de melhor data; alerta de preco (gated premium) ja existe",
+      "esforco": "medio",
+      "retorno": "alto",
+      "prioridade": "P1"
+    },
+    {
+      "titulo": "Conversor de cambio ao vivo no orcamento + cartao/conta Wise (afiliado de alto CPA)",
+      "descricao": "calc.js ja faz multimoeda com taxas (settings.fx.rates) e o orcamento todo vive em USD/base. Falta o que o viajante pt-BR mais sofre: 'quanto isso da em REAL hoje, e quanto o IOF/spread do meu banco vai comer'. Mostre no Custo Total e no planejador a conversao ao vivo na taxa mid-market (open.er-api.com ja previsto), com um aviso 'seu cartao cobra ~6% a mais; com Wise voce paga ~0,6%' e CTA de afiliado Wise (Partnerize, ~GBP10 CPA pessoa, cookie longa/vitalicia). Gera intencao de compra (economia tangivel em R$) E receita de afiliado com um dos maiores CPAs do panorama. Defensavel: amarra cambio ao SEU orcamento calculado, nao e um conversor solto.",
+      "featureNossa": "calc.js (fx/rates ja presente) + custoTotal.js — bloco 'em reais hoje' com seam Wise via withAffiliate; usa open.er-api.com do .env.example",
+      "esforco": "baixo",
+      "retorno": "alto",
+      "prioridade": "P1"
+    },
+    {
+      "titulo": "Modo grupo: rateio de custos estilo Splitwise embutido no orcamento (antes da viagem)",
+      "descricao": "Splitwise so divide DEPOIS e degradou o gratuito (exodo de usuarios). Voce ja calcula o custo total e por trecho; adicionar 'quantos viajantes' + quem paga o que (voo, hospedagem por trecho, custo diario) entrega o rateio ANTES de viajar — 'cada um leva ~US$770; Joao ja adiantou os voos, entao acerta -US$120 com a Maria'. Persistencia local primeiro (mesmo padrao de storage.js/alertas), sync Supabase como feature 'pro' (colaboracao ja esta listada como pro em planos.js). Cria intencao de compra do Pro (viagem em grupo = quem organiza paga) e retencao social. Diferenciacao: ninguem une 'planejar + orcar + dividir' num fluxo so; e um motivo concreto pra grupo inteiro entrar no app.",
+      "featureNossa": "novo split.js (puro, testavel) sobre custoTotal.js/calc.js; UI no planejador e em /decisao; sync amarrada a FEATURES.colaboracao='pro' (planos.js) e <Gate>",
+      "esforco": "medio",
+      "retorno": "alto",
+      "prioridade": "P1"
+    },
+    {
+      "titulo": "Roteiro IA 'reservavel': cada item com deep-link de afiliado + custo somado ao orcamento",
+      "descricao": "Wanderlog/Stippl monetizam jogando o roteiro pra fora via redirect; seu RoteiroView ja renderiza itens com hora/local/custo e ja linka Google Maps. Feche o loop: em cada atividade paga, um botao 'reservar' que dispara o deep-link CERTO (GetYourGuide/Viator para tours, OpenTable para restaurante, Booking para a base) com tag de afiliado; e some o custo de cada item no 'custo estimado' do roteiro (hoje vem so como texto da IA). Isso transforma o roteiro de 'inspiracao' em 'carrinho acionavel' — onde mora a intencao de compra E a comissao. O PDF premium (window.print ja gated) sai com tudo precificado e linkado: artefato que o usuario quer pagar pra ter.",
+      "featureNossa": "RoteiroClient.jsx (ItemRow/RoteiroView) + _lib/links.js — botao reservar por categoria do item, somatorio de custos, no PDF gated 'roteiro-pdf'",
+      "esforco": "medio",
+      "retorno": "alto",
+      "prioridade": "P1"
+    },
+    {
+      "titulo": "eSIM, seguro-viagem e transfer como linha de receita (a conta ja lista esses itens)",
+      "descricao": "custoTotal.js JA itemiza seguro-viagem, chip/eSIM e taxas de visto como custo — mas eles aparecem so como numero. Vire cada linha num CTA monetizado: 'Seguro deste roteiro a partir de US$X' (afiliado), 'Chip/eSIM para os 3 paises' (Klook/Airalo via Travelpayouts/Ecomobi, ~ate 20%), 'Transfer aeroporto' (Uber Reserve deep-link no item de chegada do roteiro). Esforco baixo porque o dado e a posicao na UI ja existem; e o tipo de ancillary de alta margem que o Hopper/Revolut usam pra fechar a conta. Diferencial: a oferta e CONTEXTUAL (numero de paises, dias e datas saem do seu calc), nao um banner generico.",
+      "featureNossa": "custoTotal.js (categorias seguro/esim/vistos) — cada categoria ganha CTA via withAffiliate; item de chegada do RoteiroView ganha transfer Uber Reserve",
+      "esforco": "baixo",
+      "retorno": "medio",
+      "prioridade": "P2"
+    },
+    {
+      "titulo": "Aprender o perfil das acoes e personalizar a vitrine — moat de retencao que cresce com o uso",
+      "descricao": "perfil.js JA tem o nucleo de aprendizado (aprender(), destinoParaInteresses()) mas hoje o perfil so muda quando o usuario troca o PRESET. Acione o loop: ao favoritar destino, gerar roteiro ou adicionar a rota, empurre o vetor (aprender) e re-ranqueie /decisao e a home. Mostre 'aprendemos que voce curte gastronomia + economia → estes 4 sobem'. Isso e diferenciacao DEFENSAVEL: quanto mais o usuario usa, mais certeiro fica, e ele nao leva esse perfil pra um concorrente (Booking/Google nao tem super-perfil persistente). Aumenta retencao e a sensacao de 'esse app me conhece' — que sustenta a assinatura. Sync do perfil na nuvem entra como gancho de login.",
+      "featureNossa": "perfil.js (aprender/destinoParaInteresses ja prontos) + FavoriteButton/AddToRouteButton/RoteiroClient — disparar aprendizado nas acoes; persistir no Supabase para logados",
+      "esforco": "medio",
+      "retorno": "medio",
+      "prioridade": "P2"
+    },
+    {
+      "titulo": "Alerta de visto/estacao como gancho de e-mail e prova de valor 'que salva sua viagem'",
+      "descricao": "oportunidades.js ja detecta furo de visto (P0, risco de deportacao) e estadia fora de epoca — coisas que NENHUM concorrente avisa. Eleve isso de painel passivo para alerta acionavel: badge persistente 'sua rota tem 1 furo de visto' no topo, e (para logados) e-mail/push antes da data critica. Furo de visto e medo real (multa/deportacao) e dispara intencao de pagar por 'paz de espirito'. Como ja e regra pura e auditavel (nao IA), e confiavel e defensavel — e o oposto da promessa quebrada de bait-and-switch do Kiwi/Kayak. Use como linha de captura de e-mail no /planos ('te avisamos se algo na sua rota furar o visto').",
+      "featureNossa": "oportunidades.js (escanearOportunidades, furo de visto P0) + calc.js (statusVisto/statusEstacao) — badge global e seam de e-mail/push para logados",
+      "esforco": "medio",
+      "retorno": "medio",
+      "prioridade": "P2"
+    },
+    {
+      "titulo": "Comparar destinos lado a lado pelo SEU perfil (nao alfabetico) — gated como upsell Premium",
+      "descricao": "planos.js ja reserva 'comparar-avancado' para premium e decisao.js ja produz as 8 dimensoes + porque por destino. Materialize um comparador 2-4 destinos lado a lado: custo total realista, melhor epoca vs suas datas, score por dimensao, furos de visto, com 'vencedor para o SEU perfil'. Booking/Expedia/Google tratam destino como silo e nunca comparam DESTINOS entre si — esse e um diferencial defensavel claro e um motivo limpo de paywall (mostra 2 destinos free, libera 4 e o veredito no Premium). Reaproveita recomendarDestinos/dimensoesDoDestino; pouca logica nova, muito valor percebido na hora da decisao (alto buy-intent).",
+      "featureNossa": "decisao.js (dimensoesDoDestino/recomendarDestinos) + custoTotal.js + FEATURES.comparar-avancado (planos.js) + <Gate> — nova tela/painel comparativo",
+      "esforco": "medio",
+      "retorno": "medio",
+      "prioridade": "P2"
+    },
+    {
+      "titulo": "Roteamento multimodal real entre trechos (trem/onibus/ferry), nao so voo",
+      "descricao": "Hoje transporte entre trechos e tratado como voo/estimativa; para Europa e Sudeste Asiatico (seus destaques PT/TR + TH/VN/ID) muita conexao e trem/onibus/ferry — terreno do Rome2Rio/Omio. Voce ja tem deep-link Rome2Rio em links.js; evolua para mostrar a OPCAO multimodal no custo do trecho ('Lisboa→Madri: voo US$60 / trem 10h US$45') e linkar Omio/Rome2Rio com afiliado (Travelpayouts ~6%). Fecha um buraco que faz o custo total entre trechos ficar mais honesto (reforca a opp #1) e abre receita terrestre. Defensavel porque integra a escolha de transporte ao SEU calculo de fluxo de caixa/folego, nao e busca avulsa.",
+      "featureNossa": "calc.js (custoTransporte por trecho) + _lib/links.js (Rome2Rio ja presente) — opcao multimodal no TrechoCard com seam Omio/Rome2Rio afiliado",
+      "esforco": "alto",
+      "retorno": "medio",
+      "prioridade": "P3"
+    },
+    {
+      "titulo": "SEO programatico de paginas de destino/comparacao — aquisicao organica baratissima (modelo Wanderlog)",
+      "descricao": "O moat de aquisicao do Wanderlog/Lonely Planet/Civitatis e SEO em escala. Voce ja gera /destino/[slug] estaticas (generateStaticParams, revalidate 86400) com conteudo real (Wikipedia/Wikidata) e custos por nivel. Multiplique a superficie: paginas indexaveis 'Quanto custa viajar para X', 'Melhor epoca para X', 'X vs Y para mochileiro' (server-rendered a partir de custos.js/indices.js/decisao.js, ja deterministicos) com metadata e dados estruturados. E o canal de topo de funil mais barato e leva direto pra sua proposta de valor (custo real + decisao), nao pra um redirect. Defensavel: o conteudo numerico sai do seu motor, dificil de copiar e sempre coerente com o produto.",
+      "featureNossa": "DestinoPage (ja SSG/cacheada) + custos.js/indices.js/decisao.js — novas rotas server-rendered 'custo/melhor-epoca/X vs Y' com metadata e JSON-LD",
+      "esforco": "alto",
+      "retorno": "medio",
+      "prioridade": "P3"
+    }
+  ],
+  "monetizacao": {
+    "resumo": "PAISAGEM DE COMISSAO PARA APP DE PLANEJAMENTO DE VIAGEM BR (modelo afiliado/publisher, last-click)\n\nTESE CENTRAL: nosso app NAO e merchant-of-record; nossa receita vem de capturar a INTENCAO DE COMPRA no momento da decisao do roteiro e disparar o lead/clique via deeplink para o player que paga comissao. Como afiliado last-click, ganhamos sobre a comissao do PARCEIRO FINAL (OTA/operador), nunca sobre o trafego enviado a agregadores (Google, Skyscanner, KAYAK, Trivago, Rome2Rio) que, salvo KAYAK e Skyscanner, NAO pagam quem manda trafego para eles.\n\nPRINCIPIO DE OURO DO TICKET: a comissao percentual e enganosa. O que importa e COMISSAO ABSOLUTA = ticket medio x % efetivo. Por isso a hierarquia de valor por reserva e: (1) VOO/TREM/ONIBUS de longa distancia (Kiwi 3% sobre ~US$450 = ~US$13,50/venda, um dos CPAs mais altos do setor); (2) ALUGUEL DE CARRO (Booking 6%, Rentalcars 6% sobre ticket alto); (3) HOSPEDAGEM (4-7% sobre ticket medio-alto); (4) EXPERIENCIAS/TOURS (8-12% sobre ticket ~EUR 85-100 = bom valor absoluto); (5) CAMBIO/CARTAO (CPA fixo robusto: Wise GBP10-50, Revolut ate GBP500 por conta). No fundo da pilha por valor absoluto: restaurante (US$0,25-1/comensal), hostel (CPA sobre deposito de estadia barata) e metabusca (fatia-de-fatia, centavos por clique).\n\nALERTA ESTRUTURAL 2025/2026 (muda a estrategia): (a) BOOKINGGEDDON maio/2025 - a Booking cortou milhares de afiliados pequenos; novos/pequenos sao redirecionados para Awin/CJ, entao NAO devemos depender so do Partner Centre direto - entrar via Awin/CJ desde o inicio. (b) AIRBNB nao tem programa publico desde 2021 (morto) - zero comissao, substituir por Booking/Vrbo/Expedia para 'estilo Airbnb'. (c) GOOGLE (Flights/Hotels/Maps) NAO paga publisher - e custo, nao receita; so serve para comparar preco, nunca como destino monetizado. (d) AGODA tem cookie de so 24h - exige disparar o clique exatamente na decisao. (e) cookies curtos em geral (Expedia ~7 dias, Agoda 1 dia) vs 30 dias da maioria.\n\nATALHO DE OPERACAO PARA BR: a melhor porta de entrada para um app pequeno/medio brasileiro e a rede TRAVELPAYOUTS (agrega num so cadastro: Kiwi, Trip.com, Aviasales/WayAway, Expedia, GetYourGuide, Klook, Omio, Trivago, Hostelworld, Civitatis e mais), eliminando a barreira de aprovacao individual e de trafego minimo. Em paralelo abrir programas PROPRIOS de alto valor que pagam mais por serem diretos: Viator (self-service, aprova em minutos), Civitatis (8-10%, sem intermediario, forte em destinos LatAm/Europa em pt/es), Wise e Revolut (CPA fixo alto via Impact/Partnerize).",
+    "fontesComissao": [
+      {
+        "categoria": "Hospedagem (hoteis)",
+        "players": [
+          "Booking.com",
+          "Agoda",
+          "Expedia / Hotels.com",
+          "Trip.com (via Travelpayouts)",
+          "Hostelworld (budget)",
+          "Tablet Hotels / Michelin Guide"
+        ],
+        "comissaoTipica": "Booking ~4-5,5% efetivo (25-40% da margem dele) sobre estadia concluida; Agoda 4-7% CPS (tende a 5%); Expedia/Hotels 3-4%; Trip.com 1-5%; Tablet/Michelin ~5%. Pagamento so APOS check-out.",
+        "rede": "Booking: Awin/CJ (entrada para pequenos pos-Bookinggeddon) + Partner Centre proprio. Agoda: proprio (partners.agoda.com) + Travelpayouts. Expedia: Partnerize + Travelpayouts. Trip.com: Travelpayouts. Tablet/Michelin: CJ.",
+        "modelo": "CPA / revshare (% da margem do parceiro), pago apos a estadia concluida; cancelamento/no-show nao paga",
+        "prioridade": "P0"
+      },
+      {
+        "categoria": "Hospedagem alternativa (estilo Airbnb / temporada)",
+        "players": [
+          "Booking.com (apartamentos)",
+          "Vrbo (Expedia Group)",
+          "Expedia (alugueis de temporada)"
+        ],
+        "comissaoTipica": "Booking ~4% flat; Expedia/Vrbo alugueis de temporada ~2%. ATENCAO: Airbnb NAO paga (programa publico encerrado em 2021); usar Booking/Vrbo como substitutos.",
+        "rede": "Awin / CJ / Partnerize / Travelpayouts (agregadores como Stay22 tambem cobrem 'estilo Airbnb')",
+        "modelo": "CPA pos-estadia. Airbnb so via clube fechado invite-only (sem autoatendimento) - tratar como indisponivel",
+        "prioridade": "P1"
+      },
+      {
+        "categoria": "Voos",
+        "players": [
+          "Kiwi.com",
+          "Skyscanner",
+          "KAYAK",
+          "Aviasales/WayAway (Travelpayouts)",
+          "Trip.com",
+          "Expedia (voos)",
+          "Booking (voos)",
+          "Hopper"
+        ],
+        "comissaoTipica": "Kiwi 3% do valor da reserva (~US$13,50/venda em ticket ~US$450 - melhor CPA absoluto de voos). KAYAK: rev-share ate 50% ou CPC US$0,89-0,95/clique. Skyscanner: ~20% da comissao dele (valores baixos, GBP0,07-0,30/voo). Expedia/Booking voo: ~US$2 fixo/bilhete. Hopper ~2-5% (US$2-3).",
+        "rede": "Kiwi: Travelpayouts/Awin (Tequila so por convite desde 2024). Skyscanner: Impact (proprio). KAYAK: in-house + CJ + Partnerize + Travelpayouts. Aviasales: Travelpayouts. Hopper: CJ.",
+        "modelo": "Kiwi CPA por booking confirmado (cookie 30d). KAYAK/Skyscanner CPC ou rev-share (metabusca). Expedia/Booking CPA fixo por bilhete.",
+        "prioridade": "P0"
+      },
+      {
+        "categoria": "Experiencias / Tours / Atividades",
+        "players": [
+          "Viator (Tripadvisor)",
+          "GetYourGuide",
+          "Civitatis",
+          "Klook",
+          "Tripadvisor (Experiences)"
+        ],
+        "comissaoTipica": "Viator ~8% (ate 10-12% em promo); GetYourGuide ~5-8% (agente ~16% nos 2 primeiros meses caindo a 8%); Civitatis 8-10% + EUR1 por Free Tour; Klook ~5% padrao (ate 20% no eSIM). Ticket medio ~EUR 85-100 da bom valor absoluto. So paga se a atividade aconteceu.",
+        "rede": "Viator: PROPRIO self-service (partnerresources.viator.com, aprova em minutos, sem trafego minimo). GetYourGuide: Awin/Travelpayouts/TradeDoubler + Partner proprio. Civitatis: PROPRIO sem intermediario (?aid=) + Travelpayouts. Klook: affiliate.klook.com + Ecomobi/Travelpayouts.",
+        "modelo": "CPA last-click sobre reserva concluida; cancelamento = sem pagamento. Cookie 30d (Viator/Civitatis/GetYourGuide), 30d Klook (7d so em hotel).",
+        "prioridade": "P0"
+      },
+      {
+        "categoria": "eSIM / Chip de dados",
+        "players": [
+          "Klook (eSIM)",
+          "Stippl (revenda)",
+          "Revolut (eSIM 1GLOBAL)",
+          "Civitatis (SIM/eSIM)"
+        ],
+        "comissaoTipica": "Klook eSIM destaque historico de ate ~20% (a categoria mais rentavel do Klook em %). Demais: markup proprio sobre o data plan se revendermos direto. Categoria de alta margem e baixa friccao de compra (impulso pre-viagem).",
+        "rede": "Klook: affiliate.klook.com / Travelpayouts. Players dedicados de eSIM (Airalo/Holafly via Travelpayouts/redes proprias) sao alternativas naturais a abrir.",
+        "modelo": "CPA / revshare (~20% Klook eSIM) ou markup proprio sobre plano de dados. Ciclo de pagamento Klook longo (~90d apos validacao).",
+        "prioridade": "P1"
+      },
+      {
+        "categoria": "Aluguel de carro",
+        "players": [
+          "Rentalcars.com (Booking Holdings)",
+          "Booking.com (carros)",
+          "Expedia (carros)",
+          "KAYAK (carros)",
+          "Skyscanner (carros)"
+        ],
+        "comissaoTipica": "Rentalcars ~6% CPS; Booking 6% em carros (maior que os 4% de hotel); Expedia ~2%; Skyscanner GBP0,30-0,40/carro. Ticket relativamente alto eleva o valor absoluto da comissao.",
+        "rede": "Rentalcars: RentalcarsConnect proprio via CJ/Awin + Travelpayouts. Booking carros: Awin/CJ. Expedia: Partnerize.",
+        "modelo": "CPA / revenue share por reserva (cookie 30d). Upsell de protecao (seguro do carro) fica com o merchant, nao conosco.",
+        "prioridade": "P1"
+      },
+      {
+        "categoria": "Seguro viagem",
+        "players": [
+          "Booking (ancillary)",
+          "Skyscanner (referral)",
+          "Hostelworld (no fluxo)",
+          "Klook (seguro ~5%)",
+          "Civitatis (margem)",
+          "Hopper (CFAR/fintech)"
+        ],
+        "comissaoTipica": "Sem % publicado consolidado pelos agregadores; seguro costuma ser ancillary de alta margem para o merchant. Para NOS, melhor via afiliado de seguradora de viagem dedicada (modelo CPA fixo por apolice) do que migalha de ancillary das OTAs. Klook paga ~5% em seguro.",
+        "rede": "Via OTAs (Booking/Skyscanner) como ancillary, ou abrir afiliado de seguradora de viagem dedicada (SafetyWing/Heymondo/World Nomads via Travelpayouts/redes proprias) - rota recomendada.",
+        "modelo": "CPA por apolice vendida (seguradora dedicada) ou revshare de ancillary (OTA). Hopper fintech (Price Freeze/CFAR) so via parceria B2B HTS.",
+        "prioridade": "P2"
+      },
+      {
+        "categoria": "Cambio / Cartao multimoeda",
+        "players": [
+          "Wise",
+          "Revolut",
+          "Booking (spread FX no checkout)"
+        ],
+        "comissaoTipica": "Wise: CPA FIXO ~GBP10 por conta pessoal verificada que faz transacao cross-currency, ~GBP50 por conta business (nao e % do gasto). Revolut: ate ~GBP500 por conta qualificada (aquisicao de cliente, nao booking). Cookie Wise 'lifetime/365d'. CPA fixo robusto e previsivel.",
+        "rede": "Wise: PartnerWise via Partnerize. Revolut: proprio via Impact.",
+        "modelo": "CPA fixo por nova conta/cliente verificado (nao por reserva). Excelente fit: todo viajante BR precisa de cartao internacional - alta conversao no momento de planejar gastos no exterior.",
+        "prioridade": "P0"
+      },
+      {
+        "categoria": "Transporte terrestre (trem / onibus / transfer)",
+        "players": [
+          "Omio",
+          "Kiwi.com (trem/onibus)",
+          "Rome2Rio (white-label)",
+          "Klook (transfers/passes)",
+          "Expedia (transfers ~5%)"
+        ],
+        "comissaoTipica": "Omio ~6% rev-share (faixa 2-8% por mercado, eCPC ~US$0,07, ticket ~US$81); Kiwi 3% tambem em trem/onibus; Expedia atividades/transfers ~5%; Klook transfers ~5%. Rome2Rio so via contrato/white-label (sem tabela publica).",
+        "rede": "Omio: omio.com/affiliate proprio + Travelpayouts (6%) + Impact. Kiwi: Travelpayouts/Awin. Klook: proprio/Travelpayouts. Rome2Rio: white-label (free-dashboard.rome2rio.com), nao rede aberta.",
+        "modelo": "CPA / rev-share por bilhete (cookie 30d). Omio internaliza margem do Omio Group (Rome2Rio).",
+        "prioridade": "P2"
+      },
+      {
+        "categoria": "Hostels / Acomodacao econômica",
+        "players": [
+          "Hostelworld",
+          "Booking (segmento hostel/budget)"
+        ],
+        "comissaoTipica": "Hostelworld CPA sobre o DEPOSITO (~18-22% do deposito; Travelpayouts anuncia 'ate 40% do deposito'). PORÉM base = deposito (~10-15% da estadia) sobre ticket baixo (~US$20), entao comissao ABSOLUTA por reserva e pequena (eCPC ~US$0,04). Booking cobre hostel/budget com seus 4% padrao.",
+        "rede": "Hostelworld: Partnerize (oficial) + Travelpayouts (agregado). Booking: Awin/CJ.",
+        "modelo": "CPA sobre deposito (cookie 30d, min saque ~US$30). So compensa em volume; estrategia real e empacotar transporte/tours/seguro de maior ticket no mesmo roteiro do mochileiro.",
+        "prioridade": "P2"
+      },
+      {
+        "categoria": "Restaurante / Reserva gastronomica",
+        "players": [
+          "TheFork (Tripadvisor)",
+          "OpenTable",
+          "Tablet/Michelin Guide (restaurante)"
+        ],
+        "comissaoTipica": "OpenTable ~US$0,25-1,00 por COMENSAL sentado (no-show = US$0); TheFork CPA por reserva valida (~5-10% citado por diretorios, fragmentado por pais, ticket de comissao baixo, so inventario europeu). Lead de qualidade mas valor de comissao minusculo.",
+        "rede": "OpenTable: proprio in-house (historicamente CJ/Impact em campanhas). TheFork: fragmentado - Awin (fechou alguns), FlexOffers, Plebicom (FR), Kwanko - sem rede global unica.",
+        "modelo": "CPA por comensal efetivamente sentado / reserva comparecida (cookie ~30d). Baixa prioridade de receita; mais util como feature de produto (completar o roteiro) do que como fonte de receita.",
+        "prioridade": "P3"
+      }
+    ],
+    "recomendacoes": [
+      "ABRIR PRIMEIRO (semana 1) - a porta de menor friccao para BR: cadastrar UM perfil na rede TRAVELPAYOUTS. Num so cadastro destrava Kiwi.com (voo/trem/onibus, 3%, ~US$13,50/venda), Trip.com, Aviasales/WayAway, Expedia, GetYourGuide, Klook, Omio, Trivago, Hostelworld e Civitatis - sem aprovacao individual e sem exigencia de trafego minimo que trava sites novos. Resolve voo, hospedagem, tours e transporte de uma vez.",
+      "ABRIR EM PARALELO (semana 1-2) os programas PROPRIOS de maior payout que valem o cadastro direto: (a) VIATOR Partner Program - self-service, aprova em minutos com conta Tripadvisor, 8% (ate 12% promo), PayPal semanal sem minimo; (b) CIVITATIS - proprio sem intermediario, 8-10% + EUR1/Free Tour, forte em destinos LatAm/Europa com conteudo nativo em pt/es (fit perfeito para publico BR); (c) WISE (PartnerWise/Partnerize) e REVOLUT (Impact) - CPA fixo alto (GBP10-50 / ate GBP500) por conta, capturando o brasileiro que precisa de cartao internacional antes de viajar.",
+      "HOSPEDAGEM via Awin/CJ desde o inicio, NAO so pelo Partner Centre direto da Booking. O 'Bookinggeddon' de maio/2025 derrubou milhares de afiliados pequenos e redireciona novos/pequenos justamente para Awin/CJ - entrar pela rede certa evita ter a conta encerrada com 30 dias de aviso. Complementar com Agoda proprio (forte na Asia, 5-7%).",
+      "REGRA DE PRODUTO QUE MAXIMIZA RECEITA - disparar o clique de afiliado EXATAMENTE no momento da decisao no roteiro, por causa dos cookies curtos: Agoda expira em 24h e Expedia em ~7 dias. CTA 'Reservar' deve sair direto do bloco do dia/atividade do roteiro, last-click, nao de uma pagina generica de 'ofertas'. Cookie longo (30d) na maioria dos demais da folga, mas desenhar para o pior caso.",
+      "TRATAR COMO CUSTO, NUNCA COMO RECEITA: Google (Flights/Hotels/Maps), Rome2Rio, Amadeus e Duffel NAO pagam quem manda trafego. Google e Rome2Rio servem so para EXIBIR/comparar preco dentro do app; o booking monetizado deve cair sempre numa OTA terceira que paga (Booking/Expedia/Kiwi/Viator). Airbnb tambem esta morto para afiliado - substituir por Booking/Vrbo em qualquer fluxo 'estilo Airbnb'.",
+      "PRIORIZAR POR COMISSAO ABSOLUTA (ticket x %), nao pelo % isolado: focar o esforco de UX e ranking nos blocos de VOO de longa distancia, ALUGUEL DE CARRO, HOSPEDAGEM e EXPERIENCIAS - sao onde o valor por reserva e alto. Restaurante (US$0,25-1/comensal), hostel (CPA sobre deposito barato) e metabusca (centavos/clique) entram como features de completude do roteiro, nao como fonte de receita.",
+      "ESTRATEGIA DO MOCHILEIRO / BUDGET: como a comissao do Hostelworld por reserva e minuscula (deposito de estadia ~US$20), nao apostar receita nele. O ganho real do publico hostel vem de EMPACOTAR no mesmo roteiro itens de ticket maior: voo (Kiwi 3%), tours (Viator/Civitatis 8-10%), eSIM (Klook ~20%), seguro e cartao multimoeda (Wise CPA fixo). Hostelworld e so a ponta de hospedagem.",
+      "eSIM / CHIP como ganho rapido de alta margem: a categoria eSIM do Klook paga ate ~20% (a maior do portfolio dele em %) e tem compra por impulso pre-viagem com baixa friccao. Vale abrir tambem um afiliado de eSIM dedicado (Airalo/Holafly). Mesma logica para cartao multimoeda - sao decisoes que o viajante toma JUSTAMENTE na fase de planejamento, que e onde nosso app vive.",
+      "EVITAR no curto prazo (ROI fraco ou inacessivel): TripIt, Splitwise, Roadtrippers, Wanderlog, Stippl (nao pagam afiliado de booking ou so pagam sobre a propria assinatura); Hopper e Uber (so via parceria B2B/HTS ou CPA de signup, nao % sobre voo/hotel); Amadeus/Duffel (sao custo de inventario - so relevantes se um dia virarmos merchant-of-record com markup proprio).",
+      "VISAO DE MEDIO PRAZO - subir de afiliado para merchant: o teto da comissao de afiliado (4-8%) e baixo. Quando houver volume, avaliar virar merchant-of-record via DUFFEL (voos: ganha-se markup proprio + US$2/ancillary + share de comissao em hoteis) ou embutir markup via Expedia Rapid 'Partner Collect'. Isso capta a margem cheia em vez de uma fatia dela - mas exige operacao de pagamento, suporte e risco de cancelamento; so faz sentido com escala comprovada.",
+      "MONTAR O STACK DE REDES enxuto: Travelpayouts (agregador principal, fit BR) + Awin + CJ (hospedagem/carros) + Impact (Skyscanner, Revolut) + Partnerize (Expedia, Wise, Hostelworld) cobrem praticamente todos os players que pagam. Programas proprios de alto valor (Viator, Civitatis, Agoda, Klook) entram por integracao direta de deeplink/parametro. Centralizar tudo num gerenciador de links com UTM para medir conversao por categoria e cortar o que nao performa."
+    ]
+  },
+  "integracoes": {
+    "integracoes": [
+      {
+        "nome": "Tripadvisor Content API",
+        "tipoDado": "Metadados de POI (nome, endereco, coordenadas, categoria), nota agregada, sub-notas, ranking, premios Travelers' Choice, link de reviews e fotos.",
+        "usoNoApp": "Enriquecer /destino/[slug] e os cards de atracao com nota/ranking confiavel ao lado dos dados de Wikidata/Wikipedia; selo de reputacao em restaurantes e atracoes. Camada de confianca ('todo mundo confia no TripAdvisor') que aumenta percepcao premium.",
+        "modeloComissao": "Sem comissao na Content API em si (e gratuita). Receita vem por tabela: redirecionar reviews/hoteis para TripAdvisor via deep-link de afiliado (CJ/Awin) e via Viator (que e do mesmo grupo).",
+        "limitacoes": "SO uso B2C/consumer-facing com fim de aquisicao de trafego; proibido B2B/comercial puro. Limites de chamadas, restricoes de exibicao e de caching (precisa mostrar logo/atribuicao TripAdvisor e respeitar TTL). Em ingles majoritariamente.",
+        "custo": "Gratuita dentro da cota; excedente/uso fora dos termos pode ser cortado. Custo real = engenharia de mapeamento de location_id + cache.",
+        "prioridade": "P1",
+        "complexidade": "media",
+        "fallback": "Manter a stack atual (Wikidata + Wikipedia REST) como fonte primaria de POI/descricao e usar nota agregada do Google Places quando a chave server existir; sem nota de reviews, exibir so descricao editorial + selo UNESCO/Patrimonio do Wikidata. Reviews viram deep-link 'Ver no TripAdvisor'."
+      },
+      {
+        "nome": "Google Places API",
+        "tipoDado": "POIs georreferenciados com place_id estavel, nota media, numero de reviews, fotos, faixa de preco ($-$$$$), horarios, telefone, site, categoria, autocomplete e geocoding.",
+        "usoNoApp": "Server-side (GOOGLE_PLACES_API_KEY ja previsto no .env) para preencher ficha de cidade/atracao quando Wikidata nao cobre, autocomplete de origem/destino no planner e /voos, geocoding de cidades para o mapa real (worldGeo.js). Place Details para horarios/faixa de preco em restaurantes e atracoes.",
+        "modeloComissao": "Nenhum (API paga por chamada, nao e afiliado). Pura fonte de dados/UX.",
+        "limitacoes": "CRITICO: proibido cachear conteudo de POI alem do place_id; lat/long so por 30 dias; proibido criar produto 'substancialmente similar' a um mapa/Google Travel. Custo por chamada escala rapido (Place Details US$5-20/1K, Autocomplete ~US$2,83/1K).",
+        "custo": "Pago por SKU com creditos mensais; precisa de billing ativo do Felipe e restricao de chave (referrer no client, API+IP no server). Risco de custo se exposto sem rate-limit.",
+        "prioridade": "P1",
+        "complexidade": "media",
+        "fallback": "OpenStreetMap/Overpass + Nominatim (geocoding) para POIs/coordenadas sem custo nem trava de cache, e Wikidata/Wikipedia para descricao/foto. Faixa de preco/horarios ficam ausentes (degradacao suave). O app ja roda 100% sem a chave Places hoje."
+      },
+      {
+        "nome": "OpenStreetMap/Overpass",
+        "tipoDado": "POIs com tags (turismo, gastronomia, transporte), coordenadas, nomes multilingues; via Nominatim tambem geocoding/reverse-geocoding. Dados abertos, cacheaveis sem trava.",
+        "usoNoApp": "Fallback aberto e gratuito do Google Places: enriquecer atracoes/restaurantes e geocoding de cidades no servidor, com liberdade total de cache (ao contrario do Google). Camada de mapa via tiles OSM no RouteMap quando nao usar tiles Google.",
+        "modeloComissao": "Nenhum (dados abertos ODbL). Sem receita; reduz custo de Places.",
+        "limitacoes": "Overpass publico tem rate-limit agressivo e instabilidade; Nominatim exige User-Agent identificavel, max ~1 req/s e proibe uso pesado no endpoint publico (precisa self-host para escala). Cobertura/qualidade desigual (otima na Europa, irregular em areas remotas). Licenca ODbL exige atribuicao e share-alike de dados derivados.",
+        "custo": "Gratuito no endpoint publico; em escala, custo de hospedar instancia Overpass/Nominatim propria.",
+        "prioridade": "P1",
+        "complexidade": "media",
+        "fallback": "Se Overpass/Nominatim publico falhar ou throttlar: cair para Wikidata SPARQL (que ja roda) para POIs e para a tabela estatica de coords das ORIGENS/cidades de referencia ja embutida no app. Geocoding indisponivel = usar coords pre-cadastradas em data.js/worldGeo.js."
+      },
+      {
+        "nome": "Wikidata",
+        "tipoDado": "Entidades estruturadas: QID estavel por pais/cidade/atracao, classe (atracao turistica Q570116, Patrimonio UNESCO), imagem (P18), coordenadas, descricoes multilingues, relacoes.",
+        "usoNoApp": "JA EM PRODUCAO (app/_lib/places.js): SPARQL puxa pontos turisticos reais por QID do pais para /destino/[slug] (filtra atracao turistica + Patrimonio Mundial, com imagem, cacheado 1 dia, timeout 9s, degrada para []). Base do catalogo de atracoes sem custo nem trava de cache.",
+        "modeloComissao": "Nenhum (CC0, dominio publico). Fonte de dados pura, zero custo, zero atribuicao obrigatoria.",
+        "limitacoes": "Endpoint SPARQL publico tem limite de tempo/complexidade por query e pode dar timeout em horarios de pico; cobertura depende da riqueza da entidade (cidades pequenas tem poucas atracoes com P18). Exige User-Agent identificavel.",
+        "custo": "Gratuito. Custo = manter o mapa code->QID (ja existe em destinos.js) e tuning das queries SPARQL.",
+        "prioridade": "P0",
+        "complexidade": "baixa",
+        "fallback": "Ja implementado: try/catch + AbortSignal.timeout retornam [] sem quebrar render. Sem Wikidata, /destino cai para resumo da Wikipedia + seed de vitrine; manter cache do Next (revalidate) servindo a ultima resposta boa. Considerar mirror SPARQL alternativo (QLever) se o oficial degradar."
+      },
+      {
+        "nome": "Wikipedia REST",
+        "tipoDado": "Resumo/extrato editorial de destino e atracao (pt), titulo, imagem original/thumbnail, URL canonica; via Commons API tambem autor + licenca da imagem.",
+        "usoNoApp": "JA EM PRODUCAO (app/_lib/wiki.js): resumoWiki() alimenta a descricao de cada destino e creditoImagem() resolve autor/licenca do Commons (atende a exigencia de fonte/autoria/licenca do spec). Texto base das fichas e imagem de capa creditada.",
+        "modeloComissao": "Nenhum (conteudo CC BY-SA / dominio publico conforme arquivo). Fonte editorial + credito de imagem; zero custo.",
+        "limitacoes": "Precisa exibir atribuicao/licenca corretamente (ja tratado). Resumo pode ser generico ou vir como desambiguacao (ja filtrado retornando null). Qualidade do extrato em pt varia por destino.",
+        "custo": "Gratuito. Custo = engenharia ja paga.",
+        "prioridade": "P0",
+        "complexidade": "baixa",
+        "fallback": "Ja implementado: retorna null em falha/timeout sem quebrar; nesse caso usar so REST Countries (fatos) + Wikidata. Para credito de imagem ausente, esconder a foto ou marcar 'fonte: Wikimedia Commons' generico. Cache do Next mantem ultima resposta."
+      },
+      {
+        "nome": "Booking Affiliate",
+        "tipoDado": "Via deep-link de afiliado: redireciona para busca de hospedagem ja filtrada (cidade+datas). Via Demand API (gated): inventario em tempo real, preco, disponibilidade, tipo de quarto, politica de cancelamento, fotos, geo, reviews verificadas, gestao de pedidos.",
+        "usoNoApp": "FASE 1 (ja seamado em _lib/links.js: linkBooking): botao 'Hoteis & hostels' em /destino e no roteiro abrindo Booking pre-filtrado, trocando a URL crua por link de afiliado (Awin/CJ/Travelpayouts) com tag. FASE 2 (futuro): Demand API para mostrar preco/disponibilidade real na propria UI — so se virar parceiro gerenciado.",
+        "modeloComissao": "Afiliado last-click via rede (tipicamente 25-40% da comissao que a Booking recebe do hotel, ~4% do valor da estadia liquido) com cookie de atribuicao. Demand API tem modelo de parceiro gerenciado negociado.",
+        "limitacoes": "Demand API e GATED (exige aprovacao como Managed Affiliate Partner, nao self-serve; risco de descontinuacao de parceiro). Deep-link de afiliado e imediato, mas comissao so se a rede aprovar o publisher. Nao e GDS classico.",
+        "custo": "Deep-link: gratuito (so cadastro na rede de afiliados). Demand API: sem custo de licenca, mas custo de onboarding/manutencao e dependencia de aprovacao.",
+        "prioridade": "P0",
+        "complexidade": "baixa",
+        "fallback": "Ja existe: deep-link cru (sem tag) para Booking continua funcionando hoje. Se a conta de afiliado nao sair, manter o redirect sem monetizar e complementar hospedagem com Hostelworld/Agoda/Expedia deep-links. Demand API indisponivel = nunca mostrar preco na UI, so redirecionar."
+      },
+      {
+        "nome": "Viator Affiliate API",
+        "tipoDado": "Catalogo completo de experiencias/tours/ingressos por destino (titulo, descricao, fotos, categorias, duracao, idiomas), preco e disponibilidade em tempo real (Full Access), reviews/notas TripAdvisor, politica de cancelamento, geo/ponto de encontro, deep-links e widgets, IDs estaveis para mapeamento.",
+        "usoNoApp": "FASE 1 (seamado: linkViator em links.js): botao 'Tours & experiencias' por cidade com deep-link de afiliado (cookie ~8%). FASE 2: Viator Partner API nivel Full para listar experiencias REAIS com preco/foto dentro de /destino e do /roteiro IA (a IA sugere passeios e o card ja traz preco+link), redirecionando o checkout para viator.com. E a integracao de experiencias mais madura do setor.",
+        "modeloComissao": "Afiliado ~8% last-click (venda ocorre em viator.com via deep-link). Variante Merchant (merchant of record, reserva dentro do app) existe mas exige certificacao — fora de escopo para B2C por assinatura agora.",
+        "limitacoes": "Afiliado puro nao reserva no app (so redireciona). Full Access (preco/disponibilidade em tempo real) requer aprovacao comercial. Cobre so experiencias (nao voos/hotel). Rate limits por parceiro.",
+        "custo": "Deep-link/afiliado: gratuito via rede (Travelpayouts/Awin) ou programa direto. Partner API Full: sem licenca, mas aprovacao + engenharia de catalogo.",
+        "prioridade": "P1",
+        "complexidade": "media",
+        "fallback": "Ja existe: deep-link de busca Viator funciona sem API. Sem Full Access, nao mostrar preco — so titulo/redirect. Se Viator indisponivel, usar GetYourGuide (mesma funcao) e Klook (forte na Asia) como provedores alternativos de experiencias via deep-link."
+      },
+      {
+        "nome": "GetYourGuide Partner API",
+        "tipoDado": "Catalogo de tours/atividades/ingressos por destino, disponibilidade por data/horario e categoria de ticket, precos de varejo e deals, politica de cancelamento, duracao, reviews/nota, reserva/voucher/status (Partner API), deep-links e widgets, geo/ponto de encontro.",
+        "usoNoApp": "FASE 1 (seamado: linkGetYourGuide): botao 'Passeios & ingressos' com deep-link/widget de afiliado (~5-8% last-click) em /destino e no roteiro. FASE 2: Partner API para puxar catalogo+disponibilidade e exibir cards de atividade com preco real, especialmente para destinos europeus (forca da GYG).",
+        "modeloComissao": "Afiliado ~5-8% last-click via rede (Awin/Travelpayouts) com deep-link/widget. Partner API com checkout/booking exige aprovacao comercial.",
+        "limitacoes": "Partner API completa (catalogo+booking) e gated por aprovacao comercial; rate limit ~1000 req/h. Afiliado menor fica restrito a deep-link/widget. So experiencias (nao voo/hotel).",
+        "custo": "Deep-link/widget: gratuito via rede. Partner API: sem licenca, mas onboarding comercial + engenharia.",
+        "prioridade": "P1",
+        "complexidade": "media",
+        "fallback": "Ja existe: deep-link de busca GYG funciona sem API. Usar Viator como provedor primario de experiencias e GYG como segundo (ou vice-versa por regiao). Sem nenhuma API de experiencia, manter so deep-links agregados (GYG+Viator+Klook+Civitatis) na ficha do destino."
+      },
+      {
+        "nome": "Klook Affiliate",
+        "tipoDado": "Catalogo global de experiencias (preco, descricao, fotos, politica de cancelamento), disponibilidade real-time por slot, precificacao dinamica por viajante/add-ons, reviews, voucher/QR, forte profundidade na ASIA (atracoes, transporte local, passes, eSIM), deep-links rastreaveis com UTM.",
+        "usoNoApp": "Deep-link de afiliado (Ecomobi/Travelpayouts) como provedor de experiencias para destinos asiaticos (Tailandia, Vietna, Indonesia, Japao) — onde Viator/GYG sao mais fracos. Botao adicional 'Passeios na Asia' / transporte local / eSIM na ficha do destino e no roteiro. Complementa a vitrine de destaques que ja inclui TH/ID/VN.",
+        "modeloComissao": "Afiliado via rede (Ecomobi/Travelpayouts), comissao por venda com tracking UTM/deep-link. Sem merchant no app.",
+        "limitacoes": "API de catalogo 1P (Klook OpenAPI) e de parceiro/merchant com aprovacao e onboarding — nao self-service. Para afiliado pequeno, so deep-link/rede. Cobertura ocidental menor que Viator/GYG.",
+        "custo": "Deep-link/afiliado: gratuito via rede. API de parceiro: aprovacao comercial.",
+        "prioridade": "P2",
+        "complexidade": "baixa",
+        "fallback": "Usar Viator/GetYourGuide como provedores primarios de experiencias em todo o mundo; Klook so adiciona cobertura/comissao na Asia. Sem Klook, o destino asiatico ainda tem Viator/GYG deep-link. eSIM/transporte local viram link generico se a conta Klook nao sair."
+      },
+      {
+        "nome": "Expedia Rapid API",
+        "tipoDado": "Inventario de hoteis/alugueis (Vrbo) com preco em tempo real, disponibilidade, fotos, amenidades, politicas de cancelamento, geo, ratings/reviews, net rates (B2B), inventario de carros (+47k fornecedores) e atividades. Relatorios de afiliado via Partnerize.",
+        "usoNoApp": "FASE 1: deep-link de afiliado (Expedia via Partnerize/Travelpayouts) como segunda opcao de hospedagem ao lado de Booking em /destino. FASE 2 (avancado): Rapid API B2B para mostrar preco/quarto real na propria UI e cobrir alugueis Vrbo (casas inteiras) — alternativa ao Airbnb, que NAO tem API.",
+        "modeloComissao": "Dois modelos: 'Expedia Collect' (Expedia cobra e paga comissao ao parceiro) e 'Partner Collect' (parceiro cobra, paga net rate, fica com markup). Afiliado/deeplink via Partnerize com comissao last-click.",
+        "limitacoes": "Rapid API e gated (contrato/onboarding de parceiro, nao chave instantanea). Voo NAO tem API de distribuicao aberta — Expedia cobre so hotel/carro/atividade/Vrbo. Modelo merchant exige assumir cobranca/risco.",
+        "custo": "Deep-link: gratuito via rede. Rapid API: sem licenca, mas contrato de parceiro + engenharia significativa de booking.",
+        "prioridade": "P2",
+        "complexidade": "alta",
+        "fallback": "Hospedagem ja coberta por Booking deep-link (P0). Expedia entra so como redundancia de afiliado e, no maximo futuro, como fonte de alugueis Vrbo para suprir a falta de API do Airbnb. Sem Rapid API, nunca mostrar preco — so redirecionar. Carros podem ir via deep-link Rentalcars/Booking Cars."
+      },
+      {
+        "nome": "Skyscanner (Flights API/affiliate)",
+        "tipoDado": "Tarifas de voo em tempo real (Live Prices) de 1.200+ parceiros, precos indicativos/cacheados por rota, itinerarios completos (escalas, multi-trecho, datas flexiveis), autosuggest/geo/carriers, tendencia de preco, deep-links de redirect (Affiliates Link API). Tambem hoteis e carros.",
+        "usoNoApp": "Camada de VOOS com comissao via redirect: na tela /voos (hoje provider mock em _lib/flights.js), usar Affiliates Link API para gerar deep-link monetizado para a aerea/OTA, e Indicative Prices para mostrar faixa de preco real por rota (substituindo a estimativa por distancia). Plugar no SEAM buscarVoos() ja existente. Reserva continua fora do app (so redirect).",
+        "modeloComissao": "Afiliado/referral: comissao por redirect qualificado via Affiliates Link API (CPA/CPC conforme acordo). NAO permite booking direto no app — so deep-link.",
+        "limitacoes": "API SO para parceiros (application-only, aprovacao caso a caso, 'empresa estabelecida com grande audiencia', ~2 semanas). Sem reserva no checkout do parceiro; sem NDC/GDS. Dados mistos realtime+cache.",
+        "custo": "Sem licenca; custo = aprovacao como parceiro (barreira de audiencia) + engenharia. Travelpayouts (Aviasales) e alternativa de afiliado de voo mais facil de aprovar para publishers pequenos.",
+        "prioridade": "P2",
+        "complexidade": "media",
+        "fallback": "Manter o provider MOCK deterministico de voos (ja existe e da faixa por distancia) ate ter aprovacao. Se Skyscanner negar acesso, usar Travelpayouts/Aviasales affiliate (mais acessivel) para faixa de preco+deep-link, ou Kiwi Tequila. Google Flights so como link externo cru (linkGoogleFlights ja existe)."
+      },
+      {
+        "nome": "Amadeus Self-Service API",
+        "tipoDado": "Inventario/disponibilidade de voos de 400+ cias (full-content + NDC), precificacao detalhada (fare rules, branded fares, ancillaries), hotel (incl. EPS) e carros, dados de inspiracao/POI/seguranca, predicoes ML (atraso, previsao de preco), e (so Enterprise+IATA/ARC) emissao real de bilhetes.",
+        "usoNoApp": "Provider de VOOS real por tras do SEAM buscarVoos(): Flight Offers Search para precos/itinerarios reais na tela /voos, e Flight Inspiration/Cheapest Date para 'para onde viajar com X de orcamento' (casa com o budget mode). Predicao de preco para o alerta de preco. Booking real so se um dia houver acreditacao IATA — improvavel para B2C solo.",
+        "modeloComissao": "Nenhum afiliado nativo (e GDS/API tecnica, pay-as-you-go no Self-Service). Monetizacao indireta: usar dados para enriquecer e redirecionar o booking a um parceiro que pague comissao (Duffel/OTA).",
+        "limitacoes": "CRITICO: o tier Self-Service SERA DESCOMISSIONADO em 17/07/2026 (registro pausado antes; chaves desativadas na data) — nao construir dependencia nova sobre ele agora. Enterprise exige NDA + acreditacao + IATA/ARC (semanas a meses). Nao e API de afiliado.",
+        "custo": "Self-Service: sandbox gratuito + pay-as-you-go por chamada (mas com prazo de morte). Enterprise: contrato/NDA, custo alto, IATA/ARC.",
+        "prioridade": "P3",
+        "complexidade": "alta",
+        "fallback": "NAO adotar como base por causa do EOL de jul/2026. Preferir Duffel (moderno, self-serve, booking + pagamento) como provider transacional de voo e Travelpayouts/Skyscanner para afiliado. Manter mock como default. Usar Amadeus so se via consolidador/parceiro white-label, nunca contrato direto no inicio."
+      },
+      {
+        "nome": "Duffel API",
+        "tipoDado": "Ofertas de voo em tempo real (NDC/GDS/LCC, 300-380+ cias) com fare brands, bagagem, fare rules, mapa de assento, ancillaries; hospedagem (~1.6M propriedades); carros (~40 fornecedores); ciclo completo de order (emissao PNR/ticket, mudanca, cancelamento, reembolso) e Payments (3DS, antifraude, settlement).",
+        "usoNoApp": "O caminho REAL para venda de voo DENTRO do app, se um dia formos transacional: plugar no SEAM buscarVoos() para busca com preco real e, via Duffel Links/Elements, oferecer checkout white-label de voo sem virar IATA. Tambem cobre Stays (hotel) e Cars como upsell. E a API transacional mais profunda e moderna entre os players — substitui Amadeus Self-Service (que morre em 2026).",
+        "modeloComissao": "Merchant/transacional: o app vende a tarifa (markup proprio sobre a oferta) e processa via Duffel Payments — margem por bilhete, nao comissao de afiliado. Tier pay-as-you-go self-serve + enterprise.",
+        "limitacoes": "Nao e afiliado de leitura: exige conta, fluxo de pagamento, conformidade (3DS/antifraude), suporte a mudanca/reembolso e responsabilidade de merchant. Complexidade operacional alta (pos-venda de voo e dificil). Custo de transacao/pagamento.",
+        "custo": "Self-serve pay-as-you-go (sem licenca fixa) + taxas de Payments por transacao. Custo principal e operacional (suporte, reembolsos, fraude).",
+        "prioridade": "P2",
+        "complexidade": "alta",
+        "fallback": "Enquanto nao houver operacao para suportar pos-venda de voo, NAO assumir merchant: usar Skyscanner/Travelpayouts (afiliado/redirect) para monetizar voo sem risco, e manter mock como default na /voos. Duffel vira P1 so quando a estrategia mudar de 'redirect' para 'vender voo'. Stays Duffel e redundante com Booking deep-link."
+      },
+      {
+        "nome": "Kiwi Tequila API",
+        "tipoDado": "Tarifas/disponibilidade de voos incl. combinacoes self-transfer (inexistentes em GDS), opcoes multimodais ground+air (trem/onibus), duracao/escalas/viabilidade de conexao, ancillaries por reserva, deep-links e widgets de afiliado, inventario de 800+ transportadoras.",
+        "usoNoApp": "Provider alternativo de VOOS no SEAM buscarVoos(), com diferencial de rotas self-transfer baratas e multimodal — bom para o publico mochileiro/economico do app (combina com budget mode e tiers 'mochila'). Deep-link/widget de afiliado para monetizar o redirect de voo.",
+        "modeloComissao": "Afiliado via rede (Travelpayouts/Awin) com deep-link/widget — comissao por venda/redirect. API Tequila profunda tem modelo de parceiro.",
+        "limitacoes": "Desde mai/2024 novos parceiros so entram POR CONVITE (alinhado a metas estrategicas da Kiwi) — acesso a API profunda nao e garantido. Tier free e so sandbox/teste; producao/comercial exige aprovacao. Self-transfer tem risco de perda de conexao (responsabilidade do viajante).",
+        "custo": "Sandbox gratuito; producao por aprovacao/convite. Afiliado via rede e gratuito de aderir.",
+        "prioridade": "P3",
+        "complexidade": "media",
+        "fallback": "Como a API profunda e por convite, priorizar o afiliado Kiwi via Travelpayouts (deep-link) em vez de integracao Tequila. Se indisponivel, Skyscanner cobre faixa+redirect e Rome2Rio cobre o multimodal. Manter mock como base. Self-transfer some sem Kiwi — usar Rome2Rio/Omio para terrestre."
+      },
+      {
+        "nome": "Omio API",
+        "tipoDado": "Rotas A-a-B multimodais (trem/onibus/ferry/voo) de 3.000+ operadores, com horarios, duracao, baldeacoes, preco por operador/classe, disponibilidade e compra/emissao real de bilhete, add-ons e regras (assento/bagagem/flex).",
+        "usoNoApp": "Camada de TRANSPORTE TERRESTRE entre cidades do roteiro (trem/onibus/ferry), especialmente na Europa e Asia — preenche o 'como ir de A pra B' que voo nao cobre. FASE 1: deep-link/affiliate-API para redirecionar a compra. FASE 2: Booking API/white-label para emitir bilhete no app (merchant of record). Complementa Rome2Rio (que so roteia, nao vende).",
+        "modeloComissao": "Dois caminhos: deeplink/affiliate-API (monetiza redirect sem assumir checkout) OU Booking API/white-label (parceiro vira merchant of record, fica com margem/markup do bilhete).",
+        "limitacoes": "Acesso e B2B sob contrato, nao self-service publico. Booking API (emissao no app) traz responsabilidade de merchant e pos-venda. Cobertura forte em Europa; menor em outras regioes.",
+        "custo": "Sem licenca publica listada; custo = contrato B2B + engenharia. Afiliado/deeplink e o caminho barato.",
+        "prioridade": "P2",
+        "complexidade": "media",
+        "fallback": "Usar Rome2Rio (ou seu deep-link) para MOSTRAR as opcoes multimodais e o 'como chegar', e redirecionar a compra do trecho terrestre para o site do operador/Omio via deep-link generico. Sem Omio, manter o link Rome2Rio ja seamado (linkRome2Rio em links.js) e deep-links de operadores nacionais (Trainline/Flixbus)."
+      },
+      {
+        "nome": "Rome2Rio (ou alternativa de rotas)",
+        "tipoDdata": "Rotas multimodais door-to-door entre quaisquer dois pontos (voo+trem+onibus+ferry+carro+caminhada num resultado), tempo/distancia/faixa de preco por trecho e total, operadores e estacoes, cobertura de transporte terrestre/regional obscuro, deep-links de reserva, frequencia/horarios aproximados.",
+        "tipoDado": "Rotas multimodais door-to-door entre quaisquer dois pontos (voo+trem+onibus+ferry+carro+caminhada num so resultado), tempo/distancia/faixa de preco por trecho e total, operadores e estacoes/terminais, cobertura de transporte terrestre/regional, deep-links de reserva, frequencia/horarios aproximados.",
+        "usoNoApp": "Responder 'como chegar / como circular' em /destino e ENTRE paradas do /roteiro IA (a forca exclusiva e o door-to-door multimodal que Skyscanner/Google ignoram). FASE 1: deep-link de afiliado (linkRome2Rio JA seamado em links.js). FASE 2: Search API/White-Label para renderizar as opcoes de rota com tempo/preco dentro do app.",
+        "modeloComissao": "Deep-link de afiliado (monetizavel, simples) com comissao por redirect aos parceiros de transporte/hotel/carro. Partner API/White-Label e paga (search-only, sem booking via API).",
+        "limitacoes": "SEARCH/ROUTING ONLY — explicitamente sem capacidade de booking (so retorna opcoes + deep-links). Partner API e paga por volume, sob contrato, sem tier publico gratuito self-service. Precos sao faixas estimadas, nao tarifas firmes.",
+        "custo": "Deep-link: gratuito. Partner API/White-Label: paga por volume de requisicoes + grau de customizacao (contrato).",
+        "prioridade": "P2",
+        "complexidade": "media",
+        "fallback": "Ja existe deep-link (linkRome2Rio) que funciona sem API — manter como minimo viavel. Sem a Search API, calcular distancia/tempo aproximado com a Distance Matrix do Google (ou Haversine ja usado no app) e deep-linkar Rome2Rio para o detalhe. Omio cobre a venda do trecho terrestre; Kiwi cobre multimodal com voo."
+      },
+      {
+        "nome": "Wise/Revolut (cambio)",
+        "tipoDado": "Wise: taxas de cambio ao vivo mid-market (GET /v1/rates) e cotacoes com fee/prazo (POST /v2/quotes); custo real de gastar/sacar no exterior; comparativo Wise vs banco. Revolut: cambio em tempo real, planos/RevPoints, Revolut Pay como checkout.",
+        "usoNoApp": "Reforcar o budget/multi-moeda que JA existe (o app converte custos USD e usa cambio open.er-api.com): mostrar cotacao mid-market ao vivo do orcamento da viagem e o 'quanto custa de verdade levar/sacar la fora', com CTA de afiliado para abrir conta/cartao Wise (tag de afiliado) — receita por aquisicao de conta. Util porque o publico viaja e precisa de cartao multimoeda.",
+        "modeloComissao": "Afiliado: comissao por nova conta/cartao Wise (via partnerwise/Impact) e Revolut (via Impact) com deep-link/tag. A API de taxas em si nao paga; a receita e CPA por conversao de conta.",
+        "limitacoes": "API Wise de taxas exige aprovacao como afiliado (credenciais via partnerwise) e SO traz taxas da Wise (nao compara concorrentes). Revolut nao tem API de cambio publica para terceiros — so afiliado de conta + Revolut Pay como metodo de checkout. KYC/regulatorio do lado deles.",
+        "custo": "API de taxas Wise: gratuita apos aprovacao de afiliado. Afiliado: gratuito de aderir; receita CPA.",
+        "prioridade": "P2",
+        "complexidade": "baixa",
+        "fallback": "Manter open.er-api.com (ja em uso) como fonte de cambio mid-market no budget — funciona sem qualquer aprovacao. Wise/Revolut entram so como CTA de afiliado (deep-link) e, opcionalmente, cotacao 'ao vivo' quando a chave de afiliado existir. Sem afiliado aprovado, o cambio do app nao depende deles."
+      },
+      {
+        "nome": "OpenTable/TheFork (reservas)",
+        "tipoDado": "Disponibilidade de mesa em tempo real (data/hora/pessoas), catalogo de restaurantes (cozinha, faixa de preco, bairro, fotos, cardapio/menus), notas e reviews verificados, ofertas/descontos (TheFork Yums 20-50%), links/widget de reserva, dados de cliente (alergias/preferencias) para o restaurante.",
+        "usoNoApp": "Camada de GASTRONOMIA no /destino e no /roteiro IA (refeicoes do dia): sugerir restaurantes e oferecer 'Reservar mesa' via deep-link/widget de afiliado — OpenTable para EUA/global, TheFork para Europa. Casa com a categoria 'Comida' que ja existe no custos.js e com o apelo premium (curadoria gastronomica, possivel selo Michelin no futuro).",
+        "modeloComissao": "Afiliado/CPA por reserva concretizada via deep-link/widget (programas de afiliado das duas marcas). APIs nativas (Directory/B2B) sao de parceiro e mais voltadas a CPA por cover do que a revenue-share de catalogo.",
+        "limitacoes": "Directory API (OpenTable) e B2B-API (TheFork) sao de PARCEIRO com aprovacao; disponibilidade ao vivo completa fica atras do credenciamento. TheFork e essencialmente Europa; OpenTable forte em EUA. Sem feed aberto de catalogo global — integra-se marca a marca, complementar com Google Places/Resy onde nao cobrem.",
+        "custo": "Deep-link/widget de afiliado: gratuito de aderir. APIs de parceiro: aprovacao + engenharia. Custo principal e cobertura desigual por regiao.",
+        "prioridade": "P3",
+        "complexidade": "media",
+        "fallback": "Para a ficha gastronomica, usar Google Places (nota/faixa de preco/horario) ou OSM como fonte de restaurantes e oferecer 'reservar' como deep-link de busca para OpenTable/TheFork sem API. Onde nenhum cobre, deep-link generico de mapa/Google. A reserva real e nice-to-have, nao bloqueia o roteiro."
+      }
+    ],
+    "ordemRecomendada": [
+      "FASE 0 (ja em producao, manter e endurecer): Wikidata (places.js) + Wikipedia REST (wiki.js) como fonte primaria de POI, descricao e credito de imagem — base do /destino sem custo, com timeout+fallback ja prontos.",
+      "FASE 1 (monetizacao imediata, baixo esforco — formalizar afiliados sobre os deep-links que JA existem em links.js): cadastrar nas redes (Travelpayouts/Awin/CJ/Partnerize) e trocar URLs cruas por links de afiliado de Booking, Viator e GetYourGuide. Receita comeca a fluir sem nova engenharia pesada.",
+      "FASE 2 (enriquecimento de conteudo): Google Places API (server, com cap de custo) + OpenStreetMap/Overpass como fallback aberto, para horarios/faixa de preco/geocoding/autocomplete onde Wikidata nao cobre.",
+      "FASE 3 (camada de confianca): Tripadvisor Content API para notas/ranking/reviews na ficha de destino e atracoes (respeitando termos B2C e atribuicao).",
+      "FASE 4 (expandir cobertura de afiliados de experiencia e hospedagem): Klook Affiliate (Asia) e Expedia (afiliado/Vrbo) como provedores adicionais de experiencias e alugueis, redundando Booking/Viator/GYG por regiao.",
+      "FASE 5 (camada de voos real, ainda como redirect monetizado): plugar Skyscanner (Affiliates Link API + Indicative Prices) no SEAM buscarVoos() de flights.js, substituindo a faixa por distancia por preco real; afiliado de voo via Travelpayouts/Aviasales como caminho de aprovacao mais facil. Kiwi Tequila como alternativa multimodal/self-transfer (por convite).",
+      "FASE 6 (mobilidade terrestre e cambio): Rome2Rio (Search API/White-Label, ja com deep-link) para 'como chegar' multimodal e Omio (deep-link -> Booking API) para venda de trem/onibus/ferry; Wise/Revolut como CTA de afiliado de cambio reforcando o budget mode (open.er-api.com continua a fonte base).",
+      "FASE 7 (gastronomia premium, nice-to-have): OpenTable/TheFork via deep-link/afiliado para reserva de mesa, com Google Places como catalogo de restaurantes onde a API de parceiro nao for aprovada.",
+      "FUTURO/CONDICIONAL (so se a estrategia virar transacional/merchant, fora do modelo atual de assinatura+afiliado): Duffel API para vender voo (e Stays/Cars) dentro do app com checkout white-label e Duffel Payments. NAO adotar Amadeus Self-Service como base por causa do descomissionamento em 17/07/2026 — preferir Duffel; Amadeus Enterprise so via consolidador/parceiro, exige IATA/ARC."
+    ]
+  }
+}
