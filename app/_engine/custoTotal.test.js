@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { custoTotalRealista, PREMISSAS_PADRAO } from './custoTotal.js';
+import { custoTotalRealista, resumoVitrineVsReal, calcExemploDestino, PREMISSAS_PADRAO } from './custoTotal.js';
 
 const calc = {
   diasTotais: 26,
@@ -48,5 +48,51 @@ describe('custoTotalRealista', () => {
   it('aceita premissas customizadas', () => {
     const r = custoTotalRealista(calc, { contingencia: 0 });
     expect(r.contingencia).toBe(0);
+  });
+});
+
+describe('resumoVitrineVsReal', () => {
+  it('vitrine (voo+hotel) é menor que o custo real total', () => {
+    const r = resumoVitrineVsReal(calc);
+    expect(r.vitrine).toBeLessThan(r.real);
+    expect(r.escondido).toBeGreaterThan(0);
+    expect(r.escondido).toBe(r.real - r.vitrine);
+  });
+
+  it('vitrine = hospedagem (~40% da vida) + transporte', () => {
+    // terra=1170 → hospedagem ~468; transporte=600 → vitrine ~1068
+    const r = resumoVitrineVsReal(calc);
+    expect(r.vitrine).toBe(Math.round(1170 * 0.4) + 600);
+  });
+
+  it('expõe o breakdown completo do custo real', () => {
+    const r = resumoVitrineVsReal(calc);
+    expect(Array.isArray(r.categorias)).toBe(true);
+    expect(r.categorias.length).toBeGreaterThan(0);
+    expect(r.porDia).toBeGreaterThan(0);
+  });
+});
+
+describe('calcExemploDestino', () => {
+  const peru = { code: 'PE', nome: 'Peru', custoDia: 28, coords: [-77.04, -12.05] };
+
+  it('monta um calc mínimo válido p/ 1 destino', () => {
+    const c = calcExemploDestino(peru, 7);
+    expect(c.diasTotais).toBe(7);
+    expect(c.custoTerraTotal).toBe(28 * 7);
+    expect(c.custoTransporteTotal).toBeGreaterThan(0); // estimou o voo pela distância
+    expect(c.trechos).toHaveLength(1);
+  });
+
+  it('alimenta o resumoVitrineVsReal (vitrine < real)', () => {
+    const r = resumoVitrineVsReal(calcExemploDestino(peru, 7));
+    expect(r.vitrine).toBeLessThan(r.real);
+    expect(r.real).toBeGreaterThan(0);
+  });
+
+  it('usa defaults seguros com destino incompleto', () => {
+    const c = calcExemploDestino({}, 0);
+    expect(c.diasTotais).toBe(7); // dias inválido → default
+    expect(c.custoTransporteTotal).toBeGreaterThan(0);
   });
 });

@@ -7,6 +7,10 @@ import { carregarPlano } from '../../_engine/storage.js';
 import { gerarRoteiro } from '../../_engine/services.js';
 import { MOEDAS } from '../../_engine/data.js';
 import { useLibera } from '../../_components/Gate.jsx';
+import { CustoVitrineVsReal } from '../../_components/CustoVitrineVsReal.jsx';
+import { calcExemploDestino, resumoVitrineVsReal } from '../../_engine/custoTotal.js';
+import { linkPorCategoria } from '../../_lib/links.js';
+import { track } from '../../_lib/analytics.js';
 
 const RITMOS = [{ id: 'tranquilo', label: 'Tranquilo' }, { id: 'equilibrado', label: 'Equilibrado' }, { id: 'intenso', label: 'Intenso' }];
 const CONFORTOS = [{ id: 'mochila', label: 'Mochila' }, { id: 'médio', label: 'Médio' }, { id: 'conforto', label: 'Conforto' }];
@@ -162,8 +166,15 @@ function RoteiroView({ roteiro, destino, onRegerar }) {
         </div>
       </div>
 
+      <div className="mt-4">
+        <CustoVitrineVsReal
+          resumo={resumoVitrineVsReal(calcExemploDestino(destino, roteiro.dias.length))}
+          contexto={`${roteiro.dias.length} dia(s) em ${destino.nome} — o custo real, além do voo e hotel que as OTAs anunciam:`}
+        />
+      </div>
+
       <div className="mt-4 space-y-4">
-        {roteiro.dias.map((d) => <DiaCard key={d.dia} d={d} />)}
+        {roteiro.dias.map((d) => <DiaCard key={d.dia} d={d} destino={destino} />)}
       </div>
 
       <div className="mt-4 grid sm:grid-cols-2 gap-3">
@@ -178,22 +189,25 @@ function RoteiroView({ roteiro, destino, onRegerar }) {
   );
 }
 
-function DiaCard({ d }) {
+function DiaCard({ d, destino }) {
   return (
     <div className="rounded-2xl border border-line bg-card overflow-hidden">
       <div className="px-4 py-2.5 bg-paper2/60 border-b border-line">
         <h3 className="font-display text-lg text-ink">Dia {d.dia} · <span className="text-pine">{d.titulo}</span></h3>
       </div>
       <ol className="divide-y divide-line">
-        {d.itens.map((it, i) => <ItemRow key={i} it={it} />)}
+        {d.itens.map((it, i) => <ItemRow key={i} it={it} destino={destino} />)}
       </ol>
     </div>
   );
 }
 
-function ItemRow({ it }) {
+function ItemRow({ it, destino }) {
   const icon = CAT_ICON[(it.categoria || '').toLowerCase()] || '📍';
   const maps = it.local ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(it.local) : null;
+  // CTA de reserva (last-click) conforme a categoria do item — só hospedagem/passeio/transporte.
+  const cidade = it.local || (destino && (destino.cidadePrincipal || destino.nome));
+  const cta = linkPorCategoria(it.categoria, cidade, destino && destino.nome);
   return (
     <li className="p-4 flex gap-3">
       <div className="flex flex-col items-center shrink-0 w-14">
@@ -217,6 +231,15 @@ function ItemRow({ it }) {
             {it.gratis && <span className="text-[11px] bg-success-bg text-success border border-success-bd rounded-full px-2 py-0.5">🆓 {it.gratis}</span>}
             {it.planoB && <span className="text-[11px] bg-warn-bg text-warn border border-warn-bd rounded-full px-2 py-0.5">🌧️ {it.planoB}</span>}
           </div>
+        )}
+        {cta && (
+          <a
+            href={cta.url} target="_blank" rel="noopener noreferrer sponsored"
+            onClick={() => track('reservar_click', { categoria: it.categoria || '', parceiro: cta.parceiro, destino: destino && destino.nome })}
+            className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-pine bg-pine/10 hover:bg-pine/15 rounded-lg px-2.5 py-1 focusring no-print"
+          >
+            {cta.icon} {cta.label} ↗
+          </a>
         )}
       </div>
     </li>

@@ -5,8 +5,9 @@ import { STORAGE_KEY } from '../../_engine/data.js';
 import { carregarPlano } from '../../_engine/storage.js';
 import { calcular } from '../../_engine/calc.js';
 import { scoreViagem } from '../../_engine/score.js';
-import { custoTotalRealista } from '../../_engine/custoTotal.js';
+import { custoTotalRealista, resumoVitrineVsReal } from '../../_engine/custoTotal.js';
 import { escanearOportunidades } from '../../_engine/oportunidades.js';
+import { CustoVitrineVsReal } from '../../_components/CustoVitrineVsReal.jsx';
 import { recomendarDestinos } from '../../_engine/decisao.js';
 import { carregarPerfil, salvarPerfil, perfilDoPreset, pesosScore, topInteresses, PERFIS_PRONTOS, INTERESSE_LABEL } from '../../_engine/perfil.js';
 import { fmtMoeda } from '../../_engine/utils.js';
@@ -85,6 +86,7 @@ export function DecisaoClient({ destinos }) {
   const score = useMemo(() => (perfil && calc ? scoreViagem(calc, { pesos: pesosScore(perfil) }) : null), [perfil, calc]);
   const ops = useMemo(() => (calc ? escanearOportunidades(calc) : []), [calc]);
   const custo = useMemo(() => (calc ? custoTotalRealista(calc) : null), [calc]);
+  const vitrine = useMemo(() => (calc ? resumoVitrineVsReal(calc) : null), [calc]);
   const top = perfil ? topInteresses(perfil, 3) : [];
 
   if (!perfil) return <div className="mt-8 text-inksoft text-sm">Carregando seu perfil…</div>;
@@ -215,6 +217,19 @@ export function DecisaoClient({ destinos }) {
           </div>
         )}
       </section>
+
+      {/* ============ CUSTO HONESTO ============ */}
+      {vitrine && (
+        <section aria-labelledby="vitrine-h">
+          <h2 id="vitrine-h" className="font-display text-2xl text-ink">Custo de vitrine vs. custo real</h2>
+          <p className="mt-1 text-inksoft text-sm max-w-2xl">
+            O preço que as OTAs anunciam é só voo e hotel. A gente soma o resto — pra você não tomar susto na viagem.
+          </p>
+          <div className="mt-4">
+            <CustoVitrineVsReal resumo={vitrine} contexto="Da rota avaliada acima — cada item que a vitrine não te conta:" />
+          </div>
+        </section>
+      )}
 
       {/* ============ CENTRAL DE OPORTUNIDADES ============ */}
       <section aria-labelledby="ops-h">

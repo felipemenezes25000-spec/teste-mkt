@@ -8,6 +8,8 @@ import { FavoriteButton } from '../../../_components/FavoriteButton.jsx';
 import { AddToRouteButton } from '../../../_components/AddToRouteButton.jsx';
 import { linksDestino } from '../../../_lib/links.js';
 import { CustoTiers } from '../../../_components/CustoTiers.jsx';
+import { CustoVitrineVsReal } from '../../../_components/CustoVitrineVsReal.jsx';
+import { calcExemploDestino, resumoVitrineVsReal } from '../../../_engine/custoTotal.js';
 
 export const revalidate = 86400;
 
@@ -98,6 +100,14 @@ export default async function DestinoPage({ params }) {
             <span className="text-xs text-inksoft">estimativa · do mochilão ao conforto</span>
           </div>
           <CustoTiers custoDia={d.custoDia} dias={7} />
+        </section>
+
+        {/* CUSTO HONESTO — vitrine vs real (exemplo de 7 dias) */}
+        <section>
+          <CustoVitrineVsReal
+            resumo={resumoVitrineVsReal(calcExemploDestino(d, 7))}
+            contexto={`Exemplo de 7 dias em ${d.nome} (com voo do Brasil) — o custo real além do que as OTAs mostram:`}
+          />
         </section>
 
         {/* SOBRE */}

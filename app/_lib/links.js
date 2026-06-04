@@ -1,5 +1,7 @@
-// Deep-links de reserva/serviços — só construção de URL (sem API/afiliado). Abrem
-// a busca certa no parceiro. Trocáveis por links de afiliado quando houver conta.
+// Deep-links de reserva/serviços. As URLs base abrem a busca certa no parceiro;
+// `withAffiliate` injeta a tag de afiliado quando a env existe (no-op seguro sem ela).
+import { withAffiliate } from '../_engine/afiliados.js';
+
 const enc = encodeURIComponent;
 
 export function linkBooking(cidade, pais) { return `https://www.booking.com/searchresults.html?ss=${enc(`${cidade}, ${pais}`)}`; }
@@ -12,14 +14,31 @@ export function linkGoogleFlights(origemCidade, destinoCidade, dataISO) {
   return 'https://www.google.com/travel/flights?q=' + enc(`voos ${origemCidade || ''} para ${destinoCidade} ${dataISO || ''}`);
 }
 
-// Conjunto de deep-links úteis pra um destino (cidade/país).
+// Conjunto de deep-links úteis pra um destino (cidade/país). Cada URL já sai
+// decorada com a tag de afiliado do parceiro (quando configurada). `airbnb`,
+// `tripadvisor` e `rome2rio` não pagam afiliado → withAffiliate é no-op neles.
 export function linksDestino(cidade, pais) {
   return [
-    { id: 'booking', label: 'Booking', icon: '🏨', desc: 'Hotéis & hostels', url: linkBooking(cidade, pais) },
-    { id: 'airbnb', label: 'Airbnb', icon: '🏠', desc: 'Casas & apês', url: linkAirbnb(cidade, pais) },
-    { id: 'gyg', label: 'GetYourGuide', icon: '🎟️', desc: 'Passeios & ingressos', url: linkGetYourGuide(`${cidade} ${pais}`) },
-    { id: 'viator', label: 'Viator', icon: '🚎', desc: 'Tours & experiências', url: linkViator(`${cidade}`) },
-    { id: 'tripadvisor', label: 'TripAdvisor', icon: '⭐', desc: 'Avaliações', url: linkTripadvisor(`${cidade} ${pais}`) },
-    { id: 'rome2rio', label: 'Rome2Rio', icon: '🧭', desc: 'Como chegar', url: linkRome2Rio(pais, cidade) },
+    { id: 'booking', label: 'Booking', icon: '🏨', desc: 'Hotéis & hostels', url: withAffiliate(linkBooking(cidade, pais), 'booking') },
+    { id: 'airbnb', label: 'Airbnb', icon: '🏠', desc: 'Casas & apês', url: withAffiliate(linkAirbnb(cidade, pais), 'airbnb') },
+    { id: 'gyg', label: 'GetYourGuide', icon: '🎟️', desc: 'Passeios & ingressos', url: withAffiliate(linkGetYourGuide(`${cidade} ${pais}`), 'getyourguide') },
+    { id: 'viator', label: 'Viator', icon: '🚎', desc: 'Tours & experiências', url: withAffiliate(linkViator(`${cidade}`), 'viator') },
+    { id: 'tripadvisor', label: 'TripAdvisor', icon: '⭐', desc: 'Avaliações', url: withAffiliate(linkTripadvisor(`${cidade} ${pais}`), 'tripadvisor') },
+    { id: 'rome2rio', label: 'Rome2Rio', icon: '🧭', desc: 'Como chegar', url: withAffiliate(linkRome2Rio(pais, cidade), 'rome2rio') },
   ];
+}
+
+// Mapeia a categoria de um item de roteiro → CTA de reserva (parceiro + URL
+// decorada). Hospedagem e passeios são monetizáveis; transporte abre "como chegar";
+// comida e outros não têm CTA por ora (Fatia 1). Devolve null se não houver CTA.
+export function linkPorCategoria(categoria, cidade, pais) {
+  const cat = (categoria || '').toLowerCase();
+  const q = `${cidade || ''} ${pais || ''}`.trim();
+  if (/hosped|hotel|dorm|hostel|estad/.test(cat))
+    return { parceiro: 'booking', label: 'Reservar hospedagem', icon: '🏨', url: withAffiliate(linkBooking(cidade, pais), 'booking') };
+  if (/atra|passe|tour|ingress|museu|experi|visit/.test(cat))
+    return { parceiro: 'viator', label: 'Reservar passeio', icon: '🎟️', url: withAffiliate(linkViator(q || cidade), 'viator') };
+  if (/transp|voo|trem|ônibus|onibus|ferry|transfer|desloc/.test(cat))
+    return { parceiro: 'rome2rio', label: 'Como chegar', icon: '🧭', url: withAffiliate(linkRome2Rio(pais, cidade), 'rome2rio') };
+  return null;
 }

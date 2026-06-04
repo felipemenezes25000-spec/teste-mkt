@@ -6,7 +6,7 @@
    reserva pra imprevistos. E ainda em 3 níveis (mochila/médio/conforto), pra o
    viajante não tomar susto. Recebe o `calc` pronto. Função PURA → testável.
    ========================================================================== */
-import { num } from './utils.js';
+import { num, distanciaKm, estimarPrecoVoo } from './utils.js';
 
 const TIERS = { mochila: 0.7, medio: 1.0, conforto: 1.9 };
 
@@ -66,5 +66,47 @@ export function custoTotalRealista(calc, premissas = {}) {
     porDia: dias > 0 ? Math.round(total / dias) : 0,
     faixa, // { mochila, medio, conforto }
     premissas: p,
+  };
+}
+
+// Fração da vida diária que vai pra HOSPEDAGEM (espelha custos.js → CATEGORIAS).
+// O "preço de vitrine" das OTAs mostra só passagem + diária de hotel.
+const PESO_HOSPEDAGEM = 0.40;
+
+// "Vitrine vs Real": o que uma OTA te mostra (voo + hotel) vs o custo REAL da
+// viagem inteira. É o gancho de conversão — materializa a dor nº 1 do mercado.
+// Função PURA → testável.
+export function resumoVitrineVsReal(calc, premissas = {}) {
+  const real = custoTotalRealista(calc, premissas);
+  const terra = num(calc && calc.custoTerraTotal);
+  const transporte = num(calc && calc.custoTransporteTotal);
+  const hospedagem = Math.round(terra * PESO_HOSPEDAGEM);
+  const vitrine = hospedagem + Math.round(transporte); // só voo + hotel
+  const escondido = Math.max(0, real.total - vitrine);
+  return {
+    vitrine,
+    real: real.total,
+    escondido,                 // quanto a vitrine não te conta
+    porDia: real.porDia,
+    categorias: real.categorias, // breakdown completo do custo real
+    faixa: real.faixa,
+  };
+}
+
+// Monta um `calc` MÍNIMO pra um único destino (n dias) — alimenta o bloco
+// "vitrine vs real" nas telas que não têm uma rota completa (/destino, /roteiro).
+// Estima o voo de ida pela distância da origem (default São Paulo/GRU). Puro.
+const ORIGEM_PADRAO = [-46.47, -23.43]; // GRU
+export function calcExemploDestino(destino, dias = 7, origemCoords = ORIGEM_PADRAO) {
+  const d = Math.max(1, Math.round(num(dias) || 7));
+  const custoDia = Math.max(8, num(destino && destino.custoDia, 30));
+  const km = destino && destino.coords && origemCoords ? distanciaKm(origemCoords, destino.coords) : 0;
+  const faixa = estimarPrecoVoo(km);
+  const voo = faixa ? Math.round((faixa.min + faixa.max) / 2) : 600;
+  return {
+    trechos: [{ code: destino && destino.code, nome: destino && destino.nome, dias: d, custoEfetivoDia: custoDia, vistoTipo: (destino && destino.vistoTipo) || '' }],
+    diasTotais: d,
+    custoTerraTotal: custoDia * d,
+    custoTransporteTotal: voo,
   };
 }
