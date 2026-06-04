@@ -10,6 +10,7 @@ import { linksDestino } from '../../../_lib/links.js';
 import { CustoTiers } from '../../../_components/CustoTiers.jsx';
 import { CustoVitrineVsReal } from '../../../_components/CustoVitrineVsReal.jsx';
 import { calcExemploDestino, resumoVitrineVsReal } from '../../../_engine/custoTotal.js';
+import { dicasDe, SECOES_DICAS } from '../../../_engine/dicas.js';
 
 export const revalidate = 86400;
 
@@ -175,6 +176,29 @@ export default async function DestinoPage({ params }) {
             </div>
           </section>
         )}
+
+        {/* ANTES DE IR — dicas práticas (segurança/golpes/saúde/transporte/chip) */}
+        {(() => {
+          const dicas = dicasDe(d.code);
+          const secoes = SECOES_DICAS.filter((s) => (dicas[s.id] || []).length > 0);
+          if (secoes.length === 0) return null;
+          return (
+            <section>
+              <h2 className="font-display text-2xl text-ink mb-3">✈️ Antes de ir</h2>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {secoes.map((s) => (
+                  <div key={s.id} className="rounded-2xl border border-line bg-card p-4">
+                    <h3 className="font-semibold text-ink flex items-center gap-2"><span aria-hidden>{s.icon}</span> {s.label}</h3>
+                    <ul className="mt-2 space-y-1.5 text-sm text-inksoft">
+                      {dicas[s.id].map((t, i) => <li key={i} className="flex gap-2"><span className="text-pine shrink-0" aria-hidden>•</span>{t}</li>)}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-2 text-[11px] text-inksoft">Dicas de referência por região — confira visto, vacinas e alertas atuais na fonte oficial (Itamaraty/embaixada/Anvisa).</p>
+            </section>
+          );
+        })()}
 
         {/* RESERVAR (deep-links reais) */}
         <section>

@@ -18,6 +18,18 @@ const INTERESSES = ['Cultura', 'Natureza', 'Gastronomia', 'Praia', 'História', 
 const RESTRICOES = ['Nenhuma', 'Vegetariano', 'Vegano', 'Sem glúten', 'Halal', 'Kosher'];
 const CAT_ICON = { cultura: '🏛️', natureza: '🌿', gastronomia: '🍽️', praia: '🏖️', compras: '🛍️', 'vida noturna': '🌙', aventura: '⛰️', descanso: '😌', história: '🏺' };
 
+// Roteiros temáticos = presets que pré-preenchem o form (interesses + conforto + ritmo).
+const TEMAS = [
+  { id: 'gastronomico', label: '🍽️ Gastronômico', interesses: ['Gastronomia', 'Cultura'], conforto: 'médio', ritmo: 'equilibrado' },
+  { id: 'romantico', label: '💞 Romântico', interesses: ['Gastronomia', 'Praia', 'Cultura'], conforto: 'conforto', ritmo: 'tranquilo' },
+  { id: 'familia', label: '👨‍👩‍👧 Família', interesses: ['Natureza', 'Cultura', 'Praia'], conforto: 'médio', ritmo: 'tranquilo' },
+  { id: 'mochileiro', label: '🎒 Mochileiro', interesses: ['Natureza', 'Aventura', 'Cultura'], conforto: 'mochila', ritmo: 'intenso' },
+  { id: 'luxo', label: '✨ Luxo', interesses: ['Gastronomia', 'Cultura'], conforto: 'conforto', ritmo: 'tranquilo' },
+  { id: 'cultural', label: '🏛️ Cultural', interesses: ['Cultura', 'História', 'Gastronomia'], conforto: 'médio', ritmo: 'equilibrado' },
+  { id: 'aventura', label: '⛰️ Aventura', interesses: ['Natureza', 'Aventura'], conforto: 'mochila', ritmo: 'intenso' },
+  { id: 'praia', label: '🏖️ Praia & relax', interesses: ['Praia', 'Natureza'], conforto: 'médio', ritmo: 'tranquilo' },
+];
+
 export function RoteiroClient() {
   const sp = useSearchParams();
   const dInicial = sp.get('destino') ? destinoPorSlug(sp.get('destino')) : null;
@@ -36,8 +48,15 @@ export function RoteiroClient() {
   const [roteiro, setRoteiro] = useState(null);
 
   const destino = DESTINOS.find((d) => d.code === code) || DESTINOS[0];
+  const [tema, setTema] = useState('');
 
   const toggleInteresse = (i) => setInteresses((s) => (s.includes(i) ? s.filter((x) => x !== i) : [...s, i]));
+  function aplicarTema(t) {
+    setTema(t.id);
+    setInteresses(t.interesses);
+    setConforto(t.conforto);
+    setRitmo(t.ritmo);
+  }
 
   async function gerar() {
     setBusy(true); setErro(''); setRoteiro(null);
@@ -61,6 +80,16 @@ export function RoteiroClient() {
   return (
     <div className="mt-6">
       <div className="rounded-2xl border border-line bg-card p-5 space-y-4 no-print">
+        <div>
+          <div className="text-xs text-inksoft font-medium mb-1">Tipo de roteiro <span className="opacity-70">(pré-preenche o resto)</span></div>
+          <div className="flex flex-wrap gap-1.5">
+            {TEMAS.map((t) => (
+              <button key={t.id} type="button" onClick={() => aplicarTema(t)} aria-pressed={tema === t.id}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition focusring ${tema === t.id ? 'bg-pine text-white border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}>{t.label}</button>
+            ))}
+          </div>
+        </div>
+
         <div className="grid sm:grid-cols-2 gap-3">
           <label className="text-xs text-inksoft font-medium">Destino
             <select value={code} onChange={(e) => { const c = e.target.value; setCode(c); const dd = DESTINOS.find((x) => x.code === c); if (dd) setMoeda(dd.moeda); }} className={`${field} mt-1`}>
