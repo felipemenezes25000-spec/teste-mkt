@@ -42,3 +42,15 @@ export function linkPorCategoria(categoria, cidade, pais) {
     return { parceiro: 'rome2rio', label: 'Como chegar', icon: '🧭', url: withAffiliate(linkRome2Rio(pais, cidade), 'rome2rio') };
   return null;
 }
+
+// Serviços que o viajante contrata na FASE DE PLANEJAMENTO (onde nosso app vive):
+// cartão multimoeda (câmbio), chip/eSIM e seguro-viagem. URLs já decoradas.
+export function linkWise() {
+  return withAffiliate('https://wise.com/', 'wise');
+}
+export function linkEsim(local) {
+  return withAffiliate(`https://www.klook.com/en-US/search/?query=${enc(`eSIM ${local || ''}`.trim())}`, 'klook');
+}
+export function linkSeguro() {
+  return withAffiliate('https://safetywing.com/nomad-insurance', 'safetywing');
+}

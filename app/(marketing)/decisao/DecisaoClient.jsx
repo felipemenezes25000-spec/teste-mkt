@@ -8,6 +8,7 @@ import { scoreViagem } from '../../_engine/score.js';
 import { custoTotalRealista, resumoVitrineVsReal } from '../../_engine/custoTotal.js';
 import { escanearOportunidades } from '../../_engine/oportunidades.js';
 import { CustoVitrineVsReal } from '../../_components/CustoVitrineVsReal.jsx';
+import { ServicosDaViagem } from '../../_components/ServicosDaViagem.jsx';
 import { recomendarDestinos } from '../../_engine/decisao.js';
 import { carregarPerfil, salvarPerfil, perfilDoPreset, pesosScore, topInteresses, PERFIS_PRONTOS, INTERESSE_LABEL } from '../../_engine/perfil.js';
 import { fmtMoeda } from '../../_engine/utils.js';
@@ -60,13 +61,18 @@ export function DecisaoClient({ destinos }) {
   const [perfil, setPerfil] = useState(null);
   const [presetId, setPresetId] = useState('equilibrado');
   const [calc, setCalc] = useState(null);
+  const [rates, setRates] = useState(null);
   const [temPlanoSalvo, setTemPlanoSalvo] = useState(false);
 
   useEffect(() => {
     const salvo = carregarPerfil();
     setPerfil(salvo || perfilDoPreset('equilibrado'));
     try { setTemPlanoSalvo(!!localStorage.getItem(STORAGE_KEY)); } catch {}
-    try { setCalc(calcular(carregarPlano())); } catch {}
+    try {
+      const pl = carregarPlano();
+      setCalc(calcular(pl));
+      setRates((pl.settings && pl.settings.fx && pl.settings.fx.rates) || null);
+    } catch {}
   }, []);
 
   function escolherPreset(id) {
@@ -225,8 +231,13 @@ export function DecisaoClient({ destinos }) {
           <p className="mt-1 text-inksoft text-sm max-w-2xl">
             O preço que as OTAs anunciam é só voo e hotel. A gente soma o resto — pra você não tomar susto na viagem.
           </p>
-          <div className="mt-4">
+          <div className="mt-4 grid lg:grid-cols-2 gap-4 items-start">
             <CustoVitrineVsReal resumo={vitrine} contexto="Da rota avaliada acima — cada item que a vitrine não te conta:" />
+            <ServicosDaViagem
+              totalUSD={custo && custo.total}
+              taxaBRL={rates && rates.BRL}
+              destino={calc && calc.trechos && calc.trechos[0] && calc.trechos[0].nome}
+            />
           </div>
         </section>
       )}

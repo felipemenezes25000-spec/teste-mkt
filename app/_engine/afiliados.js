@@ -19,6 +19,7 @@ export const IDS = {
   civitatis: process.env.NEXT_PUBLIC_AFF_CIVITATIS || '',
   travelpayouts: process.env.NEXT_PUBLIC_AFF_TRAVELPAYOUTS || '',
   wise: process.env.NEXT_PUBLIC_AFF_WISE || '',
+  safetywing: process.env.NEXT_PUBLIC_AFF_SAFETYWING || '',
 };
 
 // parceiro → nome do parâmetro de afiliado na URL.
@@ -30,6 +31,7 @@ const PARAM = {
   civitatis: 'aid',
   travelpayouts: 'marker',
   wise: 'ref',
+  safetywing: 'referenceID',
 };
 
 // Parceiros que NÃO pagam tráfego — no-op deliberado (só exibição/comparação).
