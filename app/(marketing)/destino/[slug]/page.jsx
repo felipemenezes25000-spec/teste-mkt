@@ -6,6 +6,7 @@ import { atracoesDe } from '../../../_lib/places.js';
 import { MESES_PT } from '../../../_engine/data.js';
 import { FavoriteButton } from '../../../_components/FavoriteButton.jsx';
 import { AddToRouteButton } from '../../../_components/AddToRouteButton.jsx';
+import { linksDestino } from '../../../_lib/links.js';
 
 export const revalidate = 86400;
 
@@ -154,6 +155,24 @@ export default async function DestinoPage({ params }) {
             </div>
           </section>
         )}
+
+        {/* RESERVAR (deep-links reais) */}
+        <section>
+          <h2 className="font-display text-2xl text-ink mb-3">🏨 Onde ficar & reservar</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {linksDestino(d.cidadePrincipal || d.nome, d.nome).map((l) => (
+              <a key={l.id} href={l.url} target="_blank" rel="noopener noreferrer"
+                className="rounded-xl border border-line bg-card p-3 hover:border-pine/50 hover:shadow-[var(--e-1)] transition focusring flex items-center gap-2.5">
+                <span className="text-xl shrink-0" aria-hidden>{l.icon}</span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold text-ink">{l.label} ↗</span>
+                  <span className="block text-[11px] text-inksoft truncate">{l.desc}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+          <p className="mt-2 text-[11px] text-inksoft">Links abrem a busca no parceiro. Preços e disponibilidade no site de cada um.</p>
+        </section>
 
         {/* CTA */}
         <section className="rounded-2xl border border-line bg-gradient-to-br from-pine/5 to-ochre/5 p-6 flex flex-col sm:flex-row sm:items-center gap-3">
