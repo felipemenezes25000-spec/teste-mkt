@@ -22,6 +22,8 @@ import { aplicarCortes } from './budget.js';
 import { encodePlan, decodePlan } from './share.js';
 import CenariosView from './CenariosView.jsx';
 import { carregarCenarios, salvarCenarios, snapshotCenario } from './cenarios.js';
+import ChecklistView from './ChecklistView.jsx';
+import { carregarCheck, salvarCheck } from './checklist.js';
 
 // Quando o backend (Render) tem a chave de IA, a IA funciona sem chave do usuário.
 const AI_SERVIDOR = process.env.NEXT_PUBLIC_AI_SERVER === '1';
@@ -116,6 +118,7 @@ export default function App() {
   const [showLogin, setShowLogin] = useState(false);
   const { confirm, confirmElement } = useConfirm();
   const [cenarios, setCenarios] = useState(carregarCenarios);  // "Rota A vs B" — snapshots comparáveis
+  const [check, setCheck] = useState(carregarCheck);            // checklist de preparativos (mapa {id:true})
 
   const calc = useMemo(() => calcular(plan), [plan]);
   const base = plan.settings.moedaBase;
@@ -125,6 +128,7 @@ export default function App() {
 
   useEffect(() => { salvarPlano(plan); }, [plan]);
   useEffect(() => { salvarCenarios(cenarios); }, [cenarios]);
+  useEffect(() => { salvarCheck(check); }, [check]);
 
   function toast(msg, tipo = 'ok') {
     const id = ++_tid.current;
@@ -353,6 +357,7 @@ export default function App() {
     setCenarios(cs => cs.filter(x => x.id !== id));
     toast('Cenário removido.');
   }
+  const toggleCheck = (id) => setCheck(c => ({ ...c, [id]: !c[id] }));
 
   const dragHandlersFor = (index) => ({
     draggable: true,
@@ -429,7 +434,7 @@ export default function App() {
 
         {plan.legs.length > 0 && (
           <Tabs value={aba} onChange={setAba}
-            tabs={[{ id: 'rota', icon: '🧭', label: 'Rota' }, { id: 'mapa', icon: '🗺️', label: 'Mapa' }, { id: 'custos', icon: '💰', label: 'Custos' }, { id: 'cenarios', icon: '⚖️', label: 'Cenários' }]} />
+            tabs={[{ id: 'rota', icon: '🧭', label: 'Rota' }, { id: 'mapa', icon: '🗺️', label: 'Mapa' }, { id: 'custos', icon: '💰', label: 'Custos' }, { id: 'cenarios', icon: '⚖️', label: 'Cenários' }, { id: 'checklist', icon: '📋', label: 'Checklist' }]} />
         )}
 
         {optResumo && (
@@ -452,6 +457,10 @@ export default function App() {
 
         {plan.legs.length > 0 && aba === 'cenarios' && (
           <CenariosView plan={plan} cenarios={cenarios} onSalvar={salvarCenario} onCarregar={carregarCenario} onRemover={removerCenario} />
+        )}
+
+        {plan.legs.length > 0 && aba === 'checklist' && (
+          <ChecklistView plan={plan} done={check} onToggle={toggleCheck} />
         )}
 
         {(plan.legs.length === 0 || aba === 'rota') && (
@@ -482,6 +491,7 @@ export default function App() {
                       t={t} index={i} total={calc.trechos.length} base={base} passaporte={plan.settings.passaporte}
                       origemCidade={i === 0 ? plan.settings.origemCidade : (calc.trechos[i - 1].cidadePrincipal || '')}
                       origemIata={i === 0 ? plan.settings.origemIata : (calc.trechos[i - 1].iata || '')}
+                      origemCoords={i === 0 ? null : (calc.trechos[i - 1].coords || null)}
                       onPatch={(patch) => patchLeg(t.id, patch)} onRemove={() => removeLeg(t.id)} onMove={moveLeg}
                       onBuscarOpp={() => handleOpp(t)} oppBusy={!!oppBusy[t.id]} rationale={rationales[t.id]}
                       ehQuebra={!calc.folego.cobreTudo && calc.folego.trechoQuebraId === t.id} dataQuebra={calc.folego.dataQuebra}

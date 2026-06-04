@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MOEDAS, PASSAPORTES, REVISADO_EM } from './data.js';
-import { fmtMoeda, fmtData, simbolo, num, clamp, toISO, linksVoo, linkMapaTexto } from './utils.js';
+import { fmtMoeda, fmtData, simbolo, num, clamp, toISO, linksVoo, linkMapaTexto, distanciaKm, estimarPrecoVoo } from './utils.js';
 import { buscarLugar } from './services.js';
 import { ESTACAO_UI, VISTO_UI, NumberInput, MesesPicker, StatusChip } from './components.jsx';
 
@@ -8,7 +8,7 @@ import { ESTACAO_UI, VISTO_UI, NumberInput, MesesPicker, StatusChip } from './co
    e painel de cidades (com Google Maps + fotos) e comidas típicas.
    Valores são digitados na MOEDA do trecho; o resumo aparece na moeda base. */
 export default function TrechoCard(props) {
-  const { t, index, total, base, passaporte, origemCidade, origemIata,
+  const { t, index, total, base, passaporte, origemCidade, origemIata, origemCoords,
           onPatch, onRemove, onMove, onBuscarOpp, oppBusy, rationale,
           ehQuebra, dataQuebra, dragHandlers, dragging, dropTarget } = props;
   const [ajustes, setAjustes] = useState(false);
@@ -25,6 +25,7 @@ export default function TrechoCard(props) {
     : t.estacao.nivel === 'parcial' ? 'text-warn' : 'text-inksoft';
 
   const voos = linksVoo({ origemCidade, origemIata, destinoCidade: t.cidadePrincipal || t.nome, destinoIata: t.iata, dataISO: toISO(t.chegada) });
+  const estVoo = origemCoords && Array.isArray(t.coords) ? estimarPrecoVoo(distanciaKm(origemCoords, t.coords)) : null;
 
   // Foto-herói do local (lazy + cacheada no serviço).
   useEffect(() => {
@@ -144,6 +145,7 @@ export default function TrechoCard(props) {
                 ✈ Buscar voo até aqui
               </a>
               {voos.skyscanner && <a href={voos.skyscanner} target="_blank" rel="noopener noreferrer" className="text-[11px] text-pine hover:underline focusring">Skyscanner ↗</a>}
+              {estVoo && <span className="text-[11px] text-inksoft tnum" title={`Estimativa grosseira por distância (${estVoo.km} km) — não é preço real`}>✈ ~US$ {estVoo.min}–{estVoo.max}</span>}
               <button onClick={() => setLugaresAberto(a => !a)} aria-expanded={lugaresAberto}
                 className="text-xs px-3 py-1.5 rounded-lg border border-line bg-input text-inksoft hover:text-pine focusring">📍 Cidades & comida</button>
               <button onClick={() => { setOppAberto(true); onBuscarOpp(); }} disabled={oppBusy}

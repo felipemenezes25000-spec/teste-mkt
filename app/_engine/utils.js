@@ -91,4 +91,23 @@ export function linksVoo({ origemCidade, origemIata, destinoCidade, destinoIata,
 export function linkMapaTexto(query) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query); }
 export function linkMapaCoord(coords) { return coords ? `https://www.google.com/maps/search/?api=1&query=${coords[1]},${coords[0]}` : null; }
 
+/* ===== Estimativa de voo por distância (sem API — só ordem de grandeza) ===== */
+// Haversine entre [lng,lat] e [lng,lat] -> km.
+export function distanciaKm(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return 0;
+  const R = 6371, rad = Math.PI / 180;
+  const dLat = (b[1] - a[1]) * rad, dLng = (b[0] - a[0]) * rad;
+  const la1 = a[1] * rad, la2 = b[1] * rad;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin(dLng / 2) ** 2;
+  return Math.round(2 * R * Math.asin(Math.min(1, Math.sqrt(h))));
+}
+// Faixa de preço de voo (USD) por distância: base + $/km com margem. NÃO é preço
+// real — é ordem de grandeza pra ajudar a preencher "transporte". Arredonda em $5.
+export function estimarPrecoVoo(km) {
+  if (!km || km <= 0) return null;
+  const min = Math.round((40 + 0.055 * km) / 5) * 5;
+  const max = Math.round((60 + 0.12 * km) / 5) * 5;
+  return { min, max, km };
+}
+
 export { MESES_PT };
