@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
+import Link from 'next/link';
 import { PAISES_REF, PASSAPORTES, MOEDAS, vistoDe } from './data.js';
 import { uid, num, clamp, dur, fmtMoeda, converter } from './utils.js';
 import { calcular } from './calc.js';
@@ -416,13 +417,13 @@ export default function App() {
 
       <header className="sticky top-0 z-30 backdrop-blur bg-paper/80 border-b border-line">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <div className="flex items-center gap-2.5 mr-auto">
+          <Link href="/" title="Início / Explorar destinos" className="flex items-center gap-2.5 mr-auto focusring rounded-lg">
             <div className="w-9 h-9 rounded-xl bg-pine text-white grid place-items-center font-display text-lg shadow-md" aria-hidden>∞</div>
             <div className="leading-tight">
               <div className="font-display text-xl text-ink">Mundo Sem Fim</div>
               <div className="text-[11px] text-inksoft -mt-0.5">Estação × Visto × Fôlego, na ordem certa</div>
             </div>
-          </div>
+          </Link>
 
           <div className="flex flex-wrap items-center justify-end gap-1.5">
             <SaveStatus estado={saveState} naNuvem={naNuvem} onRetry={tentarSincronizar} />
