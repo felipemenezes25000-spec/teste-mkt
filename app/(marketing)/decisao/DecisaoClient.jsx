@@ -9,6 +9,7 @@ import { custoTotalRealista, resumoVitrineVsReal } from '../../_engine/custoTota
 import { escanearOportunidades } from '../../_engine/oportunidades.js';
 import { CustoVitrineVsReal } from '../../_components/CustoVitrineVsReal.jsx';
 import { ServicosDaViagem } from '../../_components/ServicosDaViagem.jsx';
+import { ModoGrupo } from '../../_components/ModoGrupo.jsx';
 import { recomendarDestinos } from '../../_engine/decisao.js';
 import { carregarPerfil, salvarPerfil, perfilDoPreset, pesosScore, topInteresses, PERFIS_PRONTOS, INTERESSE_LABEL, PERFIL_EVENT } from '../../_engine/perfil.js';
 import { fmtMoeda } from '../../_engine/utils.js';
@@ -243,6 +244,9 @@ export function DecisaoClient({ destinos }) {
               taxaBRL={rates && rates.BRL}
               destino={calc && calc.trechos && calc.trechos[0] && calc.trechos[0].nome}
             />
+          </div>
+          <div className="mt-4">
+            <ModoGrupo custo={custo} />
           </div>
         </section>
       )}

@@ -5,6 +5,7 @@ import { DESTINOS } from '../../_lib/destinos.js';
 import { buscarVoos, ORIGENS } from '../../_lib/flights.js';
 import { linksVoo, toISO } from '../../_engine/utils.js';
 import { useLibera } from '../../_components/Gate.jsx';
+import { curvaPreco, vereditoCompra } from '../../_engine/previsaoVoo.js';
 
 function dataPadrao() {
   const d = new Date();
@@ -103,6 +104,8 @@ export function VoosClient() {
             ))}
           </div>
 
+          <PrevisaoVoo rota={`${origem.iata}-${destino.iata}-${data}`} faixa={res.faixa} precoAtual={res.resultados[0] && res.resultados[0].preco} />
+
           <div className="mt-4 flex flex-wrap gap-2 items-center">
             <span className="text-xs text-inksoft">Reservar de verdade:</span>
             <a href={voos.google} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-pine hover:bg-paper2 focusring">Google Flights ↗</a>
@@ -116,6 +119,43 @@ export function VoosClient() {
           </p>
         </div>
       )}
+    </div>
+  );
+}
+
+const VEREDITO_UI = {
+  comprar: { label: 'Compre agora', cls: 'bg-success-bg text-success border-success-bd', icon: '✅' },
+  esperar: { label: 'Vale esperar', cls: 'bg-warn-bg text-warn border-warn-bd', icon: '⏳' },
+  estavel: { label: 'Preço estável', cls: 'bg-card text-inksoft border-line', icon: '➡️' },
+};
+
+// Veredito "comprar/esperar" + mini-gráfico da curva de 30 dias (anti-Hopper).
+function PrevisaoVoo({ rota, faixa, precoAtual }) {
+  const curva = curvaPreco(rota, faixa, 30);
+  const veredito = vereditoCompra(curva, precoAtual);
+  if (!veredito) return null;
+  const ui = VEREDITO_UI[veredito.acao] || VEREDITO_UI.estavel;
+  const maxP = Math.max(...curva.map((p) => p.preco));
+  const minP = Math.min(...curva.map((p) => p.preco));
+  return (
+    <div className="mt-4 rounded-2xl border border-line bg-card p-4">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full border ${ui.cls}`}>{ui.icon} {ui.label}</span>
+        <span className="text-sm text-ink">{veredito.texto}</span>
+        {veredito.acao === 'esperar' && veredito.economia > 0 && (
+          <span className="text-xs font-semibold text-pine">economia ~US$ {veredito.economia}</span>
+        )}
+      </div>
+      <div className="mt-3 flex items-end gap-0.5 h-16" aria-hidden>
+        {curva.map((p) => {
+          const h = maxP > minP ? 15 + ((p.preco - minP) / (maxP - minP)) * 85 : 50;
+          const ehMin = p.dia === veredito.melhorDia;
+          return <div key={p.dia} title={`Dia ${p.dia + 1}: US$ ${p.preco}`} className={`flex-1 rounded-t ${ehMin ? 'bg-pine' : 'bg-pine/25'}`} style={{ height: `${h}%` }} />;
+        })}
+      </div>
+      <p className="mt-1.5 text-[11px] text-inksoft">
+        Previsão sobre a faixa estimada (provider mock), determinística por rota — com a API de voos ligada, roda sobre preço real. A barra escura é o dia mais barato previsto.
+      </p>
     </div>
   );
 }
