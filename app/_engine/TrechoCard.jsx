@@ -57,9 +57,9 @@ export default function TrechoCard(props) {
             <div className="stamp w-11 h-11 rounded-full grid place-items-center font-display text-lg bg-card select-none" aria-hidden>{index + 1}</div>
             <div className="flex flex-col">
               <button onClick={() => onMove(index, index - 1)} disabled={index === 0} aria-label={`Subir ${t.nome}`} title="Subir"
-                className="w-7 h-6 grid place-items-center rounded-t-md border border-line bg-input text-inksoft disabled:opacity-30 hover:text-pine focusring">▲</button>
+                className="w-9 h-9 grid place-items-center text-sm leading-none rounded-t-md border border-line bg-input text-inksoft disabled:opacity-30 hover:text-pine hover:bg-pine/5 focusring touch-manipulation">▲</button>
               <button onClick={() => onMove(index, index + 1)} disabled={index === total - 1} aria-label={`Descer ${t.nome}`} title="Descer"
-                className="w-7 h-6 rounded-b-md border border-t-0 border-line bg-input text-inksoft disabled:opacity-30 hover:text-pine focusring">▼</button>
+                className="w-9 h-9 grid place-items-center text-sm leading-none rounded-b-md border border-t-0 border-line bg-input text-inksoft disabled:opacity-30 hover:text-pine hover:bg-pine/5 focusring touch-manipulation">▼</button>
             </div>
           </div>
 

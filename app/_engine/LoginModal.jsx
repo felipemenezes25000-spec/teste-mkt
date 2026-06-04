@@ -6,7 +6,10 @@ import { emailValido } from './utils.js';
 // Login por "magic link" (Supabase OTP). Substitui o window.prompt() que
 // bloqueava a aba (e congelava em iframe/automação). onSubmit(email) DEVE lançar
 // em caso de erro — o erro aparece inline, sem fechar o modal.
-export default function LoginModal({ onClose, onSubmit }) {
+// aoUsarChave (opcional): quando o login é aberto por uma ação de IA, mostra um
+// atalho pro caminho sem conta (usar a própria chave). No "Entrar" do cabeçalho
+// o prop não é passado, então o atalho não aparece.
+export default function LoginModal({ onClose, onSubmit, aoUsarChave }) {
   const [email, setEmail] = useState('');
   const [busy, setBusy] = useState(false);
   const [enviado, setEnviado] = useState(false);
@@ -46,6 +49,7 @@ export default function LoginModal({ onClose, onSubmit }) {
           aparelho e clique no link pra entrar — a partir daí sua rota <b>salva na nuvem</b> e sincroniza entre dispositivos.
         </p>
       ) : (
+        <>
         <form onSubmit={enviar} className="space-y-3">
           <p className="text-sm text-inksoft">
             Entre com seu e-mail pra <b className="text-ink">salvar sua rota na nuvem</b>, sincronizar entre dispositivos e
@@ -68,6 +72,13 @@ export default function LoginModal({ onClose, onSubmit }) {
           {/* submit implícito pelo Enter; o botão de envio fica no rodapé do modal */}
           <button type="submit" className="hidden" aria-hidden tabIndex={-1} />
         </form>
+        {aoUsarChave && (
+          <div className="mt-4 pt-3 border-t border-line">
+            <p className="text-xs text-inksoft mb-2">Não quer criar conta? Use a IA com a <b className="text-ink">sua própria chave</b>, <b className="text-ink">sem login</b> — fica tudo no seu navegador.</p>
+            <Button variant="secondary" className="w-full" onClick={aoUsarChave}>🔑 Usar minha própria chave (sem login)</Button>
+          </div>
+        )}
+        </>
       )}
     </Modal>
   );

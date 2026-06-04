@@ -19,7 +19,7 @@ export default function ConfigIA({ ai, onSaveAi, onClose, fx, moedasEmUso, onAtu
   return (
     <Modal title="IA & Configurações" onClose={onClose}
       footer={<Button variant="secondary" onClick={onClose}>Fechar</Button>}>
-      <p className="text-sm text-inksoft">As features de IA chamam o provedor que você escolher, com a <b>sua própria chave</b> — guardada só no seu navegador, nada vai pra servidor nenhum.</p>
+      <p className="text-sm text-inksoft">As features de IA chamam o provedor que você escolher, com a <b>sua própria chave</b> — guardada só no seu navegador, nada vai pra servidor nenhum. <b className="text-ink">Funciona sem login.</b></p>
 
       <div className="text-xs bg-success-bg border border-success-bd text-success rounded-lg p-3">
         <p className="font-semibold mb-1">🎁 Não tem chave? Pegue uma de graça (Groq, ~2 min):</p>

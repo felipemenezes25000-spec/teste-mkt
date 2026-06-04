@@ -118,6 +118,7 @@ export default function App() {
   const [aba, setAba] = useState('rota');        // navegação multi-tela: rota | mapa | custos
   const [ajuda, setAjuda] = useState(0);         // reabre o onboarding ao incrementar
   const [showLogin, setShowLogin] = useState(false);
+  const [loginIA, setLoginIA] = useState(false);  // login aberto por ação de IA → mostra o atalho "usar minha própria chave"
   const { confirm, confirmElement } = useConfirm();
   const [cenarios, setCenarios] = useState(carregarCenarios);  // "Rota A vs B" — snapshots comparáveis
   const [check, setCheck] = useState(carregarCheck);            // checklist de preparativos (mapa {id:true})
@@ -226,7 +227,7 @@ export default function App() {
     }
   }, []);
 
-  function entrar() { setShowLogin(true); }
+  function entrar() { setLoginIA(false); setShowLogin(true); }
   async function deslogar() { await sair(); setUser(null); setTripId(null); toast('Você saiu.'); }
 
   // "Tentar de novo" do indicador quando a sincronização com a nuvem falha.
@@ -245,7 +246,7 @@ export default function App() {
     if (plan.settings.ai.apiKey) return true;
     if (aiServidorOk && user) return true;
     if (aiServidorOk && !user) {
-      toast('Entre pra usar a IA do servidor — ou cole sua chave em "IA / Config".', 'erro');
+      setLoginIA(true);
       setShowLogin(true);
     } else {
       toast('Cole sua chave em "IA / Config" pra usar a IA.', 'erro');
@@ -404,6 +405,7 @@ export default function App() {
         <LoginModal
           onClose={() => setShowLogin(false)}
           onSubmit={async (email) => { await entrarComEmail(email); }}
+          aoUsarChave={loginIA ? () => { setShowLogin(false); setShowConfig(true); } : undefined}
         />
       )}
       {showConfig && (
