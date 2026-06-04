@@ -236,7 +236,7 @@ export default function App() {
 
   const addPais = (code) => {
     if (code === '__custom') {
-      const novo = { id: uid(), code: '', nome: 'Novo país', regiao: '', dias: 14, custoDia: 30, moeda: base, economiaDia: 0, economiaLabel: '', transporte: 0, transporteNota: '', melhoresMeses: [], estacaoLabel: '', vistoTipo: 'isento', vistoDias: 90, vistoNota: 'Preencha a regra real do seu passaporte.', oportunidades: null };
+      const novo = { id: uid(), code: '', nome: 'Novo país', regiao: '', dias: 14, custoDia: 30, moeda: base, economiaDia: 0, economiaLabel: '', transporte: 0, transporteNota: '', melhoresMeses: [], estacaoLabel: '', vistoTipo: 'isento', vistoDias: 90, vistoNota: 'Preencha a regra real do seu passaporte.', vistoExtensao: false, vistoExtensaoNota: '', vistoComprovanteSaida: true, cidades: [], comidas: [], cidadesCusto: {}, oportunidades: null };
       setPlan(p => ({ ...p, legs: [...p.legs, novo] }));
     } else {
       const ref = PAISES_REF.find(r => r.code === code);

@@ -122,6 +122,12 @@ export default function TrechoCard(props) {
             <div className="mt-2 space-y-0.5 text-xs">
               <p className={estTxt}>🌤️ {t.estacao.texto}</p>
               {t.visto.nivel === 'over' && <p className="text-danger">🛂 {t.visto.texto}</p>}
+              {(t.vistoComprovanteSaida || t.vistoExtensao) && (
+                <p className="text-inksoft">🛂 {[
+                  t.vistoExtensao ? `extensão possível${t.vistoExtensaoNota ? ` (${t.vistoExtensaoNota})` : ''}` : '',
+                  t.vistoComprovanteSaida ? 'leve comprovante de saída' : '',
+                ].filter(Boolean).join(' · ')}</p>
+              )}
             </div>
 
             {rationale && (
@@ -158,14 +164,25 @@ export default function TrechoCard(props) {
                   {(t.cidades || []).length === 0 ? <p className="text-xs text-inksoft">Sem cidades cadastradas — adicione no país de referência.</p> : (
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {t.cidades.map(c => (
-                        <a key={c} href={linkMapaTexto(`${c}, ${t.nome}`)} target="_blank" rel="noopener noreferrer"
-                          className="group rounded-lg overflow-hidden border border-line bg-card hover:border-pine/50 focusring">
-                          <div className="h-16 bg-paper2 overflow-hidden">
-                            {cidadeImgs[c] === undefined && <div className="w-full h-full skel" />}
-                            {cidadeImgs[c] && <img src={cidadeImgs[c]} alt={c} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition" />}
+                        <div key={c} className="rounded-lg overflow-hidden border border-line bg-card">
+                          <a href={linkMapaTexto(`${c}, ${t.nome}`)} target="_blank" rel="noopener noreferrer"
+                            className="group block hover:opacity-95 focusring">
+                            <div className="h-16 bg-paper2 overflow-hidden">
+                              {cidadeImgs[c] === undefined && <div className="w-full h-full skel" />}
+                              {cidadeImgs[c] && <img src={cidadeImgs[c]} alt={c} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition" />}
+                            </div>
+                            <div className="px-2 py-1 text-[11px] text-ink flex items-center justify-between">{c} <span className="text-pine">↗</span></div>
+                          </a>
+                          <div className="flex items-center gap-1 px-2 py-1 border-t border-line">
+                            <span className="text-[10px] text-inksoft shrink-0">~{sym}/dia</span>
+                            <input type="number" min={0} inputMode="decimal"
+                              value={(t.cidadesCusto && t.cidadesCusto[c] != null) ? t.cidadesCusto[c] : ''}
+                              placeholder={String(num(t.custoDia))}
+                              onChange={(e) => onPatch({ cidadesCusto: { ...(t.cidadesCusto || {}), [c]: num(e.target.value) } })}
+                              aria-label={`Custo por dia estimado em ${c}`}
+                              className="w-full min-w-0 bg-input text-ink text-[11px] tnum rounded px-1 py-0.5 border border-line focusring" />
                           </div>
-                          <div className="px-2 py-1 text-[11px] text-ink flex items-center justify-between">{c} <span className="text-pine">↗</span></div>
-                        </a>
+                        </div>
                       ))}
                     </div>
                   )}
@@ -177,7 +194,7 @@ export default function TrechoCard(props) {
                     {(t.comidas || []).length === 0 && <span className="text-xs text-inksoft">Sem pratos cadastrados.</span>}
                   </div>
                 </div>
-                <p className="text-[11px] text-inksoft">Fotos: Wikipédia/Wikimedia. Cidades e pratos são sugestões editáveis.</p>
+                <p className="text-[11px] text-inksoft">Fotos: Wikipédia/Wikimedia. Cidades, pratos e <b>custos por cidade</b> são estimativas editáveis (referência — o custo/dia do país é o que entra na conta).</p>
               </div>
             )}
 
@@ -224,6 +241,22 @@ export default function TrechoCard(props) {
                     <input value={t.regiao} onChange={(e) => onPatch({ regiao: e.target.value })} className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring" />
                   </label>
                 </div>
+                <div className="grid sm:grid-cols-2 gap-2.5">
+                  <label className="flex items-start gap-2 text-xs text-inksoft">
+                    <input type="checkbox" checked={!!t.vistoComprovanteSaida} onChange={(e) => onPatch({ vistoComprovanteSaida: e.target.checked })} className="mt-0.5 focusring" />
+                    <span>Exige <b className="text-ink">comprovante de saída</b> (passagem de volta/onward)</span>
+                  </label>
+                  <label className="flex items-start gap-2 text-xs text-inksoft">
+                    <input type="checkbox" checked={!!t.vistoExtensao} onChange={(e) => onPatch({ vistoExtensao: e.target.checked })} className="mt-0.5 focusring" />
+                    <span><b className="text-ink">Extensão</b> de visto possível</span>
+                  </label>
+                </div>
+                {t.vistoExtensao && (
+                  <label className="block text-xs text-inksoft">Como estender (estimativa editável)
+                    <input value={t.vistoExtensaoNota || ''} onChange={(e) => onPatch({ vistoExtensaoNota: e.target.value })} placeholder="ex.: +30 dias na imigração, ~US$ 60"
+                      className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring" />
+                  </label>
+                )}
                 <label className="block text-xs text-inksoft">✈ Observação do transporte (voo/ônibus)
                   <input value={t.transporteNota} onChange={(e) => onPatch({ transporteNota: e.target.value })} placeholder="ex.: voo Bangkok → Hanói"
                     className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring" />

@@ -9,9 +9,11 @@ export function novoTrechoDeRef(ref, passaporte) {
     economiaDia: 0, economiaLabel: '', transporte: 0, transporteNota: '',
     melhoresMeses: [...ref.melhoresMeses], estacaoLabel: ref.estacao,
     vistoTipo: v.tipo, vistoDias: v.dias, vistoNota: v.nota,
+    vistoExtensao: false, vistoExtensaoNota: '', vistoComprovanteSaida: true,
     iata: ref.iata || '', cidadePrincipal: ref.cidadePrincipal || ref.nome,
     coords: ref.coords ? [...ref.coords] : null, fotoQuery: ref.fotoQuery || ref.nome,
     cidades: ref.cidades ? [...ref.cidades] : [], comidas: ref.comidas ? [...ref.comidas] : [],
+    cidadesCusto: {},
     oportunidades: null,
   };
 }
@@ -58,6 +60,10 @@ export function normalizarPlano(p) {
       melhoresMeses: Array.isArray(l.melhoresMeses) ? l.melhoresMeses : [],
       estacaoLabel: l.estacaoLabel || '',
       vistoTipo: l.vistoTipo || 'isento', vistoDias: num(l.vistoDias, 0), vistoNota: l.vistoNota || '',
+      vistoExtensao: typeof l.vistoExtensao === 'boolean' ? l.vistoExtensao : false,
+      vistoExtensaoNota: l.vistoExtensaoNota || '',
+      vistoComprovanteSaida: typeof l.vistoComprovanteSaida === 'boolean' ? l.vistoComprovanteSaida : true,
+      cidadesCusto: (l.cidadesCusto && typeof l.cidadesCusto === 'object') ? l.cidadesCusto : {},
       iata: l.iata || (ref && ref.iata) || '',
       cidadePrincipal: l.cidadePrincipal || (ref && ref.cidadePrincipal) || (l.nome || ''),
       coords: l.coords || (ref && ref.coords ? [...ref.coords] : null),
