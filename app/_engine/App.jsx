@@ -17,6 +17,9 @@ import { supabaseConfigurado, usuarioAtual, carregarViagemNuvem, salvarViagemNuv
 import LoginModal from './LoginModal.jsx';
 import { useConfirm } from './useConfirm.jsx';
 import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
+import BudgetPanel from './BudgetPanel.jsx';
+import { aplicarCortes } from './budget.js';
+import { encodePlan, decodePlan } from './share.js';
 
 // Quando o backend (Render) tem a chave de IA, a IA funciona sem chave do usuário.
 const AI_SERVIDOR = process.env.NEXT_PUBLIC_AI_SERVER === '1';
@@ -177,6 +180,25 @@ export default function App() {
     return () => clearTimeout(t);
   }, [plan, user]);
 
+  // Abre uma rota vinda de um link compartilhado (#r=...). Roda uma vez no load e
+  // limpa o hash depois (um refresh não recarrega o link). O codec nunca traz chave de IA.
+  const _linkLido = useRef(false);
+  useEffect(() => {
+    if (_linkLido.current) return;
+    _linkLido.current = true;
+    const m = (window.location.hash || '').match(/[#&]r=([^&]+)/);
+    if (!m) return;
+    try {
+      setPlan(decodePlan(decodeURIComponent(m[1])));
+      setRationales({}); setOptResumo('');
+      toast('Rota aberta de um link compartilhado.');
+    } catch (e) {
+      toast('Link de rota inválido: ' + e.message, 'erro');
+    } finally {
+      try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch (e) {}
+    }
+  }, []);
+
   function entrar() { setShowLogin(true); }
   async function deslogar() { await sair(); setUser(null); setTripId(null); toast('Você saiu.'); }
 
@@ -294,6 +316,25 @@ export default function App() {
     }
   }
 
+  // Aplica os cortes sugeridos pelo modo orçamento (motor puro, imutável).
+  function handleAplicarCortes(cortes) {
+    if (!cortes || cortes.length === 0) return;
+    setPlan(p => aplicarCortes(p, cortes));
+    const totalDias = cortes.reduce((s, c) => s + (c.dias || 0), 0);
+    toast(`Cortes aplicados: −${totalDias} dia(s) no total. Ajuste fino quando quiser.`);
+  }
+
+  // Gera o link compartilhável (rota no hash, sem chave de IA) e copia.
+  async function compartilhar() {
+    try {
+      const url = `${window.location.origin}${window.location.pathname}#r=${encodePlan(plan)}`;
+      await navigator.clipboard.writeText(url);
+      toast('Link da rota copiado! É só colar onde quiser.');
+    } catch (e) {
+      toast('Não consegui copiar o link. Use o Exportar JSON como alternativa.', 'erro');
+    }
+  }
+
   const dragHandlersFor = (index) => ({
     draggable: true,
     onDragStart: (e) => { setDrag({ from: index, over: index }); e.dataTransfer.effectAllowed = 'move'; },
@@ -337,11 +378,12 @@ export default function App() {
             <Button variant="ghost" size="sm" onClick={() => setAjuda(a => a + 1)} aria-label="Ajuda / como funciona">Ajuda</Button>
             <Button size="sm" onClick={() => setShowConfig(true)}>IA / Config</Button>
             <details className="relative">
-              <summary aria-label="Mais ações: exportar e importar" title="Mais ações"
+              <summary aria-label="Mais ações: compartilhar, exportar, importar" title="Mais ações"
                 className="list-none cursor-pointer inline-flex items-center justify-center w-9 h-9 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring [&::-webkit-details-marker]:hidden">
                 <span aria-hidden className="text-lg leading-none">⋯</span>
               </summary>
-              <div className="absolute right-0 mt-1 w-48 rounded-lg border border-line bg-card shadow-lg p-1 z-40 flex flex-col">
+              <div className="absolute right-0 mt-1 w-52 rounded-lg border border-line bg-card shadow-lg p-1 z-40 flex flex-col">
+                <button onClick={compartilhar} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">🔗 Compartilhar (copiar link)</button>
                 <button onClick={() => exportarPlano(plan)} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">⬇ Exportar JSON</button>
                 <button onClick={() => importRef.current && importRef.current.click()} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">⬆ Importar JSON</button>
               </div>
@@ -382,7 +424,12 @@ export default function App() {
           <RouteMap trechos={calc.trechos} onSelect={(id) => { setAba('rota'); setTimeout(() => { const el = document.getElementById('leg-' + id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 80); }} />
         )}
 
-        {plan.legs.length > 0 && aba === 'custos' && <CustosView calc={calc} />}
+        {plan.legs.length > 0 && aba === 'custos' && (
+          <div>
+            <CustosView calc={calc} />
+            <BudgetPanel calc={calc} onAplicarCortes={handleAplicarCortes} />
+          </div>
+        )}
 
         {(plan.legs.length === 0 || aba === 'rota') && (
           <section aria-label="Construtor de rota">
