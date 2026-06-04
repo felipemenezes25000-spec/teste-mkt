@@ -1,4 +1,4 @@
-import { AI_PROVIDERS, SYSTEM_PROMPT_OTIMIZADOR, SYSTEM_PROMPT_OPORTUNIDADES, MESES_PT, MESES_PT_LONGO } from './data.js';
+import { AI_PROVIDERS, SYSTEM_PROMPT_OTIMIZADOR, SYSTEM_PROMPT_OPORTUNIDADES, SYSTEM_PROMPT_ROTEIRO, MESES_PT, MESES_PT_LONGO } from './data.js';
 import { num } from './utils.js';
 import { tokenAtual } from './supabase.js';
 
@@ -160,4 +160,60 @@ export async function buscarOportunidades(ai, leg, moedaLabel) {
     economiaDiaEstimada: Math.max(0, Math.round(num(o.economiaDiaEstimada))),
     comoComecar: String(o.comoComecar || ''),
   }));
+}
+
+// Gera um roteiro dia a dia com IA. `ai` é o config do usuário (chave própria) ou
+// {} → cai pro servidor (login). Sanitiza a saída pra a UI nunca quebrar.
+export async function gerarRoteiro(params, ai) {
+  const { destino, dias, orcamento, moeda = 'USD', ritmo = 'equilibrado', interesses = [], restricao = 'nenhuma', conforto = 'médio' } = params || {};
+  const userPrompt = [
+    `Destino: ${destino}.`,
+    `Dias: ${dias}.`,
+    `Orçamento total aproximado (fora passagem internacional): ${moeda} ${orcamento}.`,
+    `Ritmo: ${ritmo}.`,
+    `Interesses: ${(interesses || []).join(', ') || 'variados'}.`,
+    `Restrição alimentar: ${restricao || 'nenhuma'}.`,
+    `Nível de conforto: ${conforto}.`,
+    `Use a moeda ${moeda} nas estimativas de custo. Monte exatamente ${dias} dia(s).`,
+  ].join(' ');
+
+  const texto = await chamarLLM(ai, SYSTEM_PROMPT_ROTEIRO, userPrompt);
+  return sanitizeRoteiro(extrairJSON(texto));
+}
+
+// Normaliza/saneia a saída crua da IA pra a UI nunca quebrar. Puro → testável.
+export function sanitizeRoteiro(out) {
+  out = out || {};
+  const arr = (x) => (Array.isArray(x) ? x.map((v) => String(v)).filter(Boolean) : []);
+  const dias = Array.isArray(out.dias)
+    ? out.dias.map((d, i) => ({
+        dia: Number(d && d.dia) || i + 1,
+        titulo: String((d && d.titulo) || `Dia ${i + 1}`),
+        itens: Array.isArray(d && d.itens)
+          ? d.itens.map((it) => ({
+              hora: String((it && it.hora) || ''),
+              atividade: String((it && it.atividade) || ''),
+              local: String((it && it.local) || ''),
+              duracao: String((it && it.duracao) || ''),
+              custo: String((it && it.custo) || ''),
+              categoria: String((it && it.categoria) || ''),
+              planoB: String((it && it.planoB) || ''),
+              gratis: String((it && it.gratis) || ''),
+              dica: String((it && it.dica) || ''),
+            }))
+          : [],
+      }))
+    : [];
+
+  if (dias.length === 0) throw new Error('A IA não retornou um roteiro válido. Tente de novo.');
+
+  return {
+    resumo: String(out.resumo || ''),
+    custoEstimado: String(out.custoEstimado || ''),
+    dias,
+    checklist: arr(out.checklist),
+    documentos: arr(out.documentos),
+    seguranca: arr(out.seguranca),
+    economia: arr(out.economia),
+  };
 }
