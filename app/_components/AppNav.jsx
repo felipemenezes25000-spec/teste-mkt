@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
+import { GlobalSearch } from './GlobalSearch.jsx';
 
 // Navegação global das telas de produto (marketing/explorar/destino/roteiro/voos/
 // planos). O planner (/planejar) tem o próprio cabeçalho com as ações da viagem.
@@ -48,6 +49,7 @@ export default function AppNav() {
           <span className="w-9 h-9 rounded-xl bg-pine text-white grid place-items-center font-display text-lg shadow-md" aria-hidden>∞</span>
           <span className="font-display text-lg text-ink leading-none hidden md:block">Mundo Sem Fim</span>
         </Link>
+        <GlobalSearch />
         <div className="flex items-center gap-0.5 overflow-x-auto no-scrollbar ml-auto">
           {LINKS.map((l) => {
             const active = path === l.href || path.startsWith(l.href + '/');
