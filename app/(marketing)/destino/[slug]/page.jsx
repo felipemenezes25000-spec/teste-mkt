@@ -35,6 +35,24 @@ function mapsUrl(q) {
   return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
 }
 
+// Mapa real (OpenStreetMap embed, sem chave/custo) centrado no país, com marcador.
+function MapaDestino({ coords, nome }) {
+  if (!Array.isArray(coords) || coords.length !== 2) return null;
+  const [lng, lat] = coords;
+  const dx = 6, dy = 4; // span do bbox em graus (cidade/região)
+  const bbox = `${lng - dx}%2C${lat - dy}%2C${lng + dx}%2C${lat + dy}`;
+  const src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
+  return (
+    <section>
+      <h2 className="font-display text-2xl text-ink mb-3">🗺️ Onde fica {nome}</h2>
+      <div className="rounded-2xl overflow-hidden border border-line bg-paper2">
+        <iframe src={src} title={`Mapa de ${nome}`} loading="lazy" className="w-full h-72 sm:h-80 border-0" />
+      </div>
+      <a href={`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=6/${lat}/${lng}`} target="_blank" rel="noopener noreferrer" className="inline-block mt-1 text-xs text-pine hover:underline focusring">Abrir mapa maior ↗</a>
+    </section>
+  );
+}
+
 export default async function DestinoPage({ params }) {
   const d = destinoPorSlug(params.slug);
   if (!d) notFound();
@@ -180,6 +198,9 @@ export default async function DestinoPage({ params }) {
             </div>
           </section>
         )}
+
+        {/* ONDE FICA — mapa real */}
+        <MapaDestino coords={d.coords} nome={d.nome} />
 
         {/* ANTES DE IR — dicas práticas (segurança/golpes/saúde/transporte/chip) */}
         {(() => {

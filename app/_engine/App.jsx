@@ -30,18 +30,61 @@ import { carregarCheck, salvarCheck } from './checklist.js';
 const AI_SERVIDOR = process.env.NEXT_PUBLIC_AI_SERVER === '1';
 
 function AdicionarPais({ onAdd }) {
-  const [code, setCode] = useState('');
+  const [q, setQ] = useState('');
+  const [open, setOpen] = useState(false);
+  const [ativo, setAtivo] = useState(0);
+  const ref = useRef(null);
+
+  const results = useMemo(() => {
+    const t = q.trim().toLowerCase();
+    if (!t) return [];
+    return PAISES_REF.filter(p => (`${p.nome} ${p.regiao}`).toLowerCase().includes(t)).slice(0, 8);
+  }, [q]);
+
+  useEffect(() => { setAtivo(0); }, [q]);
+  useEffect(() => {
+    const onDoc = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, []);
+
+  const add = (code) => { onAdd(code); setQ(''); setOpen(false); };
+  const onKey = (e) => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setAtivo(a => Math.min(a + 1, results.length - 1)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setAtivo(a => Math.max(a - 1, 0)); }
+    else if (e.key === 'Enter') { if (results[ativo]) add(results[ativo].code); }
+    else if (e.key === 'Escape') setOpen(false);
+  };
+
   return (
-    <div className="rise rounded-2xl border border-dashed border-pine/40 bg-pine/5 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
-      <div className="text-sm text-pine font-semibold shrink-0">➕ Adicionar país</div>
-      <select value={code} onChange={(e) => setCode(e.target.value)} aria-label="Escolher país para adicionar"
-        className="flex-1 px-3 py-2 rounded-lg border border-line bg-input text-ink focusring">
-        <option value="">Escolha um país (já vem pré-preenchido)…</option>
-        {PAISES_REF.map(p => <option key={p.code} value={p.code}>{p.nome} — {p.regiao}</option>)}
-        <option value="__custom">+ Outro país (manual)</option>
-      </select>
-      <button onClick={() => { if (!code) return; onAdd(code); setCode(''); }} disabled={!code}
-        className="px-4 py-2 rounded-lg bg-pine text-white font-semibold hover:bg-pinedk disabled:opacity-50 focusring shrink-0">Adicionar à rota</button>
+    <div ref={ref} className="rise rounded-2xl border border-dashed border-pine/40 bg-pine/5 p-4">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+        <div className="text-sm text-pine font-semibold shrink-0">➕ Adicionar país</div>
+        <div className="relative flex-1">
+          <input
+            value={q} onChange={(e) => { setQ(e.target.value); setOpen(true); }} onFocus={() => setOpen(true)} onKeyDown={onKey}
+            placeholder="Buscar entre os 167 países…" aria-label="Buscar país para adicionar"
+            role="combobox" aria-expanded={open && results.length > 0} aria-autocomplete="list"
+            className="w-full px-3 py-2 rounded-lg border border-line bg-input text-ink focusring"
+          />
+          {open && results.length > 0 && (
+            <ul className="absolute z-30 mt-1 w-full max-h-72 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox">
+              {results.map((p, i) => (
+                <li key={p.code} role="option" aria-selected={i === ativo}>
+                  <button onMouseEnter={() => setAtivo(i)} onClick={() => add(p.code)}
+                    className={`w-full text-left px-3 py-2 flex items-center justify-between gap-2 focusring ${i === ativo ? 'bg-paper2' : 'hover:bg-paper2'}`}>
+                    <span className="text-ink text-sm font-medium truncate">{p.nome}</span>
+                    <span className="text-[11px] text-inksoft shrink-0 tnum">~US$ {p.custoDia}/dia · {p.regiao}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <button onClick={() => add('__custom')}
+          className="px-4 py-2 rounded-lg border border-line bg-card text-ink font-semibold hover:text-pine focusring shrink-0 text-sm">+ Manual</button>
+      </div>
+      <p className="mt-2 text-[11px] text-inksoft">Digite e tecle Enter (ou clique). Adicione quantos quiser — cada um já vem pré-preenchido com custo, estação e visto.</p>
     </div>
   );
 }
