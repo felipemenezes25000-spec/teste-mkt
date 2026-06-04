@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { lerFavoritos, FAV_EVENT } from '../../_lib/favoritos.js';
 import { destinoPorCode } from '../../_lib/destinos.js';
 import { vistoDe, MESES_PT } from '../../_engine/data.js';
+import { custoEstadia } from '../../_lib/custos.js';
 
 const meses = (arr = []) => (arr.length ? arr.map((m) => MESES_PT[m - 1]).join(', ') : '—');
 
@@ -36,6 +37,7 @@ export function CompararClient() {
     { k: 'Região', f: (d) => d.regiao },
     { k: 'Moeda local', f: (d) => d.moeda },
     { k: 'Custo médio/dia', f: (d) => `~US$ ${d.custoDia}` },
+    { k: 'Custo médio (7 dias)', f: (d) => `~US$ ${custoEstadia(d.custoDia, 7, 'medio').total.toLocaleString('pt-BR')}` },
     { k: 'Melhor época', f: (d) => meses(d.melhoresMeses) },
     { k: 'Visto (passaporte BR)', f: (d) => { const v = vistoDe(d.code, 'BR'); return `${v.tipo} · ${v.dias}d`; } },
     { k: 'Bases sugeridas', f: (d) => (d.cidades || []).slice(0, 3).join(', ') || '—' },

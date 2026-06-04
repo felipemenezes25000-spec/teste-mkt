@@ -7,6 +7,7 @@ import { MESES_PT } from '../../../_engine/data.js';
 import { FavoriteButton } from '../../../_components/FavoriteButton.jsx';
 import { AddToRouteButton } from '../../../_components/AddToRouteButton.jsx';
 import { linksDestino } from '../../../_lib/links.js';
+import { CustoTiers } from '../../../_components/CustoTiers.jsx';
 
 export const revalidate = 86400;
 
@@ -88,6 +89,15 @@ export default async function DestinoPage({ params }) {
               <div className="font-display text-lg text-ink mt-0.5">{f.v}</div>
             </div>
           ))}
+        </section>
+
+        {/* CUSTOS por nível */}
+        <section>
+          <div className="flex items-baseline justify-between gap-2 mb-3">
+            <h2 className="font-display text-2xl text-ink">💰 Quanto custa por dia</h2>
+            <span className="text-xs text-inksoft">estimativa · do mochilão ao conforto</span>
+          </div>
+          <CustoTiers custoDia={d.custoDia} dias={7} />
         </section>
 
         {/* SOBRE */}

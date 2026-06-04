@@ -56,7 +56,7 @@ export function RoteiroClient() {
 
   return (
     <div className="mt-6">
-      <div className="rounded-2xl border border-line bg-card p-5 space-y-4">
+      <div className="rounded-2xl border border-line bg-card p-5 space-y-4 no-print">
         <div className="grid sm:grid-cols-2 gap-3">
           <label className="text-xs text-inksoft font-medium">Destino
             <select value={code} onChange={(e) => { const c = e.target.value; setCode(c); const dd = DESTINOS.find((x) => x.code === c); if (dd) setMoeda(dd.moeda); }} className={`${field} mt-1`}>
@@ -152,7 +152,7 @@ function RoteiroView({ roteiro, destino, onRegerar }) {
           </div>
           {roteiro.custoEstimado && <span className="inline-flex items-center gap-1 rounded-full bg-card border border-line px-3 py-1.5 text-sm font-semibold text-ink shrink-0">💰 {roteiro.custoEstimado}</span>}
         </div>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap gap-2 no-print">
           <button onClick={onRegerar} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">↻ Gerar de novo</button>
           {liberaPdf ? (
             <button onClick={() => window.print()} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">⬇ Exportar PDF</button>

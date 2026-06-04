@@ -53,3 +53,15 @@ input, select, button, textarea { font-family: inherit; }
 /* Esconde a barra de rolagem (nav horizontal no mobile) sem perder o scroll. */
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Impressão / Exportar PDF: tira nav, rodapé e controles; força tema claro legível. */
+@media print {
+  header, footer, .no-print { display: none !important; }
+  * { box-shadow: none !important; }
+  .rise { animation: none !important; }
+  :root, [data-theme="dark"] {
+    --c-paper: 255 255 255; --c-paper-2: 245 245 245; --c-card: 255 255 255;
+    --c-ink: 20 26 24; --c-ink-soft: 80 88 84; --c-line: 210 210 210;
+  }
+  body { background: #fff !important; }
+}
