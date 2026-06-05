@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
 import { GlobalSearch } from './GlobalSearch.jsx';
+import { MobileMenu } from './MobileMenu.jsx';
 
 // Navegação global das telas de produto (marketing/explorar/destino/roteiro/voos/
 // planos). O planner (/planejar) tem o próprio cabeçalho com as ações da viagem.
@@ -20,6 +21,10 @@ const LINKS = [
 export default function AppNav() {
   const path = usePathname() || '/';
   const [alerta, setAlerta] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Fecha o menu mobile ao navegar (inclui a busca global, que faz router.push).
+  useEffect(() => { setMenuOpen(false); }, [path]);
 
   // Alerta "que salva a viagem": conta problemas P0 (furo de visto / orçamento
   // estoura) da rota SALVA do usuário. Motor carregado sob demanda (não infla o
@@ -50,7 +55,8 @@ export default function AppNav() {
           <span className="font-display text-lg text-ink leading-none hidden md:block">Mundo Sem Fim</span>
         </Link>
         <div className="hidden lg:block shrink-0"><GlobalSearch /></div>
-        <div className="flex items-center gap-0.5 overflow-x-auto no-scrollbar ml-auto">
+        {/* Links completos só no desktop (lg+); no mobile viram o menu hambúrguer. */}
+        <div className="hidden lg:flex items-center gap-0.5 ml-auto">
           {LINKS.map((l) => {
             const active = path === l.href || path.startsWith(l.href + '/');
             return (
@@ -63,17 +69,32 @@ export default function AppNav() {
             );
           })}
         </div>
-        {alerta > 0 && (
-          <Link
-            href="/decisao" aria-label={`${alerta} alerta(s) na sua rota`}
-            title="Sua rota tem alertas (visto/orçamento) que podem estragar a viagem"
-            className="shrink-0 ml-1 inline-flex items-center gap-1 rounded-lg bg-danger-bg text-danger border border-danger-bd px-2 py-1 text-xs font-bold focusring"
+        {/* Controles à direita. ml-auto empurra o grupo no mobile (links escondidos). */}
+        <div className="flex items-center gap-1 ml-auto lg:ml-1 shrink-0">
+          {alerta > 0 && (
+            <Link
+              href="/decisao" aria-label={`${alerta} alerta(s) na sua rota`}
+              title="Sua rota tem alertas (visto/orçamento) que podem estragar a viagem"
+              className="inline-flex items-center gap-1 rounded-lg bg-danger-bg text-danger border border-danger-bd px-2 py-1 text-xs font-bold focusring"
+            >
+              ⚠ {alerta}
+            </Link>
+          )}
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Abrir menu"
+            aria-haspopup="dialog"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="lg:hidden w-11 h-11 grid place-items-center rounded-lg text-ink hover:bg-paper2 focusring text-xl leading-none"
           >
-            ⚠ {alerta}
-          </Link>
-        )}
-        <ThemeToggle className="shrink-0 ml-1" />
+            ☰
+          </button>
+        </div>
       </nav>
+      {menuOpen && <MobileMenu links={LINKS} path={path} onClose={() => setMenuOpen(false)} />}
     </header>
   );
 }
