@@ -4,6 +4,7 @@ import { PAISES_REF, PASSAPORTES, MOEDAS, vistoDe } from './data.js';
 import { uid, num, clamp, dur, fmtMoeda, converter } from './utils.js';
 import { calcular } from './calc.js';
 import { otimizarRota, buscarOportunidades, buscarCambio } from './services.js';
+import { otimizarOrdemLocal } from './otimizar.js';
 import { carregarPlano, salvarPlano, normalizarPlano, planoExemplo, exportarPlano, novoTrechoDeRef } from './storage.js';
 import { Toasts, Tripe, SaveStatus } from './components.jsx';
 import TrechoCard from './TrechoCard.jsx';
@@ -346,6 +347,16 @@ export default function App() {
     setPlan(p => { const legs = [...p.legs]; const [it] = legs.splice(from, 1); legs.splice(to, 0, it); return { ...p, legs }; });
   };
 
+  // Otimizador GRÁTIS (determinístico, sem IA): reordena por estação + geografia.
+  function handleOtimizarGratis() {
+    if (plan.legs.length < 2) { toast('Adicione pelo menos 2 países pra otimizar.', 'erro'); return; }
+    const { order, resumo, melhorou } = otimizarOrdemLocal(plan);
+    if (!melhorou) { toast('A ordem atual já está bem otimizada. 👍'); return; }
+    setPlan(p => ({ ...p, legs: order.map(id => p.legs.find(l => l.id === id)).filter(Boolean) }));
+    setRationales({}); setOptResumo(resumo);
+    toast('Rota reordenada pela melhor época e menor zigue-zague — grátis, na hora.');
+  }
+
   async function handleOtimizar() {
     if (plan.legs.length < 2) { toast('Adicione pelo menos 2 países pra otimizar.', 'erro'); return; }
     if (!exigirIA()) return;
@@ -547,7 +558,8 @@ export default function App() {
                 <input value={plan.settings.origemCidade} onChange={(e) => setSettings({ origemCidade: e.target.value })} aria-label="Cidade de origem" className="w-20 bg-transparent text-ink focusring" />
                 <input value={plan.settings.origemIata} onChange={(e) => setSettings({ origemIata: e.target.value.toUpperCase().slice(0, 3) })} aria-label="Aeroporto de origem (código IATA)" placeholder="IATA" className="w-12 bg-transparent text-ink focusring uppercase" />
               </label>
-              <Button variant="accent" onClick={handleOtimizar} loading={otimizando}>{otimizando ? 'Otimizando rota…' : '🧭 Otimizar rota (IA)'}</Button>
+              <Button variant="accent" onClick={handleOtimizarGratis}>✨ Otimizar ordem (grátis)</Button>
+              <Button variant="secondary" size="sm" onClick={handleOtimizar} loading={otimizando} title="Reordena e explica o porquê de cada país (usa IA)">{otimizando ? 'IA…' : '🧭 + justificativas (IA)'}</Button>
               <div className="flex items-center gap-1.5">
                 <Button variant="secondary" size="sm" onClick={carregarExemplo}>Exemplo</Button>
                 <Button variant="ghost" size="sm" onClick={limparTudo}>Limpar</Button>

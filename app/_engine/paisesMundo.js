@@ -1,7 +1,7 @@
 /* =============================================================================
-   CATÁLOGO MUNDIAL DE PAÍSES (gerado + enriquecido por pesquisa multiagente, jun/2026)
-   145 países além dos 22 curados. Visto-BR e cidades/comidas revisados.
-   ESTIMATIVAS de referência — confira visto/vacina na fonte oficial. Não editar à mão.
+   CATÁLOGO MUNDIAL DE PAÍSES (gerado + enriquecido; iata/cidade corrigidos jun/2026)
+   145 países além dos 22 curados. ESTIMATIVA de referência — confira na
+   fonte oficial. Não editar à mão: regerar pelos workflows do catálogo.
    ========================================================================== */
 export const PAISES_EXTRA = [
  {
@@ -56,7 +56,7 @@ export const PAISES_EXTRA = [
    12
   ],
   "estacao": "Verão ameno (jun–ago); invernos frios — dezembro tem mercados de Natal",
-  "iata": "FRA",
+  "iata": "BER",
   "cidadePrincipal": "Berlim",
   "coords": [
    13.405,
@@ -94,7 +94,7 @@ export const PAISES_EXTRA = [
    8
   ],
   "estacao": "Clima de alta montanha: invernos com neve (dez-mar) ideais para esqui; verões frescos (jul-ago) perfeitos para trilhas. Dois picos de temporada bem definidos",
-  "iata": "TLS",
+  "iata": "BCN",
   "cidadePrincipal": "Andorra-a-Velha",
   "coords": [
    1.5218,
@@ -283,7 +283,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Primavera e outono ideais; verão quente e seco; inverno frio e com neve nas montanhas",
   "iata": "EVN",
-  "cidadePrincipal": "Yerevan",
+  "cidadePrincipal": "Erevan",
   "coords": [
    44.5152,
    40.1872
@@ -965,7 +965,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Primavera (mar–mai) e outono (set–nov) ideais; monção jun–ago; inverno frio",
   "iata": "PBH",
-  "cidadePrincipal": "Timphu",
+  "cidadePrincipal": "Paro",
   "coords": [
    89.6339,
    27.4712
@@ -1004,7 +1004,7 @@ export const PAISES_EXTRA = [
    5
   ],
   "estacao": "Seco quase o ano todo; ventos nov–mar, mais quente ago–out",
-  "iata": "SID",
+  "iata": "RAI",
   "cidadePrincipal": "Praia",
   "coords": [
    -23.51,
@@ -1041,8 +1041,8 @@ export const PAISES_EXTRA = [
    2
   ],
   "estacao": "Estação seca: novembro a fevereiro, ideal para safári e praias; chuvas fortes de junho a outubro.",
-  "iata": "NSI",
-  "cidadePrincipal": "Yaoundé",
+  "iata": "DLA",
+  "cidadePrincipal": "Duala",
   "coords": [
    11.5021,
    3.848
@@ -1230,7 +1230,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Verão quente e seco no Mediterrâneo (jun-ago); primavera e outono amenos e ideais para viajar",
   "iata": "LCA",
-  "cidadePrincipal": "Nicósia",
+  "cidadePrincipal": "Lárnaca",
   "coords": [
    33.3636,
    35.1856
@@ -1305,7 +1305,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Seca nov–mar; chuvas abr–out",
   "iata": "ABJ",
-  "cidadePrincipal": "Abidjã",
+  "cidadePrincipal": "Abidjan",
   "coords": [
    -4.01,
    5.36
@@ -1986,7 +1986,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Seca/amena: mai–out (melhor época). Úmida e quente (risco de ciclones): nov–abr.",
   "iata": "NAN",
-  "cidadePrincipal": "Suva",
+  "cidadePrincipal": "Nadi",
   "coords": [
    178.4419,
    -18.1416
@@ -2624,7 +2624,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Verão para a Ring Road e sol da meia-noite: jun–ago. Auroras boreais e geleiras: set–mar",
   "iata": "KEF",
-  "cidadePrincipal": "Reykjavík",
+  "cidadePrincipal": "Reiquiavique",
   "coords": [
    -21.9426,
    64.1466
@@ -2662,7 +2662,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Primavera e outono ideais; verão muito quente e seco; inverno ameno e chuvoso no norte",
   "iata": "TLV",
-  "cidadePrincipal": "Jerusalém",
+  "cidadePrincipal": "Tel Aviv",
   "coords": [
    35.2137,
    31.7683
@@ -2775,7 +2775,7 @@ export const PAISES_EXTRA = [
    11
   ],
   "estacao": "Primavera (sakura, mar-abr) e outono (folhagens, out-nov) ideais; verão quente/úmido, inverno frio com neve",
-  "iata": "NRT",
+  "iata": "HND",
   "cidadePrincipal": "Tóquio",
   "coords": [
    139.6917,
@@ -3496,7 +3496,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Clima continental: verões quentes (jun-ago) e invernos frios com neve; primavera e início do outono são as melhores épocas, coincidindo com a vindima",
   "iata": "KIV",
-  "cidadePrincipal": "Chișinău",
+  "cidadePrincipal": "Chisinau",
   "coords": [
    28.8638,
    47.0105
@@ -3798,7 +3798,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Quente/úmido: nov–mar (verão, risco de ciclones). Ameno/seco: abr–out. Setembro–dezembro são ótimos.",
   "iata": "NOU",
-  "cidadePrincipal": "Numeá",
+  "cidadePrincipal": "Numéia",
   "coords": [
    166.4572,
    -22.2758
@@ -4294,7 +4294,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Verão curto ideal p/ trekking (jun–set); invernos longos e nevados nas montanhas.",
   "iata": "FRU",
-  "cidadePrincipal": "Bisqueque",
+  "cidadePrincipal": "Bishkek",
   "coords": [
    74.5698,
    42.8746
@@ -4523,7 +4523,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Clima mediterrâneo de montanha: verões quentes (jun-ago, alta temporada), primavera e outono amenos com clima agradável e menos multidões para explorar o centro histórico",
   "iata": "RMI",
-  "cidadePrincipal": "Cidade de San Marino",
+  "cidadePrincipal": "San Marino",
   "coords": [
    12.4471,
    43.9361
@@ -4638,7 +4638,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Seca nov–mai; chuvas jun–out",
   "iata": "DSS",
-  "cidadePrincipal": "Dacar",
+  "cidadePrincipal": "Dakar",
   "coords": [
    -17.45,
    14.69
@@ -4902,7 +4902,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Verão ideal p/ a estrada do Pamir (jun–set); invernos severos e passagens fechadas.",
   "iata": "DYU",
-  "cidadePrincipal": "Duchambé",
+  "cidadePrincipal": "Dushanbe",
   "coords": [
    68.7864,
    38.5598
@@ -4941,8 +4941,8 @@ export const PAISES_EXTRA = [
    10
   ],
   "estacao": "Seca: jun-out (melhor para safári e Kilimanjaro) e jan-fev; chuvas longas mar-mai",
-  "iata": "JRO",
-  "cidadePrincipal": "Arusha",
+  "iata": "DAR",
+  "cidadePrincipal": "Dar es Salaam",
   "coords": [
    36.683,
    -3.3869
@@ -5168,7 +5168,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Primavera e outono amenos; verão extremo no deserto Karakum (45°C+); inverno frio.",
   "iata": "ASB",
-  "cidadePrincipal": "Asgabate",
+  "cidadePrincipal": "Asgabat",
   "coords": [
    58.3833,
    37.9601
@@ -5245,7 +5245,7 @@ export const PAISES_EXTRA = [
   ],
   "estacao": "Seca: jun-ago e dez-fev (melhor para trekking de gorilas); chuvas mar-mai e set-nov",
   "iata": "EBB",
-  "cidadePrincipal": "Campala",
+  "cidadePrincipal": "Kampala",
   "coords": [
    32.5825,
    0.3476
