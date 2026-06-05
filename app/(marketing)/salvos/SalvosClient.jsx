@@ -54,6 +54,11 @@ export function SalvosClient() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {destinos.map((d) => <DestinoCard key={d.code} d={d} img={imgs[d.code]} />)}
       </div>
+      <p className="mt-6 text-xs text-inksoft border-t border-line pt-4">
+        💾 Seus salvos ficam neste navegador. Sua rota no{' '}
+        <Link href="/planejar" className="text-pine hover:underline focusring font-semibold">Planejador</Link>{' '}
+        sincroniza na nuvem quando você entra na conta — aí você abre de qualquer aparelho.
+      </p>
     </div>
   );
 }
