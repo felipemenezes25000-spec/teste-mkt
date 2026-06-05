@@ -4,6 +4,8 @@
    A página de destino busca a foto de cada "wiki" na Wikipédia → galeria garantida.
    ESTIMATIVA de referência. Não editar à mão: regerar pelo workflow "atracoes-paises".
    ========================================================================== */
+import { ATRACOES_OVERRIDE } from './atracoesOverride.js';
+
 export const ATRACOES = {
  "TH": [
   {
@@ -10362,5 +10364,9 @@ export const ATRACOES = {
 };
 
 export function atracoesDoPais(code) {
-  return (code && ATRACOES[code]) || [];
+  const base = (code && ATRACOES[code]) || [];
+  return base.map((a) => {
+    const override = ATRACOES_OVERRIDE[`${code}:${a.nome}`];
+    return override ? { ...a, wiki: override } : a;
+  });
 }
