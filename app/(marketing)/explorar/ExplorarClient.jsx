@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import { DestinoCard } from '../../_components/DestinoCard.jsx';
-import { colecoesEditorial } from '../../_lib/editorial.js';
+import { colecoesEditorial, TEMAS_EXPLORAR, temasDoDestino } from '../../_lib/editorial.js';
 
 // Busca + filtros (região/orçamento) + ordenação, no client. Recebe os destinos
 // já com imagem (puxada no servidor) — aqui é só filtrar/ordenar/renderizar.
@@ -16,6 +16,7 @@ export function ExplorarClient({ destinos }) {
   const [regiao, setRegiao] = useState('');
   const [maxCusto, setMaxCusto] = useState(0); // 0 = sem teto
   const [ordem, setOrdem] = useState('nome');
+  const [tema, setTema] = useState(''); // chip humano ativo ('' = nenhum)
 
   // Busca via URL (?q=) — alimenta a SearchAction do JSON-LD e permite deep-link de busca.
   useEffect(() => {
@@ -25,12 +26,20 @@ export function ExplorarClient({ destinos }) {
 
   const regioes = useMemo(() => [...new Set(destinos.map((d) => d.regiao))].sort(), [destinos]);
   const colecoes = useMemo(() => colecoesEditorial(destinos), [destinos]);
+  // Tema -> destinos (calculado uma vez). Alimenta o filtro por chip e a contagem.
+  const temasPorCode = useMemo(() => new Map(destinos.map((d) => [d.code, temasDoDestino(d)])), [destinos]);
+  const contagemTema = useMemo(() => {
+    const c = {};
+    for (const temas of temasPorCode.values()) for (const t of temas) c[t] = (c[t] || 0) + 1;
+    return c;
+  }, [temasPorCode]);
 
   const filtrados = useMemo(() => {
     const termo = q.trim().toLowerCase();
     let lista = destinos.filter((d) => {
       if (regiao && d.regiao !== regiao) return false;
       if (maxCusto && d.custoDia > maxCusto) return false;
+      if (tema && !(temasPorCode.get(d.code) || []).includes(tema)) return false;
       if (termo) {
         const hay = (d.nome + ' ' + d.regiao + ' ' + (d.cidades || []).join(' ')).toLowerCase();
         if (!hay.includes(termo)) return false;
@@ -41,13 +50,37 @@ export function ExplorarClient({ destinos }) {
     else if (ordem === 'caro') lista = [...lista].sort((a, b) => b.custoDia - a.custoDia);
     else lista = [...lista].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
     return lista;
-  }, [destinos, q, regiao, maxCusto, ordem]);
+  }, [destinos, q, regiao, maxCusto, ordem, tema, temasPorCode]);
 
   const field = 'px-3 py-2 rounded-lg border border-line bg-input text-ink focusring text-sm';
-  const temFiltro = q.trim() || regiao || maxCusto || ordem !== 'nome';
+  const temFiltro = q.trim() || regiao || maxCusto || ordem !== 'nome' || tema;
 
   return (
     <div className="mt-8 space-y-10">
+      {/* CHIPS — filtros humanos lastreados em dado real (custo/região/dimensões) */}
+      <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filtrar por estilo de viagem">
+        {TEMAS_EXPLORAR.map((t) => {
+          const n = contagemTema[t.id] || 0;
+          if (!n) return null;
+          const ativo = tema === t.id;
+          return (
+            <button
+              key={t.id}
+              type="button"
+              aria-pressed={ativo}
+              onClick={() => setTema(ativo ? '' : t.id)}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-semibold border transition focusring ${ativo ? 'bg-pine text-white border-pine' : 'bg-card text-ink border-line hover:border-pine/50'}`}
+            >
+              <span aria-hidden>{t.icon}</span>{t.label}
+              <span className={ativo ? 'text-white/80 text-xs' : 'text-inksoft text-xs'}>{n}</span>
+            </button>
+          );
+        })}
+        {tema && (
+          <button type="button" onClick={() => setTema('')} className="ml-1 text-sm text-pine hover:underline px-2 py-1 focusring">limpar</button>
+        )}
+      </div>
+
       {!temFiltro && (
         <div className="space-y-10">
           {colecoes.map((colecao) => (

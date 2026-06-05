@@ -1,5 +1,5 @@
 ﻿import { describe, it, expect } from 'vitest';
-import { colecoesEditorial, custoEstimadoDias, mundoScoreDestino, vereditoDestino, fitTagsDestino, alertaHumanoDestino } from './editorial.js';
+import { colecoesEditorial, custoEstimadoDias, mundoScoreDestino, vereditoDestino, fitTagsDestino, alertaHumanoDestino, temasDoDestino, TEMAS_EXPLORAR } from './editorial.js';
 import { DESTINOS_PRIORITARIOS } from './destinos-prioritarios.js';
 import { DESTINOS } from './destinos.js';
 
@@ -157,5 +157,33 @@ describe('mundoScoreDestino — subnota custoEmocional', () => {
     const score = mundoScoreDestino(destino);
     expect(score.total).toBeGreaterThan(0);
     expect(score.total).toBeLessThanOrEqual(100);
+  });
+});
+
+describe('temasDoDestino — chips humanos do Explorar', () => {
+  it('classifica destino barato e perto do Brasil pelos dados reais', () => {
+    const temas = temasDoDestino(PERU); // custoDia 32, América do Sul
+    expect(temas).toContain('barato');
+    expect(temas).toContain('perto');
+  });
+
+  it('não marca barato/perto para destino caro fora das Américas', () => {
+    const temas = temasDoDestino(ISLANDIA); // 105/dia, Europa
+    expect(temas).not.toContain('barato');
+    expect(temas).not.toContain('perto');
+  });
+
+  it('é resiliente a entrada vazia', () => {
+    expect(temasDoDestino(undefined)).toEqual([]);
+    expect(temasDoDestino(null)).toEqual([]);
+  });
+
+  it('só devolve ids de tema válidos para todo o catálogo', () => {
+    const validos = new Set(TEMAS_EXPLORAR.map((t) => t.id));
+    for (const d of DESTINOS) {
+      for (const t of temasDoDestino(d)) {
+        expect(validos.has(t), `${d.code} -> ${t}`).toBe(true);
+      }
+    }
   });
 });

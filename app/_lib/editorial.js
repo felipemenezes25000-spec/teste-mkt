@@ -395,3 +395,35 @@ export function colecoesEditorial(destinos = []) {
     },
   ].filter((colecao) => colecao.destinos.length > 0);
 }
+
+// Chips de filtro "humano" do Explorar. Cada tema é LASTREADO em dado real
+// (custo, região e as dimensões já calculadas) — de propósito NÃO existem chips
+// de "praia"/"vida noturna"/"sem visto": a base não tem esse dado, e inventar
+// seria o oposto do produto (conselho honesto, não achismo).
+export const TEMAS_EXPLORAR = [
+  { id: 'barato', label: 'Barato de verdade', icon: '💸' },
+  { id: 'perto', label: 'Perto do Brasil', icon: '🌎' },
+  { id: 'seguro', label: 'Mais seguro', icon: '🛡️' },
+  { id: 'gastronomia', label: 'Gastronomia forte', icon: '🍽️' },
+  { id: 'cultura', label: 'Cultura & natureza', icon: '🏞️' },
+  { id: 'flexivel', label: 'Clima flexível', icon: '🗓️' },
+];
+
+const TEMAS_VALIDOS = new Set(TEMAS_EXPLORAR.map((t) => t.id));
+
+// Quais temas um destino satisfaz. Reusa dimensoesDoDestino (índices do país) —
+// puro e barato, roda no client sobre o catálogo todo via useMemo.
+export function temasDoDestino(destino) {
+  if (!destino) return [];
+  const custoDia = num(destino.custoDia);
+  const dim = dimensoesDoDestino(destino);
+  const meses = Array.isArray(destino.melhoresMeses) ? destino.melhoresMeses.length : 0;
+  const temas = [];
+  if (custoDia > 0 && custoDia <= 35) temas.push('barato');
+  if (destino.regiao === 'América do Sul' || destino.regiao === 'América Central') temas.push('perto');
+  if (dim.seguranca >= 75) temas.push('seguro');
+  if (dim.gastronomia >= 70) temas.push('gastronomia');
+  if (dim.experienciaLocal >= 70) temas.push('cultura');
+  if (meses >= 6) temas.push('flexivel');
+  return temas.filter((t) => TEMAS_VALIDOS.has(t));
+}
