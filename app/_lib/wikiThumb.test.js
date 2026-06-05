@@ -30,6 +30,11 @@ describe('wikiThumb', () => {
     expect(wikiThumb(FP + 'X.jpg?width=3000', 480)).toBe(FP + 'X.jpg?width=480');
   });
 
+  test('imagem local de outra wiki (/wikipedia/en/) → Special:FilePath no host daquela wiki', () => {
+    expect(wikiThumb('https://upload.wikimedia.org/wikipedia/en/a/a2/Jakarta_National-Monument.jpg', 960))
+      .toBe('https://en.wikipedia.org/wiki/Special:FilePath/Jakarta_National-Monument.jpg?width=960');
+  });
+
   test('URL não-Wikimedia passa direto', () => {
     expect(wikiThumb('https://exemplo.com/foto.jpg', 640)).toBe('https://exemplo.com/foto.jpg');
   });

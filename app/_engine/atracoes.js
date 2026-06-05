@@ -8,7 +8,7 @@ export const ATRACOES = {
  "TH": [
   {
    "nome": "Grande Palácio de Banguecoque",
-   "wiki": "Grande Palácio de Banguecoque",
+   "wiki": "Grand Palace",
    "cidade": "Banguecoque"
   },
   {
@@ -80,22 +80,22 @@ export const ATRACOES = {
   },
   {
    "nome": "Templo da Literatura",
-   "wiki": "Templo da Literatura",
+   "wiki": "Temple of Literature, Hanoi",
    "cidade": "Hanói"
   },
   {
    "nome": "Lago Hoan Kiem",
-   "wiki": "Lago Hoan Kiem",
+   "wiki": "Lago Hoàn Kiếm",
    "cidade": "Hanói"
   },
   {
    "nome": "Cidadela Imperial de Hue",
-   "wiki": "Cidade Imperial (Hue)",
+   "wiki": "Cidade Imperial de Huế",
    "cidade": "Hue"
   },
   {
    "nome": "Catedral de Notre-Dame de Saigon",
-   "wiki": "Catedral Basílica de Notre-Dame de Saigon",
+   "wiki": "Basílica de Notre-Dame de Saigão",
    "cidade": "Ho Chi Minh"
   },
   {
@@ -110,7 +110,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Delta do Mekong",
-   "wiki": "Delta do Mekong",
+   "wiki": "Delta do Rio Mecom (região)",
    "cidade": "Can Tho"
   },
   {
@@ -301,7 +301,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Monumento Nacional (Monas)",
-   "wiki": "Monumento Nacional (Indonésia)",
+   "wiki": "National Monument (Indonesia)",
    "cidade": "Jacarta"
   },
   {
@@ -1836,7 +1836,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Grande Bazar",
-   "wiki": "Grande Bazar de Istambul",
+   "wiki": "Grande Bazar",
    "cidade": "Istambul"
   },
   {
@@ -5546,12 +5546,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Tulum",
-   "wiki": "Tulum (cidade maia)",
+   "wiki": "Tulum",
    "cidade": "Quintana Roo"
   },
   {
    "nome": "Palácio de Belas Artes",
-   "wiki": "Palácio de Belas Artes",
+   "wiki": "Palácio de Belas Artes (México)",
    "cidade": "Cidade do México"
   },
   {
@@ -5581,7 +5581,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Barrancas del Cobre",
-   "wiki": "Barranca do Cobre",
+   "wiki": "Barrancas del Cobre",
    "cidade": "Chihuahua"
   }
  ],
@@ -6920,7 +6920,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Cânion do Colca",
-   "wiki": "Cânion do Colca",
+   "wiki": "Vale do Colca",
    "cidade": "Arequipa"
   },
   {
@@ -7689,7 +7689,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Torre de Hassan",
-   "wiki": "Torre de Hassan",
+   "wiki": "Torre de Haçane",
    "cidade": "Rabat"
   }
  ],
