@@ -78,6 +78,30 @@ export async function imagemWiki(query, { revalidate = DIA } = {}) {
   return ml[0] || null;
 }
 
+// Busca DIRETA no Wikimedia Commons (namespace File:) — cobre lugares que não têm
+// artigo na Wikipédia (a maioria tem foto no Commons mesmo assim). Usado como
+// fallback pra GARANTIR foto em todo card. Filtra lixo (bandeira/ícone/mapa/svg) e
+// só aceita .jpg/.png. Degrada com segurança (null).
+export async function imagemCommons(query, { revalidate = DIA } = {}) {
+  if (!query) return null;
+  try {
+    const url = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&iiurlwidth=640&generator=search&gsrnamespace=6&gsrlimit=12&gsrsearch=' + encodeURIComponent(query);
+    const res = await fetch(url, { headers: { accept: 'application/json', 'user-agent': UA }, next: { revalidate }, signal: AbortSignal.timeout(8000) });
+    if (!res.ok) return null;
+    const d = await res.json();
+    const pages = Object.values((d && d.query && d.query.pages) || {}).sort((a, b) => (a.index || 0) - (b.index || 0));
+    for (const p of pages) {
+      const ii = p.imageinfo && p.imageinfo[0];
+      if (!ii || !ii.url || RUIM.test(ii.url) || RUIM.test(p.title || '')) continue;
+      if (!/\.(jpe?g|png)$/i.test(ii.url)) continue; // só fotos
+      return ii.url;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 function stripHtml(s) {
   return String(s).replace(/<[^>]*>/g, '').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').trim().slice(0, 90);
 }

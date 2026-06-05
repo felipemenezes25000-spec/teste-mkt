@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DESTINOS, destinoPorSlug } from '../../../_lib/destinos.js';
-import { resumoWiki, imagemWiki, imagensDe, creditoImagem } from '../../../_lib/wiki.js';
+import { resumoWiki, imagemWiki, imagensDe, creditoImagem, imagemCommons } from '../../../_lib/wiki.js';
 import { atracoesDe } from '../../../_lib/places.js';
 import { MESES_PT } from '../../../_engine/data.js';
 import { FavoriteButton } from '../../../_components/FavoriteButton.jsx';
@@ -48,6 +48,10 @@ function mapsUrl(q) {
   return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
 }
 
+// Último recurso ABSOLUTO de foto (arquivo do Commons que sempre existe) — só usado
+// se nem o país tiver foto, garantindo que NENHUM card renderize sem imagem.
+const FOTO_ULTIMO = 'https://commons.wikimedia.org/wiki/Special:FilePath/Sunset_across_Machu_Picchu.jpg';
+
 // Mapa real (OpenStreetMap embed, sem chave/custo) centrado no país, com marcador.
 function MapaDestino({ coords, nome }) {
   if (!Array.isArray(coords) || coords.length !== 2) return null;
@@ -73,15 +77,25 @@ export default async function DestinoPage({ params }) {
 
   const pontos = atracoesDoPais(d.code);
   const cidadesLista = (d.cidades || []).slice(0, 4);
-  const [wiki, atracoes, pontosImgs, cidadeImgs] = await Promise.all([
-    resumoWiki(d.fotoQuery || d.nome),
-    atracoesDe(d.wikidataId, { limite: 8 }),
-    Promise.all(pontos.map((a) => imagemWiki(a.wiki || a.nome))),
-    Promise.all(cidadesLista.map((c) => imagemWiki(cidadeWiki(d.code, c)))),
-  ]);
-  // Herói: thumbnail do resumo OU 1ª foto da media-list (mata o placeholder).
-  const heroImg = wiki?.img || (await imagensDe(d.fotoQuery || d.nome, { n: 1 }))[0] || null;
+
+  // FOTO GARANTIDA — nenhum card pode ficar sem imagem (independente do meio):
+  // verbete → busca direta no Commons → PISO = foto do país (sempre existe).
+  const wiki = await resumoWiki(d.fotoQuery || d.nome);
+  const heroImg = wiki?.img || (await imagensDe(d.fotoQuery || d.nome, { n: 1 }))[0] || (await imagemCommons(d.fotoQuery || d.nome)) || null;
   const credito = heroImg ? await creditoImagem(heroImg) : null;
+  // Piso: várias fotos do país (cicladas) — o raro item sem foto própria cai aqui sem
+  // repetir sempre a mesma imagem. FOTO_ULTIMO garante não-nulo mesmo no pior caso.
+  const poolPais = [...new Set([heroImg, ...(await imagensDe(d.nome, { n: 6 }))].filter(Boolean))];
+  const piso = (i) => (poolPais.length ? poolPais[i % poolPais.length] : (heroImg || FOTO_ULTIMO));
+
+  // Resolve a foto de CADA item com a cadeia garantida (verbete curado → Commons por
+  // nome+cidade+país → piso do país ciclado). pontosImgs/cidadeImgs nunca são nulos.
+  const fotoGarantida = async (titulo, busca, i) => (await imagemWiki(titulo)) || (await imagemCommons(busca)) || piso(i);
+  const [atracoes, pontosImgs, cidadeImgs] = await Promise.all([
+    atracoesDe(d.wikidataId, { limite: 8 }),
+    Promise.all(pontos.map((a, i) => fotoGarantida(a.wiki || a.nome, `${a.nome} ${a.cidade || ''} ${d.nome}`, i))),
+    Promise.all(cidadesLista.map((c, i) => fotoGarantida(cidadeWiki(d.code, c), `${c} ${d.nome}`, i))),
+  ]);
 
   // Galeria de pontos turísticos: prioriza a lista CURADA (foto buscada por atração),
   // com fallback pro Wikidata. Garante cobertura em todos os 167 países.
