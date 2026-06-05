@@ -5,6 +5,7 @@ import { uid, num, clamp, dur, fmtMoeda, converter } from './utils.js';
 import { calcular } from './calc.js';
 import { otimizarRota, buscarOportunidades, buscarCambio } from './services.js';
 import { otimizarOrdemLocal } from './otimizar.js';
+import { baixarICS, linkMapaRota } from './exportar.js';
 import { carregarPlano, salvarPlano, normalizarPlano, planoExemplo, exportarPlano, novoTrechoDeRef } from './storage.js';
 import { Toasts, Tripe, SaveStatus } from './components.jsx';
 import TrechoCard from './TrechoCard.jsx';
@@ -494,6 +495,8 @@ export default function App() {
               </summary>
               <div className="absolute right-0 mt-1 w-52 rounded-lg border border-line bg-card shadow-lg p-1 z-40 flex flex-col">
                 <button onClick={compartilhar} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">🔗 Compartilhar (copiar link)</button>
+                <button onClick={() => { if (baixarICS(calc)) toast('Calendário .ics baixado — importe no Google/Apple Calendar.'); }} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">📅 Exportar calendário (.ics)</button>
+                <button onClick={() => { const u = linkMapaRota(plan); if (u) window.open(u, '_blank', 'noopener'); else toast('Adicione 2+ trechos pra ver a rota no Maps.', 'erro'); }} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">🗺️ Ver rota no Google Maps</button>
                 <button onClick={() => exportarPlano(plan)} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">⬇ Exportar JSON</button>
                 <button onClick={() => importRef.current && importRef.current.click()} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">⬆ Importar JSON</button>
               </div>
