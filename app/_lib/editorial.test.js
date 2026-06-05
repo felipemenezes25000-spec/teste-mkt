@@ -1,5 +1,7 @@
 ﻿import { describe, it, expect } from 'vitest';
-import { colecoesEditorial, custoEstimadoDias, mundoScoreDestino, vereditoDestino, fitTagsDestino } from './editorial.js';
+import { colecoesEditorial, custoEstimadoDias, mundoScoreDestino, vereditoDestino, fitTagsDestino, alertaHumanoDestino } from './editorial.js';
+import { DESTINOS_PRIORITARIOS } from './destinos-prioritarios.js';
+import { DESTINOS } from './destinos.js';
 
 const PORTUGAL = { code: 'PT', nome: 'Portugal', slug: 'portugal', regiao: 'Europa', custoDia: 55, moeda: 'EUR', melhoresMeses: [5, 9], estacao: 'Primavera e outono são mais gentis.' };
 const PERU = { code: 'PE', nome: 'Peru', slug: 'peru', regiao: 'América do Sul', custoDia: 32, moeda: 'PEN', melhoresMeses: [5, 6, 7, 8, 9], estacao: 'Seca nos Andes.' };
@@ -59,5 +61,65 @@ describe('colecoesEditorial', () => {
       const codes = c.destinos.map((d) => d.code);
       expect(new Set(codes).size).toBe(codes.length);
     }
+  });
+});
+
+describe('cobertura editorial dos destinos prioritários', () => {
+  it('todos os 30 prioritários têm veredito curado (texto não-template)', () => {
+    const FALLBACK_PHRASES = [
+      'tem apelo forte, mas não deve ser vendido como viagem barata',
+      'tende a render bem no orçamento',
+      'pode ser uma boa escolha se o mês, o ritmo e o orçamento fecharem juntos',
+    ];
+    const naoCurados = [];
+    for (const code of DESTINOS_PRIORITARIOS) {
+      const destino = DESTINOS.find((d) => d.code === code);
+      const veredito = vereditoDestino(destino);
+      const ehFallback = FALLBACK_PHRASES.some((p) => veredito.texto.includes(p));
+      if (ehFallback) naoCurados.push(code);
+    }
+    expect(naoCurados).toEqual([]);
+  });
+
+  it('cada veredito tem 3-5 combina e 3-5 naoCombina', () => {
+    for (const code of DESTINOS_PRIORITARIOS) {
+      const destino = DESTINOS.find((d) => d.code === code);
+      const v = vereditoDestino(destino);
+      expect(v.combina.length, `${code} combina length`).toBeGreaterThanOrEqual(3);
+      expect(v.combina.length, `${code} combina length`).toBeLessThanOrEqual(5);
+      expect(v.naoCombina.length, `${code} naoCombina length`).toBeGreaterThanOrEqual(3);
+      expect(v.naoCombina.length, `${code} naoCombina length`).toBeLessThanOrEqual(5);
+    }
+  });
+
+  it('cada veredito tem oportunidade não-genérica', () => {
+    const GENERICAS = [
+      'Destino de desejo: planeje antes',
+      'Boa oportunidade para viajar com orçamento controlado',
+      'Vale olhar custo, mês e ritmo',
+    ];
+    for (const code of DESTINOS_PRIORITARIOS) {
+      const destino = DESTINOS.find((d) => d.code === code);
+      const v = vereditoDestino(destino);
+      const ehGenerica = GENERICAS.some((p) => v.oportunidade.includes(p));
+      expect(ehGenerica, `${code} tem oportunidade genérica`).toBe(false);
+    }
+  });
+});
+
+describe('alertaHumanoDestino — cobertura dos prioritários', () => {
+  it('todos os 30 prioritários têm alerta curado (não-fallback)', () => {
+    const FALLBACK = [
+      'Destino de desejo: planeje antes',
+      'Boa oportunidade para viajar com orçamento controlado',
+      'Vale olhar custo, mês e ritmo antes de comprar passagem',
+    ];
+    const naoCurados = [];
+    for (const code of DESTINOS_PRIORITARIOS) {
+      const destino = DESTINOS.find((d) => d.code === code);
+      const alerta = alertaHumanoDestino(destino);
+      if (FALLBACK.some((p) => alerta.includes(p))) naoCurados.push(code);
+    }
+    expect(naoCurados).toEqual([]);
   });
 });
