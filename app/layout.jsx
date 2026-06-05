@@ -43,7 +43,9 @@ const themeInit = `(function(){try{var k='mundosemfim.theme',t=localStorage.getI
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR" className={`${fraunces.variable} ${hanken.variable}`}>
+    /* suppressHydrationWarning: o themeInit abaixo modifica data-theme no html
+       antes da hidratação React; sem isso o console mostra warning de mismatch. */
+    <html lang="pt-BR" className={`${fraunces.variable} ${hanken.variable}`} suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         {children}
