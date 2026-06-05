@@ -124,3 +124,34 @@ export function jsonLdProduto(ofertas = [], baseUrl = '') {
     })),
   };
 }
+
+// Review + AggregateRating — SÓ a partir de depoimentos REAIS. Retorna null quando
+// não há nenhum (ou só exemplos `placeholder:true`), pra NUNCA emitir markup de
+// avaliação falso (enganoso + penalizado pelo Google). Liga sozinho quando o Felipe
+// preencher _lib/depoimentos.js com depoimentos de verdade.
+export function jsonLdReviews(depoimentos = [], baseUrl = '') {
+  const reais = (depoimentos || []).filter((d) => d && !d.placeholder && d.texto && d.nota);
+  if (!reais.length) return null;
+  const base = semBarra(baseUrl);
+  const soma = reais.reduce((s, d) => s + Number(d.nota), 0);
+  const ratingValue = Math.round((soma / reais.length) * 10) / 10;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: ORG_NOME,
+    url: base,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue,
+      reviewCount: reais.length,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: reais.map((d) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: d.autor || 'Viajante' },
+      reviewRating: { '@type': 'Rating', ratingValue: Number(d.nota), bestRating: 5, worstRating: 1 },
+      reviewBody: d.texto,
+    })),
+  };
+}

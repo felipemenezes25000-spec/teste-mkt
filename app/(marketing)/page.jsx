@@ -3,7 +3,9 @@ import { destinosDestaque, DESTINOS } from '../_lib/destinos.js';
 import { imagemWiki, resumoWiki } from '../_lib/wiki.js';
 import { DestinoCard } from '../_components/DestinoCard.jsx';
 import { JsonLd } from '../_components/JsonLd.jsx';
-import { jsonLdOrganization, jsonLdWebSite, siteUrl } from '../_lib/seo.js';
+import { jsonLdOrganization, jsonLdWebSite, jsonLdReviews, siteUrl } from '../_lib/seo.js';
+import { ProvaSocial } from '../_components/ProvaSocial.jsx';
+import { DEPOIMENTOS } from '../_lib/depoimentos.js';
 
 // Landing premium (Server Component). Busca a imagem-herói e as dos destaques na
 // Wikipédia (cacheadas 1 dia); se a rede falhar, cai num gradiente — nunca quebra.
@@ -39,6 +41,7 @@ const PASSOS = [
 
 export default async function Home() {
   const destaques = destinosDestaque();
+  const reviewsLd = jsonLdReviews(DEPOIMENTOS, siteUrl());
   const [hero, ...imgs] = await Promise.all([
     resumoWiki('Machu Picchu'),
     ...destaques.map((d) => imagemWiki(d.fotoQuery || d.nome)),
@@ -48,6 +51,7 @@ export default async function Home() {
     <main>
       <JsonLd data={jsonLdOrganization(siteUrl())} />
       <JsonLd data={jsonLdWebSite(siteUrl())} />
+      {reviewsLd && <JsonLd data={reviewsLd} />}
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
@@ -128,6 +132,9 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      {/* PROVA SOCIAL (honesta: sinais verificáveis + depoimentos reais quando houver) */}
+      <ProvaSocial />
 
       {/* PLANOS (teaser) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">

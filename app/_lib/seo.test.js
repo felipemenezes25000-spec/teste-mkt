@@ -6,6 +6,7 @@ import {
   jsonLdDestino,
   jsonLdBreadcrumb,
   jsonLdProduto,
+  jsonLdReviews,
   siteUrl,
 } from './seo.js';
 
@@ -110,5 +111,34 @@ describe('siteUrl — URL pública (fonte única p/ robots + sitemap)', () => {
     expect(siteUrl()).toMatch(/^https:\/\//);
     if (a !== undefined) process.env.NEXT_PUBLIC_SITE_URL = a;
     if (b !== undefined) process.env.VERCEL_PROJECT_PRODUCTION_URL = b;
+  });
+});
+
+describe('jsonLdReviews — só com depoimentos REAIS (nunca markup falso)', () => {
+  it('retorna null quando não há depoimentos', () => {
+    expect(jsonLdReviews([], BASE)).toBeNull();
+    expect(jsonLdReviews(undefined, BASE)).toBeNull();
+  });
+
+  it('ignora entradas placeholder (placeholder:true) → null se só houver exemplos', () => {
+    const deps = [{ autor: 'Exemplo', nota: 5, texto: 'troque por um real', placeholder: true }];
+    expect(jsonLdReviews(deps, BASE)).toBeNull();
+  });
+
+  it('monta AggregateRating + Review a partir de depoimentos reais', () => {
+    const deps = [
+      { autor: 'Ana', nota: 5, texto: 'Salvou meu mochilão.' },
+      { autor: 'Bruno', nota: 4, texto: 'Custo real certeiro.' },
+      { autor: 'Placeholder', nota: 5, texto: 'exemplo', placeholder: true },
+    ];
+    const j = jsonLdReviews(deps, BASE);
+    expect(j['@type']).toBe('Organization');
+    expect(j.aggregateRating['@type']).toBe('AggregateRating');
+    expect(j.aggregateRating.ratingValue).toBe(4.5);
+    expect(j.aggregateRating.reviewCount).toBe(2);
+    expect(j.review).toHaveLength(2);
+    expect(j.review[0]['@type']).toBe('Review');
+    expect(j.review[0].author.name).toBe('Ana');
+    expect(j.review[0].reviewRating.ratingValue).toBe(5);
   });
 });
