@@ -59,6 +59,48 @@ const VEREDITOS = {
     naoCombina: ['orçamento apertado só em Paris', 'mochilão rápido', 'quem quer só natureza'],
     oportunidade: 'Maio-junho ou setembro: tempo bom, dias longos e Paris menos sufocada que em julho-agosto.',
   },
+  US: {
+    texto: 'A viagem internacional que mais "decepciona barato e impressiona caro" para brasileiros. Os EUA são uma escolha óbvia para Disney/NY/LA, mas o dólar e a estrutura cara em hospedagem e comida engolem o orçamento — exceto em road trip com motel.',
+    combina: ['família com criança', 'primeira viagem internacional sem barreira linguística', 'roteiro Costa Oeste em road trip', 'quem quer mistura cidade+natureza'],
+    naoCombina: ['orçamento muito apertado em NY/CA', 'viagem curta de cidade só', 'quem quer experiência exótica'],
+    oportunidade: 'Setembro-novembro na Costa Oeste: clima ainda bom, preços fora do pico de verão e parques nacionais ainda abertos.',
+  },
+  MX: {
+    texto: 'O México é provavelmente o melhor destino de praia que brasileiros subestimam. Cancún/Tulum/Riviera Maya tem custo competitivo, infraestrutura forte e clima estável. O cuidado é não confundir Cancún com México — a cultura real está em CDMX, Oaxaca, Yucatán interior.',
+    combina: ['praia tropical com infra', 'gastronomia barata e forte', 'roteiro 7-12 dias cultura+praia', 'casal mid-range'],
+    naoCombina: ['alta temporada de dezembro/janeiro (caro e cheio)', 'busca por luxo silencioso', 'quem não tolera calor'],
+    oportunidade: 'Maio ou outubro na Riviera Maya: pré ou pós-furacão, preços melhores e praia ainda ótima.',
+  },
+  JP: {
+    texto: 'O Japão é o destino que mais dilui o investimento da viagem se você for 12+ dias. Voo caro, mas dia a dia é mais barato do que parece — comida na rua é boa e barata, transporte funciona. O choque é hospedagem em Tóquio: quartos pequenos e caros. Roteiros de 7 dias quase sempre frustram.',
+    combina: ['14+ dias', 'interesse em comida e cultura', 'primeira viagem fora do Ocidente', 'quem aprecia ordem e detalhe'],
+    naoCombina: ['viagem de 6-8 dias (não rende)', 'medo de idioma totalmente diferente', 'orçamento que ignora voo'],
+    oportunidade: 'Final de outubro (folhas) ou abril (sakura, mas mais caro): clima ideal e a paisagem virando outro destino.',
+  },
+  GR: {
+    texto: 'A Grécia é a viagem de "Europa sem stress europeu": clima quente, mar bom, comida simples e gente fácil. O detalhe é que Atenas funciona com 2 dias, e o resto é ilha — escolher 1 ou 2 ilhas pra não virar maratona de ferry. Santorini é caríssima e cheia; outras ilhas rendem muito mais.',
+    combina: ['casal lua-de-mel', 'primeira Europa que quer praia+história', 'viagem 10-12 dias', 'alguém que aprecia ritmo lento'],
+    naoCombina: ['roteiro de 5 dias pulando 4 ilhas', 'julho/agosto (lotado e caro)', 'orçamento apertado em Santorini'],
+    oportunidade: 'Maio-junho ou setembro: ilhas abrindo ou fechando temporada, mar morno e preços muito mais civilizados.',
+  },
+  TR: {
+    texto: 'A Turquia é provavelmente o destino com maior diferença entre custo e impacto cultural pra brasileiros. Istambul sozinha vale a viagem, e Capadócia é a foto que o app vende. Lira está fraca, então o real rende. O contra é distância — vale com 10+ dias.',
+    combina: ['10-14 dias misturando cidade+natureza', 'primeiro contato com cultura muçulmana', 'casal querendo experiência forte', 'orçamento médio'],
+    naoCombina: ['viagem de 6 dias só em Istambul', 'medo de barganha na compra', 'ramadã (movimento e horários diferentes)'],
+    oportunidade: 'Abril-maio ou setembro-outubro: clima bom em Istambul, balões em Capadócia funcionando e preço fora do pico.',
+  },
+  EG: {
+    texto: 'O Egito é a "experiência arqueológica intensa" que poucos países entregam. Pirâmides + Vale dos Reis + cruzeiro no Nilo é roteiro clássico que ainda funciona. O contra é que pode cansar — calor, assédio comercial e logística podem ficar pesados. Vale guia local.',
+    combina: ['8-12 dias com cruzeiro', 'interesse forte em história antiga', 'quem aceita guia/pacote organizado', 'quem tem disposição pro calor'],
+    naoCombina: ['medo de assédio comercial intenso', 'julho-agosto (calor extremo)', 'roteiro flexível mochilão sem agência'],
+    oportunidade: 'Outubro-março: clima muito mais civilizado e cruzeiro do Nilo confortável (acima de 25 graus em vez de 45).',
+  },
+  AE: {
+    texto: 'Os Emirados Árabes são "Dubai" pra maioria — uma cidade que funciona como vitrine de tudo: shopping, deserto, praia, arranha-céus. Vale como escala num roteiro maior pra Ásia ou como 4-5 dias isolados. Como destino único de 10 dias, geralmente não rende — é raso de cultura.',
+    combina: ['escala estendida (stopover Emirates)', 'primeira viagem no Oriente Médio sem barreira de idioma', 'família querendo segurança e estrutura', 'luxo bom pelo preço'],
+    naoCombina: ['busca por autenticidade cultural', '10+ dias só em Dubai', 'verão (calor insuportável)'],
+    oportunidade: 'Novembro-março: deserto frio, praia ótima e festivais funcionando. Stopover de 3-4 dias rende muito mais que viagem-destino única.',
+  },
 };
 
 export function custoEstimadoDias(destino, dias = [7, 10, 15]) {
