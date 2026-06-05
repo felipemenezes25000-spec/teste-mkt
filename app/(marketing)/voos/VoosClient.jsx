@@ -77,6 +77,9 @@ export function VoosClient() {
 
       {res && (
         <div className="mt-5">
+          <div className="mb-3 rounded-lg border border-ochre/40 bg-ochre/10 text-warn px-3 py-2 text-xs font-medium">
+            ⚠ Valores, horários e companhias são <b>ilustrativos</b> (estimativa por distância — provider mock), não preços reais. Confirme nos links “Reservar de verdade” abaixo.
+          </div>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
             <p className="text-sm text-inksoft">
               {origem.iata} → {destino.iata}{res.km ? ` · ${res.km.toLocaleString('pt-BR')} km` : ''} · faixa estimada US$ {res.faixa.min}–{res.faixa.max}

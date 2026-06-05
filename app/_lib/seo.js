@@ -155,3 +155,20 @@ export function jsonLdReviews(depoimentos = [], baseUrl = '') {
     })),
   };
 }
+
+// FAQPage a partir de pares {pergunta, resposta}. Ignora entradas incompletas; null
+// se não sobrar nenhuma. Usado nas páginas de destino (melhor época/custo) → rich
+// results de FAQ no Google, que são SEO de cauda longa puro.
+export function jsonLdFaq(perguntas = []) {
+  const validas = (perguntas || []).filter((q) => q && q.pergunta && q.resposta);
+  if (!validas.length) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: validas.map((q) => ({
+      '@type': 'Question',
+      name: q.pergunta,
+      acceptedAnswer: { '@type': 'Answer', text: q.resposta },
+    })),
+  };
+}

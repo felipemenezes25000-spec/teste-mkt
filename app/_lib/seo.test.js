@@ -7,6 +7,7 @@ import {
   jsonLdBreadcrumb,
   jsonLdProduto,
   jsonLdReviews,
+  jsonLdFaq,
   siteUrl,
 } from './seo.js';
 
@@ -91,6 +92,27 @@ describe('JSON-LD', () => {
     expect(p.offers[0].priceCurrency).toBe('BRL');
     expect(p.offers[0].price).toBe('19.00');
     expect(p.offers[1].price).toBe('39.00');
+  });
+});
+
+describe('jsonLdFaq — FAQPage (rich results de melhor época/custo/visto)', () => {
+  it('retorna null sem perguntas válidas', () => {
+    expect(jsonLdFaq([])).toBeNull();
+    expect(jsonLdFaq([{ pergunta: 'x' }])).toBeNull(); // sem resposta → ignora
+  });
+
+  it('monta FAQPage com Question/acceptedAnswer', () => {
+    const f = jsonLdFaq([
+      { pergunta: 'Melhor época?', resposta: 'Maio a setembro.' },
+      { pergunta: 'Custa quanto?', resposta: '~US$ 35/dia.' },
+    ]);
+    expect(f['@context']).toBe('https://schema.org');
+    expect(f['@type']).toBe('FAQPage');
+    expect(f.mainEntity).toHaveLength(2);
+    expect(f.mainEntity[0]['@type']).toBe('Question');
+    expect(f.mainEntity[0].name).toBe('Melhor época?');
+    expect(f.mainEntity[0].acceptedAnswer['@type']).toBe('Answer');
+    expect(f.mainEntity[0].acceptedAnswer.text).toBe('Maio a setembro.');
   });
 });
 

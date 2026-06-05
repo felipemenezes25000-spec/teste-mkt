@@ -1870,7 +1870,7 @@ export const PAISES_EXTRA = [
    9,
    10
   ],
-  "estacao": "4 estações: verão jun–ago (quente), outono set–out ameno; invierno frio no norte",
+  "estacao": "4 estações: verão jun–ago (quente), outono set–out ameno; inverno frio no norte",
   "iata": "JFK",
   "cidadePrincipal": "Nova York",
   "coords": [

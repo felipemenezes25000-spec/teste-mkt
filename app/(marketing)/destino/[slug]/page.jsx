@@ -17,7 +17,7 @@ import { cidadeWiki } from '../../../_lib/cidadeWiki.js';
 import { GaleriaLugares } from './GaleriaLugares.jsx';
 import { wikiThumb } from '../../../_lib/wikiThumb.js';
 import { JsonLd } from '../../../_components/JsonLd.jsx';
-import { jsonLdDestino, jsonLdBreadcrumb, siteUrl } from '../../../_lib/seo.js';
+import { jsonLdDestino, jsonLdBreadcrumb, jsonLdFaq, siteUrl } from '../../../_lib/seo.js';
 import { ShareButtons } from '../../../_components/ShareButtons.jsx';
 
 export const revalidate = 86400;
@@ -105,6 +105,10 @@ export default async function DestinoPage({ params }) {
     : (d.comidas || []).map((f) => ({ nome: f, tipo: 'salgado' }));
 
   const meses = (d.melhoresMeses || []).map((m) => MESES_PT[m - 1]).join(' · ') || '—';
+  const faqLd = jsonLdFaq([
+    { pergunta: `Qual a melhor época para visitar ${d.nome}?`, resposta: `${meses !== '—' ? `Melhores meses: ${meses}. ` : ''}${d.estacao || ''}`.trim() },
+    { pergunta: `Quanto custa viajar para ${d.nome}?`, resposta: `Custo médio de referência: ~US$ ${d.custoDia}/dia (perfil econômico, em terra). O custo real da viagem (com voo, seguro e visto) aparece na página.` },
+  ]);
   const fatos = [
     { k: 'Região', v: d.regiao },
     { k: 'Moeda local', v: d.moeda },
@@ -125,6 +129,7 @@ export default async function DestinoPage({ params }) {
           { nome: d.nome, url: `${base}/destino/${d.slug}` },
         ])}
       />
+      {faqLd && <JsonLd data={faqLd} />}
       {/* HERO */}
       <section className="relative h-[42vh] min-h-[260px] max-h-[440px] overflow-hidden bg-paper2">
         {heroImg ? (

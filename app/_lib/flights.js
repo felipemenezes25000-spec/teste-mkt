@@ -37,7 +37,7 @@ export function buscarVoosMock({ origemIata, origemCoords, destinoIata, destinoC
   for (let i = 0; i < n; i++) {
     const escalas = r() < 0.45 ? 0 : r() < 0.82 ? 1 : 2;
     const preco = Math.max(40, Math.round((faixa.min + (faixa.max - faixa.min) * r()) * (1 - escalas * 0.05) / 5) * 5);
-    const dur = horas(km || 1200, escalas);
+    const dur = horas(km || 1200, escalas) * (0.92 + r() * 0.16); // ±8% → diretos não ficam idênticos
     const partida = 0.18 + r() * 0.62;
     resultados.push({
       id: 'f' + i,
@@ -51,14 +51,22 @@ export function buscarVoosMock({ origemIata, origemCoords, destinoIata, destinoC
     });
   }
   resultados.sort((a, b) => a.preco - b.preco);
-  // "Melhor custo-benefício" = menor (preço + penalidade por escala/duração).
-  let melhor = resultados[0], best = Infinity;
-  for (const f of resultados) {
-    const score = f.preco + f.escalas * 60 + f.duracaoH * 8;
-    if (score < best) { best = score; melhor = f; }
-  }
+  const melhor = escolherMelhorCB(resultados);
   if (melhor) melhor.melhorCustoBeneficio = true;
   return { km, faixa, resultados, moeda: 'USD', fonte: 'mock' };
+}
+
+// Selo "custo-benefício": menor score = preço + penalidade FORTE por escala (conexão
+// custa tempo/risco real) + penalidade por duração. Pondera os 3 — um 1-escala só
+// leva o selo se for BEM mais barato que o melhor direto (corrige o caso da auditoria
+// em que um 1-escala lento vencia um direto por só US$110).
+export function escolherMelhorCB(resultados) {
+  let melhor = null, best = Infinity;
+  for (const f of resultados) {
+    const score = f.preco + f.escalas * 120 + f.duracaoH * 10;
+    if (score < best) { best = score; melhor = f; }
+  }
+  return melhor;
 }
 
 // SEAM — quando tiver chave, plugue o provider real aqui:

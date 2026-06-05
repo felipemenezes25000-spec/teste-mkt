@@ -21,7 +21,7 @@ export const metadata = {
 const CTA_PRIMARY =
   'inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-white font-semibold px-5 py-3 shadow-lg hover:bg-pinedk transition focusring';
 const CTA_LIGHT =
-  'inline-flex items-center justify-center gap-2 rounded-xl bg-white/15 backdrop-blur border border-white/30 text-white font-semibold px-5 py-3 hover:bg-white/25 transition focusring';
+  'inline-flex items-center justify-center gap-2 rounded-xl bg-ink/35 backdrop-blur border border-white/60 text-white font-semibold px-5 py-3 hover:bg-ink/50 transition focusring';
 const CTA_GHOST =
   'inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-card text-ink font-semibold px-5 py-3 hover:text-pine transition focusring';
 
@@ -61,7 +61,10 @@ export default async function Home() {
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-pine to-pinedk" aria-hidden />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/92 via-ink/65 to-ink/40" />
+          {/* Scrim vertical + scrim horizontal na coluna esquerda → garante ≥4,5:1
+              pro texto branco independentemente do pixel da foto (WCAG 1.4.3). */}
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/75 to-ink/45" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/35 to-transparent" />
         </div>
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-14 sm:pt-28 sm:pb-20">
@@ -71,7 +74,7 @@ export default async function Home() {
           <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.05] text-white max-w-3xl drop-shadow">
             Decida a viagem da sua vida — <span className="text-amberx">com um copiloto que pensa por você.</span>
           </h1>
-          <p className="mt-4 text-lg text-white/85 max-w-2xl">
+          <p className="mt-4 text-lg text-white/90 max-w-2xl">
             As OTAs te empurram opções. A gente diz <strong className="text-white">pra onde ir</strong> pelo seu perfil,
             <strong className="text-white"> quanto custa de verdade</strong> (não só voo + hotel) e monta o
             <strong className="text-white"> roteiro que recalcula</strong>. Comece grátis.
@@ -80,7 +83,7 @@ export default async function Home() {
             <Link href="/decisao" className={CTA_PRIMARY}>🧠 Decidir minha viagem</Link>
             <Link href="/explorar" className={CTA_LIGHT}>🧭 Explorar 167 destinos</Link>
           </div>
-          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-xs text-white/75">
+          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-[13px] text-white/95">
             <span>✓ Grátis pra começar</span>
             <span>✓ Sem cartão</span>
             <span>✓ Conselho neutro (não vendemos a reserva)</span>
