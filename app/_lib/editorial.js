@@ -101,6 +101,54 @@ const VEREDITOS = {
     naoCombina: ['busca por autenticidade cultural', '10+ dias só em Dubai', 'verão (calor insuportável)'],
     oportunidade: 'Novembro-março: deserto frio, praia ótima e festivais funcionando. Stopover de 3-4 dias rende muito mais que viagem-destino única.',
   },
+  CO: {
+    texto: 'A Colômbia mudou de cara nos últimos 10 anos e hoje é uma das viagens mais interessantes da América do Sul: Cartagena pra romance, Medellín pra mudança cultural, Bogotá pra altitude+cultura, Eixo Cafeteiro pra natureza. Custo bom, voo razoável de SP/RJ.',
+    combina: ['casal querendo destino sul-americano fora do óbvio', '10-12 dias misturando cidade+praia+natureza', 'interesse em café e cultura caribenha', 'segunda viagem internacional após PT/AR'],
+    naoCombina: ['roteiro de 5 dias multi-cidade', 'quem se incomoda com altitude em Bogotá', 'busca por luxo silencioso'],
+    oportunidade: 'Dezembro-março ou julho-agosto: clima seco nas duas estações principais, e Cartagena fora do pico de outubro.',
+  },
+  NL: {
+    texto: 'A Holanda é o destino de "Europa fácil + pegada cultural alternativa" — Amsterdam é caminhável, ciclável, com museus do nível de Londres/Paris mas em dois dias. Vale com pouca duração (4-5 dias) ou como parte de um roteiro multi-cidade na Europa.',
+    combina: ['roteiro de 4-5 dias intensos em Amsterdam', 'interesse em arte (Van Gogh, Rijksmuseum)', 'parte de roteiro Europa multi-cidade', 'primeira viagem que quer cidade caminhável'],
+    naoCombina: ['10+ dias só em Amsterdam (não rende)', 'orçamento muito apertado', 'busca por praia/natureza'],
+    oportunidade: 'Abril-maio (tulipas) ou setembro-outubro: clima bom e Amsterdam menos lotada que no verão.',
+  },
+  DE: {
+    texto: 'A Alemanha é "Europa eficiente": trens funcionam, cidades organizadas, custo médio razoável pra Europa. Mas é destino que precisa de roteiro pensado — Berlim é única, mas o resto (Munique, Hamburgo, Rota Romântica) só faz sentido com 12+ dias. O brasileiro tipicamente passa rápido demais em cada cidade.',
+    combina: ['roteiro 10-14 dias misturando Berlim + Sul (Baviera)', 'interesse em história séc. XX', 'família com adolescente', 'viagem de carro/trem fora dos circuitos óbvios'],
+    naoCombina: ['5 dias só em Berlim', 'busca por praia ou comida latina', 'primeira Europa sem inglês'],
+    oportunidade: 'Maio-junho ou setembro: clima bom, Christmas markets ainda longe, preços fora do pico.',
+  },
+  GB: {
+    texto: 'Londres é a viagem mais "Manhattan da Europa" — internacional, museus de classe mundial, teatro, gastronomia transformada. Mas é cara pra brasileiros (libra+hospedagem), e fora de Londres a Inglaterra rende menos do que vale o trabalho de mover. Escócia é o segredo subestimado.',
+    combina: ['7 dias intensos em Londres', 'interesse forte em museus, teatro, gastronomia internacional', 'primeira Europa que quer cidade grande', 'roteiro Londres+Escócia 10-12 dias'],
+    naoCombina: ['orçamento muito apertado', 'busca por sol', 'viagem que tenta cobrir toda Inglaterra+Escócia em 7 dias'],
+    oportunidade: 'Maio-setembro: dias longos, Londres com energia máxima e Escócia possível sem chuva contínua.',
+  },
+  ID: {
+    texto: 'A Indonésia é principalmente Bali pra brasileiros, e Bali é dois destinos diferentes: a versão "Eat Pray Love" (Ubud, retiro, natureza) e a versão "festa em Canggu/Seminyak". Custo é bom no chão, mas o voo+conexão é o que pesa. Vale muito com 12+ dias.',
+    combina: ['14-21 dias diluindo voo', 'interesse em yoga/retiro/spa', 'casal sem pressa', 'mochileiro com ritmo lento'],
+    naoCombina: ['viagem de 7 dias', 'medo de barriga viajante', 'orçamento que ignora voo'],
+    oportunidade: 'Maio-setembro: estação seca em Bali, sem monção e com clima ideal pra praia/cachoeiras.',
+  },
+  VN: {
+    texto: 'O Vietnã é provavelmente o melhor custo-benefício do Sudeste Asiático que brasileiros mochilam. Distâncias bem pensadas (Hanoi → Hoi An → HCMC), comida memorável, custo absurdamente baixo no dia a dia. O contra é o voo: longo, sem direto do Brasil.',
+    combina: ['mochilão de 14+ dias', 'interesse forte em comida de rua', 'roteiro norte-sul de trem/ônibus', 'orçamento controlado mas com algumas experiências'],
+    naoCombina: ['viagem de menos de 10 dias', 'viagem com criança pequena', 'medo de tráfego caótico nas cidades'],
+    oportunidade: 'Outubro-março no sul (HCMC), maio-setembro no norte (Hanoi): país tem clima oposto entre regiões.',
+  },
+  MA: {
+    texto: 'Marrocos é a viagem do "exótico próximo" — cidade imperial (Marrakech, Fes), deserto do Saara, cultura completamente diferente, mas com infraestrutura turística funcional. Vale como 8-10 dias que mistura medina + deserto + costa atlântica. Pode chocar pelo assédio comercial.',
+    combina: ['8-12 dias misturando cidades+deserto', 'interesse em cultura árabe-berbere', 'casal que aceita ritmo intenso', 'quem quer experiência exótica sem ir muito longe'],
+    naoCombina: ['medo de barganha agressiva', 'viagem com criança pequena', 'ramadã (horários e movimento diferentes)'],
+    oportunidade: 'Março-maio ou outubro-novembro: clima ideal no deserto e nas cidades, sem o calor extremo do verão.',
+  },
+  KR: {
+    texto: 'A Coreia do Sul é o destino que cresceu muito nos últimos anos pra brasileiros — Seul é uma das cidades mais modernas do mundo, comida forte e diferente, K-pop/K-drama puxam interesse. O custo é mais alto que esperado (similar a Japão), e voo é longo. Vale com 10+ dias.',
+    combina: ['interesse forte em cultura coreana (k-pop, k-drama, comida)', '10-14 dias misturando Seul+Busan+Jeju', 'roteiro cultural urbano', 'primeira viagem na Ásia'],
+    naoCombina: ['viagem curta (6-7 dias não rendem)', 'busca por preço baixo', 'medo de idioma muito diferente'],
+    oportunidade: 'Final de outubro (outono colorido) ou abril (sakura coreana): clima ideal e paisagem virando atração à parte.',
+  },
 };
 
 export function custoEstimadoDias(destino, dias = [7, 10, 15]) {
