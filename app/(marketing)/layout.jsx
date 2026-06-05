@@ -1,4 +1,6 @@
 import AppNav from '../_components/AppNav.jsx';
+import { TourGuiado } from '../_components/TourGuiado.jsx';
+import { TourReopen } from '../_components/TourReopen.jsx';
 
 // Shell das telas de produto: nav global + rodapé. O planner (/planejar) fica
 // FORA deste grupo de rotas e mantém o próprio cabeçalho de viagem.
@@ -6,6 +8,7 @@ export default function MarketingLayout({ children }) {
   return (
     <>
       <AppNav />
+      <TourGuiado />
       <div className="min-h-[calc(100vh-3.5rem)]">{children}</div>
       <footer className="border-t border-line mt-6">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-xs text-inksoft flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -17,6 +20,7 @@ export default function MarketingLayout({ children }) {
             Estimativas de custo, clima e visto são referências de fontes públicas — confira sempre na fonte oficial.
             Imagens via Wikipédia/Wikimedia, com crédito na origem.
           </p>
+          <TourReopen />
         </div>
       </footer>
     </>
