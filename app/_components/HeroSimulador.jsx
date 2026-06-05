@@ -11,7 +11,10 @@ const ESTILOS = Object.entries(PERFIS_PRONTOS).map(([id, p]) => ({ id, label: p.
 // Card que transforma a vitrine em PRODUTO logo no topo: em ~30s o visitante
 // escolhe estilo/dias/orçamento/mês e recebe 3 destinos REAIS — reusando o mesmo
 // motor de decisão da /decisao (recomendarDestinos), sem duplicar ranking.
-export function HeroSimulador() {
+//
+// variant='default' → renderiza como cartão flutuante embaixo do hero (mobile/tablet).
+// variant='inHero'  → renderiza inline como coluna do hero (desktop), sem positioning.
+export function HeroSimulador({ variant = 'default' }) {
   const [estilo, setEstilo] = useState('equilibrado');
   const [dias, setDias] = useState(14);
   const [orcamento, setOrcamento] = useState('');
@@ -41,16 +44,23 @@ export function HeroSimulador() {
   const field = 'mt-1 w-full px-3 py-2 rounded-lg border border-line bg-input text-ink focusring text-sm';
   const nd = Number(dias) || 14;
 
+  const wrapperClass = variant === 'inHero'
+    ? ''
+    : 'relative z-10 max-w-5xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-12';
+  const cardClass = variant === 'inHero'
+    ? 'rounded-3xl border border-white/15 bg-card/95 backdrop-blur shadow-[var(--e-2)] p-5'
+    : 'rounded-3xl border border-line bg-card shadow-[var(--e-2)] p-5 sm:p-7';
+
   return (
-    <section className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-12">
-      <div className="rounded-3xl border border-line bg-card shadow-[var(--e-2)] p-5 sm:p-7">
+    <section className={wrapperClass}>
+      <div className={cardClass}>
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-[11px] font-bold uppercase tracking-wider text-oncoral bg-coral px-2.5 py-1 rounded-full">30 segundos</span>
           <h2 className="font-display text-xl sm:text-2xl text-ink">Descubra a viagem que combina com você</h2>
         </div>
 
-        <form onSubmit={simular} className="mt-4 grid grid-cols-2 lg:grid-cols-5 gap-3 items-end">
-          <label className="text-xs text-inksoft font-medium col-span-2 lg:col-span-1">Estilo
+        <form onSubmit={simular} className={`mt-4 grid gap-3 items-end ${variant === 'inHero' ? 'grid-cols-2' : 'grid-cols-2 lg:grid-cols-5'}`}>
+          <label className={`text-xs text-inksoft font-medium ${variant === 'inHero' ? 'col-span-2' : 'col-span-2 lg:col-span-1'}`}>Estilo
             <select value={estilo} onChange={(e) => setEstilo(e.target.value)} className={field}>
               {ESTILOS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
             </select>
@@ -61,20 +71,20 @@ export function HeroSimulador() {
           <label className="text-xs text-inksoft font-medium">Orçamento US$
             <input type="number" min="0" step="100" placeholder="opcional" value={orcamento} onChange={(e) => setOrcamento(e.target.value)} className={`${field} tnum`} />
           </label>
-          <label className="text-xs text-inksoft font-medium">Mês
+          <label className={`text-xs text-inksoft font-medium ${variant === 'inHero' ? 'col-span-2' : ''}`}>Mês
             <select value={mes} onChange={(e) => setMes(Number(e.target.value))} className={field}>
               <option value={0}>Qualquer</option>
               {MESES_PT.map((m, i) => <option key={m} value={i + 1}>{m}</option>)}
             </select>
           </label>
-          <button type="submit" className="col-span-2 lg:col-span-1 inline-flex items-center justify-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 transition focusring">
+          <button type="submit" className={`inline-flex items-center justify-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 transition focusring ${variant === 'inHero' ? 'col-span-2' : 'col-span-2 lg:col-span-1'}`}>
             Descobrir destino
           </button>
         </form>
 
         {res ? (
           <div className="mt-5">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className={`grid gap-3 ${variant === 'inHero' ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-3'}`}>
               {res.map((d, i) => (
                 <div key={d.code} className="rounded-2xl border border-line bg-paper2/60 p-4 flex flex-col">
                   <div className="flex items-center justify-between gap-2">
