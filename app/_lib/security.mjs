@@ -30,6 +30,7 @@ export function buildSecurityHeaders({ production = true, vercel = false } = {})
     `script-src ${scriptSrc}`,
     `style-src 'self' 'unsafe-inline'`,
     `font-src 'self'`,
+    `worker-src 'self' blob:`,
     `img-src 'self' data: blob: ${WIKI} ${SUPABASE}`,
     `frame-src 'self' https://www.openstreetmap.org`,
     `connect-src ${connectSrc}`,

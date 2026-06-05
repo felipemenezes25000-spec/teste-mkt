@@ -24,6 +24,7 @@ describe('buildSecurityHeaders — cabeçalhos de segurança', () => {
     expect(c).toContain("base-uri 'self'");
     expect(c).toContain("form-action 'self'");
     expect(c).toMatch(/script-src[^;]*'unsafe-inline'/);
+    expect(c).toMatch(/worker-src[^;]*'self'/);
   });
 
   it('a CSP libera exatamente as origens que o app usa NO BROWSER', () => {

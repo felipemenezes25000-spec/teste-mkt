@@ -1,6 +1,7 @@
 import './_ui/tokens.css';
 import './globals.css';
 import { Fraunces, Hanken_Grotesk } from 'next/font/google';
+import { SWRegister } from './_components/SWRegister.jsx';
 
 const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces', display: 'swap' });
 const hanken = Hanken_Grotesk({ subsets: ['latin'], variable: '--font-hanken', display: 'swap' });
@@ -46,6 +47,7 @@ export default function RootLayout({ children }) {
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         {children}
+        <SWRegister />
       </body>
     </html>
   );
