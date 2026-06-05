@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Modal } from '../../../_ui/Modal.jsx';
 import { resumoClient } from '../../../_lib/wikiClient.js';
+import { wikiThumb } from '../../../_lib/wikiThumb.js';
 
 // Modal de um ponto turístico / cidade: foto grande, nome, cidade/região, história
 // (resumo da Wikipédia pt buscado no browser, com cache+fallback) e o botão "Abrir no
@@ -17,8 +18,9 @@ export function PontoModal({ ponto, onClose }) {
     return () => { vivo = false; };
   }, [ponto.wiki]);
 
-  // No modal, prefere a imagem (maior) que o próprio resumo traz; senão a do card.
-  const imgGrande = (!hist.carregando && hist.img) || ponto.img || null;
+  // No modal, prefere a imagem que o próprio resumo traz; senão a do card. Sempre como
+  // thumb de 960px (evita baixar o original de vários MB).
+  const imgGrande = wikiThumb((!hist.carregando && hist.img) || ponto.img || null, 960);
 
   return (
     <Modal
@@ -35,7 +37,11 @@ export function PontoModal({ ponto, onClose }) {
     >
       {imgGrande ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={imgGrande} alt={ponto.nome} className="w-full h-52 sm:h-64 object-cover rounded-xl bg-paper2" />
+        <img
+          src={imgGrande} alt={ponto.nome} width="960" height="540" decoding="async"
+          className="w-full h-52 sm:h-64 object-cover rounded-xl bg-paper2 bg-cover bg-center"
+          style={{ backgroundImage: `url("${wikiThumb(imgGrande, 32)}")` }}
+        />
       ) : (
         <div className="w-full h-52 sm:h-64 grid place-items-center rounded-xl bg-gradient-to-br from-pine/15 to-ochre/15 text-4xl" aria-hidden>📍</div>
       )}

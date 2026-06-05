@@ -15,6 +15,7 @@ import { atracoesDoPais } from '../../../_engine/atracoes.js';
 import { comidasDoPais, COMIDA_ICON } from '../../../_engine/comidas.js';
 import { cidadeWiki } from '../../../_lib/cidadeWiki.js';
 import { GaleriaLugares } from './GaleriaLugares.jsx';
+import { wikiThumb } from '../../../_lib/wikiThumb.js';
 import { JsonLd } from '../../../_components/JsonLd.jsx';
 import { jsonLdDestino, jsonLdBreadcrumb, siteUrl } from '../../../_lib/seo.js';
 
@@ -84,15 +85,15 @@ export default async function DestinoPage({ params }) {
   // Galeria de pontos turísticos: prioriza a lista CURADA (foto buscada por atração),
   // com fallback pro Wikidata. Garante cobertura em todos os 167 países.
   const galeria = pontos.length
-    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: pontosImgs[i], wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }))
-    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: a.img, wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }));
+    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: wikiThumb(pontosImgs[i], 480), wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }))
+    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: wikiThumb(a.img, 480), wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }));
 
   // Cidades & bases: mesma estrutura da galeria pra abrir o mesmo modal (decisão do
   // usuário: cidades também abrem história). wiki via override (foto + história certas).
   const cidadesData = cidadesLista.map((c, i) => ({
     nome: c,
     sub: d.nome,
-    img: cidadeImgs[i],
+    img: wikiThumb(cidadeImgs[i], 480),
     wiki: cidadeWiki(d.code, c),
     maps: mapsUrl(`${c}, ${d.nome}`),
   }));
@@ -127,7 +128,11 @@ export default async function DestinoPage({ params }) {
       <section className="relative h-[42vh] min-h-[260px] max-h-[440px] overflow-hidden bg-paper2">
         {heroImg ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={heroImg} alt={d.nome} className="w-full h-full object-cover" />
+          <img
+            src={wikiThumb(heroImg, 1280)} alt={d.nome} width="1280" height="538" fetchPriority="high"
+            className="w-full h-full object-cover bg-cover bg-center"
+            style={{ backgroundImage: `url("${wikiThumb(heroImg, 32)}")` }}
+          />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-pine/20 to-ochre/20" aria-hidden />
         )}
