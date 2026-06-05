@@ -19,6 +19,8 @@ import { wikiThumb } from '../../../_lib/wikiThumb.js';
 import { JsonLd } from '../../../_components/JsonLd.jsx';
 import { jsonLdDestino, jsonLdBreadcrumb, jsonLdFaq, siteUrl } from '../../../_lib/seo.js';
 import { ShareButtons } from '../../../_components/ShareButtons.jsx';
+import { VerdictCard } from '../../../_components/VerdictCard.jsx';
+import { TravelFitScore } from '../../../_components/TravelFitScore.jsx';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -34,7 +36,7 @@ export async function generateMetadata({ params }) {
   const d = destinoPorSlug(params.slug);
   if (!d) return {};
   const titulo = `${d.nome} — guia de viagem | Mundo Sem Fim`;
-  const desc = `Melhor época, custo médio, pontos turísticos e comida típica de ${d.nome}.`;
+  const desc = `Veredito humano, Mundo Score, melhor época, custo real, pontos turísticos e comida típica de ${d.nome}.`;
   return {
     title: titulo,
     description: desc,
@@ -192,7 +194,10 @@ export default async function DestinoPage({ params }) {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-5">
             <Link href="/explorar" className="text-white/85 hover:text-white text-sm focusring">← Explorar</Link>
             <h1 className="font-display text-4xl sm:text-5xl text-white drop-shadow mt-1">{d.nome}</h1>
-            <p className="text-white/85 text-sm">{d.estacao}</p>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <p className="text-white/90 text-sm">{d.estacao}</p>
+              <TravelFitScore destino={d} compact />
+            </div>
           </div>
         </div>
         {(credito?.fileUrl || wiki?.url) && (
@@ -216,6 +221,10 @@ export default async function DestinoPage({ params }) {
             </div>
           ))}
         </section>
+
+        <VerdictCard destino={d} />
+
+        <TravelFitScore destino={d} />
 
         {/* CUSTOS por nível */}
         <section>

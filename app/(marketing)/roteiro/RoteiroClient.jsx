@@ -42,6 +42,10 @@ export function RoteiroClient() {
   const [conforto, setConforto] = useState('médio');
   const [interesses, setInteresses] = useState([]);
   const [restricao, setRestricao] = useState('Nenhuma');
+  const [companhia, setCompanhia] = useState('casal');
+  const [transporte, setTransporte] = useState('transporte público');
+  const [inicioDia, setInicioDia] = useState('10:00');
+  const [planoChuva, setPlanoChuva] = useState(true);
 
   const [busy, setBusy] = useState(false);
   const [erro, setErro] = useState('');
@@ -64,7 +68,7 @@ export function RoteiroClient() {
       let ai = {};
       try { ai = carregarPlano().settings.ai; } catch {}
       const out = await gerarRoteiro(
-        { destino: destino.nome, dias, orcamento, moeda, ritmo, interesses, restricao: restricao === 'Nenhuma' ? '' : restricao, conforto },
+        { destino: destino.nome, dias, orcamento, moeda, ritmo, interesses, restricao: restricao === 'Nenhuma' ? '' : restricao, conforto, companhia, transporte, inicioDia, planoChuva },
         ai,
       );
       setRoteiro(out);
@@ -79,7 +83,8 @@ export function RoteiroClient() {
 
   return (
     <div className="mt-6">
-      <div className="rounded-2xl border border-line bg-card p-5 space-y-4 no-print">
+      <div className="grid lg:grid-cols-[1fr_0.85fr] gap-5 items-start">
+      <div className="rounded-3xl border border-line bg-card p-5 space-y-4 no-print shadow-[var(--e-1)]">
         <div>
           <div className="text-xs text-inksoft font-medium mb-1">Tipo de roteiro <span className="opacity-70">(pré-preenche o resto)</span></div>
           <div className="flex flex-wrap gap-1.5">
@@ -122,6 +127,34 @@ export function RoteiroClient() {
           </div>
         </div>
 
+        <div className="grid sm:grid-cols-2 gap-3">
+          <label className="text-xs text-inksoft font-medium">Companhia
+            <select value={companhia} onChange={(e) => setCompanhia(e.target.value)} className={`${field} mt-1`}>
+              <option value="solo">Solo</option>
+              <option value="casal">Casal</option>
+              <option value="amigos">Amigos</option>
+              <option value="família">Família</option>
+            </select>
+          </label>
+          <label className="text-xs text-inksoft font-medium">Transporte preferido
+            <select value={transporte} onChange={(e) => setTransporte(e.target.value)} className={`${field} mt-1`}>
+              <option value="transporte público">Transporte público</option>
+              <option value="app/táxi quando fizer sentido">App/táxi quando fizer sentido</option>
+              <option value="carro alugado">Carro alugado</option>
+              <option value="a pé sempre que possível">A pé sempre que possível</option>
+            </select>
+          </label>
+          <label className="text-xs text-inksoft font-medium">Começar o dia por volta de
+            <input type="time" value={inicioDia} onChange={(e) => setInicioDia(e.target.value)} className={`${field} mt-1 tnum`} />
+          </label>
+          <label className="text-xs text-inksoft font-medium">Plano B de chuva
+            <button type="button" onClick={() => setPlanoChuva((v) => !v)} aria-pressed={planoChuva}
+              className={`mt-1 w-full px-3 py-2 rounded-lg border text-left text-sm font-semibold focusring ${planoChuva ? 'border-pine bg-pine/10 text-pine' : 'border-line bg-input text-inksoft'}`}>
+              {planoChuva ? 'Sim, incluir alternativas cobertas' : 'Não precisa'}
+            </button>
+          </label>
+        </div>
+
         <div>
           <div className="text-xs text-inksoft font-medium mb-1">Interesses</div>
           <div className="flex flex-wrap gap-1.5">
@@ -146,6 +179,28 @@ export function RoteiroClient() {
             {busy ? <><span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" aria-hidden /> Montando…</> : '✨ Gerar roteiro'}
           </button>
         </div>
+      </div>
+
+      <aside className="rounded-3xl border border-line bg-gradient-to-br from-pine/8 to-ochre/10 p-5 sticky top-20">
+        <p className="text-xs uppercase tracking-[0.18em] text-pine font-bold">Prévia do que sai</p>
+        <h2 className="mt-1 font-display text-2xl text-ink">Dia 1 · chegada sem correria</h2>
+        <div className="mt-4 space-y-3 text-sm">
+          {[
+            ['Manhã', 'Chegada, check-in e primeira caminhada leve perto da hospedagem.'],
+            ['Tarde', 'Um bairro bonito, sem atravessar a cidade no primeiro dia.'],
+            ['Noite', 'Jantar local com custo controlado e volta simples.'],
+          ].map(([periodo, texto]) => (
+            <div key={periodo} className="rounded-2xl bg-card border border-line p-3">
+              <p className="text-xs uppercase tracking-wide text-pine font-bold">{periodo}</p>
+              <p className="mt-1 text-inksoft">{texto}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 rounded-2xl border border-warn-bd bg-warn-bg p-3">
+          <p className="text-xs uppercase tracking-wide text-warn font-bold">Opinião do roteiro</p>
+          <p className="mt-1 text-sm text-ink">Não coloque atração cara no primeiro dia. Você compra lembrança melhor quando não está destruído.</p>
+        </div>
+      </aside>
       </div>
 
       {erro && (

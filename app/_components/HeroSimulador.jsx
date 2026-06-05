@@ -6,7 +6,7 @@ import { recomendarDestinos } from '../_engine/decisao.js';
 import { perfilDoPreset, PERFIS_PRONTOS } from '../_engine/perfil.js';
 import { MESES_PT } from '../_engine/data.js';
 
-const ESTILOS = Object.entries(PERFIS_PRONTOS).map(([id, p]) => ({ id, label: `${p.emoji} ${p.nome}` }));
+const ESTILOS = Object.entries(PERFIS_PRONTOS).map(([id, p]) => ({ id, label: p.nome }));
 
 // Card que transforma a vitrine em PRODUTO logo no topo: em ~30s o visitante
 // escolhe estilo/dias/orçamento/mês e recebe 3 destinos REAIS — reusando o mesmo
@@ -46,7 +46,7 @@ export function HeroSimulador() {
       <div className="rounded-3xl border border-line bg-card shadow-[var(--e-2)] p-5 sm:p-7">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-[11px] font-bold uppercase tracking-wider text-oncoral bg-coral px-2.5 py-1 rounded-full">30 segundos</span>
-          <h2 className="font-display text-xl sm:text-2xl text-ink">Descubra sua próxima viagem</h2>
+          <h2 className="font-display text-xl sm:text-2xl text-ink">Descubra a viagem que combina com você</h2>
         </div>
 
         <form onSubmit={simular} className="mt-4 grid grid-cols-2 lg:grid-cols-5 gap-3 items-end">
@@ -68,7 +68,7 @@ export function HeroSimulador() {
             </select>
           </label>
           <button type="submit" className="col-span-2 lg:col-span-1 inline-flex items-center justify-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 transition focusring">
-            ✨ Descobrir
+            Descobrir destino
           </button>
         </form>
 

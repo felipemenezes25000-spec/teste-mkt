@@ -9,13 +9,18 @@ import { MobileMenu } from './MobileMenu.jsx';
 // Navegação global das telas de produto (marketing/explorar/destino/roteiro/voos/
 // planos). O planner (/planejar) tem o próprio cabeçalho com as ações da viagem.
 const LINKS = [
-  { href: '/explorar', label: 'Explorar', icon: '🧭' },
-  { href: '/decisao', label: 'Decisão', icon: '🧠' },
-  { href: '/planejar', label: 'Planejar', icon: '🗺️' },
-  { href: '/roteiro', label: 'Roteiro IA', icon: '✨' },
-  { href: '/voos', label: 'Voos', icon: '✈' },
-  { href: '/salvos', label: 'Salvos', icon: '♥' },
-  { href: '/planos', label: 'Planos', icon: '⭐' },
+  { href: '/explorar', label: 'Descobrir' },
+  { href: '/decisao', label: 'Decidir' },
+  { href: '/comparar', label: 'Comparar' },
+  { href: '/planejar', label: 'Planejar' },
+  { href: '/roteiro', label: 'Roteiro' },
+  { href: '/planos', label: 'Preços' },
+];
+
+const SECONDARY_LINKS = [
+  { href: '/voos', label: 'Voos' },
+  { href: '/salvos', label: 'Salvos' },
+  { href: '/conta', label: 'Entrar' },
 ];
 
 export default function AppNav() {
@@ -64,7 +69,19 @@ export default function AppNav() {
                 key={l.href} href={l.href} aria-current={active ? 'page' : undefined}
                 className={`px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition focusring ${active ? 'bg-card text-pine shadow-sm' : 'text-inksoft hover:text-ink'}`}
               >
-                <span aria-hidden className="mr-1">{l.icon}</span>{l.label}
+                {l.label}
+              </Link>
+            );
+          })}
+          <span className="mx-1 h-5 w-px bg-line" aria-hidden />
+          {SECONDARY_LINKS.map((l) => {
+            const active = path === l.href || path.startsWith(l.href + '/');
+            return (
+              <Link
+                key={l.href} href={l.href} aria-current={active ? 'page' : undefined}
+                className={`px-2.5 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition focusring ${active ? 'bg-card text-pine shadow-sm' : 'text-inksoft hover:text-ink'}`}
+              >
+                {l.label}
               </Link>
             );
           })}
@@ -94,7 +111,7 @@ export default function AppNav() {
           </button>
         </div>
       </nav>
-      {menuOpen && <MobileMenu links={LINKS} path={path} onClose={() => setMenuOpen(false)} />}
+      {menuOpen && <MobileMenu links={[...LINKS, ...SECONDARY_LINKS]} path={path} onClose={() => setMenuOpen(false)} />}
     </header>
   );
 }

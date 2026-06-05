@@ -21,12 +21,13 @@ export default async function DecisaoPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-      <span className="inline-block text-xs font-bold uppercase tracking-wider text-pine bg-pine/10 px-2.5 py-1 rounded-full">Camada de inteligência</span>
-      <h1 className="mt-3 font-display text-3xl sm:text-4xl text-ink">Decisão de viagem</h1>
-      <p className="mt-2 text-inksoft max-w-2xl">
-        Os outros apps <em>listam</em> opções. Aqui a gente <strong className="text-ink">decide com você</strong>: para onde ir pelo seu perfil,
-        quanto a viagem custa de verdade, e o que ajustar antes de embarcar — com o porquê de cada recomendação.
-      </p>
+      <section className="rounded-[2rem] border border-line bg-card p-6 sm:p-10 shadow-[var(--e-1)]">
+        <span className="inline-block text-xs font-bold uppercase tracking-[0.18em] text-pine bg-pine/10 px-3 py-1 rounded-full">Camada de decisão antes da reserva</span>
+        <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.03] text-ink">Descubra a viagem que realmente combina com você.</h1>
+        <p className="mt-4 text-lg text-inksoft max-w-3xl">
+          Coloque dias, orçamento e tolerância a perrengue. O Mundo Sem Fim cruza custo real, clima, segurança e ritmo para dizer onde vale ir — e onde é melhor não gastar agora.
+        </p>
+      </section>
       <DecisaoClient destinos={destinos} />
     </main>
   );

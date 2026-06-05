@@ -165,16 +165,25 @@ export async function buscarOportunidades(ai, leg, moedaLabel) {
 // Gera um roteiro dia a dia com IA. `ai` é o config do usuário (chave própria) ou
 // {} → cai pro servidor (login). Sanitiza a saída pra a UI nunca quebrar.
 export async function gerarRoteiro(params, ai) {
-  const { destino, dias, orcamento, moeda = 'USD', ritmo = 'equilibrado', interesses = [], restricao = 'nenhuma', conforto = 'médio' } = params || {};
+  const {
+    destino, dias, orcamento, moeda = 'USD', ritmo = 'equilibrado',
+    interesses = [], restricao = 'nenhuma', conforto = 'médio',
+    companhia = 'casal', transporte = 'transporte público', inicioDia = '10:00',
+    planoChuva = true,
+  } = params || {};
   const userPrompt = [
     `Destino: ${destino}.`,
     `Dias: ${dias}.`,
     `Orçamento total aproximado (fora passagem internacional): ${moeda} ${orcamento}.`,
     `Ritmo: ${ritmo}.`,
+    `Companhia: ${companhia}.`,
+    `Transporte preferido: ${transporte}.`,
+    `Começar os dias por volta de: ${inicioDia}.`,
     `Interesses: ${(interesses || []).join(', ') || 'variados'}.`,
     `Restrição alimentar: ${restricao || 'nenhuma'}.`,
     `Nível de conforto: ${conforto}.`,
-    `Use a moeda ${moeda} nas estimativas de custo. Monte exatamente ${dias} dia(s).`,
+    `Plano B de chuva: ${planoChuva ? 'sim, inclua alternativas cobertas por dia' : 'não obrigatório'}.`,
+    `Use a moeda ${moeda} nas estimativas de custo. Monte exatamente ${dias} dia(s). Seja opinativo: diga quando uma escolha parece bonita no mapa, mas ruim na vida real.`,
   ].join(' ');
 
   const texto = await chamarLLM(ai, SYSTEM_PROMPT_ROTEIRO, userPrompt);

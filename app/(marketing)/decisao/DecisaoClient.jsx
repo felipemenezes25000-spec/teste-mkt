@@ -65,6 +65,10 @@ export function DecisaoClient({ destinos }) {
   const [calc, setCalc] = useState(null);
   const [rates, setRates] = useState(null);
   const [temPlanoSalvo, setTemPlanoSalvo] = useState(false);
+  const [diasPretendidos, setDiasPretendidos] = useState(8);
+  const [orcamentoBRL, setOrcamentoBRL] = useState(6500);
+  const [companhia, setCompanhia] = useState('casal');
+  const [perrengue, setPerrengue] = useState('medio');
 
   useEffect(() => {
     const salvo = carregarPerfil();
@@ -95,7 +99,22 @@ export function DecisaoClient({ destinos }) {
     return m;
   }, [destinos]);
 
-  const ranked = useMemo(() => (perfil ? recomendarDestinos(destinos, perfil).slice(0, 8) : []), [destinos, perfil]);
+  const budgetDiaUSD = Math.max(12, (Number(orcamentoBRL) / 5.2) / Math.max(1, Number(diasPretendidos)) * 0.55);
+  const ranked = useMemo(() => {
+    if (!perfil) return [];
+    const base = recomendarDestinos(destinos, perfil);
+    return base.map((destino) => {
+      const folga = budgetDiaUSD - destino.custoDia;
+      const ajusteBudget = folga >= 10 ? 7 : folga >= 0 ? 3 : folga > -18 ? -7 : -15;
+      const ajustePerrengue = perrengue === 'baixo' && destino.custoDia < 30 ? -2 : perrengue === 'alto' && destino.custoDia < 40 ? 4 : 0;
+      const pontos = Math.max(0, Math.min(100, Math.round(destino.pontos + ajusteBudget + ajustePerrengue)));
+      return {
+        ...destino,
+        pontos,
+        porque: `${destino.porque} ${folga >= 0 ? 'Cabe melhor no seu orçamento informado.' : 'Pode exigir cortes ou mais dias para respirar.'}`,
+      };
+    }).sort((a, b) => b.pontos - a.pontos).map((destino, index) => ({ ...destino, posicao: index + 1 })).slice(0, 8);
+  }, [destinos, perfil, budgetDiaUSD, perrengue]);
   const score = useMemo(() => (perfil && calc ? scoreViagem(calc, { pesos: pesosScore(perfil) }) : null), [perfil, calc]);
   const ops = useMemo(() => (calc ? escanearOportunidades(calc) : []), [calc]);
   const custo = useMemo(() => (calc ? custoTotalRealista(calc) : null), [calc]);
@@ -111,9 +130,85 @@ export function DecisaoClient({ destinos }) {
 
   return (
     <div className="mt-6 space-y-12">
+      {/* ============ WIZARD ============ */}
+      <section aria-labelledby="wizard-h" className="rounded-[2rem] border border-line bg-card p-5 sm:p-6 shadow-[var(--e-1)]">
+        <div className="grid lg:grid-cols-[1fr_0.95fr] gap-6">
+          <div>
+            <p className="text-xs uppercase tracking-[0.18em] text-pine font-bold">Wizard de decisão</p>
+            <h2 id="wizard-h" className="mt-1 font-display text-2xl sm:text-3xl text-ink">Conte o contexto. Eu reduzo o mundo para 3 boas decisões.</h2>
+            <div className="mt-5 grid sm:grid-cols-2 gap-3">
+              <label className="text-xs text-inksoft font-semibold">Dias disponíveis
+                <input type="number" min="3" max="45" value={diasPretendidos} onChange={(e) => setDiasPretendidos(Math.max(3, Math.min(45, Number(e.target.value) || 8)))} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring tnum" />
+              </label>
+              <label className="text-xs text-inksoft font-semibold">Orçamento total
+                <div className="mt-1 flex rounded-xl border border-line bg-input overflow-hidden focus-within:outline focus-within:outline-2 focus-within:outline-pine">
+                  <span className="px-3 py-2 text-sm text-inksoft bg-paper2 border-r border-line">R$</span>
+                  <input type="number" min="500" value={orcamentoBRL} onChange={(e) => setOrcamentoBRL(Math.max(500, Number(e.target.value) || 6500))} className="w-full px-3 py-2 bg-transparent text-ink tnum outline-none" />
+                </div>
+              </label>
+              <label className="text-xs text-inksoft font-semibold">Estilo
+                <select value={presetId} onChange={(e) => escolherPreset(e.target.value)} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring">
+                  {Object.entries(PERFIS_PRONTOS).map(([id, p]) => <option key={id} value={id}>{p.nome}</option>)}
+                </select>
+              </label>
+              <label className="text-xs text-inksoft font-semibold">Companhia
+                <select value={companhia} onChange={(e) => setCompanhia(e.target.value)} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring">
+                  <option value="solo">Solo</option>
+                  <option value="casal">Casal</option>
+                  <option value="amigos">Amigos</option>
+                  <option value="familia">Família</option>
+                </select>
+              </label>
+              <label className="text-xs text-inksoft font-semibold sm:col-span-2">Limite de perrengue
+                <div className="mt-1 grid grid-cols-3 rounded-xl border border-line bg-paper2 p-1">
+                  {[
+                    ['baixo', 'Baixo'],
+                    ['medio', 'Médio'],
+                    ['alto', 'Alto'],
+                  ].map(([id, label]) => (
+                    <button key={id} type="button" onClick={() => setPerrengue(id)} aria-pressed={perrengue === id}
+                      className={`rounded-lg px-3 py-2 text-sm font-semibold transition focusring ${perrengue === id ? 'bg-card text-pine shadow-sm' : 'text-inksoft hover:text-ink'}`}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </label>
+            </div>
+            <p className="mt-3 text-xs text-inksoft">
+              Leitura rápida: ~US$ {Math.round(budgetDiaUSD)}/dia útil para destino, hospedagem e chão da viagem. Passagem cara pode mudar tudo.
+            </p>
+          </div>
+
+          <div className="rounded-3xl border border-line bg-paper2/60 p-4">
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="font-display text-xl text-ink">Resultado instantâneo</h3>
+              <span className="text-xs text-inksoft">{companhia} · {diasPretendidos} dias</span>
+            </div>
+            <div className="mt-3 space-y-3">
+              {ranked.slice(0, 3).map((destino) => (
+                <Link key={destino.id} href={`/destino/${destino.slug}`} className="block rounded-2xl border border-line bg-card p-3 hover:border-pine/40 hover:shadow-[var(--e-1)] transition focusring">
+                  <div className="flex items-start gap-3">
+                    <div className="w-14 h-14 rounded-2xl bg-pine text-white grid place-items-center shrink-0">
+                      <span className="font-display text-2xl tnum">{destino.pontos}</span>
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-baseline gap-2">
+                        <h4 className="font-display text-lg text-ink truncate">{destino.nome}</h4>
+                        <span className="text-xs text-inksoft tnum shrink-0">US$ {destino.custoDia}/dia</span>
+                      </div>
+                      <p className="text-xs text-inksoft leading-snug line-clamp-2">{destino.porque}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ============ PERFIL ============ */}
       <section aria-labelledby="perfil-h">
-        <h2 id="perfil-h" className="font-display text-2xl text-ink">1 · Seu perfil de viajante</h2>
+        <h2 id="perfil-h" className="font-display text-2xl text-ink">Ajuste fino do seu perfil</h2>
         <p className="mt-1 text-inksoft text-sm max-w-2xl">
           A gente personaliza tudo — recomendações e notas — pelo seu jeito de viajar. Escolha um ponto de partida (dá pra mudar quando quiser).
         </p>

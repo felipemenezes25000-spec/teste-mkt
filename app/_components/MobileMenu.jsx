@@ -61,7 +61,7 @@ export function MobileMenu({ links, path, onClose }) {
                 aria-current={active ? 'page' : undefined}
                 className={`flex items-center gap-3 px-4 min-h-[48px] rounded-xl text-base font-semibold transition focusring ${active ? 'bg-card text-pine' : 'text-ink hover:bg-paper2'}`}
               >
-                <span aria-hidden className="text-xl w-6 text-center">{l.icon}</span>{l.label}
+                <span aria-hidden className={`w-2 h-2 rounded-full ${active ? 'bg-pine' : 'bg-line'}`} />{l.label}
               </Link>
             );
           })}

@@ -18,6 +18,8 @@ export function VoosClient() {
   const [origem, setOrigem] = useState(ORIGENS[0]);
   const [destino, setDestino] = useState(DESTINOS[0]);
   const [data, setData] = useState(dataPadrao);
+  const [dias, setDias] = useState(8);
+  const [orcamentoTotal, setOrcamentoTotal] = useState(6500);
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState(null);
   const [alerta, setAlerta] = useState('');
@@ -55,7 +57,7 @@ export function VoosClient() {
 
   return (
     <div className="mt-6">
-      <div className="rounded-2xl border border-line bg-card p-5 grid sm:grid-cols-4 gap-3 items-end">
+      <div className="rounded-3xl border border-line bg-card p-5 grid sm:grid-cols-2 lg:grid-cols-6 gap-3 items-end shadow-[var(--e-1)]">
         <Autocomplete
           label="Origem" items={ORIGENS} value={origem} onChange={setOrigem}
           toText={(o) => `${o.cidade} (${o.iata})`} toSearch={(o) => `${o.cidade} ${o.iata}`}
@@ -72,8 +74,14 @@ export function VoosClient() {
         <label className="text-xs text-inksoft font-medium block">Data
           <input type="date" value={data} onChange={(e) => setData(e.target.value)} className={`${field} mt-1 tnum`} />
         </label>
+        <label className="text-xs text-inksoft font-medium block">Dias
+          <input type="number" min="3" max="45" value={dias} onChange={(e) => setDias(Math.max(3, Math.min(45, Number(e.target.value) || 8)))} className={`${field} mt-1 tnum`} />
+        </label>
+        <label className="text-xs text-inksoft font-medium block">Orçamento total
+          <input type="number" min="500" value={orcamentoTotal} onChange={(e) => setOrcamentoTotal(Math.max(500, Number(e.target.value) || 6500))} className={`${field} mt-1 tnum`} />
+        </label>
         <button onClick={buscar} disabled={busy} className="inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-white font-semibold px-4 py-2.5 hover:bg-pinedk disabled:opacity-60 focusring">
-          {busy ? 'Buscando…' : '✈ Buscar'}
+          {busy ? 'Buscando…' : 'Buscar voos'}
         </button>
       </div>
 
@@ -95,18 +103,26 @@ export function VoosClient() {
           {alerta && <div className="mb-3 rounded-lg border border-success-bd bg-success-bg text-success px-3 py-2 text-sm">{alerta}</div>}
 
           <div className="space-y-2">
-            {res.resultados.map((f) => (
-              <div key={f.id} className={`rounded-xl border bg-card p-4 flex flex-wrap items-center gap-x-4 gap-y-1 ${f.melhorCustoBeneficio ? 'border-pine ring-1 ring-pine/20' : 'border-line'}`}>
-                <div className="w-32">
-                  <div className="font-semibold text-ink">{f.companhia}</div>
-                  {f.melhorCustoBeneficio && <span className="text-[11px] font-bold text-pine">★ Melhor custo-benefício</span>}
+            {res.resultados.map((f) => {
+              const impacto = impactoVoo(f, dias, orcamentoTotal);
+              return (
+                <div key={f.id} className={`rounded-2xl border bg-card p-4 ${f.melhorCustoBeneficio ? 'border-pine ring-1 ring-pine/20 shadow-[var(--e-1)]' : 'border-line'}`}>
+                  <div className="flex flex-wrap items-start gap-x-4 gap-y-2">
+                    <div className="w-36">
+                      <div className="font-semibold text-ink">{f.companhia}</div>
+                      {f.melhorCustoBeneficio && <span className="text-[11px] font-bold text-pine">Melhor custo-benefício</span>}
+                    </div>
+                    <div className="text-sm text-ink tnum">{f.partida} → {f.chegada}</div>
+                    <div className="text-xs text-inksoft">{f.duracao}</div>
+                    <div className="text-xs text-inksoft">{f.escalas === 0 ? 'Direto' : `${f.escalas} escala${f.escalas > 1 ? 's' : ''}`}</div>
+                    <div className="ml-auto font-display text-2xl text-ink tnum">US$ {f.preco}</div>
+                  </div>
+                  <div className={`mt-3 rounded-xl border px-3 py-2 text-sm ${impacto.cls}`}>
+                    <strong>{impacto.titulo}:</strong> {impacto.texto}
+                  </div>
                 </div>
-                <div className="text-sm text-ink tnum">{f.partida} → {f.chegada}</div>
-                <div className="text-xs text-inksoft">{f.duracao}</div>
-                <div className="text-xs text-inksoft">{f.escalas === 0 ? 'Direto' : `${f.escalas} escala${f.escalas > 1 ? 's' : ''}`}</div>
-                <div className="ml-auto font-display text-xl text-ink tnum">US$ {f.preco}</div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <PrevisaoVoo rota={`${origem.iata}-${destino.iata}-${data}`} faixa={res.faixa} precoAtual={res.resultados[0] && res.resultados[0].preco} />
@@ -126,6 +142,38 @@ export function VoosClient() {
       )}
     </div>
   );
+}
+
+function impactoVoo(voo, dias, orcamentoTotalBRL) {
+  const duracaoHoras = Number(String(voo.duracao || '').match(/\d+/)?.[0] || 0);
+  const custoBRL = Number(voo.preco || 0) * 5.2;
+  const pesoNoOrcamento = orcamentoTotalBRL > 0 ? custoBRL / orcamentoTotalBRL : 0;
+  if (voo.escalas >= 2 || duracaoHoras >= 22) {
+    return {
+      titulo: 'Mais barato pode sair caro',
+      texto: `Economiza na passagem, mas cobra energia. Para ${dias} dias, eu evitaria se a diferença não for grande.`,
+      cls: 'border-danger-bd bg-danger-bg text-ink',
+    };
+  }
+  if (dias <= 6 && duracaoHoras >= 14) {
+    return {
+      titulo: 'Ruim para viagem curta',
+      texto: 'A duração pesa demais para poucos dias. Você compra preço, mas perde presença no destino.',
+      cls: 'border-warn-bd bg-warn-bg text-ink',
+    };
+  }
+  if (pesoNoOrcamento > 0.45) {
+    return {
+      titulo: 'Voo domina o orçamento',
+      texto: 'A passagem come uma fatia grande da verba. Só faz sentido se o destino render muito no dia a dia.',
+      cls: 'border-warn-bd bg-warn-bg text-ink',
+    };
+  }
+  return {
+    titulo: 'Boa leitura prática',
+    texto: 'Preço, escalas e duração parecem equilibrados para preservar energia e orçamento.',
+    cls: 'border-success-bd bg-success-bg text-ink',
+  };
 }
 
 const VEREDITO_UI = {

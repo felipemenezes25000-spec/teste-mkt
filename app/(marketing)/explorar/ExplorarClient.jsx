@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import { DestinoCard } from '../../_components/DestinoCard.jsx';
+import { colecoesEditorial } from '../../_lib/editorial.js';
 
 // Busca + filtros (região/orçamento) + ordenação, no client. Recebe os destinos
 // já com imagem (puxada no servidor) — aqui é só filtrar/ordenar/renderizar.
@@ -23,6 +24,7 @@ export function ExplorarClient({ destinos }) {
   }, []);
 
   const regioes = useMemo(() => [...new Set(destinos.map((d) => d.regiao))].sort(), [destinos]);
+  const colecoes = useMemo(() => colecoesEditorial(destinos), [destinos]);
 
   const filtrados = useMemo(() => {
     const termo = q.trim().toLowerCase();
@@ -42,11 +44,37 @@ export function ExplorarClient({ destinos }) {
   }, [destinos, q, regiao, maxCusto, ordem]);
 
   const field = 'px-3 py-2 rounded-lg border border-line bg-input text-ink focusring text-sm';
+  const temFiltro = q.trim() || regiao || maxCusto || ordem !== 'nome';
 
   return (
-    <div className="mt-6">
-      <div className="flex flex-wrap gap-2 items-center">
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="🔍 Buscar país ou cidade…" aria-label="Buscar destino" className={`${field} flex-1 min-w-[180px]`} />
+    <div className="mt-8 space-y-10">
+      {!temFiltro && (
+        <div className="space-y-10">
+          {colecoes.map((colecao) => (
+            <section key={colecao.id} aria-labelledby={`${colecao.id}-h`}>
+              <div className="flex items-end justify-between gap-3 mb-4">
+                <div>
+                  <h2 id={`${colecao.id}-h`} className="font-display text-2xl sm:text-3xl text-ink">{colecao.titulo}</h2>
+                  <p className="mt-1 text-sm text-inksoft max-w-2xl">{colecao.subtitulo}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {colecao.destinos.slice(0, 4).map((d) => <DestinoCard key={`${colecao.id}-${d.code}`} d={d} img={d.img} />)}
+              </div>
+            </section>
+          ))}
+        </div>
+      )}
+
+      <section aria-labelledby="catalogo-h" className="rounded-[2rem] border border-line bg-card/70 p-4 sm:p-5">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-4">
+          <div>
+            <h2 id="catalogo-h" className="font-display text-2xl text-ink">{temFiltro ? 'Resultado da busca' : 'Catálogo completo'}</h2>
+            <p className="text-sm text-inksoft">Use quando quiser procurar um país específico ou filtrar pelo bolso.</p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2 items-center">
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar país ou cidade…" aria-label="Buscar destino" className={`${field} flex-1 min-w-[180px]`} />
         <select value={regiao} onChange={(e) => setRegiao(e.target.value)} aria-label="Filtrar por região" className={field}>
           <option value="">Todas as regiões</option>
           {regioes.map((r) => <option key={r} value={r}>{r}</option>)}
@@ -73,6 +101,7 @@ export function ExplorarClient({ destinos }) {
           {filtrados.map((d) => <DestinoCard key={d.code} d={d} img={d.img} />)}
         </div>
       )}
+      </section>
     </div>
   );
 }
