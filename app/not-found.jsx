@@ -6,7 +6,7 @@ export const metadata = { title: 'Página não encontrada · Mundo Sem Fim' };
 // raiz, fora do (marketing) layout, então traz a marca e os atalhos inline.
 const ATALHOS = [
   { href: '/', label: 'Voltar ao início', icon: '🏠', primary: true },
-  { href: '/explorar', label: 'Explorar 167 destinos', icon: '🧭' },
+  { href: '/explorar', label: 'Explorar destinos', icon: '🧭' },
   { href: '/decisao', label: 'Decidir minha viagem', icon: '🧠' },
 ];
 

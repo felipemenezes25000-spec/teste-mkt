@@ -57,7 +57,7 @@ export default async function OgDestino({ params }) {
   const nome = d ? d.nome : 'Mundo Sem Fim';
   const regiao = d ? d.regiao : 'Volta ao mundo';
   const meses = d && (d.melhoresMeses || []).length ? d.melhoresMeses.map((m) => MESES_PT[m - 1]).join(' · ') : '—';
-  const custo = d ? `~US$ ${d.custoDia}/dia` : '167 países';
+  const custo = d ? `~US$ ${d.custoDia}/dia` : 'O mundo inteiro';
 
   return new ImageResponse(
     (

@@ -47,4 +47,11 @@ describe('wikiThumb', () => {
   test('largura para blur (32px) também funciona', () => {
     expect(wikiThumb(ORIG, 32)).toBe(FP + 'Lagoa_das_Sete_Cidades3.jpg?width=32');
   });
+
+  test('força https em URL http (Wikidata devolve http://commons — senão a CSP bloqueia)', () => {
+    expect(wikiThumb('http://commons.wikimedia.org/wiki/Special:FilePath/Kazan.jpg', 480))
+      .toBe(FP + 'Kazan.jpg?width=480');
+    expect(wikiThumb('http://upload.wikimedia.org/wikipedia/commons/9/91/Foo.jpg', 640))
+      .toBe(FP + 'Foo.jpg?width=640');
+  });
 });

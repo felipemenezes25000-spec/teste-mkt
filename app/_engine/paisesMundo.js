@@ -5,6 +5,45 @@
    ========================================================================== */
 export const PAISES_EXTRA = [
  {
+  "code": "RU",
+  "nome": "Rússia",
+  "regiao": "Europa",
+  "custoDia": 45,
+  "moeda": "RUB",
+  "melhoresMeses": [
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "estacao": "Verão curto e agradável (jun–ago; Noites Brancas em São Petersburgo); inverno longo e rigoroso (−10 a −25 °C). Maio e setembro são ótimos meios-termos.",
+  "iata": "SVO",
+  "cidadePrincipal": "Moscou",
+  "coords": [
+   37.6173,
+   55.7558
+  ],
+  "fotoQuery": "Catedral de São Basílio",
+  "cidades": [
+   "Moscou",
+   "São Petersburgo",
+   "Cazã",
+   "Sóchi",
+   "Ecaterimburgo",
+   "Vladivostok"
+  ],
+  "comidas": [
+   "Borsch (sopa de beterraba)",
+   "Pelmeni (pastéis cozidos)",
+   "Blini (panquecas finas)",
+   "Strogonoff de carne",
+   "Pirozhki (pãezinhos recheados)",
+   "Caviar com blini",
+   "Kvass (bebida fermentada)"
+  ]
+ },
+ {
   "code": "AL",
   "nome": "Albânia",
   "regiao": "Europa",
@@ -5502,6 +5541,11 @@ export const PAISES_EXTRA = [
 ];
 
 export const VISTOS_EXTRA_BR = {
+ "RU": {
+  "tipo": "isento",
+  "dias": 90,
+  "nota": "Brasileiro entra SEM visto a turismo por até 90 dias (acordo bilateral Brasil–Rússia; máx. 90 dias em cada 180). Passaporte válido por 6+ meses + cartão de migração preenchido na entrada; estadia acima de 7 dias úteis exige registro (em geral o hotel faz). ATENÇÃO ao contexto atual: voos diretos do Brasil são limitados (conexões via Istambul/Dubai/Doha) e cartões Visa/Mastercard estrangeiros NÃO funcionam na Rússia — leve dinheiro em espécie (euro/dólar pra trocar por rublo) ou cartão UnionPay. Confira avisos de viagem e regras atualizadas no Itamaraty/embaixada antes de ir."
+ },
  "SG": {
   "tipo": "isento",
   "dias": 30,
@@ -6230,6 +6274,15 @@ export const VISTOS_EXTRA_BR = {
 };
 
 export const INDICES_EXTRA = {
+ "RU": {
+  "seguranca": 6,
+  "gastronomia": 7,
+  "natureza": 8,
+  "cultura": 10,
+  "praia": 3,
+  "vidaNoturna": 7,
+  "aventura": 8
+ },
  "SG": {
   "seguranca": 10,
   "gastronomia": 9,
@@ -7538,6 +7591,7 @@ export const INDICES_EXTRA = {
 };
 
 export const WIKIDATA_EXTRA = {
+ "RU": "Q159",
  "SG": "Q334",
  "MM": "Q836",
  "BN": "Q921",
@@ -7686,6 +7740,10 @@ export const WIKIDATA_EXTRA = {
 };
 
 export const MOEDAS_EXTRA = [
+ {
+  "code": "RUB",
+  "nome": "RUB (Rússia)"
+ },
  {
   "code": "SGD",
   "nome": "SGD (Singapura)"
@@ -8085,6 +8143,7 @@ export const MOEDAS_EXTRA = [
 ];
 
 export const FX_EXTRA = {
+ "RUB": 90,
  "SGD": 1.35,
  "MMK": 2100,
  "BND": 1.35,

@@ -1,4 +1,5 @@
 import { DEPOIMENTOS } from '../_lib/depoimentos.js';
+import { DESTINOS } from '../_lib/destinos.js';
 
 // Prova social HONESTA: sinais de confiança VERIFICÁVEIS (sempre visíveis) + uma grade
 // de depoimentos que só aparece quando _lib/depoimentos.js tiver entradas REAIS (não
@@ -8,11 +9,11 @@ import { DEPOIMENTOS } from '../_lib/depoimentos.js';
 const PILARES = [
   { icon: '🤝', titulo: 'Conselho neutro', txt: 'Não vendemos a reserva — então não temos motivo pra te empurrar a opção errada. A recomendação é pelo SEU perfil.' },
   { icon: '🧾', titulo: 'Custo real, não vitrine', txt: 'Somamos o que a OTA esconde: seguro, eSIM, visto e contingência. Você sabe o número de verdade antes de ir.' },
-  { icon: '🌍', titulo: 'O mundo todo, com fonte', txt: '167 países e 2.000+ pontos turísticos, com dados e fotos de Wikipédia/Wikidata — autoria e licença na origem, não achismo de blog.' },
+  { icon: '🌍', titulo: 'O mundo todo, com fonte', txt: `${DESTINOS.length} países e 2.000+ pontos turísticos, com dados e fotos de Wikipédia/Wikidata — autoria e licença na origem, não achismo de blog.` },
 ];
 
 const STATS = [
-  { n: '167', l: 'países' },
+  { n: String(DESTINOS.length), l: 'países' },
   { n: '2.000+', l: 'pontos turísticos' },
   { n: '100+', l: 'moedas' },
   { n: 'Grátis', l: 'pra começar, sem cartão' },

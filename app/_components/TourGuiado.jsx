@@ -9,7 +9,7 @@ import { Modal } from '../_ui/Modal.jsx';
 // específico do /planejar — aqui é a orientação do fluxo geral.
 const KEY = 'mundosemfim.tour.v1';
 const PASSOS = [
-  { icon: '🧠', t: 'Primeiro: decida pra onde ir', d: 'A gente ranqueia os 167 destinos pelo SEU perfil — com nota e o porquê de cada um. Sem rolar 200 opções no escuro.' },
+  { icon: '🧠', t: 'Primeiro: decida pra onde ir', d: 'A gente ranqueia os destinos pelo SEU perfil — com nota e o porquê de cada um. Sem rolar 200 opções no escuro.' },
   { icon: '🗺️', t: 'Depois: monte a rota na ordem certa', d: 'Estação × visto × fôlego: a ordem dos países muda tudo. O plano recalcula clima, visto e grana assim que você mexe.' },
   { icon: '✨', t: 'Por fim: roteiro + custo real', d: 'Gere o roteiro dia a dia com IA e veja o custo REAL da viagem inteira — não só voo + hotel.' },
 ];

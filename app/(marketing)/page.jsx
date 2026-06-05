@@ -15,7 +15,7 @@ export const revalidate = 86400;
 export const metadata = {
   title: 'Mundo Sem Fim — o copiloto que decide a viagem com você',
   description:
-    'Não listamos 200 hotéis. Dizemos pra onde ir pelo seu perfil, quanto a viagem custa de verdade (não só voo+hotel) e montamos o roteiro que recalcula. 167 países. Comece grátis.',
+    `Não listamos 200 hotéis. Dizemos pra onde ir pelo seu perfil, quanto a viagem custa de verdade (não só voo+hotel) e montamos o roteiro que recalcula. ${DESTINOS.length} países. Comece grátis.`,
   alternates: { canonical: '/' },
 };
 
@@ -31,11 +31,11 @@ const PILARES = [
   { icon: '🧠', titulo: 'Decide com você', txt: 'Não te empurra 200 opções. Diz qual destino faz sentido pro SEU perfil, mês e bolso — com nota e o porquê de cada um.', href: '/decisao', cta: 'Ver a decisão' },
   { icon: '🧾', titulo: 'Custo honesto', txt: 'O preço de vitrine é só voo + hotel. Mostramos o custo REAL da viagem inteira, item a item — sem surpresa no balcão.', href: '/decisao', cta: 'Ver o custo real' },
   { icon: '🗺️', titulo: 'Roteiro vivo', txt: 'Estação × visto × fôlego: a ordem dos países muda tudo. O plano recalcula clima, visto e grana quando você mexe.', href: '/planejar', cta: 'Abrir o planejador' },
-  { icon: '🌍', titulo: '167 países', txt: 'O mundo inteiro com custo, melhor época, visto, segurança e o que comer — não só os óbvios da prateleira.', href: '/explorar', cta: 'Explorar destinos' },
+  { icon: '🌍', titulo: `${DESTINOS.length} países`, txt: 'O mundo inteiro com custo, melhor época, visto, segurança e o que comer — não só os óbvios da prateleira.', href: '/explorar', cta: 'Explorar destinos' },
 ];
 
 const PASSOS = [
-  { n: '1', titulo: 'Descubra', txt: 'Conte seu estilo. A gente ranqueia os 167 destinos pelo que combina com você — com score e custo real.' },
+  { n: '1', titulo: 'Descubra', txt: `Conte seu estilo. A gente ranqueia os ${DESTINOS.length} destinos pelo que combina com você — com score e custo real.` },
   { n: '2', titulo: 'Decida', txt: 'Compare lado a lado por custo-benefício, segurança, clima e visto. Sem achismo de blog.' },
   { n: '3', titulo: 'Planeje & vá', txt: 'Monte a rota na ordem certa, gere o roteiro dia a dia com IA, e reserve com um clique. Tudo num lugar.' },
 ];
@@ -70,7 +70,7 @@ export default async function Home() {
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-14 sm:pt-28 sm:pb-20">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/90 bg-white/10 border border-white/20 rounded-full px-3 py-1">
-            167 países · decisão inteligente
+            {DESTINOS.length} países · decisão inteligente
           </span>
           <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.05] text-white max-w-3xl drop-shadow">
             Decida a viagem da sua vida — <span className="text-amberx">com um copiloto que pensa por você.</span>
@@ -82,7 +82,7 @@ export default async function Home() {
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href="/decisao" className={CTA_PRIMARY}>🧠 Decidir minha viagem</Link>
-            <Link href="/explorar" className={CTA_LIGHT}>🧭 Explorar 167 destinos</Link>
+            <Link href="/explorar" className={CTA_LIGHT}>🧭 Explorar {DESTINOS.length} destinos</Link>
           </div>
           <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-[13px] text-white/95">
             <span>✓ Grátis pra começar</span>

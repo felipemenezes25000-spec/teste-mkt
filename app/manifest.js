@@ -3,7 +3,7 @@ export default function manifest() {
   return {
     name: 'Mundo Sem Fim — o copiloto que decide a viagem',
     short_name: 'Mundo Sem Fim',
-    description: 'Decide pra onde ir pelo seu perfil, mostra o custo real e monta o roteiro que recalcula. 167 países.',
+    description: 'Decide pra onde ir pelo seu perfil, mostra o custo real e monta o roteiro que recalcula. O mundo inteiro num app.',
     start_url: '/',
     display: 'standalone',
     background_color: '#F4EDDE',

@@ -5,6 +5,9 @@
 // quebra (400) quando o original é menor que N). Pura (server + client).
 export function wikiThumb(url, width = 640) {
   if (!url) return url;
+  // O Wikidata (wdt:P18) devolve imagens em http://commons… — força https senão a
+  // CSP (img-src https:) bloqueia como mixed content. Vale pra qualquer fonte.
+  url = url.replace(/^http:\/\//, 'https://');
   // Já é Special:FilePath → só (re)define o width (preserva o host: commons/en/…).
   if (url.includes('Special:FilePath/')) {
     return url.split('?')[0] + '?width=' + width;
