@@ -23,6 +23,42 @@ const VEREDITOS = {
     naoCombina: ['sensibilidade à altitude', 'viagem sem planejamento', 'ritmo muito corrido'],
     oportunidade: 'Maio costuma unir clima seco, custo honesto e uma logística ainda razoável.',
   },
+  AR: {
+    texto: 'A Argentina é um dos melhores destinos custo-benefício saindo do Brasil: chegada barata, comida memorável, vinho a preço de mercado e um senso de cidade que poucos países da região têm. O ponto que pesa é a instabilidade cambial — o real-peso vira o tempo todo e influencia hospedagem e câmbio na rua.',
+    combina: ['casal pela primeira vez na Patagônia', 'foodie querendo bife e vinho', 'cidade grande caminhável', 'orçamento médio com luxo seletivo'],
+    naoCombina: ['praia', 'quem evita lidar com câmbio paralelo', 'roteiro engessado por reserva antecipada'],
+    oportunidade: 'Março-maio em Buenos Aires e novembro na Patagônia: clima bom e dólar paralelo costuma render mais que o oficial.',
+  },
+  CL: {
+    texto: 'O Chile é o destino sul-americano mais parecido com a Europa em estrutura: aeroportos, transporte e segurança funcionam bem. Vale tanto pra primeira viagem internacional quanto pra quem quer Patagônia/Atacama sem perrengue logístico. O contra é que sai mais caro que vizinhos, principalmente fora de Santiago.',
+    combina: ['primeira viagem internacional', 'casal sem perrengue', 'natureza extrema com conforto', 'viagem de 7-10 dias'],
+    naoCombina: ['orçamento muito apertado', 'quem quer praia tropical', 'quem evita altitude'],
+    oportunidade: 'Outubro-novembro junta clima bom em Santiago, Atacama ainda razoável e Patagônia abrindo a temporada — antes do pico de dezembro.',
+  },
+  UY: {
+    texto: 'O Uruguai é a viagem internacional mais fácil que existe para brasileiros: voo curto, idioma simples, segurança alta e clima parecido. É um ótimo destino pra "primeira saída do Brasil" e pra casal que quer um final de semana sem stress. O preço fica mais alto que parece — câmbio e hospedagem em Punta no verão são caros.',
+    combina: ['primeira viagem internacional', 'casal final de semana', 'fim de ano alternativo a praia brasileira', 'wine country sem ir longe'],
+    naoCombina: ['viagem longa', 'busca por exuberância natural', 'orçamento muito apertado em janeiro'],
+    oportunidade: 'Março-abril em Montevideo e Colonia: temporada baixa, preços razoáveis e clima ainda quente.',
+  },
+  ES: {
+    texto: 'A Espanha equilibra cidade, praia, gastronomia e estrutura como poucos países da Europa. Para brasileiros é uma escolha óbvia: idioma próximo, conexão direta de SP e GRU, custo médio entre Portugal e França. O cuidado é não tentar fazer Madri+Barcelona+Andaluzia em 7 dias — vira corrida cansativa.',
+    combina: ['primeira Europa que quer cidade e praia', 'gastronomia', 'casal 10-14 dias', 'língua próxima'],
+    naoCombina: ['roteiro de 5 dias multi-cidade', 'praia barata estilo Nordeste', 'verão em agosto (lotado e caro)'],
+    oportunidade: 'Maio-junho ou setembro-outubro: clima ideal, preços fora do pico e atrações sem multidão.',
+  },
+  IT: {
+    texto: 'A Itália é a viagem dos clichês justificados: comida, arte e cidade-arte funcionam quase em qualquer mês. Mas é cara, e o "destino bonito barato" só existe fora dos circuitos óbvios (Sul da Itália, Puglia, Sicília fora do verão). Roma+Florença+Veneza em 8 dias é o erro mais comum.',
+    combina: ['casal foodie', 'primeira Europa com história forte', 'viagem de 10-14 dias', 'roteiro de uma região (não três)'],
+    naoCombina: ['orçamento apertado em junho-agosto', 'mochileiro tentando fazer norte+sul rápido', 'quem prioriza praia barata'],
+    oportunidade: 'Setembro-outubro no sul (Puglia, Nápoles, Sicília): comida no auge, preços civilizados e clima ainda bom.',
+  },
+  FR: {
+    texto: 'A França é o destino de "Europa premium" típico: Paris é experiência única, mas o resto do país (Provence, Bordeaux, Normandia) costuma render mais por euro gasto. O choque para brasileiros é hospedagem em Paris — fica caro e pequeno. Vale muito se você dilui Paris com outra região.',
+    combina: ['casal que quer uma cidade icônica', 'foodie + vinho', 'viagem 8-12 dias dividindo Paris + região', 'quem aprecia museu e arte'],
+    naoCombina: ['orçamento apertado só em Paris', 'mochilão rápido', 'quem quer só natureza'],
+    oportunidade: 'Maio-junho ou setembro: tempo bom, dias longos e Paris menos sufocada que em julho-agosto.',
+  },
 };
 
 export function custoEstimadoDias(destino, dias = [7, 10, 15]) {
