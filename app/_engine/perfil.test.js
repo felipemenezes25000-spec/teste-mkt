@@ -64,3 +64,25 @@ describe('topInteresses', () => {
     expect(typeof top[0].label).toBe('string');
   });
 });
+
+describe('PERFIS_PRONTOS — novos modos', () => {
+  it.each([
+    ['primeira-viagem', { seguranca: 0.9, conforto: 0.7 }],
+    ['descansar', { conforto: 0.9, praia: 0.8, aventura: 0.1 }],
+    ['casal-economico', { economia: 0.8, conforto: 0.6, seguranca: 0.7 }],
+    ['mochilao-sem-perrengue', { economia: 0.7, seguranca: 0.7, aventura: 0.6 }],
+  ])('preset %s tem pesos esperados', (id, esperado) => {
+    const p = perfilDoPreset(id);
+    for (const [chave, valor] of Object.entries(esperado)) {
+      expect(p[chave]).toBeGreaterThanOrEqual(valor - 0.05);
+      expect(p[chave]).toBeLessThanOrEqual(valor + 0.05);
+    }
+  });
+
+  it('cada novo preset tem nome e emoji', () => {
+    for (const id of ['primeira-viagem', 'descansar', 'casal-economico', 'mochilao-sem-perrengue']) {
+      expect(PERFIS_PRONTOS[id].nome, `${id} missing nome`).toBeTruthy();
+      expect(PERFIS_PRONTOS[id].emoji, `${id} missing emoji`).toBeTruthy();
+    }
+  });
+});

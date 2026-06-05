@@ -33,6 +33,10 @@ export const PERFIS_PRONTOS = {
   aventura: { nome: 'Aventura', emoji: '🧗', pesos: { economia: 0.5, conforto: 0.2, natureza: 0.9, gastronomia: 0.4, praia: 0.4, cultura: 0.5, vidaNoturna: 0.3, seguranca: 0.4, aventura: 1 } },
   cultural: { nome: 'Cultural', emoji: '🏛️', pesos: { economia: 0.5, conforto: 0.5, natureza: 0.4, gastronomia: 0.6, praia: 0.3, cultura: 1, vidaNoturna: 0.4, seguranca: 0.5, aventura: 0.4 } },
   praia: { nome: 'Praia & relax', emoji: '🏖️', pesos: { economia: 0.4, conforto: 0.6, natureza: 0.6, gastronomia: 0.5, praia: 1, cultura: 0.3, vidaNoturna: 0.6, seguranca: 0.6, aventura: 0.4 } },
+  'primeira-viagem': { nome: 'Primeira viagem internacional', emoji: '🛂', pesos: { economia: 0.4, conforto: 0.7, natureza: 0.4, gastronomia: 0.5, praia: 0.5, cultura: 0.6, vidaNoturna: 0.3, seguranca: 0.9, aventura: 0.2 } },
+  descansar: { nome: 'Eu só quero descansar', emoji: '😌', pesos: { economia: 0.4, conforto: 0.9, natureza: 0.5, gastronomia: 0.5, praia: 0.8, cultura: 0.2, vidaNoturna: 0.2, seguranca: 0.7, aventura: 0.1 } },
+  'casal-economico': { nome: 'Casal sem estourar o cartão', emoji: '💕', pesos: { economia: 0.8, conforto: 0.6, natureza: 0.5, gastronomia: 0.7, praia: 0.6, cultura: 0.5, vidaNoturna: 0.3, seguranca: 0.7, aventura: 0.3 } },
+  'mochilao-sem-perrengue': { nome: 'Mochilão sem perrengue', emoji: '🎒', pesos: { economia: 0.7, conforto: 0.5, natureza: 0.7, gastronomia: 0.5, praia: 0.5, cultura: 0.6, vidaNoturna: 0.4, seguranca: 0.7, aventura: 0.6 } },
 };
 
 export function perfilDoPreset(id) {
