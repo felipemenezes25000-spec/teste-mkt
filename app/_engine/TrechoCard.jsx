@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { MOEDAS, PASSAPORTES, REVISADO_EM } from './data.js';
+import { PASSAPORTES, REVISADO_EM } from './data.js';
 import { fmtMoeda, fmtData, simbolo, num, clamp, toISO, linksVoo, linkMapaTexto, distanciaKm, estimarPrecoVoo } from './utils.js';
 import { buscarLugar } from './services.js';
+import { MoedaPicker } from '../_components/MoedaPicker.jsx';
 import { ESTACAO_UI, VISTO_UI, NumberInput, MesesPicker, StatusChip } from './components.jsx';
 
 /* Card de um trecho. v4: foto do local (Wikipedia), busca de voo do trecho (origem→destino),
@@ -78,12 +79,9 @@ export default function TrechoCard(props) {
               <input value={t.nome} onChange={(e) => onPatch({ nome: e.target.value })} aria-label="Nome do país"
                 className="font-display text-xl text-ink bg-transparent border-b border-transparent hover:border-line focus:border-pine outline-none min-w-0 max-w-full focusring rounded" />
               <span className="text-[11px] uppercase tracking-wider text-inksoft bg-paper2 border border-line rounded-full px-2 py-0.5">{t.regiao || 'região?'}</span>
-              <label className="text-[11px] text-inksoft flex items-center gap-1">moeda
-                <select value={t.moeda} onChange={(e) => onPatch({ moeda: e.target.value })} aria-label={`Moeda dos custos em ${t.nome}`}
-                  className="bg-input border border-line rounded-md px-1.5 py-0.5 text-ink focusring">
-                  {MOEDAS.map(m => <option key={m.code} value={m.code}>{m.code}</option>)}
-                </select>
-              </label>
+              <span className="text-[11px] text-inksoft flex items-center gap-1">moeda
+                <MoedaPicker value={t.moeda} onChange={(code) => onPatch({ moeda: code })} label={`Moeda dos custos em ${t.nome}`} />
+              </span>
               <span className="text-sm text-inksoft tnum">Chega <b className="text-ink">{fmtData(t.chegada)}</b> · sai {fmtData(t.saida)}</span>
             </div>
 
