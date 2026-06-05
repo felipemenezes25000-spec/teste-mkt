@@ -69,41 +69,32 @@ export default async function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/35 to-transparent" />
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-14 sm:pt-28 sm:pb-20 lg:grid lg:grid-cols-[1.15fr_1fr] lg:gap-10 lg:items-start">
-          <div>
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/90 bg-white/10 border border-white/20 rounded-full px-3 py-1">
-              {DESTINOS.length} países · decisão inteligente
-            </span>
-            <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.05] text-white max-w-3xl drop-shadow">
-              Decida a viagem da sua vida — <span className="text-amberx">com um copiloto que pensa por você.</span>
-            </h1>
-            <p className="mt-4 text-lg text-white/90 max-w-2xl">
-              As OTAs te empurram opções. A gente diz <strong className="text-white">pra onde ir</strong> pelo seu perfil,
-              <strong className="text-white"> quanto custa de verdade</strong> (não só voo + hotel) e monta o
-              <strong className="text-white"> roteiro que recalcula</strong>. Comece grátis.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/decisao" className={CTA_PRIMARY}>🧠 Decidir minha viagem</Link>
-              <Link href="/explorar" className={CTA_LIGHT}>🧭 Explorar {DESTINOS.length} destinos</Link>
-            </div>
-            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-[13px] text-white/95">
-              <span>✓ Grátis pra começar</span>
-              <span>✓ Sem cartão</span>
-              <span>✓ Conselho neutro (não vendemos a reserva)</span>
-            </div>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-14 sm:pt-28 sm:pb-20">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/90 bg-white/10 border border-white/20 rounded-full px-3 py-1">
+            {DESTINOS.length} países · decisão inteligente
+          </span>
+          <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.05] text-white max-w-3xl drop-shadow">
+            Decida a viagem da sua vida — <span className="text-amberx">com um copiloto que pensa por você.</span>
+          </h1>
+          <p className="mt-4 text-lg text-white/90 max-w-2xl">
+            As OTAs te empurram opções. A gente diz <strong className="text-white">pra onde ir</strong> pelo seu perfil,
+            <strong className="text-white"> quanto custa de verdade</strong> (não só voo + hotel) e monta o
+            <strong className="text-white"> roteiro que recalcula</strong>. Comece grátis.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link href="/decisao" className={CTA_PRIMARY}>🧠 Decidir minha viagem</Link>
+            <Link href="/explorar" className={CTA_LIGHT}>🧭 Explorar {DESTINOS.length} destinos</Link>
           </div>
-          {/* Em desktop, o simulador entra como coluna direita do hero. */}
-          <div className="hidden lg:block lg:mt-2">
-            <HeroSimulador variant="inHero" />
+          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-[13px] text-white/95">
+            <span>✓ Grátis pra começar</span>
+            <span>✓ Sem cartão</span>
+            <span>✓ Conselho neutro (não vendemos a reserva)</span>
           </div>
         </div>
       </section>
 
-      {/* SIMULADOR FLUTUANTE — em mobile/tablet o simulador segue logo abaixo do hero
-          (em desktop já apareceu como coluna direita, então fica escondido). */}
-      <div className="lg:hidden">
-        <HeroSimulador />
-      </div>
+      {/* SIMULADOR — transforma a vitrine em produto logo no topo (reusa o motor da /decisao) */}
+      <HeroSimulador />
 
       {/* PILARES (o fosso) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
