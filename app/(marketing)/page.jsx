@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { destinosDestaque, DESTINOS } from '../_lib/destinos.js';
 import { imagemWiki, resumoWiki } from '../_lib/wiki.js';
+import { wikiThumb } from '../_lib/wikiThumb.js';
 import { DestinoCard } from '../_components/DestinoCard.jsx';
 import { JsonLd } from '../_components/JsonLd.jsx';
 import { jsonLdOrganization, jsonLdWebSite, jsonLdReviews, siteUrl } from '../_lib/seo.js';
@@ -57,7 +58,7 @@ export default async function Home() {
         <div className="absolute inset-0">
           {hero?.img ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={hero.img} alt="" className="w-full h-full object-cover" />
+            <img src={wikiThumb(hero.img, 1600)} alt="" width="1600" height="900" fetchPriority="high" className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-pine to-pinedk" aria-hidden />
           )}

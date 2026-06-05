@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FavoriteButton } from './FavoriteButton.jsx';
+import { wikiThumb } from '../_lib/wikiThumb.js';
 
 // Card de destino reutilizado na home, no /explorar e nos salvos. img pode ser
 // null (cai num gradiente). O coração fica fora do <Link> (HTML válido).
@@ -14,7 +15,7 @@ export function DestinoCard({ d, img }) {
         <div className="relative h-40 bg-paper2 overflow-hidden">
           {img ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={img} alt={d.nome} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            <img src={wikiThumb(img, 640)} alt={d.nome} loading="lazy" width="640" height="256" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
           ) : (
             <div className="w-full h-full grid place-items-center bg-gradient-to-br from-pine/15 to-ochre/15 text-4xl" aria-hidden>🗺️</div>
           )}
