@@ -16,7 +16,7 @@ export function EmptyState({ icon = '✨', title, subtitle, actions = [], dashed
               key={a.href + a.label}
               href={a.href}
               className={a.primary
-                ? 'inline-flex items-center justify-center gap-1.5 rounded-xl bg-pine text-white font-semibold px-5 py-2.5 hover:bg-pinedk focusring'
+                ? 'inline-flex items-center justify-center gap-1.5 rounded-xl bg-coral text-oncoral font-semibold px-5 py-2.5 hover:brightness-95 transition focusring'
                 : 'inline-flex items-center justify-center gap-1.5 rounded-xl border border-line bg-card text-ink font-semibold px-5 py-2.5 hover:text-pine focusring'}
             >
               {a.label}

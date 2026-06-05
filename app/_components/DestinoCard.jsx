@@ -10,7 +10,7 @@ export function DestinoCard({ d, img }) {
       <FavoriteButton code={d.code} nome={d.nome} className="absolute top-2 right-2 z-10" />
       <Link
         href={`/destino/${d.slug}`}
-        className="block rounded-2xl border border-line bg-card overflow-hidden hover:shadow-[var(--e-1)] hover:-translate-y-0.5 transition focusring"
+        className="block rounded-2xl border border-line bg-card overflow-hidden hover:shadow-[var(--e-2)] hover:-translate-y-0.5 transition focusring"
       >
         <div className="relative h-40 bg-paper2 overflow-hidden">
           {img ? (
@@ -19,6 +19,7 @@ export function DestinoCard({ d, img }) {
           ) : (
             <div className="w-full h-full grid place-items-center bg-gradient-to-br from-pine/15 to-ochre/15 text-4xl" aria-hidden>🗺️</div>
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" aria-hidden />
           <span className="absolute top-2 left-2 text-[11px] font-semibold bg-ink/55 text-white px-2 py-0.5 rounded-full">{d.regiao}</span>
         </div>
         <div className="p-3.5">

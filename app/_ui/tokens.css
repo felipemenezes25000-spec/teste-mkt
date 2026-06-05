@@ -17,6 +17,11 @@
   --c-sage: 47 122 87; --c-amberx: 183 121 31;
   --c-input: 255 255 255;    /* superfície de controles (inputs/selects) */
   --c-on-ochre: 34 45 43;    /* texto sobre ocre — escuro nos DOIS temas */
+  /* Acentos premium (híbrido): coral = CTA primário; solar = economia/destaque.
+     Definidos só aqui (:root) → valem nos 2 temas. coral c/ branco = 4.9:1 (AA);
+     solar é SEMPRE fundo com texto escuro (on-solar), nunca texto sobre claro. */
+  --c-coral: 198 68 46; --c-on-coral: 255 255 255;
+  --c-solar: 245 184 50; --c-on-solar: 34 45 43;
 
   /* Semânticas de status (texto/fundo/borda) — pares com contraste AA */
   --c-success: 31 107 72; --c-success-bg: 231 241 234; --c-success-bd: 191 224 205;

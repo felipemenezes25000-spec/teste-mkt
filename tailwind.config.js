@@ -19,6 +19,8 @@ module.exports = {
         ochre: c('--c-ochre'), ochresoft: c('--c-ochre-soft'), clay: c('--c-clay'),
         sage: c('--c-sage'), amberx: c('--c-amberx'),
         input: c('--c-input'), onochre: c('--c-on-ochre'),
+        coral: c('--c-coral'), oncoral: c('--c-on-coral'),
+        solar: c('--c-solar'), onsolar: c('--c-on-solar'),
         success: c('--c-success'), 'success-bg': c('--c-success-bg'), 'success-bd': c('--c-success-bd'),
         warn: c('--c-warn'), 'warn-bg': c('--c-warn-bg'), 'warn-bd': c('--c-warn-bd'),
         danger: c('--c-danger'), 'danger-bg': c('--c-danger-bg'), 'danger-bd': c('--c-danger-bd'),

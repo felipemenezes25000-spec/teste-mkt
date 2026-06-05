@@ -6,6 +6,7 @@ import { DestinoCard } from '../_components/DestinoCard.jsx';
 import { JsonLd } from '../_components/JsonLd.jsx';
 import { jsonLdOrganization, jsonLdWebSite, jsonLdReviews, siteUrl } from '../_lib/seo.js';
 import { ProvaSocial } from '../_components/ProvaSocial.jsx';
+import { HeroSimulador } from '../_components/HeroSimulador.jsx';
 import { DEPOIMENTOS } from '../_lib/depoimentos.js';
 
 // Landing premium (Server Component). Busca a imagem-herói e as dos destaques na
@@ -20,7 +21,7 @@ export const metadata = {
 };
 
 const CTA_PRIMARY =
-  'inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-white font-semibold px-5 py-3 shadow-lg hover:bg-pinedk transition focusring';
+  'inline-flex items-center justify-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-5 py-3 shadow-lg hover:brightness-95 transition focusring';
 const CTA_LIGHT =
   'inline-flex items-center justify-center gap-2 rounded-xl bg-ink/35 backdrop-blur border border-white/60 text-white font-semibold px-5 py-3 hover:bg-ink/50 transition focusring';
 const CTA_GHOST =
@@ -91,6 +92,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* SIMULADOR — transforma a vitrine em produto logo no topo (reusa o motor da /decisao) */}
+      <HeroSimulador />
 
       {/* PILARES (o fosso) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
