@@ -6,6 +6,7 @@ import { buscarVoos, ORIGENS } from '../../_lib/flights.js';
 import { linksVoo, toISO } from '../../_engine/utils.js';
 import { useLibera } from '../../_components/Gate.jsx';
 import { curvaPreco, vereditoCompra } from '../../_engine/previsaoVoo.js';
+import { Autocomplete } from '../../_components/Autocomplete.jsx';
 
 function dataPadrao() {
   const d = new Date();
@@ -14,15 +15,13 @@ function dataPadrao() {
 }
 
 export function VoosClient() {
-  const [oi, setOi] = useState(0);
-  const [code, setCode] = useState(DESTINOS[0].code);
+  const [origem, setOrigem] = useState(ORIGENS[0]);
+  const [destino, setDestino] = useState(DESTINOS[0]);
   const [data, setData] = useState(dataPadrao);
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState(null);
   const [alerta, setAlerta] = useState('');
 
-  const origem = ORIGENS[oi];
-  const destino = DESTINOS.find((d) => d.code === code) || DESTINOS[0];
   const { libera: liberaAlerta } = useLibera('alertas-preco');
 
   async function buscar() {
@@ -57,17 +56,20 @@ export function VoosClient() {
   return (
     <div className="mt-6">
       <div className="rounded-2xl border border-line bg-card p-5 grid sm:grid-cols-4 gap-3 items-end">
-        <label className="text-xs text-inksoft font-medium">Origem
-          <select value={oi} onChange={(e) => setOi(Number(e.target.value))} className={`${field} mt-1`}>
-            {ORIGENS.map((o, i) => <option key={o.iata} value={i}>{o.cidade} ({o.iata})</option>)}
-          </select>
-        </label>
-        <label className="text-xs text-inksoft font-medium">Destino
-          <select value={code} onChange={(e) => setCode(e.target.value)} className={`${field} mt-1`}>
-            {DESTINOS.map((d) => <option key={d.code} value={d.code}>{d.cidadePrincipal || d.nome} ({d.iata})</option>)}
-          </select>
-        </label>
-        <label className="text-xs text-inksoft font-medium">Data
+        <Autocomplete
+          label="Origem" items={ORIGENS} value={origem} onChange={setOrigem}
+          toText={(o) => `${o.cidade} (${o.iata})`} toSearch={(o) => `${o.cidade} ${o.iata}`}
+          toKey={(o) => o.iata} toRight={(o) => o.iata}
+          icon="🛫" placeholder="cidade de partida"
+        />
+        <Autocomplete
+          label="Destino" items={DESTINOS} value={destino} onChange={setDestino}
+          toText={(d) => `${d.cidadePrincipal || d.nome} (${d.iata})`}
+          toSearch={(d) => `${d.nome} ${d.cidadePrincipal || ''} ${d.regiao} ${d.iata}`}
+          toKey={(d) => d.code} toRight={(d) => d.regiao}
+          icon="🛬" placeholder="busque um país"
+        />
+        <label className="text-xs text-inksoft font-medium block">Data
           <input type="date" value={data} onChange={(e) => setData(e.target.value)} className={`${field} mt-1 tnum`} />
         </label>
         <button onClick={buscar} disabled={busy} className="inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-white font-semibold px-4 py-2.5 hover:bg-pinedk disabled:opacity-60 focusring">
@@ -78,7 +80,7 @@ export function VoosClient() {
       {res && (
         <div className="mt-5">
           <div className="mb-3 rounded-lg border border-ochre/40 bg-ochre/10 text-warn px-3 py-2 text-xs font-medium">
-            ⚠ Valores, horários e companhias são <b>ilustrativos</b> (estimativa por distância — provider mock), não preços reais. Confirme nos links “Reservar de verdade” abaixo.
+            ⚠ Valores, horários e companhias são <b>ilustrativos</b> (estimativa por distância), não preços reais. Confirme nos links “Reservar de verdade” abaixo.
           </div>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
             <p className="text-sm text-inksoft">
@@ -117,8 +119,8 @@ export function VoosClient() {
           </div>
 
           <p className="mt-3 text-xs text-inksoft">
-            Preços e horários são ESTIMATIVAS (provider mock por distância) — confira o valor real nos links acima.
-            Arquitetura pronta pra preço ao vivo via API (Amadeus/Kiwi/Duffel).
+            Preços e horários são estimativas por distância — confira o valor real nos links acima.
+            Em breve, com preços em tempo real.
           </p>
         </div>
       )}
@@ -157,7 +159,7 @@ function PrevisaoVoo({ rota, faixa, precoAtual }) {
         })}
       </div>
       <p className="mt-1.5 text-[11px] text-inksoft">
-        Previsão sobre a faixa estimada (provider mock), determinística por rota — com a API de voos ligada, roda sobre preço real. A barra escura é o dia mais barato previsto.
+        Previsão sobre a faixa estimada, determinística por rota. A barra escura é o dia mais barato previsto. (Em breve, sobre preços em tempo real.)
       </p>
     </div>
   );

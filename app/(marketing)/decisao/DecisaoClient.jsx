@@ -14,6 +14,7 @@ import { recomendarDestinos } from '../../_engine/decisao.js';
 import { carregarPerfil, salvarPerfil, perfilDoPreset, pesosScore, topInteresses, PERFIS_PRONTOS, INTERESSE_LABEL, PERFIL_EVENT } from '../../_engine/perfil.js';
 import { fmtMoeda } from '../../_engine/utils.js';
 import { FavoriteButton } from '../../_components/FavoriteButton.jsx';
+import { CardsSkeleton } from '../../_components/Skeleton.jsx';
 
 // Ordem e rótulo das 8 dimensões do score.
 const DIM = [
@@ -101,7 +102,12 @@ export function DecisaoClient({ destinos }) {
   const vitrine = useMemo(() => (calc ? resumoVitrineVsReal(calc) : null), [calc]);
   const top = perfil ? topInteresses(perfil, 3) : [];
 
-  if (!perfil) return <div className="mt-8 text-inksoft text-sm">Carregando seu perfil…</div>;
+  if (!perfil) return (
+    <div className="mt-6 space-y-6" role="status" aria-label="Carregando sua decisão" aria-busy="true">
+      <div className="flex flex-wrap gap-2">{[0, 1, 2, 3].map((i) => <div key={i} className="skel h-9 w-28 rounded-xl" />)}</div>
+      <CardsSkeleton n={4} />
+    </div>
+  );
 
   return (
     <div className="mt-6 space-y-12">

@@ -73,6 +73,17 @@ export function custoTotalRealista(calc, premissas = {}) {
 // O "preço de vitrine" das OTAs mostra só passagem + diária de hotel.
 const PESO_HOSPEDAGEM = 0.40;
 
+// Os DOIS percentuais do custo escondido — pra não enganar: "% acima da vitrine"
+// (escondido/vitrine, sobre o preço ANUNCIADO) é maior que "% do custo final"
+// (escondido/real, fração do TOTAL). Mostrar só um colado no comparativo confunde. Pura.
+export function percentuaisEscondido({ vitrine, real, escondido } = {}) {
+  const e = num(escondido), v = num(vitrine), r = num(real);
+  return {
+    sobreVitrine: v > 0 ? Math.round((e / v) * 100) : 0,
+    doFinal: r > 0 ? Math.round((e / r) * 100) : 0,
+  };
+}
+
 // "Vitrine vs Real": o que uma OTA te mostra (voo + hotel) vs o custo REAL da
 // viagem inteira. É o gancho de conversão — materializa a dor nº 1 do mercado.
 // Função PURA → testável.
@@ -87,6 +98,7 @@ export function resumoVitrineVsReal(calc, premissas = {}) {
     vitrine,
     real: real.total,
     escondido,                 // quanto a vitrine não te conta
+    pct: percentuaisEscondido({ vitrine, real: real.total, escondido }), // {sobreVitrine, doFinal}
     porDia: real.porDia,
     categorias: real.categorias, // breakdown completo do custo real
     faixa: real.faixa,

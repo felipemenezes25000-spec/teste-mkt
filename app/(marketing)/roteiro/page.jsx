@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { RoteiroClient } from './RoteiroClient.jsx';
+import { FormSkeleton } from '../../_components/Skeleton.jsx';
 
 export const metadata = {
   title: 'Roteiro com IA — Mundo Sem Fim',
@@ -14,7 +15,7 @@ export default function RoteiroPage() {
         Diga o destino e suas preferências — a IA monta um roteiro dia a dia com custo estimado, plano B de chuva,
         opções grátis, checklist e documentos.
       </p>
-      <Suspense fallback={<div className="mt-6 text-inksoft text-sm">Carregando…</div>}>
+      <Suspense fallback={<FormSkeleton rows={5} />}>
         <RoteiroClient />
       </Suspense>
     </main>

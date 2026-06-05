@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DESTINOS, destinoPorSlug } from '../../../_lib/destinos.js';
-import { resumoWiki, imagemWiki, imagensDe, creditoImagem, imagemCommons, imagemOpenverse } from '../../../_lib/wiki.js';
+import { resumoWiki, imagemWiki, imagensDe, creditoImagem, imagemCommons, imagemOpenverse, escolherSobre } from '../../../_lib/wiki.js';
 import { atracoesDe } from '../../../_lib/places.js';
 import { MESES_PT } from '../../../_engine/data.js';
 import { FavoriteButton } from '../../../_components/FavoriteButton.jsx';
@@ -95,6 +95,11 @@ export default async function DestinoPage({ params }) {
   // FOTO GARANTIDA — nenhum card pode ficar sem imagem (independente do meio):
   // verbete → busca direta no Commons → PISO = foto do país (sempre existe).
   const wiki = await resumoWiki(d.fotoQuery || d.nome);
+  // "Sobre {país}" SEMPRE vem do PAÍS — fotoQuery é cidade/landmark (escolhida p/ a foto),
+  // e usá-la como descrição fazia "Sobre Alemanha" mostrar o Portão de Brandemburgo.
+  // Sem fotoQuery (curados), `wiki` já é o país → reusa sem 2º fetch.
+  const sobrePais = (!d.fotoQuery || d.fotoQuery === d.nome) ? wiki : await resumoWiki(d.nome);
+  const sobre = escolherSobre({ pais: sobrePais, ponto: wiki });
   const heroImg = wiki?.img || (await imagensDe(d.fotoQuery || d.nome, { n: 1 }))[0] || (await imagemCommons(d.fotoQuery || d.nome)) || null;
   const credito = heroImg ? await creditoImagem(heroImg) : null;
   // Piso: várias fotos do país (cicladas) — o raro item sem foto própria cai aqui sem
@@ -229,12 +234,15 @@ export default async function DestinoPage({ params }) {
           />
         </section>
 
-        {/* SOBRE */}
-        {wiki?.extrato && (
+        {/* SOBRE — sempre o país; fallback honesto pro ponto de referência se faltar */}
+        {sobre && (
           <section>
-            <h2 className="font-display text-2xl text-ink mb-2">Sobre {d.nome}</h2>
-            <p className="text-inksoft leading-relaxed">{wiki.extrato}</p>
-            {wiki.url && <a href={wiki.url} target="_blank" rel="noopener noreferrer" className="inline-block mt-1 text-sm text-pine hover:underline focusring">Ler na Wikipédia ↗</a>}
+            <h2 className="font-display text-2xl text-ink mb-2">
+              {sobre.doPais ? `Sobre ${d.nome}` : `Sobre ${sobre.titulo}`}
+            </h2>
+            {!sobre.doPais && <p className="text-xs text-inksoft mb-1">Ponto de referência em {d.nome}.</p>}
+            <p className="text-inksoft leading-relaxed">{sobre.extrato}</p>
+            {sobre.url && <a href={sobre.url} target="_blank" rel="noopener noreferrer" className="inline-block mt-1 text-sm text-pine hover:underline focusring">Ler na Wikipédia ↗</a>}
           </section>
         )}
 

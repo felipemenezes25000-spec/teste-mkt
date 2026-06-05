@@ -8,6 +8,8 @@ import { custoEstadia } from '../../_lib/custos.js';
 import { carregarPerfil, perfilDoPreset, PERFIL_EVENT, topInteresses } from '../../_engine/perfil.js';
 import { recomendarDestinos } from '../../_engine/decisao.js';
 import { Gate } from '../../_components/Gate.jsx';
+import { EmptyState } from '../../_components/EmptyState.jsx';
+import { Skeleton } from '../../_components/Skeleton.jsx';
 
 const meses = (arr = []) => (arr.length ? arr.map((m) => MESES_PT[m - 1]).join(', ') : '—');
 
@@ -32,15 +34,22 @@ export function CompararClient() {
 
   const destinos = (codes || []).map(destinoPorCode).filter(Boolean);
 
-  if (codes === null) return <div className="mt-6 text-inksoft text-sm">Carregando…</div>;
+  if (codes === null) return (
+    <div className="mt-6 space-y-3" role="status" aria-label="Carregando" aria-busy="true">
+      <Skeleton className="h-10 w-full" />
+      <Skeleton className="h-64 w-full" />
+    </div>
+  );
 
   if (destinos.length < 2) {
     return (
-      <div className="mt-6 rounded-2xl border border-dashed border-line bg-card p-10 text-center">
-        <div className="text-4xl mb-2" aria-hidden>⚖️</div>
-        <p className="text-ink font-semibold">Salve pelo menos 2 destinos pra comparar.</p>
-        <p className="text-inksoft text-sm mt-1">Toque no coração nos destinos que te interessam.</p>
-        <Link href="/explorar" className="inline-flex mt-4 rounded-xl bg-pine text-white font-semibold px-5 py-2.5 hover:bg-pinedk focusring">Explorar destinos</Link>
+      <div className="mt-6">
+        <EmptyState
+          icon="⚖️"
+          title="Salve pelo menos 2 destinos pra comparar."
+          subtitle="Toque no coração nos destinos que te interessam — aqui eles aparecem lado a lado (custo, visto, melhor época)."
+          actions={[{ href: '/explorar', label: 'Explorar destinos', primary: true }, { href: '/salvos', label: 'Ver salvos' }]}
+        />
       </div>
     );
   }

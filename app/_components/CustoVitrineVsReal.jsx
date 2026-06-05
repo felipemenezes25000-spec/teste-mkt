@@ -5,8 +5,11 @@ import { fmtMoeda } from '../_engine/utils.js';
 // sem estado, server-safe, dark-aware. Não renderiza se não houver dado.
 export function CustoVitrineVsReal({ resumo, contexto }) {
   if (!resumo || !resumo.real) return null;
-  const { vitrine, real, escondido, categorias = [] } = resumo;
-  const pct = real > 0 ? Math.round((escondido / real) * 100) : 0;
+  const { vitrine, real, escondido, categorias = [], pct } = resumo;
+  // Dois percentuais HONESTOS (com fallback se o resumo vier sem `pct`): "acima da
+  // vitrine" (sobre o preço anunciado) e "do custo final" (fração do total).
+  const pSobreVitrine = pct?.sobreVitrine ?? (vitrine > 0 ? Math.round((escondido / vitrine) * 100) : 0);
+  const pDoFinal = pct?.doFinal ?? (real > 0 ? Math.round((escondido / real) * 100) : 0);
 
   return (
     <section className="rounded-2xl border border-line bg-card p-5" aria-label="Custo de vitrine versus custo real">
@@ -30,8 +33,8 @@ export function CustoVitrineVsReal({ resumo, contexto }) {
       </div>
 
       <p className="mt-3 text-sm">
-        <span className="font-bold text-danger">+{fmtMoeda(escondido, 'USD')}</span>{' '}
-        <span className="text-inksoft">({pct}%) que ninguém te conta — e que a gente soma item a item:</span>
+        <span className="font-bold text-danger">+{fmtMoeda(escondido, 'USD')} acima da vitrine</span>{' '}
+        <span className="text-inksoft">({pSobreVitrine}% a mais) — o que ninguém te conta. Equivale a {pDoFinal}% do custo final, somado item a item:</span>
       </p>
 
       <ul className="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-1.5">

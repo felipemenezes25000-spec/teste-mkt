@@ -1,10 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { lerFavoritos, FAV_EVENT } from '../../_lib/favoritos.js';
-import { destinoPorCode } from '../../_lib/destinos.js';
+import { destinoPorCode, DESTINOS } from '../../_lib/destinos.js';
 import { imagemWiki } from '../../_lib/wiki.js';
 import { DestinoCard } from '../../_components/DestinoCard.jsx';
+import { EmptyState } from '../../_components/EmptyState.jsx';
+import { CardsSkeleton } from '../../_components/Skeleton.jsx';
 
 export function SalvosClient() {
   const [codes, setCodes] = useState(null); // null = ainda lendo localStorage
@@ -18,11 +20,18 @@ export function SalvosClient() {
   }, []);
 
   const destinos = (codes || []).map(destinoPorCode).filter(Boolean);
+  const vazio = codes !== null && destinos.length === 0;
+  // 5 recomendados (destaques) pra preencher o estado vazio com algo útil.
+  const recomendados = useMemo(() => {
+    const dest = DESTINOS.filter((d) => d.destaque);
+    return (dest.length ? dest : DESTINOS).slice(0, 5);
+  }, []);
+  const aMostrar = vazio ? recomendados : destinos;
 
   // Busca as imagens no client (Wikipedia REST tem CORS aberto).
   useEffect(() => {
     let vivo = true;
-    destinos.forEach((d) => {
+    aMostrar.forEach((d) => {
       if (imgs[d.code] !== undefined) return;
       imagemWiki(d.fotoQuery || d.nome).then((src) => {
         if (vivo) setImgs((p) => ({ ...p, [d.code]: src || null }));
@@ -32,15 +41,21 @@ export function SalvosClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codes]);
 
-  if (codes === null) return <div className="mt-6 text-inksoft text-sm">Carregando…</div>;
+  if (codes === null) return <div className="mt-6"><CardsSkeleton n={4} /></div>;
 
-  if (destinos.length === 0) {
+  if (vazio) {
     return (
-      <div className="mt-6 rounded-2xl border border-dashed border-line bg-card p-10 text-center">
-        <div className="text-4xl mb-2" aria-hidden>♡</div>
-        <p className="text-ink font-semibold">Nenhum destino salvo ainda.</p>
-        <p className="text-inksoft text-sm mt-1">Toque no coração de qualquer destino pra salvar aqui.</p>
-        <Link href="/explorar" className="inline-flex mt-4 rounded-xl bg-pine text-white font-semibold px-5 py-2.5 hover:bg-pinedk focusring">Explorar destinos</Link>
+      <div className="mt-6">
+        <EmptyState
+          icon="♡"
+          title="Você ainda não salvou destinos."
+          subtitle="Toque no coração de qualquer destino pra guardar aqui. Pra começar, estes são ótimos pra brasileiros:"
+          actions={[{ href: '/explorar', label: 'Explorar destinos', primary: true }, { href: '/decisao', label: 'Decidir por mim' }]}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {recomendados.map((d) => <DestinoCard key={d.code} d={d} img={imgs[d.code]} />)}
+          </div>
+        </EmptyState>
       </div>
     );
   }

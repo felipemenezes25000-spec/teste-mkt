@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { custoTotalRealista, resumoVitrineVsReal, calcExemploDestino, PREMISSAS_PADRAO } from './custoTotal.js';
+import { custoTotalRealista, resumoVitrineVsReal, calcExemploDestino, percentuaisEscondido, PREMISSAS_PADRAO } from './custoTotal.js';
 
 const calc = {
   diasTotais: 26,
@@ -71,6 +71,13 @@ describe('resumoVitrineVsReal', () => {
     expect(r.categorias.length).toBeGreaterThan(0);
     expect(r.porDia).toBeGreaterThan(0);
   });
+
+  it('expõe os dois percentuais (sobre vitrine ≥ do total)', () => {
+    const r = resumoVitrineVsReal(calc);
+    expect(r.pct.sobreVitrine).toBeGreaterThan(0);
+    expect(r.pct.doFinal).toBeGreaterThan(0);
+    expect(r.pct.sobreVitrine).toBeGreaterThanOrEqual(r.pct.doFinal);
+  });
 });
 
 describe('calcExemploDestino', () => {
@@ -94,5 +101,20 @@ describe('calcExemploDestino', () => {
     const c = calcExemploDestino({}, 0);
     expect(c.diasTotais).toBe(7); // dias inválido → default
     expect(c.custoTransporteTotal).toBeGreaterThan(0);
+  });
+});
+
+describe('percentuaisEscondido', () => {
+  it('distingue % sobre a vitrine (maior) de % do custo final (menor)', () => {
+    // exemplo da review: vitrine 897, real 1292, escondido 395
+    const p = percentuaisEscondido({ vitrine: 897, real: 1292, escondido: 395 });
+    expect(p.sobreVitrine).toBe(44); // 395/897
+    expect(p.doFinal).toBe(31);      // 395/1292
+    expect(p.sobreVitrine).toBeGreaterThan(p.doFinal);
+  });
+
+  it('é seguro com valores zero/ausentes', () => {
+    expect(percentuaisEscondido({})).toEqual({ sobreVitrine: 0, doFinal: 0 });
+    expect(percentuaisEscondido({ vitrine: 0, real: 0, escondido: 100 })).toEqual({ sobreVitrine: 0, doFinal: 0 });
   });
 });

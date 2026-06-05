@@ -10,8 +10,8 @@ export default function VoosPage() {
     <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       <h1 className="font-display text-3xl sm:text-4xl text-ink">✈ Busca de voos</h1>
       <p className="mt-1 text-inksoft max-w-2xl">
-        Compare preço, escalas e duração e ache a melhor opção por custo-benefício. Estimativas por distância (provider
-        mock) com arquitetura pronta pra preço real via API.
+        Compare preço, escalas e duração e ache a melhor opção por custo-benefício.
+        Estimativas inteligentes por distância — em breve, com preços em tempo real.
       </p>
       <VoosClient />
     </main>

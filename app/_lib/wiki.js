@@ -33,6 +33,15 @@ export async function resumoWiki(query, { revalidate = DIA } = {}) {
   };
 }
 
+// Decide a fonte do bloco "Sobre {país}": prioriza o resumo do PAÍS; só cai no resumo
+// do ponto/cidade (fotoQuery) — com rótulo honesto (doPais=false) — se o país não tiver
+// extrato. Pura → testável. Conserta o bug de "Sobre {país}" mostrar texto da capital.
+export function escolherSobre({ pais, ponto } = {}) {
+  if (pais && pais.extrato) return { titulo: pais.titulo, extrato: pais.extrato, url: pais.url, doPais: true };
+  if (ponto && ponto.extrato) return { titulo: ponto.titulo, extrato: ponto.extrato, url: ponto.url, doPais: false };
+  return null;
+}
+
 const imgDe = (d) => (d && d.type !== 'disambiguation' ? ((d.originalimage && d.originalimage.source) || (d.thumbnail && d.thumbnail.source) || null) : null);
 
 // Lixo comum na media-list (bandeiras, ícones, mapas, brasões, áudio, svg).
