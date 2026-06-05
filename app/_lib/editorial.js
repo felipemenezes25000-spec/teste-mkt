@@ -4,6 +4,24 @@ import { clamp, num } from '../_engine/utils.js';
 const round = (value) => Math.round(clamp(value, 0, 100));
 const uniq = (items) => [...new Set((items || []).filter(Boolean))];
 
+const IDIOMA_SCORE_POR_REGIAO = {
+  'América do Sul': 95,
+  'América Central': 90,
+  'Europa': 85,
+  'América do Norte': 75,
+  'Oceania': 70,
+  'Oriente Médio': 60,
+  'África': 55,
+  'Ásia': 50,
+};
+
+function custoEmocionalDestino(destino, cansacoLogistico) {
+  const idiomaScore = IDIOMA_SCORE_POR_REGIAO[destino?.regiao] ?? 65;
+  const meses = Array.isArray(destino?.melhoresMeses) ? destino.melhoresMeses.length : 0;
+  const riscoChuvaScore = meses >= 6 ? 90 : meses >= 4 ? 75 : meses >= 2 ? 60 : 50;
+  return round((cansacoLogistico * 0.4) + (idiomaScore * 0.35) + (riscoChuvaScore * 0.25));
+}
+
 const VEREDITOS = {
   PT: {
     texto: 'Portugal é uma das escolhas mais seguras para uma primeira Europa: fácil de andar, boa comida, idioma familiar e muita coisa bonita concentrada. O problema é que o euro pesa mais do que parece, principalmente em hospedagem.',
@@ -202,7 +220,8 @@ export function mundoScoreDestino(destino) {
   const experiencia = round((dimensoes.experienciaLocal * 0.55) + (dimensoes.gastronomia * 0.25) + (dimensoes.tempoLivre * 0.2));
   const facilidade = round((seguranca * 0.55) + (dimensoes.risco * 0.25) + (dimensoes.conforto * 0.2));
   const cansacoLogistico = round(100 - Math.max(0, num(destino && destino.custoDia) - 38) * 0.8);
-  const total = round((custoReal * 0.28) + (seguranca * 0.2) + (experiencia * 0.24) + (facilidade * 0.18) + (cansacoLogistico * 0.1));
+  const custoEmocional = custoEmocionalDestino(destino, cansacoLogistico);
+  const total = round((custoReal * 0.25) + (seguranca * 0.18) + (experiencia * 0.22) + (facilidade * 0.15) + (cansacoLogistico * 0.08) + (custoEmocional * 0.12));
   const chanceArrependimento = total >= 78 ? 'baixa' : total >= 62 ? 'média' : 'alta';
 
   return {
@@ -214,6 +233,7 @@ export function mundoScoreDestino(destino) {
       experiencia,
       facilidade,
       cansacoLogistico,
+      custoEmocional,
     },
   };
 }

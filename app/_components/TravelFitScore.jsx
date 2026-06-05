@@ -6,6 +6,7 @@ const SUBNOTAS = [
   ['experiencia', 'Experiência'],
   ['facilidade', 'Facilidade'],
   ['cansacoLogistico', 'Cansaço'],
+  ['custoEmocional', 'Custo emocional'],
 ];
 
 function corNota(nota) {
@@ -38,11 +39,11 @@ export function TravelFitScore({ destino, compact = false }) {
           <p className="text-xs uppercase tracking-[0.18em] text-pine font-bold">Mundo Score</p>
           <h3 className="font-display text-2xl text-ink mt-1">Vale a pena para você?</h3>
           <p className="mt-1 text-sm text-inksoft">
-            Leitura editorial por custo real, segurança, experiência, facilidade e cansaço logístico. Chance de arrependimento: <strong className="text-ink">{score.chanceArrependimento}</strong>.
+            Leitura editorial por custo real, segurança, experiência, facilidade, cansaço logístico e custo emocional. Chance de arrependimento: <strong className="text-ink">{score.chanceArrependimento}</strong>.
           </p>
         </div>
       </div>
-      <div className="mt-5 grid sm:grid-cols-5 gap-3">
+      <div className="mt-5 grid sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {SUBNOTAS.map(([key, label]) => {
           const nota = score.subnotas[key];
           return (

@@ -123,3 +123,39 @@ describe('alertaHumanoDestino — cobertura dos prioritários', () => {
     expect(naoCurados).toEqual([]);
   });
 });
+
+describe('mundoScoreDestino — subnota custoEmocional', () => {
+  it('Portugal tem custo emocional alto (idioma+sem visto+melhores meses)', () => {
+    const destino = { code: 'PT', regiao: 'Europa', custoDia: 55, melhoresMeses: [4,5,6,9,10] };
+    const score = mundoScoreDestino(destino);
+    expect(score.subnotas.custoEmocional).toBeGreaterThan(75);
+  });
+
+  it('Tailândia tem custo emocional menor que Portugal (idioma diferente + score de região)', () => {
+    const tailandia = { code: 'TH', regiao: 'Ásia', custoDia: 35, melhoresMeses: [11,12,1,2,3] };
+    const portugal = { code: 'PT', regiao: 'Europa', custoDia: 55, melhoresMeses: [4,5,6,9,10] };
+    const scoreTH = mundoScoreDestino(tailandia);
+    const scorePT = mundoScoreDestino(portugal);
+    expect(scoreTH.subnotas.custoEmocional).toBeLessThan(scorePT.subnotas.custoEmocional);
+  });
+
+  it('custoEmocional fica entre 0 e 100', () => {
+    const destinos = [
+      { code: 'AR', regiao: 'América do Sul', custoDia: 40, melhoresMeses: [3,4,5,9,10,11] },
+      { code: 'JP', regiao: 'Ásia', custoDia: 80, melhoresMeses: [10,11,4] },
+      { code: 'EG', regiao: 'Oriente Médio', custoDia: 35, melhoresMeses: [10,11,12,1,2,3] },
+    ];
+    for (const d of destinos) {
+      const score = mundoScoreDestino(d);
+      expect(score.subnotas.custoEmocional).toBeGreaterThanOrEqual(0);
+      expect(score.subnotas.custoEmocional).toBeLessThanOrEqual(100);
+    }
+  });
+
+  it('total recalcula com peso de custoEmocional', () => {
+    const destino = { code: 'PT', regiao: 'Europa', custoDia: 55, melhoresMeses: [4,5,6,9,10] };
+    const score = mundoScoreDestino(destino);
+    expect(score.total).toBeGreaterThan(0);
+    expect(score.total).toBeLessThanOrEqual(100);
+  });
+});
