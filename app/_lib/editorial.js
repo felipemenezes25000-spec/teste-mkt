@@ -232,11 +232,45 @@ export function fitTagsDestino(destino) {
   return uniq(tags).slice(0, 4);
 }
 
+// Alertas humanos curados por país (extraídos da voz do veredito de cada um).
+// Use uma frase: o ponto de atenção real para brasileiros, sem template genérico.
+const ALERTAS_HUMANOS = {
+  PT: 'Fácil e segura, mas hospedagem em euro costuma pesar mais que o previsto.',
+  TH: 'Barata no dia a dia, mas o voo saindo do Brasil pode engolir o orçamento.',
+  PE: 'Ótimo valor, com atenção para altitude e deslocamentos internos.',
+  AR: 'Custo bom no peso, mas câmbio paralelo e instabilidade mexem com hospedagem.',
+  CL: 'Estrutura europeia em Sul-América, mas Patagônia e Atacama puxam o orçamento.',
+  UY: 'Vizinho próximo e seguro, mas Punta no verão paga preço Caribe.',
+  ES: 'Equilíbrio raro de cidade+praia+comida, mas alta temporada em agosto é caos.',
+  IT: 'Comida e história compensam, mas vitrine cobra mais que custo real prometido.',
+  FR: 'Paris é experiência única, mas hospedagem na cidade é o que mais aperta.',
+  US: 'Câmbio dólar pesa em tudo, mas voos diretos e estrutura compensam para roteiros longos.',
+  MX: 'Praia tropical com infra forte, mas Cancún no fim do ano paga preço Caribe e a cultura real fica em CDMX/Oaxaca.',
+  JP: 'Dia a dia mais barato do que parece, mas o voo + hospedagem em Tóquio só fazem sentido com 12+ dias.',
+  GR: 'Mar e comida fáceis, mas Santorini cobra preço de Mediterrâneo de luxo.',
+  TR: 'Lira fraca rende muito, mas precisa de 10+ dias pra justificar a distância de Capadócia.',
+  EG: 'Pirâmides e Nilo entregam o clichê justificado, mas calor e assédio pedem guia local pra não cansar.',
+  AE: 'Stopover de luxo funciona, mas cultura é vitrine — 10 dias só em Dubai geralmente não rende.',
+  CO: 'Custo bom e variedade rara na América do Sul, mas altitude em Bogotá e logística entre regiões pedem planejamento.',
+  NL: 'Amsterdam rende em 4-5 dias intensos, mas estender muito tempo só na cidade aperta o orçamento sem dar retorno.',
+  DE: 'Cidades organizadas e trem que funciona, mas 5 dias em Berlim não cobre a Alemanha — pense roteiro 12+ dias.',
+  GB: 'Londres é Manhattan europeu, mas a libra + hospedagem cara fazem 5 dias parecerem 3.',
+  ID: 'Bali rende com 14+ dias diluindo voo, mas viagem de 7 dias geralmente não compensa a distância.',
+  VN: 'Custo absurdamente baixo no chão, mas o voo longo e sem direto do Brasil pede mochilão de 14+ dias.',
+  MA: 'Exótico próximo e infra turística boa, mas assédio comercial e ramadã podem chocar — vale guia/agência.',
+  KR: 'Cultura coreana puxa interesse, mas custo é alto e voo longo — 10+ dias mínimo pra render.',
+  CA: 'Natureza extrema com estrutura ocidental, mas dólar canadense pesa em tudo — orçamento curto não rende.',
+  IE: 'Pubs e Wild Atlantic Way em 8-10 dias com carro, mas Dublin sozinha frustra e clima é instável.',
+  CZ: 'Praga rende em 4-5 dias intensos, mas no verão fica lotada — fora do pico é onde compensa.',
+  HR: 'Costa dálmata varia muito de preço — Dubrovnik subiu demais, Plitvice e ilhas ainda têm bom retorno.',
+  BO: 'Salar e altitude são únicos, mas logística pesada pede tour organizado — não é destino pra improvisar.',
+  PA: 'Stopover que vale como destino, mas só de praia tem opções melhores no Caribe.',
+};
+
 export function alertaHumanoDestino(destino) {
+  const curado = ALERTAS_HUMANOS[destino?.code];
+  if (curado) return curado;
   const custoDia = num(destino && destino.custoDia);
-  if (destino?.code === 'TH') return 'Barata no dia a dia, mas o voo saindo do Brasil pode engolir o orçamento.';
-  if (destino?.code === 'PT') return 'Fácil e segura, mas hospedagem em euro costuma pesar mais que o previsto.';
-  if (destino?.code === 'PE') return 'Ótimo valor, com atenção para altitude e deslocamentos internos.';
   if (custoDia >= 80) return 'Destino de desejo: planeje antes para não cair no “voo barato, viagem cara”.';
   if (custoDia <= 30) return 'Boa oportunidade para viajar com orçamento controlado sem cortar tudo.';
   return 'Vale olhar custo, mês e ritmo antes de comprar passagem.';
