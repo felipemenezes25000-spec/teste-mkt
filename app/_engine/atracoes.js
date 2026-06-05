@@ -157,7 +157,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Palácio Real de Phnom Penh",
-   "wiki": "Palácio Real (Camboja)",
+   "wiki": "Palácio Real de Phnom Penh",
    "cidade": "Phnom Penh"
   },
   {
@@ -234,7 +234,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Cataratas de Khone (Si Phan Don)",
-   "wiki": "Cataratas de Khone",
+   "wiki": "Cataratas de Khone Phapheng",
    "cidade": "Champasak"
   },
   {
@@ -385,12 +385,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Rio Subterrâneo de Puerto Princesa",
-   "wiki": "Parque Nacional do Rio Subterrâneo de Puerto Princesa",
+   "wiki": "Parque Nacional do rio subterrâneo de Puerto Princesa",
    "cidade": "Palawan"
   },
   {
    "nome": "Colinas de Chocolate",
-   "wiki": "Colinas de Chocolate",
+   "wiki": "Colinas do Chocolate",
    "cidade": "Bohol"
   },
   {
@@ -420,7 +420,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Vulcão Taal",
-   "wiki": "Vulcão Taal",
+   "wiki": "Taal",
    "cidade": "Batangas"
   },
   {
@@ -435,7 +435,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Coron (Palawan)",
-   "wiki": "Coron (Palawan)",
+   "wiki": "Coron",
    "cidade": "Palawan"
   }
  ],
@@ -482,7 +482,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Aeroporto de Changi (Jewel)",
-   "wiki": "Aeroporto de Singapura-Changi",
+   "wiki": "Aeroporto de Changi",
    "cidade": "Singapura"
   },
   {
@@ -566,7 +566,7 @@ export const ATRACOES = {
  "BN": [
   {
    "nome": "Mesquita Sultan Omar Ali Saifuddin",
-   "wiki": "Mesquita Sultan Omar Ali Saifuddin",
+   "wiki": "Omar Ali Saifuddien III",
    "cidade": "Bandar Seri Begawan"
   },
   {
@@ -638,12 +638,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Exército de Terracota",
-   "wiki": "Guerreiros de Xi'an",
+   "wiki": "Exército de Terracota",
    "cidade": "Xi'an"
   },
   {
    "nome": "Montanhas de Zhangjiajie",
-   "wiki": "Parque Florestal Nacional de Zhangjiajie",
+   "wiki": "Ponte de Vidro de Zhangjiajie",
    "cidade": "Hunan"
   },
   {
@@ -663,7 +663,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Montanha Amarela (Huangshan)",
-   "wiki": "Montes Amarelos",
+   "wiki": "Montanhas Huangshan",
    "cidade": "Anhui"
   },
   {
@@ -673,7 +673,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Buda Gigante de Leshan",
-   "wiki": "Buda Gigante de Leshan",
+   "wiki": "Grande Buda de Leshan",
    "cidade": "Sichuan"
   },
   {
@@ -720,7 +720,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Memorial da Paz",
-   "wiki": "Cúpula da Bomba Atômica",
+   "wiki": "Parque Memorial da Paz de Hiroshima",
    "cidade": "Hiroshima"
   },
   {
@@ -762,7 +762,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Torre N de Seul (Namsan)",
-   "wiki": "Torre N de Seul",
+   "wiki": "Namsan (Seul)",
    "cidade": "Seul"
   },
   {
@@ -834,7 +834,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Memorial de Chiang Kai-shek",
-   "wiki": "Memorial de Chiang Kai-shek",
+   "wiki": "Memorial Chiang Kai-shek",
    "cidade": "Taipé"
   },
   {
@@ -881,7 +881,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Grande Buda de Tian Tan",
-   "wiki": "Buda Tian Tan",
+   "wiki": "Tian Tan Buddha",
    "cidade": "Ilha de Lantau"
   },
   {
@@ -896,7 +896,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Templo Wong Tai Sin",
-   "wiki": "Templo Sik Sik Yuen Wong Tai Sin",
+   "wiki": "Wong Tai Sin (distrito)",
    "cidade": "Kowloon"
   },
   {
@@ -1521,7 +1521,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Cânion Charyn",
-   "wiki": "Cânion Charyn",
+   "wiki": "Cânion de Charyn",
    "cidade": "Almaty"
   },
   {
@@ -1625,7 +1625,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Torre Burana",
-   "wiki": "Torre Burana",
+   "wiki": "Torre de Burana",
    "cidade": "Tokmok"
   },
   {
@@ -1692,7 +1692,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Estrada do Pamir",
-   "wiki": "Rodovia do Pamir",
+   "wiki": "Estrada do Pamir",
    "cidade": "Gorno-Badaquistão"
   },
   {
@@ -2089,7 +2089,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Jardins Baha'i de Haifa",
-   "wiki": "Jardins de Bahá'í",
+   "wiki": "Centro Mundial Bahá'í",
    "cidade": "Haifa"
   },
   {
@@ -2213,7 +2213,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Vale de Kadisha",
-   "wiki": "Vale Kadisha",
+   "wiki": "Vale do Kadisha",
    "cidade": "Bsharri"
   },
   {
@@ -2290,7 +2290,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Montanhas Hajar (Hatta)",
-   "wiki": "Montes Hajar",
+   "wiki": "Montanhas Hajar",
    "cidade": "Hatta"
   },
   {
@@ -2342,7 +2342,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Estádio Lusail",
-   "wiki": "Estádio Icônico de Lusail",
+   "wiki": "Estádio Nacional de Lusail",
    "cidade": "Lusail"
   },
   {
@@ -2481,7 +2481,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Oásis de Al-Ahsa",
-   "wiki": "Al-Hasa",
+   "wiki": "Alhaça (oásis)",
    "cidade": "Hofuf"
   }
  ],
@@ -2828,7 +2828,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Palácio dos Papas",
-   "wiki": "Palácio dos Papas",
+   "wiki": "Palácio dos Papas de Avinhão",
    "cidade": "Avinhão"
   },
   {
@@ -3039,7 +3039,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Igreja de São Bavão (Haarlem)",
-   "wiki": "Grote Kerk (Haarlem)",
+   "wiki": "Igreja de São Bavão",
    "cidade": "Haarlem"
   }
  ],
@@ -3101,7 +3101,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Catedral de São Miguel e Santa Gúdula",
-   "wiki": "Catedral de Bruxelas",
+   "wiki": "Catedral de São Miguel e Santa Gudula",
    "cidade": "Bruxelas"
   }
  ],
@@ -3158,7 +3158,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Monte Pilatus",
-   "wiki": "Pilatus",
+   "wiki": "Monte Pilatus",
    "cidade": "Lucerna"
   },
   {
@@ -3304,7 +3304,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Rocha de Cashel",
-   "wiki": "Rochedo de Cashel",
+   "wiki": "Rocha de Cashel",
    "cidade": "Tipperary"
   },
   {
@@ -3329,12 +3329,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Nacional de Killarney",
-   "wiki": "Parque Nacional de Killarney",
+   "wiki": "Killarney",
    "cidade": "Kerry"
   },
   {
    "nome": "Temple Bar",
-   "wiki": "Temple Bar (Dublin)",
+   "wiki": "Temple Bar",
    "cidade": "Dublin"
   },
   {
@@ -3356,7 +3356,7 @@ export const ATRACOES = {
  "LU": [
   {
    "nome": "Casamatas do Bock",
-   "wiki": "Casamatas do Bock",
+   "wiki": "Bock (Luxemburgo)",
    "cidade": "Luxemburgo"
   },
   {
@@ -3366,7 +3366,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Palácio Grão-Ducal",
-   "wiki": "Palácio Grão-Ducal (Luxemburgo)",
+   "wiki": "Palácio Grão-Ducal",
    "cidade": "Luxemburgo"
   },
   {
@@ -3418,12 +3418,12 @@ export const ATRACOES = {
  "MT": [
   {
    "nome": "Co-Catedral de São João",
-   "wiki": "Concatedral de São João",
+   "wiki": "Co-Catedral de São João",
    "cidade": "Valeta"
   },
   {
    "nome": "Templos de Ġgantija",
-   "wiki": "Templos de Ggantija",
+   "wiki": "Templos de Tarxien",
    "cidade": "Gozo"
   },
   {
@@ -3738,12 +3738,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Vale do Madriu-Perafita-Claror",
-   "wiki": "Vale do Madriu-Perafita-Claror",
+   "wiki": "Vale Madriu-Perafita-Claror",
    "cidade": "Escaldes-Engordany"
   },
   {
    "nome": "Igreja de Santa Coloma",
-   "wiki": "Igreja de Santa Coloma (Andorra)",
+   "wiki": "Igreja de Santa Coloma",
    "cidade": "Andorra-a-Velha"
   },
   {
@@ -3778,7 +3778,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Santuário de Meritxell",
-   "wiki": "Santuário de Nossa Senhora de Meritxell",
+   "wiki": "Santuário de Meritxell",
    "cidade": "Canillo"
   },
   {
@@ -3800,7 +3800,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Museu Oceanográfico",
-   "wiki": "Museu Oceanográfico de Mônaco",
+   "wiki": "Museu Oceanográfico do Mónaco",
    "cidade": "Monaco-Ville"
   },
   {
@@ -3954,7 +3954,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Torre Montale",
-   "wiki": "Montale (torre)",
+   "wiki": "Montale (San Marino)",
    "cidade": "Cidade de San Marino"
   },
   {
@@ -4026,7 +4026,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Göta Canal",
-   "wiki": "Canal Göta",
+   "wiki": "Canal de Gota",
    "cidade": "Suécia"
   },
   {
@@ -4063,7 +4063,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Ópera de Oslo",
-   "wiki": "Casa de Ópera de Oslo",
+   "wiki": "Ópera de Oslo",
    "cidade": "Oslo"
   },
   {
@@ -4110,7 +4110,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Jardins Tivoli",
-   "wiki": "Tivoli (Copenhague)",
+   "wiki": "Jardins de Tivoli",
    "cidade": "Copenhague"
   },
   {
@@ -4135,7 +4135,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Cidade Livre de Christiania",
-   "wiki": "Christiania (Copenhaga)",
+   "wiki": "Christiania",
    "cidade": "Copenhague"
   },
   {
@@ -4172,7 +4172,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Igreja de Temppeliaukio",
-   "wiki": "Igreja de Temppeliaukio",
+   "wiki": "Temppeliaukio kirkko",
    "cidade": "Helsinque"
   },
   {
@@ -4301,7 +4301,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Palácio de Kadriorg",
-   "wiki": "Palácio de Kadriorg",
+   "wiki": "Palácio Kadriorg",
    "cidade": "Tallinn"
   },
   {
@@ -4341,7 +4341,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Castelo de Hermann em Narva",
-   "wiki": "Castelo de Narva",
+   "wiki": "Castelo de Hermann",
    "cidade": "Narva"
   }
  ],
@@ -4373,12 +4373,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Arquitetura Art Nouveau de Riga",
-   "wiki": "Art nouveau em Riga",
+   "wiki": "Arquitetura Art Nouveau em Riga",
    "cidade": "Riga"
   },
   {
    "nome": "Castelo de Turaida",
-   "wiki": "Castelo de Turaida",
+   "wiki": "Caupo de Turaida",
    "cidade": "Sigulda"
   },
   {
@@ -4403,7 +4403,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Mercado Central de Riga",
-   "wiki": "Mercado Central de Riga",
+   "wiki": "Riga Central Market",
    "cidade": "Riga"
   }
  ],
@@ -4450,7 +4450,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Portão da Aurora",
-   "wiki": "Portão da Aurora",
+   "wiki": "Nossa Senhora da Porta da Aurora",
    "cidade": "Vilnius"
   },
   {
@@ -4477,7 +4477,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Castelo de Wawel",
-   "wiki": "Castelo de Wawel",
+   "wiki": "Castelo Real de Wawel",
    "cidade": "Cracóvia"
   },
   {
@@ -4527,7 +4527,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Castelo de Książ",
-   "wiki": "Castelo de Książ",
+   "wiki": "Książ",
    "cidade": "Wałbrzych"
   }
  ],
@@ -4611,7 +4611,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Montanhas Altos Tatras",
-   "wiki": "Altos Tatras",
+   "wiki": "Montanhas Tatra",
    "cidade": "Tatras"
   },
   {
@@ -4641,7 +4641,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Igrejas de madeira dos Cárpatos",
-   "wiki": "Igrejas de madeira dos Cárpatos eslovacos",
+   "wiki": "Igrejas de madeira na parte eslovaca da zona dos Cárpatos",
    "cidade": "Eslováquia"
   },
   {
@@ -4698,7 +4698,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Grande Sinagoga da Rua Dohány",
-   "wiki": "Sinagoga da Rua Dohány",
+   "wiki": "Grande Sinagoga de Budapeste",
    "cidade": "Budapeste"
   },
   {
@@ -4730,7 +4730,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Palácio do Parlamento",
-   "wiki": "Palácio do Parlamento (Romênia)",
+   "wiki": "Palácio do Parlamento",
    "cidade": "Bucareste"
   },
   {
@@ -4765,7 +4765,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Cemitério Alegre de Săpânța",
-   "wiki": "Cemitério Alegre",
+   "wiki": "Cemitério alegre de Săpânța",
    "cidade": "Săpânța"
   },
   {
@@ -4802,7 +4802,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Teatro Romano de Plovdiv",
-   "wiki": "Teatro Romano de Plovdiv",
+   "wiki": "Teatro romano de Filipópolis",
    "cidade": "Plovdiv"
   },
   {
@@ -4968,7 +4968,7 @@ export const ATRACOES = {
  "RS": [
   {
    "nome": "Fortaleza de Kalemegdan",
-   "wiki": "Fortaleza de Belgrado",
+   "wiki": "Kalemegdan",
    "cidade": "Belgrado"
   },
   {
@@ -4978,7 +4978,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Fortaleza de Petrovaradin",
-   "wiki": "Fortaleza de Petrovaradin",
+   "wiki": "Petrovaradin",
    "cidade": "Novi Sad"
   },
   {
@@ -5050,12 +5050,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Mesquita de Gazi Husrev-beg",
-   "wiki": "Mesquita de Gazi Husrev-beg",
+   "wiki": "Biblioteca Gazi Cosrove Bei",
    "cidade": "Sarajevo"
   },
   {
    "nome": "Ponte Mehmed Paša Sokolović",
-   "wiki": "Ponte sobre o Drina",
+   "wiki": "Ponte Mehmed Paša Sokolović",
    "cidade": "Višegrad"
   },
   {
@@ -5117,7 +5117,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Nacional de Durmitor",
-   "wiki": "Parque Nacional de Durmitor",
+   "wiki": "Parque Nacional Durmitor",
    "cidade": "Žabljak"
   },
   {
@@ -5174,7 +5174,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Praça da Macedônia (Skopje)",
-   "wiki": "Praça da Macedónia",
+   "wiki": "Praça da Macedônia",
    "cidade": "Skopje"
   },
   {
@@ -5184,7 +5184,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Ponte de Pedra de Skopje",
-   "wiki": "Ponte de Pedra (Skopje)",
+   "wiki": "Ponte de Pedra (Escópia)",
    "cidade": "Skopje"
   },
   {
@@ -5365,7 +5365,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Palácio de Vorontsov",
-   "wiki": "Palácio de Vorontsov",
+   "wiki": "Palácio Vorontsov (Alupka)",
    "cidade": "Alupka"
   },
   {
@@ -5375,7 +5375,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Escadaria Potemkin",
-   "wiki": "Escadaria Potemkin",
+   "wiki": "Escadaria de Potemkin",
    "cidade": "Odessa"
   },
   {
@@ -5593,7 +5593,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Antígua Guatemala",
-   "wiki": "Antígua Guatemala",
+   "wiki": "Antigua Guatemala",
    "cidade": "Sacatepéquez"
   },
   {
@@ -5660,7 +5660,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Barreira de Coral de Belize",
-   "wiki": "Barreira de Corais de Belize",
+   "wiki": "Rede de Reservas dos Recifes da Barreira do Belize",
    "cidade": "Mar do Caribe"
   },
   {
@@ -5814,12 +5814,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Gracias",
-   "wiki": "Gracias (Honduras)",
+   "wiki": "Gracias",
    "cidade": "Lempira"
   },
   {
    "nome": "Reserva da Biosfera do Rio Plátano",
-   "wiki": "Reserva da Biosfera do Rio Plátano",
+   "wiki": "Reserva da Biosfera de Río Plátano",
    "cidade": "Gracias a Dios"
   },
   {
@@ -5975,7 +5975,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Bocas del Toro",
-   "wiki": "Bocas del Toro",
+   "wiki": "Bocas del Toro (província)",
    "cidade": "Bocas del Toro"
   },
   {
@@ -5990,7 +5990,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Boquete",
-   "wiki": "Boquete (Panamá)",
+   "wiki": "Boquete (cidade)",
    "cidade": "Chiriquí"
   },
   {
@@ -6000,7 +6000,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Eclusas de Miraflores",
-   "wiki": "Eclusas de Miraflores",
+   "wiki": "Miraflores (Panamá)",
    "cidade": "Cidade do Panamá"
   },
   {
@@ -6275,7 +6275,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Palácio Sans-Souci",
-   "wiki": "Palácio Sans-Souci",
+   "wiki": "Palácio de Sans-Souci",
    "cidade": "Milot"
   },
   {
@@ -6305,7 +6305,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Ilha de Tortuga",
-   "wiki": "Ilha da Tartaruga (Haiti)",
+   "wiki": "Tortuga",
    "cidade": "Nord-Ouest"
   },
   {
@@ -6315,7 +6315,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Catedral de Porto Príncipe",
-   "wiki": "Catedral de Notre-Dame de Porto Príncipe",
+   "wiki": "Catedral de Porto Príncipe",
    "cidade": "Porto Príncipe"
   },
   {
@@ -6357,7 +6357,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Pigeon Point",
-   "wiki": "Pigeon Point (Tobago)",
+   "wiki": "Pigeon Point, Tobago",
    "cidade": "Tobago"
   },
   {
@@ -6382,7 +6382,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Scarborough",
-   "wiki": "Scarborough (Trinidad e Tobago)",
+   "wiki": "Scarborough (Tobago)",
    "cidade": "Tobago"
   },
   {
@@ -6624,7 +6624,7 @@ export const ATRACOES = {
    "cidade": "Curaçao"
   },
   {
-   "nome": "Praia de Playa Porto Mari",
+   "nome": "Playa Porto Mari",
    "wiki": "Playa Porto Mari",
    "cidade": "Curaçao"
   },
@@ -6657,7 +6657,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Shirley Heights",
-   "wiki": "Shirley Heights",
+   "wiki": "Shirley Heights, Antigua and Barbuda",
    "cidade": "English Harbour"
   },
   {
@@ -6781,7 +6781,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque de Esculturas Subaquáticas",
-   "wiki": "Parque Subaquático de Esculturas de Molinere",
+   "wiki": "Parque de Esculturas Subaquáticas Molinere",
    "cidade": "Saint George"
   },
   {
@@ -6833,7 +6833,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Morne Trois Pitons",
-   "wiki": "Parque Nacional Morne Trois Pitons",
+   "wiki": "Parque Nacional de Morne Trois Pitons",
    "cidade": "Saint George"
   },
   {
@@ -7183,7 +7183,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Vulcão Osorno",
-   "wiki": "Vulcão Osorno",
+   "wiki": "Osorno (vulcão)",
    "cidade": "Los Lagos"
   },
   {
@@ -7193,7 +7193,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Vale do Elqui",
-   "wiki": "Vale do Elqui",
+   "wiki": "Vale de Elqui",
    "cidade": "Coquimbo"
   }
  ],
@@ -7245,7 +7245,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Praia de Copacabana",
-   "wiki": "Copacabana (bairro do Rio de Janeiro)",
+   "wiki": "Praia de Copacabana",
    "cidade": "Rio de Janeiro"
   },
   {
@@ -7302,7 +7302,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Basílica do Voto Nacional",
-   "wiki": "Basílica do Voto Nacional",
+   "wiki": "Basílica del Voto Nacional",
    "cidade": "Quito"
   },
   {
@@ -7391,12 +7391,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Ruínas Jesuíticas de Trinidad",
-   "wiki": "La Santíssima Trinidad de Paraná",
+   "wiki": "Trinidad (Paraguai)",
    "cidade": "Itapúa"
   },
   {
    "nome": "Assunção (Palácio dos López)",
-   "wiki": "Palácio dos López",
+   "wiki": "Palacio de los López",
    "cidade": "Assunção"
   },
   {
@@ -7431,7 +7431,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Encarnación",
-   "wiki": "Encarnación (Paraguai)",
+   "wiki": "Encarnación",
    "cidade": "Itapúa"
   },
   {
@@ -7441,7 +7441,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Nacional Cerro Corá",
-   "wiki": "Parque Nacional Cerro Corá",
+   "wiki": "Batalha de Cerro Corá",
    "cidade": "Amambay"
   }
  ],
@@ -7493,7 +7493,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Cataratas do Hacha (Canaima)",
-   "wiki": "Laguna de Canaima",
+   "wiki": "Parque Nacional Canaima",
    "cidade": "Bolívar"
   },
   {
@@ -7746,12 +7746,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Mosteiro de Santa Catarina",
-   "wiki": "Mosteiro de Santa Catarina (Sinai)",
+   "wiki": "Mosteiro de Santa Catarina",
    "cidade": "Sinai"
   },
   {
    "nome": "Biblioteca de Alexandria",
-   "wiki": "Biblioteca de Alexandria (moderna)",
+   "wiki": "Biblioteca de Alexandria",
    "cidade": "Alexandria"
   }
  ],
@@ -7882,7 +7882,7 @@ export const ATRACOES = {
  "KE": [
   {
    "nome": "Reserva Nacional Masai Mara",
-   "wiki": "Reserva Nacional Masai Mara",
+   "wiki": "Masai Mara",
    "cidade": "Narok"
   },
   {
@@ -7954,7 +7954,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Cratera de Ngorongoro",
-   "wiki": "Cratera de Ngorongoro",
+   "wiki": "Ngorongoro",
    "cidade": "Arusha"
   },
   {
@@ -8006,7 +8006,7 @@ export const ATRACOES = {
  "UG": [
   {
    "nome": "Parque Nacional da Floresta Impenetrável de Bwindi",
-   "wiki": "Parque Nacional da Floresta Impenetrável de Bwindi",
+   "wiki": "Parque Nacional Impenetrável de Bwindi",
    "cidade": "Kanungu"
   },
   {
@@ -8150,7 +8150,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Montanhas Simien",
-   "wiki": "Parque Nacional das Montanhas Simien",
+   "wiki": "Parque Nacional do Simien",
    "cidade": "Gondar"
   },
   {
@@ -8180,7 +8180,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Igrejas rupestres de Lalibela",
-   "wiki": "Igrejas de Lalibela",
+   "wiki": "Igrejas rupestres de Lalibela",
    "cidade": "Lalibela"
   },
   {
@@ -8197,7 +8197,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Fortaleza de São Miguel",
-   "wiki": "Fortaleza de São Miguel (Luanda)",
+   "wiki": "Fortaleza de São Miguel",
    "cidade": "Luanda"
   },
   {
@@ -8631,7 +8631,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Ilha de Kunta Kinteh (James)",
-   "wiki": "Ilha de James",
+   "wiki": "Ilha James e sítios associados",
    "cidade": "Albreda"
   },
   {
@@ -8656,7 +8656,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Círculos de pedra de Wassu",
-   "wiki": "Círculos megalíticos de Senegâmbia",
+   "wiki": "Círculos de pedras da Senegâmbia",
    "cidade": "Wassu"
   },
   {
@@ -8770,7 +8770,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Nacional de Etosha",
-   "wiki": "Parque Nacional de Etosha",
+   "wiki": "Parque Nacional Etosha",
    "cidade": "Norte da Namíbia"
   },
   {
@@ -8785,7 +8785,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Costa do Esqueleto",
-   "wiki": "Costa do Esqueleto",
+   "wiki": "Costa dos Esqueletos",
    "cidade": "Litoral noroeste"
   },
   {
@@ -8884,12 +8884,12 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Nacional de Hwange",
-   "wiki": "Parque Nacional de Hwange",
+   "wiki": "Parque Nacional Hwange",
    "cidade": "Oeste"
   },
   {
    "nome": "Parque Nacional de Matobo",
-   "wiki": "Parque Nacional de Matobo",
+   "wiki": "Colinas de Matobo",
    "cidade": "Bulawayo"
   },
   {
@@ -8951,7 +8951,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Arquipélago das Quirimbas",
-   "wiki": "Arquipélago das Quirimbas",
+   "wiki": "Quirimbas",
    "cidade": "Cabo Delgado"
   },
   {
@@ -8966,7 +8966,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Estação Central de Maputo",
-   "wiki": "Estação Central dos Caminhos de Ferro de Maputo",
+   "wiki": "Estação do Caminho de Ferro de Maputo",
    "cidade": "Maputo"
   },
   {
@@ -9003,7 +9003,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Nacional South Luangwa",
-   "wiki": "Parque Nacional de Luangwa Sul",
+   "wiki": "Parque Nacional do Luangwa do Sul",
    "cidade": "Leste"
   },
   {
@@ -9038,7 +9038,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Cataratas de Kalambo",
-   "wiki": "Cataratas de Kalambo",
+   "wiki": "Rio Kalambo",
    "cidade": "Norte"
   },
   {
@@ -9157,7 +9157,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Santuário de Aves de Djoudj",
-   "wiki": "Parque Nacional das Aves do Djoudj",
+   "wiki": "Santuário Nacional de Aves de Djoudj",
    "cidade": "Norte"
   },
   {
@@ -9204,7 +9204,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Mausoléu Kwame Nkrumah",
-   "wiki": "Memorial Kwame Nkrumah",
+   "wiki": "Kwame Nkrumah",
    "cidade": "Acra"
   },
   {
@@ -9281,7 +9281,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Mesquita Nacional de Abuja",
-   "wiki": "Mesquita Nacional da Nigéria",
+   "wiki": "Mesquita Nacional de Abuja",
    "cidade": "Abuja"
   },
   {
@@ -9333,7 +9333,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Nacional de Comoé",
-   "wiki": "Parque Nacional da Comoé",
+   "wiki": "Parque nacional de Comoé",
    "cidade": "Nordeste"
   },
   {
@@ -9415,7 +9415,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Tarrafal",
-   "wiki": "Tarrafal (concelho de Santiago)",
+   "wiki": "Campo de Concentração do Tarrafal",
    "cidade": "Santiago"
   },
   {
@@ -9519,7 +9519,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Ilha de Mahé",
-   "wiki": "Mahé (Seicheles)",
+   "wiki": "Ilha de Mahé",
    "cidade": "Ilha principal"
   },
   {
@@ -9596,7 +9596,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Ilha de Sainte-Marie",
-   "wiki": "Ilha de Santa Maria (Madagáscar)",
+   "wiki": "Ilha Sainte-Marie",
    "cidade": "Costa leste"
   },
   {
@@ -9735,7 +9735,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Parque Nacional Tongariro",
-   "wiki": "Parque Nacional Tongariro",
+   "wiki": "Parque Nacional de Tongariro",
    "cidade": "Ilha Norte"
   }
  ],
@@ -10159,7 +10159,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Ilha de Ouvéa",
-   "wiki": "Ouvéa (Nova Caledónia)",
+   "wiki": "Ouvéa",
    "cidade": "Ilhas Lealdade"
   },
   {
@@ -10310,7 +10310,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Laguna Marovo",
-   "wiki": "Laguna Marovo",
+   "wiki": "Lagoa Marovo",
    "cidade": "Província Ocidental"
   },
   {
@@ -10330,7 +10330,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Ilha de Savo (vulcão)",
-   "wiki": "Savo",
+   "wiki": "Ilha de Savo",
    "cidade": "Província Central"
   },
   {
