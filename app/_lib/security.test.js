@@ -38,8 +38,9 @@ describe('buildSecurityHeaders — cabeçalhos de segurança', () => {
     expect(c).toContain('https://api.openai.com');
     expect(c).toContain('https://api.groq.com');
     expect(c).toContain('https://api.anthropic.com');
-    // fotos + APIs Wikipedia/Wikidata e câmbio ao vivo
-    expect(c).toMatch(/img-src[^;]*wikimedia/);
+    // fotos de fontes de licença livre (Wikimedia, Flickr-CC via Openverse, museus…)
+    // vêm de muitos domínios HTTPS → img-src libera https: (imagem não executa código)
+    expect(c).toMatch(/img-src[^;]*https:/);
     expect(c).toContain('https://query.wikidata.org');
     expect(c).toContain('https://open.er-api.com');
   });

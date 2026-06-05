@@ -31,7 +31,10 @@ export function buildSecurityHeaders({ production = true, vercel = false } = {})
     `style-src 'self' 'unsafe-inline'`,
     `font-src 'self'`,
     `worker-src 'self' blob:`,
-    `img-src 'self' data: blob: ${WIKI} ${SUPABASE}`,
+    // Fotos de fontes livres (Wikimedia, Flickr-CC via Openverse, museus…) vêm de
+    // muitos domínios HTTPS → liberamos img https: (imagem não executa código; o
+    // script-src segue restrito). Crédito+licença de cada foto aparecem no modal.
+    `img-src 'self' data: blob: https:`,
     `frame-src 'self' https://www.openstreetmap.org`,
     `connect-src ${connectSrc}`,
     // só sob HTTPS real (Vercel): localmente quebraria o `next start` em http://localhost

@@ -46,6 +46,13 @@ export function PontoModal({ ponto, onClose }) {
         <div className="w-full h-52 sm:h-64 grid place-items-center rounded-xl bg-gradient-to-br from-pine/15 to-ochre/15 text-4xl" aria-hidden>📍</div>
       )}
 
+      {ponto.credito && (
+        <p className="text-[11px] text-inksoft -mt-1">
+          Foto: {ponto.credito.autor ? ponto.credito.autor + ' · ' : ''}{ponto.credito.licenca ? ponto.credito.licenca + ' · ' : ''}{ponto.credito.fonte}
+          {ponto.credito.link && <> · <a href={ponto.credito.link} target="_blank" rel="noopener noreferrer" className="text-pine hover:underline focusring">ver fonte ↗</a></>}
+        </p>
+      )}
+
       {ponto.sub && (
         <p className="text-sm text-inksoft flex items-center gap-1.5"><span aria-hidden>📍</span>{ponto.sub}</p>
       )}

@@ -78,6 +78,35 @@ export async function imagemWiki(query, { revalidate = DIA } = {}) {
   return ml[0] || null;
 }
 
+// Busca no Openverse (Creative Commons oficial) — agrega Flickr-CC, Wikimedia, museus
+// etc. Filtra p/ licenças de USO COMERCIAL + modificável (seguro p/ produto pago). Sem
+// chave de API. Devolve a 1ª foto boa COM crédito pronto (autor/licença/link da origem)
+// pra exibir atribuição. Degrada com segurança (null). Amplia muito a cobertura real.
+export async function imagemOpenverse(query, { revalidate = DIA } = {}) {
+  if (!query) return null;
+  try {
+    const url = 'https://api.openverse.org/v1/images/?page_size=4&mature=false&license_type=commercial,modification&q=' + encodeURIComponent(query);
+    const res = await fetch(url, { headers: { accept: 'application/json', 'user-agent': UA }, next: { revalidate }, signal: AbortSignal.timeout(8000) });
+    if (!res.ok) return null;
+    const d = await res.json();
+    for (const r of (d && d.results) || []) {
+      const src = r.url;
+      if (!src || RUIM.test(src) || RUIM.test(r.title || '')) continue;
+      if (!/\.(jpe?g|png)(\?|$)/i.test(src) && !/staticflickr|upload\.wikimedia/.test(src)) continue;
+      return {
+        url: src,
+        autor: autorLimpo(r.creator) || null,
+        licenca: r.license ? `CC ${String(r.license).toUpperCase().replace(/-/g, '-')}${r.license_version ? ' ' + r.license_version : ''}` : null,
+        link: r.foreign_landing_url || src,
+        fonte: r.source || 'Openverse',
+      };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 // Busca DIRETA no Wikimedia Commons (namespace File:) — cobre lugares que não têm
 // artigo na Wikipédia (a maioria tem foto no Commons mesmo assim). Usado como
 // fallback pra GARANTIR foto em todo card. Filtra lixo (bandeira/ícone/mapa/svg) e

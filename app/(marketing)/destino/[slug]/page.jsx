@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DESTINOS, destinoPorSlug } from '../../../_lib/destinos.js';
-import { resumoWiki, imagemWiki, imagensDe, creditoImagem, imagemCommons } from '../../../_lib/wiki.js';
+import { resumoWiki, imagemWiki, imagensDe, creditoImagem, imagemCommons, imagemOpenverse } from '../../../_lib/wiki.js';
 import { atracoesDe } from '../../../_lib/places.js';
 import { MESES_PT } from '../../../_engine/data.js';
 import { FavoriteButton } from '../../../_components/FavoriteButton.jsx';
@@ -52,6 +52,20 @@ function mapsUrl(q) {
 // se nem o país tiver foto, garantindo que NENHUM card renderize sem imagem.
 const FOTO_ULTIMO = 'https://commons.wikimedia.org/wiki/Special:FilePath/Sunset_across_Machu_Picchu.jpg';
 
+// Crédito-lite p/ imagem hospedada no Wikimedia (link da página do arquivo, onde
+// aparecem autor + licença). Para fotos do Openverse o crédito vem pronto da API.
+function creditoCommonsLite(u) {
+  if (!u) return null;
+  try {
+    const p = new URL(u).pathname.split('/');
+    const file = decodeURIComponent(u.includes('/thumb/') ? p[p.length - 2] : p[p.length - 1]);
+    const link = /upload\.wikimedia|Special:FilePath/.test(u) ? 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(file) : u;
+    return { fonte: 'Wikimedia Commons', autor: null, licenca: null, link };
+  } catch {
+    return { fonte: 'Wikimedia Commons', autor: null, licenca: null, link: u };
+  }
+}
+
 // Mapa real (OpenStreetMap embed, sem chave/custo) centrado no país, com marcador.
 function MapaDestino({ coords, nome }) {
   if (!Array.isArray(coords) || coords.length !== 2) return null;
@@ -88,10 +102,20 @@ export default async function DestinoPage({ params }) {
   const poolPais = [...new Set([heroImg, ...(await imagensDe(d.nome, { n: 6 }))].filter(Boolean))];
   const piso = (i) => (poolPais.length ? poolPais[i % poolPais.length] : (heroImg || FOTO_ULTIMO));
 
-  // Resolve a foto de CADA item com a cadeia garantida (verbete curado → Commons por
-  // nome+cidade+país → piso do país ciclado). pontosImgs/cidadeImgs nunca são nulos.
-  const fotoGarantida = async (titulo, busca, i) => (await imagemWiki(titulo)) || (await imagemCommons(busca)) || piso(i);
-  const [atracoes, pontosImgs, cidadeImgs] = await Promise.all([
+  // Cadeia COM GARANTIA + CRÉDITO de cada item. Ordem: verbete curado → Openverse
+  // (Flickr-CC/museus/Commons, traz autor+licença+link) → Commons direto → piso do país
+  // ciclado. Devolve { src, credito } — nunca nulo (piso/FOTO_ULTIMO garantem).
+  const fotoGarantida = async (titulo, busca, i) => {
+    const w = await imagemWiki(titulo);
+    if (w) return { src: w, credito: creditoCommonsLite(w) };
+    const ov = await imagemOpenverse(busca);
+    if (ov) return { src: ov.url, credito: { fonte: ov.fonte, autor: ov.autor, licenca: ov.licenca, link: ov.link } };
+    const c = await imagemCommons(busca);
+    if (c) return { src: c, credito: creditoCommonsLite(c) };
+    const p = piso(i);
+    return { src: p, credito: creditoCommonsLite(p) };
+  };
+  const [atracoes, pontosInfo, cidadeInfo] = await Promise.all([
     atracoesDe(d.wikidataId, { limite: 8 }),
     Promise.all(pontos.map((a, i) => fotoGarantida(a.wiki || a.nome, `${a.nome} ${a.cidade || ''} ${d.nome}`, i))),
     Promise.all(cidadesLista.map((c, i) => fotoGarantida(cidadeWiki(d.code, c), `${c} ${d.nome}`, i))),
@@ -100,15 +124,16 @@ export default async function DestinoPage({ params }) {
   // Galeria de pontos turísticos: prioriza a lista CURADA (foto buscada por atração),
   // com fallback pro Wikidata. Garante cobertura em todos os 167 países.
   const galeria = pontos.length
-    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: wikiThumb(pontosImgs[i], 480), wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }))
-    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: wikiThumb(a.img, 480), wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }));
+    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: wikiThumb(pontosInfo[i].src, 480), credito: pontosInfo[i].credito, wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }))
+    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: wikiThumb(a.img, 480), credito: creditoCommonsLite(a.img), wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }));
 
   // Cidades & bases: mesma estrutura da galeria pra abrir o mesmo modal (decisão do
   // usuário: cidades também abrem história). wiki via override (foto + história certas).
   const cidadesData = cidadesLista.map((c, i) => ({
     nome: c,
     sub: d.nome,
-    img: wikiThumb(cidadeImgs[i], 480),
+    img: wikiThumb(cidadeInfo[i].src, 480),
+    credito: cidadeInfo[i].credito,
     wiki: cidadeWiki(d.code, c),
     maps: mapsUrl(`${c}, ${d.nome}`),
   }));
@@ -221,7 +246,7 @@ export default async function DestinoPage({ params }) {
               <span className="text-xs text-inksoft">{galeria.length} lugares</span>
             </div>
             <GaleriaLugares lugares={galeria} layout="ponto" />
-            <p className="mt-2 text-[11px] text-inksoft">Fotos: Wikipédia/Wikimedia Commons. Toque na foto para ver a história e abrir no mapa.</p>
+            <p className="mt-2 text-[11px] text-inksoft">Fotos de fontes de licença livre (Wikimedia Commons, Flickr-CC via Openverse e outras) — autor e licença no detalhe de cada lugar. Toque na foto para ver a história e abrir no mapa.</p>
           </section>
         )}
 
