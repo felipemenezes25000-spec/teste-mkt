@@ -149,6 +149,42 @@ const VEREDITOS = {
     naoCombina: ['viagem curta (6-7 dias não rendem)', 'busca por preço baixo', 'medo de idioma muito diferente'],
     oportunidade: 'Final de outubro (outono colorido) ou abril (sakura coreana): clima ideal e paisagem virando atração à parte.',
   },
+  CA: {
+    texto: 'O Canadá é a viagem de "natureza com estrutura ocidental": Rocky Mountains, Toronto/Vancouver, urso/alce/baleia, esqui no inverno. Custo é alto (dólar canadense pesa) mas a experiência é singular. Vale especialmente pra quem quer natureza extrema sem perrengue logístico.',
+    combina: ['natureza extrema com infraestrutura', 'roteiro 10-14 dias Costa Oeste (Vancouver+Rockies)', 'casal aventureiro mid-range', 'primeira viagem internacional com inglês básico'],
+    naoCombina: ['orçamento muito apertado', 'viagem só de cidade', 'busca por cultura latina/exótica'],
+    oportunidade: 'Junho-setembro pras Rockies (alpinismo, lagos azuis sem neve) ou janeiro-março pra esqui em Whistler/Banff.',
+  },
+  IE: {
+    texto: 'A Irlanda é o destino subestimado da Europa: pubs autênticos, costas dramáticas, cultura literária forte, gente conversadora. Dublin sozinha não rende — o segredo é alugar carro e fazer Wild Atlantic Way. Custo médio, mas hospedagem fora de Dublin é bem mais barata.',
+    combina: ['roteiro 8-10 dias com carro fora de Dublin', 'interesse em pub/cultura/literatura', 'casal que aprecia natureza dramática', 'primeira Europa fora dos circuitos óbvios'],
+    naoCombina: ['viagem só urbana em Dublin', 'medo de dirigir na esquerda', 'quem precisa de sol constante'],
+    oportunidade: 'Maio-setembro: clima possível, dias longos e Wild Atlantic Way operando. Outubro também rende, com menos turismo.',
+  },
+  CZ: {
+    texto: 'Praga é a viagem de "Europa Central acessível": castelo, cervejaria, arquitetura intacta, custo bem menor que Europa Ocidental. Funciona muito bem como 4-5 dias intensos ou como parte de um roteiro Europa Central (com Budapeste e Viena). Lotada no verão, vale ir fora do pico.',
+    combina: ['4-5 dias intensos em Praga', 'roteiro Europa Central 12-14 dias', 'interesse em arquitetura e cerveja', 'orçamento que aperta na Europa Ocidental'],
+    naoCombina: ['10+ dias só em Praga', 'busca por praia', 'julho-agosto (lotado e mais caro)'],
+    oportunidade: 'Abril-maio ou setembro-outubro: Praga sem multidão, clima bom e preços bem mais civilizados.',
+  },
+  HR: {
+    texto: 'A Croácia é "Grécia atualizada": costa dálmata, cidades medievais (Dubrovnik, Split), ilhas e parques nacionais (Plitvice). Era barato; agora subiu de preço (especialmente Dubrovnik). Mas ainda rende muito mais que Grécia em variedade de paisagem. Vale roteiro de carro/balsa norte-sul.',
+    combina: ['10-12 dias misturando Plitvice+Split+Dubrovnik+ilha', 'casal aventureiro', 'primeira viagem na ex-Iugoslávia', 'interesse em natureza+cidade+mar'],
+    naoCombina: ['5 dias só em Dubrovnik', 'orçamento muito apertado no verão', 'busca por cultura tradicional muito viva'],
+    oportunidade: 'Junho ou setembro: mar morno, cidades sem hordas de cruzeiros e preços bem mais razoáveis que julho-agosto.',
+  },
+  BO: {
+    texto: 'A Bolívia é provavelmente o destino mais barato da América do Sul para brasileiros, e o de paisagem mais alienígena: Salar de Uyuni, Lagoa Colorada, La Paz/Lago Titicaca. Custo absurdamente baixo, mas logística e altitude pesam. Vale como 8-10 dias com tour organizado para o Salar.',
+    combina: ['orçamento muito controlado', 'paisagens únicas (Salar)', '8-10 dias com tour organizado', 'mochileiro com disposição'],
+    naoCombina: ['sensibilidade à altitude', 'busca por cidade grande/sofisticada', 'viagem com criança pequena'],
+    oportunidade: 'Abril-maio para Salar com pouca água (chão de sal) ou janeiro-março para Salar com espelho d\'água — escolha visual.',
+  },
+  PA: {
+    texto: 'O Panamá é a viagem "stopover" que vale como destino: 7-10 dias entre Cidade do Panamá (canal, skyline tropical), Bocas del Toro (Caribe selvagem) e San Blas (paraíso indígena). Custo médio. Funciona bem como primeiro contato com Centro-América sem complicação.',
+    combina: ['7-10 dias misturando cidade+Caribe', 'primeira viagem em Centro-América', 'casal querendo experiência tropical autêntica', 'interesse pelo Canal e Causeway'],
+    naoCombina: ['viagem só de praia (existem melhores no Caribe)', 'busca por cultura prehispânica forte', 'orçamento muito apertado em San Blas'],
+    oportunidade: 'Dezembro-abril: estação seca, com San Blas e Bocas no auge. Maio-novembro tem chuva intensa.',
+  },
 };
 
 export function custoEstimadoDias(destino, dias = [7, 10, 15]) {
