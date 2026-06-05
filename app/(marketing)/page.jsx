@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { destinosDestaque, DESTINOS } from '../_lib/destinos.js';
 import { imagemWiki, resumoWiki } from '../_lib/wiki.js';
 import { DestinoCard } from '../_components/DestinoCard.jsx';
+import { JsonLd } from '../_components/JsonLd.jsx';
+import { jsonLdOrganization, jsonLdWebSite, siteUrl } from '../_lib/seo.js';
 
 // Landing premium (Server Component). Busca a imagem-herói e as dos destaques na
 // Wikipédia (cacheadas 1 dia); se a rede falhar, cai num gradiente — nunca quebra.
@@ -11,6 +13,7 @@ export const metadata = {
   title: 'Mundo Sem Fim — o copiloto que decide a viagem com você',
   description:
     'Não listamos 200 hotéis. Dizemos pra onde ir pelo seu perfil, quanto a viagem custa de verdade (não só voo+hotel) e montamos o roteiro que recalcula. 167 países. Comece grátis.',
+  alternates: { canonical: '/' },
 };
 
 const CTA_PRIMARY =
@@ -43,6 +46,8 @@ export default async function Home() {
 
   return (
     <main>
+      <JsonLd data={jsonLdOrganization(siteUrl())} />
+      <JsonLd data={jsonLdWebSite(siteUrl())} />
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">

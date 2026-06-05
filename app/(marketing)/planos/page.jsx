@@ -1,8 +1,11 @@
 import { PlanosCta } from './PlanosCta.jsx';
+import { JsonLd } from '../../_components/JsonLd.jsx';
+import { jsonLdProduto, siteUrl } from '../../_lib/seo.js';
 
 export const metadata = {
   title: 'Planos — Mundo Sem Fim',
   description: 'Free, Premium e Pro. Comece grátis e desbloqueie roteiros com IA, custos detalhados, comparação e mais.',
+  alternates: { canonical: '/planos' },
 };
 
 const PLANOS = [
@@ -24,8 +27,10 @@ const PLANOS = [
 ];
 
 export default function PlanosPage() {
+  const ofertas = PLANOS.filter((p) => p.id !== 'free').map((p) => ({ nome: p.nome, preco: p.preco.replace(/[^\d]/g, '') + '.00' }));
   return (
     <main className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+      <JsonLd data={jsonLdProduto(ofertas, siteUrl())} />
       <div className="text-center max-w-2xl mx-auto">
         <h1 className="font-display text-3xl sm:text-4xl text-ink">Escolha seu plano</h1>
         <p className="mt-2 text-inksoft">Comece grátis. Vire premium quando a viagem ficar séria. Cancele quando quiser.</p>

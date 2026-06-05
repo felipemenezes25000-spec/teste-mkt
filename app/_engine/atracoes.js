@@ -699,7 +699,7 @@ export const ATRACOES = {
    "cidade": "Quioto"
   },
   {
-   "nome": "Tortúrios torii de Fushimi Inari",
+   "nome": "Torii de Fushimi Inari",
    "wiki": "Fushimi Inari-taisha",
    "cidade": "Quioto"
   },
@@ -2704,7 +2704,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Lagoa das Sete Cidades",
-   "wiki": "Sete Cidades (Açores)",
+   "wiki": "Lagoa das Sete Cidades",
    "cidade": "Açores"
   },
   {
@@ -2714,7 +2714,7 @@ export const ATRACOES = {
   },
   {
    "nome": "Benagil (Gruta)",
-   "wiki": "Algar de Benagil",
+   "wiki": "Praia de Benagil",
    "cidade": "Algarve"
   },
   {

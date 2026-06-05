@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { DestinoCard } from '../../_components/DestinoCard.jsx';
 
 // Busca + filtros (região/orçamento) + ordenação, no client. Recebe os destinos
@@ -15,6 +15,12 @@ export function ExplorarClient({ destinos }) {
   const [regiao, setRegiao] = useState('');
   const [maxCusto, setMaxCusto] = useState(0); // 0 = sem teto
   const [ordem, setOrdem] = useState('nome');
+
+  // Busca via URL (?q=) — alimenta a SearchAction do JSON-LD e permite deep-link de busca.
+  useEffect(() => {
+    const t = new URLSearchParams(window.location.search).get('q');
+    if (t) setQ(t);
+  }, []);
 
   const regioes = useMemo(() => [...new Set(destinos.map((d) => d.regiao))].sort(), [destinos]);
 

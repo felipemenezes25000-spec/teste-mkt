@@ -13,6 +13,10 @@ import { calcExemploDestino, resumoVitrineVsReal } from '../../../_engine/custoT
 import { dicasDe, SECOES_DICAS } from '../../../_engine/dicas.js';
 import { atracoesDoPais } from '../../../_engine/atracoes.js';
 import { comidasDoPais, COMIDA_ICON } from '../../../_engine/comidas.js';
+import { cidadeWiki } from '../../../_lib/cidadeWiki.js';
+import { GaleriaLugares } from './GaleriaLugares.jsx';
+import { JsonLd } from '../../../_components/JsonLd.jsx';
+import { jsonLdDestino, jsonLdBreadcrumb, siteUrl } from '../../../_lib/seo.js';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -27,9 +31,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const d = destinoPorSlug(params.slug);
   if (!d) return {};
+  const titulo = `${d.nome} — guia de viagem | Mundo Sem Fim`;
+  const desc = `Melhor época, custo médio, pontos turísticos e comida típica de ${d.nome}.`;
   return {
-    title: `${d.nome} — guia de viagem | Mundo Sem Fim`,
-    description: `Melhor época, custo médio, pontos turísticos e comida típica de ${d.nome}.`,
+    title: titulo,
+    description: desc,
+    alternates: { canonical: `/destino/${d.slug}` },
+    openGraph: { title: titulo, description: desc, url: `/destino/${d.slug}` },
+    twitter: { title: titulo, description: desc },
   };
 }
 
@@ -58,13 +67,15 @@ function MapaDestino({ coords, nome }) {
 export default async function DestinoPage({ params }) {
   const d = destinoPorSlug(params.slug);
   if (!d) notFound();
+  const base = siteUrl();
 
   const pontos = atracoesDoPais(d.code);
+  const cidadesLista = (d.cidades || []).slice(0, 4);
   const [wiki, atracoes, pontosImgs, cidadeImgs] = await Promise.all([
     resumoWiki(d.fotoQuery || d.nome),
     atracoesDe(d.wikidataId, { limite: 8 }),
     Promise.all(pontos.map((a) => imagemWiki(a.wiki || a.nome))),
-    Promise.all((d.cidades || []).slice(0, 4).map((c) => imagemWiki(c))),
+    Promise.all(cidadesLista.map((c) => imagemWiki(cidadeWiki(d.code, c)))),
   ]);
   // Herói: thumbnail do resumo OU 1ª foto da media-list (mata o placeholder).
   const heroImg = wiki?.img || (await imagensDe(d.fotoQuery || d.nome, { n: 1 }))[0] || null;
@@ -73,8 +84,18 @@ export default async function DestinoPage({ params }) {
   // Galeria de pontos turísticos: prioriza a lista CURADA (foto buscada por atração),
   // com fallback pro Wikidata. Garante cobertura em todos os 167 países.
   const galeria = pontos.length
-    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: pontosImgs[i] }))
-    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: a.img }));
+    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: pontosImgs[i], wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }))
+    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: a.img, wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }));
+
+  // Cidades & bases: mesma estrutura da galeria pra abrir o mesmo modal (decisão do
+  // usuário: cidades também abrem história). wiki via override (foto + história certas).
+  const cidadesData = cidadesLista.map((c, i) => ({
+    nome: c,
+    sub: d.nome,
+    img: cidadeImgs[i],
+    wiki: cidadeWiki(d.code, c),
+    maps: mapsUrl(`${c}, ${d.nome}`),
+  }));
 
   // Comidas: lista curada (com tipo: salgado/doce/bebida) ou fallback dos dados base.
   const comidas = comidasDoPais(d.code).length
@@ -94,6 +115,14 @@ export default async function DestinoPage({ params }) {
 
   return (
     <main>
+      <JsonLd data={jsonLdDestino(d, base)} />
+      <JsonLd
+        data={jsonLdBreadcrumb([
+          { nome: 'Início', url: base },
+          { nome: 'Explorar', url: `${base}/explorar` },
+          { nome: d.nome, url: `${base}/destino/${d.slug}` },
+        ])}
+      />
       {/* HERO */}
       <section className="relative h-[42vh] min-h-[260px] max-h-[440px] overflow-hidden bg-paper2">
         {heroImg ? (
@@ -166,50 +195,16 @@ export default async function DestinoPage({ params }) {
               <h2 className="font-display text-2xl text-ink">📸 Pontos turísticos</h2>
               <span className="text-xs text-inksoft">{galeria.length} lugares</span>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-              {galeria.map((a, i) => (
-                <a
-                  key={`${a.nome}-${i}`} href={mapsUrl(`${a.nome}, ${d.nome}`)} target="_blank" rel="noopener noreferrer"
-                  className="group rounded-xl overflow-hidden border border-line bg-card hover:border-pine/50 hover:shadow-[var(--e-1)] transition focusring"
-                >
-                  <div className="h-28 sm:h-32 bg-paper2 overflow-hidden">
-                    {a.img ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={a.img} alt={a.nome} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                    ) : (
-                      <div className="w-full h-full grid place-items-center bg-gradient-to-br from-pine/15 to-ochre/15 text-2xl" aria-hidden>📍</div>
-                    )}
-                  </div>
-                  <div className="p-2.5">
-                    <div className="text-sm font-semibold text-ink line-clamp-1">{a.nome}</div>
-                    {a.sub && <div className="text-[11px] text-inksoft line-clamp-1 mt-0.5">{a.sub}</div>}
-                  </div>
-                </a>
-              ))}
-            </div>
-            <p className="mt-2 text-[11px] text-inksoft">Fotos: Wikipédia/Wikimedia Commons. Toque para abrir no Google Maps.</p>
+            <GaleriaLugares lugares={galeria} layout="ponto" />
+            <p className="mt-2 text-[11px] text-inksoft">Fotos: Wikipédia/Wikimedia Commons. Toque na foto para ver a história e abrir no mapa.</p>
           </section>
         )}
 
         {/* CIDADES */}
-        {(d.cidades || []).length > 0 && (
+        {cidadesData.length > 0 && (
           <section>
             <h2 className="font-display text-2xl text-ink mb-3">Cidades & bases</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {d.cidades.slice(0, 4).map((c, i) => (
-                <a key={c} href={mapsUrl(`${c}, ${d.nome}`)} target="_blank" rel="noopener noreferrer" className="group rounded-xl overflow-hidden border border-line bg-card hover:border-pine/50 focusring">
-                  <div className="h-24 bg-paper2 overflow-hidden">
-                    {cidadeImgs[i] ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={cidadeImgs[i]} alt={c} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition" />
-                    ) : (
-                      <div className="w-full h-full grid place-items-center text-2xl" aria-hidden>📍</div>
-                    )}
-                  </div>
-                  <div className="px-2.5 py-1.5 text-sm text-ink flex items-center justify-between">{c} <span className="text-pine">↗</span></div>
-                </a>
-              ))}
-            </div>
+            <GaleriaLugares lugares={cidadesData} layout="cidade" />
           </section>
         )}
 
