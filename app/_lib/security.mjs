@@ -35,7 +35,7 @@ export function buildSecurityHeaders({ production = true, vercel = false } = {})
     // muitos domínios HTTPS → liberamos img https: (imagem não executa código; o
     // script-src segue restrito). Crédito+licença de cada foto aparecem no modal.
     `img-src 'self' data: blob: https:`,
-    `frame-src 'self' https://www.openstreetmap.org`,
+    `frame-src 'self' https://www.openstreetmap.org https://api.maptiler.com`,
     `connect-src ${connectSrc}`,
     // só sob HTTPS real (Vercel): localmente quebraria o `next start` em http://localhost
     vercel && 'upgrade-insecure-requests',

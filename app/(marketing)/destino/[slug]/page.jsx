@@ -68,20 +68,39 @@ function creditoCommonsLite(u) {
   }
 }
 
-// Mapa real (OpenStreetMap embed, sem chave/custo) centrado no país, com marcador.
-function MapaDestino({ coords, nome }) {
+// Mapa do país centrado, com marcador. Suporta 2 modos:
+//  (1) MapTiler: se NEXT_PUBLIC_MAPTILER_KEY estiver definido, usa tiles com idioma
+//      controlado por `?language=` (50+ idiomas: pt/en/es/fr/de/ja/zh/ar/ru/...).
+//      Cadastre uma chave grátis em https://cloud.maptiler.com (free tier ~100k req/mês).
+//  (2) OSM (fallback sem chave): labels no idioma local da cidade (Tóquio em japonês,
+//      Beirute em árabe, etc) — sem controle do idioma, mas sem custo nem dependência.
+// Quando o site tiver i18n, o callsite passa `idioma={locale}` e o mapa segue.
+function MapaDestino({ coords, nome, idioma = 'pt' }) {
   if (!Array.isArray(coords) || coords.length !== 2) return null;
   const [lng, lat] = coords;
-  const dx = 6, dy = 4; // span do bbox em graus (cidade/região)
-  const bbox = `${lng - dx}%2C${lat - dy}%2C${lng + dx}%2C${lat + dy}`;
-  const src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
+  const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY;
+
+  let src;
+  let openLargerHref;
+  if (maptilerKey) {
+    // MapTiler embed interativo (zoom/pan dentro do iframe) com idioma das labels.
+    // Estilo "streets-v2" é o mais legível pra cidades; zoom 5 mostra o país inteiro.
+    src = `https://api.maptiler.com/maps/streets-v2/?key=${maptilerKey}&language=${idioma}#5/${lat}/${lng}`;
+    openLargerHref = `https://www.maptiler.com/maps/#streets-v2//${idioma}/5/${lng}/${lat}`;
+  } else {
+    const dx = 6, dy = 4;
+    const bbox = `${lng - dx}%2C${lat - dy}%2C${lng + dx}%2C${lat + dy}`;
+    src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
+    openLargerHref = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=6/${lat}/${lng}`;
+  }
+
   return (
     <section>
       <h2 className="font-display text-2xl text-ink mb-3">🗺️ Onde fica {nome}</h2>
       <div className="rounded-2xl overflow-hidden border border-line bg-paper2">
         <iframe src={src} title={`Mapa de ${nome}`} loading="lazy" className="w-full h-72 sm:h-80 border-0" />
       </div>
-      <a href={`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=6/${lat}/${lng}`} target="_blank" rel="noopener noreferrer" className="inline-block mt-1 text-xs text-pine hover:underline focusring">Abrir mapa maior ↗</a>
+      <a href={openLargerHref} target="_blank" rel="noopener noreferrer" className="inline-block mt-1 text-xs text-pine hover:underline focusring">Abrir mapa maior ↗</a>
     </section>
   );
 }
