@@ -1,7 +1,7 @@
 /* =============================================================================
    CATÁLOGO MUNDIAL DE PAÍSES (gerado + enriquecido; iata/cidade corrigidos jun/2026)
-   145 países além dos 22 curados. ESTIMATIVA de referência — confira na
-   fonte oficial. Não editar à mão: regerar pelos workflows do catálogo.
+   183 países além dos 22 curados (total 205 = 195 ONU + 10 territórios).
+   ESTIMATIVA de referência — confira na fonte oficial.
    ========================================================================== */
 export const PAISES_EXTRA = [
  {
@@ -5538,6 +5538,1444 @@ export const PAISES_EXTRA = [
    "Maheu (bebida fermentada de milho)"
   ]
  }
+,
+ {
+   "code": "AF",
+   "nome": "Afeganistão",
+   "regiao": "Cáucaso e Oriente Médio",
+   "custoDia": 35,
+   "moeda": "AFN",
+   "melhoresMeses": [
+     4,
+     5,
+     9,
+     10
+   ],
+   "estacao": "Primavera (abr–mai) e outono (set–out) mais amenos; verão extremamente quente nas planícies; inverno rigoroso nas montanhas.",
+   "iata": "KBL",
+   "cidadePrincipal": "Cabul",
+   "coords": [
+     69.1723,
+     34.5281
+   ],
+   "fotoQuery": "Band-e Amir",
+   "cidades": [
+     "Cabul",
+     "Herat",
+     "Mazar-i-Sharif",
+     "Kandahar",
+     "Bamyan",
+     "Jalalabad"
+   ],
+   "comidas": [
+     "Kabuli Pulao (arroz com cordeiro e cenoura)",
+     "Mantu (ravióli afegão)",
+     "Ashak (pastel de alho-poró)",
+     "Bolani (pão recheado)",
+     "Kebab chapli",
+     "Shorwa (sopa de legumes com carne)",
+     "Sheer Khurma (sobremesa de leite com tâmaras)"
+   ]
+ },
+ {
+   "code": "BF",
+   "nome": "Burkina Faso",
+   "regiao": "África",
+   "custoDia": 30,
+   "moeda": "XOF",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2
+   ],
+   "estacao": "Estação seca (nov–fev) mais confortável; chuvosa (jun–set) com calor intenso e estradas intransitáveis.",
+   "iata": "OUA",
+   "cidadePrincipal": "Uagadugu",
+   "coords": [
+     -1.5197,
+     12.3714
+   ],
+   "fotoQuery": "Loropéni",
+   "cidades": [
+     "Uagadugu",
+     "Bobo-Dioulasso",
+     "Banfora",
+     "Koudougou",
+     "Ouahigouya",
+     "Kaya"
+   ],
+   "comidas": [
+     "Tô (mingau de milho ou sorgo)",
+     "Riz gras (arroz gorduroso)",
+     "Poulet bicyclette (frango caipira grelhado)",
+     "Ragout de amendoim",
+     "Dèguè (iogurte com milheto)",
+     "Babenda (ensopado de folhas verdes)",
+     "Brochettes de carne"
+   ]
+ },
+ {
+   "code": "BI",
+   "nome": "Burundi",
+   "regiao": "África",
+   "custoDia": 30,
+   "moeda": "BIF",
+   "melhoresMeses": [
+     6,
+     7,
+     8,
+     9
+   ],
+   "estacao": "Estação seca (jun–set) ideal para viagem; chuvosa (out–mai) com chuvas fortes. Temperaturas amenas o ano todo pelo altitude.",
+   "iata": "BJM",
+   "cidadePrincipal": "Bujumbura",
+   "coords": [
+     29.3644,
+     -3.3614
+   ],
+   "fotoQuery": "Lago Tanganhica",
+   "cidades": [
+     "Bujumbura",
+     "Gitega",
+     "Ngozi",
+     "Rumonge",
+     "Bururi",
+     "Makamba"
+   ],
+   "comidas": [
+     "Boko Boko (mingau de trigo com carne)",
+     "Brochettes de cabrito",
+     "Ugali (angu de mandioca)",
+     "Isombe (folhas de mandioca com pasta de amendoim)",
+     "Sambaza (sardinhas fritas do Lago Tanganyika)",
+     "Ibijumbu (batata-doce cozida)",
+     "Inzimano (feijão com banana)"
+   ]
+ },
+ {
+   "code": "CF",
+   "nome": "República Centro-Africana",
+   "regiao": "África",
+   "custoDia": 45,
+   "moeda": "XAF",
+   "melhoresMeses": [
+     12,
+     1,
+     2,
+     3
+   ],
+   "estacao": "Estação seca (dez–mar) mais acessível; chuvosa (mai–out) com estradas precárias. Calor intenso o ano todo.",
+   "iata": "BGF",
+   "cidadePrincipal": "Bangui",
+   "coords": [
+     18.5582,
+     4.3947
+   ],
+   "fotoQuery": "Bangui",
+   "cidades": [
+     "Bangui",
+     "Bimbo",
+     "Berbérati",
+     "Carnot",
+     "Bambari",
+     "Bouar"
+   ],
+   "comidas": [
+     "Gozo (pasta de mandioca)",
+     "Kanda ti nyma (ensopado de carne com espinafre)",
+     "Makara (pão de mandioca)",
+     "Capitaine grelhado (perca-do-Nilo)",
+     "Fufu de banana-da-terra",
+     "Saté de carne de caça",
+     "Ngumu (folhas de mandioca cozidas)"
+   ]
+ },
+ {
+   "code": "TD",
+   "nome": "Chade",
+   "regiao": "África",
+   "custoDia": 45,
+   "moeda": "XAF",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2
+   ],
+   "estacao": "Estação seca (nov–fev) com temperaturas suportáveis; mar–mai calor extremo (>45 °C); chuvosa (jun–out) no sul.",
+   "iata": "NDJ",
+   "cidadePrincipal": "N'Djamena",
+   "coords": [
+     15.0444,
+     12.1348
+   ],
+   "fotoQuery": "Lagos de Ounianga",
+   "cidades": [
+     "N'Djamena",
+     "Moundou",
+     "Sarh",
+     "Abéché",
+     "Faya-Largeau",
+     "Bongor"
+   ],
+   "comidas": [
+     "Boule (bola de milheto)",
+     "La Bouillie (mingau de milheto)",
+     "Daraba (ensopado de quiabo com amendoim)",
+     "Kisra (panqueca de sorgo)",
+     "Jarret de boeuf (carne cozida)",
+     "Capitaine grelhado",
+     "Karkanji (chá de hibisco)"
+   ]
+ },
+ {
+   "code": "KM",
+   "nome": "Comores",
+   "regiao": "África",
+   "custoDia": 40,
+   "moeda": "KMF",
+   "melhoresMeses": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+   ],
+   "estacao": "Estação seca (mai–out) fresca e agradável; chuvosa (nov–abr) quente e úmida com risco de ciclones.",
+   "iata": "HAH",
+   "cidadePrincipal": "Moroni",
+   "coords": [
+     43.2551,
+     -11.7172
+   ],
+   "fotoQuery": "Karthala",
+   "cidades": [
+     "Moroni",
+     "Mutsamudu",
+     "Fomboni",
+     "Domoni",
+     "Mitsamiouli",
+     "Ouani"
+   ],
+   "comidas": [
+     "Langouste à la vanille (lagosta com baunilha)",
+     "Pilaou (arroz com especiarias e carne)",
+     "Mataba (folhas de mandioca com coco)",
+     "Mkatra foutra (pão de coco)",
+     "Poisson au coco (peixe no coco)",
+     "Embrevade (lentilhas com arroz)",
+     "Madaba (banana-da-terra cozida)"
+   ]
+ },
+ {
+   "code": "CG",
+   "nome": "Congo (República do)",
+   "regiao": "África",
+   "custoDia": 50,
+   "moeda": "XAF",
+   "melhoresMeses": [
+     6,
+     7,
+     8,
+     9
+   ],
+   "estacao": "Estação seca (jun–set) mais confortável; chuvosa (out–mai) com chuvas intensas. Clima equatorial quente e úmido o ano todo.",
+   "iata": "BZV",
+   "cidadePrincipal": "Brazzaville",
+   "coords": [
+     15.2832,
+     -4.2634
+   ],
+   "fotoQuery": "Brazzaville",
+   "cidades": [
+     "Brazzaville",
+     "Pointe-Noire",
+     "Dolisie",
+     "Ouesso",
+     "Owando",
+     "Impfondo"
+   ],
+   "comidas": [
+     "Moambe (frango ao molho de dendê)",
+     "Saka-saka (folhas de mandioca piladas)",
+     "Fufu de mandioca",
+     "Poisson salé (peixe salgado cozido)",
+     "Mikate (bolinhos fritos)",
+     "Liboké (peixe grelhado na folha de bananeira)",
+     "Mwangé (ensopado de amendoim)"
+   ]
+ },
+ {
+   "code": "CD",
+   "nome": "Congo (RD)",
+   "regiao": "África",
+   "custoDia": 45,
+   "moeda": "CDF",
+   "melhoresMeses": [
+     6,
+     7,
+     8,
+     9
+   ],
+   "estacao": "Estação seca (jun–set) melhor para trekking; chuvosa (out–mai) dificulta deslocamentos. Clima equatorial úmido.",
+   "iata": "FIH",
+   "cidadePrincipal": "Kinshasa",
+   "coords": [
+     15.3075,
+     -4.325
+   ],
+   "fotoQuery": "Nyiragongo",
+   "cidades": [
+     "Kinshasa",
+     "Lubumbashi",
+     "Goma",
+     "Bukavu",
+     "Kisangani",
+     "Mbuji-Mayi"
+   ],
+   "comidas": [
+     "Poulet à la moambe (frango no dendê)",
+     "Chikwangue (pão de mandioca fermentada)",
+     "Fufu de milho",
+     "Saka-saka (folhas de mandioca)",
+     "Liboke ya mbisi (peixe na folha)",
+     "Makayabu (peixe salgado seco)",
+     "Pondu (folhas de mandioca com óleo de palma)"
+   ]
+ },
+ {
+   "code": "DJ",
+   "nome": "Djibuti",
+   "regiao": "África",
+   "custoDia": 55,
+   "moeda": "DJF",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2,
+     3
+   ],
+   "estacao": "Inverno (nov–mar) mais suportável (25–30 °C); verão (jun–ago) extremamente quente (>40 °C). Seco o ano todo.",
+   "iata": "JIB",
+   "cidadePrincipal": "Djibuti",
+   "coords": [
+     43.1456,
+     11.5721
+   ],
+   "fotoQuery": "Lago Assal",
+   "cidades": [
+     "Djibuti",
+     "Ali Sabieh",
+     "Tadjoura",
+     "Obock",
+     "Dikhil",
+     "Arta"
+   ],
+   "comidas": [
+     "Skoudehkaris (arroz com cordeiro e especiarias)",
+     "Fah-fah (sopa picante de carne)",
+     "Canjeero (panqueca somaliana)",
+     "Laxoox (crepe fermentada)",
+     "Maraq (caldo de carne com legumes)",
+     "Samboussa (pastel frito)",
+     "Halwa (doce de semolina)"
+   ]
+ },
+ {
+   "code": "GQ",
+   "nome": "Guiné Equatorial",
+   "regiao": "África",
+   "custoDia": 60,
+   "moeda": "XAF",
+   "melhoresMeses": [
+     6,
+     7,
+     8,
+     9
+   ],
+   "estacao": "Estação seca (jun–set) mais confortável; chuvosa (out–mai) com chuvas intensas. País mais rico da África subsaariana per capita.",
+   "iata": "SSG",
+   "cidadePrincipal": "Malabo",
+   "coords": [
+     8.7832,
+     3.7504
+   ],
+   "fotoQuery": "Pico Basilé",
+   "cidades": [
+     "Malabo",
+     "Bata",
+     "Ebebiyín",
+     "Aconibe",
+     "Añisoc",
+     "Mongomo"
+   ],
+   "comidas": [
+     "Succotash de amendoim e banana",
+     "Poisson à la sauce (peixe ao molho)",
+     "Pepesoup (sopa picante de peixe)",
+     "Poulet DG (frango grelhado com banana-da-terra)",
+     "Ndolé (ensopado de folhas amargas)",
+     "Malamba (vinho de palma)",
+     "Akwadu (banana assada com coco)"
+   ]
+ },
+ {
+   "code": "ER",
+   "nome": "Eritreia",
+   "regiao": "África",
+   "custoDia": 30,
+   "moeda": "ERN",
+   "melhoresMeses": [
+     10,
+     11,
+     12,
+     1,
+     2,
+     3
+   ],
+   "estacao": "Estação seca de outubro a março com clima agradável nos planaltos; chuvas em jun–set; litoral quente o ano todo.",
+   "iata": "ASM",
+   "cidadePrincipal": "Asmara",
+   "coords": [
+     38.9318,
+     15.3229
+   ],
+   "fotoQuery": "Asmara",
+   "cidades": [
+     "Asmara",
+     "Keren",
+     "Massawa",
+     "Assab",
+     "Mendefera",
+     "Barentu"
+   ],
+   "comidas": [
+     "Injera com zigni (carne picante)",
+     "Tsebhi dorho (frango apimentado)",
+     "Shiro (pasta de grão-de-bico)",
+     "Ful medames (fava cozida)",
+     "Birsen (lentilhas ao molho)",
+     "Ga'at (mingau de trigo)",
+     "Suwa (cerveja caseira de cereais)"
+   ]
+ },
+ {
+   "code": "GN",
+   "nome": "Guiné",
+   "regiao": "África",
+   "custoDia": 30,
+   "moeda": "GNF",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2,
+     3,
+     4
+   ],
+   "estacao": "Estação seca (nov–abr) melhor para viagem; chuvosa (mai–out) com precipitação muito forte na costa. Calor o ano todo.",
+   "iata": "CKY",
+   "cidadePrincipal": "Conacri",
+   "coords": [
+     -13.5784,
+     9.6412
+   ],
+   "fotoQuery": "Conacri",
+   "cidades": [
+     "Conacri",
+     "Kindia",
+     "Kankan",
+     "Labé",
+     "N'Zérékoré",
+     "Mamou"
+   ],
+   "comidas": [
+     "Riz au gras (arroz gorduroso)",
+     "Maffe (ensopado de amendoim)",
+     "Poulet yassa (frango ao limão e cebola)",
+     "Fouti (fufu de mandioca com sopa)",
+     "Tô de fonio",
+     "Poisson braisé (peixe grelhado)",
+     "Jus de bissap (suco de hibisco)"
+   ]
+ },
+ {
+   "code": "GW",
+   "nome": "Guiné-Bissau",
+   "regiao": "África",
+   "custoDia": 30,
+   "moeda": "XOF",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2,
+     3,
+     4
+   ],
+   "estacao": "Estação seca (nov–abr) com brisas agradáveis; chuvosa (mai–out) com chuvas fortes e calor intenso.",
+   "iata": "OXB",
+   "cidadePrincipal": "Bissau",
+   "coords": [
+     -15.1804,
+     11.8636
+   ],
+   "fotoQuery": "Bijagós",
+   "cidades": [
+     "Bissau",
+     "Bafatá",
+     "Gabú",
+     "Bissorã",
+     "Bolama",
+     "Bubaque"
+   ],
+   "comidas": [
+     "Caldo de mancarra (amendoim)",
+     "Arroz de cabidela",
+     "Peixe grelhado com mandioca",
+     "Chabéu (molho de tomate com peixe)",
+     "Sigá (carne seca fumada)",
+     "Jambakossa (doce de caju)",
+     "Vinho de palma"
+   ]
+ },
+ {
+   "code": "IQ",
+   "nome": "Iraque",
+   "regiao": "Cáucaso e Oriente Médio",
+   "custoDia": 50,
+   "moeda": "IQD",
+   "melhoresMeses": [
+     3,
+     4,
+     10,
+     11
+   ],
+   "estacao": "Primavera (mar–abr) e outono (out–nov) agradáveis; verão escaldante (>50 °C no sul); inverno frio no norte curdo.",
+   "iata": "BGW",
+   "cidadePrincipal": "Bagdá",
+   "coords": [
+     44.3661,
+     33.3152
+   ],
+   "fotoQuery": "Iraque",
+   "cidades": [
+     "Bagdá",
+     "Erbil",
+     "Basra",
+     "Suleimaniya",
+     "Duhok",
+     "Najaf"
+   ],
+   "comidas": [
+     "Masgouf (peixe grelhado aberto)",
+     "Dolma (folhas de parreira recheadas)",
+     "Kubba (quibe iraquiano)",
+     "Tashreeb (pão com caldo de carne)",
+     "Biryani iraquiano",
+     "Kleicha (biscoito recheado de tâmaras)",
+     "Chai hel (chá com cardamomo)"
+   ]
+ },
+ {
+   "code": "KI",
+   "nome": "Kiribati",
+   "regiao": "Oceania",
+   "custoDia": 60,
+   "moeda": "AUD",
+   "melhoresMeses": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+   ],
+   "estacao": "Estação seca (abr–out) com ventos alísios; chuvosa (nov–mar) mais quente e úmida. Temperatura estável (28–32 °C) o ano todo.",
+   "iata": "TRW",
+   "cidadePrincipal": "Tarawa",
+   "coords": [
+     173.0176,
+     1.4518
+   ],
+   "fotoQuery": "Kiribati",
+   "cidades": [
+     "Tarawa Sul",
+     "Betio",
+     "Bikenibeu",
+     "Bairiki",
+     "Abaiang",
+     "Kiritimati"
+   ],
+   "comidas": [
+     "Palu sami (creme de coco com folhas de taro)",
+     "Ika mata (peixe cru marinado no coco)",
+     "Pão de fruta assado",
+     "Babai (taro gigante cozido)",
+     "Peixe grelhado no coco",
+     "Arroz com corned beef",
+     "Toddy (seiva de coqueiro fermentada)"
+   ]
+ },
+ {
+   "code": "KP",
+   "nome": "Coreia do Norte",
+   "regiao": "Leste Asiático",
+   "custoDia": 50,
+   "moeda": "KPW",
+   "melhoresMeses": [
+     5,
+     6,
+     9,
+     10
+   ],
+   "estacao": "Primavera (mai–jun) e outono (set–out) agradáveis e coloridos; verão quente e chuvoso; inverno muito frio (−20 °C).",
+   "iata": "FNJ",
+   "cidadePrincipal": "Pyongyang",
+   "coords": [
+     125.7625,
+     39.0392
+   ],
+   "fotoQuery": "Pyongyang",
+   "cidades": [
+     "Pyongyang",
+     "Kaesong",
+     "Nampo",
+     "Wonsan",
+     "Hamhung",
+     "Chongjin"
+   ],
+   "comidas": [
+     "Naengmyeon (macarrão gelado)",
+     "Kimchi (conserva fermentada)",
+     "Bulgogi coreano",
+     "Mandu (pastel cozido ou frito)",
+     "Injo gogi bap (arroz com carne de soja)",
+     "Bibimbap coreano",
+     "Soju (destilado de arroz)"
+   ]
+ },
+ {
+   "code": "LR",
+   "nome": "Libéria",
+   "regiao": "África",
+   "custoDia": 40,
+   "moeda": "LRD",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2,
+     3
+   ],
+   "estacao": "Estação seca (nov–mar) melhor para viagem; chuvosa (mai–out) com precipitação extrema (até 5.000 mm). Calor e umidade constantes.",
+   "iata": "ROB",
+   "cidadePrincipal": "Monróvia",
+   "coords": [
+     -10.8032,
+     6.2907
+   ],
+   "fotoQuery": "Libéria",
+   "cidades": [
+     "Monróvia",
+     "Buchanan",
+     "Gbarnga",
+     "Kakata",
+     "Harper",
+     "Zwedru"
+   ],
+   "comidas": [
+     "Jollof rice (arroz com tomate e especiarias)",
+     "Fufu de mandioca com sopa de amendoim",
+     "Palava sauce (ensopado de folhas verdes)",
+     "Pepper soup (sopa apimentada)",
+     "Dumboy (bola de mandioca)",
+     "Kanyah (barra de amendoim torrado)",
+     "Ginger beer (cerveja de gengibre)"
+   ]
+ },
+ {
+   "code": "LY",
+   "nome": "Líbia",
+   "regiao": "África",
+   "custoDia": 50,
+   "moeda": "LYD",
+   "melhoresMeses": [
+     3,
+     4,
+     10,
+     11
+   ],
+   "estacao": "Primavera e outono agradáveis na costa; verão escaldante no interior (Saara); inverno ameno no litoral.",
+   "iata": "TIP",
+   "cidadePrincipal": "Trípoli",
+   "coords": [
+     13.1913,
+     32.8872
+   ],
+   "fotoQuery": "Leptis Magna",
+   "cidades": [
+     "Trípoli",
+     "Bengasi",
+     "Misrata",
+     "Sabha",
+     "Ghadames",
+     "Sirte"
+   ],
+   "comidas": [
+     "Couscous bil-bosla (cuscuz com cebola e cordeiro)",
+     "Sharba Libiya (sopa de cordeiro com tomate)",
+     "Bazeen (massa densa de cevada)",
+     "Asida (doce de semolina)",
+     "Rishda (macarrão com grão-de-bico)",
+     "Mbatten (batata recheada frita)",
+     "Shay bil-na'na' (chá de menta)"
+   ]
+ },
+ {
+   "code": "ML",
+   "nome": "Mali",
+   "regiao": "África",
+   "custoDia": 30,
+   "moeda": "XOF",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2
+   ],
+   "estacao": "Estação seca fria (nov–fev) ideal; seca quente (mar–mai) escaldante; chuvosa (jun–out) com estradas cortadas. Saara no norte.",
+   "iata": "BKO",
+   "cidadePrincipal": "Bamako",
+   "coords": [
+     -8.0029,
+     12.6392
+   ],
+   "fotoQuery": "Djenné",
+   "cidades": [
+     "Bamako",
+     "Timbuctu",
+     "Djenné",
+     "Mopti",
+     "Ségou",
+     "Sikasso"
+   ],
+   "comidas": [
+     "Tiguadegue na (ensopado de amendoim)",
+     "Riz au gras (arroz com carne e legumes)",
+     "Tô (mingau de milheto)",
+     "Maafe (ensopado de carne com amendoim)",
+     "Fakoye (peixe do Rio Níger grelhado)",
+     "Dègue (sobremesa de iogurte e milheto)",
+     "Jus de gingembre (suco de gengibre)"
+   ]
+ },
+ {
+   "code": "MH",
+   "nome": "Ilhas Marshall",
+   "regiao": "Oceania",
+   "custoDia": 70,
+   "moeda": "USD",
+   "melhoresMeses": [
+     1,
+     2,
+     3,
+     4
+   ],
+   "estacao": "Estação seca (jan–abr) menos chuvosa; úmida (mai–nov). Temperatura estável (27–30 °C). Tufões raros.",
+   "iata": "MAJ",
+   "cidadePrincipal": "Majuro",
+   "coords": [
+     171.3803,
+     7.1164
+   ],
+   "fotoQuery": "Ilhas Marshall",
+   "cidades": [
+     "Majuro",
+     "Ebeye",
+     "Kwajalein",
+     "Jaluit",
+     "Wotje",
+     "Arno"
+   ],
+   "comidas": [
+     "Bwiro (fruta-pão fermentada)",
+     "Peixe cru com molho de coco",
+     "Fruta-pão assada",
+     "Arroz com frango (estilo local)",
+     "Pandanus cozido",
+     "Iaraj (conserva de coco)",
+     "Banana frita"
+   ]
+ },
+ {
+   "code": "MR",
+   "nome": "Mauritânia",
+   "regiao": "África",
+   "custoDia": 40,
+   "moeda": "MRU",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2,
+     3
+   ],
+   "estacao": "Estação seca fria (nov–mar) melhor; verão (abr–set) extremamente quente no deserto (>45 °C). Chuvosa curta no sul (jul–set).",
+   "iata": "NKC",
+   "cidadePrincipal": "Nouakchott",
+   "coords": [
+     -15.9785,
+     18.0735
+   ],
+   "fotoQuery": "Mauritânia",
+   "cidades": [
+     "Nouakchott",
+     "Nouadhibou",
+     "Chinguetti",
+     "Atar",
+     "Rosso",
+     "Kiffa"
+   ],
+   "comidas": [
+     "Thieboudienne (arroz com peixe)",
+     "Mechoui (cordeiro assado inteiro)",
+     "Couscous au lait (cuscuz com leite)",
+     "Maru we-llham (arroz com carne e legumes)",
+     "Chá mauritano (três rodadas)",
+     "Lakh (mingau de milheto com leite)",
+     "Zrig (leite azedo com água e açúcar)"
+   ]
+ },
+ {
+   "code": "FM",
+   "nome": "Micronésia",
+   "regiao": "Oceania",
+   "custoDia": 65,
+   "moeda": "USD",
+   "melhoresMeses": [
+     1,
+     2,
+     3,
+     4
+   ],
+   "estacao": "Menos chuvoso de janeiro a abril; chuvoso de maio a novembro. Tropical quente e úmido o ano todo (27–30 °C).",
+   "iata": "PNI",
+   "cidadePrincipal": "Palikir",
+   "coords": [
+     158.1611,
+     6.9248
+   ],
+   "fotoQuery": "Micronésia",
+   "cidades": [
+     "Palikir",
+     "Weno (Chuuk)",
+     "Kolonia (Pohnpei)",
+     "Colonia (Yap)",
+     "Tofol (Kosrae)",
+     "Lelu"
+   ],
+   "comidas": [
+     "Peixe cru com leite de coco",
+     "Fruta-pão cozida",
+     "Taro em folha de bananeira",
+     "Kelaguen (frango marinado no limão)",
+     "Banana fermentada",
+     "Arroz com atum grelhado",
+     "Sakau (bebida cerimonial de kava)"
+   ]
+ },
+ {
+   "code": "NR",
+   "nome": "Nauru",
+   "regiao": "Oceania",
+   "custoDia": 70,
+   "moeda": "AUD",
+   "melhoresMeses": [
+     2,
+     3,
+     4,
+     5,
+     10,
+     11
+   ],
+   "estacao": "Menos chuvoso fev–mai e out–nov; monções de novembro a fevereiro. Quente e úmido o ano todo (25–35 °C).",
+   "iata": "INU",
+   "cidadePrincipal": "Yaren",
+   "coords": [
+     166.9209,
+     -0.5477
+   ],
+   "fotoQuery": "Nauru",
+   "cidades": [
+     "Yaren",
+     "Denigomodu",
+     "Meneng",
+     "Aiwo",
+     "Buada",
+     "Boe"
+   ],
+   "comidas": [
+     "Peixe grelhado no coco",
+     "Arroz com corned beef",
+     "Fruta-pão frita",
+     "Pandanus cozido",
+     "Coconut toddy (seiva fermentada)",
+     "Ika mata (peixe cru marinado)",
+     "Banana assada"
+   ]
+ },
+ {
+   "code": "NE",
+   "nome": "Níger",
+   "regiao": "África",
+   "custoDia": 30,
+   "moeda": "XOF",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2
+   ],
+   "estacao": "Estação seca fria (nov–fev) mais suportável; seca quente (mar–mai) escaldante (>45 °C); chuvosa (jun–set) no sul.",
+   "iata": "NIM",
+   "cidadePrincipal": "Niamey",
+   "coords": [
+     2.1098,
+     13.5116
+   ],
+   "fotoQuery": "Níger",
+   "cidades": [
+     "Niamey",
+     "Zinder",
+     "Maradi",
+     "Agadez",
+     "Tahoua",
+     "Dosso"
+   ],
+   "comidas": [
+     "Djerma tuwo (bola de milheto com sopa)",
+     "Kilishi (carne seca temperada)",
+     "Jollof rice com carne",
+     "Dambou (cuscuz de mandioca)",
+     "Brochettes de cordeiro",
+     "Ragout de quiabo",
+     "Bisap (suco de hibisco)"
+   ]
+ },
+ {
+   "code": "KN",
+   "nome": "São Cristóvão e Névis",
+   "regiao": "América Central e Norte",
+   "custoDia": 70,
+   "moeda": "XCD",
+   "melhoresMeses": [
+     1,
+     2,
+     3,
+     4,
+     5
+   ],
+   "estacao": "Estação seca (jan–mai) ideal; chuvosa (jun–nov) com risco de furacões (ago–out). Tropical quente o ano todo (25–30 °C).",
+   "iata": "SKB",
+   "cidadePrincipal": "Basseterre",
+   "coords": [
+     -62.7177,
+     17.3026
+   ],
+   "fotoQuery": "São Cristóvão e Névis",
+   "cidades": [
+     "Basseterre",
+     "Charlestown",
+     "Sandy Point Town",
+     "Old Road Town",
+     "Dieppe Bay Town",
+     "Gingerland"
+   ],
+   "comidas": [
+     "Stewed saltfish (bacalhau guisado com legumes)",
+     "Pelau (arroz com ervilha e frango)",
+     "Goat water (ensopado de cabrito apimentado)",
+     "Conch fritters (bolinhos de búzio)",
+     "Dumplings de banana-da-terra",
+     "Johnny cakes (pãezinhos fritos)",
+     "Rum punch caribenho"
+   ]
+ },
+ {
+   "code": "VC",
+   "nome": "São Vicente e Granadinas",
+   "regiao": "América Central e Norte",
+   "custoDia": 65,
+   "moeda": "XCD",
+   "melhoresMeses": [
+     1,
+     2,
+     3,
+     4,
+     5
+   ],
+   "estacao": "Estação seca (jan–mai) ideal para praias e mergulho; chuvosa (jun–nov) com possibilidade de furacões. Tropical (26–30 °C).",
+   "iata": "SVD",
+   "cidadePrincipal": "Kingstown",
+   "coords": [
+     -61.2277,
+     13.1587
+   ],
+   "fotoQuery": "São Vicente e Granadinas",
+   "cidades": [
+     "Kingstown",
+     "Georgetown",
+     "Barrouallie",
+     "Bequia",
+     "Mustique",
+     "Union Island"
+   ],
+   "comidas": [
+     "Roasted breadfruit (fruta-pão assada)",
+     "Fried jackfish (peixe frito)",
+     "Callaloo soup (sopa de folhas verdes)",
+     "Pelau caribenho",
+     "Lambi (búzio preparado)",
+     "Banana verde cozida com bacalhau",
+     "Sea moss drink (bebida de alga)"
+   ]
+ },
+ {
+   "code": "ST",
+   "nome": "São Tomé e Príncipe",
+   "regiao": "África",
+   "custoDia": 45,
+   "moeda": "STN",
+   "melhoresMeses": [
+     6,
+     7,
+     8,
+     9
+   ],
+   "estacao": "Gravana (estação seca, jun–set) mais fresca e sem chuva; chuvosa (out–mai) quente e úmida. Tropical equatorial.",
+   "iata": "TMS",
+   "cidadePrincipal": "São Tomé",
+   "coords": [
+     6.6131,
+     0.1864
+   ],
+   "fotoQuery": "São Tomé e Príncipe",
+   "cidades": [
+     "São Tomé",
+     "Trindade",
+     "Neves",
+     "Guadalupe",
+     "Santo Amaro",
+     "Cidade de Santo António"
+   ],
+   "comidas": [
+     "Calulu (ensopado de peixe com quiabo e folhas)",
+     "Arroz-doce santomense",
+     "Banana-pão frita",
+     "Peixe grelhado com molho de óleo de palma",
+     "Izaquente (geleia de jaca)",
+     "Matabala (inhame cozido)",
+     "Café de São Tomé com chocolate"
+   ]
+ },
+ {
+   "code": "SL",
+   "nome": "Serra Leoa",
+   "regiao": "África",
+   "custoDia": 35,
+   "moeda": "SLE",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2,
+     3,
+     4
+   ],
+   "estacao": "Estação seca (nov–abr) melhor para viagem; chuvosa (mai–out) com precipitação muito forte. Costa com praias espetaculares.",
+   "iata": "FNA",
+   "cidadePrincipal": "Freetown",
+   "coords": [
+     -13.2317,
+     8.4657
+   ],
+   "fotoQuery": "Freetown",
+   "cidades": [
+     "Freetown",
+     "Bo",
+     "Kenema",
+     "Makeni",
+     "Koidu",
+     "Bonthe"
+   ],
+   "comidas": [
+     "Cassava leaf stew (ensopado de folha de mandioca)",
+     "Jollof rice serra-leonês",
+     "Groundnut soup (sopa de amendoim)",
+     "Fried plantain (banana-da-terra frita)",
+     "Poyo (vinho de palma)",
+     "Pepper soup (sopa picante de peixe)",
+     "Akara (bolinho de feijão fradinho)"
+   ]
+ },
+ {
+   "code": "SO",
+   "nome": "Somália",
+   "regiao": "África",
+   "custoDia": 35,
+   "moeda": "SOS",
+   "melhoresMeses": [
+     7,
+     8,
+     12,
+     1,
+     2
+   ],
+   "estacao": "Jilaal (dez–mar) seco e menos quente; Gu (abr–jun) chuvoso; Hagaa (jul–ago) seco e ventoso; Deyr (out–nov) chuvoso. Costa é quente o ano todo.",
+   "iata": "MGQ",
+   "cidadePrincipal": "Mogadíscio",
+   "coords": [
+     45.3182,
+     2.0469
+   ],
+   "fotoQuery": "Mogadíscio",
+   "cidades": [
+     "Mogadíscio",
+     "Hargeisa",
+     "Berbera",
+     "Kismayo",
+     "Garowe",
+     "Bosaso"
+   ],
+   "comidas": [
+     "Bariis iskukaris (arroz com especiarias e carne)",
+     "Canjeero (panqueca somaliana)",
+     "Suqaar (carne refogada com legumes)",
+     "Samboussa (pastel frito)",
+     "Muufo (pão achatado)",
+     "Maraq (caldo de cabrito)",
+     "Shaah (chá com leite de camela e especiarias)"
+   ]
+ },
+ {
+   "code": "SS",
+   "nome": "Sudão do Sul",
+   "regiao": "África",
+   "custoDia": 55,
+   "moeda": "SSP",
+   "melhoresMeses": [
+     12,
+     1,
+     2,
+     3
+   ],
+   "estacao": "Estação seca (dez–mar) mais acessível; chuvosa (abr–out) com estradas intransitáveis e inundações. Calor intenso o ano todo.",
+   "iata": "JUB",
+   "cidadePrincipal": "Juba",
+   "coords": [
+     31.5825,
+     4.8594
+   ],
+   "fotoQuery": "Juba (Sudão do Sul)",
+   "cidades": [
+     "Juba",
+     "Wau",
+     "Malakal",
+     "Bor",
+     "Yambio",
+     "Rumbek"
+   ],
+   "comidas": [
+     "Kisra (panqueca de sorgo)",
+     "Asida (massa cozida de sorgo)",
+     "Ful medames (favas cozidas)",
+     "Bamia (quiabo com carne)",
+     "Kawal (folhas fermentadas)",
+     "Nyama choma (carne grelhada)",
+     "Merissa (cerveja de sorgo)"
+   ]
+ },
+ {
+   "code": "SD",
+   "nome": "Sudão",
+   "regiao": "África",
+   "custoDia": 35,
+   "moeda": "SDG",
+   "melhoresMeses": [
+     11,
+     12,
+     1,
+     2
+   ],
+   "estacao": "Inverno (nov–fev) mais ameno e seco; verão (mar–jun) extremamente quente; chuvosa (jul–out) no sul. Deserto ao norte.",
+   "iata": "KRT",
+   "cidadePrincipal": "Cartum",
+   "coords": [
+     32.5599,
+     15.5007
+   ],
+   "fotoQuery": "Sudão",
+   "cidades": [
+     "Cartum",
+     "Ondurmã",
+     "Porto Sudão",
+     "Kassala",
+     "El-Obeid",
+     "Wad Madani"
+   ],
+   "comidas": [
+     "Ful medames (favas temperadas)",
+     "Kisra (panqueca de sorgo com molho)",
+     "Asida (massa de trigo cozida)",
+     "Shaya (carne grelhada)",
+     "Mulah (ensopados variados)",
+     "Tamiya (falafel sudanês)",
+     "Hilumur (bebida de sorgo fermentado)"
+   ]
+ },
+ {
+   "code": "SY",
+   "nome": "Síria",
+   "regiao": "Cáucaso e Oriente Médio",
+   "custoDia": 30,
+   "moeda": "SYP",
+   "melhoresMeses": [
+     3,
+     4,
+     5,
+     10,
+     11
+   ],
+   "estacao": "Primavera (mar–mai) e outono (out–nov) agradáveis; verão quente e seco; inverno frio no interior. Conflito ativo limita viagens.",
+   "iata": "DAM",
+   "cidadePrincipal": "Damasco",
+   "coords": [
+     36.2765,
+     33.5138
+   ],
+   "fotoQuery": "Síria",
+   "cidades": [
+     "Damasco",
+     "Aleppo",
+     "Homs",
+     "Latakia",
+     "Tartus",
+     "Palmira"
+   ],
+   "comidas": [
+     "Kibbeh (quibe sírio em camadas)",
+     "Fattoush (salada com pão torrado)",
+     "Shawarma sírio",
+     "Muhammara (pasta de pimentão com nozes)",
+     "Kebab halabi (de Aleppo)",
+     "Ma'amoul (biscoito recheado)",
+     "Arak (destilado de anis)"
+   ]
+ },
+ {
+   "code": "TL",
+   "nome": "Timor-Leste",
+   "regiao": "Sudeste Asiático",
+   "custoDia": 35,
+   "moeda": "USD",
+   "melhoresMeses": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+   ],
+   "estacao": "Estação seca (mai–nov) ideal para viagem e mergulho; chuvosa (dez–abr) com estradas difíceis nas montanhas. Tropical quente.",
+   "iata": "DIL",
+   "cidadePrincipal": "Díli",
+   "coords": [
+     125.5736,
+     -8.5569
+   ],
+   "fotoQuery": "Timor-Leste",
+   "cidades": [
+     "Díli",
+     "Baucau",
+     "Maliana",
+     "Suai",
+     "Ainaro",
+     "Ataúro"
+   ],
+   "comidas": [
+     "Ikan pepes (peixe grelhado na folha de bananeira)",
+     "Batar da'an (sopa de milho com abóbora e feijão)",
+     "Tukir (carne cozida com especiarias)",
+     "Ai-farina (mandioca cozida)",
+     "Koto (ensopado de tripa)",
+     "Café de Timor",
+     "Saboko (bolo de mandioca e coco)"
+   ]
+ },
+ {
+   "code": "TV",
+   "nome": "Tuvalu",
+   "regiao": "Oceania",
+   "custoDia": 60,
+   "moeda": "AUD",
+   "melhoresMeses": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+   ],
+   "estacao": "Estação seca (mai–out) mais confortável; chuvosa (nov–abr) com risco de ciclones. Tropical quente e úmido (27–32 °C) o ano todo.",
+   "iata": "FUN",
+   "cidadePrincipal": "Funafuti",
+   "coords": [
+     179.194,
+     -8.5211
+   ],
+   "fotoQuery": "Tuvalu",
+   "cidades": [
+     "Funafuti",
+     "Nanumea",
+     "Nui",
+     "Vaitupu",
+     "Nukufetau",
+     "Niutao"
+   ],
+   "comidas": [
+     "Pulaka (taro gigante cozido)",
+     "Peixe cru com leite de coco",
+     "Fruta-pão assada",
+     "Arroz com peixe frito",
+     "Palusami (creme de coco com taro)",
+     "Coconut toddy fermentado",
+     "Bananas cozidas no coco"
+   ]
+ },
+ {
+   "code": "YE",
+   "nome": "Iêmen",
+   "regiao": "Cáucaso e Oriente Médio",
+   "custoDia": 30,
+   "moeda": "YER",
+   "melhoresMeses": [
+     10,
+     11,
+     12,
+     1,
+     2,
+     3
+   ],
+   "estacao": "Inverno (out–mar) mais fresco e seco; verão (abr–set) quente e úmido na costa. Planaltos de Sana'a agradáveis o ano todo. Conflito limita viagens.",
+   "iata": "SAH",
+   "cidadePrincipal": "Sana'a",
+   "coords": [
+     44.2075,
+     15.3694
+   ],
+   "fotoQuery": "Iémen",
+   "cidades": [
+     "Sana'a",
+     "Áden",
+     "Taiz",
+     "Al Hudaydah",
+     "Ibb",
+     "Socotra"
+   ],
+   "comidas": [
+     "Saltah (ensopado nacional com hilbeh)",
+     "Mandi (arroz com carne defumada)",
+     "Bint al-sahn (massa folhada com mel)",
+     "Haneeth (cordeiro assado lentamente)",
+     "Fattah (pão com caldo de carne)",
+     "Jachnun (massa assada de madrugada)",
+     "Café yemenita com gengibre"
+   ]
+ },
+ {
+   "code": "VA",
+   "nome": "Vaticano (Santa Sé)",
+   "regiao": "Europa",
+   "custoDia": 80,
+   "moeda": "EUR",
+   "melhoresMeses": [
+     3,
+     4,
+     5,
+     10,
+     11
+   ],
+   "estacao": "Primavera (mar–mai) e outono (set–nov) ideais; verão (jun–ago) quente e lotado; inverno ameno. Mesmo clima de Roma.",
+   "iata": "FCO",
+   "cidadePrincipal": "Cidade do Vaticano",
+   "coords": [
+     12.4534,
+     41.9029
+   ],
+   "fotoQuery": "Capela Sistina",
+   "cidades": [
+     "Cidade do Vaticano",
+     "Jardins do Vaticano",
+     "Praça de São Pedro",
+     "Museus Vaticanos",
+     "Capela Sistina",
+     "Necrópole Vaticana"
+   ],
+   "comidas": [
+     "Cacio e pepe (massa com queijo e pimenta)",
+     "Supplì (bolinho de arroz frito romano)",
+     "Carciofi alla giudia (alcachofra frita)",
+     "Pizza al taglio (pizza romana em pedaços)",
+     "Saltimbocca alla romana",
+     "Maritozzo (pão doce com creme)",
+     "Gelato artesanal"
+   ]
+ },
+ {
+   "code": "PS",
+   "nome": "Palestina",
+   "regiao": "Cáucaso e Oriente Médio",
+   "custoDia": 40,
+   "moeda": "ILS",
+   "melhoresMeses": [
+     3,
+     4,
+     5,
+     10,
+     11
+   ],
+   "estacao": "Primavera (mar–mai) e outono (out–nov) amenos; verão quente e seco; inverno frio em Belém/Hebron. Situação política limita acesso.",
+   "iata": "TLV",
+   "cidadePrincipal": "Ramallah",
+   "coords": [
+     35.2042,
+     31.9038
+   ],
+   "fotoQuery": "Estado da Palestina",
+   "cidades": [
+     "Ramallah",
+     "Belém",
+     "Hebron",
+     "Jericó",
+     "Nablus",
+     "Gaza"
+   ],
+   "comidas": [
+     "Musakhan (frango com cebola e sumac no pão taboon)",
+     "Maqluba (arroz invertido com carne e legumes)",
+     "Knafeh (doce de queijo com massa crocante)",
+     "Mansaf (cordeiro com arroz e coalhada)",
+     "Falafel palestino",
+     "Zaatar com azeite e pão",
+     "Qatayef (panqueca recheada)"
+   ]
+ }
 ];
 
 export const VISTOS_EXTRA_BR = {
@@ -6102,7 +7540,7 @@ export const VISTOS_EXTRA_BR = {
   "nota": "Brasileiros precisam de visto: eVisa (evisamada-mg.com) OU visto na chegada nos aeroportos internacionais. Taxas 2026 (após 16/02): até 15 dias €30/US$35; 16–30 dias €35; 31–60 dias €40; 90 dias €50. Passaporte válido por 6 meses. ATENÇÃO febre amarela: CIVP obrigatório para quem chega do Brasil (país listado), inclusive em trânsito acima de 12h — leve o certificado. Confira na fonte oficial."
  },
  "AU": {
-  "tipo": "eVisa",
+  "tipo": "e-visa",
   "dias": 90,
   "nota": "Brasileiro precisa de autorizacao eletronica eVisitor (subclasse 651), GRATUITA, solicitada online no site da Home Affairs (immi.gov.au) antes do embarque. Permite multiplas entradas com estadia de ate 3 meses por entrada dentro de 12 meses. Passaporte valido por toda a estadia; exige-se passagem de saida e fundos. NAO existe ESTA na Australia (isso e dos EUA)."
  },
@@ -6271,6 +7709,192 @@ export const VISTOS_EXTRA_BR = {
   "dias": 90,
   "nota": "Brasileiro recebe Visitor Permit (permissao de visitante) GRATUITA na chegada, valida por ate 3 meses dentro de um periodo de 1 ano. Exige passaporte valido por 6 meses, passagem de saida/retorno e comprovacao de fundos/hospedagem. Confira exigencias sanitarias na fonte oficial."
  }
+,
+ "AF": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório com aprovação prévia. Situação de segurança extremamente instável — o Itamaraty desaconselha viagens ao Afeganistão. Verificar com a embaixada mais próxima (geralmente Islamabad)."
+ },
+ "BF": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório para brasileiros, obtido na embaixada ou consulado antes da viagem. Passaporte válido por 6 meses, foto, carta-convite e comprovante de vacinação contra febre amarela exigidos."
+ },
+ "BI": {
+   "tipo": "on-arrival",
+   "dias": 30,
+   "nota": "Visto disponível na chegada (visa on arrival) no Aeroporto de Bujumbura por ~90 USD. Passaporte válido por 6+ meses, comprovante de hospedagem e passagem de retorno. Certificado de vacinação contra febre amarela obrigatório."
+ },
+ "CF": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório, obtido previamente na embaixada (Paris é a referência). Situação de segurança muito instável — o Itamaraty desaconselha viagens. Certificado de febre amarela exigido."
+ },
+ "TD": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório para brasileiros, obtido na embaixada (Paris ou Abuja). Exige passaporte válido por 6+ meses, fotos, comprovante de hospedagem e vacinação contra febre amarela."
+ },
+ "KM": {
+   "tipo": "on-arrival",
+   "dias": 45,
+   "nota": "Visto na chegada disponível no Aeroporto de Moroni por ~50 EUR. Passaporte válido por 6+ meses, passagem de retorno e comprovante de hospedagem. Relativamente simples."
+ },
+ "CG": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório para brasileiros, obtido na embaixada antes da viagem. Exige carta-convite, passaporte válido por 6+ meses e certificado de vacinação contra febre amarela."
+ },
+ "CD": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório, obtido previamente na embaixada. Processo burocrático e demorado. Situação de segurança precária em várias regiões (especialmente leste). Certificado de febre amarela obrigatório."
+ },
+ "DJ": {
+   "tipo": "e-visa",
+   "dias": 31,
+   "nota": "E-visa disponível online pelo portal oficial (~30 USD). Processamento em 72h. Passaporte válido por 6+ meses. Alternativa: visto na chegada sob certas condições."
+ },
+ "GQ": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório, obtido na embaixada antes da viagem. Processo restritivo: carta-convite frequentemente exigida. Um dos países mais difíceis de visitar na África."
+ },
+ "ER": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório, obtido na embaixada antes da viagem. Turismo muito restrito — deslocamentos internos requerem autorização adicional. Passaporte válido por 6+ meses."
+ },
+ "GN": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório para brasileiros. Pode ser obtido na embaixada ou verificar disponibilidade de e-visa. Passaporte válido por 6+ meses e vacinação contra febre amarela obrigatória."
+ },
+ "GW": {
+   "tipo": "isento",
+   "dias": 90,
+   "nota": "Brasileiros são isentos de visto para estadias de até 90 dias (acordo CPLP). Passaporte válido por 6+ meses. Membro da Comunidade dos Países de Língua Portuguesa."
+ },
+ "IQ": {
+   "tipo": "on-arrival",
+   "dias": 60,
+   "nota": "Visto na chegada disponível nos aeroportos de Erbil, Suleimaniya e Bagdá (~75 USD). Região do Curdistão iraquiano é mais acessível. Centro/sul instável — verificar alertas do Itamaraty."
+ },
+ "KI": {
+   "tipo": "isento",
+   "dias": 30,
+   "nota": "Brasileiros podem visitar sem visto por até 30 dias. Passaporte válido por 6+ meses e passagem de retorno exigidos. Acesso limitado — poucos voos semanais."
+ },
+ "KP": {
+   "tipo": "visto",
+   "dias": 15,
+   "nota": "Visto obrigatório, obtido exclusivamente via agências de turismo autorizadas (ex: Koryo Tours). Turismo individual não existe — apenas grupos guiados. Jornalistas proibidos."
+ },
+ "LR": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório para brasileiros, obtido na embaixada antes da viagem. Passaporte válido por 6+ meses e vacinação contra febre amarela obrigatória."
+ },
+ "LY": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório, obtido previamente. Situação de segurança muito instável — o Itamaraty desaconselha viagens à Líbia. Acesso extremamente difícil."
+ },
+ "ML": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório para brasileiros, obtido na embaixada. O norte do país (Timbuctu, Kidal) tem segurança muito precária — o Itamaraty desaconselha viagens a essas regiões."
+ },
+ "MH": {
+   "tipo": "isento",
+   "dias": 30,
+   "nota": "Brasileiros podem entrar sem visto por até 30 dias. Passaporte válido por 6+ meses e passagem de retorno. Conexões aéreas limitadas (via Guam, Honolulu ou Fiji)."
+ },
+ "MR": {
+   "tipo": "on-arrival",
+   "dias": 30,
+   "nota": "Visto na chegada disponível no Aeroporto de Nouakchott por ~55 EUR. Passaporte válido por 6+ meses, foto recente e comprovante de hospedagem."
+ },
+ "FM": {
+   "tipo": "isento",
+   "dias": 30,
+   "nota": "Brasileiros podem visitar sem visto por até 30 dias. Passaporte válido por 6+ meses e passagem de saída. Extensão possível até 90 dias no local."
+ },
+ "NR": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório, geralmente obtido previamente. Verificar com a representação de Nauru (Suva, Fiji). Acesso muito limitado — poucos voos semanais via Fiji ou Ilhas Marshall."
+ },
+ "NE": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório para brasileiros, obtido na embaixada. O norte (zona do Saara) tem situação de segurança instável. Vacinação contra febre amarela obrigatória."
+ },
+ "KN": {
+   "tipo": "isento",
+   "dias": 90,
+   "nota": "Brasileiros são isentos de visto para estadias de até 90 dias. Passaporte válido por 6+ meses, passagem de retorno e comprovante de hospedagem/fundos."
+ },
+ "VC": {
+   "tipo": "isento",
+   "dias": 90,
+   "nota": "Brasileiros são isentos de visto para estadias de até 90 dias. Passaporte válido por 6+ meses, passagem de retorno e comprovante de recursos financeiros."
+ },
+ "ST": {
+   "tipo": "isento",
+   "dias": 15,
+   "nota": "Brasileiros são isentos de visto para estadias de até 15 dias (acordo CPLP). Para estadias maiores, autorização de permanência no local. Passaporte válido por 6+ meses."
+ },
+ "SL": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório para brasileiros, obtido na embaixada ou verificar e-visa disponível. Passaporte válido por 6+ meses. Vacinação contra febre amarela obrigatória."
+ },
+ "SO": {
+   "tipo": "on-arrival",
+   "dias": 30,
+   "nota": "Visto na chegada disponível nos aeroportos de Mogadíscio e Hargeisa (~60 USD). Situação de segurança extremamente instável — o Itamaraty desaconselha viagens. Somalilândia (norte) é mais estável."
+ },
+ "SS": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório, obtido na embaixada antes da viagem. Situação de segurança muito instável — o Itamaraty desaconselha fortemente viagens ao Sudão do Sul."
+ },
+ "SD": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório para brasileiros, obtido na embaixada. Conflito armado ativo desde 2023 — o Itamaraty desaconselha viagens. Passaporte não pode conter carimbo de Israel."
+ },
+ "SY": {
+   "tipo": "visto",
+   "dias": 15,
+   "nota": "Visto obrigatório, obtido na embaixada antes da viagem. Conflito armado prolongado — o Itamaraty desaconselha fortemente viagens à Síria. Infraestrutura turística destruída em grande parte."
+ },
+ "TL": {
+   "tipo": "on-arrival",
+   "dias": 30,
+   "nota": "Visto na chegada gratuito (visa on arrival) no Aeroporto de Díli para brasileiros (acordo CPLP). Passaporte válido por 6+ meses, passagem de retorno e comprovante de fundos (~50 USD/dia)."
+ },
+ "TV": {
+   "tipo": "isento",
+   "dias": 30,
+   "nota": "Brasileiros podem entrar sem visto por até 30 dias. Passaporte válido por 6+ meses. Acesso muito limitado — voos apenas de Fiji (Suva). Um dos países menos visitados do mundo."
+ },
+ "YE": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Visto obrigatório, obtido na embaixada. Conflito armado ativo — o Itamaraty desaconselha fortemente viagens ao Iêmen. Praticamente impossível turismo convencional."
+ },
+ "VA": {
+   "tipo": "isento",
+   "dias": 90,
+   "nota": "Brasileiros entram livremente no Vaticano (mesmo regime Schengen/Itália). Isenção de visto para até 90 dias no espaço Schengen. Passaporte válido por 3+ meses além da estadia."
+ },
+ "PS": {
+   "tipo": "visto",
+   "dias": 30,
+   "nota": "Acesso à Cisjordânia via Israel (isento de visto israelense por 90 dias). Controles militares rígidos nos checkpoints. Faixa de Gaza inacessível para turismo. Situação volátil — verificar alertas do Itamaraty."
+ }
 };
 
 export const INDICES_EXTRA = {
@@ -6369,7 +7993,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 5,
   "natureza": 10,
   "cultura": 8,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 4,
   "aventura": 10
  },
@@ -6396,7 +8020,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 6,
   "natureza": 10,
   "cultura": 10,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 2,
   "aventura": 9
  },
@@ -6423,7 +8047,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 7,
   "natureza": 6,
   "cultura": 10,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 5,
   "aventura": 7
  },
@@ -6459,7 +8083,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 7,
   "natureza": 9,
   "cultura": 9,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 6,
   "aventura": 8
  },
@@ -6657,7 +8281,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 6,
   "natureza": 7,
   "cultura": 7,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 5,
   "aventura": 5
  },
@@ -6756,7 +8380,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 7,
   "natureza": 6,
   "cultura": 9,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 8,
   "aventura": 5
  },
@@ -6765,7 +8389,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 6,
   "natureza": 8,
   "cultura": 7,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 6,
   "aventura": 7
  },
@@ -6774,7 +8398,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 8,
   "natureza": 6,
   "cultura": 9,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 9,
   "aventura": 5
  },
@@ -6819,7 +8443,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 7,
   "natureza": 7,
   "cultura": 7,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 9,
   "aventura": 6
  },
@@ -7053,7 +8677,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 6,
   "natureza": 7,
   "cultura": 6,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 5,
   "aventura": 6
  },
@@ -7152,7 +8776,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 7,
   "natureza": 9,
   "cultura": 10,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 4,
   "aventura": 9
  },
@@ -7170,7 +8794,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 4,
   "natureza": 10,
   "cultura": 6,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 4,
   "aventura": 9
  },
@@ -7179,7 +8803,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 4,
   "natureza": 9,
   "cultura": 6,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 4,
   "aventura": 9
  },
@@ -7197,7 +8821,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 4,
   "natureza": 9,
   "cultura": 6,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 4,
   "aventura": 9
  },
@@ -7386,7 +9010,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 7,
   "natureza": 6,
   "cultura": 7,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 6,
   "aventura": 5
  },
@@ -7395,7 +9019,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 6,
   "natureza": 7,
   "cultura": 7,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 6,
   "aventura": 5
  },
@@ -7404,7 +9028,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 7,
   "natureza": 8,
   "cultura": 8,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 6,
   "aventura": 7
  },
@@ -7413,7 +9037,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 7,
   "natureza": 9,
   "cultura": 6,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 5,
   "aventura": 9
  },
@@ -7431,7 +9055,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 6,
   "natureza": 9,
   "cultura": 6,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 4,
   "aventura": 8
  },
@@ -7440,7 +9064,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 7,
   "natureza": 7,
   "cultura": 9,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 4,
   "aventura": 5
  },
@@ -7476,7 +9100,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 4,
   "natureza": 8,
   "cultura": 7,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 4,
   "aventura": 7
  },
@@ -7485,7 +9109,7 @@ export const INDICES_EXTRA = {
   "gastronomia": 4,
   "natureza": 9,
   "cultura": 7,
-  "praia": 0,
+  "praia": 1,
   "vidaNoturna": 3,
   "aventura": 9
  },
@@ -7587,6 +9211,340 @@ export const INDICES_EXTRA = {
   "praia": 9,
   "vidaNoturna": 3,
   "aventura": 10
+ }
+,
+ "AF": {
+   "seguranca": 1,
+   "gastronomia": 7,
+   "natureza": 8,
+   "cultura": 9,
+   "praia": 1,
+   "vidaNoturna": 1,
+   "aventura": 8
+ },
+ "BF": {
+   "seguranca": 3,
+   "gastronomia": 5,
+   "natureza": 5,
+   "cultura": 6,
+   "praia": 1,
+   "vidaNoturna": 3,
+   "aventura": 5
+ },
+ "BI": {
+   "seguranca": 3,
+   "gastronomia": 4,
+   "natureza": 6,
+   "cultura": 5,
+   "praia": 3,
+   "vidaNoturna": 2,
+   "aventura": 5
+ },
+ "CF": {
+   "seguranca": 1,
+   "gastronomia": 3,
+   "natureza": 6,
+   "cultura": 4,
+   "praia": 1,
+   "vidaNoturna": 1,
+   "aventura": 5
+ },
+ "TD": {
+   "seguranca": 2,
+   "gastronomia": 4,
+   "natureza": 7,
+   "cultura": 5,
+   "praia": 1,
+   "vidaNoturna": 2,
+   "aventura": 7
+ },
+ "KM": {
+   "seguranca": 5,
+   "gastronomia": 6,
+   "natureza": 8,
+   "cultura": 5,
+   "praia": 8,
+   "vidaNoturna": 2,
+   "aventura": 7
+ },
+ "CG": {
+   "seguranca": 3,
+   "gastronomia": 5,
+   "natureza": 7,
+   "cultura": 5,
+   "praia": 4,
+   "vidaNoturna": 4,
+   "aventura": 6
+ },
+ "CD": {
+   "seguranca": 2,
+   "gastronomia": 5,
+   "natureza": 9,
+   "cultura": 6,
+   "praia": 1,
+   "vidaNoturna": 3,
+   "aventura": 9
+ },
+ "DJ": {
+   "seguranca": 5,
+   "gastronomia": 5,
+   "natureza": 7,
+   "cultura": 4,
+   "praia": 5,
+   "vidaNoturna": 3,
+   "aventura": 7
+ },
+ "GQ": {
+   "seguranca": 4,
+   "gastronomia": 5,
+   "natureza": 7,
+   "cultura": 4,
+   "praia": 6,
+   "vidaNoturna": 3,
+   "aventura": 5
+ },
+ "ER": {
+   "seguranca": 4,
+   "gastronomia": 7,
+   "natureza": 6,
+   "cultura": 7,
+   "praia": 5,
+   "vidaNoturna": 2,
+   "aventura": 6
+ },
+ "GN": {
+   "seguranca": 3,
+   "gastronomia": 6,
+   "natureza": 7,
+   "cultura": 6,
+   "praia": 4,
+   "vidaNoturna": 4,
+   "aventura": 6
+ },
+ "GW": {
+   "seguranca": 4,
+   "gastronomia": 5,
+   "natureza": 7,
+   "cultura": 5,
+   "praia": 6,
+   "vidaNoturna": 3,
+   "aventura": 6
+ },
+ "IQ": {
+   "seguranca": 3,
+   "gastronomia": 8,
+   "natureza": 5,
+   "cultura": 10,
+   "praia": 1,
+   "vidaNoturna": 3,
+   "aventura": 5
+ },
+ "KI": {
+   "seguranca": 7,
+   "gastronomia": 4,
+   "natureza": 7,
+   "cultura": 5,
+   "praia": 9,
+   "vidaNoturna": 1,
+   "aventura": 6
+ },
+ "KP": {
+   "seguranca": 5,
+   "gastronomia": 5,
+   "natureza": 6,
+   "cultura": 8,
+   "praia": 2,
+   "vidaNoturna": 1,
+   "aventura": 3
+ },
+ "LR": {
+   "seguranca": 4,
+   "gastronomia": 5,
+   "natureza": 6,
+   "cultura": 5,
+   "praia": 7,
+   "vidaNoturna": 4,
+   "aventura": 5
+ },
+ "LY": {
+   "seguranca": 2,
+   "gastronomia": 6,
+   "natureza": 7,
+   "cultura": 9,
+   "praia": 5,
+   "vidaNoturna": 1,
+   "aventura": 6
+ },
+ "ML": {
+   "seguranca": 2,
+   "gastronomia": 6,
+   "natureza": 6,
+   "cultura": 9,
+   "praia": 1,
+   "vidaNoturna": 4,
+   "aventura": 6
+ },
+ "MH": {
+   "seguranca": 7,
+   "gastronomia": 4,
+   "natureza": 7,
+   "cultura": 5,
+   "praia": 9,
+   "vidaNoturna": 2,
+   "aventura": 6
+ },
+ "MR": {
+   "seguranca": 4,
+   "gastronomia": 5,
+   "natureza": 7,
+   "cultura": 6,
+   "praia": 3,
+   "vidaNoturna": 1,
+   "aventura": 7
+ },
+ "FM": {
+   "seguranca": 7,
+   "gastronomia": 4,
+   "natureza": 8,
+   "cultura": 6,
+   "praia": 8,
+   "vidaNoturna": 2,
+   "aventura": 7
+ },
+ "NR": {
+   "seguranca": 7,
+   "gastronomia": 3,
+   "natureza": 4,
+   "cultura": 4,
+   "praia": 5,
+   "vidaNoturna": 1,
+   "aventura": 3
+ },
+ "NE": {
+   "seguranca": 3,
+   "gastronomia": 5,
+   "natureza": 7,
+   "cultura": 6,
+   "praia": 1,
+   "vidaNoturna": 2,
+   "aventura": 7
+ },
+ "KN": {
+   "seguranca": 7,
+   "gastronomia": 6,
+   "natureza": 7,
+   "cultura": 5,
+   "praia": 9,
+   "vidaNoturna": 5,
+   "aventura": 6
+ },
+ "VC": {
+   "seguranca": 7,
+   "gastronomia": 6,
+   "natureza": 8,
+   "cultura": 5,
+   "praia": 9,
+   "vidaNoturna": 5,
+   "aventura": 7
+ },
+ "ST": {
+   "seguranca": 7,
+   "gastronomia": 6,
+   "natureza": 8,
+   "cultura": 5,
+   "praia": 8,
+   "vidaNoturna": 3,
+   "aventura": 7
+ },
+ "SL": {
+   "seguranca": 4,
+   "gastronomia": 5,
+   "natureza": 7,
+   "cultura": 5,
+   "praia": 8,
+   "vidaNoturna": 4,
+   "aventura": 6
+ },
+ "SO": {
+   "seguranca": 1,
+   "gastronomia": 6,
+   "natureza": 5,
+   "cultura": 6,
+   "praia": 5,
+   "vidaNoturna": 1,
+   "aventura": 4
+ },
+ "SS": {
+   "seguranca": 1,
+   "gastronomia": 3,
+   "natureza": 6,
+   "cultura": 4,
+   "praia": 1,
+   "vidaNoturna": 1,
+   "aventura": 4
+ },
+ "SD": {
+   "seguranca": 1,
+   "gastronomia": 6,
+   "natureza": 7,
+   "cultura": 8,
+   "praia": 4,
+   "vidaNoturna": 2,
+   "aventura": 6
+ },
+ "SY": {
+   "seguranca": 1,
+   "gastronomia": 9,
+   "natureza": 5,
+   "cultura": 10,
+   "praia": 4,
+   "vidaNoturna": 2,
+   "aventura": 4
+ },
+ "TL": {
+   "seguranca": 5,
+   "gastronomia": 5,
+   "natureza": 8,
+   "cultura": 6,
+   "praia": 7,
+   "vidaNoturna": 3,
+   "aventura": 8
+ },
+ "TV": {
+   "seguranca": 8,
+   "gastronomia": 3,
+   "natureza": 5,
+   "cultura": 5,
+   "praia": 7,
+   "vidaNoturna": 1,
+   "aventura": 4
+ },
+ "YE": {
+   "seguranca": 1,
+   "gastronomia": 8,
+   "natureza": 7,
+   "cultura": 9,
+   "praia": 5,
+   "vidaNoturna": 1,
+   "aventura": 5
+ },
+ "VA": {
+   "seguranca": 10,
+   "gastronomia": 8,
+   "natureza": 2,
+   "cultura": 10,
+   "praia": 1,
+   "vidaNoturna": 1,
+   "aventura": 1
+ },
+ "PS": {
+   "seguranca": 2,
+   "gastronomia": 9,
+   "natureza": 5,
+   "cultura": 10,
+   "praia": 3,
+   "vidaNoturna": 3,
+   "aventura": 4
  }
 };
 
@@ -7737,6 +9695,44 @@ export const WIKIDATA_EXTRA = {
  "DM": "Q784",
  "PW": "Q695",
  "SB": "Q685"
+,
+ "AF": "Q889",
+ "BF": "Q965",
+ "BI": "Q967",
+ "CF": "Q929",
+ "TD": "Q657",
+ "KM": "Q970",
+ "CG": "Q971",
+ "CD": "Q974",
+ "DJ": "Q977",
+ "GQ": "Q983",
+ "ER": "Q986",
+ "GN": "Q1006",
+ "GW": "Q1007",
+ "IQ": "Q796",
+ "KI": "Q710",
+ "KP": "Q423",
+ "LR": "Q1014",
+ "LY": "Q1016",
+ "ML": "Q912",
+ "MH": "Q709",
+ "MR": "Q1025",
+ "FM": "Q702",
+ "NR": "Q697",
+ "NE": "Q1032",
+ "KN": "Q763",
+ "VC": "Q757",
+ "ST": "Q1039",
+ "SL": "Q1044",
+ "SO": "Q1045",
+ "SS": "Q958",
+ "SD": "Q1049",
+ "SY": "Q858",
+ "TL": "Q574",
+ "TV": "Q672",
+ "YE": "Q805",
+ "VA": "Q237",
+ "PS": "Q219060"
 };
 
 export const MOEDAS_EXTRA = [
@@ -8140,6 +10136,26 @@ export const MOEDAS_EXTRA = [
   "code": "SBD",
   "nome": "SBD (Ilhas Salomão)"
  }
+,
+ {"code":"AFN","nome":"AFN (Afeganistão)"},
+ {"code":"BIF","nome":"BIF (Burundi)"},
+ {"code":"KMF","nome":"KMF (Comores)"},
+ {"code":"CDF","nome":"CDF (Congo RD)"},
+ {"code":"DJF","nome":"DJF (Djibuti)"},
+ {"code":"ERN","nome":"ERN (Eritreia)"},
+ {"code":"GNF","nome":"GNF (Guiné)"},
+ {"code":"IQD","nome":"IQD (Iraque)"},
+ {"code":"KPW","nome":"KPW (Coreia do Norte)"},
+ {"code":"LRD","nome":"LRD (Libéria)"},
+ {"code":"LYD","nome":"LYD (Líbia)"},
+ {"code":"MRU","nome":"MRU (Mauritânia)"},
+ {"code":"SLE","nome":"SLE (Serra Leoa)"},
+ {"code":"SOS","nome":"SOS (Somália)"},
+ {"code":"SSP","nome":"SSP (Sudão do Sul)"},
+ {"code":"SDG","nome":"SDG (Sudão)"},
+ {"code":"SYP","nome":"SYP (Síria)"},
+ {"code":"STN","nome":"STN (São Tomé e Príncipe)"},
+ {"code":"YER","nome":"YER (Iêmen)"}
 ];
 
 export const FX_EXTRA = {
@@ -8243,4 +10259,24 @@ export const FX_EXTRA = {
  "ANG": 1.79,
  "XCD": 2.7,
  "SBD": 8.06
+,
+ "AFN": 72,
+ "BIF": 2900,
+ "KMF": 453,
+ "CDF": 2800,
+ "DJF": 178,
+ "ERN": 15,
+ "GNF": 8600,
+ "IQD": 1310,
+ "KPW": 900,
+ "LRD": 192,
+ "LYD": 4.85,
+ "MRU": 39.5,
+ "SLE": 22.5,
+ "SOS": 571,
+ "SSP": 1650,
+ "SDG": 600,
+ "SYP": 13000,
+ "STN": 22.8,
+ "YER": 250
 };
