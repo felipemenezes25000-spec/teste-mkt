@@ -18,6 +18,7 @@ import { GaleriaLugares } from './GaleriaLugares.jsx';
 import { wikiThumb } from '../../../_lib/wikiThumb.js';
 import { JsonLd } from '../../../_components/JsonLd.jsx';
 import { jsonLdDestino, jsonLdBreadcrumb, siteUrl } from '../../../_lib/seo.js';
+import { ShareButtons } from '../../../_components/ShareButtons.jsx';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -285,6 +286,15 @@ export default async function DestinoPage({ params }) {
           </div>
           <AddToRouteButton code={d.code} nome={d.nome} className={btnPrimary}>🗺️ Adicionar à rota</AddToRouteButton>
           <Link href={`/roteiro?destino=${d.slug}`} className={btnGhost}>✨ Gerar roteiro</Link>
+        </section>
+
+        {/* COMPARTILHAR — cada destino é público e tem OG próprio (card bonito no link) */}
+        <section className="rounded-2xl border border-line bg-card p-5">
+          <ShareButtons
+            url={`${base}/destino/${d.slug}`}
+            titulo={`${d.nome} — guia de viagem`}
+            texto={`Olha ${d.nome} no Mundo Sem Fim: melhor época, custo real e o que fazer.`}
+          />
         </section>
 
         <p className="text-xs text-inksoft border-t border-line pt-4">
