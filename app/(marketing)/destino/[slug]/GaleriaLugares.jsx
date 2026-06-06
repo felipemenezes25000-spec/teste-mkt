@@ -35,7 +35,14 @@ export function GaleriaLugares({ lugares, layout = 'ponto' }) {
             </div>
             <div className="p-2.5 flex items-center justify-between gap-1">
               <span className="min-w-0">
-                <span className="block text-sm font-semibold text-ink line-clamp-1">{l.nome}</span>
+                <span className="flex items-center gap-1.5">
+                  <span className="block text-sm font-semibold text-ink line-clamp-1">{l.nome}</span>
+                  {l.fora && (
+                    <span className="shrink-0 text-[9px] font-bold uppercase tracking-wider bg-coral/15 text-coral border border-coral/30 rounded-full px-1.5 py-0.5" title="Fora da rota turística clássica">
+                      fora da rota
+                    </span>
+                  )}
+                </span>
                 {l.sub && <span className="block text-[11px] text-inksoft line-clamp-1 mt-0.5">{l.sub}</span>}
               </span>
               <span className="text-pine shrink-0" aria-hidden>↗</span>

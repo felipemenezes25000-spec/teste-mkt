@@ -5,29 +5,37 @@ import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
 import { GlobalSearch } from './GlobalSearch.jsx';
 import { MobileMenu } from './MobileMenu.jsx';
+import { IdiomaSwitcher } from './IdiomaSwitcher.jsx';
+import { useIdioma } from '../_lib/i18n.js';
 
 // Navegação global das telas de produto (marketing/explorar/destino/roteiro/voos/
 // planos). O planner (/planejar) tem o próprio cabeçalho com as ações da viagem.
+// labels viram chaves de i18n (resolvidas via t() no render). Default pt-BR
+// sobrevive sem i18n (hook não-montado no SSR).
 const LINKS = [
-  { href: '/explorar', label: 'Descobrir' },
-  { href: '/decisao', label: 'Decidir' },
-  { href: '/comparar', label: 'Comparar' },
-  { href: '/custo-real', label: 'Custo real' },
-  { href: '/roteiro', label: 'Roteiro' },
-  { href: '/planos', label: 'Preços' },
+  { href: '/explorar', i18nKey: 'nav.descobrir', fallback: 'Descobrir' },
+  { href: '/decisao', i18nKey: 'nav.decidir', fallback: 'Decidir' },
+  { href: '/comparar', i18nKey: 'nav.comparar', fallback: 'Comparar' },
+  { href: '/custo-real', i18nKey: 'nav.custoReal', fallback: 'Custo real' },
+  { href: '/roteiro', i18nKey: 'nav.roteiro', fallback: 'Roteiro' },
+  { href: '/planos', i18nKey: 'nav.precos', fallback: 'Preços' },
 ];
 
 const SECONDARY_LINKS = [
-  { href: '/planejar', label: 'Planejar' },
-  { href: '/voos', label: 'Voos' },
-  { href: '/salvos', label: 'Salvos' },
-  { href: '/conta', label: 'Entrar' },
+  { href: '/planejar', i18nKey: 'nav.planejar', fallback: 'Planejar' },
+  { href: '/voos', i18nKey: 'nav.voos', fallback: 'Voos' },
+  { href: '/salvos', i18nKey: 'nav.salvos', fallback: 'Salvos' },
+  { href: '/conta', i18nKey: 'nav.entrar', fallback: 'Entrar' },
 ];
 
 export default function AppNav() {
   const path = usePathname() || '/';
   const [alerta, setAlerta] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useIdioma();
+  // Resolve labels uma vez por render — t() é puro/rápido.
+  const linksTrad = LINKS.map((l) => ({ ...l, label: t(l.i18nKey) || l.fallback }));
+  const linksSecTrad = SECONDARY_LINKS.map((l) => ({ ...l, label: t(l.i18nKey) || l.fallback }));
 
   // Fecha o menu mobile ao navegar (inclui a busca global, que faz router.push).
   useEffect(() => { setMenuOpen(false); }, [path]);
@@ -63,7 +71,7 @@ export default function AppNav() {
         <div className="hidden lg:block shrink-0"><GlobalSearch /></div>
         {/* Links completos só no desktop (lg+); no mobile viram o menu hambúrguer. */}
         <div className="hidden lg:flex items-center gap-0.5 ml-auto">
-          {LINKS.map((l) => {
+          {linksTrad.map((l) => {
             const active = path === l.href || path.startsWith(l.href + '/');
             return (
               <Link
@@ -75,7 +83,7 @@ export default function AppNav() {
             );
           })}
           <span className="mx-1 h-5 w-px bg-line" aria-hidden />
-          {SECONDARY_LINKS.map((l) => {
+          {linksSecTrad.map((l) => {
             const active = path === l.href || path.startsWith(l.href + '/');
             return (
               <Link
@@ -98,6 +106,7 @@ export default function AppNav() {
               ⚠ {alerta}
             </Link>
           )}
+          <IdiomaSwitcher />
           <ThemeToggle />
           <button
             type="button"
@@ -112,7 +121,7 @@ export default function AppNav() {
           </button>
         </div>
       </nav>
-      {menuOpen && <MobileMenu links={[...LINKS, ...SECONDARY_LINKS]} path={path} onClose={() => setMenuOpen(false)} />}
+      {menuOpen && <MobileMenu links={[...linksTrad, ...linksSecTrad]} path={path} onClose={() => setMenuOpen(false)} />}
     </header>
   );
 }

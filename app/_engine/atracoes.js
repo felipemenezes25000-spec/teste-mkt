@@ -6,6 +6,7 @@
    ========================================================================== */
 import { ATRACOES_OVERRIDE } from './atracoesOverride.js';
 import { ATRACOES_EXTRA } from './atracoesExtra.js';
+import { FORA_DA_ROTA } from './atracoesForaDaRota.js';
 
 export const ATRACOES = {
  "TH": [
@@ -10365,10 +10366,14 @@ export const ATRACOES = {
 };
 
 export function atracoesDoPais(code) {
-  // Prefere a base auto-gerada; se o país não está no JSON (38 países pequenos/
-  // instáveis), cai pro ATRACOES_EXTRA curado à mão. Override sempre aplica.
+  // 1. Base auto-gerada (167 países) ou ATRACOES_EXTRA (38 países curados).
+  // 2. Concatena com FORA_DA_ROTA (pontos periféricos / fora do circuito clássico
+  //    pros top 30 destinos). Cada item tem `fora: true` pra UI diferenciar.
+  // 3. Override sempre aplica (substitui `wiki` por título melhor curado).
   const base = (code && (ATRACOES[code] || ATRACOES_EXTRA[code])) || [];
-  return base.map((a) => {
+  const fora = (code && FORA_DA_ROTA[code]) || [];
+  const todos = [...base, ...fora];
+  return todos.map((a) => {
     const override = ATRACOES_OVERRIDE[`${code}:${a.nome}`];
     return override ? { ...a, wiki: override } : a;
   });

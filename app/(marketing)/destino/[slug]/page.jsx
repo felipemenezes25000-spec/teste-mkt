@@ -23,6 +23,7 @@ import { VerdictCard } from '../../../_components/VerdictCard.jsx';
 import { TravelFitScore } from '../../../_components/TravelFitScore.jsx';
 import { ValeIrAgora } from '../../../_components/ValeIrAgora.jsx';
 import { OQueNinguemConta } from '../../../_components/OQueNinguemConta.jsx';
+import { MapaDestino } from '../../../_components/MapaDestino.jsx';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -71,42 +72,8 @@ function creditoCommonsLite(u) {
   }
 }
 
-// Mapa do país centrado, com marcador. Suporta 2 modos:
-//  (1) MapTiler: se NEXT_PUBLIC_MAPTILER_KEY estiver definido, usa tiles com idioma
-//      controlado por `?language=` (50+ idiomas: pt/en/es/fr/de/ja/zh/ar/ru/...).
-//      Cadastre uma chave grátis em https://cloud.maptiler.com (free tier ~100k req/mês).
-//  (2) OSM (fallback sem chave): labels no idioma local da cidade (Tóquio em japonês,
-//      Beirute em árabe, etc) — sem controle do idioma, mas sem custo nem dependência.
-// Quando o site tiver i18n, o callsite passa `idioma={locale}` e o mapa segue.
-function MapaDestino({ coords, nome, idioma = 'pt' }) {
-  if (!Array.isArray(coords) || coords.length !== 2) return null;
-  const [lng, lat] = coords;
-  const maptilerKey = process.env.NEXT_PUBLIC_MAPTILER_KEY;
-
-  let src;
-  let openLargerHref;
-  if (maptilerKey) {
-    // MapTiler embed interativo (zoom/pan dentro do iframe) com idioma das labels.
-    // Estilo "streets-v2" é o mais legível pra cidades; zoom 5 mostra o país inteiro.
-    src = `https://api.maptiler.com/maps/streets-v2/?key=${maptilerKey}&language=${idioma}#5/${lat}/${lng}`;
-    openLargerHref = `https://www.maptiler.com/maps/#streets-v2//${idioma}/5/${lng}/${lat}`;
-  } else {
-    const dx = 6, dy = 4;
-    const bbox = `${lng - dx}%2C${lat - dy}%2C${lng + dx}%2C${lat + dy}`;
-    src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
-    openLargerHref = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=6/${lat}/${lng}`;
-  }
-
-  return (
-    <section>
-      <h2 className="font-display text-2xl text-ink mb-3">🗺️ Onde fica {nome}</h2>
-      <div className="rounded-2xl overflow-hidden border border-line bg-paper2">
-        <iframe src={src} title={`Mapa de ${nome}`} loading="lazy" className="w-full h-72 sm:h-80 border-0" />
-      </div>
-      <a href={openLargerHref} target="_blank" rel="noopener noreferrer" className="inline-block mt-1 text-xs text-pine hover:underline focusring">Abrir mapa maior ↗</a>
-    </section>
-  );
-}
+// MapaDestino agora é Client Component (lê useIdioma → MapTiler troca labels).
+// Importado de _components/MapaDestino.jsx.
 
 export default async function DestinoPage(props) {
   const params = await props.params;
@@ -159,8 +126,8 @@ export default async function DestinoPage(props) {
   const contextoPais = sobrePais?.extrato || sobre?.extrato || null;
   const urlPais = sobrePais?.url || sobre?.url || null;
   const galeria = pontos.length
-    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: wikiThumb(pontosInfo[i].src, 480), credito: pontosInfo[i].credito, wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais }))
-    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: wikiThumb(a.img, 480), credito: creditoCommonsLite(a.img), wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais }));
+    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: wikiThumb(pontosInfo[i].src, 480), credito: pontosInfo[i].credito, wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais, fora: !!a.fora }))
+    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: wikiThumb(a.img, 480), credito: creditoCommonsLite(a.img), wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais, fora: false }));
 
   // Cidades & bases: mesma estrutura da galeria pra abrir o mesmo modal (decisão do
   // usuário: cidades também abrem história). wiki via override (foto + história certas).
