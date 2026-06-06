@@ -108,6 +108,8 @@ export const ATRACOES_EXTRA = {
     { nome: 'Parque Nacional Sudd', wiki: 'Sudd', cidade: 'Centro-norte' },
     { nome: 'Juba', wiki: 'Juba', cidade: 'Juba' },
     { nome: 'Reserva de Caça Bandingilo', wiki: 'Parque Nacional Bandingilo', cidade: 'Equatória Oriental' },
+    { nome: 'Catedral de Santa Teresa de Juba', wiki: 'Juba', cidade: 'Juba' },
+    { nome: 'Rio Nilo no Sudão do Sul', wiki: 'Rio Nilo', cidade: 'Juba' },
   ],
   KP: [
     { nome: 'Praça Kim Il-sung', wiki: 'Praça Kim Il-sung', cidade: 'Pyongyang' },
@@ -176,8 +178,10 @@ export const ATRACOES_EXTRA = {
     { nome: 'Parque Nacional de Manovo-Gounda St Floris', wiki: 'Parque Nacional Manovo-Gounda St. Floris', cidade: 'Bamingui-Bangoran' },
     { nome: 'Reserva Especial de Dzanga-Sangha', wiki: 'Reserva Especial Dzanga-Sangha', cidade: 'Sangha-Mbaéré' },
     { nome: 'Bangui', wiki: 'Bangui', cidade: 'Bangui' },
-    { nome: 'Catedral de Bangui', wiki: 'Bangui', cidade: 'Bangui' },
+    { nome: 'Catedral de Notre-Dame de Bangui', wiki: 'Catedral de Notre-Dame de Bangui', cidade: 'Bangui' },
     { nome: 'Rio Oubangui', wiki: 'Rio Ubangui', cidade: 'Bangui' },
+    { nome: 'Cataratas Boali', wiki: 'Cataratas Boali', cidade: 'Ombella-Mpoko' },
+    { nome: 'Floresta de Ngotto', wiki: 'Floresta de Ngotto', cidade: 'Lobaye' },
   ],
   CD: [
     { nome: 'Parque Nacional de Virunga', wiki: 'Parque Nacional de Virunga', cidade: 'Kivu do Norte' },
@@ -295,6 +299,8 @@ export const ATRACOES_EXTRA = {
     { nome: 'Área Protegida das Ilhas Phoenix', wiki: 'Área Protegida das Ilhas Fênix', cidade: 'Ilhas Fênix' },
     { nome: 'Banaba', wiki: 'Banaba', cidade: 'Rabi' },
     { nome: 'Bairiki', wiki: 'Bairiki', cidade: 'Tarawa' },
+    { nome: 'Memorial de Betio', wiki: 'Batalha de Tarawa', cidade: 'Betio' },
+    { nome: 'Ilhas Gilbert', wiki: 'Ilhas Gilbert', cidade: 'Tarawa' },
   ],
   MH: [
     { nome: 'Atol de Bikini', wiki: 'Atol de Bikini', cidade: 'Bikini' },
@@ -302,6 +308,8 @@ export const ATRACOES_EXTRA = {
     { nome: 'Atol de Kwajalein', wiki: 'Atol de Kwajalein', cidade: 'Kwajalein' },
     { nome: 'Arno Atoll', wiki: 'Arno', cidade: 'Arno' },
     { nome: 'Mili Atoll', wiki: 'Mili (atol)', cidade: 'Mili' },
+    { nome: 'Atol de Enewetak', wiki: 'Enewetak', cidade: 'Enewetak' },
+    { nome: 'Ilhas Marshall (cadeias Ratak e Ralik)', wiki: 'Ilhas Marshall', cidade: 'Majuro' },
   ],
   FM: [
     { nome: 'Nan Madol', wiki: 'Nan Madol', cidade: 'Pohnpei' },
@@ -317,6 +325,8 @@ export const ATRACOES_EXTRA = {
     { nome: 'Comando Ridge', wiki: 'Comando Ridge', cidade: 'Nauru' },
     { nome: 'Anibare Bay', wiki: 'Anibare', cidade: 'Anibare' },
     { nome: 'Moqua Caves', wiki: 'Moqua Caves', cidade: 'Anabar' },
+    { nome: 'Aeroporto Internacional de Nauru', wiki: 'Aeroporto Internacional de Nauru', cidade: 'Yaren' },
+    { nome: 'Capital de Nauru (sem capital oficial)', wiki: 'Nauru', cidade: 'Yaren' },
   ],
   TV: [
     { nome: 'Funafuti', wiki: 'Funafuti', cidade: 'Funafuti' },
@@ -324,6 +334,8 @@ export const ATRACOES_EXTRA = {
     { nome: 'Nanumea', wiki: 'Nanumea', cidade: 'Nanumea' },
     { nome: 'Nukufetau', wiki: 'Nukufetau', cidade: 'Nukufetau' },
     { nome: 'Vaiaku', wiki: 'Vaiaku', cidade: 'Funafuti' },
+    { nome: 'Niutao', wiki: 'Niutao', cidade: 'Niutao' },
+    { nome: 'Nui', wiki: 'Nui (Tuvalu)', cidade: 'Nui' },
   ],
   KN: [
     { nome: 'Brimstone Hill Fortress', wiki: 'Brimstone Hill Fortress', cidade: 'São Cristóvão' },
