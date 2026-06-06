@@ -84,6 +84,12 @@ export const STRINGS = {
       oqueTitulo: 'O que ninguém te conta',
       oqueP: 'Coisas que blog romantizado, vídeo curto e influencer não falam. Curado por país; honesto até quando incomoda.',
       oqueNotaIdioma: 'Dicas curadas em português brasileiro. Tradução automática em breve.',
+      // V2 — bloco "Específico de [cidade]"
+      fazerV2Titulo: 'Específico de', fazerV2Sub: 'Dicas, passes, especialidades e grátis curados — pesquisado em',
+      fazerV2Dicas: '💡 Dicas de economia', fazerV2Passes: '🎟️ Vale o passe?', fazerV2Cobre: 'Cobre',
+      fazerV2Especial: '⭐ Especialidade de', fazerV2Gratis: '🆓 Grátis ou doação', fazerV2Fontes: 'Fontes',
+      fazerV2Baixa: 'estimativa baixa confiança', fazerV2Desat: 'pesquisada há mais de 1 ano',
+      fazerV2Aviso: '⚠️ Preços mudam. Confira no site oficial antes de ir.',
     },
     map: { ampliar: 'Ver mapa maior' },
     geral: {
@@ -236,6 +242,12 @@ export const STRINGS = {
       oqueTitulo: 'What nobody tells you',
       oqueP: 'Things romanticized blogs, short videos and influencers don\'t mention. Curated by country; honest even when uncomfortable.',
       oqueNotaIdioma: 'Tips curated in Brazilian Portuguese. Auto-translation coming soon.',
+      // V2 — block "Specific to [city]"
+      fazerV2Titulo: 'Specific to', fazerV2Sub: 'Tips, passes, specialties and curated freebies — researched in',
+      fazerV2Dicas: '💡 Money-saving tips', fazerV2Passes: '🎟️ Worth the pass?', fazerV2Cobre: 'Covers',
+      fazerV2Especial: '⭐ Specialty of', fazerV2Gratis: '🆓 Free or donation', fazerV2Fontes: 'Sources',
+      fazerV2Baixa: 'low confidence estimate', fazerV2Desat: 'researched over 1 year ago',
+      fazerV2Aviso: '⚠️ Prices change. Check the official site before going.',
     },
     map: { ampliar: 'View larger map' },
     geral: {
@@ -388,6 +400,12 @@ export const STRINGS = {
       oqueTitulo: 'Lo que nadie te cuenta',
       oqueP: 'Cosas que los blogs romanticos, videos cortos y influencers no dicen. Curado por país; honesto hasta cuando incomoda.',
       oqueNotaIdioma: 'Tips curados en portugués brasileño. Traducción automática próximamente.',
+      // V2 — bloque "Específico de [ciudad]"
+      fazerV2Titulo: 'Específico de', fazerV2Sub: 'Tips, passes, especialidades y gratis curados — investigado en',
+      fazerV2Dicas: '💡 Tips de ahorro', fazerV2Passes: '🎟️ ¿Vale el pase?', fazerV2Cobre: 'Cubre',
+      fazerV2Especial: '⭐ Especialidad de', fazerV2Gratis: '🆓 Gratis o donación', fazerV2Fontes: 'Fuentes',
+      fazerV2Baixa: 'estimación baja confianza', fazerV2Desat: 'investigado hace más de 1 año',
+      fazerV2Aviso: '⚠️ Los precios cambian. Verifica el sitio oficial antes de ir.',
     },
     map: { ampliar: 'Ver mapa grande' },
     geral: {
@@ -540,6 +558,12 @@ export const STRINGS = {
       oqueTitulo: '誰も教えてくれないこと',
       oqueP: 'ロマンチックなブログ、ショート動画、インフルエンサーが語らないこと。国別キュレーション。不快でも正直に。',
       oqueNotaIdioma: 'ブラジル・ポルトガル語でキュレーション。自動翻訳は近日対応。',
+      // V2 — 「[都市]の特別情報」ブロック
+      fazerV2Titulo: 'の特別情報', fazerV2Sub: 'ヒント、パス、名物、無料情報 — 調査時期',
+      fazerV2Dicas: '💡 節約のヒント', fazerV2Passes: '🎟️ パスはお得？', fazerV2Cobre: '含まれるもの',
+      fazerV2Especial: '⭐ 名物 in', fazerV2Gratis: '🆓 無料または寄付', fazerV2Fontes: '情報源',
+      fazerV2Baixa: '信頼度低い推定', fazerV2Desat: '調査から1年以上',
+      fazerV2Aviso: '⚠️ 価格は変動します。訪問前に公式サイトで確認してください。',
     },
     map: { ampliar: '大きな地図を見る' },
     geral: {

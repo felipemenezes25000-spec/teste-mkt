@@ -142,8 +142,8 @@ export function OQueFazer({ itens = [], code, cidadePrincipal }) {
         <div className="mt-6 rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
           <header className="px-4 sm:px-5 py-3 border-b border-line flex items-center justify-between gap-3 flex-wrap">
             <div className="min-w-0">
-              <h3 className="font-display text-lg text-ink leading-tight">🏙️ Específico de {cidadeV2}</h3>
-              <p className="text-[11px] text-inksoft mt-0.5">Dicas, passes, especialidades e grátis curados — pesquisado em {meta.pesquisadoEm}.</p>
+              <h3 className="font-display text-lg text-ink leading-tight">🏙️ {t('destino.fazerV2Titulo')} {cidadeV2}</h3>
+              <p className="text-[11px] text-inksoft mt-0.5">{t('destino.fazerV2Sub')} {meta.pesquisadoEm}.</p>
             </div>
             {cidadesV2.length > 1 ? (
               <div className="flex flex-wrap gap-1.5">
@@ -162,7 +162,7 @@ export function OQueFazer({ itens = [], code, cidadePrincipal }) {
           <div className="divide-y divide-line">
             {dicas.length ? (
               <div className="px-4 sm:px-5 py-3">
-                <div className="text-xs font-semibold text-ink mb-1.5">💡 Dicas de economia</div>
+                <div className="text-xs font-semibold text-ink mb-1.5">{t('destino.fazerV2Dicas')}</div>
                 <ul className="space-y-1 text-sm text-ink">
                   {dicas.map((d, i) => (<li key={i} className="flex gap-2"><span aria-hidden className="text-inksoft">·</span><span>{d}</span></li>))}
                 </ul>
@@ -171,7 +171,7 @@ export function OQueFazer({ itens = [], code, cidadePrincipal }) {
 
             {passes.length ? (
               <div className="px-4 sm:px-5 py-3">
-                <div className="text-xs font-semibold text-ink mb-1.5">🎟️ Vale o passe?</div>
+                <div className="text-xs font-semibold text-ink mb-1.5">{t('destino.fazerV2Passes')}</div>
                 <ul className="space-y-2">
                   {passes.map((p, i) => {
                     const brl = cambio.brl ? `R$ ${Math.round(p.precoUSD * cambio.brl).toLocaleString('pt-BR')}` : null;
@@ -182,7 +182,7 @@ export function OQueFazer({ itens = [], code, cidadePrincipal }) {
                           <span className="tnum">{brl ?? `US$ ${Math.round(p.precoUSD)}`} {brl ? `(US$ ${Math.round(p.precoUSD)})` : null}</span>
                           {p.economia ? <span>• {p.economia}</span> : null}
                         </div>
-                        <div className="text-[12px] text-ink mt-0.5">Cobre: {p.cobre.join(' · ')}</div>
+                        <div className="text-[12px] text-ink mt-0.5">{t('destino.fazerV2Cobre')}: {p.cobre.join(' · ')}</div>
                       </li>
                     );
                   })}
@@ -192,7 +192,7 @@ export function OQueFazer({ itens = [], code, cidadePrincipal }) {
 
             {especialidades.length ? (
               <div className="px-4 sm:px-5 py-3">
-                <div className="text-xs font-semibold text-ink mb-1.5">⭐ Especialidade de {cidadeV2}</div>
+                <div className="text-xs font-semibold text-ink mb-1.5">{t('destino.fazerV2Especial')} {cidadeV2}</div>
                 <ul className="space-y-2">
                   {especialidades.map((e, i) => {
                     const faixaBRL = fmtFaixaBRL(e.precoUSD.min, e.precoUSD.max, cambio.brl);
@@ -212,7 +212,7 @@ export function OQueFazer({ itens = [], code, cidadePrincipal }) {
 
             {gratuitos.length ? (
               <div className="px-4 sm:px-5 py-3">
-                <div className="text-xs font-semibold text-ink mb-1.5">🆓 Grátis ou doação</div>
+                <div className="text-xs font-semibold text-ink mb-1.5">{t('destino.fazerV2Gratis')}</div>
                 <ul className="space-y-1 text-sm text-ink">
                   {gratuitos.map((g, i) => (<li key={i} className="flex gap-2"><span aria-hidden className="text-success">·</span><span>{g}</span></li>))}
                 </ul>
@@ -221,10 +221,10 @@ export function OQueFazer({ itens = [], code, cidadePrincipal }) {
           </div>
 
           <footer className="px-4 sm:px-5 py-2.5 border-t border-line bg-bg/50 text-[11px] text-inksoft flex flex-wrap gap-x-3 gap-y-1 items-center">
-            {fontes.length ? <span>Fontes: {fontes.join(' · ')}</span> : null}
-            {conf === 'baixa' ? <span className="px-1.5 py-0.5 rounded-full bg-warning-bg text-warning border border-warning-bd font-semibold">estimativa baixa confiança</span> : null}
-            {desatualizado ? <span className="px-1.5 py-0.5 rounded-full bg-warning-bg text-warning border border-warning-bd font-semibold">pesquisada há mais de 1 ano</span> : null}
-            <span>⚠️ Preços mudam. Confira no site oficial antes de ir.</span>
+            {fontes.length ? <span>{t('destino.fazerV2Fontes')}: {fontes.join(' · ')}</span> : null}
+            {conf === 'baixa' ? <span className="px-1.5 py-0.5 rounded-full bg-warning-bg text-warning border border-warning-bd font-semibold">{t('destino.fazerV2Baixa')}</span> : null}
+            {desatualizado ? <span className="px-1.5 py-0.5 rounded-full bg-warning-bg text-warning border border-warning-bd font-semibold">{t('destino.fazerV2Desat')}</span> : null}
+            <span>{t('destino.fazerV2Aviso')}</span>
           </footer>
         </div>
       ) : null}
