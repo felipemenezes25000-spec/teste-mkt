@@ -1,7 +1,15 @@
 // Cabeçalhos de segurança HTTP. Função PURA (testável); next.config.mjs a chama com
-// o ambiente atual. A CSP é "estática-friendly": usa 'unsafe-inline' p/ scripts em vez
-// de nonce — assim as 167 páginas de destino seguem SSG/ISR (nonce forçaria render
-// dinâmico em tudo). Mesmo assim trava clickjacking, MIME-sniffing e restringe as
+// o ambiente atual.
+//
+// CSP × SSG: o App Router injeta ~7 inline <script> (self.__next_f.push) no HTML de
+// páginas estáticas (RSC flight data). Sem nonce, 'unsafe-inline' é obrigatório para
+// script-src — hash não serve porque adicionar hash faz CSP3 IGNORAR 'unsafe-inline',
+// quebrando os scripts do Next.js. A migração exige middleware com nonce, o que força
+// render dinâmico e inviabiliza ISR/SSG nos 205 destinos.
+//   → Hash do themeInit (layout.jsx): sha256-caMvgfOMGKZQziYAaE6UNl41PseEusyxAlaBo83GMSo=
+//     Guardado aqui para uso imediato quando migrar para nonce-based CSP.
+//
+// Mesmo com 'unsafe-inline', a CSP trava clickjacking, MIME-sniffing e restringe as
 // origens de rede/imagem/iframe ao que o app de fato toca NO BROWSER.
 //
 // O que NÃO precisa entrar na CSP: deep-links de afiliado (Booking/Viator/…) são <a>

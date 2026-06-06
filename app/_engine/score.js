@@ -54,6 +54,7 @@ export function scoreViagem(calc, opts = {}) {
   const mediaDia = num(calc && calc.mediaDia);
   const numPaises = trechos.length || 1;
   const diasTotais = num(calc && calc.diasTotais);
+  const moedaBase = (opts.moedaBase) || (calc && calc.moedaBase) || 'USD';
 
   // 1) CUSTO-BENEFÍCIO — quão bem o dinheiro rende. Se há orçamento, parte do
   // quanto da meta é usada (folga = mais valor); senão, do custo/dia absoluto.
@@ -111,8 +112,8 @@ export function scoreViagem(calc, opts = {}) {
   economia = round(economia);
 
   const dimensoes = {
-    custoBeneficio: { nota: custoBeneficio, texto: textoCB(calc, ratio, mediaDia) },
-    conforto: { nota: conforto, texto: `Gasto médio de ~US$ ${Math.round(mediaDia)}/dia${folego.cobreTudo === false ? ' — mas o fôlego não cobre tudo.' : '.'}` },
+    custoBeneficio: { nota: custoBeneficio, texto: textoCB(calc, ratio, mediaDia, moedaBase) },
+    conforto: { nota: conforto, texto: `Gasto médio de ~${moedaBase} ${Math.round(mediaDia)}/dia${folego.cobreTudo === false ? ' — mas o fôlego não cobre tudo.' : '.'}` },
     seguranca: { nota: seguranca, texto: `Segurança média ${segIdx.toFixed(1)}/10${segPior ? `; trecho mais sensível: ${segPior.nome} (${segPior.valor}/10).` : '.'}` },
     tempoLivre: { nota: tempoLivre, texto: `~${pace.toFixed(1)} dia(s) por país (${pace < 5 ? 'corrido' : pace < 9 ? 'equilibrado' : 'tranquilo'}).` },
     experienciaLocal: { nota: experienciaLocal, texto: `${regioes.size} região(ões) e imersão cultural ${cultIdx.toFixed(1)}/10.` },
@@ -129,12 +130,12 @@ export function scoreViagem(calc, opts = {}) {
   return { dimensoes, geral, selo: SELO(geral), pesos };
 }
 
-function textoCB(calc, ratio, mediaDia) {
+function textoCB(calc, ratio, mediaDia, moedaBase) {
   if (calc && calc.orcamento > 0) {
     const pct = Math.round(ratio * 100);
     return `A viagem usa ~${pct}% do orçamento (${pct <= 85 ? 'folgado' : pct <= 100 ? 'no limite' : 'estoura'}).`;
   }
-  return `Custo médio de ~US$ ${Math.round(mediaDia)}/dia (sem orçamento definido).`;
+  return `Custo médio de ~${moedaBase} ${Math.round(mediaDia)}/dia (sem orçamento definido).`;
 }
 
 function textoRisco(calc) {

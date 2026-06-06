@@ -21,9 +21,12 @@ export function AddToRouteButton({ code, nome, className = '', children }) {
           salvarPlano(plan);
         }
       }
-    } catch {}
-    setFeito(true);
-    router.push('/planejar');
+      setFeito(true);
+      router.push('/planejar');
+    } catch (e) {
+      console.warn('[AddToRoute]', e && e.message);
+      router.push('/planejar');
+    }
   }
 
   return (

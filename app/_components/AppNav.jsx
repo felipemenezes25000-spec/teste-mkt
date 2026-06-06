@@ -12,12 +12,13 @@ const LINKS = [
   { href: '/explorar', label: 'Descobrir' },
   { href: '/decisao', label: 'Decidir' },
   { href: '/comparar', label: 'Comparar' },
-  { href: '/planejar', label: 'Planejar' },
+  { href: '/custo-real', label: 'Custo real' },
   { href: '/roteiro', label: 'Roteiro' },
   { href: '/planos', label: 'Preços' },
 ];
 
 const SECONDARY_LINKS = [
+  { href: '/planejar', label: 'Planejar' },
   { href: '/voos', label: 'Voos' },
   { href: '/salvos', label: 'Salvos' },
   { href: '/conta', label: 'Entrar' },

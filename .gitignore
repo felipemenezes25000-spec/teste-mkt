@@ -14,3 +14,6 @@ dist/
 *.log
 .DS_Store
 coverage/
+
+# config local de dev (MCP preview, etc) — não versionar
+.claude/

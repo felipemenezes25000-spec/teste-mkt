@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { DESTINOS } from '../../_lib/destinos.js';
 import { buscarVoos, ORIGENS } from '../../_lib/flights.js';
@@ -7,6 +7,10 @@ import { linksVoo, toISO } from '../../_engine/utils.js';
 import { useLibera } from '../../_components/Gate.jsx';
 import { curvaPreco, vereditoCompra } from '../../_engine/previsaoVoo.js';
 import { Autocomplete } from '../../_components/Autocomplete.jsx';
+import { carregarPlano } from '../../_engine/storage.js';
+import { FlightScoreCard } from '../../_components/FlightScoreCard.jsx';
+import { useCambioBRL } from '../../_lib/cambioClient.js';
+import { track } from '../../_lib/analytics.js';
 
 function dataPadrao() {
   const d = new Date();
@@ -24,10 +28,25 @@ export function VoosClient() {
   const [res, setRes] = useState(null);
   const [alerta, setAlerta] = useState('');
 
+  // Prioridade: rate do plano salvo (já atualizado pelo App.jsx) > câmbio ao vivo
+  // do cambioClient (open.er-api.com com cache 12h) > fallback estático 5.4.
+  // VoosClient usa o BRL pra calcular o "peso do voo no orçamento" no FlightScoreCard.
+  const cambio = useCambioBRL();
+  const [taxaPlano, setTaxaPlano] = useState(null);
+  const taxaBRL = taxaPlano && taxaPlano > 0 ? taxaPlano : cambio.brl;
   const { libera: liberaAlerta } = useLibera('alertas-preco');
+
+  useEffect(() => {
+    try {
+      const pl = carregarPlano();
+      const r = pl.settings?.fx?.rates?.BRL;
+      if (r && r > 0) setTaxaPlano(r);
+    } catch {}
+  }, []);
 
   async function buscar() {
     setBusy(true); setRes(null); setAlerta('');
+    track('voos_buscar', { origem: origem.iata, destino: destino.iata, dias });
     try {
       const out = await buscarVoos({
         origemCidade: origem.cidade, origemIata: origem.iata, origemCoords: origem.coords,
@@ -35,6 +54,8 @@ export function VoosClient() {
         dataISO: data,
       });
       setRes(out);
+    } catch (e) {
+      setAlerta(e.message || 'Erro ao buscar voos. Tente novamente.');
     } finally {
       setBusy(false);
     }
@@ -47,6 +68,7 @@ export function VoosClient() {
       lista.push({ origem: origem.iata, destino: destino.iata, data });
       localStorage.setItem(key, JSON.stringify(lista));
       setAlerta(`Alerta criado para ${origem.iata} → ${destino.iata}. Te avisamos quando o preço cair.`);
+      track('voos_alerta_criado', { origem: origem.iata, destino: destino.iata });
     } catch {
       setAlerta('Não consegui salvar o alerta.');
     }
@@ -102,27 +124,18 @@ export function VoosClient() {
           </div>
           {alerta && <div className="mb-3 rounded-lg border border-success-bd bg-success-bg text-success px-3 py-2 text-sm">{alerta}</div>}
 
-          <div className="space-y-2">
-            {res.resultados.map((f) => {
-              const impacto = impactoVoo(f, dias, orcamentoTotal);
-              return (
-                <div key={f.id} className={`rounded-2xl border bg-card p-4 ${f.melhorCustoBeneficio ? 'border-pine ring-1 ring-pine/20 shadow-[var(--e-1)]' : 'border-line'}`}>
-                  <div className="flex flex-wrap items-start gap-x-4 gap-y-2">
-                    <div className="w-36">
-                      <div className="font-semibold text-ink">{f.companhia}</div>
-                      {f.melhorCustoBeneficio && <span className="text-[11px] font-bold text-pine">Melhor custo-benefício</span>}
-                    </div>
-                    <div className="text-sm text-ink tnum">{f.partida} → {f.chegada}</div>
-                    <div className="text-xs text-inksoft">{f.duracao}</div>
-                    <div className="text-xs text-inksoft">{f.escalas === 0 ? 'Direto' : `${f.escalas} escala${f.escalas > 1 ? 's' : ''}`}</div>
-                    <div className="ml-auto font-display text-2xl text-ink tnum">US$ {f.preco}</div>
-                  </div>
-                  <div className={`mt-3 rounded-xl border px-3 py-2 text-sm ${impacto.cls}`}>
-                    <strong>{impacto.titulo}:</strong> {impacto.texto}
-                  </div>
-                </div>
-              );
-            })}
+          <div className="mb-3 rounded-2xl border border-line bg-paper2/50 px-4 py-3 text-sm text-inksoft">
+            <strong className="text-ink">O voo mais barato pode custar o primeiro dia da viagem.</strong> Cada card abaixo tem um score 0-100 considerando preço, escalas, duração e horário de chegada. Toque em "Como calculamos" pra ver o porquê.
+          </div>
+          <div className="space-y-3">
+            {res.resultados.map((f) => (
+              <FlightScoreCard
+                key={f.id}
+                voo={f}
+                ctx={{ orcamentoTotalBRL: orcamentoTotal, taxaBRL, dias }}
+                destaque={f.melhorCustoBeneficio}
+              />
+            ))}
           </div>
 
           <PrevisaoVoo rota={`${origem.iata}-${destino.iata}-${data}`} faixa={res.faixa} precoAtual={res.resultados[0] && res.resultados[0].preco} />
@@ -144,37 +157,6 @@ export function VoosClient() {
   );
 }
 
-function impactoVoo(voo, dias, orcamentoTotalBRL) {
-  const duracaoHoras = Number(String(voo.duracao || '').match(/\d+/)?.[0] || 0);
-  const custoBRL = Number(voo.preco || 0) * 5.2;
-  const pesoNoOrcamento = orcamentoTotalBRL > 0 ? custoBRL / orcamentoTotalBRL : 0;
-  if (voo.escalas >= 2 || duracaoHoras >= 22) {
-    return {
-      titulo: 'Mais barato pode sair caro',
-      texto: `Economiza na passagem, mas cobra energia. Para ${dias} dias, eu evitaria se a diferença não for grande.`,
-      cls: 'border-danger-bd bg-danger-bg text-ink',
-    };
-  }
-  if (dias <= 6 && duracaoHoras >= 14) {
-    return {
-      titulo: 'Ruim para viagem curta',
-      texto: 'A duração pesa demais para poucos dias. Você compra preço, mas perde presença no destino.',
-      cls: 'border-warn-bd bg-warn-bg text-ink',
-    };
-  }
-  if (pesoNoOrcamento > 0.45) {
-    return {
-      titulo: 'Voo domina o orçamento',
-      texto: 'A passagem come uma fatia grande da verba. Só faz sentido se o destino render muito no dia a dia.',
-      cls: 'border-warn-bd bg-warn-bg text-ink',
-    };
-  }
-  return {
-    titulo: 'Boa leitura prática',
-    texto: 'Preço, escalas e duração parecem equilibrados para preservar energia e orçamento.',
-    cls: 'border-success-bd bg-success-bg text-ink',
-  };
-}
 
 const VEREDITO_UI = {
   comprar: { label: 'Compre agora', cls: 'bg-success-bg text-success border-success-bd', icon: '✅' },

@@ -15,6 +15,7 @@ export const dynamic = 'force-dynamic';
 const SUPA_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPA_ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const LIMITE_DIA = Math.max(0, parseInt(process.env.AI_DAILY_LIMIT || '50', 10) || 0);
+const MODELOS_PERMITIDOS = new Set((process.env.AI_MODEL || 'gpt-4o-mini').split(',').map(s => s.trim()).concat(['gpt-4o-mini', 'gpt-4.1-mini', 'gpt-4.1-nano']));
 
 function erro(msg, status) { return Response.json({ error: msg }, { status }); }
 
@@ -61,7 +62,9 @@ export async function POST(req) {
   let body;
   try { body = await req.json(); } catch { return erro('JSON inválido.', 400); }
   const { system, user, model } = body || {};
-  if (!system || !user) return erro('Faltam system/user.', 400);
+  if (!system || !user || typeof system !== 'string' || typeof user !== 'string') return erro('Faltam system/user (strings).', 400);
+  if (system.length > 8000 || user.length > 12000) return erro('Prompt muito longo.', 400);
+  const modeloFinal = (model && MODELOS_PERMITIDOS.has(model)) ? model : (process.env.AI_MODEL || 'gpt-4o-mini');
 
   // 3) Cota diária por usuário.
   if (!(await dentroDaCota(auth.supa))) {
@@ -77,21 +80,20 @@ export async function POST(req) {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` },
       body: JSON.stringify({
-        model: model || process.env.AI_MODEL || 'gpt-4o-mini',
+        model: modeloFinal,
         temperature: 0.5,
         messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
       }),
       signal: ctrl.signal,
     });
     if (!res.ok) {
-      const t = await res.text().catch(() => '');
-      return erro(`Provedor respondeu ${res.status}. ${t.slice(0, 200)}`, 502);
+      return erro('O provedor de IA não conseguiu gerar a resposta.', 502);
     }
     const data = await res.json();
     const text = data?.choices?.[0]?.message?.content || '';
     return Response.json({ text });
   } catch (err) {
     const msg = err?.name === 'AbortError' ? 'A IA demorou demais (timeout).' : 'Falha ao chamar o provedor de IA.';
-    return erro(msg, 502);
+    return erro(msg, err?.name === 'AbortError' ? 504 : 502);
   } finally { clearTimeout(timeout); }
 }

@@ -21,6 +21,8 @@ import { jsonLdDestino, jsonLdBreadcrumb, jsonLdFaq, siteUrl } from '../../../_l
 import { ShareButtons } from '../../../_components/ShareButtons.jsx';
 import { VerdictCard } from '../../../_components/VerdictCard.jsx';
 import { TravelFitScore } from '../../../_components/TravelFitScore.jsx';
+import { ValeIrAgora } from '../../../_components/ValeIrAgora.jsx';
+import { OQueNinguemConta } from '../../../_components/OQueNinguemConta.jsx';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -32,7 +34,8 @@ export function generateStaticParams() {
   return (destaques.length ? destaques : DESTINOS.slice(0, 12)).map((d) => ({ slug: d.slug }));
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const d = destinoPorSlug(params.slug);
   if (!d) return {};
   const titulo = `${d.nome} — guia de viagem | Mundo Sem Fim`;
@@ -105,7 +108,8 @@ function MapaDestino({ coords, nome, idioma = 'pt' }) {
   );
 }
 
-export default async function DestinoPage({ params }) {
+export default async function DestinoPage(props) {
+  const params = await props.params;
   const d = destinoPorSlug(params.slug);
   if (!d) notFound();
   const base = siteUrl();
@@ -243,6 +247,9 @@ export default async function DestinoPage({ params }) {
 
         <VerdictCard destino={d} />
 
+        {/* VALE IR AGORA — veredito prescritivo baseado no mês corrente x melhor época */}
+        <ValeIrAgora destino={d} />
+
         <TravelFitScore destino={d} />
 
         {/* CUSTOS por nível */}
@@ -261,6 +268,9 @@ export default async function DestinoPage({ params }) {
             contexto={`Exemplo de 7 dias em ${d.nome} (com voo do Brasil) — o custo real além do que as OTAs mostram:`}
           />
         </section>
+
+        {/* O QUE NINGUÉM TE CONTA — alertas honestos por país que blog/influencer não fala */}
+        <OQueNinguemConta destino={d} />
 
         {/* SOBRE — sempre o país; fallback honesto pro ponto de referência se faltar */}
         {sobre && (

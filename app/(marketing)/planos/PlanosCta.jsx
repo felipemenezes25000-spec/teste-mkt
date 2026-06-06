@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { tokenAtual, usuarioAtual } from '../../_engine/supabase.js';
+import { track } from '../../_lib/analytics.js';
 
 // Botão de assinar: chama /api/stripe/checkout e redireciona pro Stripe. Se o
 // checkout ainda não estiver configurado (503), explica em vez de quebrar.
@@ -18,16 +19,19 @@ export function PlanosCta({ plano, label, destaque, freeHref }) {
   }
 
   async function assinar() {
+    track('assinar_click', { plano });
     setBusy(true); setMsg('');
     try {
-      let token = null, user = null;
-      try { token = await tokenAtual(); user = await usuarioAtual(); } catch {}
+      let token = null;
+      try { token = await tokenAtual(); } catch {}
+      if (!token) { setMsg('Faça login antes de assinar.'); setBusy(false); return; }
       const r = await fetch('/api/stripe/checkout', {
         method: 'POST',
-        headers: { 'content-type': 'application/json', ...(token ? { authorization: `Bearer ${token}` } : {}) },
-        body: JSON.stringify({ plano, userId: user && user.id, email: user && user.email }),
+        headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` },
+        body: JSON.stringify({ plano }),
       });
       if (r.status === 503) { setMsg('Checkout em configuração — disponível assim que as chaves do Stripe forem ligadas.'); setBusy(false); return; }
+      if (r.status === 401) { setMsg('Sessão expirada. Faça login novamente.'); setBusy(false); return; }
       const d = await r.json().catch(() => ({}));
       if (d.url) { window.location.href = d.url; return; }
       setMsg(d.error || 'Não foi possível iniciar o checkout.');

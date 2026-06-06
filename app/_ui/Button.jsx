@@ -13,6 +13,7 @@ export function Button({ variant = 'primary', size = 'md', loading = false, clas
     <button
       className={`inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition focusring disabled:opacity-50 disabled:cursor-not-allowed ${SIZES[size]} ${VARIANTS[variant]} ${className}`}
       aria-busy={loading || undefined}
+      disabled={loading || props.disabled}
       {...props}
     >
       {loading && <span className="inline-block w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin opacity-70" aria-hidden />}

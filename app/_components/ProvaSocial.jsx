@@ -25,7 +25,7 @@ function Depoimentos() {
   return (
     <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {reais.map((d, i) => (
-        <figure key={i} className="rounded-2xl border border-line bg-card p-5">
+        <figure key={d.autor || d.texto} className="rounded-2xl border border-line bg-card p-5">
           {d.nota ? (
             <div className="text-amberx text-sm" aria-label={`Nota ${d.nota} de 5`}>{'★'.repeat(Math.round(d.nota))}</div>
           ) : null}

@@ -45,7 +45,7 @@ export function TravelFitScore({ destino, compact = false }) {
       </div>
       <div className="mt-5 grid sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {SUBNOTAS.map(([key, label]) => {
-          const nota = score.subnotas[key];
+          const nota = score.subnotas[key] ?? 0;
           return (
             <div key={key} className="rounded-2xl bg-paper2/70 p-3">
               <div className="flex items-center justify-between gap-2">

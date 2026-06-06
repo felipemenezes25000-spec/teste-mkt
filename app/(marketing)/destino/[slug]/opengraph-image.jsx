@@ -51,7 +51,8 @@ function Fato({ rotulo, valor, cor }) {
   );
 }
 
-export default async function OgDestino({ params }) {
+export default async function OgDestino(props) {
+  const params = await props.params;
   const d = destinoPorSlug(params.slug);
   const fonts = await getFonte();
   const nome = d ? d.nome : 'Mundo Sem Fim';

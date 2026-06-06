@@ -2,6 +2,7 @@ import './_ui/tokens.css';
 import './globals.css';
 import { Fraunces, Hanken_Grotesk } from 'next/font/google';
 import { SWRegister } from './_components/SWRegister.jsx';
+import { AnalyticsScripts, AnalyticsNoscript } from './_components/AnalyticsScripts.jsx';
 
 const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces', display: 'swap' });
 const hanken = Hanken_Grotesk({ subsets: ['latin'], variable: '--font-hanken', display: 'swap' });
@@ -46,8 +47,12 @@ export default function RootLayout({ children }) {
     /* suppressHydrationWarning: o themeInit abaixo modifica data-theme no html
        antes da hidratação React; sem isso o console mostra warning de mismatch. */
     <html lang="pt-BR" className={`${fraunces.variable} ${hanken.variable}`} suppressHydrationWarning>
+      <head>
+        <AnalyticsScripts />
+      </head>
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <AnalyticsNoscript />
         {children}
         <SWRegister />
       </body>

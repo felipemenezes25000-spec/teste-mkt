@@ -24,6 +24,7 @@ describe('construirSitemap', () => {
     expect(urls).toContain('https://exemplo.com');
     expect(urls).toContain('https://exemplo.com/explorar');
     expect(urls).toContain('https://exemplo.com/decisao');
+    expect(urls).toContain('https://exemplo.com/custo-real');
     expect(urls).toContain('https://exemplo.com/planos');
     expect(urls).toContain('https://exemplo.com/destino/japao');
     expect(urls).toContain('https://exemplo.com/destino/peru');

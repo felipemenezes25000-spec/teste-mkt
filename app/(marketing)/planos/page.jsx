@@ -1,6 +1,7 @@
 import { PlanosCta } from './PlanosCta.jsx';
 import { JsonLd } from '../../_components/JsonLd.jsx';
 import { jsonLdProduto, siteUrl } from '../../_lib/seo.js';
+import { ROICalculator } from './ROICalculator.jsx';
 
 export const metadata = {
   title: 'Planos — Mundo Sem Fim',
@@ -11,19 +12,19 @@ export const metadata = {
 const PLANOS = [
   {
     id: 'free', nome: 'Grátis', preco: 'R$ 0', periodo: 'pra sempre', destaque: false,
-    frase: 'Para sentir o produto antes de gastar um real.',
+    frase: 'Para começar a decidir sem cartão.',
     bullets: ['Descobrir destinos por curadoria', 'Planejar rota com estação × visto × fôlego', '3 favoritos para comparar', 'Câmbio ao vivo'],
     cta: 'Começar grátis', href: '/planejar',
   },
   {
     id: 'premium', nome: 'Premium', preco: 'R$ 19', periodo: '/mês', destaque: true,
-    frase: 'Para testar versões antes de comprar passagem.',
+    frase: 'Para quem vai comprar passagem e quer decidir com segurança.',
     bullets: ['Tudo do Grátis', 'Teste quantas versões quiser antes de comprar passagem', 'Veja o custo real antes do “voo barato, viagem cara”', 'Escolha com clareza entre 2 ou 3 viagens possíveis', 'Alertas de preço de voo', 'Exportar PDF'],
     cta: 'Assinar Premium', href: '/conta',
   },
   {
     id: 'pro', nome: 'Pro', preco: 'R$ 39', periodo: '/mês', destaque: false,
-    frase: 'Para viagem longa, casal/grupo ou rota com muitas partes móveis.',
+    frase: 'Para viagens longas, casal, grupo, multi-país ou roteiros complexos.',
     bullets: ['Tudo do Premium', 'Rota multi-país com menos cansaço', 'Colaboração na viagem', 'Orçamento prescritivo', 'Suporte prioritário'],
     cta: 'Assinar Pro', href: '/conta',
   },
@@ -58,6 +59,8 @@ export default function PlanosPage() {
           </div>
         ))}
       </div>
+      <ROICalculator />
+
       <div className="mt-8 grid sm:grid-cols-3 gap-3 text-sm">
         {[
           ['Conselho neutro', 'A recomendação não depende de comissão de reserva.'],

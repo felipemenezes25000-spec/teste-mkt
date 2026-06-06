@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 const WHSEC = process.env.STRIPE_WEBHOOK_SECRET;
 const SECRET = process.env.STRIPE_SECRET_KEY;
-const URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPA_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SERVICE = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 // Verificação da assinatura "Stripe-Signature: t=..,v1=.." (tolerância de 5 min).
@@ -27,12 +27,15 @@ function assinaturaOk(payload, sig) {
 }
 
 function planoDoPrice(priceId) {
-  if (priceId && priceId === process.env.STRIPE_PRICE_PRO) return 'pro';
-  return 'premium';
+  if (!priceId) return 'free';
+  if (priceId === process.env.STRIPE_PRICE_PRO) return 'pro';
+  if (priceId === process.env.STRIPE_PRICE_PREMIUM) return 'premium';
+  return 'free';
 }
 
 async function stripeGet(path) {
   const res = await fetch('https://api.stripe.com/v1/' + path, { headers: { authorization: `Bearer ${SECRET}` } });
+  if (!res.ok) throw new Error(`Stripe API ${res.status} em ${path}`);
   return res.json();
 }
 
@@ -47,7 +50,7 @@ export async function POST(req) {
   let evt;
   try { evt = JSON.parse(payload); } catch { return Response.json({ error: 'JSON inválido.' }, { status: 400 }); }
 
-  const db = URL && SERVICE ? createClient(URL, SERVICE, { auth: { persistSession: false } }) : null;
+  const db = SUPA_URL && SERVICE ? createClient(SUPA_URL, SERVICE, { auth: { persistSession: false } }) : null;
   if (!db) return Response.json({ received: true, note: 'sem service role — evento ignorado' });
 
   try {
@@ -81,8 +84,8 @@ export async function POST(req) {
         .eq('stripe_subscription_id', obj.id);
     }
   } catch (e) {
-    // Não derruba o webhook por erro de gravação — o Stripe re-tenta.
-    console.warn('[stripe-webhook]', e && e.message);
+    console.error('[stripe-webhook]', e && e.message);
+    return Response.json({ error: 'Falha ao processar evento.' }, { status: 500 });
   }
 
   return Response.json({ received: true });

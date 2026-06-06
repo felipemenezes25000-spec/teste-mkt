@@ -8,6 +8,14 @@ import { jsonLdOrganization, jsonLdWebSite, jsonLdReviews, siteUrl } from '../_l
 import { ProvaSocial } from '../_components/ProvaSocial.jsx';
 import { HeroSimulador } from '../_components/HeroSimulador.jsx';
 import { DEPOIMENTOS } from '../_lib/depoimentos.js';
+import {
+  HomeSecaoProblema,
+  HomeSecaoComoDecide,
+  HomeSecaoCustoReal,
+  HomeSecaoOtas,
+  HomeSecaoFaq,
+  HomeSecaoCtaFinal,
+} from '../_components/HomeSections.jsx';
 
 // Landing premium (Server Component). Busca a imagem-herói e as dos destaques na
 // Wikipédia (cacheadas 1 dia); se a rede falhar, cai num gradiente — nunca quebra.
@@ -96,6 +104,9 @@ export default async function Home() {
       {/* SIMULADOR — transforma a vitrine em produto logo no topo (reusa o motor da /decisao) */}
       <HeroSimulador />
 
+      {/* PROBLEMA REAL — espelho do leitor: você reconhece a cena, então confia no diagnóstico */}
+      <HomeSecaoProblema />
+
       {/* PILARES (o fosso) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
         <h2 className="font-display text-2xl sm:text-3xl text-ink text-center max-w-2xl mx-auto">
@@ -115,6 +126,15 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      {/* COMO DECIDE — os 8 fatores que mudam a resposta */}
+      <HomeSecaoComoDecide />
+
+      {/* CUSTO REAL — preview com exemplo Peru */}
+      <HomeSecaoCustoReal />
+
+      {/* OTAs — onde a gente entra no mapa de ferramentas */}
+      <HomeSecaoOtas />
 
       {/* DESTAQUES */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
@@ -144,6 +164,9 @@ export default async function Home() {
       {/* PROVA SOCIAL (honesta: sinais verificáveis + depoimentos reais quando houver) */}
       <ProvaSocial />
 
+      {/* FAQ — perguntas que todo viajante faz; reduz fricção antes do CTA final */}
+      <HomeSecaoFaq />
+
       {/* PLANOS (teaser) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
         <div className="rounded-3xl border border-line bg-gradient-to-br from-pine/8 to-ochre/8 p-8 sm:p-12 text-center">
@@ -160,6 +183,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* CTA FINAL — fechamento prescritivo, foco em uma única ação */}
+      <HomeSecaoCtaFinal />
     </main>
   );
 }

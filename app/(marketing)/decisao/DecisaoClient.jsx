@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { STORAGE_KEY } from '../../_engine/data.js';
+import { STORAGE_KEY, MESES_PT } from '../../_engine/data.js';
 import { carregarPlano } from '../../_engine/storage.js';
 import { calcular } from '../../_engine/calc.js';
 import { scoreViagem } from '../../_engine/score.js';
@@ -13,6 +13,7 @@ import { ModoGrupo } from '../../_components/ModoGrupo.jsx';
 import { recomendarDestinos } from '../../_engine/decisao.js';
 import { carregarPerfil, salvarPerfil, perfilDoPreset, pesosScore, topInteresses, PERFIS_PRONTOS, INTERESSE_LABEL, PERFIL_EVENT } from '../../_engine/perfil.js';
 import { fmtMoeda } from '../../_engine/utils.js';
+import { track } from '../../_lib/analytics.js';
 import { FavoriteButton } from '../../_components/FavoriteButton.jsx';
 import { CardsSkeleton } from '../../_components/Skeleton.jsx';
 
@@ -69,6 +70,8 @@ export function DecisaoClient({ destinos }) {
   const [orcamentoBRL, setOrcamentoBRL] = useState(6500);
   const [companhia, setCompanhia] = useState('casal');
   const [perrengue, setPerrengue] = useState('medio');
+  const [origem, setOrigem] = useState('GRU');
+  const [mes, setMes] = useState(0); // 0 = qualquer mês
 
   useEffect(() => {
     const salvo = carregarPerfil();
@@ -91,6 +94,7 @@ export function DecisaoClient({ destinos }) {
     const p = perfilDoPreset(id);
     setPerfil(p);
     salvarPerfil(p, id);
+    track('perfil_definido', { preset: id });
   }
 
   const imgPorCode = useMemo(() => {
@@ -99,7 +103,8 @@ export function DecisaoClient({ destinos }) {
     return m;
   }, [destinos]);
 
-  const budgetDiaUSD = Math.max(12, (Number(orcamentoBRL) / 5.2) / Math.max(1, Number(diasPretendidos)) * 0.55);
+  const taxaBRL = (rates && rates.BRL) || 5.4;
+  const budgetDiaUSD = Math.max(12, (Number(orcamentoBRL) / taxaBRL) / Math.max(1, Number(diasPretendidos)) * 0.55);
   const ranked = useMemo(() => {
     if (!perfil) return [];
     const base = recomendarDestinos(destinos, perfil);
@@ -107,14 +112,23 @@ export function DecisaoClient({ destinos }) {
       const folga = budgetDiaUSD - destino.custoDia;
       const ajusteBudget = folga >= 10 ? 7 : folga >= 0 ? 3 : folga > -18 ? -7 : -15;
       const ajustePerrengue = perrengue === 'baixo' && destino.custoDia < 30 ? -2 : perrengue === 'alto' && destino.custoDia < 40 ? 4 : 0;
-      const pontos = Math.max(0, Math.min(100, Math.round(destino.pontos + ajusteBudget + ajustePerrengue)));
+      // Mês: se o usuário escolheu um mês, premiamos quem está na melhor época e
+      // penalizamos quem está fora. Quando "qualquer mês", não interfere.
+      const destinoFull = destinos.find((d) => d.code === destino.id);
+      const naMelhorEpoca = mes > 0 && destinoFull && (destinoFull.melhoresMeses || []).includes(mes);
+      const foraDaEpoca = mes > 0 && destinoFull && (destinoFull.melhoresMeses || []).length > 0 && !naMelhorEpoca;
+      const ajusteMes = naMelhorEpoca ? 6 : foraDaEpoca ? -5 : 0;
+      const pontos = Math.max(0, Math.min(100, Math.round(destino.pontos + ajusteBudget + ajustePerrengue + ajusteMes)));
+      let porqueExtra = folga >= 0 ? 'Cabe melhor no seu orçamento informado.' : 'Pode exigir cortes ou mais dias para respirar.';
+      if (naMelhorEpoca) porqueExtra += ` ${MESES_PT[mes - 1]} está na janela ótima.`;
+      if (foraDaEpoca) porqueExtra += ` Atenção: ${MESES_PT[mes - 1]} está fora da melhor época.`;
       return {
         ...destino,
         pontos,
-        porque: `${destino.porque} ${folga >= 0 ? 'Cabe melhor no seu orçamento informado.' : 'Pode exigir cortes ou mais dias para respirar.'}`,
+        porque: `${destino.porque} ${porqueExtra}`,
       };
     }).sort((a, b) => b.pontos - a.pontos).map((destino, index) => ({ ...destino, posicao: index + 1 })).slice(0, 8);
-  }, [destinos, perfil, budgetDiaUSD, perrengue]);
+  }, [destinos, perfil, budgetDiaUSD, perrengue, mes]);
   const score = useMemo(() => (perfil && calc ? scoreViagem(calc, { pesos: pesosScore(perfil) }) : null), [perfil, calc]);
   const ops = useMemo(() => (calc ? escanearOportunidades(calc) : []), [calc]);
   const custo = useMemo(() => (calc ? custoTotalRealista(calc) : null), [calc]);
@@ -135,8 +149,36 @@ export function DecisaoClient({ destinos }) {
         <div className="grid lg:grid-cols-[1fr_0.95fr] gap-6">
           <div>
             <p className="text-xs uppercase tracking-[0.18em] text-pine font-bold">Wizard de decisão</p>
-            <h2 id="wizard-h" className="mt-1 font-display text-2xl sm:text-3xl text-ink">Conte o contexto. Eu reduzo o mundo para 3 boas decisões.</h2>
+            <h2 id="wizard-h" className="mt-1 font-display text-2xl sm:text-3xl text-ink">Onde vale ir com o seu dinheiro, seu mês e sua energia?</h2>
+            <p className="mt-2 text-sm text-inksoft">Tudo recalcula no momento em que você muda. Sem botão de “gerar”.</p>
+
+            {/* INDICADOR DE ETAPAS — visual, não bloqueante */}
+            <ol className="mt-4 flex flex-wrap gap-1.5 text-[10px] uppercase tracking-wider font-semibold">
+              {['Origem','Mês','Dias','Orçamento','Companhia','Estilo','Tolerância','Resultado'].map((etapa) => (
+                <li key={etapa} className="px-2 py-1 rounded-full bg-pine/10 text-pine">{etapa}</li>
+              ))}
+            </ol>
+
             <div className="mt-5 grid sm:grid-cols-2 gap-3">
+              <label className="text-xs text-inksoft font-semibold">Saindo de
+                <select value={origem} onChange={(e) => setOrigem(e.target.value)} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring">
+                  <option value="GRU">São Paulo (GRU)</option>
+                  <option value="GIG">Rio de Janeiro (GIG)</option>
+                  <option value="BSB">Brasília (BSB)</option>
+                  <option value="POA">Porto Alegre (POA)</option>
+                  <option value="CNF">Belo Horizonte (CNF)</option>
+                  <option value="REC">Recife (REC)</option>
+                  <option value="SSA">Salvador (SSA)</option>
+                  <option value="FOR">Fortaleza (FOR)</option>
+                  <option value="CWB">Curitiba (CWB)</option>
+                </select>
+              </label>
+              <label className="text-xs text-inksoft font-semibold">Mês
+                <select value={mes} onChange={(e) => setMes(Number(e.target.value))} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring">
+                  <option value={0}>Qualquer mês</option>
+                  {MESES_PT.map((m, i) => <option key={m} value={i + 1}>{m}</option>)}
+                </select>
+              </label>
               <label className="text-xs text-inksoft font-semibold">Dias disponíveis
                 <input type="number" min="3" max="45" value={diasPretendidos} onChange={(e) => setDiasPretendidos(Math.max(3, Math.min(45, Number(e.target.value) || 8)))} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring tnum" />
               </label>
@@ -159,12 +201,12 @@ export function DecisaoClient({ destinos }) {
                   <option value="familia">Família</option>
                 </select>
               </label>
-              <label className="text-xs text-inksoft font-semibold sm:col-span-2">Limite de perrengue
+              <label className="text-xs text-inksoft font-semibold sm:col-span-2">Tolerância a perrengue
                 <div className="mt-1 grid grid-cols-3 rounded-xl border border-line bg-paper2 p-1">
                   {[
-                    ['baixo', 'Baixo'],
-                    ['medio', 'Médio'],
-                    ['alto', 'Alto'],
+                    ['baixo', 'Baixa — quero conforto'],
+                    ['medio', 'Média — equilibrado'],
+                    ['alto', 'Alta — economizo no chão'],
                   ].map(([id, label]) => (
                     <button key={id} type="button" onClick={() => setPerrengue(id)} aria-pressed={perrengue === id}
                       className={`rounded-lg px-3 py-2 text-sm font-semibold transition focusring ${perrengue === id ? 'bg-card text-pine shadow-sm' : 'text-inksoft hover:text-ink'}`}>
@@ -182,7 +224,7 @@ export function DecisaoClient({ destinos }) {
           <div className="rounded-3xl border border-line bg-paper2/60 p-4">
             <div className="flex items-center justify-between gap-3">
               <h3 className="font-display text-xl text-ink">Resultado instantâneo</h3>
-              <span className="text-xs text-inksoft">{companhia} · {diasPretendidos} dias</span>
+              <span className="text-xs text-inksoft">{origem} · {mes > 0 ? MESES_PT[mes - 1] : 'qualquer mês'} · {diasPretendidos} dias · {companhia}</span>
             </div>
             <div className="mt-3 space-y-3">
               {ranked.slice(0, 3).map((destino) => (

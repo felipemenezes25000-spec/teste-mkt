@@ -1,19 +1,22 @@
+'use client';
 import { useEffect, useRef } from 'react';
 
-// Modal acessível: role=dialog, Esc para fechar, foco inicial, FOCUS TRAP completo
-// (Tab cicla dentro), e restaura o foco ao fechar.
 export function Modal({ title, onClose, children, footer }) {
   const ref = useRef(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     const el = ref.current;
     const anterior = document.activeElement;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     const sel = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
     const focaveis = () => Array.from(el.querySelectorAll(sel)).filter(n => n.offsetParent !== null);
     const t = setTimeout(() => { const f = focaveis(); (f[0] || el).focus(); }, 20);
 
     function onKey(e) {
-      if (e.key === 'Escape') { onClose(); return; }
+      if (e.key === 'Escape') { onCloseRef.current(); return; }
       if (e.key !== 'Tab') return;
       const f = focaveis(); if (!f.length) return;
       const first = f[0], last = f[f.length - 1];
@@ -21,8 +24,8 @@ export function Modal({ title, onClose, children, footer }) {
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     }
     document.addEventListener('keydown', onKey);
-    return () => { document.removeEventListener('keydown', onKey); clearTimeout(t); if (anterior && anterior.focus) anterior.focus(); };
-  }, [onClose]);
+    return () => { document.removeEventListener('keydown', onKey); clearTimeout(t); document.body.style.overflow = prevOverflow; if (anterior && anterior.focus) anterior.focus(); };
+  }, []);
 
   return (
     <div className="fixed inset-0 z-40 bg-ink/40 backdrop-blur-sm grid place-items-center p-4" onClick={onClose}>

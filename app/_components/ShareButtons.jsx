@@ -11,7 +11,20 @@ export function ShareButtons({ url, titulo, texto }) {
   const x = `https://twitter.com/intent/tweet?text=${encodeURIComponent(msg)}&url=${encodeURIComponent(url)}`;
 
   const copiar = async () => {
-    try { await navigator.clipboard.writeText(url); setCopiado(true); setTimeout(() => setCopiado(false), 1800); } catch { /* ignore */ }
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 1800);
+    } catch {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta);
+        setCopiado(true);
+        setTimeout(() => setCopiado(false), 1800);
+      } catch { /* nenhum método de cópia disponível */ }
+    }
   };
   const nativo = async () => {
     try { if (navigator.share) await navigator.share({ title: titulo, text: texto, url }); else await copiar(); } catch { /* cancelado */ }

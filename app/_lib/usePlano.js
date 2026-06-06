@@ -24,19 +24,23 @@ export function usePlano() {
     const h = () => setDemo(lerDemoPlano());
     window.addEventListener(EVT, h);
 
+    const ctrl = new AbortController();
     (async () => {
       let token = null;
       try { token = await tokenAtual(); } catch {}
       try {
-        const r = await fetch('/api/me/plan', token ? { headers: { authorization: `Bearer ${token}` } } : undefined);
+        const r = await fetch('/api/me/plan', {
+          ...(token ? { headers: { authorization: `Bearer ${token}` } } : {}),
+          signal: ctrl.signal,
+        });
         const d = r.ok ? await r.json() : null;
         setServerPlano((d && d.plano) || 'free');
-      } catch {
-        setServerPlano('free');
+      } catch (e) {
+        if (e.name !== 'AbortError') setServerPlano('free');
       }
     })();
 
-    return () => window.removeEventListener(EVT, h);
+    return () => { ctrl.abort(); window.removeEventListener(EVT, h); };
   }, []);
 
   const plano = demo || serverPlano || 'free';

@@ -1,16 +1,15 @@
 'use client';
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState, useMemo, useRef, useEffect, useId } from 'react';
 import { useRouter } from 'next/navigation';
 import { DESTINOS } from '../_lib/destinos.js';
 
-// Busca global no cabeçalho: digite um país/cidade e pule direto pro destino.
-// Com 167 países, é o jeito rápido de chegar em qualquer um de qualquer tela.
 export function GlobalSearch() {
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(false);
   const [ativo, setAtivo] = useState(0);
   const router = useRouter();
   const ref = useRef(null);
+  const listId = useId();
 
   const results = useMemo(() => {
     const t = q.trim().toLowerCase();
@@ -51,12 +50,14 @@ export function GlobalSearch() {
         placeholder="🔍 Buscar país…"
         aria-label="Buscar destino"
         role="combobox" aria-expanded={open && results.length > 0} aria-autocomplete="list"
+        aria-controls={listId}
+        aria-activedescendant={open && results.length > 0 ? `${listId}-${ativo}` : undefined}
         className="w-28 sm:w-44 px-3 py-1.5 rounded-lg border border-line bg-input text-ink text-sm focusring"
       />
       {open && results.length > 0 && (
-        <ul className="absolute z-50 mt-1 left-0 w-64 max-h-80 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox">
+        <ul id={listId} className="absolute z-50 mt-1 left-0 w-64 max-h-80 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox">
           {results.map((d, i) => (
-            <li key={d.code} role="option" aria-selected={i === ativo}>
+            <li key={d.code} id={`${listId}-${i}`} role="option" aria-selected={i === ativo}>
               <button
                 onMouseEnter={() => setAtivo(i)}
                 onClick={() => go(d)}

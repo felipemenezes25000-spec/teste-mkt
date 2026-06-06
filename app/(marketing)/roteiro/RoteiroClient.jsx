@@ -64,6 +64,7 @@ export function RoteiroClient() {
 
   async function gerar() {
     setBusy(true); setErro(''); setRoteiro(null);
+    track('roteiro_solicitado', { destino: destino.nome, dias, ritmo, conforto });
     try {
       let ai = {};
       try { ai = carregarPlano().settings.ai; } catch {}
@@ -72,6 +73,7 @@ export function RoteiroClient() {
         ai,
       );
       setRoteiro(out);
+      track('roteiro_gerado', { destino: destino.nome, dias });
     } catch (e) {
       setErro(e.message || 'Falha ao gerar o roteiro.');
     } finally {
@@ -273,14 +275,58 @@ function RoteiroView({ roteiro, destino, onRegerar }) {
   );
 }
 
+// Energia do dia: heurística simples. Conta itens, soma duração estimada e
+// presença de plano B (chuva = preserva). Devolve {nivel, cor, txt, custoDia}.
+function leituraDoDia(d) {
+  const itens = d.itens || [];
+  const minutosTotais = itens.reduce((s, it) => {
+    const m = String(it.duracao || '').match(/(\d+)/);
+    return s + (m ? Number(m[1]) : 60); // se não disser, conta 60min por padrão
+  }, 0);
+  const custoDia = itens.reduce((s, it) => {
+    const m = String(it.custo || '').replace(/\./g, '').match(/(\d+)/);
+    return s + (m ? Number(m[1]) : 0);
+  }, 0);
+
+  let nivel = 'media';
+  if (itens.length >= 6 || minutosTotais >= 600) nivel = 'alta';
+  else if (itens.length <= 3 && minutosTotais <= 300) nivel = 'baixa';
+
+  const UI = {
+    baixa: { cor: 'bg-success', txt: 'Energia baixa — dia leve, bom pra chegada/saída' },
+    media: { cor: 'bg-warn', txt: 'Energia média — ritmo equilibrado' },
+    alta: { cor: 'bg-danger', txt: 'Energia alta — preserve jantar leve' },
+  }[nivel];
+
+  // alerta de excesso de deslocamento: se >5 atividades com local diferente.
+  const locaisUnicos = new Set(itens.map((it) => it.local).filter(Boolean));
+  const alertaDeslocamento = locaisUnicos.size >= 5;
+
+  return { nivel, ui: UI, minutosTotais, custoDia, itens: itens.length, alertaDeslocamento };
+}
+
 function DiaCard({ d, destino }) {
+  const leitura = leituraDoDia(d);
   return (
     <div className="rounded-2xl border border-line bg-card overflow-hidden">
-      <div className="px-4 py-2.5 bg-paper2/60 border-b border-line">
-        <h3 className="font-display text-lg text-ink">Dia {d.dia} · <span className="text-pine">{d.titulo}</span></h3>
+      <div className="px-4 py-3 bg-paper2/60 border-b border-line">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h3 className="font-display text-lg text-ink">Dia {d.dia} · <span className="text-pine">{d.titulo}</span></h3>
+          <span className="text-[11px] text-inksoft">{leitura.itens} atividades · {Math.round(leitura.minutosTotais / 60)}h estimadas</span>
+        </div>
+        <div className="mt-2 grid grid-cols-[auto_1fr_auto] gap-3 items-center">
+          <span className="text-[10px] uppercase tracking-wider font-bold text-inksoft">Energia</span>
+          <div className="h-2 rounded-full bg-paper2 overflow-hidden" role="img" aria-label={leitura.ui.txt}>
+            <div className={`h-full ${leitura.ui.cor}`} style={{ width: leitura.nivel === 'baixa' ? '33%' : leitura.nivel === 'media' ? '66%' : '100%' }} />
+          </div>
+          {leitura.custoDia > 0 && (
+            <span className="text-xs font-semibold text-ink tnum whitespace-nowrap">~{leitura.custoDia} (custo do dia)</span>
+          )}
+        </div>
+        <p className="mt-1.5 text-[11px] text-inksoft">{leitura.ui.txt}.{leitura.alertaDeslocamento ? ' ⚠ Excesso de deslocamento — agrupe atividades por região.' : ''}</p>
       </div>
       <ol className="divide-y divide-line">
-        {d.itens.map((it, i) => <ItemRow key={i} it={it} destino={destino} />)}
+        {d.itens.map((it) => <ItemRow key={`${it.hora}-${it.atividade}`} it={it} destino={destino} />)}
       </ol>
     </div>
   );
@@ -336,7 +382,7 @@ function Lista({ titulo, itens }) {
     <div className="rounded-2xl border border-line bg-card p-4">
       <h3 className="font-display text-lg text-ink mb-2">{titulo}</h3>
       <ul className="space-y-1.5 text-sm text-inksoft">
-        {itens.map((it, i) => <li key={i} className="flex gap-2"><span className="text-pine shrink-0" aria-hidden>•</span>{it}</li>)}
+        {itens.map((it) => <li key={it} className="flex gap-2"><span className="text-pine shrink-0" aria-hidden>•</span>{it}</li>)}
       </ul>
     </div>
   );

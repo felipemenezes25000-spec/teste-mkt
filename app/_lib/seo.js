@@ -22,6 +22,7 @@ const ROTAS_CORE = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/explorar', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/decisao', priority: 0.9, changeFrequency: 'weekly' },
+  { path: '/custo-real', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/planejar', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/roteiro', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/voos', priority: 0.6, changeFrequency: 'monthly' },

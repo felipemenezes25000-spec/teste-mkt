@@ -17,6 +17,7 @@ import { Tabs } from '../_ui/Tabs.jsx';
 import Onboarding from './Onboarding.jsx';
 import CustosView from './CustosView.jsx';
 import { supabaseConfigurado, usuarioAtual, carregarViagemNuvem, salvarViagemNuvem, entrarComEmail, sair } from './supabase.js';
+import { identify, track } from '../_lib/analytics.js';
 import LoginModal from './LoginModal.jsx';
 import { useConfirm } from './useConfirm.jsx';
 import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
@@ -227,6 +228,15 @@ export default function App() {
     usuarioAtual().then(async (u) => {
       setUser(u || null);
       if (!u) return;
+      // Identify no analytics (PostHog/GTM) sem PII: id + criado_em + provedor.
+      // E-mail/nome NÃO vão pro tracking (LGPD-friendly).
+      try {
+        identify(u.id, {
+          criado_em: u.created_at || null,
+          provedor: u.app_metadata?.provider || 'email',
+        });
+        track('login_ok', { provedor: u.app_metadata?.provider || 'email' });
+      } catch {}
       try {
         const nuvem = await carregarViagemNuvem(u.id);
         if (nuvem) {
@@ -252,7 +262,8 @@ export default function App() {
         .catch(() => setSaveState('error'));
     }, 1500);
     return () => clearTimeout(t);
-  }, [plan, user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [plan, user, tripId]);
 
   // Abre uma rota vinda de um link compartilhado (#r=...). Roda uma vez no load e
   // limpa o hash depois (um refresh não recarrega o link). O codec nunca traz chave de IA.
@@ -460,7 +471,7 @@ export default function App() {
       {showLogin && (
         <LoginModal
           onClose={() => setShowLogin(false)}
-          onSubmit={async (email) => { await entrarComEmail(email); }}
+          onSubmit={async (email) => { await entrarComEmail(email); track('login_solicitado', { metodo: 'magic_link' }); }}
           aoUsarChave={loginIA ? () => { setShowLogin(false); setShowConfig(true); } : undefined}
         />
       )}
