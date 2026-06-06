@@ -7,6 +7,7 @@
 import { ATRACOES_OVERRIDE } from './atracoesOverride.js';
 import { ATRACOES_EXTRA } from './atracoesExtra.js';
 import { FORA_DA_ROTA } from './atracoesForaDaRota.js';
+import { FORA_DA_ROTA_2 } from './atracoesForaDaRota2.js';
 
 export const ATRACOES = {
  "TH": [
@@ -10371,7 +10372,7 @@ export function atracoesDoPais(code) {
   //    pros top 30 destinos). Cada item tem `fora: true` pra UI diferenciar.
   // 3. Override sempre aplica (substitui `wiki` por título melhor curado).
   const base = (code && (ATRACOES[code] || ATRACOES_EXTRA[code])) || [];
-  const fora = (code && FORA_DA_ROTA[code]) || [];
+  const fora = (code && (FORA_DA_ROTA[code] || FORA_DA_ROTA_2[code])) || [];
   const todos = [...base, ...fora];
   return todos.map((a) => {
     const override = ATRACOES_OVERRIDE[`${code}:${a.nome}`];

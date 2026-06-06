@@ -14,6 +14,7 @@ import { recomendarDestinos } from '../../_engine/decisao.js';
 import { carregarPerfil, salvarPerfil, perfilDoPreset, pesosScore, topInteresses, PERFIS_PRONTOS, INTERESSE_LABEL, PERFIL_EVENT } from '../../_engine/perfil.js';
 import { fmtMoeda } from '../../_engine/utils.js';
 import { track } from '../../_lib/analytics.js';
+import { useIdioma } from '../../_lib/i18n.js';
 import { FavoriteButton } from '../../_components/FavoriteButton.jsx';
 import { CardsSkeleton } from '../../_components/Skeleton.jsx';
 
@@ -72,6 +73,7 @@ export function DecisaoClient({ destinos }) {
   const [perrengue, setPerrengue] = useState('medio');
   const [origem, setOrigem] = useState('GRU');
   const [mes, setMes] = useState(0); // 0 = qualquer mês
+  const { t } = useIdioma();
 
   useEffect(() => {
     const salvo = carregarPerfil();
@@ -148,8 +150,8 @@ export function DecisaoClient({ destinos }) {
       <section aria-labelledby="wizard-h" className="rounded-[2rem] border border-line bg-card p-5 sm:p-6 shadow-[var(--e-1)]">
         <div className="grid lg:grid-cols-[1fr_0.95fr] gap-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-pine font-bold">Wizard de decisão</p>
-            <h2 id="wizard-h" className="mt-1 font-display text-2xl sm:text-3xl text-ink">Onde vale ir com o seu dinheiro, seu mês e sua energia?</h2>
+            <p className="text-xs uppercase tracking-[0.18em] text-pine font-bold">{t('decisao.wizardSelo')}</p>
+            <h2 id="wizard-h" className="mt-1 font-display text-2xl sm:text-3xl text-ink">{t('decisao.wizardH2')}</h2>
             <p className="mt-2 text-sm text-inksoft">Tudo recalcula no momento em que você muda. Sem botão de “gerar”.</p>
 
             {/* INDICADOR DE ETAPAS — visual, não bloqueante */}
@@ -160,7 +162,7 @@ export function DecisaoClient({ destinos }) {
             </ol>
 
             <div className="mt-5 grid sm:grid-cols-2 gap-3">
-              <label className="text-xs text-inksoft font-semibold">Saindo de
+              <label className="text-xs text-inksoft font-semibold">{t('decisao.saindoDe')}
                 <select value={origem} onChange={(e) => setOrigem(e.target.value)} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring">
                   <option value="GRU">São Paulo (GRU)</option>
                   <option value="GIG">Rio de Janeiro (GIG)</option>
@@ -173,27 +175,27 @@ export function DecisaoClient({ destinos }) {
                   <option value="CWB">Curitiba (CWB)</option>
                 </select>
               </label>
-              <label className="text-xs text-inksoft font-semibold">Mês
+              <label className="text-xs text-inksoft font-semibold">{t('decisao.mes')}
                 <select value={mes} onChange={(e) => setMes(Number(e.target.value))} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring">
-                  <option value={0}>Qualquer mês</option>
+                  <option value={0}>{t('decisao.mesQualquer')}</option>
                   {MESES_PT.map((m, i) => <option key={m} value={i + 1}>{m}</option>)}
                 </select>
               </label>
-              <label className="text-xs text-inksoft font-semibold">Dias disponíveis
+              <label className="text-xs text-inksoft font-semibold">{t('decisao.dias')}
                 <input type="number" min="3" max="45" value={diasPretendidos} onChange={(e) => setDiasPretendidos(Math.max(3, Math.min(45, Number(e.target.value) || 8)))} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring tnum" />
               </label>
-              <label className="text-xs text-inksoft font-semibold">Orçamento total
+              <label className="text-xs text-inksoft font-semibold">{t('decisao.orcamento')}
                 <div className="mt-1 flex rounded-xl border border-line bg-input overflow-hidden focus-within:outline focus-within:outline-2 focus-within:outline-pine">
                   <span className="px-3 py-2 text-sm text-inksoft bg-paper2 border-r border-line">R$</span>
                   <input type="number" min="500" value={orcamentoBRL} onChange={(e) => setOrcamentoBRL(Math.max(500, Number(e.target.value) || 6500))} className="w-full px-3 py-2 bg-transparent text-ink tnum outline-none" />
                 </div>
               </label>
-              <label className="text-xs text-inksoft font-semibold">Estilo
+              <label className="text-xs text-inksoft font-semibold">{t('decisao.estilo')}
                 <select value={presetId} onChange={(e) => escolherPreset(e.target.value)} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring">
                   {Object.entries(PERFIS_PRONTOS).map(([id, p]) => <option key={id} value={id}>{p.nome}</option>)}
                 </select>
               </label>
-              <label className="text-xs text-inksoft font-semibold">Companhia
+              <label className="text-xs text-inksoft font-semibold">{t('decisao.companhia')}
                 <select value={companhia} onChange={(e) => setCompanhia(e.target.value)} className="mt-1 w-full px-3 py-2 rounded-xl border border-line bg-input text-ink focusring">
                   <option value="solo">Solo</option>
                   <option value="casal">Casal</option>
@@ -201,12 +203,12 @@ export function DecisaoClient({ destinos }) {
                   <option value="familia">Família</option>
                 </select>
               </label>
-              <label className="text-xs text-inksoft font-semibold sm:col-span-2">Tolerância a perrengue
+              <label className="text-xs text-inksoft font-semibold sm:col-span-2">{t('decisao.tolerancia')}
                 <div className="mt-1 grid grid-cols-3 rounded-xl border border-line bg-paper2 p-1">
                   {[
-                    ['baixo', 'Baixa — quero conforto'],
-                    ['medio', 'Média — equilibrado'],
-                    ['alto', 'Alta — economizo no chão'],
+                    ['baixo', t('decisao.tolBaixo')],
+                    ['medio', t('decisao.tolMedio')],
+                    ['alto', t('decisao.tolAlto')],
                   ].map(([id, label]) => (
                     <button key={id} type="button" onClick={() => setPerrengue(id)} aria-pressed={perrengue === id}
                       className={`rounded-lg px-3 py-2 text-sm font-semibold transition focusring ${perrengue === id ? 'bg-card text-pine shadow-sm' : 'text-inksoft hover:text-ink'}`}>
@@ -223,7 +225,7 @@ export function DecisaoClient({ destinos }) {
 
           <div className="rounded-3xl border border-line bg-paper2/60 p-4">
             <div className="flex items-center justify-between gap-3">
-              <h3 className="font-display text-xl text-ink">Resultado instantâneo</h3>
+              <h3 className="font-display text-xl text-ink">{t('decisao.resultadoInst')}</h3>
               <span className="text-xs text-inksoft">{origem} · {mes > 0 ? MESES_PT[mes - 1] : 'qualquer mês'} · {diasPretendidos} dias · {companhia}</span>
             </div>
             <div className="mt-3 space-y-3">

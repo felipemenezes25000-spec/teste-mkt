@@ -25,6 +25,7 @@ import { ValeIrAgora } from '../../../_components/ValeIrAgora.jsx';
 import { OQueNinguemConta } from '../../../_components/OQueNinguemConta.jsx';
 import { MapaDestino } from '../../../_components/MapaDestino.jsx';
 import { T } from '../../../_components/T.jsx';
+import { ComoSeLocomove } from '../../../_components/ComoSeLocomove.jsx';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -298,6 +299,9 @@ export default async function DestinoPage(props) {
             </div>
           </section>
         )}
+
+        {/* COMO SE LOCOMOVE — preços reais de transporte (Uber/táxi/ônibus/metrô/aluguel/voo) */}
+        <ComoSeLocomove code={d.code} />
 
         {/* ONDE FICA — mapa real */}
         <MapaDestino coords={d.coords} nome={d.nome} />
