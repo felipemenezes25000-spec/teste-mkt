@@ -1,3 +1,6 @@
+'use client';
+import { useIdioma } from '../_lib/i18n.js';
+
 // Bloco "Vale ir agora?" — pega o destino + (opcional) mês atual e dá um
 // veredito prescritivo. NÃO é "compre agora": pode dizer "espere", "evite",
 // "só com orçamento maior". É o oposto da OTA.
@@ -75,16 +78,31 @@ const TOM_UI = {
   neutro: { borda: 'border-line', bg: 'bg-paper2', text: 'text-ink', icon: '➡️' },
 };
 
+// Mapeia o `tom` (chave do TOM_UI) pra chave do dicionário i18n. O texto explicativo
+// segue em pt — é gerado com nomes de destino e meses específicos, traduzir
+// dinamicamente exigiria template multilíngue (próxima leva).
+const TOM_TO_I18N = {
+  bom: 'destino.valeBomMomento',
+  alerta: 'destino.valeAlerta',
+  espere: 'destino.valeEspere',
+  evite: 'destino.valeEvite',
+  condicional: 'destino.valeCondicional',
+  neutro: 'destino.valeNeutro',
+};
+
 export function ValeIrAgora({ destino, mes }) {
+  const { t } = useIdioma();
   const v = vereditoIrAgora(destino, mes);
   const ui = TOM_UI[v.tom] || TOM_UI.neutro;
+  // Heurística: se tom é "bom" e texto começa com "Janela aberta", é valeBomBarato
+  const tituloKey = v.titulo.startsWith('Janela') ? 'destino.valeBomBarato' : (TOM_TO_I18N[v.tom] || 'destino.valeNeutro');
   return (
     <section aria-labelledby="vale-ir-agora-titulo">
-      <h2 id="vale-ir-agora-titulo" className="font-display text-2xl text-ink mb-3">⏱️ Vale ir agora?</h2>
+      <h2 id="vale-ir-agora-titulo" className="font-display text-2xl text-ink mb-3">⏱️ {t('destino.valeTitulo')}</h2>
       <div className={`rounded-3xl border ${ui.borda} ${ui.bg} p-5 sm:p-6`}>
         <div className="flex items-baseline gap-2">
           <span aria-hidden className="text-xl">{ui.icon}</span>
-          <h3 className={`font-display text-xl ${ui.text}`}>{v.titulo}</h3>
+          <h3 className={`font-display text-xl ${ui.text}`}>{t(tituloKey)}</h3>
         </div>
         <p className={`mt-2 text-sm ${ui.text} opacity-90`}>{v.texto}</p>
       </div>

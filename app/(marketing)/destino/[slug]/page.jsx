@@ -24,6 +24,7 @@ import { TravelFitScore } from '../../../_components/TravelFitScore.jsx';
 import { ValeIrAgora } from '../../../_components/ValeIrAgora.jsx';
 import { OQueNinguemConta } from '../../../_components/OQueNinguemConta.jsx';
 import { MapaDestino } from '../../../_components/MapaDestino.jsx';
+import { tServerFactory } from '../../../_lib/i18nServer.js';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -80,6 +81,7 @@ export default async function DestinoPage(props) {
   const d = destinoPorSlug(params.slug);
   if (!d) notFound();
   const base = siteUrl();
+  const { t } = await tServerFactory();
 
   const pontos = atracoesDoPais(d.code);
   const cidadesLista = (d.cidades || []).slice(0, 4);
@@ -262,8 +264,8 @@ export default async function DestinoPage(props) {
         {galeria.length > 0 && (
           <section>
             <div className="flex items-baseline justify-between gap-2 mb-3">
-              <h2 className="font-display text-2xl text-ink">📸 Pontos turísticos</h2>
-              <span className="text-xs text-inksoft">{galeria.length} lugares</span>
+              <h2 className="font-display text-2xl text-ink">📸 {t('destino.pontosTuristicos')}</h2>
+              <span className="text-xs text-inksoft">{galeria.length} {t('destino.lugares')}</span>
             </div>
             <GaleriaLugares lugares={galeria} layout="ponto" />
             <p className="mt-2 text-[11px] text-inksoft">Fotos de fontes de licença livre (Wikimedia Commons, Flickr-CC via Openverse e outras) — autor e licença no detalhe de cada lugar. Toque na foto para ver a história e abrir no mapa.</p>
@@ -273,7 +275,7 @@ export default async function DestinoPage(props) {
         {/* CIDADES */}
         {cidadesData.length > 0 && (
           <section>
-            <h2 className="font-display text-2xl text-ink mb-3">Cidades & bases</h2>
+            <h2 className="font-display text-2xl text-ink mb-3">{t('destino.cidadesBases')}</h2>
             <GaleriaLugares lugares={cidadesData} layout="cidade" />
           </section>
         )}

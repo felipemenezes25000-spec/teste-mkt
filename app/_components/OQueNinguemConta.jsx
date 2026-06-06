@@ -1,9 +1,15 @@
+'use client';
+import { useIdioma } from '../_lib/i18n.js';
+
 // Bloco "O que ninguém te conta" — dicas honestas curadas por país que NÃO
 // aparecem em blog de turismo: golpes comuns, distâncias reais, lotação por
 // ponto turístico, custos escondidos por região, riscos específicos.
 //
 // Quando o país não está no curado, geramos 3 alertas heurísticos por região +
 // custo, pra nenhum destino renderizar vazio.
+//
+// Conteúdo das dicas está em pt-BR (cultural-específico curado pra brasileiros).
+// Em outros idiomas, mostramos uma nota e o conteúdo segue PT.
 
 const CURADO = {
   PT: [
@@ -832,13 +838,15 @@ export function dicasOQueNinguemConta(destino) {
 }
 
 export function OQueNinguemConta({ destino }) {
+  const { idioma, t } = useIdioma();
   const dicas = dicasOQueNinguemConta(destino);
   return (
     <section aria-labelledby="oque-ninguem-conta-titulo">
-      <h2 id="oque-ninguem-conta-titulo" className="font-display text-2xl text-ink mb-3">🤫 O que ninguém te conta</h2>
-      <p className="text-sm text-inksoft mb-4 max-w-2xl">
-        Coisas que blog romantizado, vídeo curto e influencer não falam. Curado por país; honesto até quando incomoda.
-      </p>
+      <h2 id="oque-ninguem-conta-titulo" className="font-display text-2xl text-ink mb-3">🤫 {t('destino.oqueTitulo')}</h2>
+      <p className="text-sm text-inksoft mb-2 max-w-2xl">{t('destino.oqueP')}</p>
+      {idioma !== 'pt' && (
+        <p className="text-[11px] text-inksoft mb-4 max-w-2xl italic">📝 {t('destino.oqueNotaIdioma')}</p>
+      )}
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {dicas.map((d, i) => (
           <li key={i} className="rounded-2xl border border-line bg-card p-4 flex gap-3">
