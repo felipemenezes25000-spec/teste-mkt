@@ -16,6 +16,7 @@ import {
   HomeSecaoFaq,
   HomeSecaoCtaFinal,
 } from '../_components/HomeSections.jsx';
+import { T } from '../_components/T.jsx';
 
 // Landing premium (Server Component). Busca a imagem-herói e as dos destaques na
 // Wikipédia (cacheadas 1 dia); se a rede falhar, cai num gradiente — nunca quebra.
@@ -35,18 +36,19 @@ const CTA_LIGHT =
 const CTA_GHOST =
   'inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-card text-ink font-semibold px-5 py-3 hover:text-pine transition focusring';
 
-// Os diferenciais REAIS (o fosso da pesquisa) — cada um leva pra tela que o prova.
+// Pilares e Passos viram chaves de i18n — renderizados via <T />. Mantemos
+// `icon` e `href` no array pra topologia, mas título/texto/CTA via t().
 const PILARES = [
-  { icon: '🧠', titulo: 'Decide com você', txt: 'Não te empurra 200 opções. Diz qual destino faz sentido pro SEU perfil, mês e bolso — com nota e o porquê de cada um.', href: '/decisao', cta: 'Ver a decisão' },
-  { icon: '🧾', titulo: 'Custo honesto', txt: 'O preço de vitrine é só voo + hotel. Mostramos o custo REAL da viagem inteira, item a item — sem surpresa no balcão.', href: '/decisao', cta: 'Ver o custo real' },
-  { icon: '🗺️', titulo: 'Roteiro vivo', txt: 'Estação × visto × fôlego: a ordem dos países muda tudo. O plano recalcula clima, visto e grana quando você mexe.', href: '/planejar', cta: 'Abrir o planejador' },
-  { icon: '🌍', titulo: `${DESTINOS.length} países`, txt: 'O mundo inteiro com custo, melhor época, visto, segurança e o que comer — não só os óbvios da prateleira.', href: '/explorar', cta: 'Explorar destinos' },
+  { icon: '🧠', tit: 'pilares.decideTit', txt: 'pilares.decideTxt', href: '/decisao', cta: 'pilares.decideCTA' },
+  { icon: '🧾', tit: 'pilares.custoTit', txt: 'pilares.custoTxt', href: '/custo-real', cta: 'pilares.custoCTA' },
+  { icon: '🗺️', tit: 'pilares.roteiroTit', txt: 'pilares.roteiroTxt', href: '/planejar', cta: 'pilares.roteiroCTA' },
+  { icon: '🌍', tit: `${DESTINOS.length}+ ${'__paises__'}`, txt: 'pilares.paisesTxt', href: '/explorar', cta: 'pilares.paisesCTA' },
 ];
 
 const PASSOS = [
-  { n: '1', titulo: 'Descubra', txt: `Conte seu estilo. A gente ranqueia os ${DESTINOS.length} destinos pelo que combina com você — com score e custo real.` },
-  { n: '2', titulo: 'Decida', txt: 'Compare lado a lado por custo-benefício, segurança, clima e visto. Sem achismo de blog.' },
-  { n: '3', titulo: 'Planeje & vá', txt: 'Monte a rota na ordem certa, gere o roteiro dia a dia com IA, e reserve com um clique. Tudo num lugar.' },
+  { n: '1', tit: 'passos.p1Tit', txt: 'passos.p1Txt' },
+  { n: '2', tit: 'passos.p2Tit', txt: 'passos.p2Txt' },
+  { n: '3', tit: 'passos.p3Tit', txt: 'passos.p3Txt' },
 ];
 
 export default async function Home() {
@@ -110,18 +112,23 @@ export default async function Home() {
       {/* PILARES (o fosso) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
         <h2 className="font-display text-2xl sm:text-3xl text-ink text-center max-w-2xl mx-auto">
-          O que nenhum app de viagem faz — e a gente faz
+          <T k="pilares.titulo" fallback="O que nenhum app de viagem faz — e a gente faz" />
         </h2>
         <p className="mt-2 text-center text-inksoft max-w-xl mx-auto text-sm">
-          Eles competem em te vender a reserva mais barata. A gente é a camada de decisão neutra acima disso.
+          <T k="pilares.sub" fallback="Eles competem em te vender a reserva mais barata. A gente é a camada de decisão neutra acima disso." />
         </p>
         <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {PILARES.map((p) => (
-            <Link key={p.titulo} href={p.href} className="group rounded-2xl border border-line bg-card p-5 hover:border-pine/40 hover:shadow-[var(--e-1)] hover:-translate-y-0.5 transition focusring">
+          {PILARES.map((p, i) => (
+            <Link key={p.tit} href={p.href} className="group rounded-2xl border border-line bg-card p-5 hover:border-pine/40 hover:shadow-[var(--e-1)] hover:-translate-y-0.5 transition focusring">
               <div className="text-3xl" aria-hidden>{p.icon}</div>
-              <h3 className="mt-2 font-display text-lg text-ink">{p.titulo}</h3>
-              <p className="mt-1 text-sm text-inksoft">{p.txt}</p>
-              <span className="mt-3 inline-block text-sm font-semibold text-pine group-hover:underline">{p.cta} →</span>
+              <h3 className="mt-2 font-display text-lg text-ink">
+                {i === 3 ? `${DESTINOS.length}+ ` : ''}
+                <T k={p.tit} fallback={p.tit.split('.').pop()} />
+              </h3>
+              <p className="mt-1 text-sm text-inksoft"><T k={p.txt} fallback="" /></p>
+              <span className="mt-3 inline-block text-sm font-semibold text-pine group-hover:underline">
+                <T k={p.cta} fallback="" /> →
+              </span>
             </Link>
           ))}
         </div>
@@ -149,13 +156,13 @@ export default async function Home() {
 
       {/* COMO FUNCIONA */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-        <h2 className="font-display text-2xl sm:text-3xl text-ink text-center">Como funciona</h2>
+        <h2 className="font-display text-2xl sm:text-3xl text-ink text-center"><T k="passos.titulo" fallback="Como funciona" /></h2>
         <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
           {PASSOS.map((p) => (
             <div key={p.n} className="relative rounded-2xl border border-line bg-card p-6">
               <span className="absolute -top-3 left-6 w-9 h-9 grid place-items-center rounded-xl bg-pine text-white font-display text-lg shadow-md">{p.n}</span>
-              <h3 className="mt-3 font-display text-xl text-ink">{p.titulo}</h3>
-              <p className="mt-1 text-sm text-inksoft">{p.txt}</p>
+              <h3 className="mt-3 font-display text-xl text-ink"><T k={p.tit} fallback={p.tit.split('.').pop()} /></h3>
+              <p className="mt-1 text-sm text-inksoft"><T k={p.txt} fallback="" /></p>
             </div>
           ))}
         </div>

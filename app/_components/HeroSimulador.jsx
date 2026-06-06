@@ -5,6 +5,7 @@ import { DESTINOS, destinoPorCode } from '../_lib/destinos.js';
 import { recomendarDestinos } from '../_engine/decisao.js';
 import { perfilDoPreset, PERFIS_PRONTOS } from '../_engine/perfil.js';
 import { MESES_PT } from '../_engine/data.js';
+import { useIdioma } from '../_lib/i18n.js';
 
 const ESTILOS = Object.entries(PERFIS_PRONTOS).map(([id, p]) => ({ id, label: p.nome }));
 
@@ -17,6 +18,7 @@ export function HeroSimulador() {
   const [orcamento, setOrcamento] = useState('');
   const [mes, setMes] = useState(0); // 0 = qualquer mês
   const [res, setRes] = useState(null);
+  const { t } = useIdioma();
 
   function simular(e) {
     e.preventDefault();
@@ -45,30 +47,30 @@ export function HeroSimulador() {
     <section className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-12">
       <div className="rounded-3xl border border-line bg-card shadow-[var(--e-2)] p-5 sm:p-7">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-oncoral bg-coral px-2.5 py-1 rounded-full">30 segundos</span>
-          <h2 className="font-display text-xl sm:text-2xl text-ink">Descubra a viagem que combina com você</h2>
+          <span className="text-[11px] font-bold uppercase tracking-wider text-oncoral bg-coral px-2.5 py-1 rounded-full">{t('simulador.badge30s')}</span>
+          <h2 className="font-display text-xl sm:text-2xl text-ink">{t('simulador.titulo')}</h2>
         </div>
 
         <form onSubmit={simular} className="mt-4 grid grid-cols-2 lg:grid-cols-5 gap-3 items-end">
-          <label className="text-xs text-inksoft font-medium col-span-2 lg:col-span-1">Estilo
+          <label className="text-xs text-inksoft font-medium col-span-2 lg:col-span-1">{t('simulador.estilo')}
             <select value={estilo} onChange={(e) => setEstilo(e.target.value)} className={field}>
               {ESTILOS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
             </select>
           </label>
-          <label className="text-xs text-inksoft font-medium">Dias
+          <label className="text-xs text-inksoft font-medium">{t('simulador.dias')}
             <input type="number" min="1" max="120" value={dias} onChange={(e) => setDias(e.target.value)} className={`${field} tnum`} />
           </label>
-          <label className="text-xs text-inksoft font-medium">Orçamento US$
-            <input type="number" min="0" step="100" placeholder="opcional" value={orcamento} onChange={(e) => setOrcamento(e.target.value)} className={`${field} tnum`} />
+          <label className="text-xs text-inksoft font-medium">{t('simulador.orcamento')}
+            <input type="number" min="0" step="100" placeholder={t('simulador.placeholderOpcional')} value={orcamento} onChange={(e) => setOrcamento(e.target.value)} className={`${field} tnum`} />
           </label>
-          <label className="text-xs text-inksoft font-medium">Mês
+          <label className="text-xs text-inksoft font-medium">{t('simulador.mes')}
             <select value={mes} onChange={(e) => setMes(Number(e.target.value))} className={field}>
-              <option value={0}>Qualquer</option>
+              <option value={0}>{t('simulador.qualquer')}</option>
               {MESES_PT.map((m, i) => <option key={m} value={i + 1}>{m}</option>)}
             </select>
           </label>
           <button type="submit" className="col-span-2 lg:col-span-1 inline-flex items-center justify-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 transition focusring">
-            Descobrir destino
+            {t('simulador.cta')}
           </button>
         </form>
 
@@ -85,29 +87,27 @@ export function HeroSimulador() {
                   <p className="text-xs text-inksoft mt-0.5 line-clamp-2 grow">{d.porque}</p>
                   <div className="mt-2 flex flex-wrap items-baseline gap-x-1.5">
                     <span className="text-sm font-semibold text-ink tnum">~US$ {d.custoTerra.toLocaleString('pt-BR')}</span>
-                    <span className="text-[11px] text-inksoft">em {nd} dias (em terra)</span>
+                    <span className="text-[11px] text-inksoft">{nd} {t('simulador.dias').toLowerCase()} · {t('simulador.emTerra')}</span>
                   </div>
                   <div className="mt-1.5 flex flex-wrap gap-1">
-                    {d.cabe === true && <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-solar text-onsolar">✓ cabe no orçamento</span>}
-                    {d.cabe === false && <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-danger-bg text-danger border border-danger-bd">acima do orçamento</span>}
-                    {d.boaEpoca === true && <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-success-bg text-success border border-success-bd">boa época</span>}
+                    {d.cabe === true && <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-solar text-onsolar">{t('simulador.cabeOrcamento')}</span>}
+                    {d.cabe === false && <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-danger-bg text-danger border border-danger-bd">{t('simulador.acimaOrcamento')}</span>}
+                    {d.boaEpoca === true && <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-success-bg text-success border border-success-bd">{t('simulador.boaEpoca')}</span>}
                   </div>
                   <div className="mt-3 flex gap-3">
-                    <Link href={`/destino/${d.slug}`} className="text-xs font-semibold text-pine hover:underline focusring">Ver destino →</Link>
-                    <Link href={`/roteiro?destino=${d.slug}`} className="text-xs font-semibold text-inksoft hover:text-pine focusring">Montar roteiro</Link>
+                    <Link href={`/destino/${d.slug}`} className="text-xs font-semibold text-pine hover:underline focusring">{t('simulador.verDestino')}</Link>
+                    <Link href={`/roteiro?destino=${d.slug}`} className="text-xs font-semibold text-inksoft hover:text-pine focusring">{t('simulador.montarRoteiro')}</Link>
                   </div>
                 </div>
               ))}
             </div>
             <p className="mt-3 text-[11px] text-inksoft">
-              Estimativa rápida em terra (sem voo), pelo seu estilo. Pra decisão completa — score, custo real com voo e oportunidades —{' '}
-              <Link href="/decisao" className="text-pine font-semibold hover:underline focusring">abra a Decisão →</Link>
+              {t('simulador.decisaoCompleta')}{' '}
+              <Link href="/decisao" className="text-pine font-semibold hover:underline focusring"></Link>
             </p>
           </div>
         ) : (
-          <p className="mt-3 text-xs text-inksoft">
-            Escolha seu estilo e veja <strong className="text-ink">3 destinos que combinam</strong> — com custo estimado e o porquê de cada um.
-          </p>
+          <p className="mt-3 text-xs text-inksoft">{t('simulador.rodape')}</p>
         )}
       </div>
     </section>
