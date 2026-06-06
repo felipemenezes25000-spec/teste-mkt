@@ -303,7 +303,7 @@ export default async function DestinoPage(props) {
         )}
 
         {/* O QUE FAZER E QUANTO CUSTA — atrações/museus/passeios com preço de ingresso/tour */}
-        <OQueFazer itens={atracoesPrecosDoPais(d.code)} />
+        <OQueFazer itens={atracoesPrecosDoPais(d.code)} code={d.code} cidadePrincipal={d.cidadePrincipal} />
 
         {/* COMO SE LOCOMOVE — preços reais de transporte (Uber/táxi/ônibus/metrô/aluguel/voo) */}
         <ComoSeLocomove code={d.code} />
