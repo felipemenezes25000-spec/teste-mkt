@@ -26,6 +26,7 @@ import { OQueNinguemConta } from '../../../_components/OQueNinguemConta.jsx';
 import { MapaDestino } from '../../../_components/MapaDestino.jsx';
 import { T } from '../../../_components/T.jsx';
 import { ComoSeLocomove } from '../../../_components/ComoSeLocomove.jsx';
+import { PasseiosIngressos } from '../../../_components/PasseiosIngressos.jsx';
 import { OQueFazer } from '../../../_components/OQueFazer.jsx';
 import { atracoesPrecosDoPais } from '../../../_engine/atracoesPrecos.js';
 
@@ -307,6 +308,9 @@ export default async function DestinoPage(props) {
 
         {/* COMO SE LOCOMOVE — preços reais de transporte (Uber/táxi/ônibus/metrô/aluguel/voo) */}
         <ComoSeLocomove code={d.code} />
+
+        {/* PASSEIOS & INGRESSOS — atrações reais com preço de entrada (deep research multiagente) */}
+        <PasseiosIngressos code={d.code} nomePais={d.nome} />
 
         {/* ONDE FICA — mapa real */}
         <MapaDestino coords={d.coords} nome={d.nome} />
