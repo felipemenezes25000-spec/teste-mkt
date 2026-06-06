@@ -5,6 +5,7 @@ import { distanciaKm, estimarPrecoVoo } from '../../_engine/utils.js';
 import { custoTotalRealista, PREMISSAS_PADRAO } from '../../_engine/custoTotal.js';
 import { useCambioBRL, CambioBadge, BRL_FALLBACK } from '../../_lib/cambioClient.js';
 import { track } from '../../_lib/analytics.js';
+import { useIdioma } from '../../_lib/i18n.js';
 
 // Calculadora prescritiva: o usuário escolhe destino + dias + perfil + mês +
 // pessoas; mostramos vitrine (voo+hotel) vs custo real completo, breakdown por
@@ -52,6 +53,7 @@ export function CustoRealClient({ destinos }) {
   const [passeiosDia, setPasseiosDia] = useState(20);
   const [bagagem, setBagagem] = useState(80);
   const cambio = useCambioBRL();
+  const { t } = useIdioma();
 
   const origem = ORIGENS[origemIdx];
   const destino = destinos.find((d) => d.code === destinoCode) || destinos[0];
@@ -124,40 +126,40 @@ export function CustoRealClient({ destinos }) {
     <div className="mt-8 grid lg:grid-cols-[1fr_1.15fr] gap-6 items-start">
       {/* INPUTS */}
       <div className="rounded-3xl border border-line bg-card p-5 sm:p-6 shadow-[var(--e-1)] no-print">
-        <h2 className="font-display text-2xl text-ink">Sua viagem em detalhe</h2>
-        <p className="text-xs text-inksoft mt-1">Tudo recalcula no momento em que você muda. Sem botão.</p>
+        <h2 className="font-display text-2xl text-ink">{t('custoReal.detalhe')}</h2>
+        <p className="text-xs text-inksoft mt-1">{t('custoReal.detalheP')}</p>
 
         <div className="mt-5 grid sm:grid-cols-2 gap-3">
-          <label className="text-xs font-medium text-inksoft">Saindo de
+          <label className="text-xs font-medium text-inksoft">{t('decisao.saindoDe')}
             <select value={origemIdx} onChange={(e) => setOrigemIdx(Number(e.target.value))} className={field}>
               {ORIGENS.map((o, i) => <option key={o.iata} value={i}>{o.cidade} ({o.iata})</option>)}
             </select>
           </label>
-          <label className="text-xs font-medium text-inksoft">Destino
+          <label className="text-xs font-medium text-inksoft">{t('custoReal.destino')}
             <select value={destinoCode} onChange={(e) => setDestinoCode(e.target.value)} className={field}>
               {destinos.map((d) => <option key={d.code} value={d.code}>{d.nome}</option>)}
             </select>
           </label>
-          <label className="text-xs font-medium text-inksoft">Dias
+          <label className="text-xs font-medium text-inksoft">{t('decisao.dias')}
             <input type="number" min={1} max={60} value={dias} onChange={(e) => setDias(clamp(Number(e.target.value) || 1, 1, 60))} className={`${field} tnum`} />
           </label>
-          <label className="text-xs font-medium text-inksoft">Pessoas
+          <label className="text-xs font-medium text-inksoft">{t('custoReal.pessoas')}
             <input type="number" min={1} max={10} value={pessoas} onChange={(e) => setPessoas(clamp(Number(e.target.value) || 1, 1, 10))} className={`${field} tnum`} />
           </label>
-          <label className="text-xs font-medium text-inksoft">Mês
+          <label className="text-xs font-medium text-inksoft">{t('decisao.mes')}
             <select value={mes} onChange={(e) => setMes(Number(e.target.value))} className={field}>
               {MESES.map((m, i) => <option key={m} value={i + 1}>{m}</option>)}
             </select>
           </label>
-          <label className="text-xs font-medium text-inksoft">Estilo
+          <label className="text-xs font-medium text-inksoft">{t('decisao.estilo')}
             <select value={perfil} onChange={(e) => setPerfil(e.target.value)} className={field}>
               {PERFIS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
             </select>
           </label>
-          <label className="text-xs font-medium text-inksoft">Passeios US$/dia
+          <label className="text-xs font-medium text-inksoft">{t('custoReal.passeios')}
             <input type="number" min={0} value={passeiosDia} onChange={(e) => setPasseiosDia(Math.max(0, Number(e.target.value) || 0))} className={`${field} tnum`} />
           </label>
-          <label className="text-xs font-medium text-inksoft">Bagagem US$/pessoa
+          <label className="text-xs font-medium text-inksoft">{t('custoReal.bagagem')}
             <input type="number" min={0} value={bagagem} onChange={(e) => setBagagem(Math.max(0, Number(e.target.value) || 0))} className={`${field} tnum`} />
           </label>
         </div>
@@ -209,7 +211,7 @@ export function CustoRealClient({ destinos }) {
 
         {/* Breakdown */}
         <div className="rounded-3xl border border-line bg-card p-5 shadow-[var(--e-1)]">
-          <h3 className="font-display text-xl text-ink">Onde o dinheiro vai</h3>
+          <h3 className="font-display text-xl text-ink">{t('custoReal.onde')}</h3>
           <ul className="mt-3 space-y-1.5">
             {resultado.categorias.map((c) => {
               const pct = resultado.total > 0 ? (c.valor / resultado.total) * 100 : 0;
@@ -235,8 +237,8 @@ export function CustoRealClient({ destinos }) {
 
         {/* 3 cenários */}
         <div className="rounded-3xl border border-line bg-card p-5 shadow-[var(--e-1)]">
-          <h3 className="font-display text-xl text-ink">3 cenários — escolha o seu</h3>
-          <p className="text-xs text-inksoft">Mantemos voo, seguro e taxas iguais. Muda só a vida diária (hospedagem + comida + transporte local).</p>
+          <h3 className="font-display text-xl text-ink">{t('custoReal.cenariosTitulo')}</h3>
+          <p className="text-xs text-inksoft">{t('custoReal.cenariosP')}</p>
           <div className="mt-3 grid grid-cols-3 gap-3">
             {PERFIS.map((p) => {
               const v = resultado.faixa[p.id === 'medio' ? 'medio' : p.id] || resultado.faixa.medio;
@@ -260,7 +262,7 @@ export function CustoRealClient({ destinos }) {
 
         {/* Alerta prescritivo */}
         <div className="rounded-3xl border border-warn-bd bg-warn-bg p-5">
-          <h3 className="font-display text-lg text-warn">Atenção</h3>
+          <h3 className="font-display text-lg text-warn">{t('custoReal.atencao')}</h3>
           <ul className="mt-2 space-y-1.5 text-sm text-warn">
             <li>• A maior fatia da sua viagem é <strong>{maiorCategoria.label.toLowerCase()}</strong>. É onde corte ou upgrade pesa mais.</li>
             {resultado.ehAltaTemporada && (

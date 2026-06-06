@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { track } from '../../_lib/analytics.js';
+import { useIdioma } from '../../_lib/i18n.js';
 
 // Calculadora "quanto custa uma escolha ruim": o usuário marca quais erros já
 // cometeu (ou pode cometer) e a UI soma. Sempre maior que 12 meses de Premium
@@ -24,6 +25,7 @@ const PREMIUM_ANO = PREMIUM_MES * 12;
 export function ROICalculator() {
   const [marcados, setMarcados] = useState({ 'diaria-ruim': true, 'voo-mal': true });
   const [meses, setMeses] = useState(12);
+  const { t } = useIdioma();
 
   const total = ERROS.reduce((s, e) => s + (marcados[e.id] ? e.valor : 0), 0);
   const planoTotal = PREMIUM_MES * meses;
@@ -43,12 +45,12 @@ export function ROICalculator() {
   return (
     <div className="mt-10 rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
       <div className="p-6 sm:p-8 border-b border-line bg-paper2/40">
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-coral">Argumento concreto</span>
+        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-coral">{t('planos.roiSelo')}</span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.05]">
-          Quanto custa uma escolha ruim?
+          {t('planos.roiH2')}
         </h2>
         <p className="mt-3 text-inksoft max-w-2xl">
-          Marque os erros que você já cometeu (ou pode cometer). A conta normalmente passa de um ano de Premium na primeira viagem.
+          {t('planos.roiP')}
         </p>
       </div>
 
@@ -85,14 +87,14 @@ export function ROICalculator() {
 
         <div className="p-5 sm:p-6 bg-paper2/30 lg:border-l border-line">
           <div className="rounded-3xl bg-pine text-white p-5 shadow-[var(--e-1)]">
-            <div className="text-[11px] font-bold uppercase tracking-wide opacity-85">Custo dos erros marcados</div>
+            <div className="text-[11px] font-bold uppercase tracking-wide opacity-85">{t('planos.custoErros')}</div>
             <div className="mt-1 font-display text-5xl tnum">R$ {total.toLocaleString('pt-BR')}</div>
-            <p className="mt-2 text-xs opacity-85">numa única viagem mal decidida</p>
+            <p className="mt-2 text-xs opacity-85">{t('planos.umaViagem')}</p>
           </div>
 
           <div className="mt-4 rounded-2xl border border-line bg-card p-4">
             <label className="text-xs font-medium text-inksoft block">
-              Premium por
+              {t('planos.premiumPor')}
               <select value={meses} onChange={(e) => setMeses(Number(e.target.value))} className="ml-2 px-2 py-1 rounded-md border border-line bg-input text-ink focusring text-sm">
                 <option value={3}>3 meses</option>
                 <option value={6}>6 meses</option>
@@ -108,7 +110,7 @@ export function ROICalculator() {
 
           {economia > 0 ? (
             <div className="mt-3 rounded-2xl border border-success-bd bg-success-bg p-4">
-              <div className="text-[11px] font-bold uppercase tracking-wide text-success">Você economiza pelo menos</div>
+              <div className="text-[11px] font-bold uppercase tracking-wide text-success">{t('planos.economiaLabel')}</div>
               <div className="mt-1 font-display text-3xl text-success tnum">R$ {economia.toLocaleString('pt-BR')}</div>
               <p className="mt-1 text-[11px] text-success">ROI de {roi}% — sem contar tempo, ansiedade e arrependimento.</p>
             </div>
@@ -120,10 +122,10 @@ export function ROICalculator() {
 
           <div className="mt-5 flex flex-wrap gap-2">
             <Link href="/conta" className="inline-flex rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 focusring">
-              Assinar Premium
+              {t('planos.assinarPremium')}
             </Link>
             <Link href="/custo-real" className="inline-flex rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2.5 hover:text-pine focusring">
-              Ver custo real primeiro
+              {t('planos.verCustoPrimeiro')}
             </Link>
           </div>
 

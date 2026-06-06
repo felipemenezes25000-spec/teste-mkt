@@ -11,6 +11,7 @@ import { carregarPlano } from '../../_engine/storage.js';
 import { FlightScoreCard } from '../../_components/FlightScoreCard.jsx';
 import { useCambioBRL } from '../../_lib/cambioClient.js';
 import { track } from '../../_lib/analytics.js';
+import { useIdioma } from '../../_lib/i18n.js';
 
 function dataPadrao() {
   const d = new Date();
@@ -76,34 +77,35 @@ export function VoosClient() {
 
   const voos = linksVoo({ origemCidade: origem.cidade, origemIata: origem.iata, destinoCidade: destino.cidadePrincipal || destino.nome, destinoIata: destino.iata, dataISO: data });
   const field = 'w-full px-3 py-2 rounded-lg border border-line bg-input text-ink focusring text-sm';
+  const { t } = useIdioma();
 
   return (
     <div className="mt-6">
       <div className="rounded-3xl border border-line bg-card p-5 grid sm:grid-cols-2 lg:grid-cols-6 gap-3 items-end shadow-[var(--e-1)]">
         <Autocomplete
-          label="Origem" items={ORIGENS} value={origem} onChange={setOrigem}
+          label={t('voos.origem')} items={ORIGENS} value={origem} onChange={setOrigem}
           toText={(o) => `${o.cidade} (${o.iata})`} toSearch={(o) => `${o.cidade} ${o.iata}`}
           toKey={(o) => o.iata} toRight={(o) => o.iata}
           icon="🛫" placeholder="cidade de partida"
         />
         <Autocomplete
-          label="Destino" items={DESTINOS} value={destino} onChange={setDestino}
+          label={t('voos.destino')} items={DESTINOS} value={destino} onChange={setDestino}
           toText={(d) => `${d.cidadePrincipal || d.nome} (${d.iata})`}
           toSearch={(d) => `${d.nome} ${d.cidadePrincipal || ''} ${d.regiao} ${d.iata}`}
           toKey={(d) => d.code} toRight={(d) => d.regiao}
           icon="🛬" placeholder="busque um país"
         />
-        <label className="text-xs text-inksoft font-medium block">Data
+        <label className="text-xs text-inksoft font-medium block">{t('voos.data')}
           <input type="date" value={data} onChange={(e) => setData(e.target.value)} className={`${field} mt-1 tnum`} />
         </label>
-        <label className="text-xs text-inksoft font-medium block">Dias
+        <label className="text-xs text-inksoft font-medium block">{t('decisao.dias')}
           <input type="number" min="3" max="45" value={dias} onChange={(e) => setDias(Math.max(3, Math.min(45, Number(e.target.value) || 8)))} className={`${field} mt-1 tnum`} />
         </label>
-        <label className="text-xs text-inksoft font-medium block">Orçamento total
+        <label className="text-xs text-inksoft font-medium block">{t('decisao.orcamento')}
           <input type="number" min="500" value={orcamentoTotal} onChange={(e) => setOrcamentoTotal(Math.max(500, Number(e.target.value) || 6500))} className={`${field} mt-1 tnum`} />
         </label>
         <button onClick={buscar} disabled={busy} className="inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-white font-semibold px-4 py-2.5 hover:bg-pinedk disabled:opacity-60 focusring">
-          {busy ? 'Buscando…' : 'Buscar voos'}
+          {busy ? t('voos.buscando') : t('voos.buscar')}
         </button>
       </div>
 

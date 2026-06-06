@@ -2,6 +2,7 @@ import { PlanosCta } from './PlanosCta.jsx';
 import { JsonLd } from '../../_components/JsonLd.jsx';
 import { jsonLdProduto, siteUrl } from '../../_lib/seo.js';
 import { ROICalculator } from './ROICalculator.jsx';
+import { T } from '../../_components/T.jsx';
 
 export const metadata = {
   title: 'Planos — Mundo Sem Fim',
@@ -36,9 +37,9 @@ export default function PlanosPage() {
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       <JsonLd data={jsonLdProduto(ofertas, siteUrl())} />
       <div className="text-center max-w-3xl mx-auto">
-        <span className="inline-flex rounded-full bg-pine/10 text-pine px-3 py-1 text-xs font-bold uppercase tracking-[0.18em]">Economia antes da passagem</span>
-        <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.03] text-ink">Pague menos para errar menos.</h1>
-        <p className="mt-4 text-lg text-inksoft">O Premium se paga quando evita uma passagem mal comprada, um roteiro corrido demais ou uma viagem “barata” que fica cara no detalhe.</p>
+        <span className="inline-flex rounded-full bg-pine/10 text-pine px-3 py-1 text-xs font-bold uppercase tracking-[0.18em]"><T k="planos.heroSelo" fallback="Economia antes da passagem" /></span>
+        <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.03] text-ink"><T k="planos.heroH1" fallback="Pague menos para errar menos." /></h1>
+        <p className="mt-4 text-lg text-inksoft"><T k="planos.heroP" fallback="O Premium se paga quando evita uma passagem mal comprada, um roteiro corrido demais ou uma viagem barata que fica cara no detalhe." /></p>
       </div>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
         {PLANOS.map((p) => (

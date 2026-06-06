@@ -1,23 +1,12 @@
+'use client';
 import { DEPOIMENTOS } from '../_lib/depoimentos.js';
 import { DESTINOS } from '../_lib/destinos.js';
+import { useIdioma } from '../_lib/i18n.js';
 
 // Prova social HONESTA: sinais de confiança VERIFICÁVEIS (sempre visíveis) + uma grade
 // de depoimentos que só aparece quando _lib/depoimentos.js tiver entradas REAIS (não
 // placeholder). Nada fabricado. O JSON-LD de Review/AggregateRating fica gated no
 // page.jsx (só sai com depoimentos reais).
-
-const PILARES = [
-  { icon: '🤝', titulo: 'Conselho neutro', txt: 'Não vendemos a reserva — então não temos motivo pra te empurrar a opção errada. A recomendação é pelo SEU perfil.' },
-  { icon: '🧾', titulo: 'Custo real, não vitrine', txt: 'Somamos o que a OTA esconde: seguro, eSIM, visto e contingência. Você sabe o número de verdade antes de ir.' },
-  { icon: '🌍', titulo: 'O mundo todo, com fonte', txt: `${DESTINOS.length} países e 2.000+ pontos turísticos, com dados e fotos de Wikipédia/Wikidata — autoria e licença na origem, não achismo de blog.` },
-];
-
-const STATS = [
-  { n: String(DESTINOS.length), l: 'países' },
-  { n: '2.000+', l: 'pontos turísticos' },
-  { n: '100+', l: 'moedas' },
-  { n: 'Grátis', l: 'pra começar, sem cartão' },
-];
 
 function Depoimentos() {
   const reais = DEPOIMENTOS.filter((d) => d && !d.placeholder && d.texto);
@@ -40,13 +29,25 @@ function Depoimentos() {
 }
 
 export function ProvaSocial() {
+  const { t } = useIdioma();
+  const PILARES = [
+    { icon: '🤝', titulo: t('prova.neutroTit'), txt: t('prova.neutroTxt') },
+    { icon: '🧾', titulo: t('prova.custoTit'), txt: t('prova.custoTxt') },
+    { icon: '🌍', titulo: t('prova.mundoTit'), txt: `${DESTINOS.length} ${t('prova.mundoTxt')}` },
+  ];
+  const STATS = [
+    { n: String(DESTINOS.length), l: t('prova.statPaises') },
+    { n: '2.000+', l: t('prova.statPontos') },
+    { n: '100+', l: t('prova.statMoedas') },
+    { n: t('prova.statGratis'), l: t('prova.statGratisL') },
+  ];
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
       <h2 className="font-display text-2xl sm:text-3xl text-ink text-center max-w-2xl mx-auto">
-        Por que confiar na gente
+        {t('prova.titulo')}
       </h2>
       <p className="mt-2 text-center text-inksoft max-w-xl mx-auto text-sm">
-        Sem conflito de interesse, com dados rastreáveis — o básico que um copiloto de viagem devia ter.
+        {t('prova.sub')}
       </p>
 
       <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4">

@@ -120,6 +120,14 @@ export const STRINGS = {
       p2Tit: 'Decida', p2Txt: 'Compare lado a lado por custo-benefício, segurança, clima e visto. Sem achismo de blog.',
       p3Tit: 'Planeje & vá', p3Txt: 'Monte a rota na ordem certa, gere o roteiro dia a dia com IA, e reserve com um clique. Tudo num lugar.',
     },
+    prova: {
+      titulo: 'Por que confiar na gente',
+      sub: 'Sem conflito de interesse, com dados rastreáveis — o básico que um copiloto de viagem devia ter.',
+      neutroTit: 'Conselho neutro', neutroTxt: 'Não vendemos a reserva — então não temos motivo pra te empurrar a opção errada. A recomendação é pelo SEU perfil.',
+      custoTit: 'Custo real, não vitrine', custoTxt: 'Somamos o que a OTA esconde: seguro, eSIM, visto e contingência. Você sabe o número de verdade antes de ir.',
+      mundoTit: 'O mundo todo, com fonte', mundoTxt: 'países e 2.000+ pontos turísticos, com dados e fotos de Wikipédia/Wikidata — autoria e licença na origem, não achismo de blog.',
+      statPaises: 'países', statPontos: 'pontos turísticos', statMoedas: 'moedas', statGratis: 'Grátis', statGratisL: 'pra começar, sem cartão',
+    },
     custoReal: {
       heroSelo: 'Vitrine × custo real',
       heroH1: 'O preço da vitrine termina na compra.',
@@ -132,6 +140,10 @@ export const STRINGS = {
       cenariosP: 'Mantemos voo, seguro e taxas iguais. Muda só a vida diária (hospedagem + comida + transporte local).',
       atencao: 'Atenção',
       cambio: 'Câmbio',
+      destino: 'Destino', pessoas: 'Pessoas', passeios: 'Passeios US$/dia', bagagem: 'Bagagem US$/pessoa',
+      precoVitrine: 'Preço de vitrine', escondido: 'Escondido', custoTotal: 'Custo real total',
+      porDia: 'por dia', porPessoa: 'por pessoa', vooEstimado: 'voo estimado',
+      verAlertasDestino: 'Ver alertas do destino', montarRoteiroOrcamento: 'Montar roteiro neste orçamento',
     },
     voos: {
       heroSelo: 'Além do voo barato',
@@ -256,6 +268,14 @@ export const STRINGS = {
       p2Tit: 'Decide', p2Txt: 'Compare side by side by value, safety, weather and visa. No blog guessing.',
       p3Tit: 'Plan & go', p3Txt: 'Build the route in the right order, generate the day-by-day itinerary with AI, and book in one click. All in one place.',
     },
+    prova: {
+      titulo: 'Why trust us',
+      sub: 'No conflict of interest, with traceable data — the basics a travel copilot should have.',
+      neutroTit: 'Neutral advice', neutroTxt: 'We don\'t sell the booking — so we have no reason to push the wrong option. The recommendation is for YOUR profile.',
+      custoTit: 'Real cost, not sticker', custoTxt: 'We add what the OTA hides: insurance, eSIM, visa and contingency. You know the real number before going.',
+      mundoTit: 'The whole world, sourced', mundoTxt: 'countries and 2,000+ sights, with data and photos from Wikipedia/Wikidata — authorship and license at the source, not blog guessing.',
+      statPaises: 'countries', statPontos: 'sights', statMoedas: 'currencies', statGratis: 'Free', statGratisL: 'to start, no card',
+    },
     custoReal: {
       heroSelo: 'Sticker × real cost',
       heroH1: 'The sticker price ends at checkout.',
@@ -268,6 +288,10 @@ export const STRINGS = {
       cenariosP: 'We keep flight, insurance and taxes the same. Only the daily life changes (lodging + food + local transport).',
       atencao: 'Heads up',
       cambio: 'Exchange',
+      destino: 'Destination', pessoas: 'People', passeios: 'Tours US$/day', bagagem: 'Baggage US$/person',
+      precoVitrine: 'Sticker price', escondido: 'Hidden', custoTotal: 'Total real cost',
+      porDia: 'per day', porPessoa: 'per person', vooEstimado: 'estimated flight',
+      verAlertasDestino: 'See destination alerts', montarRoteiroOrcamento: 'Build itinerary on this budget',
     },
     voos: {
       heroSelo: 'Beyond the cheap flight',
@@ -392,6 +416,14 @@ export const STRINGS = {
       p2Tit: 'Decide', p2Txt: 'Compara lado a lado por relación coste-beneficio, seguridad, clima y visa. Sin adivinanzas de blog.',
       p3Tit: 'Planifica & ve', p3Txt: 'Arma la ruta en el orden correcto, genera el itinerario día a día con IA, y reserva con un clic. Todo en un lugar.',
     },
+    prova: {
+      titulo: 'Por qué confiar en nosotros',
+      sub: 'Sin conflicto de interés, con datos rastreables — lo básico que un copiloto de viaje debería tener.',
+      neutroTit: 'Consejo neutral', neutroTxt: 'No vendemos la reserva — así que no tenemos motivo para empujarte la opción equivocada. La recomendación es para TU perfil.',
+      custoTit: 'Coste real, no vitrina', custoTxt: 'Sumamos lo que la OTA esconde: seguro, eSIM, visa y contingencia. Sabes el número real antes de ir.',
+      mundoTit: 'El mundo entero, con fuente', mundoTxt: 'países y 2.000+ lugares turísticos, con datos y fotos de Wikipedia/Wikidata — autoría y licencia en la fuente, no adivinanzas de blog.',
+      statPaises: 'países', statPontos: 'lugares turísticos', statMoedas: 'monedas', statGratis: 'Gratis', statGratisL: 'para empezar, sin tarjeta',
+    },
     custoReal: {
       heroSelo: 'Vitrina × coste real',
       heroH1: 'El precio de vitrina termina en la compra.',
@@ -404,6 +436,10 @@ export const STRINGS = {
       cenariosP: 'Mantenemos vuelo, seguro y tasas iguales. Solo cambia la vida diaria (alojamiento + comida + transporte local).',
       atencao: 'Atención',
       cambio: 'Tipo de cambio',
+      destino: 'Destino', pessoas: 'Personas', passeios: 'Tours US$/día', bagagem: 'Equipaje US$/persona',
+      precoVitrine: 'Precio de vitrina', escondido: 'Oculto', custoTotal: 'Coste real total',
+      porDia: 'por día', porPessoa: 'por persona', vooEstimado: 'vuelo estimado',
+      verAlertasDestino: 'Ver alertas del destino', montarRoteiroOrcamento: 'Armar itinerario con este presupuesto',
     },
     voos: {
       heroSelo: 'Más allá del vuelo barato',
@@ -528,6 +564,14 @@ export const STRINGS = {
       p2Tit: '決定', p2Txt: 'コスパ、安全、気候、ビザで並べて比較。ブログの当てずっぽうなし。',
       p3Tit: '計画して出発', p3Txt: '正しい順序でルートを組み、AIで日々の旅程を生成、ワンクリックで予約。すべて一箇所で。',
     },
+    prova: {
+      titulo: 'なぜ私たちを信頼するか',
+      sub: '利害の対立なし、追跡可能なデータ付き — 旅の副操縦士が持つべき基本。',
+      neutroTit: '中立的なアドバイス', neutroTxt: '予約を売らない — だから間違った選択肢を押し付ける理由がない。推薦はあなたのプロフィールに基づく。',
+      custoTit: '実費、表示価格ではなく', custoTxt: 'OTAが隠すものを加算: 保険、eSIM、ビザ、予備費。行く前に本当の数字がわかる。',
+      mundoTit: '世界全体、出典付き', mundoTxt: 'か国と2,000以上の観光スポット、ウィキペディア/ウィキデータのデータと写真付き — 出典は元に、ブログの当てずっぽうではなく。',
+      statPaises: 'か国', statPontos: '観光スポット', statMoedas: '通貨', statGratis: '無料', statGratisL: '開始、カード不要',
+    },
     custoReal: {
       heroSelo: '値札 × 実費',
       heroH1: '値札の価格は会計で終わる。',
@@ -540,6 +584,10 @@ export const STRINGS = {
       cenariosP: '航空券、保険、税金は同じまま。日常生活（宿泊+食事+現地交通）だけが変わります。',
       atencao: '注意',
       cambio: '為替',
+      destino: '目的地', pessoas: '人数', passeios: 'ツアー US$/日', bagagem: '荷物 US$/人',
+      precoVitrine: '表示価格', escondido: '隠れた費用', custoTotal: '実費合計',
+      porDia: '1日あたり', porPessoa: '1人あたり', vooEstimado: '推定フライト',
+      verAlertasDestino: '目的地の注意を見る', montarRoteiroOrcamento: 'この予算で旅程を作る',
     },
     voos: {
       heroSelo: '安いフライトの先へ',
