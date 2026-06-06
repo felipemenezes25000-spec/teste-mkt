@@ -74,13 +74,19 @@ export function PontoModal({ ponto, onClose }) {
           )}
         </div>
       ) : (
-        <>
-          <p className="text-inksoft leading-relaxed whitespace-pre-line">{hist.extrato}</p>
-          <p className="text-[11px] text-inksoft">
+        <div className="max-h-[40vh] overflow-y-auto pr-2 -mr-2 space-y-3">
+          {/* Multi-parágrafo: a Action API devolve \n\n entre parágrafos.
+              Renderizar como <p> separados torna a leitura digerível e
+              preserva o ritmo do artigo da Wikipédia (intro + história +
+              curiosidades). */}
+          {hist.extrato.split(/\n\n+/).map((p, i) => (
+            <p key={i} className="text-inksoft leading-relaxed text-[15px]">{p}</p>
+          ))}
+          <p className="text-[11px] text-inksoft pt-1">
             Fonte: Wikipédia · CC BY-SA 4.0
-            {hist.url && <> · <a href={hist.url} target="_blank" rel="noopener noreferrer" className="text-pine hover:underline focusring">Ler na Wikipédia ↗</a></>}
+            {hist.url && <> · <a href={hist.url} target="_blank" rel="noopener noreferrer" className="text-pine hover:underline focusring">Ler o artigo completo ↗</a></>}
           </p>
-        </>
+        </div>
       )}
     </Modal>
   );

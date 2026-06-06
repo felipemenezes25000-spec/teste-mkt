@@ -1,10 +1,22 @@
-// Resumo da Wikipédia (pt) buscado NO BROWSER quando o usuário abre o modal de um
-// ponto/cidade. Cache em memória (Map) + dedupe de chamadas in-flight + persistência
-// em sessionStorage (só sucessos) pra não repetir a chamada à API. Fallback seguro:
-// retorna { erro: true } quando o verbete não existe, é desambiguação ou a rede falha.
-const cache = new Map(); // titulo -> { extrato, url, titulo, img } | { erro: true }
-const emVoo = new Map(); // titulo -> Promise (deduplica chamadas simultâneas)
-const SS_PREFIXO = 'msf.wiki.';
+// História da Wikipédia buscada NO BROWSER quando o usuário abre o modal de um
+// ponto/cidade. Usa a Action API com `exchars=1200` (limite máximo da Wikipédia)
+// pra trazer 3-4 parágrafos de história REAL — não o lead seco da REST summary.
+// O resultado é texto rico: história + curiosidades + contexto cultural.
+//
+// Estratégia em camadas:
+//   1. cache em memória (Map) → 0ms na 2ª chamada do mesmo título
+//   2. dedupe in-flight → 1 fetch só pra N chamadas simultâneas
+//   3. sessionStorage (só sucesso) → sobrevive nav dentro da aba
+//   4. tenta pt; se vazio, cai pra en (cobre pontos obscuros sem verbete pt)
+//   5. erro/desambig/sem extrato → { erro: true } pra o componente cair no
+//      contextoPais (histórico editorial do país)
+
+const cache = new Map();   // titulo -> resultado|{erro:true}
+const emVoo = new Map();   // titulo -> Promise (deduplica chamadas simultâneas)
+const SS_PREFIXO = 'msf.wiki.v2.'; // v2 = invalida cache antigo da REST summary
+
+const EXCHARS = 1200; // limite máximo da Action API; ~3 parágrafos
+const PI_WIDTH = 960; // thumb pro modal (renderizado em 960px)
 
 function lerSS(chave) {
   try { if (typeof sessionStorage === 'undefined') return null; const v = sessionStorage.getItem(chave); return v ? JSON.parse(v) : null; } catch { return null; }
@@ -13,18 +25,49 @@ function gravarSS(chave, valor) {
   try { if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(chave, JSON.stringify(valor)); } catch { /* quota/privado: ignora */ }
 }
 
+// Limpa marcadores que a Wikipédia deixa: notas "[carece de fontes]", "(?)"
+// soltos do parser de IPA, e linhas só de espaço. Mantém quebras de parágrafo.
+function limparExtrato(s) {
+  return String(s || '')
+    .replace(/\[\d+\]/g, '')              // referências [1] [2]
+    .replace(/\[carece[^\]]*\]/gi, '')    // "[carece de fontes]"
+    .replace(/\(\s*\?\s*\)/g, '')         // "(?)" de transliteração
+    .replace(/\n{3,}/g, '\n\n')           // colapsa múltiplas linhas
+    .trim();
+}
+
 async function buscarLang(titulo, lang) {
   try {
-    const url = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/` + encodeURIComponent(String(titulo).replace(/ /g, '_'));
+    const params = new URLSearchParams({
+      action: 'query',
+      format: 'json',
+      prop: 'extracts|pageimages|info|pageprops',
+      exchars: String(EXCHARS),
+      explaintext: '1',
+      piprop: 'original|thumbnail',
+      pithumbsize: String(PI_WIDTH),
+      inprop: 'url',
+      titles: titulo,
+      redirects: '1',
+      origin: '*', // CORS no browser
+    });
+    const url = `https://${lang}.wikipedia.org/w/api.php?${params}`;
     const res = await fetch(url, { headers: { accept: 'application/json' } });
     if (!res.ok) return null;
-    const d = await res.json();
-    if (!d || d.type === 'disambiguation' || !d.extract) return null;
+    const data = await res.json();
+    const pages = data?.query?.pages;
+    if (!pages) return null;
+    const page = Object.values(pages)[0];
+    if (!page || page.missing !== undefined || !page.extract) return null;
+    // página de desambiguação tem pageprops.disambiguation
+    if (page.pageprops && 'disambiguation' in page.pageprops) return null;
+    const extrato = limparExtrato(page.extract);
+    if (extrato.length < 80) return null; // texto curto demais ≈ stub
     return {
-      extrato: d.extract,
-      url: (d.content_urls && d.content_urls.desktop && d.content_urls.desktop.page) || null,
-      titulo: d.title || String(titulo),
-      img: (d.originalimage && d.originalimage.source) || (d.thumbnail && d.thumbnail.source) || null,
+      extrato,
+      url: page.fullurl || `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(String(titulo).replace(/ /g, '_'))}`,
+      titulo: page.title || String(titulo),
+      img: (page.original && page.original.source) || (page.thumbnail && page.thumbnail.source) || null,
     };
   } catch {
     return null;
@@ -32,9 +75,6 @@ async function buscarLang(titulo, lang) {
 }
 
 async function buscar(titulo) {
-  // Tenta pt; se vier vazio, tenta en. Articula pra que pontos turísticos
-  // obscuros (Iêmen, RDC, Tuvalu, Comores) ainda contem história — a Wikipédia
-  // em pt não cobre 100% dos sítios menos visitados.
   const pt = await buscarLang(titulo, 'pt');
   if (pt) return pt;
   const en = await buscarLang(titulo, 'en');
@@ -51,7 +91,7 @@ export async function resumoClient(titulo) {
 
   const p = buscar(titulo).then((r) => {
     cache.set(titulo, r);
-    if (!r.erro) gravarSS(SS_PREFIXO + titulo, r); // só persiste sucesso (erro pode ser transitório)
+    if (!r.erro) gravarSS(SS_PREFIXO + titulo, r);
     return r;
   }).finally(() => emVoo.delete(titulo));
 
