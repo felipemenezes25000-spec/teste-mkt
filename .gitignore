@@ -17,3 +17,6 @@ coverage/
 
 # config local de dev (MCP preview, etc) — não versionar
 .claude/
+
+# temporarios de workflow
+.tmp-*
