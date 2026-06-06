@@ -152,10 +152,15 @@ export default async function DestinoPage(props) {
   ]);
 
   // Galeria de pontos turísticos: prioriza a lista CURADA (foto buscada por atração),
-  // com fallback pro Wikidata. Garante cobertura em todos os 167 países.
+  // com fallback pro Wikidata. Garante cobertura em todos os 205 países.
+  // `contextoPais` é o trunfo: quando a Wikipédia falhar pra um ponto obscuro
+  // (Tuvalu, Comores), o modal mostra o sobre do PAÍS — nunca deixa o usuário
+  // com a mensagem fria "Não encontramos um resumo".
+  const contextoPais = sobrePais?.extrato || sobre?.extrato || null;
+  const urlPais = sobrePais?.url || sobre?.url || null;
   const galeria = pontos.length
-    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: wikiThumb(pontosInfo[i].src, 480), credito: pontosInfo[i].credito, wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }))
-    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: wikiThumb(a.img, 480), credito: creditoCommonsLite(a.img), wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`) }));
+    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: wikiThumb(pontosInfo[i].src, 480), credito: pontosInfo[i].credito, wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais }))
+    : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: wikiThumb(a.img, 480), credito: creditoCommonsLite(a.img), wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais }));
 
   // Cidades & bases: mesma estrutura da galeria pra abrir o mesmo modal (decisão do
   // usuário: cidades também abrem história). wiki via override (foto + história certas).
@@ -166,6 +171,8 @@ export default async function DestinoPage(props) {
     credito: cidadeInfo[i].credito,
     wiki: cidadeWiki(d.code, c),
     maps: mapsUrl(`${c}, ${d.nome}`),
+    contextoPais,
+    urlPais,
   }));
 
   // Comidas: lista curada (com tipo: salgado/doce/bebida) ou fallback dos dados base.

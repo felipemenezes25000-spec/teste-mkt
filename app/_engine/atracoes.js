@@ -5,6 +5,7 @@
    ESTIMATIVA de referência. Não editar à mão: regerar pelo workflow "atracoes-paises".
    ========================================================================== */
 import { ATRACOES_OVERRIDE } from './atracoesOverride.js';
+import { ATRACOES_EXTRA } from './atracoesExtra.js';
 
 export const ATRACOES = {
  "TH": [
@@ -10364,7 +10365,9 @@ export const ATRACOES = {
 };
 
 export function atracoesDoPais(code) {
-  const base = (code && ATRACOES[code]) || [];
+  // Prefere a base auto-gerada; se o país não está no JSON (38 países pequenos/
+  // instáveis), cai pro ATRACOES_EXTRA curado à mão. Override sempre aplica.
+  const base = (code && (ATRACOES[code] || ATRACOES_EXTRA[code])) || [];
   return base.map((a) => {
     const override = ATRACOES_OVERRIDE[`${code}:${a.nome}`];
     return override ? { ...a, wiki: override } : a;

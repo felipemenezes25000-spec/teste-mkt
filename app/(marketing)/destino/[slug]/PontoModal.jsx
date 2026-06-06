@@ -60,7 +60,19 @@ export function PontoModal({ ponto, onClose }) {
       {hist.carregando ? (
         <p className="text-sm text-inksoft animate-pulse">Carregando história…</p>
       ) : hist.erro ? (
-        <p className="text-sm text-inksoft">Não encontramos um resumo deste lugar na Wikipédia. Use o botão abaixo para ver no mapa.</p>
+        <div className="space-y-2">
+          {ponto.contextoPais ? (
+            <>
+              <p className="text-inksoft leading-relaxed">{ponto.contextoPais}</p>
+              <p className="text-[11px] text-inksoft">
+                A Wikipédia ainda não tem um verbete específico desse ponto — o trecho acima é o veredito editorial sobre o país.
+                {ponto.urlPais && <> · <a href={ponto.urlPais} target="_blank" rel="noopener noreferrer" className="text-pine hover:underline focusring">Ler sobre o país ↗</a></>}
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-inksoft">Não encontramos um resumo deste lugar na Wikipédia. Use o botão abaixo para ver no mapa.</p>
+          )}
+        </div>
       ) : (
         <>
           <p className="text-inksoft leading-relaxed whitespace-pre-line">{hist.extrato}</p>
