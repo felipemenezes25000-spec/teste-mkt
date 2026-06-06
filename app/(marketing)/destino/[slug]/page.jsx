@@ -26,6 +26,8 @@ import { OQueNinguemConta } from '../../../_components/OQueNinguemConta.jsx';
 import { MapaDestino } from '../../../_components/MapaDestino.jsx';
 import { T } from '../../../_components/T.jsx';
 import { ComoSeLocomove } from '../../../_components/ComoSeLocomove.jsx';
+import { OQueFazer } from '../../../_components/OQueFazer.jsx';
+import { atracoesPrecosDoPais } from '../../../_engine/atracoesPrecos.js';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -299,6 +301,9 @@ export default async function DestinoPage(props) {
             </div>
           </section>
         )}
+
+        {/* O QUE FAZER E QUANTO CUSTA — atrações/museus/passeios com preço de ingresso/tour */}
+        <OQueFazer itens={atracoesPrecosDoPais(d.code)} />
 
         {/* COMO SE LOCOMOVE — preços reais de transporte (Uber/táxi/ônibus/metrô/aluguel/voo) */}
         <ComoSeLocomove code={d.code} />

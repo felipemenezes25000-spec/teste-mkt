@@ -32,17 +32,21 @@ function gravarCache(brl, atualizadoEm) {
 }
 
 export function useCambioBRL() {
-  const [estado, setEstado] = useState(() => {
-    if (typeof window === 'undefined') return { brl: BRL_FALLBACK, status: 'fallback', atualizadoEm: null };
-    const c = lerCache();
-    if (c) return { brl: c.brl, status: 'cache', atualizadoEm: c.atualizadoEm };
-    return { brl: BRL_FALLBACK, status: 'fallback', atualizadoEm: null };
-  });
+  // CRÍTICO p/ SSR: o initializer DEVE devolver o mesmo valor no server e na
+  // primeira renderização do client (hydration). Por isso sempre começa no
+  // FALLBACK — ler o cache aqui faria server (5,40) ≠ client (5,07 do cache) e
+  // dispararia hydration mismatch em QUALQUER preço SSR'd (OQueFazer/ComoSeLocomove).
+  // O cache e a API entram no useEffect (pós-hydrate), aí o preço atualiza suave.
+  const [estado, setEstado] = useState({ brl: BRL_FALLBACK, status: 'fallback', atualizadoEm: null });
 
   useEffect(() => {
     let vivo = true;
     const c = lerCache();
-    if (c && Date.now() - c.atualizadoEm < REFRESH_AGE_MS) return; // cache fresco
+    if (c) {
+      // adota o cache imediatamente após o mount (não no SSR)
+      setEstado({ brl: c.brl, status: 'cache', atualizadoEm: c.atualizadoEm });
+      if (Date.now() - c.atualizadoEm < REFRESH_AGE_MS) return; // cache fresco → não refetch
+    }
     setEstado((s) => ({ ...s, status: 'busy' }));
     buscarCambio().then((fx) => {
       if (!vivo) return;
