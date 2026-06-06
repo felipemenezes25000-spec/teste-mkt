@@ -1,0 +1,116 @@
+{
+  "Kingstown": [
+    {
+      "n": "Forte Charlotte",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Jardim Botânico de São Vicente (mais antigo do hemisfério)",
+      "k": "parque",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Catedral de Santa Maria (St. Mary's)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Passeio de iate pelas Granadinas",
+      "k": "passeio",
+      "u": 150,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Mercado de Kingstown e Cobblestone",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Georgetown": [
+    {
+      "n": "Trilha do Vulcão La Soufrière",
+      "k": "natureza",
+      "u": 75,
+      "t": "tour",
+      "d": "6-8h"
+    }
+  ],
+  "Granadinas": [
+    {
+      "n": "Tobago Cays (santuário marinho)",
+      "k": "natureza",
+      "u": 120,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Petit Tabac e Baradal (snorkel com tartarugas)",
+      "k": "experiencia",
+      "u": 110,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Richmond": [
+    {
+      "n": "Cachoeiras de Dark View",
+      "k": "natureza",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Bequia": [
+    {
+      "n": "Mergulho e snorkeling em Bequia",
+      "k": "experiencia",
+      "u": 95,
+      "t": "tour",
+      "d": "4h"
+    },
+    {
+      "n": "Praia de Princess Margaret (Bequia)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-4h"
+    }
+  ],
+  "Wallilabou": [
+    {
+      "n": "Wallilabou Bay (locação de Piratas do Caribe)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Owia": [
+    {
+      "n": "Owia Salt Pond (piscinas naturais)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Mustique": [
+    {
+      "n": "Mustique (passeio de dia na ilha)",
+      "k": "experiencia",
+      "u": 180,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ]
+}

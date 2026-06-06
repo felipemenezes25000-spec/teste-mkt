@@ -1,0 +1,116 @@
+{
+  "Lotofaga": [
+    {
+      "n": "To Sua Ocean Trench",
+      "k": "natureza",
+      "u": 7,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Apia": [
+    {
+      "n": "Museu Robert Louis Stevenson (Vailima)",
+      "k": "museu",
+      "u": 7,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Pedras escorregadias de Papaseea",
+      "k": "natureza",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Trilha ao túmulo de Stevenson no Monte Vaea",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Catedral da Imaculada Conceição de Apia",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Mercado de Maketi Fou (Fugalei)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Lufilufi": [
+    {
+      "n": "Piscina da Caverna Piula",
+      "k": "natureza",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Taga": [
+    {
+      "n": "Buracos de sopro de Alofaaga",
+      "k": "natureza",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Lalomanu": [
+    {
+      "n": "Praia de Lalomanu",
+      "k": "natureza",
+      "u": 4,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Falealupo": [
+    {
+      "n": "Passarela das copas de Falealupo (Canopy Walkway)",
+      "k": "natureza",
+      "u": 7,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Upolu": [
+    {
+      "n": "Cataratas de Papapapaitai",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Cataratas de Togitogiga",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Parque Nacional O Le Pupu-Pue",
+      "k": "parque",
+      "u": 4,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Savaii": [
+    {
+      "n": "Cataratas de Afu Aau (Olemoe)",
+      "k": "natureza",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ]
+}

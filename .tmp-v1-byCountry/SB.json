@@ -1,0 +1,112 @@
+{
+  "Honiara": [
+    {
+      "n": "Mergulho nos destroços de Iron Bottom Sound",
+      "k": "experiencia",
+      "u": 120,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Museu Nacional das Ilhas Salomão",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Memorial de Guerra Americano de Guadalcanal",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Cataratas Mataniko",
+      "k": "natureza",
+      "u": 40,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Mercado Central de Honiara",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Catedral de Santa Cruz (Holy Cross Cathedral)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "Província Ocidental": [
+    {
+      "n": "Mergulho na Lagoa Marovo",
+      "k": "natureza",
+      "u": 150,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Cingança de mergulho na Ilha Tetepare (reserva)",
+      "k": "natureza",
+      "u": 90,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Munda": [
+    {
+      "n": "Mergulho na Lagoa de Vona Vona / Munda",
+      "k": "experiencia",
+      "u": 130,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Gizo": [
+    {
+      "n": "Tour de mergulho de superfície em Gizo",
+      "k": "passeio",
+      "u": 80,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Toa Maru (naufrágio japonês) em Gizo",
+      "k": "experiencia",
+      "u": 110,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Ilha Kennedy (JFK PT-109)",
+      "k": "historico",
+      "u": 70,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Malaita": [
+    {
+      "n": "Vilarejo Langa Langa Lagoon (ilhas artificiais)",
+      "k": "passeio",
+      "u": 60,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Guadalcanal": [
+    {
+      "n": "Tenaru Falls (caminhada)",
+      "k": "natureza",
+      "u": 50,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ]
+}

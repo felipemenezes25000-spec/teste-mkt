@@ -4,7 +4,10 @@
 //   categoria: museu | passeio | atracao | parque | experiencia | religioso | natureza | historico
 //   precoTipo: ingresso | tour | gratis | estimado
 // ESTIMATIVAS de referencia (2025-2026) -- confira no local.
-// NAO editar a mao -- reexecutar o workflow "atracoes-precos-deep".
+// O OBJETO ATRACOES_PRECOS abaixo e gerado -- reexecutar o workflow
+// "atracoes-precos-deep". Ao regenerar, PRESERVE o import e o getter no fim
+// (aplicam correcoes da auditoria via atracoesPrecosOverride.js).
+import { ATRACOES_PRECOS_OVERRIDE } from './atracoesPrecosOverride.js';
 
 export const ATRACOES_PRECOS = {
   AD: [
@@ -3291,5 +3294,10 @@ export const ATRACOES_PRECOS = {
 };
 
 export function atracoesPrecosDoPais(code) {
-  return (code && ATRACOES_PRECOS[code]) || [];
+  const itens = (code && ATRACOES_PRECOS[code]) || [];
+  // Aplica correções da auditoria (override por 'CODE::nome'), se houver.
+  return itens.map((it) => {
+    const ov = ATRACOES_PRECOS_OVERRIDE[`${code}::${it.nome}`];
+    return ov ? { ...it, ...ov } : it;
+  });
 }

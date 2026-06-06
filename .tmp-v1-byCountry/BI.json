@@ -1,0 +1,109 @@
+{
+  "Gitega": [
+    {
+      "n": "Museu Nacional de Gitega",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Santuário dos Tambores de Gishora (espetáculo)",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "1-2h"
+    }
+  ],
+  "Bujumbura": [
+    {
+      "n": "Museu Vivo de Bujumbura",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Parque Nacional da Rusizi (hipopótamos e crocodilos)",
+      "k": "parque",
+      "u": 30,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Praia Saga (Lago Tanganica)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Monumento Livingstone–Stanley (Mugere)",
+      "k": "historico",
+      "u": 2,
+      "t": "estimado",
+      "d": "1h"
+    },
+    {
+      "n": "Catedral Regina Mundi de Bujumbura",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Rutana": [
+    {
+      "n": "Cataratas de Karera",
+      "k": "natureza",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Rutovu": [
+    {
+      "n": "Nascente do Nilo (pirâmide de Rutovu)",
+      "k": "natureza",
+      "u": 5,
+      "t": "estimado",
+      "d": "1-2h"
+    }
+  ],
+  "Bubanza": [
+    {
+      "n": "Parque Nacional de Kibira (floresta tropical)",
+      "k": "parque",
+      "u": 25,
+      "t": "estimado",
+      "d": "1 dia"
+    }
+  ],
+  "Muyinga": [
+    {
+      "n": "Parque Nacional de Ruvubu",
+      "k": "parque",
+      "u": 25,
+      "t": "estimado",
+      "d": "1 dia"
+    }
+  ],
+  "Bujumbura Rural": [
+    {
+      "n": "Monte Heha (ponto mais alto do país)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Kirundo": [
+    {
+      "n": "Reserva Natural do Lago Rwihinda (lago dos pássaros)",
+      "k": "natureza",
+      "u": 5,
+      "t": "estimado",
+      "d": "2-3h"
+    }
+  ]
+}

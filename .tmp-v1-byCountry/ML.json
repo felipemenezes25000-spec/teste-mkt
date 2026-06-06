@@ -1,0 +1,114 @@
+{
+  "Djenné": [
+    {
+      "n": "Grande Mesquita de Djenné",
+      "k": "religioso",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Cidade Velha de Djenné (Patrimônio UNESCO)",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Bandiagara": [
+    {
+      "n": "Falésia de Bandiagara (País Dogon)",
+      "k": "natureza",
+      "u": 150,
+      "t": "tour",
+      "d": "2-3 dias"
+    },
+    {
+      "n": "Aldeias Dogon (trekking guiado)",
+      "k": "experiencia",
+      "u": 50,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Timbuktu": [
+    {
+      "n": "Timbuktu (cidade histórica)",
+      "k": "historico",
+      "u": 15,
+      "t": "ingresso",
+      "d": "1 dia"
+    },
+    {
+      "n": "Mesquita de Djingareyber",
+      "k": "religioso",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Bibliotecas de Manuscritos de Timbuktu",
+      "k": "museu",
+      "u": 10,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Bamako": [
+    {
+      "n": "Museu Nacional do Mali",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Mercado Grande de Bamako (Marché Rose)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Monumento da Independência de Bamako",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "Mopti": [
+    {
+      "n": "Rio Níger (passeio de pinasse)",
+      "k": "passeio",
+      "u": 30,
+      "t": "tour",
+      "d": "3-4h"
+    },
+    {
+      "n": "Porto de Mopti (Veneza do Mali)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Gao": [
+    {
+      "n": "Tumba dos Askia (Gao)",
+      "k": "historico",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Ségou": [
+    {
+      "n": "Festival sur le Niger (Ségou)",
+      "k": "experiencia",
+      "u": 40,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "Baku": [
+    {
+      "n": "Cidade Velha de Baku (Icherisheher)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Torre da Donzela",
+      "k": "historico",
+      "u": 9,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Palácio dos Shirvanshahs",
+      "k": "historico",
+      "u": 9,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Centro Heydar Aliyev",
+      "k": "atracao",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Montanha em Chamas Yanar Dag",
+      "k": "natureza",
+      "u": 6,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Calçadão Beira-Mar de Baku (Bulvar)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu de Arte do Tapete do Azerbaijão",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Gobustan": [
+    {
+      "n": "Reserva de Petróglifos de Gobustan",
+      "k": "historico",
+      "u": 6,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Vulcões de Lama de Gobustan",
+      "k": "natureza",
+      "u": 10,
+      "t": "tour",
+      "d": "2h"
+    }
+  ],
+  "Surakhani": [
+    {
+      "n": "Templo do Fogo Ateshgah",
+      "k": "religioso",
+      "u": 6,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Sheki": [
+    {
+      "n": "Cidade-museu de Sheki e Palácio dos Khans",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Khinalug": [
+    {
+      "n": "Aldeia de montanha de Khinalug",
+      "k": "natureza",
+      "u": 40,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Lahij": [
+    {
+      "n": "Cachoeira e cidade de Lahij (artesanato em cobre)",
+      "k": "experiencia",
+      "u": 30,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Gabala": [
+    {
+      "n": "Parque Nacional de Gabala e teleférico Tufandag",
+      "k": "parque",
+      "u": 12,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ]
+}

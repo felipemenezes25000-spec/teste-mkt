@@ -1,0 +1,120 @@
+{
+  "Yucatán": [
+    {
+      "n": "Chichén Itzá (zona arqueológica)",
+      "k": "historico",
+      "u": 33,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Cenote Ik Kil",
+      "k": "natureza",
+      "u": 10,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Estado do México": [
+    {
+      "n": "Teotihuacán (pirâmides)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Cidade do México": [
+    {
+      "n": "Museu Nacional de Antropologia",
+      "k": "museu",
+      "u": 5,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Museu Frida Kahlo (Casa Azul)",
+      "k": "museu",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Cidade do México - Centro Histórico e Zócalo",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Quintana Roo": [
+    {
+      "n": "Tulum (ruínas à beira-mar)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Riviera Maya": [
+    {
+      "n": "Xcaret (parque ecológico)",
+      "k": "parque",
+      "u": 130,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "Chiapas": [
+    {
+      "n": "Palenque (zona arqueológica)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Cañón del Sumidero (passeio de barco)",
+      "k": "passeio",
+      "u": 20,
+      "t": "tour",
+      "d": "2-3h"
+    }
+  ],
+  "Baja California Sur": [
+    {
+      "n": "Cabo San Lucas (El Arco, passeio de barco)",
+      "k": "passeio",
+      "u": 40,
+      "t": "tour",
+      "d": "2h"
+    }
+  ],
+  "Guanajuato": [
+    {
+      "n": "Guanajuato (centro histórico e Callejón del Beso)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ],
+  "Oaxaca": [
+    {
+      "n": "Hierve el Agua (cascatas petrificadas)",
+      "k": "natureza",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Michoacán": [
+    {
+      "n": "Reserva da Biosfera da Borboleta Monarca",
+      "k": "natureza",
+      "u": 5,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ]
+}

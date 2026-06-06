@@ -1,0 +1,118 @@
+{
+  "Niagara Falls": [
+    {
+      "n": "Cataratas do Niágara (Journey Behind the Falls)",
+      "k": "natureza",
+      "u": 18,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Niagara City Cruises (barco às cataratas)",
+      "k": "passeio",
+      "u": 34,
+      "t": "tour",
+      "d": "1h"
+    }
+  ],
+  "Toronto": [
+    {
+      "n": "CN Tower (mirante)",
+      "k": "atracao",
+      "u": 31,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu Real de Ontário (ROM)",
+      "k": "museu",
+      "u": 20,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Castelo Casa Loma",
+      "k": "historico",
+      "u": 30,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Banff": [
+    {
+      "n": "Parque Nacional de Banff (entrada)",
+      "k": "parque",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1-2 dias"
+    }
+  ],
+  "Alberta": [
+    {
+      "n": "Lago Louise",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Quebec": [
+    {
+      "n": "Old Quebec (Cidade Velha de Quebec)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Château Frontenac",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Gatineau": [
+    {
+      "n": "Museu Canadense de História",
+      "k": "museu",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Vancouver": [
+    {
+      "n": "Parque Stanley",
+      "k": "parque",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Capilano Suspension Bridge",
+      "k": "atracao",
+      "u": 47,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Jasper": [
+    {
+      "n": "Parque Nacional de Jasper (entrada)",
+      "k": "natureza",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1-2 dias"
+    }
+  ],
+  "Montreal": [
+    {
+      "n": "Basílica de Notre-Dame de Montreal",
+      "k": "religioso",
+      "u": 15,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ]
+}

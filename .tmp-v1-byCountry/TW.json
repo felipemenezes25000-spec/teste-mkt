@@ -1,0 +1,112 @@
+{
+  "Taipé": [
+    {
+      "n": "Taipei 101 (mirante)",
+      "k": "atracao",
+      "u": 20,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu do Palácio Nacional",
+      "k": "museu",
+      "u": 11,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Memorial de Chiang Kai-shek",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Templo Longshan",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado Noturno de Shilin",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Beitou (fontes termais)",
+      "k": "experiencia",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Nova Taipé": [
+    {
+      "n": "Vila Antiga de Jiufen",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Parque Geológico de Yehliu",
+      "k": "natureza",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Soltar lanternas em Pingxi",
+      "k": "experiencia",
+      "u": 6,
+      "t": "estimado",
+      "d": "meio dia"
+    }
+  ],
+  "Nantou": [
+    {
+      "n": "Lago Sol-Lua (passeio de barco)",
+      "k": "natureza",
+      "u": 10,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Hualien": [
+    {
+      "n": "Desfiladeiro de Taroko (Garganta de Taroko)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ],
+  "Chiayi": [
+    {
+      "n": "Aldeia de Alishan (ferrovia de montanha)",
+      "k": "natureza",
+      "u": 8,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "Kaohsiung": [
+    {
+      "n": "Templo Fo Guang Shan",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Lago de Lótus (pagodes do Dragão e do Tigre)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ]
+}

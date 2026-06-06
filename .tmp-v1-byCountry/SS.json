@@ -1,0 +1,109 @@
+{
+  "Boma": [
+    {
+      "n": "Parque Nacional de Boma",
+      "k": "parque",
+      "u": 200,
+      "t": "tour",
+      "d": "vários dias"
+    }
+  ],
+  "Bandingilo": [
+    {
+      "n": "Parque Nacional Bandingilo (grande migração)",
+      "k": "parque",
+      "u": 250,
+      "t": "tour",
+      "d": "vários dias"
+    }
+  ],
+  "Bor": [
+    {
+      "n": "Sudd (maior pântano do mundo)",
+      "k": "natureza",
+      "u": 180,
+      "t": "tour",
+      "d": "vários dias"
+    }
+  ],
+  "Nimule": [
+    {
+      "n": "Cataratas de Fula (rio Nilo)",
+      "k": "natureza",
+      "u": 90,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Parque Nacional de Nimule",
+      "k": "parque",
+      "u": 120,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Juba": [
+    {
+      "n": "Mausoléu de John Garang",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Catedral de Todos os Santos (Juba)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado Konyo-Konyo",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Margens do Nilo Branco em Juba",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Túmulo do Comandante (Memorial da Independência), Juba",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "Terekeka": [
+    {
+      "n": "Visita cultural aos Mundari (acampamentos de gado)",
+      "k": "experiencia",
+      "u": 300,
+      "t": "tour",
+      "d": "2-3 dias"
+    }
+  ],
+  "Torit": [
+    {
+      "n": "Montanhas de Imatong (Monte Kinyeti)",
+      "k": "natureza",
+      "u": 220,
+      "t": "tour",
+      "d": "vários dias"
+    }
+  ],
+  "Kapoeta": [
+    {
+      "n": "Visita às tribos Toposa",
+      "k": "experiencia",
+      "u": 250,
+      "t": "tour",
+      "d": "2 dias"
+    }
+  ]
+}

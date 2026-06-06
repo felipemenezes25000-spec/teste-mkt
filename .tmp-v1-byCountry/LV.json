@@ -1,0 +1,103 @@
+{
+  "Riga": [
+    {
+      "n": "Centro Histórico de Riga",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Casa dos Cabeças-Pretas",
+      "k": "historico",
+      "u": 7,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado Central de Riga",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu Nacional de Arte da Letônia",
+      "k": "museu",
+      "u": 6,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Catedral de Riga",
+      "k": "religioso",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Igreja de São Pedro (torre)",
+      "k": "religioso",
+      "u": 10,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Etnográfico ao Ar Livre da Letônia",
+      "k": "museu",
+      "u": 6,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Monumento da Liberdade",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "Pilsrundāle": [
+    {
+      "n": "Palácio de Rundāle",
+      "k": "historico",
+      "u": 13,
+      "t": "ingresso",
+      "d": "3h"
+    }
+  ],
+  "Sigulda": [
+    {
+      "n": "Parque Nacional de Gauja",
+      "k": "parque",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Castelo de Turaida",
+      "k": "historico",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Jūrmala": [
+    {
+      "n": "Praia de Jūrmala",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Kolka": [
+    {
+      "n": "Cabo Kolka (Reserva de Slītere)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ]
+}

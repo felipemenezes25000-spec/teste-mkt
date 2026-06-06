@@ -1,0 +1,109 @@
+{
+  "Livingstone": [
+    {
+      "n": "Cataratas Vitória (entrada lado zambiano)",
+      "k": "natureza",
+      "u": 20,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Piscina do Diabo (Devil's Pool)",
+      "k": "experiencia",
+      "u": 110,
+      "t": "tour",
+      "d": "2-3h"
+    },
+    {
+      "n": "Bungee jump da Ponte de Victoria Falls",
+      "k": "experiencia",
+      "u": 160,
+      "t": "tour",
+      "d": "1h"
+    },
+    {
+      "n": "Cruzeiro ao pôr do sol no Rio Zambeze",
+      "k": "passeio",
+      "u": 60,
+      "t": "tour",
+      "d": "2-3h"
+    },
+    {
+      "n": "Museu Livingstone",
+      "k": "museu",
+      "u": 7,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Mfuwe": [
+    {
+      "n": "Parque Nacional South Luangwa (safari)",
+      "k": "parque",
+      "u": 25,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Safari a pé no South Luangwa",
+      "k": "experiencia",
+      "u": 80,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Chirundu": [
+    {
+      "n": "Parque Nacional Lower Zambezi (safari de canoa)",
+      "k": "experiencia",
+      "u": 90,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Mumbwa": [
+    {
+      "n": "Parque Nacional Kafue",
+      "k": "parque",
+      "u": 25,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "Mbala": [
+    {
+      "n": "Cataratas Kalambo (segunda mais alta da África)",
+      "k": "natureza",
+      "u": 10,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Siavonga": [
+    {
+      "n": "Lago Kariba (passeio de barco)",
+      "k": "passeio",
+      "u": 40,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Monze": [
+    {
+      "n": "Parque Nacional Lochinvar (observação de aves)",
+      "k": "natureza",
+      "u": 15,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "Sioma": [
+    {
+      "n": "Cataratas Ngonye (Sioma)",
+      "k": "natureza",
+      "u": 10,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ]
+}

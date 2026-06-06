@@ -1,0 +1,118 @@
+{
+  "Sana'a": [
+    {
+      "n": "Cidade Velha de Sana'a",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Museu Nacional do Iêmen",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Grande Mesquita de Sana'a",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Shibam": [
+    {
+      "n": "Shibam (Manhattan do Deserto)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Socotra": [
+    {
+      "n": "Ilha de Socotra (expedição)",
+      "k": "natureza",
+      "u": 1200,
+      "t": "tour",
+      "d": "7-8 dias"
+    },
+    {
+      "n": "Floresta de Dragoeiros (Socotra)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Piscina de Homhil (Socotra)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Qalansiyah": [
+    {
+      "n": "Praia de Qalansiyah e Lagoa Detwah",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Wadi Dhar": [
+    {
+      "n": "Dar al-Hajar (Palácio da Rocha)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Zabid": [
+    {
+      "n": "Cidade Histórica de Zabid",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Seiyun": [
+    {
+      "n": "Wadi Hadramaut",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1 dia"
+    },
+    {
+      "n": "Palácio do Sultão Kathiri (Seiyun)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Aden": [
+    {
+      "n": "Cidade Velha de Aden e Cisternas de Tawila",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Manakhah": [
+    {
+      "n": "Montanhas Haraz e Vila de Manakhah",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1 dia"
+    }
+  ]
+}

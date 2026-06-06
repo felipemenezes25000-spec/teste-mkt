@@ -1,0 +1,130 @@
+{
+  "Dili": [
+    {
+      "n": "Cristo Rei de Dili",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Arquivo e Museu da Resistência Timorense",
+      "k": "museu",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1h30"
+    },
+    {
+      "n": "Exposição Chega! (Antiga Prisão Comarca de Balide)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h30"
+    },
+    {
+      "n": "Cemitério de Santa Cruz",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado de Tais",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Tour de dia inteiro por Dili",
+      "k": "passeio",
+      "u": 75,
+      "t": "tour",
+      "d": "8h"
+    }
+  ],
+  "Ataúro": [
+    {
+      "n": "Mergulho com snorkel na Ilha de Ataúro",
+      "k": "natureza",
+      "u": 20,
+      "t": "tour",
+      "d": "3h"
+    },
+    {
+      "n": "Mergulho (scuba) na Ilha de Ataúro",
+      "k": "experiencia",
+      "u": 60,
+      "t": "tour",
+      "d": "4h"
+    },
+    {
+      "n": "Aldeia Ecológica Tua Koin",
+      "k": "experiencia",
+      "u": 25,
+      "t": "estimado",
+      "d": "meio dia"
+    }
+  ],
+  "Tutuala": [
+    {
+      "n": "Ilha de Jaco (travessia de barco de Tutuala)",
+      "k": "natureza",
+      "u": 10,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Hatobuilico": [
+    {
+      "n": "Trekking ao Monte Ramelau (Tatamailau)",
+      "k": "natureza",
+      "u": 20,
+      "t": "tour",
+      "d": "6-8h"
+    }
+  ],
+  "Baucau": [
+    {
+      "n": "Piscina de Baucau (nascente portuguesa)",
+      "k": "atracao",
+      "u": 0.5,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Cidade Antiga de Baucau (centro colonial português)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Maubisse": [
+    {
+      "n": "Maubisse (vila de montanha e Pousada)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Maubara": [
+    {
+      "n": "Forte de Maubara",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Liquiçá": [
+    {
+      "n": "Tour de dia inteiro por Maubara e Liquiçá",
+      "k": "passeio",
+      "u": 90,
+      "t": "tour",
+      "d": "8h"
+    }
+  ]
+}

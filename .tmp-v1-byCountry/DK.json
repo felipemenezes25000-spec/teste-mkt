@@ -1,0 +1,112 @@
+{
+  "Copenhague": [
+    {
+      "n": "Parque Tivoli",
+      "k": "parque",
+      "u": 24,
+      "t": "ingresso",
+      "d": "3-5h"
+    },
+    {
+      "n": "A Pequena Sereia",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Palácio de Rosenborg",
+      "k": "historico",
+      "u": 18,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Torre Redonda (Rundetårn)",
+      "k": "atracao",
+      "u": 6,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional da Dinamarca",
+      "k": "museu",
+      "u": 17,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Gliptoteca Ny Carlsberg",
+      "k": "museu",
+      "u": 18,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Bairro livre de Christiania",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Cais de Nyhavn",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Helsingør": [
+    {
+      "n": "Castelo de Kronborg (Hamlet)",
+      "k": "historico",
+      "u": 21,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Humlebæk": [
+    {
+      "n": "Museu de Arte Moderna Louisiana",
+      "k": "museu",
+      "u": 22,
+      "t": "ingresso",
+      "d": "3h"
+    }
+  ],
+  "Hillerød": [
+    {
+      "n": "Castelo de Frederiksborg",
+      "k": "historico",
+      "u": 17,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Roskilde": [
+    {
+      "n": "Museu dos Barcos Vikings de Roskilde",
+      "k": "museu",
+      "u": 20,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Catedral de Roskilde",
+      "k": "religioso",
+      "u": 9,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Billund": [
+    {
+      "n": "Legoland Billund",
+      "k": "parque",
+      "u": 60,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ]
+}

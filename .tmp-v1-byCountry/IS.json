@@ -1,0 +1,116 @@
+{
+  "Grindavík": [
+    {
+      "n": "Lagoa Azul (Blue Lagoon)",
+      "k": "experiencia",
+      "u": 90,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Reykjavík": [
+    {
+      "n": "Círculo Dourado (tour)",
+      "k": "passeio",
+      "u": 75,
+      "t": "tour",
+      "d": "8h"
+    },
+    {
+      "n": "Igreja Hallgrímskirkja (torre)",
+      "k": "religioso",
+      "u": 9,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional da Islândia",
+      "k": "museu",
+      "u": 17,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Selfoss": [
+    {
+      "n": "Parque Nacional Thingvellir",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Cachoeira Gullfoss",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Área geotérmica de Geysir",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Húsavík": [
+    {
+      "n": "Observação de baleias",
+      "k": "experiencia",
+      "u": 80,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "Höfn": [
+    {
+      "n": "Laguna glacial Jökulsárlón",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Tour em caverna de gelo (geleira Vatnajökull)",
+      "k": "experiencia",
+      "u": 150,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "Hvolsvöllur": [
+    {
+      "n": "Cachoeira Seljalandsfoss",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Skógar": [
+    {
+      "n": "Cachoeira Skógafoss",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Vík": [
+    {
+      "n": "Caminhada em geleira (Sólheimajökull)",
+      "k": "experiencia",
+      "u": 110,
+      "t": "tour",
+      "d": "4h"
+    },
+    {
+      "n": "Praia de areia preta Reynisfjara",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ]
+}

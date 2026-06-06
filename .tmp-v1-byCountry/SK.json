@@ -1,0 +1,124 @@
+{
+  "Bratislava": [
+    {
+      "n": "Castelo de Bratislava",
+      "k": "historico",
+      "u": 13,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Museu Nacional Eslovaco",
+      "k": "museu",
+      "u": 6,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Cidade Velha de Bratislava (centro)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Spišské Podhradie": [
+    {
+      "n": "Castelo de Spiš",
+      "k": "historico",
+      "u": 11,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Dobšiná": [
+    {
+      "n": "Caverna de Gelo de Dobšiná",
+      "k": "natureza",
+      "u": 11,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Štrbské Pleso": [
+    {
+      "n": "Parque Nacional Alto Tatras",
+      "k": "parque",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ],
+  "Starý Smokovec": [
+    {
+      "n": "Funicular para Hrebienok (Tatras)",
+      "k": "experiencia",
+      "u": 12,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Oravský Podzámok": [
+    {
+      "n": "Castelo de Orava",
+      "k": "historico",
+      "u": 11,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Ochtiná": [
+    {
+      "n": "Caverna de Aragonita de Ochtiná",
+      "k": "natureza",
+      "u": 10,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Banská Štiavnica": [
+    {
+      "n": "Centro Histórico de Banská Štiavnica",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    }
+  ],
+  "Hervartov": [
+    {
+      "n": "Igrejas de madeira dos Cárpatos",
+      "k": "religioso",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Hrabušice": [
+    {
+      "n": "Garganta de Sokol (Paraíso Eslovaco)",
+      "k": "natureza",
+      "u": 3,
+      "t": "ingresso",
+      "d": "4-6h"
+    }
+  ],
+  "Bojnice": [
+    {
+      "n": "Castelo de Bojnice",
+      "k": "historico",
+      "u": 13,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Poprad": [
+    {
+      "n": "Termas Aquacity Poprad",
+      "k": "experiencia",
+      "u": 28,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ]
+}

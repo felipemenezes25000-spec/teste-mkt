@@ -1,0 +1,114 @@
+{
+  "Maun": [
+    {
+      "n": "Safári no Delta do Okavango (mokoro)",
+      "k": "natureza",
+      "u": 350,
+      "t": "tour",
+      "d": "1 dia"
+    },
+    {
+      "n": "Reserva de Caça de Moremi",
+      "k": "parque",
+      "u": 35,
+      "t": "ingresso",
+      "d": "1 dia"
+    },
+    {
+      "n": "Voo panorâmico sobre o Okavango",
+      "k": "experiencia",
+      "u": 160,
+      "t": "tour",
+      "d": "1h"
+    }
+  ],
+  "Kasane": [
+    {
+      "n": "Parque Nacional de Chobe (safári)",
+      "k": "parque",
+      "u": 50,
+      "t": "ingresso",
+      "d": "1 dia"
+    },
+    {
+      "n": "Safári de barco no Rio Chobe",
+      "k": "passeio",
+      "u": 45,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "Gweta": [
+    {
+      "n": "Salinas de Makgadikgadi",
+      "k": "natureza",
+      "u": 150,
+      "t": "tour",
+      "d": "1 dia"
+    },
+    {
+      "n": "Parque Nacional de Nxai Pan",
+      "k": "parque",
+      "u": 35,
+      "t": "ingresso",
+      "d": "1 dia"
+    },
+    {
+      "n": "Baobá de Chapman",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Ghanzi": [
+    {
+      "n": "Reserva de Caça do Kalahari Central",
+      "k": "parque",
+      "u": 35,
+      "t": "ingresso",
+      "d": "1 dia"
+    },
+    {
+      "n": "Vila cultural San (Bosquímanos)",
+      "k": "experiencia",
+      "u": 40,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "Shakawe": [
+    {
+      "n": "Colinas de Tsodilo (arte rupestre)",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Gaborone": [
+    {
+      "n": "Museu Nacional de Botswana",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Reserva Natural de Gaborone",
+      "k": "parque",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Serowe": [
+    {
+      "n": "Reserva de Rinocerontes de Khama",
+      "k": "natureza",
+      "u": 15,
+      "t": "ingresso",
+      "d": "3h"
+    }
+  ]
+}

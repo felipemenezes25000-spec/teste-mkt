@@ -1,0 +1,122 @@
+{
+  "Petén": [
+    {
+      "n": "Tikal (Parque Nacional, ruínas maias)",
+      "k": "historico",
+      "u": 20,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Flores e ilha no Lago Petén Itzá",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Sacatepéquez": [
+    {
+      "n": "Antigua Guatemala (centro histórico)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ],
+  "Sololá": [
+    {
+      "n": "Lago de Atitlán (passeio de barco entre vilas)",
+      "k": "passeio",
+      "u": 15,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Escuintla": [
+    {
+      "n": "Vulcão Pacaya (trekking)",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "4-5h"
+    }
+  ],
+  "Chimaltenango": [
+    {
+      "n": "Vulcão Acatenango (trekking 2 dias)",
+      "k": "experiencia",
+      "u": 75,
+      "t": "tour",
+      "d": "2 dias"
+    }
+  ],
+  "Alta Verapaz": [
+    {
+      "n": "Semuc Champey (piscinas naturais)",
+      "k": "natureza",
+      "u": 12,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "Quiché": [
+    {
+      "n": "Chichicastenango (mercado indígena)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Totonicapán": [
+    {
+      "n": "Igreja de San Andrés Xecul",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Cidade da Guatemala": [
+    {
+      "n": "Museu Popol Vuh",
+      "k": "museu",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Nacional de Arqueologia e Etnologia",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Izabal": [
+    {
+      "n": "Quiriguá (estelas maias)",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Livingston e Rio Dulce (cultura garífuna)",
+      "k": "natureza",
+      "u": 25,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Antigua": [
+    {
+      "n": "Arco de Santa Catalina (Antigua)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ]
+}

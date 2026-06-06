@@ -1,0 +1,114 @@
+{
+  "Kiev": [
+    {
+      "n": "Lavra de Kiev-Pechersk",
+      "k": "religioso",
+      "u": 3,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Catedral de Santa Sofia",
+      "k": "religioso",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Catedral de São Miguel das Cúpulas Douradas",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Rua Andriyivskyy Descent",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Nacional de Chernobyl",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Praça da Independência (Maidan)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Pripyat": [
+    {
+      "n": "Tour à Zona de Exclusão de Chernobyl",
+      "k": "experiencia",
+      "u": 120,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Lviv": [
+    {
+      "n": "Centro Histórico de Lviv",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Ópera Nacional de Lviv",
+      "k": "atracao",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Capela Boim",
+      "k": "religioso",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Klevan": [
+    {
+      "n": "Túnel do Amor",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Yalta": [
+    {
+      "n": "Palácio de Lividia (Yalta)",
+      "k": "historico",
+      "u": 6,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Kamianets-Podilskyi": [
+    {
+      "n": "Fortaleza de Kamianets-Podilskyi",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Uman": [
+    {
+      "n": "Parque Sofiyivka",
+      "k": "parque",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ]
+}

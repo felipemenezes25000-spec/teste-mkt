@@ -1,0 +1,110 @@
+{
+  "Hong Kong": [
+    {
+      "n": "The Peak Tram + Sky Terrace 428",
+      "k": "atracao",
+      "u": 21,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Ocean Park Hong Kong",
+      "k": "parque",
+      "u": 63,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Star Ferry (travessia do porto)",
+      "k": "passeio",
+      "u": 1,
+      "t": "ingresso",
+      "d": "15min"
+    },
+    {
+      "n": "Símfonia das Luzes (espetáculo no Victoria Harbour)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "15min"
+    },
+    {
+      "n": "Museu M+ (arte visual contemporânea)",
+      "k": "museu",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Lantau": [
+    {
+      "n": "Ngong Ping 360 (teleférico) + Grande Buda de Tian Tan",
+      "k": "religioso",
+      "u": 36,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Hong Kong Disneyland",
+      "k": "parque",
+      "u": 82,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "Kowloon": [
+    {
+      "n": "Templo Wong Tai Sin",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Museu de História de Hong Kong",
+      "k": "museu",
+      "u": 1.3,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Avenida das Estrelas",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado de Temple Street (mercado noturno)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Sha Tin": [
+    {
+      "n": "Mosteiro dos Dez Mil Budas",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Hong Kong Island": [
+    {
+      "n": "Trilha do Dragon's Back",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Praia de Repulse Bay",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "Londres": [
+    {
+      "n": "Museu Britânico",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Torre de Londres",
+      "k": "historico",
+      "u": 42,
+      "t": "ingresso",
+      "d": "3h"
+    },
+    {
+      "n": "London Eye",
+      "k": "atracao",
+      "u": 40,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Abadia de Westminster",
+      "k": "religioso",
+      "u": 36,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Catedral de São Paulo",
+      "k": "religioso",
+      "u": 26,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "National Gallery",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Tower Bridge (exibição)",
+      "k": "atracao",
+      "u": 15,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Windsor": [
+    {
+      "n": "Castelo de Windsor",
+      "k": "historico",
+      "u": 35,
+      "t": "ingresso",
+      "d": "3h"
+    }
+  ],
+  "Wiltshire": [
+    {
+      "n": "Stonehenge",
+      "k": "historico",
+      "u": 28,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Edimburgo": [
+    {
+      "n": "Castelo de Edimburgo",
+      "k": "historico",
+      "u": 25,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Leavesden": [
+    {
+      "n": "Warner Bros. Studio Tour (Harry Potter)",
+      "k": "experiencia",
+      "u": 65,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Bath": [
+    {
+      "n": "Roman Baths (Termas Romanas)",
+      "k": "historico",
+      "u": 35,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Cumbria": [
+    {
+      "n": "Parque Nacional Lake District",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1 dia"
+    }
+  ],
+  "Bushmills": [
+    {
+      "n": "Calçada do Gigante",
+      "k": "natureza",
+      "u": 16,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ]
+}

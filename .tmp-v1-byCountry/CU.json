@@ -1,0 +1,110 @@
+{
+  "Havana": [
+    {
+      "n": "Habana Vieja (centro histórico, Patrimônio da Humanidade)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Passeio em carro clássico americano por Havana",
+      "k": "experiencia",
+      "u": 40,
+      "t": "tour",
+      "d": "1-2h"
+    },
+    {
+      "n": "Castelo de los Tres Reyes del Morro",
+      "k": "historico",
+      "u": 6,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu da Revolução",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Cemitério de Colón",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Fábrica de Arte Cubano (FAC)",
+      "k": "experiencia",
+      "u": 3,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Capitólio Nacional de Havana",
+      "k": "atracao",
+      "u": 10,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Catedral de Havana (Plaza de la Catedral)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Viñales": [
+    {
+      "n": "Vale de Viñales (passeio + plantação de tabaco)",
+      "k": "natureza",
+      "u": 30,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Trinidad": [
+    {
+      "n": "Trinidad (cidade colonial, Patrimônio da Humanidade)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Vale dos Engenhos (Valle de los Ingenios)",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Parque Nacional Topes de Collantes",
+      "k": "parque",
+      "u": 10,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "Varadero": [
+    {
+      "n": "Praias de Varadero",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ],
+  "Cienfuegos": [
+    {
+      "n": "Cienfuegos (centro histórico, Patrimônio da Humanidade)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ]
+}

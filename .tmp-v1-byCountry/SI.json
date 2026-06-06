@@ -1,0 +1,116 @@
+{
+  "Bled": [
+    {
+      "n": "Lago Bled (passeio de pletna até a ilha)",
+      "k": "natureza",
+      "u": 20,
+      "t": "tour",
+      "d": "1-2h"
+    },
+    {
+      "n": "Igreja da Assunção (Ilha de Bled)",
+      "k": "religioso",
+      "u": 13,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Castelo de Bled",
+      "k": "historico",
+      "u": 17,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Garganta de Vintgar",
+      "k": "natureza",
+      "u": 12,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Postojna": [
+    {
+      "n": "Grutas de Postojna (trem subterrâneo)",
+      "k": "natureza",
+      "u": 34,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Predjama": [
+    {
+      "n": "Castelo de Predjama",
+      "k": "historico",
+      "u": 17,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Divača": [
+    {
+      "n": "Grutas de Škocjan (Patrimônio UNESCO)",
+      "k": "natureza",
+      "u": 26,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Liubliana": [
+    {
+      "n": "Castelo de Liubliana (funicular + entrada)",
+      "k": "historico",
+      "u": 18,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Ponte Tripla e centro histórico de Liubliana",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Galeria Nacional da Eslovênia",
+      "k": "museu",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Nacional da Eslovênia",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Bohinj": [
+    {
+      "n": "Lago Bohinj e Parque Nacional do Triglav",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Piran": [
+    {
+      "n": "Piran (cidade costeira veneziana)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Bovec": [
+    {
+      "n": "Vale do Soča (rafting de águas-brancas)",
+      "k": "experiencia",
+      "u": 55,
+      "t": "tour",
+      "d": "2-3h"
+    }
+  ]
+}

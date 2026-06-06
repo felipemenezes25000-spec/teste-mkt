@@ -1,0 +1,116 @@
+{
+  "Granada": [
+    {
+      "n": "Cidade colonial de Granada",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Passeio de barco pelas Isletas de Granada",
+      "k": "passeio",
+      "u": 25,
+      "t": "tour",
+      "d": "2h"
+    },
+    {
+      "n": "Reserva Natural Laguna de Apoyo",
+      "k": "natureza",
+      "u": 8,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Reserva Natural Volcán Mombacho",
+      "k": "parque",
+      "u": 25,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Igreja de La Merced (mirante)",
+      "k": "religioso",
+      "u": 1,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Masaya": [
+    {
+      "n": "Vulcão Masaya (Parque Nacional)",
+      "k": "natureza",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Mercado de Artesanato de Masaya",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "León": [
+    {
+      "n": "Sandboard no Vulcão Cerro Negro",
+      "k": "experiencia",
+      "u": 30,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Catedral de León",
+      "k": "religioso",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Ometepe": [
+    {
+      "n": "Ilha de Ometepe (Vulcões Concepción e Maderas)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2 dias"
+    }
+  ],
+  "San Juan del Sur": [
+    {
+      "n": "Surfe em San Juan del Sur",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Somoto": [
+    {
+      "n": "Reserva Natural Cañón de Somoto",
+      "k": "natureza",
+      "u": 15,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Matagalpa": [
+    {
+      "n": "Selva Negra (reserva e trilhas)",
+      "k": "natureza",
+      "u": 5,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Corn Islands": [
+    {
+      "n": "Corn Islands (praias do Caribe)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1 dia"
+    }
+  ]
+}

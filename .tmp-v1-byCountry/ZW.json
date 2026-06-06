@@ -1,0 +1,112 @@
+{
+  "Victoria Falls": [
+    {
+      "n": "Cataratas Vitória",
+      "k": "natureza",
+      "u": 50,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Rafting no Rio Zambeze",
+      "k": "experiencia",
+      "u": 160,
+      "t": "tour",
+      "d": "1 dia"
+    },
+    {
+      "n": "Bungee jump na Ponte das Cataratas Vitória",
+      "k": "experiencia",
+      "u": 175,
+      "t": "tour",
+      "d": "2h"
+    },
+    {
+      "n": "Cruzeiro ao pôr do sol no Zambeze",
+      "k": "passeio",
+      "u": 75,
+      "t": "tour",
+      "d": "2h"
+    },
+    {
+      "n": "Voo de helicóptero sobre as Cataratas",
+      "k": "experiencia",
+      "u": 150,
+      "t": "tour",
+      "d": "15 min"
+    },
+    {
+      "n": "Devil's Pool (piscina do diabo)",
+      "k": "experiencia",
+      "u": 110,
+      "t": "tour",
+      "d": "2h"
+    }
+  ],
+  "Masvingo": [
+    {
+      "n": "Grande Zimbábue (ruínas)",
+      "k": "historico",
+      "u": 15,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Hwange": [
+    {
+      "n": "Parque Nacional de Hwange (safári)",
+      "k": "parque",
+      "u": 20,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Kariba": [
+    {
+      "n": "Parque Nacional de Mana Pools",
+      "k": "parque",
+      "u": 20,
+      "t": "ingresso",
+      "d": "1 dia"
+    },
+    {
+      "n": "Lago Kariba (cruzeiro de barco)",
+      "k": "natureza",
+      "u": 120,
+      "t": "tour",
+      "d": "1 dia"
+    },
+    {
+      "n": "Parque Nacional Matusadona",
+      "k": "parque",
+      "u": 20,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Bulawayo": [
+    {
+      "n": "Matobo Hills (Túmulo de Rhodes)",
+      "k": "historico",
+      "u": 15,
+      "t": "ingresso",
+      "d": "半dia"
+    },
+    {
+      "n": "Museu de História Natural do Zimbábue",
+      "k": "museu",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Harare": [
+    {
+      "n": "Galeria Nacional do Zimbábue",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ]
+}

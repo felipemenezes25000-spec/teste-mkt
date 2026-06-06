@@ -1,0 +1,119 @@
+{
+  "Isfahã": [
+    {
+      "n": "Praça Naqsh-e Jahan",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Mesquita do Xá (Masjed-e Shah)",
+      "k": "religioso",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Ponte Si-o-se-pol",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Vila de Abyaneh",
+      "k": "experiencia",
+      "u": 2,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Shiraz": [
+    {
+      "n": "Persépolis",
+      "k": "historico",
+      "u": 4,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Mesquita Nasir al-Mulk (Mesquita Rosa)",
+      "k": "religioso",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Mausoléu de Hafez",
+      "k": "historico",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Naqsh-e Rustam (tumbas reais)",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Teerã": [
+    {
+      "n": "Palácio Golestan",
+      "k": "historico",
+      "u": 6,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Museu Nacional do Irã",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Torre Milad",
+      "k": "atracao",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Tabriz": [
+    {
+      "n": "Bazar de Tabriz",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Kashan": [
+    {
+      "n": "Deserto de Maranjab (passeio)",
+      "k": "natureza",
+      "u": 40,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Casa de Borujerdi",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Mashhad": [
+    {
+      "n": "Santuário do Imã Reza",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ]
+}

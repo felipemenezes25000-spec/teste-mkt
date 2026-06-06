@@ -1,0 +1,119 @@
+{
+  "Vientiane": [
+    {
+      "n": "Templo Pha That Luang",
+      "k": "religioso",
+      "u": 1,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Arco Patuxai (Monumento)",
+      "k": "historico",
+      "u": 1,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Templo Wat Si Saket",
+      "k": "religioso",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "COPE Visitor Centre",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Luang Prabang": [
+    {
+      "n": "Cataratas Kuang Si",
+      "k": "natureza",
+      "u": 4,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Monte Phou Si (mirante)",
+      "k": "natureza",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Cerimônia da esmola aos monges (Tak Bat)",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Grutas de Pak Ou",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Museu do Palácio Real (Haw Kham)",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Cataratas Tat Kuang Si (santuário de ursos)",
+      "k": "natureza",
+      "u": 4,
+      "t": "ingresso",
+      "d": "3h"
+    }
+  ],
+  "Phonsavan": [
+    {
+      "n": "Planície dos Jarros",
+      "k": "historico",
+      "u": 2,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Vang Vieng": [
+    {
+      "n": "Tubing no rio em Vang Vieng",
+      "k": "experiencia",
+      "u": 10,
+      "t": "tour",
+      "d": "3-4h"
+    },
+    {
+      "n": "Lagoa Azul (Blue Lagoon 1)",
+      "k": "natureza",
+      "u": 1,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Planalto de Bolaven": [
+    {
+      "n": "Cachoeira Tad Fane",
+      "k": "natureza",
+      "u": 2,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Si Phan Don": [
+    {
+      "n": "Cataratas Khone Phapheng",
+      "k": "natureza",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ]
+}

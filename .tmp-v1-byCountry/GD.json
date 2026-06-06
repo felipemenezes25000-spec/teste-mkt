@@ -1,0 +1,108 @@
+{
+  "St. George's": [
+    {
+      "n": "Cachoeira de Annandale",
+      "k": "natureza",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Forte George",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Forte Frederick",
+      "k": "historico",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Parque de Esculturas Subaquáticas de Molinere",
+      "k": "experiencia",
+      "u": 60,
+      "t": "tour",
+      "d": "2-3h"
+    },
+    {
+      "n": "Praia de Grand Anse",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Museu Nacional de Grenada",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado de Especiarias de St. George's",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Tour de catamarã ao pôr do sol",
+      "k": "passeio",
+      "u": 75,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "St. Andrew": [
+    {
+      "n": "Cachoeiras de Seven Sisters",
+      "k": "natureza",
+      "u": 5,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Parque Nacional e Reserva Florestal de Grand Etang",
+      "k": "parque",
+      "u": 2,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Lago da Cratera Grand Etang",
+      "k": "natureza",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "St. Patrick": [
+    {
+      "n": "Destilaria de Rum River Antoine",
+      "k": "experiencia",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Plantação de Cacau Belmont Estate",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "2-3h"
+    }
+  ],
+  "Carriacou": [
+    {
+      "n": "Mergulho com snorkel na Ilha Sandy",
+      "k": "passeio",
+      "u": 40,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ]
+}

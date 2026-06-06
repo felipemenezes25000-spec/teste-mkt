@@ -1,0 +1,110 @@
+{
+  "Praga": [
+    {
+      "n": "Castelo de Praga",
+      "k": "historico",
+      "u": 20,
+      "t": "ingresso",
+      "d": "3h"
+    },
+    {
+      "n": "Ponte Carlos",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Relógio Astronômico de Praga",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Torre do Relógio Astronômico (subida)",
+      "k": "atracao",
+      "u": 14,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Sinagoga Espanhola e Bairro Judeu",
+      "k": "religioso",
+      "u": 24,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Biblioteca do Mosteiro de Strahov",
+      "k": "religioso",
+      "u": 7,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional de Praga",
+      "k": "museu",
+      "u": 12,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Torre de Observação de Petřín",
+      "k": "atracao",
+      "u": 7,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Kutná Hora": [
+    {
+      "n": "Ossário de Sedlec (Igreja dos Ossos)",
+      "k": "religioso",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Mina de prata de Kutná Hora",
+      "k": "atracao",
+      "u": 7,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Český Krumlov": [
+    {
+      "n": "Cidade histórica de Český Krumlov",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Castelo de Český Krumlov",
+      "k": "historico",
+      "u": 12,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Hřensko": [
+    {
+      "n": "Parque Nacional da Suíça Boêmia",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ],
+  "Karlovy Vary": [
+    {
+      "n": "Spas de Karlovy Vary",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ]
+}

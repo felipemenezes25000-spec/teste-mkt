@@ -1,0 +1,120 @@
+{
+  "Andasibe": [
+    {
+      "n": "Parque Nacional Andasibe-Mantadia (lêmures indri)",
+      "k": "parque",
+      "u": 25,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Morondava": [
+    {
+      "n": "Avenida dos Baobás (pôr do sol)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Bekopaka": [
+    {
+      "n": "Tsingy de Bemaraha (Reserva)",
+      "k": "natureza",
+      "u": 30,
+      "t": "ingresso",
+      "d": "1-2 dias"
+    }
+  ],
+  "Ranohira": [
+    {
+      "n": "Parque Nacional Isalo",
+      "k": "parque",
+      "u": 25,
+      "t": "ingresso",
+      "d": "1-2 dias"
+    }
+  ],
+  "Ambalavao": [
+    {
+      "n": "Reserva de Anja (lêmures-de-cauda-anelada)",
+      "k": "natureza",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Antananarivo": [
+    {
+      "n": "Palácio da Rainha (Rova de Antananarivo)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Allée des Lémuriens / Lemurs' Park",
+      "k": "parque",
+      "u": 12,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Mercado de Analakely (artesanato)",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Nosy Be": [
+    {
+      "n": "Ilha Nosy Be (praias e ilhas)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1 dia"
+    }
+  ],
+  "Ranomafana": [
+    {
+      "n": "Parque Nacional Ranomafana",
+      "k": "parque",
+      "u": 25,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Sainte-Marie": [
+    {
+      "n": "Île aux Nattes (Nosy Nato)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Observação de baleias-jubarte em Sainte-Marie",
+      "k": "experiencia",
+      "u": 50,
+      "t": "tour",
+      "d": "3-4h"
+    }
+  ],
+  "Diego Suarez": [
+    {
+      "n": "Parque Nacional Montanha de Âmbar",
+      "k": "parque",
+      "u": 20,
+      "t": "ingresso",
+      "d": "1 dia"
+    },
+    {
+      "n": "Tsingy Rouge (Tsingy Vermelho)",
+      "k": "natureza",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ]
+}

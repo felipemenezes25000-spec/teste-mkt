@@ -1,0 +1,103 @@
+{
+  "Goma": [
+    {
+      "n": "Parque Nacional de Virunga (gorilas)",
+      "k": "natureza",
+      "u": 400,
+      "t": "tour",
+      "d": "1 dia"
+    },
+    {
+      "n": "Vulcão Nyiragongo (trekking 2 dias)",
+      "k": "experiencia",
+      "u": 300,
+      "t": "tour",
+      "d": "2 dias"
+    },
+    {
+      "n": "Lago Kivu (passeio)",
+      "k": "natureza",
+      "u": 25,
+      "t": "estimado",
+      "d": "half-dia"
+    }
+  ],
+  "Kinshasa": [
+    {
+      "n": "Santuário de Chimpanzés Lola ya Bonobo",
+      "k": "natureza",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Museu Nacional da RD Congo",
+      "k": "museu",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Cataratas de Zongo",
+      "k": "natureza",
+      "u": 20,
+      "t": "estimado",
+      "d": "1 dia"
+    },
+    {
+      "n": "Mercado Central de Kinshasa",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Catedral de Notre-Dame do Congo",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Rio Congo (passeio de barco)",
+      "k": "passeio",
+      "u": 40,
+      "t": "tour",
+      "d": "3h"
+    },
+    {
+      "n": "Símbolo da Independência (Monumento Patrice Lumumba)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Bukavu": [
+    {
+      "n": "Parque Nacional de Kahuzi-Biega (gorilas das terras baixas)",
+      "k": "natureza",
+      "u": 400,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Kisangani": [
+    {
+      "n": "Cataratas Boyoma (Stanley Falls)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Dungu": [
+    {
+      "n": "Parque Nacional de Garamba (safári)",
+      "k": "natureza",
+      "u": 100,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ]
+}

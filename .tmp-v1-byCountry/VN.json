@@ -1,0 +1,120 @@
+{
+  "Ha Long": [
+    {
+      "n": "Baía de Ha Long (cruzeiro)",
+      "k": "natureza",
+      "u": 120,
+      "t": "tour",
+      "d": "1-2 dias"
+    }
+  ],
+  "Hue": [
+    {
+      "n": "Cidade Imperial de Hue",
+      "k": "historico",
+      "u": 8,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Hoi An": [
+    {
+      "n": "Cidade Antiga de Hoi An",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Ho Chi Minh": [
+    {
+      "n": "Túneis de Cu Chi",
+      "k": "historico",
+      "u": 6,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Museu dos Vestígios da Guerra",
+      "k": "museu",
+      "u": 2,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Catedral de Notre-Dame de Saigon",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Hanói": [
+    {
+      "n": "Mausoléu de Ho Chi Minh",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Templo da Literatura",
+      "k": "religioso",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Sapa": [
+    {
+      "n": "Terraços de arroz de Sapa (trekking)",
+      "k": "natureza",
+      "u": 50,
+      "t": "tour",
+      "d": "1-2 dias"
+    }
+  ],
+  "Ninh Binh": [
+    {
+      "n": "Trang An (passeio de barco)",
+      "k": "natureza",
+      "u": 10,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Pagode de Bai Dinh",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "My Tho": [
+    {
+      "n": "Delta do Mekong (tour de barco)",
+      "k": "passeio",
+      "u": 35,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Phong Nha": [
+    {
+      "n": "Caverna de Son Doong / Parque Phong Nha",
+      "k": "natureza",
+      "u": 30,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Da Nang": [
+    {
+      "n": "Teleférico de Ba Na Hills (Ponte Dourada)",
+      "k": "atracao",
+      "u": 38,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ]
+}

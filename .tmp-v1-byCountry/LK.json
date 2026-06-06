@@ -1,0 +1,124 @@
+{
+  "Sigiriya": [
+    {
+      "n": "Fortaleza da Rocha do Leão de Sigiriya",
+      "k": "historico",
+      "u": 30,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Kandy": [
+    {
+      "n": "Templo do Dente Sagrado",
+      "k": "religioso",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Jardim Botânico Real de Peradeniya",
+      "k": "parque",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Polonnaruwa": [
+    {
+      "n": "Cidade Antiga de Polonnaruwa",
+      "k": "historico",
+      "u": 25,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Dambulla": [
+    {
+      "n": "Templos da Caverna de Dambulla",
+      "k": "religioso",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Yala": [
+    {
+      "n": "Safári no Parque Nacional de Yala",
+      "k": "natureza",
+      "u": 50,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Ella": [
+    {
+      "n": "Trem panorâmico Kandy a Ella",
+      "k": "experiencia",
+      "u": 8,
+      "t": "ingresso",
+      "d": "6-7h"
+    },
+    {
+      "n": "Ponte das Nove Arcadas",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Ratnapura": [
+    {
+      "n": "Pico de Adão (Sri Pada)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "6-8h"
+    }
+  ],
+  "Galle": [
+    {
+      "n": "Forte de Galle",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Anuradhapura": [
+    {
+      "n": "Cidade Antiga de Anuradhapura",
+      "k": "historico",
+      "u": 25,
+      "t": "ingresso",
+      "d": "4-5h"
+    }
+  ],
+  "Pinnawala": [
+    {
+      "n": "Orfanato de Elefantes de Pinnawala",
+      "k": "atracao",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Mirissa": [
+    {
+      "n": "Safári de baleias em Mirissa",
+      "k": "natureza",
+      "u": 45,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Nuwara Eliya": [
+    {
+      "n": "Planície de Horton e World's End",
+      "k": "natureza",
+      "u": 25,
+      "t": "ingresso",
+      "d": "4h"
+    }
+  ]
+}

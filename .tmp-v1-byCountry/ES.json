@@ -1,0 +1,118 @@
+{
+  "Barcelona": [
+    {
+      "n": "Sagrada Família",
+      "k": "religioso",
+      "u": 29,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Park Güell",
+      "k": "parque",
+      "u": 18,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Casa Batlló",
+      "k": "atracao",
+      "u": 38,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Madri": [
+    {
+      "n": "Museu do Prado",
+      "k": "museu",
+      "u": 16,
+      "t": "ingresso",
+      "d": "3h"
+    },
+    {
+      "n": "Palácio Real de Madri",
+      "k": "historico",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Nacional Centro de Arte Reina Sofía",
+      "k": "museu",
+      "u": 13,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Granada": [
+    {
+      "n": "Alhambra",
+      "k": "historico",
+      "u": 19,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Córdoba": [
+    {
+      "n": "Mesquita-Catedral de Córdoba",
+      "k": "religioso",
+      "u": 14,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Bilbao": [
+    {
+      "n": "Museu Guggenheim Bilbao",
+      "k": "museu",
+      "u": 18,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Sevilha": [
+    {
+      "n": "Catedral de Sevilha e Giralda",
+      "k": "religioso",
+      "u": 13,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Real Alcázar de Sevilha",
+      "k": "historico",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Valência": [
+    {
+      "n": "Cidade das Artes e das Ciências",
+      "k": "atracao",
+      "u": 40,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Segóvia": [
+    {
+      "n": "Aqueduto de Segóvia",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "San Sebastián": [
+    {
+      "n": "La Concha (praia)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ]
+}

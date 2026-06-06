@@ -1,0 +1,107 @@
+{
+  "Trakai": [
+    {
+      "n": "Castelo da Ilha de Trakai",
+      "k": "historico",
+      "u": 13,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Vilnius": [
+    {
+      "n": "Cidade Velha de Vilnius",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Torre de Gediminas",
+      "k": "atracao",
+      "u": 6,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional da Lituânia",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Palácio dos Grão-Duques da Lituânia",
+      "k": "historico",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Catedral de Vilnius",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Museu das Vítimas do Genocídio (KGB)",
+      "k": "museu",
+      "u": 6,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Igreja de Santa Ana",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "Šiauliai": [
+    {
+      "n": "Colina das Cruzes",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Neringa": [
+    {
+      "n": "Cúspide de Curlândia (Neringa)",
+      "k": "natureza",
+      "u": 7,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Nida": [
+    {
+      "n": "Duna de Parnidis",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Kaunas": [
+    {
+      "n": "Castelo de Kaunas",
+      "k": "historico",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Druskininkai": [
+    {
+      "n": "Parque Grūtas (Grūto Parkas)",
+      "k": "parque",
+      "u": 9,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ]
+}

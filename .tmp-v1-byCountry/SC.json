@@ -1,0 +1,110 @@
+{
+  "Praslin": [
+    {
+      "n": "Reserva Natural Vallée de Mai",
+      "k": "natureza",
+      "u": 24,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Praia Anse Lazio",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Ilha Curieuse (tartarugas gigantes)",
+      "k": "natureza",
+      "u": 30,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Ilha Cousin Reserva Natural (aves)",
+      "k": "natureza",
+      "u": 55,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "La Digue": [
+    {
+      "n": "Praia Anse Source d'Argent",
+      "k": "natureza",
+      "u": 8,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Aldabra": [
+    {
+      "n": "Reserva Especial de Aldabra (atol)",
+      "k": "natureza",
+      "u": 350,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Mahé": [
+    {
+      "n": "Parque Nacional Marinho de Sainte Anne (snorkel)",
+      "k": "passeio",
+      "u": 90,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Morne Seychellois National Park (trilha)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Mergulho no recife (Beau Vallon)",
+      "k": "experiencia",
+      "u": 75,
+      "t": "tour",
+      "d": "3h"
+    },
+    {
+      "n": "Destilaria Takamaka (Domaine de Val des Près)",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "1-2h"
+    }
+  ],
+  "Victoria": [
+    {
+      "n": "Jardim Botânico Nacional de Victoria",
+      "k": "parque",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Mercado Sir Selwyn Selwyn-Clarke",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional de História de Seychelles",
+      "k": "museu",
+      "u": 10,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Torre do Relógio de Victoria (Little Big Ben)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ]
+}

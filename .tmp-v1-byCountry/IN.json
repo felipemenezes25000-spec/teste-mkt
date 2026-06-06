@@ -1,0 +1,120 @@
+{
+  "Agra": [
+    {
+      "n": "Taj Mahal (ingresso estrangeiro)",
+      "k": "historico",
+      "u": 15,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Délhi": [
+    {
+      "n": "Forte Vermelho (Red Fort)",
+      "k": "historico",
+      "u": 7,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Qutub Minar",
+      "k": "historico",
+      "u": 7,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu Nacional de Nova Délhi",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Jaipur": [
+    {
+      "n": "Forte Amber (Amer Fort)",
+      "k": "historico",
+      "u": 7,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Hawa Mahal (Palácio dos Ventos)",
+      "k": "atracao",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Amritsar": [
+    {
+      "n": "Templo Dourado (Harmandir Sahib)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Aurangabad": [
+    {
+      "n": "Grutas de Ajanta",
+      "k": "historico",
+      "u": 7,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Grutas de Ellora",
+      "k": "historico",
+      "u": 7,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Varanasi": [
+    {
+      "n": "Passeio de barco ao amanhecer em Varanasi",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "1-2h"
+    }
+  ],
+  "Sawai Madhopur": [
+    {
+      "n": "Safári de tigres no Parque Nacional de Ranthambore",
+      "k": "natureza",
+      "u": 40,
+      "t": "tour",
+      "d": "3-4h"
+    }
+  ],
+  "Alleppey": [
+    {
+      "n": "Backwaters de Kerala (passeio de houseboat)",
+      "k": "natureza",
+      "u": 150,
+      "t": "tour",
+      "d": "dia/pernoite"
+    }
+  ],
+  "Mysore": [
+    {
+      "n": "Mysore Palace (Palácio de Mysore)",
+      "k": "historico",
+      "u": 2,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Khajuraho": [
+    {
+      "n": "Templos de Khajuraho",
+      "k": "religioso",
+      "u": 7,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ]
+}

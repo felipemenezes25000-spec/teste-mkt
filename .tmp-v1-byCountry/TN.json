@@ -1,0 +1,124 @@
+{
+  "El Jem": [
+    {
+      "n": "Anfiteatro de El Jem",
+      "k": "historico",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Túnis": [
+    {
+      "n": "Sítio Arqueológico de Cartago",
+      "k": "historico",
+      "u": 4,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Museu Nacional do Bardo",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Medina de Túnis",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3h"
+    }
+  ],
+  "Sidi Bou Said": [
+    {
+      "n": "Sidi Bou Said (vila azul e branca)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Béja": [
+    {
+      "n": "Sítio de Dougga",
+      "k": "historico",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Tataouine": [
+    {
+      "n": "Ksar Ouled Soltane",
+      "k": "historico",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Douz": [
+    {
+      "n": "Passeio de camelo no deserto do Saara (Douz)",
+      "k": "experiencia",
+      "u": 35,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Tozeur": [
+    {
+      "n": "Oásis de montanha de Chebika",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Kairouan": [
+    {
+      "n": "Grande Mesquita de Kairouan",
+      "k": "religioso",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Hammamet": [
+    {
+      "n": "Praias de Hammamet",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Djerba": [
+    {
+      "n": "Ilha de Djerba e Sinagoga El Ghriba",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Matmata": [
+    {
+      "n": "Matmata (casas trogloditas)",
+      "k": "atracao",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Jendouba": [
+    {
+      "n": "Sítio de Bulla Regia",
+      "k": "historico",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ]
+}

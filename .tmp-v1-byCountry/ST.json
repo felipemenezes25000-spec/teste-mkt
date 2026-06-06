@@ -1,0 +1,111 @@
+{
+  "Distrito de Caué": [
+    {
+      "n": "Pico Cão Grande (trilha e mirante)",
+      "k": "natureza",
+      "u": 50,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Água Izé": [
+    {
+      "n": "Roça Água Izé (plantação histórica de cacau)",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Guadalupe": [
+    {
+      "n": "Roça Agostinho Neto (visita guiada)",
+      "k": "historico",
+      "u": 10,
+      "t": "tour",
+      "d": "2h"
+    }
+  ],
+  "Bom Sucesso": [
+    {
+      "n": "Parque Natural Obô de São Tomé (trekking)",
+      "k": "parque",
+      "u": 35,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Ilhéu das Rolas": [
+    {
+      "n": "Ilhéu das Rolas (cruzamento da Linha do Equador)",
+      "k": "natureza",
+      "u": 40,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Santo António": [
+    {
+      "n": "Praia Banana (Príncipe)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Reserva da Biosfera da Ilha do Príncipe (passeio)",
+      "k": "natureza",
+      "u": 80,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "São Tomé": [
+    {
+      "n": "Catedral de São Tomé (Sé Catedral)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Forte de São Sebastião / Museu Nacional",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Tour de degustação de cacau e chocolate (Claudio Corallo)",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "1-2h"
+    },
+    {
+      "n": "Boca do Inferno (formação rochosa e blowhole)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Trindade": [
+    {
+      "n": "Cascata de São Nicolau (Cascata Bombaim)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Porto Alegre": [
+    {
+      "n": "Praia Jalé (observação de tartarugas)",
+      "k": "experiencia",
+      "u": 25,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ]
+}

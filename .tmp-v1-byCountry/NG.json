@@ -1,0 +1,125 @@
+{
+  "Lagos": [
+    {
+      "n": "Centro Cultural Nike Art Gallery",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Nacional de Lagos",
+      "k": "museu",
+      "u": 2,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Lekki Conservation Centre (passarela suspensa)",
+      "k": "natureza",
+      "u": 7,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Mercado Lekki Arts & Crafts",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Praia de Tarkwa Bay (passeio de barco)",
+      "k": "natureza",
+      "u": 10,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Osogbo": [
+    {
+      "n": "Floresta Sagrada de Osun-Osogbo",
+      "k": "religioso",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Idanre": [
+    {
+      "n": "Idanre Hills (colinas históricas)",
+      "k": "natureza",
+      "u": 5,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Erin-Ijesha": [
+    {
+      "n": "Cachoeiras de Erin-Ijesha (Olumirin)",
+      "k": "natureza",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Bauchi": [
+    {
+      "n": "Parque Nacional Yankari (safári e fontes termais)",
+      "k": "parque",
+      "u": 25,
+      "t": "ingresso",
+      "d": "1-2 dias"
+    }
+  ],
+  "Abuja": [
+    {
+      "n": "Zuma Rock (mirante)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Mesquita Nacional de Abuja",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Catedral Nacional Cristã (Centro Ecumênico)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Kano": [
+    {
+      "n": "Paço Real de Kano e Cidade Antiga (muralhas)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "3h"
+    }
+  ],
+  "Badagry": [
+    {
+      "n": "Centro Histórico de Badagry e Rota dos Escravos",
+      "k": "historico",
+      "u": 8,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Argungu": [
+    {
+      "n": "Festival Argungu de Pesca",
+      "k": "experiencia",
+      "u": 15,
+      "t": "estimado",
+      "d": "1 dia"
+    }
+  ]
+}

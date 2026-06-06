@@ -1,0 +1,117 @@
+{
+  "Vava'u": [
+    {
+      "n": "Nado com baleias jubarte (tour de barco dia inteiro)",
+      "k": "experiencia",
+      "u": 250,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Mergulho com cilindro nas cavernas de Vava'u (Mariner's Cave)",
+      "k": "experiencia",
+      "u": 150,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Pesca esportiva offshore em Vava'u (charter)",
+      "k": "experiencia",
+      "u": 600,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Tongatapu": [
+    {
+      "n": "Blowholes de Mapu'a 'a Vaca (Houma)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Ha'amonga 'a Maui (trilito de pedra)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Praia de Ha'atafu (snorkel no recife)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Captain Cook's Landing Site (Ponto de desembarque de Cook)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "'Anahulu Cave (caverna com piscina de água doce)",
+      "k": "natureza",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Nuku'alofa": [
+    {
+      "n": "Tumbas Reais (Mala'e Kula)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Tour cultural Tongan (kava, dança lakalaka, umu)",
+      "k": "experiencia",
+      "u": 45,
+      "t": "tour",
+      "d": "3h"
+    },
+    {
+      "n": "Mercado Talamahu (mercado central de Nuku'alofa)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Catedral Centenária Wesleyana (Free Wesleyan Church)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Pangaimotu Island (balsa + praia bangalô)",
+      "k": "passeio",
+      "u": 15,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "'Eua": [
+    {
+      "n": "Trilha aos penhascos e cavernas de 'Eua",
+      "k": "natureza",
+      "u": 35,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Kolovai": [
+    {
+      "n": "Flying foxes de Kolovai (colônia de morcegos sagrados)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ]
+}

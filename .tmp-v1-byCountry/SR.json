@@ -1,0 +1,118 @@
+{
+  "Paramaribo": [
+    {
+      "n": "Centro histórico de Paramaribo (Patrimônio UNESCO)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Forte Zeelandia",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Catedral de São Pedro e São Paulo",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Mesquita Keizerstraat e Sinagoga Neveh Shalom",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado central de Paramaribo",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Jules Wijdenbosch Bridge",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Brokopondo": [
+    {
+      "n": "Reserva Natural de Brownsberg",
+      "k": "natureza",
+      "u": 15,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Interior do Suriname": [
+    {
+      "n": "Reserva Natural Central de Suriname (UNESCO)",
+      "k": "natureza",
+      "u": 500,
+      "t": "tour",
+      "d": "3-4 dias"
+    }
+  ],
+  "Galibi": [
+    {
+      "n": "Galibi (observação de tartarugas marinhas)",
+      "k": "experiencia",
+      "u": 250,
+      "t": "tour",
+      "d": "2 dias"
+    }
+  ],
+  "Nickerie": [
+    {
+      "n": "Reserva de Vida Selvagem de Bigi Pan",
+      "k": "natureza",
+      "u": 120,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Rio Commewijne": [
+    {
+      "n": "Plantação Frederiksdorp (passeio de barco no rio Commewijne)",
+      "k": "passeio",
+      "u": 60,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Rio Upper Suriname": [
+    {
+      "n": "Vilas Quilombolas Maroon do Alto Suriname (rio Upper Suriname)",
+      "k": "experiencia",
+      "u": 350,
+      "t": "tour",
+      "d": "3 dias"
+    }
+  ],
+  "Palumeu": [
+    {
+      "n": "Palumeu (eco-lodge na floresta amazônica)",
+      "k": "experiencia",
+      "u": 700,
+      "t": "tour",
+      "d": "4 dias"
+    }
+  ],
+  "Commewijne": [
+    {
+      "n": "Fortaleza Nieuw Amsterdam (museu ao ar livre)",
+      "k": "museu",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ]
+}

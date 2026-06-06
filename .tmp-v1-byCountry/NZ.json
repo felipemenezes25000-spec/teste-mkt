@@ -1,0 +1,133 @@
+{
+  "Auckland": [
+    {
+      "n": "Sky Tower (observatório)",
+      "k": "atracao",
+      "u": 24,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Auckland War Memorial Museum",
+      "k": "museu",
+      "u": 20,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Matamata": [
+    {
+      "n": "Hobbiton Movie Set (tour)",
+      "k": "experiencia",
+      "u": 75,
+      "t": "tour",
+      "d": "2-3h"
+    }
+  ],
+  "Wellington": [
+    {
+      "n": "Te Papa Tongarewa (museu nacional)",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    }
+  ],
+  "Waitomo": [
+    {
+      "n": "Cavernas de Waitomo (vagalumes)",
+      "k": "natureza",
+      "u": 40,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Fiordland": [
+    {
+      "n": "Milford Sound (cruzeiro)",
+      "k": "passeio",
+      "u": 60,
+      "t": "tour",
+      "d": "2h"
+    }
+  ],
+  "Queenstown": [
+    {
+      "n": "Bungy jump em Kawarau Bridge",
+      "k": "experiencia",
+      "u": 135,
+      "t": "tour",
+      "d": "1-2h"
+    }
+  ],
+  "Tongariro": [
+    {
+      "n": "Parque Nacional de Tongariro (Alpine Crossing)",
+      "k": "parque",
+      "u": 0,
+      "t": "gratis",
+      "d": "7-8h"
+    }
+  ],
+  "Rotorua": [
+    {
+      "n": "Parque Geotérmico Wai-O-Tapu",
+      "k": "natureza",
+      "u": 20,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Vila Maori Te Puia (cultura + gêiser)",
+      "k": "experiencia",
+      "u": 45,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Westland": [
+    {
+      "n": "Franz Josef Glacier (heli-hike)",
+      "k": "experiencia",
+      "u": 350,
+      "t": "tour",
+      "d": "3-4h"
+    }
+  ],
+  "Dunedin": [
+    {
+      "n": "Larnach Castle",
+      "k": "historico",
+      "u": 22,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Wanaka": [
+    {
+      "n": "Trilha Roys Peak",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "5-6h"
+    }
+  ],
+  "Kaikoura": [
+    {
+      "n": "Observação de baleias em Kaikoura",
+      "k": "passeio",
+      "u": 100,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "Christchurch": [
+    {
+      "n": "Catedral de Cardboard",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ]
+}

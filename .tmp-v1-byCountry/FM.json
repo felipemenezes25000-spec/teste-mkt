@@ -1,0 +1,101 @@
+{
+  "Chuuk": [
+    {
+      "n": "Mergulho na Lagoa de Chuuk (Truk Lagoon)",
+      "k": "experiencia",
+      "u": 150,
+      "t": "tour",
+      "d": "1 dia"
+    },
+    {
+      "n": "Liveaboard de naufrágios em Truk Lagoon",
+      "k": "experiencia",
+      "u": 3500,
+      "t": "tour",
+      "d": "7-10 dias"
+    }
+  ],
+  "Pohnpei": [
+    {
+      "n": "Ruínas de Nan Madol (Patrimônio Mundial)",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Cachoeira Kepirohi",
+      "k": "natureza",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Sokehs Rock (trilha e mirante)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Cerimônia da bebida sakau (kava) em Pohnpei",
+      "k": "experiencia",
+      "u": 15,
+      "t": "estimado",
+      "d": "2h"
+    },
+    {
+      "n": "Trilha pela floresta tropical de Pohnpei",
+      "k": "natureza",
+      "u": 40,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Yap": [
+    {
+      "n": "Mergulho com raias-manta em Yap",
+      "k": "experiencia",
+      "u": 160,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Bancos de dinheiro de pedra (Rai) em Yap",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Aldeia tradicional e dança de Yap",
+      "k": "experiencia",
+      "u": 25,
+      "t": "estimado",
+      "d": "2h"
+    }
+  ],
+  "Kosrae": [
+    {
+      "n": "Ruínas de Lelu (Kosrae)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Mergulho nos recifes de Kosrae",
+      "k": "experiencia",
+      "u": 130,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Snorkel nos mangues e canais de Kosrae",
+      "k": "passeio",
+      "u": 60,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "Parque Nacional Kaieteur": [
+    {
+      "n": "Cataratas Kaieteur (excursão aérea de 1 dia)",
+      "k": "natureza",
+      "u": 250,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Região de Potaro-Siparuni": [
+    {
+      "n": "Parque Nacional Kaieteur (taxa de entrada)",
+      "k": "parque",
+      "u": 40,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Georgetown": [
+    {
+      "n": "Jardim Botânico de Georgetown",
+      "k": "parque",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Catedral de São Jorge",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional da Guiana",
+      "k": "museu",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Mercado de Stabroek",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Farol de Georgetown",
+      "k": "historico",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Sea Wall de Georgetown",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Reserva Florestal de Iwokrama": [
+    {
+      "n": "Iwokrama Forest Canopy Walkway",
+      "k": "natureza",
+      "u": 35,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Lethem": [
+    {
+      "n": "Rupununi Savannah (safári de lodge)",
+      "k": "experiencia",
+      "u": 600,
+      "t": "tour",
+      "d": "3-4 dias"
+    }
+  ],
+  "Região de Barima-Waini": [
+    {
+      "n": "Shell Beach (observação de tartarugas)",
+      "k": "natureza",
+      "u": 300,
+      "t": "tour",
+      "d": "2-3 dias"
+    }
+  ],
+  "Rio Essequibo": [
+    {
+      "n": "Forte Zeelandia (Ilha Fort)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Rio Kamuni": [
+    {
+      "n": "Santa Mission (vila Amerindia)",
+      "k": "experiencia",
+      "u": 80,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Fronteira Brasil-Guiana": [
+    {
+      "n": "Cataratas Orinduik",
+      "k": "natureza",
+      "u": 200,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ]
+}

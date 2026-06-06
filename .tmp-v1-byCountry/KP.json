@@ -1,0 +1,110 @@
+{
+  "Pyongyang": [
+    {
+      "n": "Praça Kim Il-sung",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Grandes Monumentos do Monte Mansu (estátuas)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Palácio do Sol de Kumsusan (mausoléu)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Torre Juche",
+      "k": "atracao",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Arco do Triunfo de Pyongyang",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Metrô de Pyongyang (passeio nas estações)",
+      "k": "atracao",
+      "u": 1,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Museu da Guerra de Libertação da Pátria",
+      "k": "museu",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Navio espião USS Pueblo",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Maratona de Pyongyang (participação)",
+      "k": "experiencia",
+      "u": 100,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Kaesong": [
+    {
+      "n": "Zona Desmilitarizada / Panmunjom",
+      "k": "historico",
+      "u": 30,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Cidade histórica de Kaesong",
+      "k": "historico",
+      "u": 15,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Ryanggang": [
+    {
+      "n": "Montanha Paektu (vulcão sagrado)",
+      "k": "natureza",
+      "u": 50,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Hyangsan": [
+    {
+      "n": "Montanhas Myohyang e Casa de Exposições da Amizade",
+      "k": "natureza",
+      "u": 20,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Kangwon": [
+    {
+      "n": "Montanhas Kumgang (Diamante)",
+      "k": "natureza",
+      "u": 40,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ]
+}

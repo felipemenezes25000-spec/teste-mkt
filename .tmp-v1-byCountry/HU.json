@@ -1,0 +1,108 @@
+{
+  "Budapeste": [
+    {
+      "n": "Parlamento Húngaro (tour)",
+      "k": "historico",
+      "u": 35,
+      "t": "tour",
+      "d": "45min"
+    },
+    {
+      "n": "Termas Széchenyi",
+      "k": "experiencia",
+      "u": 33,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Bastião dos Pescadores",
+      "k": "atracao",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Castelo de Buda",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Basílica de Santo Estêvão",
+      "k": "religioso",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Termas Gellért",
+      "k": "experiencia",
+      "u": 36,
+      "t": "ingresso",
+      "d": "3h"
+    },
+    {
+      "n": "Cruzeiro no Danúbio",
+      "k": "passeio",
+      "u": 20,
+      "t": "tour",
+      "d": "1-2h"
+    },
+    {
+      "n": "Sapatos na Margem do Danúbio",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Ópera Estatal Húngara (tour)",
+      "k": "atracao",
+      "u": 12,
+      "t": "tour",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional Húngaro",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Memento Park (estátuas comunistas)",
+      "k": "historico",
+      "u": 12,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Balaton": [
+    {
+      "n": "Lago Balaton",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ],
+  "Esztergom": [
+    {
+      "n": "Curva do Danúbio e Esztergom",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Eger": [
+    {
+      "n": "Vinícolas de Eger e Vale das Belas Senhoras",
+      "k": "experiencia",
+      "u": 25,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ]
+}

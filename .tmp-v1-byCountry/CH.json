@@ -1,0 +1,120 @@
+{
+  "Interlaken": [
+    {
+      "n": "Monte Jungfraujoch (Topo da Europa)",
+      "k": "natureza",
+      "u": 230,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Zermatt": [
+    {
+      "n": "Trem Glacier Express",
+      "k": "passeio",
+      "u": 160,
+      "t": "tour",
+      "d": "8h"
+    },
+    {
+      "n": "Matterhorn Glacier Paradise",
+      "k": "natureza",
+      "u": 130,
+      "t": "ingresso",
+      "d": "半dia"
+    }
+  ],
+  "Lucerna": [
+    {
+      "n": "Monte Pilatus (teleférico e cremalheira)",
+      "k": "natureza",
+      "u": 80,
+      "t": "ingresso",
+      "d": "半dia"
+    },
+    {
+      "n": "Ponte da Capela (Kapellbrücke)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Monte Rigi (Rainha das Montanhas)",
+      "k": "natureza",
+      "u": 78,
+      "t": "ingresso",
+      "d": "半dia"
+    },
+    {
+      "n": "Monumento do Leão de Lucerna",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "Montreux": [
+    {
+      "n": "Castelo de Chillon",
+      "k": "historico",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Schaffhausen": [
+    {
+      "n": "Cataratas do Reno (Rheinfall)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Chur": [
+    {
+      "n": "Trem panorâmico Bernina Express",
+      "k": "passeio",
+      "u": 70,
+      "t": "tour",
+      "d": "4h"
+    }
+  ],
+  "Lauterbrunnen": [
+    {
+      "n": "Monte Schilthorn (Piz Gloria)",
+      "k": "natureza",
+      "u": 120,
+      "t": "ingresso",
+      "d": "半dia"
+    }
+  ],
+  "Lausanne": [
+    {
+      "n": "Museu Olímpico de Lausanne",
+      "k": "museu",
+      "u": 20,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Zurique": [
+    {
+      "n": "Kunsthaus Zürich (museu de arte)",
+      "k": "museu",
+      "u": 26,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Genebra": [
+    {
+      "n": "Cruzeiro no Lago de Genebra",
+      "k": "passeio",
+      "u": 35,
+      "t": "tour",
+      "d": "半dia"
+    }
+  ]
+}

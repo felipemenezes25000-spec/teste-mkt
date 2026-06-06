@@ -1,0 +1,120 @@
+{
+  "Schwangau": [
+    {
+      "n": "Castelo de Neuschwanstein",
+      "k": "historico",
+      "u": 23,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Berlim": [
+    {
+      "n": "Portão de Brandemburgo",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Ilha dos Museus (Museu de Pérgamo)",
+      "k": "museu",
+      "u": 14,
+      "t": "ingresso",
+      "d": "3h"
+    },
+    {
+      "n": "Memorial do Muro de Berlim",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Reichstag (cúpula de vidro)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Colônia": [
+    {
+      "n": "Catedral de Colônia",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Munique": [
+    {
+      "n": "Oktoberfest (entrada nas tendas)",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Museu BMW",
+      "k": "museu",
+      "u": 11,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Rust": [
+    {
+      "n": "Europa-Park",
+      "k": "parque",
+      "u": 65,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "Dachau": [
+    {
+      "n": "Campo de concentração de Dachau",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Sankt Goar": [
+    {
+      "n": "Cruzeiro pelo Vale do Reno",
+      "k": "passeio",
+      "u": 30,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Friburgo em Brisgóvia": [
+    {
+      "n": "Floresta Negra (trilhas e natureza)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ],
+  "Potsdam": [
+    {
+      "n": "Palácio de Sanssouci",
+      "k": "historico",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Heidelberg": [
+    {
+      "n": "Castelo de Heidelberg",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "Lahore": [
+    {
+      "n": "Mesquita Badshahi",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Forte de Lahore (Shahi Qila)",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Cerimônia de fronteira de Wagah",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Jardins de Shalimar",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Bazar Empório de Lahore / Cidade Velha (tour)",
+      "k": "passeio",
+      "u": 15,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "Islamabad": [
+    {
+      "n": "Mesquita Faisal",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Larkana": [
+    {
+      "n": "Ruínas de Mohenjo-daro",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Taxila": [
+    {
+      "n": "Museu de Taxila",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Gilgit-Baltistão": [
+    {
+      "n": "Vale de Hunza",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3 dias"
+    },
+    {
+      "n": "Estrada do Caracorum (Karakoram Highway)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "vários dias"
+    }
+  ],
+  "Skardu": [
+    {
+      "n": "Acampamento-base K2 (trekking)",
+      "k": "experiencia",
+      "u": 2500,
+      "t": "tour",
+      "d": "14-21 dias"
+    },
+    {
+      "n": "Pico Deosai (Planícies de Deosai)",
+      "k": "parque",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Naran": [
+    {
+      "n": "Lago Saiful Muluk",
+      "k": "natureza",
+      "u": 2,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Jhelum": [
+    {
+      "n": "Forte de Rohtas",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Karachi": [
+    {
+      "n": "Mausoléu de Jinnah (Mazar-e-Quaid)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ]
+}

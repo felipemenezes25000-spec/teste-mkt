@@ -1,0 +1,104 @@
+{
+  "Cidade do Vaticano": [
+    {
+      "n": "Museus do Vaticano e Capela Sistina",
+      "k": "museu",
+      "u": 22,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Basílica de São Pedro",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Cúpula da Basílica de São Pedro (subida)",
+      "k": "atracao",
+      "u": 11,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Capela Sistina",
+      "k": "religioso",
+      "u": 22,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Praça de São Pedro",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Necrópole Vaticana e Túmulo de São Pedro (Scavi)",
+      "k": "historico",
+      "u": 15,
+      "t": "tour",
+      "d": "1.5h"
+    },
+    {
+      "n": "Jardins do Vaticano (tour guiado)",
+      "k": "parque",
+      "u": 37,
+      "t": "tour",
+      "d": "2h"
+    },
+    {
+      "n": "Grutas Vaticanas (túmulos papais)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "45min"
+    },
+    {
+      "n": "Audiência Papal (Quarta-feira)",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Quartos de Rafael (Stanze di Raffaello)",
+      "k": "museu",
+      "u": 22,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Pinacoteca Vaticana",
+      "k": "museu",
+      "u": 22,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu Pio-Clementino (escultura clássica)",
+      "k": "museu",
+      "u": 22,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Tour noturno dos Museus do Vaticano (sextas)",
+      "k": "experiencia",
+      "u": 30,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "Castel Gandolfo": [
+    {
+      "n": "Castel Gandolfo - Villas Pontifícias (trem do Vaticano)",
+      "k": "passeio",
+      "u": 43,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ]
+}

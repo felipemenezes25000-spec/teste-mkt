@@ -1,0 +1,112 @@
+{
+  "Luxemburgo": [
+    {
+      "n": "Casamatas do Bock",
+      "k": "historico",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Palácio Grão-Ducal",
+      "k": "historico",
+      "u": 15,
+      "t": "tour",
+      "d": "1h"
+    },
+    {
+      "n": "Catedral de Notre-Dame de Luxemburgo",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Mudam - Museu de Arte Moderna Grão-Duque Jean",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Nacional de História e Arte",
+      "k": "museu",
+      "u": 7,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu de História da Cidade de Luxemburgo",
+      "k": "museu",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Caminho da Corniche (Varanda mais bela da Europa)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Bairro de Grund",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Vianden": [
+    {
+      "n": "Castelo de Vianden",
+      "k": "historico",
+      "u": 11,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Telecadeira de Vianden",
+      "k": "passeio",
+      "u": 7,
+      "t": "ingresso",
+      "d": "30min"
+    }
+  ],
+  "Mullerthal": [
+    {
+      "n": "Castelos do Vale do Müllerthal (Pequena Suíça)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "4-6h"
+    }
+  ],
+  "Bourscheid": [
+    {
+      "n": "Castelo de Bourscheid",
+      "k": "historico",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Hamm": [
+    {
+      "n": "Memorial Americano de Luxemburgo (cemitério Patton)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Remich": [
+    {
+      "n": "Adega vinícola do Vale do Mosela (degustação)",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "2h"
+    }
+  ]
+}

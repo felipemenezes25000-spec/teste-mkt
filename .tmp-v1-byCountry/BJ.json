@@ -1,0 +1,114 @@
+{
+  "Abomey": [
+    {
+      "n": "Palácios Reais de Abomey (Patrimônio Mundial)",
+      "k": "historico",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Ganvié": [
+    {
+      "n": "Aldeia Lacustre de Ganvié (passeio de barco)",
+      "k": "passeio",
+      "u": 20,
+      "t": "tour",
+      "d": "3-4h"
+    }
+  ],
+  "Ouidah": [
+    {
+      "n": "Porta do Não Retorno (Rota dos Escravos)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Templo das Pítons (Templo do Vodu)",
+      "k": "religioso",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Floresta Sagrada de Kpassè",
+      "k": "religioso",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu de História de Ouidah (Forte Português)",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu de Arte da Vida Quotidiana (Fundação Zinsou)",
+      "k": "museu",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Festival Internacional do Vodu (10 de janeiro)",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "1 dia"
+    }
+  ],
+  "Tanguiéta": [
+    {
+      "n": "Parque Nacional da Pendjari (safári)",
+      "k": "parque",
+      "u": 35,
+      "t": "ingresso",
+      "d": "1-2 dias"
+    }
+  ],
+  "Kandi": [
+    {
+      "n": "Parque Nacional W (safári transfronteiriço)",
+      "k": "parque",
+      "u": 30,
+      "t": "ingresso",
+      "d": "1-2 dias"
+    }
+  ],
+  "Natitingou": [
+    {
+      "n": "Aldeias Tata Somba (casas-fortaleza Somba)",
+      "k": "experiencia",
+      "u": 10,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Cotonou": [
+    {
+      "n": "Mercado Dantokpa",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Praça da Amazona (Place de l'Amazone)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Basílica da Imaculada Conceição",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ]
+}

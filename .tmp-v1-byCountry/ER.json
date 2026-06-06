@@ -1,0 +1,105 @@
+{
+  "Asmara": [
+    {
+      "n": "Centro modernista de Asmara (cidade UNESCO)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Edifício Fiat Tagliero",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Cinema Impero",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Museu Nacional da Eritreia",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Ferrovia Eritreia (trem a vapor Asmara–Massawa)",
+      "k": "passeio",
+      "u": 80,
+      "t": "estimado",
+      "d": "meio dia"
+    },
+    {
+      "n": "Cemitério de Tanques de Asmara",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Mercado de Medeber (oficinas de reciclagem)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Massawa": [
+    {
+      "n": "Cidade portuária histórica de Massawa",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Arquipélago de Dahlak (mergulho/barco)",
+      "k": "experiencia",
+      "u": 200,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Keren": [
+    {
+      "n": "Keren e santuário de Mariam Dearit",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Adi Keyh": [
+    {
+      "n": "Ruínas antigas de Qohaito",
+      "k": "historico",
+      "u": 5,
+      "t": "estimado",
+      "d": "2-3h"
+    }
+  ],
+  "Foro": [
+    {
+      "n": "Sítio arqueológico de Adulis",
+      "k": "historico",
+      "u": 5,
+      "t": "estimado",
+      "d": "2-3h"
+    }
+  ],
+  "Nefasit": [
+    {
+      "n": "Mosteiro de Debre Bizen",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ]
+}

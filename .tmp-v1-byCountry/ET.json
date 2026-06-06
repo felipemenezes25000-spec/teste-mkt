@@ -1,0 +1,138 @@
+{
+  "Lalibela": [
+    {
+      "n": "Igrejas escavadas na rocha de Lalibela",
+      "k": "religioso",
+      "u": 50,
+      "t": "ingresso",
+      "d": "1-2 dias"
+    }
+  ],
+  "Debark": [
+    {
+      "n": "Parque Nacional das Montanhas Simien",
+      "k": "parque",
+      "u": 10,
+      "t": "ingresso",
+      "d": "1-3 dias"
+    }
+  ],
+  "Mekele": [
+    {
+      "n": "Depressão de Danakil e vulcão Erta Ale (tour)",
+      "k": "experiencia",
+      "u": 550,
+      "t": "tour",
+      "d": "3-4 dias"
+    }
+  ],
+  "Axum": [
+    {
+      "n": "Obeliscos (estelas) de Axum",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "3-4h"
+    }
+  ],
+  "Gondar": [
+    {
+      "n": "Fasil Ghebbi – Recinto Real de Gondar",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Bahir Dar": [
+    {
+      "n": "Cataratas do Nilo Azul (Tis Issat)",
+      "k": "natureza",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Mosteiros do Lago Tana (passeio de barco)",
+      "k": "passeio",
+      "u": 35,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Goba": [
+    {
+      "n": "Parque Nacional das Montanhas Bale",
+      "k": "parque",
+      "u": 10,
+      "t": "ingresso",
+      "d": "1-2 dias"
+    }
+  ],
+  "Harar": [
+    {
+      "n": "Cidade murada de Harar Jugol",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Alimentação das hienas em Harar",
+      "k": "experiencia",
+      "u": 10,
+      "t": "tour",
+      "d": "1h"
+    }
+  ],
+  "Adis Abeba": [
+    {
+      "n": "Museu Nacional da Etiópia (fóssil Lucy)",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu Etnológico (Adis Abeba)",
+      "k": "museu",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Catedral da Santíssima Trindade",
+      "k": "religioso",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Hawzen": [
+    {
+      "n": "Igreja rupestre Abuna Yemata Guh (Tigré)",
+      "k": "religioso",
+      "u": 15,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Tiya": [
+    {
+      "n": "Estelas de Tiya (sítio UNESCO)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Jinka": [
+    {
+      "n": "Vale do Omo (visita às tribos)",
+      "k": "experiencia",
+      "u": 120,
+      "t": "tour",
+      "d": "1-2 dias"
+    }
+  ]
+}

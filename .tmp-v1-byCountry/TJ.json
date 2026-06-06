@@ -1,0 +1,114 @@
+{
+  "Duchambé": [
+    {
+      "n": "Museu Nacional do Tajiquistão",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Nacional de Antiguidades (Buda Adormecido)",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Bandeira Nacional / Mastro de Duchambé",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Palácio Navruz",
+      "k": "atracao",
+      "u": 6,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Khorog": [
+    {
+      "n": "Rodovia do Pamir (Pamir Highway - tour)",
+      "k": "experiencia",
+      "u": 700,
+      "t": "tour",
+      "d": "7-10 dias"
+    }
+  ],
+  "Montanhas Fann": [
+    {
+      "n": "Lagos Iskanderkul",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1 dia"
+    },
+    {
+      "n": "Lagos Marguzor (Haft Kul / Sete Lagos)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1 dia"
+    }
+  ],
+  "Gorno-Badakhshan": [
+    {
+      "n": "Lago Karakul",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Fontes termais de Garm Chashma",
+      "k": "natureza",
+      "u": 2,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Penjikent": [
+    {
+      "n": "Montanhas Fann (trekking)",
+      "k": "experiencia",
+      "u": 400,
+      "t": "tour",
+      "d": "5-7 dias"
+    },
+    {
+      "n": "Sítio arqueológico de Sarazm",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Ruínas da antiga Penjikent",
+      "k": "historico",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Hisor": [
+    {
+      "n": "Fortaleza de Hisor (Hissar)",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Pamir": [
+    {
+      "n": "Pico Ismoil Somoni (escalada)",
+      "k": "experiencia",
+      "u": 3000,
+      "t": "tour",
+      "d": "3 semanas"
+    }
+  ]
+}

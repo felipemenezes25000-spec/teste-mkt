@@ -1,0 +1,118 @@
+{
+  "Plitvice": [
+    {
+      "n": "Parque Nacional dos Lagos de Plitvice",
+      "k": "parque",
+      "u": 40,
+      "t": "ingresso",
+      "d": "4-6h"
+    }
+  ],
+  "Dubrovnik": [
+    {
+      "n": "Muralhas da Cidade Velha de Dubrovnik",
+      "k": "historico",
+      "u": 38,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Teleférico do Monte Srđ (Dubrovnik)",
+      "k": "atracao",
+      "u": 30,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Passeio de barco às Ilhas Elafiti",
+      "k": "passeio",
+      "u": 60,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Game of Thrones - tour a pé em Dubrovnik",
+      "k": "experiencia",
+      "u": 35,
+      "t": "tour",
+      "d": "2h"
+    }
+  ],
+  "Split": [
+    {
+      "n": "Palácio de Diocleciano",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Pula": [
+    {
+      "n": "Anfiteatro de Pula (Arena)",
+      "k": "historico",
+      "u": 13,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Šibenik": [
+    {
+      "n": "Parque Nacional de Krka (cachoeiras)",
+      "k": "parque",
+      "u": 25,
+      "t": "ingresso",
+      "d": "3-5h"
+    },
+    {
+      "n": "Catedral de São Tiago de Šibenik (UNESCO)",
+      "k": "religioso",
+      "u": 6,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Vis": [
+    {
+      "n": "Caverna Azul de Biševo (tour de barco)",
+      "k": "passeio",
+      "u": 85,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Trogir": [
+    {
+      "n": "Anfiteatro e centro histórico de Trogir (UNESCO)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Zagreb": [
+    {
+      "n": "Museu dos Relacionamentos Desfeitos",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Cidade Alta de Zagreb e Catedral",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Bol": [
+    {
+      "n": "Praia de Zlatni Rat (Chifre Dourado)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ]
+}

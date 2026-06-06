@@ -1,0 +1,116 @@
+{
+  "Vilankulo": [
+    {
+      "n": "Arquipélago de Bazaruto (mergulho)",
+      "k": "natureza",
+      "u": 120,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Ilha de Moçambique": [
+    {
+      "n": "Ilha de Moçambique (Patrimônio Mundial)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1 dia"
+    },
+    {
+      "n": "Fortaleza de São Sebastião",
+      "k": "historico",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Pemba": [
+    {
+      "n": "Arquipélago das Quirimbas (mergulho)",
+      "k": "natureza",
+      "u": 130,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Chitengo": [
+    {
+      "n": "Parque Nacional da Gorongosa (safári)",
+      "k": "parque",
+      "u": 40,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Maputo": [
+    {
+      "n": "Mercado Central de Maputo",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Estação Central de Maputo (CFM)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Reserva Especial de Maputo",
+      "k": "parque",
+      "u": 20,
+      "t": "ingresso",
+      "d": "1 dia"
+    },
+    {
+      "n": "Catedral de Nossa Senhora da Conceição",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional de Arte de Moçambique",
+      "k": "museu",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Ilha da Inhaca (passeio de barco)",
+      "k": "passeio",
+      "u": 35,
+      "t": "tour",
+      "d": "1 dia"
+    }
+  ],
+  "Inhambane": [
+    {
+      "n": "Tofo (mergulho com tubarões-baleia)",
+      "k": "experiencia",
+      "u": 85,
+      "t": "tour",
+      "d": "半dia"
+    }
+  ],
+  "Massingir": [
+    {
+      "n": "Parque Nacional do Limpopo (safári)",
+      "k": "parque",
+      "u": 30,
+      "t": "ingresso",
+      "d": "1 dia"
+    }
+  ],
+  "Ponta do Ouro": [
+    {
+      "n": "Ponta do Ouro (mergulho com golfinhos)",
+      "k": "experiencia",
+      "u": 90,
+      "t": "tour",
+      "d": "半dia"
+    }
+  ]
+}

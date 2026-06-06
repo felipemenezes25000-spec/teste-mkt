@@ -1,0 +1,103 @@
+{
+  "Grande Comore": [
+    {
+      "n": "Monte Karthala (trekking ao vulcão)",
+      "k": "natureza",
+      "u": 80,
+      "t": "tour",
+      "d": "2 dias"
+    },
+    {
+      "n": "Lago Salgado (Lac Salé)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Mergulho e snorkel no Recife de Coral",
+      "k": "experiencia",
+      "u": 60,
+      "t": "tour",
+      "d": "3-4h"
+    },
+    {
+      "n": "Praia de Chomoni",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Moroni": [
+    {
+      "n": "Antiga Medina de Moroni",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Mesquita Antiga da Sexta-feira (Ancienne Mosquée du Vendredi)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado de especiarias (baunilha e ylang-ylang)",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Mohéli": [
+    {
+      "n": "Ilha de Mohéli e Parque Marinho",
+      "k": "parque",
+      "u": 40,
+      "t": "tour",
+      "d": "1 dia"
+    },
+    {
+      "n": "Observação de tartarugas em Itsamia",
+      "k": "natureza",
+      "u": 25,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Cachoeira de Dziani Boundouni",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Mutsamudu": [
+    {
+      "n": "Ilha de Anjouan (Mutsamudu)",
+      "k": "passeio",
+      "u": 30,
+      "t": "tour",
+      "d": "1 dia"
+    },
+    {
+      "n": "Cidadela de Mutsamudu",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Anjouan": [
+    {
+      "n": "Tour de destilaria de ylang-ylang",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "2h"
+    }
+  ]
+}

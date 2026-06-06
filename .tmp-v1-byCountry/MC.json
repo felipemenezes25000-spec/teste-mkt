@@ -1,0 +1,108 @@
+{
+  "Monte Carlo": [
+    {
+      "n": "Cassino de Monte Carlo",
+      "k": "atracao",
+      "u": 20,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Jardim Japonês de Mônaco",
+      "k": "parque",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Circuito de Mônaco (volta a pé pelo traçado de F1)",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Termas Marinhas de Monte Carlo (spa)",
+      "k": "experiencia",
+      "u": 120,
+      "t": "estimado",
+      "d": "meio dia"
+    }
+  ],
+  "Mônaco": [
+    {
+      "n": "Museu Oceanográfico de Mônaco",
+      "k": "museu",
+      "u": 21,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Jardim Exótico de Mônaco",
+      "k": "parque",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Coleção de Carros de Sua Alteza Sereníssima o Príncipe",
+      "k": "museu",
+      "u": 11,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Museu de Antropologia Pré-histórica",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Praia do Larvotto",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Novo Museu Nacional de Mônaco (Villa Sauber)",
+      "k": "museu",
+      "u": 7,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Mônaco-Ville": [
+    {
+      "n": "Palácio do Príncipe de Mônaco",
+      "k": "historico",
+      "u": 11,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Catedral de Mônaco (túmulo de Grace Kelly)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Mudança da Guarda no Palácio do Príncipe",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "La Turbie": [
+    {
+      "n": "Troféu dos Alpes (La Turbie, vista de Mônaco)",
+      "k": "historico",
+      "u": 6,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ]
+}

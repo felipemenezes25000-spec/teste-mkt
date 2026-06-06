@@ -1,0 +1,114 @@
+{
+  "Nadi": [
+    {
+      "n": "Ilhas Mamanuca (passeio de barco)",
+      "k": "passeio",
+      "u": 90,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Ilhas Yasawa (cruzeiro)",
+      "k": "passeio",
+      "u": 120,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Jardim do Gigante Adormecido (Garden of the Sleeping Giant)",
+      "k": "natureza",
+      "u": 13,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Sri Siva Subramaniya (templo hindu)",
+      "k": "religioso",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Pacific Harbour": [
+    {
+      "n": "Mergulho com tubarões em Beqa Lagoon",
+      "k": "experiencia",
+      "u": 280,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Cruzeiro pelo Rio Navua / Cachoeiras",
+      "k": "passeio",
+      "u": 85,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Suva": [
+    {
+      "n": "Fiji Museum",
+      "k": "museu",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Colo-i-Suva Forest Park",
+      "k": "parque",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Taveuni": [
+    {
+      "n": "Cachoeiras de Tavoro (Bouma National Heritage Park)",
+      "k": "natureza",
+      "u": 12,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Mergulho na Rainbow Reef",
+      "k": "natureza",
+      "u": 150,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Sigatoka": [
+    {
+      "n": "Sand Dunes de Sigatoka (parque nacional)",
+      "k": "parque",
+      "u": 6,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Viti Levu": [
+    {
+      "n": "Cerimônia de Kava em aldeia tradicional",
+      "k": "experiencia",
+      "u": 40,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Mamanuca": [
+    {
+      "n": "Cloud 9 (plataforma flutuante)",
+      "k": "experiencia",
+      "u": 50,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Ilha Monuriki (locação de Náufrago)",
+      "k": "passeio",
+      "u": 110,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ]
+}

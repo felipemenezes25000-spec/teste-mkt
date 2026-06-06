@@ -1,0 +1,112 @@
+{
+  "Darvaza": [
+    {
+      "n": "Cratera de gas de Darvaza (Portao do Inferno)",
+      "k": "natureza",
+      "u": 150,
+      "t": "tour",
+      "d": "pernoite"
+    }
+  ],
+  "Mary": [
+    {
+      "n": "Sitio arqueologico de Merv",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Mausoleu do Sultao Sanjar",
+      "k": "historico",
+      "u": 3,
+      "t": "estimado",
+      "d": "1h"
+    }
+  ],
+  "Asgabate": [
+    {
+      "n": "Sitio arqueologico de Nisa",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Monumento da Neutralidade",
+      "k": "atracao",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Mesquita de Turkmenbashi Ruhy (Kipchak)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional do Turcomenistao",
+      "k": "museu",
+      "u": 12,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Bazar Tolkuchka (Altyn Asyr)",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Roda-gigante coberta de Asgabate",
+      "k": "atracao",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Cavalos Akhal-Teke (visita a hipodromo)",
+      "k": "experiencia",
+      "u": 30,
+      "t": "estimado",
+      "d": "2h"
+    },
+    {
+      "n": "Avenida da Independencia e monumentos",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Konye-Urgench": [
+    {
+      "n": "Konye-Urgench (sitio historico)",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Balkanabat": [
+    {
+      "n": "Canyon de Yangykala",
+      "k": "natureza",
+      "u": 120,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Baharly": [
+    {
+      "n": "Lago Kow-Ata (lago subterraneo)",
+      "k": "natureza",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ]
+}

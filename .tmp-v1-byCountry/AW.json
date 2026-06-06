@@ -1,0 +1,121 @@
+{
+  "Santa Cruz": [
+    {
+      "n": "Parque Nacional Arikok",
+      "k": "parque",
+      "u": 15,
+      "t": "ingresso",
+      "d": "4h"
+    },
+    {
+      "n": "Piscina Natural (Conchi)",
+      "k": "natureza",
+      "u": 60,
+      "t": "tour",
+      "d": "4h"
+    },
+    {
+      "n": "Ruínas do Moinho de Ouro de Bushiribana",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Noord": [
+    {
+      "n": "Capela de Alto Vista",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Farol Califórnia",
+      "k": "atracao",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Praia Palm",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "3h"
+    },
+    {
+      "n": "Borboletário de Aruba",
+      "k": "atracao",
+      "u": 16,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Oranjestad": [
+    {
+      "n": "Praia Eagle",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "3h"
+    },
+    {
+      "n": "Museu Arqueológico Nacional de Aruba",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Restaurante e Aquário Flutuante De Palm Island",
+      "k": "experiencia",
+      "u": 109,
+      "t": "ingresso",
+      "d": "6h"
+    },
+    {
+      "n": "Passeio de Submarino Atlantis",
+      "k": "experiencia",
+      "u": 115,
+      "t": "tour",
+      "d": "2h"
+    }
+  ],
+  "Paradera": [
+    {
+      "n": "Formação Rochosa de Casibari",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Hato": [
+    {
+      "n": "Fábrica de Aloe de Aruba",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Malmok": [
+    {
+      "n": "Tour de Mergulho no Naufrágio do Antilla",
+      "k": "experiencia",
+      "u": 75,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "San Nicolas": [
+    {
+      "n": "Praia do Bebê (Baby Beach)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "3h"
+    }
+  ]
+}

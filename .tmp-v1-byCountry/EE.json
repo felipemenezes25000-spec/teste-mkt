@@ -1,0 +1,110 @@
+{
+  "Tallinn": [
+    {
+      "n": "Cidade Velha de Tallinn (centro histórico)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Museu de História Estoniano (Casa da Grande Guilda)",
+      "k": "museu",
+      "u": 11,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Marítimo Estoniano (Hidroavião Harbour)",
+      "k": "museu",
+      "u": 16,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Museu de Arte KUMU",
+      "k": "museu",
+      "u": 15,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Palácio e Parque de Kadriorg",
+      "k": "historico",
+      "u": 9,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Torre Toompea e Catedral Alexander Nevsky",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Igreja de São Olavo (torre)",
+      "k": "religioso",
+      "u": 5,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Telliskivi Creative City (bairro criativo)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Lahemaa": [
+    {
+      "n": "Parque Nacional de Lahemaa",
+      "k": "parque",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ],
+  "Tartu": [
+    {
+      "n": "Museu Nacional Estoniano",
+      "k": "museu",
+      "u": 15,
+      "t": "ingresso",
+      "d": "3h"
+    },
+    {
+      "n": "AHHAA Centro de Ciências",
+      "k": "atracao",
+      "u": 16,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Kuressaare": [
+    {
+      "n": "Castelo do Bispo de Kuressaare",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Pärnu": [
+    {
+      "n": "Spa termal de Pärnu (resort litorâneo)",
+      "k": "experiencia",
+      "u": 30,
+      "t": "estimado",
+      "d": "3h"
+    },
+    {
+      "n": "Praia de Pärnu",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ]
+}

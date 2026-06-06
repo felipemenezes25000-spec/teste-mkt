@@ -1,0 +1,108 @@
+{
+  "Betio": [
+    {
+      "n": "Relíquias da Batalha de Tarawa (canhões e bunkers, Betio)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Canhões costeiros japoneses de 8 polegadas (Betio)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Memorial dos fuzileiros navais dos EUA (Red Beach, Betio)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado de Betio e vilarejos de Tarawa Sul",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Naufrágios e tanques na maré baixa (Betio lagoon)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Kiritimati": [
+    {
+      "n": "Pesca de bonefish em Kiritimati (Ilha Christmas)",
+      "k": "experiencia",
+      "u": 450,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Observação de aves em Kiritimati (santuário de aves marinhas)",
+      "k": "natureza",
+      "u": 60,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Surfe e praia em Kiritimati (Ilha Christmas)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Linha Internacional de Data em Kiritimati (primeiro fuso a ver o dia)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "Tarawa": [
+    {
+      "n": "Maneaba tradicional (casa de reunião comunal)",
+      "k": "experiencia",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Snorkel e mergulho na lagoa de Tarawa",
+      "k": "natureza",
+      "u": 50,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Dança tradicional Gilbertese (te mwaie)",
+      "k": "experiencia",
+      "u": 35,
+      "t": "estimado",
+      "d": "2h"
+    },
+    {
+      "n": "Catedral do Sagrado Coração (Teaoraereke)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "Abaiang": [
+    {
+      "n": "Travessia de barco a Abaiang (atol vizinho)",
+      "k": "passeio",
+      "u": 40,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ]
+}

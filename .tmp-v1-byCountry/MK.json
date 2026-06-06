@@ -1,0 +1,110 @@
+{
+  "Skopje": [
+    {
+      "n": "Memorial House of Mother Teresa",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Fortaleza Kale (Skopje)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Canyon Matka (passeio de barco e gruta)",
+      "k": "natureza",
+      "u": 10,
+      "t": "tour",
+      "d": "2-3h"
+    },
+    {
+      "n": "Museu Arqueológico da Macedônia do Norte",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Velho Bazar de Skopje (Čaršija)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Pico Vodno e Cruz do Milênio (teleférico)",
+      "k": "atracao",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Ohrid": [
+    {
+      "n": "Lago Ohrid (passeio de barco)",
+      "k": "natureza",
+      "u": 15,
+      "t": "tour",
+      "d": "2-3h"
+    },
+    {
+      "n": "Igreja de São João em Kaneo",
+      "k": "religioso",
+      "u": 2,
+      "t": "ingresso",
+      "d": "30min"
+    },
+    {
+      "n": "Mosteiro de São Naum",
+      "k": "religioso",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Teatro Antigo de Ohrid",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Sítio Arqueológico de Plaošnik",
+      "k": "historico",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Kratovo": [
+    {
+      "n": "Stone Town de Kuklica",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Mavrovo": [
+    {
+      "n": "Parque Nacional Mavrovo",
+      "k": "parque",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Bitola": [
+    {
+      "n": "Bitola e Sítio de Heraclea Lyncestis",
+      "k": "historico",
+      "u": 2,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "Bandar Seri Begawan": [
+    {
+      "n": "Mesquita Omar Ali Saifuddien",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Mesquita Jame'Asr Hassanil Bolkiah",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Kampong Ayer (vila sobre as águas)",
+      "k": "historico",
+      "u": 15,
+      "t": "tour",
+      "d": "1-2h"
+    },
+    {
+      "n": "Passeio de barco para ver macacos narigudos",
+      "k": "natureza",
+      "u": 35,
+      "t": "tour",
+      "d": "2-3h"
+    },
+    {
+      "n": "Museu Real Regalia (Royal Regalia)",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu Marítimo de Brunei",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Galeria de Arte e Artesanato Islâmico",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Tasek Lama Recreational Park",
+      "k": "parque",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Mercado Tamu Kianggeh",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Palácio Istana Nurul Iman (vista externa)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Jerudong": [
+    {
+      "n": "Parque Temático Jerudong",
+      "k": "parque",
+      "u": 15,
+      "t": "ingresso",
+      "d": "3-4h"
+    },
+    {
+      "n": "Empire Brunei (resort e golfe)",
+      "k": "experiencia",
+      "u": 50,
+      "t": "estimado",
+      "d": "半dia"
+    }
+  ],
+  "Temburong": [
+    {
+      "n": "Centro de Pesquisa Ulu Temburong (canopy walk)",
+      "k": "natureza",
+      "u": 120,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Muara": [
+    {
+      "n": "Praia de Muara",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ]
+}

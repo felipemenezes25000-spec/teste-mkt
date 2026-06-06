@@ -1,0 +1,110 @@
+{
+  "Manama": [
+    {
+      "n": "Forte do Bahrein (Qal'at al-Bahrain)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Grande Mesquita Al Fateh",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Museu Nacional do Bahrein",
+      "k": "museu",
+      "u": 1,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Souq de Manama (Bab Al Bahrain)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Bahrain Fort Museum",
+      "k": "museu",
+      "u": 1,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Casa do Alcorão (Beit Al Quran)",
+      "k": "museu",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Sakhir": [
+    {
+      "n": "Árvore da Vida",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Bahrain International Circuit (tour)",
+      "k": "experiencia",
+      "u": 15,
+      "t": "tour",
+      "d": "1-2h"
+    },
+    {
+      "n": "Al Areen Wildlife Park",
+      "k": "parque",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Lost Paradise of Dilmun (parque aquático)",
+      "k": "parque",
+      "u": 20,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "A'ali": [
+    {
+      "n": "Túmulos de Dilmun (Necrópole)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Muharraq": [
+    {
+      "n": "Casa Sheikh Isa bin Ali",
+      "k": "historico",
+      "u": 1,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Pérolas do Bahrein (mergulho/tour)",
+      "k": "experiencia",
+      "u": 60,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Riffa": [
+    {
+      "n": "Riffa Fort (Sheikh Salman bin Ahmed Al Fateh)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ]
+}

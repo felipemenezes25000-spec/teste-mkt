@@ -1,0 +1,125 @@
+{
+  "Mascate": [
+    {
+      "n": "Grande Mesquita Sultão Qaboos",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Royal Opera House Muscat",
+      "k": "atracao",
+      "u": 8,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu Nacional de Omã",
+      "k": "museu",
+      "u": 13,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Mutrah Souq",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Tour de mergulho/snorkel nas Ilhas Daymaniyat",
+      "k": "experiencia",
+      "u": 90,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Forte Al Jalali e Al Mirani",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Nizwa": [
+    {
+      "n": "Forte de Nizwa",
+      "k": "historico",
+      "u": 13,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Tiwi": [
+    {
+      "n": "Wadi Shab (caminhada e piscinas)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Bahla": [
+    {
+      "n": "Forte de Bahla",
+      "k": "historico",
+      "u": 13,
+      "t": "ingresso",
+      "d": "1-2h"
+    }
+  ],
+  "Bidiyah": [
+    {
+      "n": "Deserto de Wahiba Sands (safári)",
+      "k": "experiencia",
+      "u": 120,
+      "t": "tour",
+      "d": "1-2 dias"
+    }
+  ],
+  "Al Sharqiyah": [
+    {
+      "n": "Wadi Bani Khalid",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Al Hamra": [
+    {
+      "n": "Jebel Shams (Grand Canyon de Omã)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Wadi Ghul / Aldeia Misfat Al Abriyeen",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    }
+  ],
+  "Ras Al Hadd": [
+    {
+      "n": "Observação de tartarugas em Ras Al Jinz",
+      "k": "natureza",
+      "u": 18,
+      "t": "tour",
+      "d": "2-3h"
+    }
+  ],
+  "Dibab": [
+    {
+      "n": "Bimmah Sinkhole (Hawiyat Najm)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "Buada": [
+    {
+      "n": "Buada Lagoon (lagoa de água salobra interior)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Aiwo": [
+    {
+      "n": "Command Ridge (ponto mais alto, canhões japoneses da 2ª Guerra)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    },
+    {
+      "n": "Relíquias e canhões japoneses da Segunda Guerra",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Anibare": [
+    {
+      "n": "Anibare Bay (praia de areia branca)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Anibare Harbour (porto e barcos de pesca)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Pesca esportiva no Pacífico",
+      "k": "experiencia",
+      "u": 300,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Mergulho e snorkel nos recifes de coral",
+      "k": "experiencia",
+      "u": 120,
+      "t": "estimado",
+      "d": "meio dia"
+    }
+  ],
+  "Yaren": [
+    {
+      "n": "Moqua Well e cavernas de Moqua",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Distrito de Yaren (sede do governo)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Igreja Congregacional de Nauru (culto local)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Topside": [
+    {
+      "n": "Pináculos de fosfato em Topside (interior minerado)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Nauru": [
+    {
+      "n": "Volta completa de carro pela ilha (Ring Road)",
+      "k": "passeio",
+      "u": 50,
+      "t": "estimado",
+      "d": "meio dia"
+    }
+  ],
+  "Anabar": [
+    {
+      "n": "Lago artificial e piscinas naturais de Anabar",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ]
+}

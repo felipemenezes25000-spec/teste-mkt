@@ -1,0 +1,101 @@
+{
+  "Aitutaki": [
+    {
+      "n": "Cruzeiro pela lagoa de Aitutaki",
+      "k": "passeio",
+      "u": 120,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Praia e snorkel em One Foot Island (Tapuaetai)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Rarotonga": [
+    {
+      "n": "Travessia da ilha (Cross-Island Track) e The Needle",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    },
+    {
+      "n": "Trilha guiada de Pa (Cross Island)",
+      "k": "experiencia",
+      "u": 55,
+      "t": "tour",
+      "d": "3-4h"
+    },
+    {
+      "n": "Te Vara Nui Village (show noturno sobre a água)",
+      "k": "experiencia",
+      "u": 95,
+      "t": "tour",
+      "d": "4h"
+    },
+    {
+      "n": "Highland Paradise (vila cultural na montanha)",
+      "k": "experiencia",
+      "u": 75,
+      "t": "tour",
+      "d": "4h"
+    },
+    {
+      "n": "Mergulho com cilindro em Rarotonga",
+      "k": "experiencia",
+      "u": 75,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Tour de scooter ao redor de Rarotonga",
+      "k": "passeio",
+      "u": 25,
+      "t": "estimado",
+      "d": "meio dia"
+    }
+  ],
+  "Avarua": [
+    {
+      "n": "Mercado de Punanga Nui",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Igreja CICC de Avarua (culto dominical)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu e Biblioteca das Ilhas Cook",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Muri": [
+    {
+      "n": "Praia de Muri e sua lagoa",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Cruzeiro de glass-bottom kayak na lagoa de Muri",
+      "k": "passeio",
+      "u": 50,
+      "t": "tour",
+      "d": "3h"
+    }
+  ]
+}

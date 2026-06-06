@@ -1,0 +1,116 @@
+{
+  "Kalandula": [
+    {
+      "n": "Quedas de Kalandula (Cataratas de Kalandula)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Luanda": [
+    {
+      "n": "Fortaleza de São Miguel / Museu das Forças Armadas",
+      "k": "historico",
+      "u": 5,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Nacional de Antropologia",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Museu Nacional da Escravatura",
+      "k": "museu",
+      "u": 3,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Praia do Mussulo (passeio de barco)",
+      "k": "passeio",
+      "u": 35,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Marginal de Luanda (Avenida 4 de Fevereiro)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Belas": [
+    {
+      "n": "Miradouro da Lua (Miradouro da Lua)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Quiçama": [
+    {
+      "n": "Parque Nacional da Kissama (safári)",
+      "k": "parque",
+      "u": 90,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Muxima": [
+    {
+      "n": "Igreja de Nossa Senhora do Cabo (Igreja da Muxima)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Lubango": [
+    {
+      "n": "Fenda da Tundavala (Tundavala)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Cristo Rei do Lubango",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Serra da Leba (estrada panorâmica)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Namibe": [
+    {
+      "n": "Deserto do Namibe e Welwitschia mirabilis",
+      "k": "natureza",
+      "u": 110,
+      "t": "tour",
+      "d": "dia inteiro"
+    }
+  ],
+  "Pungo Andongo": [
+    {
+      "n": "Grutas do Nzenzo / Pungo Andongo (Pedras Negras)",
+      "k": "natureza",
+      "u": 15,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ]
+}

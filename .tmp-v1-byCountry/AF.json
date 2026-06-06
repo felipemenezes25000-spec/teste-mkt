@@ -1,0 +1,116 @@
+{
+  "Bamiyan": [
+    {
+      "n": "Lagos de Band-e Amir (Parque Nacional)",
+      "k": "natureza",
+      "u": 5,
+      "t": "ingresso",
+      "d": "meio dia"
+    },
+    {
+      "n": "Nichos dos Budas de Bamiyan (Patrimônio da UNESCO)",
+      "k": "historico",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Ghor": [
+    {
+      "n": "Minarete de Jam (Patrimônio da UNESCO)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "2h"
+    }
+  ],
+  "Mazar-i-Sharif": [
+    {
+      "n": "Mesquita Azul (Santuário de Ali)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1-2h"
+    }
+  ],
+  "Herat": [
+    {
+      "n": "Cidadela de Herat (Qala Ikhtyaruddin)",
+      "k": "historico",
+      "u": 2,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Grande Mesquita de Herat (Masjid Jami)",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Minaretes e Mausoléu de Gawhar Shad",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Cabul": [
+    {
+      "n": "Jardins de Babur",
+      "k": "parque",
+      "u": 3,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu Nacional do Afeganistão",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Bazar e Cidade Velha de Cabul",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "3h"
+    },
+    {
+      "n": "Lago Qargha",
+      "k": "natureza",
+      "u": 1,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Badakhshan": [
+    {
+      "n": "Corredor de Wakhan (trekking)",
+      "k": "experiencia",
+      "u": 800,
+      "t": "tour",
+      "d": "vários dias"
+    }
+  ],
+  "Parwan": [
+    {
+      "n": "Passo de Salang",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ],
+  "Panjshir": [
+    {
+      "n": "Mausoléu de Ahmad Shah Massoud (Vale do Panjshir)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    }
+  ]
+}

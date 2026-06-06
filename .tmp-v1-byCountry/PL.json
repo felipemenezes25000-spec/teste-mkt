@@ -1,0 +1,116 @@
+{
+  "Oświęcim": [
+    {
+      "n": "Museu de Auschwitz-Birkenau",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3-4h"
+    }
+  ],
+  "Wieliczka": [
+    {
+      "n": "Mina de Sal de Wieliczka",
+      "k": "atracao",
+      "u": 35,
+      "t": "ingresso",
+      "d": "3h"
+    }
+  ],
+  "Cracóvia": [
+    {
+      "n": "Castelo de Wawel",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Cidade Velha de Cracóvia (Rynek Główny)",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "2-3h"
+    },
+    {
+      "n": "Museu da Fábrica de Schindler",
+      "k": "museu",
+      "u": 9,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Basílica de Santa Maria",
+      "k": "religioso",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1h"
+    }
+  ],
+  "Varsóvia": [
+    {
+      "n": "Museu do Levante de Varsóvia",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Castelo Real de Varsóvia",
+      "k": "historico",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Museu POLIN de História dos Judeus Poloneses",
+      "k": "museu",
+      "u": 9,
+      "t": "ingresso",
+      "d": "2-3h"
+    }
+  ],
+  "Malbork": [
+    {
+      "n": "Castelo de Malbork",
+      "k": "historico",
+      "u": 18,
+      "t": "ingresso",
+      "d": "3h"
+    }
+  ],
+  "Gdańsk": [
+    {
+      "n": "Cidade Velha de Gdańsk",
+      "k": "passeio",
+      "u": 0,
+      "t": "gratis",
+      "d": "3h"
+    },
+    {
+      "n": "Centro Europeu da Solidariedade",
+      "k": "museu",
+      "u": 8,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Białowieża": [
+    {
+      "n": "Parque Nacional de Białowieża",
+      "k": "natureza",
+      "u": 8,
+      "t": "ingresso",
+      "d": "meio dia"
+    }
+  ],
+  "Zakopane": [
+    {
+      "n": "Montanhas Tatra e Zakopane (funicular Gubałówka)",
+      "k": "natureza",
+      "u": 8,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ]
+}

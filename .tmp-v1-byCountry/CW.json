@@ -1,0 +1,123 @@
+{
+  "Caracas Baai": [
+    {
+      "n": "Mergulho na Tug Boat (Naufrágio do Rebocador)",
+      "k": "experiencia",
+      "u": 45,
+      "t": "tour",
+      "d": "3h"
+    }
+  ],
+  "Tera Kòrá": [
+    {
+      "n": "Praia de Cas Abao (Cas Abao Beach)",
+      "k": "natureza",
+      "u": 6,
+      "t": "ingresso",
+      "d": "4h"
+    }
+  ],
+  "Savonet": [
+    {
+      "n": "Parque Nacional Christoffel (Christoffelpark)",
+      "k": "parque",
+      "u": 18,
+      "t": "ingresso",
+      "d": "4h"
+    }
+  ],
+  "Willemstad": [
+    {
+      "n": "Grutas de Hato (Hato Caves)",
+      "k": "natureza",
+      "u": 11,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Aquário Marinho (Curaçao Sea Aquarium)",
+      "k": "atracao",
+      "u": 21,
+      "t": "ingresso",
+      "d": "3h"
+    },
+    {
+      "n": "Ponte Rainha Emma (Queen Emma Bridge)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    },
+    {
+      "n": "Sinagoga Mikvé Israel-Emanuel",
+      "k": "religioso",
+      "u": 10,
+      "t": "ingresso",
+      "d": "1h"
+    },
+    {
+      "n": "Bairro histórico de Willemstad (Punda e Otrobanda)",
+      "k": "historico",
+      "u": 0,
+      "t": "gratis",
+      "d": "3h"
+    },
+    {
+      "n": "Museu Kurá Hulanda",
+      "k": "museu",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Destilaria Senior (Curaçao Liqueur, Landhuis Chobolobo)",
+      "k": "experiencia",
+      "u": 12,
+      "t": "tour",
+      "d": "1h"
+    },
+    {
+      "n": "Mercado Flutuante (Floating Market)",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    }
+  ],
+  "Lagún": [
+    {
+      "n": "Praia de Kenepa Grandi (Grote Knip)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "4h"
+    }
+  ],
+  "Santa Cruz": [
+    {
+      "n": "Mergulho no Mushroom Forest e Blue Room Cave",
+      "k": "experiencia",
+      "u": 60,
+      "t": "tour",
+      "d": "4h"
+    }
+  ],
+  "Westpunt": [
+    {
+      "n": "Shete Boka (Parque Nacional Shete Boka)",
+      "k": "parque",
+      "u": 10,
+      "t": "ingresso",
+      "d": "2h"
+    }
+  ],
+  "Bandabou": [
+    {
+      "n": "Plantação Histórica Landhuis Kenepa (Museu Tula)",
+      "k": "museu",
+      "u": 6,
+      "t": "ingresso",
+      "d": "1h30"
+    }
+  ]
+}

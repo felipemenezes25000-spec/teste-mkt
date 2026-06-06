@@ -1,0 +1,108 @@
+{
+  "Nouméa": [
+    {
+      "n": "Aquário de Nouméa (Aquarium des Lagons)",
+      "k": "atracao",
+      "u": 16,
+      "t": "ingresso",
+      "d": "2h"
+    },
+    {
+      "n": "Centro Cultural Tjibaou",
+      "k": "museu",
+      "u": 11,
+      "t": "ingresso",
+      "d": "2-3h"
+    },
+    {
+      "n": "Lagoa da Nova Caledônia (Patrimônio UNESCO) - passeio de barco",
+      "k": "natureza",
+      "u": 80,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Museu da Nova Caledônia",
+      "k": "museu",
+      "u": 4,
+      "t": "ingresso",
+      "d": "1-2h"
+    },
+    {
+      "n": "Ilhota Amédée e farol (Phare Amédée)",
+      "k": "passeio",
+      "u": 90,
+      "t": "tour",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Praia da Baie des Citrons",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Mergulho com snorkel em Île aux Canards",
+      "k": "experiencia",
+      "u": 20,
+      "t": "tour",
+      "d": "meio dia"
+    },
+    {
+      "n": "Mercado Municipal de Port Moselle",
+      "k": "atracao",
+      "u": 0,
+      "t": "gratis",
+      "d": "1h"
+    },
+    {
+      "n": "Catedral de São José de Nouméa",
+      "k": "religioso",
+      "u": 0,
+      "t": "gratis",
+      "d": "30min"
+    }
+  ],
+  "Île des Pins": [
+    {
+      "n": "Ilha dos Pinheiros (Île des Pins) - Baía de Oro",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    },
+    {
+      "n": "Praia de Kuto e Kanumera",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "meio dia"
+    },
+    {
+      "n": "Furo de Oro (Piscine Naturelle d'Oro)",
+      "k": "natureza",
+      "u": 15,
+      "t": "tour",
+      "d": "meio dia"
+    }
+  ],
+  "Yaté": [
+    {
+      "n": "Parque Provincial da Rivière Bleue",
+      "k": "parque",
+      "u": 4,
+      "t": "ingresso",
+      "d": "dia inteiro"
+    }
+  ],
+  "Lifou": [
+    {
+      "n": "Ilha Lifou (Ilhas da Lealdade)",
+      "k": "natureza",
+      "u": 0,
+      "t": "gratis",
+      "d": "dia inteiro"
+    }
+  ]
+}
