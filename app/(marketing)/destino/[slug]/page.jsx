@@ -7,11 +7,13 @@ import { MESES_PT } from '../../../_engine/data.js';
 import { FavoriteButton } from '../../../_components/FavoriteButton.jsx';
 import { AddToRouteButton } from '../../../_components/AddToRouteButton.jsx';
 import { linksDestino } from '../../../_lib/links.js';
+import { flagUrl } from '../../../_lib/flags.js';
 import { CustoTiers } from '../../../_components/CustoTiers.jsx';
 import { CustoVitrineVsReal } from '../../../_components/CustoVitrineVsReal.jsx';
 import { calcExemploDestino, resumoVitrineVsReal } from '../../../_engine/custoTotal.js';
 import { dicasDe, SECOES_DICAS } from '../../../_engine/dicas.js';
 import { atracoesDoPais } from '../../../_engine/atracoes.js';
+import { ATRACOES_IMG } from '../../../_engine/atracoesImgOverride.js';
 import { comidasDoPais, COMIDA_ICON } from '../../../_engine/comidas.js';
 import { cidadeWiki } from '../../../_lib/cidadeWiki.js';
 import { GaleriaLugares } from './GaleriaLugares.jsx';
@@ -101,7 +103,12 @@ export default async function DestinoPage(props) {
   const credito = heroImg ? await creditoImagem(heroImg) : null;
   // Piso: várias fotos do país (cicladas) — o raro item sem foto própria cai aqui sem
   // repetir sempre a mesma imagem. FOTO_ULTIMO garante não-nulo mesmo no pior caso.
-  const poolPais = [...new Set([heroImg, ...(await imagensDe(d.nome, { n: 6 }))].filter(Boolean))];
+  // Piso do país: fotos do LANDMARK curado (d.fotoQuery) via media-list, que JÁ é filtrada por RUIM (sem
+  // bandeira/brasão/mapa). Auditoria jun/2026: a fonte antiga imagensDe(d.nome) puxava o artigo do PAÍS
+  // (mapas/pinturas/brasões coloniais) -> ~1.180 cards errados. NÃO prependemos heroImg aqui porque ele vem do
+  // summary (pode ser mapa/brasão de lead); ele fica só como último recurso no piso() abaixo (quando a media-list
+  // vier vazia). Prova: ~88%->~98% dos cards de pool viraram foto real.
+  const poolPais = [...new Set((await imagensDe(d.fotoQuery || d.nome, { n: 6 })).filter(Boolean))];
   const piso = (i) => (poolPais.length ? poolPais[i % poolPais.length] : (heroImg || FOTO_ULTIMO));
 
   // Cadeia COM GARANTIA + CRÉDITO de cada item. Ordem: verbete curado → Openverse
@@ -119,7 +126,12 @@ export default async function DestinoPage(props) {
   };
   const [atracoes, pontosInfo, cidadeInfo] = await Promise.all([
     atracoesDe(d.wikidataId, { limite: 8 }),
-    Promise.all(pontos.map((a, i) => fotoGarantida(a.wiki || a.nome, `${a.nome} ${a.cidade || ''} ${d.nome}`, i))),
+    Promise.all(pontos.map((a, i) => {
+      // Override de IMAGEM DIRETA (auditoria jun/2026): atrações sem título wiki bom recebem aqui uma URL de
+      // foto real conferida por agente (Commons específica ou foto-landmark do país). Vem ANTES da cascata.
+      const direta = ATRACOES_IMG[`${d.code}:${a.nome}`];
+      return direta ? Promise.resolve({ src: direta, credito: creditoCommonsLite(direta) }) : fotoGarantida(a.wiki || a.nome, `${a.nome} ${a.cidade || ''} ${d.nome}`, i);
+    })),
     Promise.all(cidadesLista.map((c, i) => fotoGarantida(cidadeWiki(d.code, c), `${c} ${d.nome}`, i))),
   ]);
 
@@ -195,7 +207,13 @@ export default async function DestinoPage(props) {
         <div className="absolute bottom-0 left-0 right-0">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-5">
             <Link href="/explorar" className="text-white/85 hover:text-white text-sm focusring">← Explorar</Link>
-            <h1 className="font-display text-4xl sm:text-5xl text-white drop-shadow mt-1">{d.nome}</h1>
+            <h1 className="font-display text-4xl sm:text-5xl text-white drop-shadow mt-1 flex items-center gap-3">
+              {flagUrl(d.code) && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={flagUrl(d.code)} alt="" width="48" height="36" loading="lazy" className="rounded-[3px] shadow-md ring-1 ring-white/40 shrink-0" />
+              )}
+              <span>{d.nome}</span>
+            </h1>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <p className="text-white/90 text-sm">{d.estacao}</p>
               <TravelFitScore destino={d} compact />

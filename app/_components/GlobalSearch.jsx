@@ -2,6 +2,7 @@
 import { useState, useMemo, useRef, useEffect, useId } from 'react';
 import { useRouter } from 'next/navigation';
 import { DESTINOS } from '../_lib/destinos.js';
+import { flagUrl } from '../_lib/flags.js';
 
 export function GlobalSearch() {
   const [q, setQ] = useState('');
@@ -63,7 +64,13 @@ export function GlobalSearch() {
                 onClick={() => go(d)}
                 className={`w-full text-left px-3 py-2 flex items-center justify-between gap-2 focusring ${i === ativo ? 'bg-paper2' : 'hover:bg-paper2'}`}
               >
-                <span className="text-ink text-sm font-medium truncate">{d.nome}</span>
+                <span className="text-ink text-sm font-medium truncate flex items-center gap-2 min-w-0">
+                  {flagUrl(d.code) && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={flagUrl(d.code)} alt="" width="18" height="13" loading="lazy" className="rounded-[1px] ring-1 ring-line shrink-0" />
+                  )}
+                  <span className="truncate">{d.nome}</span>
+                </span>
                 <span className="text-[11px] text-inksoft shrink-0">{d.regiao}</span>
               </button>
             </li>

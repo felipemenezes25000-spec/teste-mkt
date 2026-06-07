@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FavoriteButton } from './FavoriteButton.jsx';
 import { wikiThumb } from '../_lib/wikiThumb.js';
+import { flagUrl } from '../_lib/flags.js';
 import { alertaHumanoDestino, custoEstimadoDias, fitTagsDestino, mundoScoreDestino } from '../_lib/editorial.js';
 
 // Card de destino reutilizado na home, no /explorar e nos salvos. img pode ser
@@ -34,7 +35,13 @@ export function DestinoCard({ d, img }) {
         </div>
         <div className="p-4">
           <div className="flex items-center justify-between gap-2">
-            <h3 className="font-display text-xl text-ink truncate">{d.nome}</h3>
+            <h3 className="font-display text-xl text-ink flex items-center gap-2 min-w-0">
+              {flagUrl(d.code) && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={flagUrl(d.code)} alt="" width="24" height="18" loading="lazy" className="rounded-[2px] ring-1 ring-line shrink-0" />
+              )}
+              <span className="truncate">{d.nome}</span>
+            </h3>
             <span className="text-xs text-pine font-bold tnum shrink-0">US$ {d.custoDia}/dia</span>
           </div>
           <p className="mt-1 text-sm text-inksoft leading-snug line-clamp-2">{alerta}</p>
