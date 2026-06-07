@@ -20,3 +20,10 @@ coverage/
 
 # temporarios de workflow
 .tmp-*
+
+# provas de QA e dumps de pesquisa — gerar local, NÃO versionar (incham o repo)
+docs/plataforma/_proof/
+docs/plataforma/_dados/*.json
+.playwright-mcp/
+test-results/
+playwright-report/
