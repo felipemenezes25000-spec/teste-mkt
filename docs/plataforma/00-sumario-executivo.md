@@ -34,7 +34,7 @@
 | 11 | [Prompt de Implementação](11-prompt-de-implementacao.md) | prompt pronto pro Cursor/Claude, no estilo do repo |
 | 12 | [Critérios de Qualidade](12-criterios-de-qualidade.md) | a régua de cada entrega + as 2 réguas finais |
 
-**Dados de apoio:** [matriz](02-matriz-competitiva.md) · [tabela de monetização](_dados/tabela-monetizacao.md) · [tabela de integrações](_dados/tabela-integracoes.md) · [perfis dos 37 players](players/) · [pesquisa bruta (JSON)](_dados/pesquisa-bruta.json).
+**Dados de apoio:** [matriz](02-matriz-competitiva.md) · [tabela de monetização](_dados/tabela-monetizacao.md) · [tabela de integrações](_dados/tabela-integracoes.md) · [perfis dos 37 players](players/).
 
 ---
 
