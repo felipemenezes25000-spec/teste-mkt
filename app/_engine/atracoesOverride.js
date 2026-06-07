@@ -317,6 +317,10 @@ export const ATRACOES_OVERRIDE = {
   // Ucrânia (UA)
   'UA:Palácio de Vorontsov': 'Palácio Vorontsov (Alupka)',
   'UA:Escadaria Potemkin': 'Escadaria de Potemkin',
+  'UA:Ninho de Andorinha': "Swallow's Nest",
+  'UA:Portão Dourado de Kiev': 'Golden Gate, Kyiv',
+  'UA:Túnel do Amor': 'Tunnel of Love (railway)',
+  'UA:Reserva da Biosfera do Danúbio': 'Danube Delta',
 
   // Uganda (UG)
   'UG:Parque Nacional da Floresta Impenetrável de Bwindi': 'Parque Nacional Impenetrável de Bwindi',

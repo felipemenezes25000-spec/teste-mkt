@@ -1113,9 +1113,6 @@ export const FORA_DA_ROTA_2 = {
   ],
   UA: [
     { nome: 'Cidade subterrânea de Kamianets-Podilskyi', wiki: 'Kamianets-Podilskyi', cidade: 'Kamianets-Podilskyi', fora: true },
-    { nome: 'Túnel do Amor em Klevan', wiki: 'Tunnel of Love (Ukraine)', cidade: 'Klevan', fora: true },
-    { nome: 'Montanhas dos Cárpatos ucranianos', wiki: 'Ukrainian Carpathians', cidade: 'Ivano-Frankivsk', fora: true },
-    { nome: 'Cidade velha de Lviv', wiki: 'Lviv', cidade: 'Lviv', fora: true },
     { nome: 'Reserva da Biosfera do Danúbio', wiki: 'Danube Biosphere Reserve', cidade: 'Vylkove', fora: true },
   ],
   UG: [
