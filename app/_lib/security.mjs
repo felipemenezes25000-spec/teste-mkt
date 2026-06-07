@@ -18,14 +18,18 @@
 const WIKI = 'https://*.wikipedia.org https://*.wikimedia.org https://upload.wikimedia.org';
 const SUPABASE = 'https://*.supabase.co';
 const IA_BYOK = 'https://api.openai.com https://api.groq.com https://api.anthropic.com';
+// PostHog carrega `array.js` (capture script) e envia eventos via XHR. O domínio
+// us.i.posthog.com cobre script + ingestão; us-assets cobre alguns assets estáticos.
+const POSTHOG = 'https://us.i.posthog.com https://us-assets.i.posthog.com';
 
 export function buildSecurityHeaders({ production = true, vercel = false } = {}) {
   const dev = !production;
 
-  const scriptSrc = ["'self'", "'unsafe-inline'", dev && "'unsafe-eval'"].filter(Boolean).join(' ');
+  const scriptSrc = ["'self'", "'unsafe-inline'", POSTHOG, dev && "'unsafe-eval'"].filter(Boolean).join(' ');
   const connectSrc = [
     "'self'", SUPABASE, 'wss://*.supabase.co',
     WIKI, 'https://query.wikidata.org', 'https://open.er-api.com', IA_BYOK,
+    POSTHOG,
     dev && 'ws:', dev && 'http://localhost:*',
   ].filter(Boolean).join(' ');
 
