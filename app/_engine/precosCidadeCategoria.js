@@ -1,6 +1,6 @@
 /* =============================================================================
    PRECOS por cidade x categoria (V2) - enriquecimento de atracoesPrecos.js (V1)
-   Gerado pelo workflow precos-enriquecimento-v2 (jun/2026).
+   Gerado pelo workflow precos-enriquecimento-v2 + re-verify das baixas (jun/2026).
    PRECOS_CIDADE[code][cidade] = { categoriasMeta, especialidades, passesCombo,
    gratuitosCurados, dicasEconomia, fontes, confianca }
    ESTIMATIVA de referencia. Nao editar a mao - regerar pelo workflow.
@@ -746,209 +746,547 @@ export const PRECOS_CIDADE = {
   "AF": {
     "Badakhshan": {
       "fontes": [
-        "v1-only",
-        "wikipedia:Wakhan_Corridor"
+        "en.wikivoyage.org/wiki/Wakhan_Corridor",
+        "caravanistan.com/afghanistan/wakhan-corridor",
+        "expertvagabond.com/travel-afghanistan-wakhan",
+        "takeyourbackpack.com/visit-badakhshan"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "experiencia": {
-          "melhorHorario": "julho a setembro é a única janela praticável (resto do ano fechado por neve)",
-          "reservaAntecipada": "obrigatoria"
+      "confianca": "media",
+      "especialidades": [
+        {
+          "slug": "corredor-wakhan",
+          "precoUSD": {
+            "min": 0,
+            "max": 5
+          },
+          "obs": "Corredor de Wakhan: tira de terra entre Tajiquistao e Paquistao, com Hindu Kush e Pamir. Acesso exige permit gratuito em Eshkashem e taxa de guia/porteiro local.",
+          "moedaLocal": "gratis (permit)",
+          "wiki": "https://en.wikipedia.org/wiki/Wakhan_Corridor"
+        },
+        {
+          "slug": "little-pamir-yurtas-kirghiz",
+          "precoUSD": {
+            "min": 15,
+            "max": 40
+          },
+          "obs": "Pamir Pequeno: planalto alpino com nomades quirguizes em yurtas, cavalos e iaques. Pernoite em yurta com familia $15-40 com refeicoes. Trek 4-7 dias com camelos/burros.",
+          "moedaLocal": "1000-3000 AFN/dia",
+          "wiki": "https://en.wikipedia.org/wiki/Little_Pamir"
+        },
+        {
+          "slug": "minas-lapis-sar-e-sang",
+          "precoUSD": {
+            "min": 0,
+            "max": 5
+          },
+          "obs": "Sar-e-Sang no vale Kokcha: minas historicas de lapis-lazuli do Afeganistao, fornecedoras do mundo antigo. Visita externa via guia; compra de pedras nos artesaos locais.",
+          "moedaLocal": "negociar com artesao",
+          "wiki": "https://en.wikipedia.org/wiki/Sar-i_Sang"
         }
-      },
-      "especialidades": [],
+      ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Paisagem do Corredor de Wakhan entre Pamir e Hindu Kush (visualização cultural)"
+        "Vista do encontro dos rios Panj e Pamir em Qala-e Panj",
+        "Vilarejos Wakhi como Sarhad-e Broghil com cha e pao no tandoor",
+        "Trekking informal pelo vale do rio Wakhan",
+        "Pontes pingvinas (footbridges) entre Wakhan afegao e Tajiquistao",
+        "Fortaleza de Qahqaha em ruinas perto de Khandud"
       ],
       "dicasEconomia": [
-        "Corredor de Wakhan exige permissões especiais e operadores locais; estimativa V1 de 800 USD reflete logística de expedição",
-        "Trekking sério para alpinistas experientes; não há infraestrutura turística regular"
-      ]
+        "Permit do Wakhan e gratuito em Eshkashem - desconfie de quem cobra",
+        "Cavalos/burros para o trek 15-25 USD/dia com tratador",
+        "Pegue van compartilhada Fayzabad->Eshkashem ao inves de 4x4 privado"
+      ],
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "junho a setembro (resto do ano: neve)",
+          "reservaAntecipada": "recomendada"
+        },
+        "historico": {
+          "melhorHorario": "verao para acessar minas e fortes",
+          "reservaAntecipada": "recomendada"
+        },
+        "atracao": {
+          "melhorHorario": "agosto para festivais nomades",
+          "reservaAntecipada": "recomendada"
+        }
+      }
     },
     "Bamiyan": {
       "fontes": [
-        "v1-only",
-        "wikipedia:Bamyan",
-        "unesco:Bamiyan_Cultural_Landscape"
+        "whc.unesco.org/en/list/208",
+        "en.wikipedia.org/wiki/Buddhas_of_Bamiyan",
+        "koryogroup.com/blog/bamiyan-afghanistan",
+        "daryaexpeditions.com/buddhas-of-bamiyan"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "manhã cedo evita vento forte e temperaturas extremas",
-          "reservaAntecipada": "nao"
+      "confianca": "alta",
+      "especialidades": [
+        {
+          "slug": "nichos-buda-bamiyan",
+          "precoUSD": {
+            "min": 6,
+            "max": 8
+          },
+          "obs": "Nichos dos Budas de Bamiyan (55m e 38m, destruidos em 2001) e cavernas budistas dos sec. III-V. Patrimonio UNESCO. Ingresso ~500 AFN inclui folheto e visita aos dois nichos.",
+          "moedaLocal": "500 AFN",
+          "wiki": "https://en.wikipedia.org/wiki/Buddhas_of_Bamiyan"
         },
-        "historico": {
-          "melhorHorario": "manhã ou final da tarde para luz suave nas falésias",
-          "reservaAntecipada": "nao"
+        {
+          "slug": "band-e-amir",
+          "precoUSD": {
+            "min": 3,
+            "max": 6
+          },
+          "obs": "Parque Nacional Band-e Amir (primeiro do Afeganistao) com seis lagos turquesa em barragens naturais de travertino. Day trip 2h-3h de Bamiyan.",
+          "moedaLocal": "200-400 AFN",
+          "wiki": "https://en.wikipedia.org/wiki/Band-e_Amir_National_Park"
+        },
+        {
+          "slug": "shahr-e-gholghola",
+          "precoUSD": {
+            "min": 2,
+            "max": 5
+          },
+          "obs": "Cidade dos Gritos: ruinas da fortaleza saqueada por Genghis Khan em 1221. Por do sol espetacular sobre o vale.",
+          "moedaLocal": "150-300 AFN",
+          "wiki": "https://en.wikipedia.org/wiki/Shahr-e_Gholghola"
         }
-      },
-      "especialidades": [],
+      ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Nichos vazios dos Budas de Bamiyan (vista externa é gratuita)",
-        "Vale e falésias de Bamiyan com vista panorâmica do sítio UNESCO",
-        "Caminhada pelas margens dos lagos de Band-e Amir"
+        "Mirante do vale de Bamiyan a partir da estrada de Foladi",
+        "Bazar local de Bamiyan com tapetes hazara e pao tandoori",
+        "Ruinas de Shahr-e Zuhak (Cidade Vermelha) vistas da rodovia",
+        "Lago Band-e Haibat (acesso externo) ao por do sol",
+        "Festival da Seda (anual, Setembro) com musica e gastronomia hazara"
       ],
       "dicasEconomia": [
-        "Afeganistão está sob alerta máximo de viagem (Itamaraty, US State Dept, UK FCDO) — pesquisa cultural, não recomendação turística",
-        "Não há infraestrutura turística regular operando publicamente; preços V1 são históricos pré-2021 e podem não refletir realidade atual"
-      ]
+        "Pegue voo de Cabul somente se a estrada estiver perigosa; van compartilhada custa 1/5 do voo",
+        "Hospedagem em guesthouses comunitarias hazara ($10-15/noite com refeicoes)",
+        "Combine Budas + Band-e Amir num unico dia compartilhando 4x4 com outros viajantes"
+      ],
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "manha cedo ou fim de tarde para luz suave",
+          "reservaAntecipada": "nao"
+        },
+        "natureza": {
+          "melhorHorario": "meio-dia para cor turquesa nos lagos",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "primavera ou outono",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Cabul": {
       "fontes": [
-        "v1-only",
-        "wikipedia:Babur_Gardens",
-        "wikipedia:National_Museum_of_Afghanistan"
+        "wikipedia.org/wiki/Tourism_in_Afghanistan",
+        "tripadvisor.com/Kabul",
+        "realtalktravel.com/afghanistan-travel-budget",
+        "theglobetrottingdetective.com/afghanistan-kabul-travel-guide"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "parque": {
-          "melhorHorario": "manhã para escapar do calor; sextas são lotadas com famílias locais",
-          "reservaAntecipada": "nao"
+      "confianca": "media",
+      "especialidades": [
+        {
+          "slug": "museu-nacional-afeganistao",
+          "precoUSD": {
+            "min": 6,
+            "max": 8
+          },
+          "obs": "Museu Nacional do Afeganistao com colecao Bactrian Gold, esculturas budistas e artefatos islamicos. Entrada ~500 AFN. Taxa extra para celular/camera.",
+          "moedaLocal": "500 AFN",
+          "wiki": "https://en.wikipedia.org/wiki/National_Museum_of_Afghanistan"
         },
-        "museu": {
-          "melhorHorario": "verificar abertura — Museu Nacional teve operação intermitente",
-          "reservaAntecipada": "nao"
+        {
+          "slug": "jardins-de-babur",
+          "precoUSD": {
+            "min": 2,
+            "max": 4
+          },
+          "obs": "Bagh-e Babur, jardim historico mughal com tumulo de Babur, primeiro imperador mughal. Restaurado pelo Aga Khan Trust. Vista panoramica de Cabul.",
+          "moedaLocal": "150-250 AFN",
+          "wiki": "https://en.wikipedia.org/wiki/Gardens_of_Babur"
         },
-        "passeio": {
-          "melhorHorario": "manhã cedo; evitar grandes aglomerações",
-          "reservaAntecipada": "nao"
-        },
-        "natureza": {
-          "melhorHorario": "manhã ou final de tarde",
-          "reservaAntecipada": "nao"
+        {
+          "slug": "darul-aman-bala-hissar",
+          "precoUSD": {
+            "min": 0,
+            "max": 3
+          },
+          "obs": "Palacio Darul Aman (recem-restaurado) e fortaleza Bala Hissar (1.500 anos). Acesso externo geralmente livre; conferir restricoes locais.",
+          "moedaLocal": "gratis ou doacao",
+          "wiki": "https://en.wikipedia.org/wiki/Darul_Aman_Palace"
         }
-      },
-      "especialidades": [],
+      ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Vista panorâmica de Cabul a partir das colinas TV Hill ou Bibi Mahro",
-        "Bazar e cidade velha de Cabul (Murad Khani) — caminhada cultural",
-        "Margens do Lago Qargha aos finais de semana"
+        "Bazar de Cabul (Mandai e Chicken Street) para artesanato e tapetes",
+        "Vista panoramica desde a colina TV Hill (Koh-e Asmai)",
+        "Mesquita Shah-Do-Shamshira as margens do rio Cabul",
+        "Mausoleu do Rei Nadir Shah na colina Tepe Maranjan",
+        "Passeio externo pelas muralhas da fortaleza Bala Hissar"
       ],
       "dicasEconomia": [
-        "Afeganistão está sob alerta máximo de viagem; entrada/permanência não recomendada",
-        "Preços V1 (Jardins 3 USD, Museu 4 USD) são pré-2021 e podem estar desatualizados ou inacessíveis"
-      ]
+        "Pague em afegane (AFN); dolar costuma sair pior em sitios e taxis",
+        "Negocie taxi por trajeto fechado; corridas curtas ~50-100 AFN",
+        "Viaje por terra com guia local de Cabul para Bamiyan/Panjshir e divida custos"
+      ],
+      "categoriasMeta": {
+        "museu": {
+          "melhorHorario": "manha (9h-11h), fecha as 15h-16h",
+          "reservaAntecipada": "nao"
+        },
+        "religioso": {
+          "melhorHorario": "fora dos horarios de oracao",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "manha, evitar sol forte do meio-dia",
+          "reservaAntecipada": "nao"
+        },
+        "parque": {
+          "melhorHorario": "fim de tarde para por do sol",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Ghor": {
       "fontes": [
-        "v1-only",
-        "unesco:Minaret_of_Jam"
+        "whc.unesco.org/en/list/211",
+        "en.wikipedia.org/wiki/Minaret_of_Jam",
+        "takeyourbackpack.com/visit-ghor-province",
+        "daryaexpeditions.com/visit-minaret-of-jam"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "acesso depende de condições de segurança e estrada",
-          "reservaAntecipada": "nao"
+      "confianca": "media",
+      "especialidades": [
+        {
+          "slug": "minarete-de-jam",
+          "precoUSD": {
+            "min": 3,
+            "max": 8
+          },
+          "obs": "Minarete de Jam (62-65m, c.1190), Patrimonio UNESCO em Perigo. Tijolos baked com caligrafia Kufic e Naskhi. Acesso super remoto, 4x4 obrigatorio. Taxa simbolica ao guarda local.",
+          "moedaLocal": "200-500 AFN doacao",
+          "wiki": "https://en.wikipedia.org/wiki/Minaret_of_Jam"
+        },
+        {
+          "slug": "vale-hari-rud",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Vale do rio Hari Rud no caminho ao Jam: paisagem de Hindu Kush, vilarejos remotos, ruinas de fortificacoes Ghuridas. Sem taxa, mas exige logistica de tour.",
+          "moedaLocal": "gratis",
+          "wiki": "https://en.wikipedia.org/wiki/Hari_(Afghanistan)"
+        },
+        {
+          "slug": "chaghcharan-bazar",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Capital provincial Chaghcharan (Firozkoh): bazar local hazara/aimaq, pao e cha tradicionais, base para excursao ao Minarete. Sem ingresso.",
+          "moedaLocal": "gratis",
+          "wiki": "https://en.wikipedia.org/wiki/Chaghcharan"
         }
-      },
-      "especialidades": [],
+      ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Minarete de Jam — Patrimônio UNESCO em Lista de Perigo, vista externa do monumento de 65m"
+        "Vista do Minarete de Jam encaixado entre montanhas",
+        "Cemiterio judeu medieval proximo ao Minarete (relicaria de Turquoise Mountain)",
+        "Bazar e mesquita de Chaghcharan/Firozkoh",
+        "Trekking informal pelas margens do rio Hari Rud",
+        "Vilarejos aimaq no caminho com hospitalidade tradicional"
       ],
       "dicasEconomia": [
-        "Região remota sem infraestrutura turística; visita não recomendada para viajantes — pesquisa cultural apenas"
-      ]
+        "Va com agencia especializada (Untamed Borders, Koryo, Darya) - 4x4 sozinho sai caro",
+        "Combine com Bamiyan/Herat no mesmo roteiro para diluir custo do transporte",
+        "Hospedagem em casas locais via guia sai $10-20 com refeicoes incluidas"
+      ],
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "primavera (mar-mai) e outono (set-nov)",
+          "reservaAntecipada": "recomendada"
+        },
+        "natureza": {
+          "melhorHorario": "evitar inverno (estradas fechadas)",
+          "reservaAntecipada": "recomendada"
+        }
+      }
     },
     "Herat": {
       "fontes": [
-        "v1-only",
-        "wikipedia:Herat",
-        "wikipedia:Herat_Citadel"
+        "lonelyplanet.com/afghanistan/herat/attractions/friday-mosque",
+        "en.wikipedia.org/wiki/Great_Mosque_of_Herat",
+        "adventuresoflilnicki.com/herat-travel-guide",
+        "takeyourbackpack.com/visit-herat-citadel"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manhã ou final de tarde por causa do calor extremo no verão",
-          "reservaAntecipada": "nao"
+      "confianca": "alta",
+      "especialidades": [
+        {
+          "slug": "mesquita-jami-herat",
+          "precoUSD": {
+            "min": 0,
+            "max": 2
+          },
+          "obs": "Masjid Jami (Mesquita de Sexta) de Herat, 800+ anos, considerada o melhor edificio islamico do Afeganistao. Entrada gratis; oficina de azulejos aceita doacao.",
+          "moedaLocal": "gratis (doacao)",
+          "wiki": "https://en.wikipedia.org/wiki/Great_Mosque_of_Herat"
         },
-        "religioso": {
-          "melhorHorario": "fora dos horários de oração; evitar sextas",
-          "reservaAntecipada": "nao"
+        {
+          "slug": "citadela-herat",
+          "precoUSD": {
+            "min": 6,
+            "max": 10
+          },
+          "obs": "Citadela de Herat (Qala-i-Ikhtyaruddin), origem na epoca de Alexandre o Grande (330 a.C.). Entrada 500 AFN + 250 AFN camera. Inclui Museu de Comunicacoes. Fecha sexta.",
+          "moedaLocal": "500 AFN (+250 camera)",
+          "wiki": "https://en.wikipedia.org/wiki/Herat_Citadel"
+        },
+        {
+          "slug": "minaretes-musalla",
+          "precoUSD": {
+            "min": 0,
+            "max": 2
+          },
+          "obs": "Minaretes do complexo Musalla de Gawhar Shad (sec. XV, dinastia timurida). Cinco minaretes tortos sobreviveram a guerras e terremotos. Acesso externo livre.",
+          "moedaLocal": "gratis",
+          "wiki": "https://en.wikipedia.org/wiki/Musalla_Complex"
         }
-      },
-      "especialidades": [],
+      ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Pátio externo da Grande Mesquita de Herat (Masjid Jami) com mosaicos de azulejos azuis",
-        "Ruínas dos minaretes do complexo Musalla de Gawhar Shad",
-        "Bazar antigo de Herat com artesanato tradicional"
+        "Mesquita Jami de Herat com oficina de azulejos turquesa",
+        "Bazar coberto de Herat (Chahar Suq) com vidro azul soprado",
+        "Mausoleu de Gawhar Shad (rainha timurida) perto dos minaretes",
+        "Tumba do poeta sufi Khwaja Abdullah Ansari em Gazur Gah",
+        "Caminhada ao longo das muralhas externas da Citadela ao por do sol"
       ],
       "dicasEconomia": [
-        "Vestimenta islâmica conservadora obrigatória em toda a cidade",
-        "Preços V1 (Cidadela 2 USD) são históricos pré-2021"
-      ]
+        "Evite a taxa de camera de 250 AFN deixando o celular guardado e pedindo foto ao guia",
+        "Visite Mesquita Jami de manha (gratis) e Citadela a tarde no mesmo dia",
+        "Hospedagem na Cidade Velha custa metade do preco dos hoteis modernos"
+      ],
+      "categoriasMeta": {
+        "religioso": {
+          "melhorHorario": "manha cedo, evitar oracao do meio-dia",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "10h-16h (citadela fecha 16h e sextas)",
+          "reservaAntecipada": "nao"
+        },
+        "museu": {
+          "melhorHorario": "manha (incluido na citadela)",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Mazar-i-Sharif": {
       "fontes": [
-        "v1-only",
-        "wikipedia:Shrine_of_Ali"
+        "theglobetrottingdetective.com/afghanistan-mazar-sharif-city",
+        "koryogroup.com/blog/mazar-mazar-i-sharif",
+        "tripadvisor.com/Blue_Mosque-Mazar_i_Sharif",
+        "trek.zone/en/afghanistan/places/229394"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "religioso": {
-          "melhorHorario": "evitar sextas-feiras (oração principal); manhã para luz nos azulejos azuis",
-          "reservaAntecipada": "nao"
+      "confianca": "alta",
+      "especialidades": [
+        {
+          "slug": "mesquita-azul-hazrat-ali",
+          "precoUSD": {
+            "min": 0,
+            "max": 5
+          },
+          "obs": "Mesquita Azul (Santuario de Hazrat Ali), cupulas turquesa e milhares de pombos brancos. Patio livre; nao-muculmanos NAO entram no edificio do santuario. Doacao 350 AFN.",
+          "moedaLocal": "doacao 200-350 AFN",
+          "wiki": "https://en.wikipedia.org/wiki/Shrine_of_Ali"
+        },
+        {
+          "slug": "balkh-mae-das-cidades",
+          "precoUSD": {
+            "min": 2,
+            "max": 5
+          },
+          "obs": "Ruinas de Balkh (Bactra), Mae das Cidades, com mesquita No Gonbad (sec. IX, mais antiga do Afeganistao) e tumba de Rabia Balkhi. 30 min de Mazar.",
+          "moedaLocal": "100-300 AFN",
+          "wiki": "https://en.wikipedia.org/wiki/Balkh"
+        },
+        {
+          "slug": "buzkashi-mazar",
+          "precoUSD": {
+            "min": 0,
+            "max": 3
+          },
+          "obs": "Buzkashi (esporte equestre nacional do Afeganistao) com partidas as sextas no inverno em campo aberto perto da cidade. Espetaculo gratuito.",
+          "moedaLocal": "gratis",
+          "wiki": "https://en.wikipedia.org/wiki/Buzkashi"
         }
-      },
-      "especialidades": [],
+      ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Santuário Azul de Ali (Hazrat Ali Mazar) — vista externa dos icônicos azulejos turquesa",
-        "Praça em frente ao santuário com pombos brancos (símbolo da cidade)"
+        "Patio externo da Mesquita Azul ao amanhecer com pombos brancos",
+        "Festival Nowruz (21 marco) em Mazar com Jhanda Bala na Mesquita Azul",
+        "Bazar de Mazar para tapetes turcomenos e seda",
+        "Ruinas e muralhas de Balkh com mausoleu de Khwaja Parsa",
+        "Partidas de Buzkashi as sextas no inverno"
       ],
       "dicasEconomia": [
-        "Vestimenta islâmica conservadora obrigatória; mulheres cobrem cabelo e corpo todo",
-        "Não-muçulmanos têm acesso limitado ao interior do santuário"
-      ]
+        "Pague em afegane; nao-muculmanos doam apenas se quiserem entrar em areas anexas",
+        "Taxi compartilhado para Balkh ~50 AFN ida e volta",
+        "Hospede-se perto do santuario para evitar gasto com taxi 24h"
+      ],
+      "categoriasMeta": {
+        "religioso": {
+          "melhorHorario": "apos oracoes, evitar sextas ao meio-dia",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "manha em Balkh para fugir do calor",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "primavera (Nowruz) e outono",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Panjshir": {
       "fontes": [
-        "v1-only",
-        "wikipedia:Ahmad_Shah_Massoud"
+        "en.wikivoyage.org/wiki/Panjshir_Valley",
+        "roughguides.com/articles/on-the-road-in-panjshir-afghanistan",
+        "globalgaz.com/visiting-the-tomb-of-ahmad-shah-massoud",
+        "adventuresoflilnicki.com/panjshir-valley-afghanistan"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "primavera ou início do outono para clima ameno no vale",
-          "reservaAntecipada": "nao"
+      "confianca": "alta",
+      "especialidades": [
+        {
+          "slug": "tumulo-massoud-bazarak",
+          "precoUSD": {
+            "min": 0,
+            "max": 3
+          },
+          "obs": "Mausoleu de Ahmad Shah Massoud em Bazarak: cupula de pedra e vidro com tumba de marmore negro inscrita com versos do Corao. Vista panoramica do vale. Doacao.",
+          "moedaLocal": "gratis (doacao)",
+          "wiki": "https://en.wikipedia.org/wiki/Ahmad_Shah_Massoud"
+        },
+        {
+          "slug": "tanques-sovieticos-panjshir",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Campo de tanques sovieticos enferrujados na entrada do vale, relembrando a resistencia de Massoud nos anos 80. Foto stop classico, sem ingresso.",
+          "moedaLocal": "gratis",
+          "wiki": "https://en.wikipedia.org/wiki/Panjshir_Valley"
+        },
+        {
+          "slug": "rio-panjshir-pesca",
+          "precoUSD": {
+            "min": 0,
+            "max": 10
+          },
+          "obs": "Rio Panjshir com agua glacial cristalina: pesca de truta, banho em verao e kebab em chaikhana a beira-rio. Refeicao tipica 200-400 AFN.",
+          "moedaLocal": "200-700 AFN",
+          "wiki": "https://en.wikipedia.org/wiki/Panjshir_River"
         }
-      },
-      "especialidades": [],
+      ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Mausoléu de Ahmad Shah Massoud com vista para o Vale do Panjshir",
-        "Paisagem do Vale do Panjshir entre montanhas Hindu Kush (referência cultural)"
+        "Mausoleu de Massoud com vista do vale",
+        "Campo de tanques sovieticos na entrada de Panjshir",
+        "Caminhada pelas vilas do vale com mineracao de esmeraldas (Khenj)",
+        "Rio Panjshir para banho e foto no verao",
+        "Lago Anjuman no alto vale (acesso 4x4)"
       ],
       "dicasEconomia": [
-        "Vale do Panjshir foi epicentro de conflitos recentes; acesso restrito e situação volátil",
-        "Visita não recomendada — pesquisa cultural sobre figura histórica de Massoud apenas"
-      ]
+        "Day trip de Cabul: taxi privado fechado $40-50 ida e volta",
+        "Coma em chaikhana a beira-rio (kebab + pao + cha por 200-300 AFN)",
+        "Use guia local de Bazarak ao inves de tour fechado de Cabul"
+      ],
+      "categoriasMeta": {
+        "religioso": {
+          "melhorHorario": "manha ou fim de tarde, evitar sextas",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "qualquer hora do dia",
+          "reservaAntecipada": "nao"
+        },
+        "natureza": {
+          "melhorHorario": "abril-maio e setembro-outubro",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Parwan": {
       "fontes": [
-        "v1-only",
-        "wikipedia:Salang_Pass"
+        "en.wikipedia.org/wiki/Parwan_Province",
+        "takeyourbackpack.com/visit-parwan",
+        "theglobetrottingdetective.com/afghanistan-parwan-day-trip",
+        "trek.zone/en/afghanistan/places/1077/bagram"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "verão (maio-setembro); inverno é frequentemente fechado por neve e avalanches",
-          "reservaAntecipada": "nao"
+      "confianca": "media",
+      "especialidades": [
+        {
+          "slug": "estupa-topdara",
+          "precoUSD": {
+            "min": 0,
+            "max": 3
+          },
+          "obs": "Estupa Topdara perto de Charikar (sec. II-III, Imperio Kushan), uma das estupas budistas mais bem preservadas do Afeganistao. Restaurada com apoio internacional. Doacao.",
+          "moedaLocal": "100-200 AFN doacao",
+          "wiki": "https://en.wikipedia.org/wiki/Topdara_Stupa"
+        },
+        {
+          "slug": "sitio-bagram",
+          "precoUSD": {
+            "min": 0,
+            "max": 5
+          },
+          "obs": "Bagram: ruinas arqueologicas Aquemenida-Greco-Bactriana-Kushan, origem do tesouro de Bagram (marfins indianos, vidros romanos). Acesso restrito pela base militar.",
+          "moedaLocal": "negociar acesso",
+          "wiki": "https://en.wikipedia.org/wiki/Bagram"
+        },
+        {
+          "slug": "colina-golghondi",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Colina Golghondi em Charikar: arvores de Juda (Judas trees) floridas em rosa-purpura na primavera, parada classica entre Cabul e Salang. Sem ingresso.",
+          "moedaLocal": "gratis",
+          "wiki": "https://en.wikipedia.org/wiki/Charikar"
         }
-      },
-      "especialidades": [],
+      ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Vista panorâmica das montanhas Hindu Kush no Passo de Salang (3.878m)"
+        "Bazar Central de Charikar com nozes, frutas secas, texteis",
+        "Mesquita Jami de Charikar (arquitetura local)",
+        "Vista da passagem de Salang vindo de Cabul (foto stop)",
+        "Colina Golghondi na primavera (abril-maio)",
+        "Vista externa das ruinas de Bagram desde a estrada"
       ],
       "dicasEconomia": [
-        "Estrada do Passo de Salang é a única via norte-sul; sujeita a fechamentos por avalanche",
-        "Sem infraestrutura turística; região de trânsito apenas"
-      ]
+        "Day trip de Cabul (1h30) com taxi compartilhado: $15-25 ida e volta",
+        "Combine Topdara + bazar de Charikar num unico dia (gratis ou simbolico)",
+        "Coma kabuli pulao em casa de cha local em Charikar (~150 AFN)"
+      ],
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "manha, evitar calor do meio-dia",
+          "reservaAntecipada": "nao"
+        },
+        "religioso": {
+          "melhorHorario": "fora dos horarios de oracao",
+          "reservaAntecipada": "nao"
+        },
+        "natureza": {
+          "melhorHorario": "abril-maio para arvores de Juda em flor",
+          "reservaAntecipada": "nao"
+        }
+      }
     }
   },
   "AG": {
@@ -4869,27 +5207,68 @@ export const PRECOS_CIDADE = {
       "confianca": "media"
     },
     "Jajce": {
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manha; cascata urbana fica melhor antes das 11h",
-          "reservaAntecipada": "nao"
+      "fontes": [
+        "en.wikivoyage.org/wiki/Jajce",
+        "tourismbih.com",
+        "wander-lush.org"
+      ],
+      "confianca": "alta",
+      "especialidades": [
+        {
+          "slug": "cachoeira-pliva-no-centro",
+          "precoUSD": {
+            "min": 4,
+            "max": 6
+          },
+          "moedaLocal": "8-10 BAM (plataforma); 0 KM por cima",
+          "obs": "Queda de ~22m do rio Pliva caindo no Vrbas no centro da cidade muralhada. Plataforma inferior 8-10 KM; vista de cima e gratis. Off-season (out-abr) adulto 2 EUR."
+        },
+        {
+          "slug": "moinhos-pliva-lagos",
+          "precoUSD": {
+            "min": 0,
+            "max": 2
+          },
+          "moedaLocal": "0-4 KM",
+          "obs": "Conjunto de 20+ pequenos moinhos d'agua de madeira (mlincici) entre o lago Veliko e Malo Plivsko, 5,5 km a oeste; visita externa gratis."
+        },
+        {
+          "slug": "catacumbas-jajce-medievais",
+          "precoUSD": {
+            "min": 1,
+            "max": 3
+          },
+          "moedaLocal": "2-5 BAM",
+          "obs": "Camara funeraria subterranea medieval esculpida na rocha, unica do tipo na regiao."
         }
-      },
-      "especialidades": [],
+      ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Mirante da cascata Pliva no centro de Jajce (sem ingresso, vista panoramica)",
-        "Lagos Pliva e moinhos de agua tradicionais (~5 km do centro)"
+        "Vista da cachoeira Pliva pelo mirante superior (gratis)",
+        "Fortaleza de Jajce no topo da cidade (entrada gratis na maior parte do ano)",
+        "Lagos Pliva: trilha e nado no verao (gratis)",
+        "Museu AVNOJ por fora + bairro historico murado",
+        "Mitreu romano e Igreja de Sao Lucas (exterior)"
       ],
       "dicasEconomia": [
-        "Catacumbas e fortaleza tem ingressos baratos (~3-5 EUR cada); combinar no mesmo dia",
-        "Pensoes familiares no centro saem por 25-35 EUR a noite com cafe"
+        "Combine entrada da cachoeira + catacumbas + fortaleza no mesmo dia pra economizar deslocamento.",
+        "Pegue van compartilhada Sarajevo-Jajce-Travnik (~25-30 EUR ida-volta) em vez de tour privado.",
+        "Fora da alta temporada (out-abr) ingresso da cachoeira cai pra 2 EUR adulto."
       ],
-      "fontes": [
-        "v1-only",
-        "wikivoyage:Jajce"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "manha (luz lateral na cachoeira)",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "tarde",
+          "reservaAntecipada": "nao"
+        },
+        "museu": {
+          "melhorHorario": "manha",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Mostar": {
       "categoriasMeta": {
@@ -7306,149 +7685,156 @@ export const PRECOS_CIDADE = {
   },
   "BI": {
     "Bujumbura": {
-      "categoriasMeta": {
-        "museu": {
-          "melhorHorario": "manha 9h-11h evita calor e tem mais luz nas exposicoes ao ar livre",
-          "reservaAntecipada": "nao"
-        },
-        "natureza": {
-          "melhorHorario": "manha cedo 6h-9h ou final de tarde 16h-18h para ver hipopotamos e crocodilos ativos",
-          "reservaAntecipada": "recomendada"
-        },
-        "historico": {
-          "melhorHorario": "final de tarde no Mausoleu pega o por do sol sobre o lago Tanganyika",
-          "reservaAntecipada": "nao"
-        },
-        "passeio": {
-          "melhorHorario": "manha ou fim de tarde evita o sol forte do meio-dia",
-          "reservaAntecipada": "nao"
-        },
-        "atracao": {
-          "melhorHorario": "abertura ou ultimas 2h evita calor e fluxo de grupos locais",
-          "reservaAntecipada": "nao"
-        }
-      },
+      "fontes": [
+        "wikivoyage.org/Bujumbura",
+        "iwacu-burundi.org (Musee Vivant)",
+        "tripadvisor Bujumbura",
+        "wikipedia Tourism in Burundi"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "tambores-reais-burundi",
+          "slug": "musee-vivant",
           "precoUSD": {
-            "min": 15,
-            "max": 30
+            "min": 1.7,
+            "max": 2
           },
-          "moedaLocal": "40000-85000 BIF",
-          "obs": "Apresentacao dos tambores reais (UNESCO 2014) costuma ocorrer em eventos culturais ou via operadores. Reservar com 1-2 dias de antecedencia atraves de agencia local.",
-          "wiki": "Ritual dance of the royal drum"
+          "obs": "Museu vivo a ceu aberto que recria aldeia tradicional burundi com casas, fauna local (crocodilos, cobras, leopardo) e demonstracoes culturais. Estrangeiro paga 5.000 BIF.",
+          "moedaLocal": "5.000 BIF (adulto estrangeiro)",
+          "wiki": "Living Museum of Bujumbura"
         },
         {
-          "slug": "passeio-de-barco-tanganyika",
+          "slug": "rusizi-national-park",
           "precoUSD": {
-            "min": 40,
-            "max": 100
+            "min": 7,
+            "max": 10
           },
-          "moedaLocal": "115000-285000 BIF",
-          "obs": "Barco no lago Tanganyika para avistar hipopotamos e ver vilarejos pesqueiros. Negociar direto na praia com pescadores sai mais barato que operador.",
+          "obs": "Parque na foz do rio Rusizi, 15 km da cidade. Safari de carro com guia para ver hipopotamos, crocodilos e aves. Taxa de 20.000 BIF + guia/transporte recomendado.",
+          "moedaLocal": "20.000 BIF entrada",
+          "wiki": "Rusizi National Park"
+        },
+        {
+          "slug": "praias-lago-tanganica",
+          "precoUSD": {
+            "min": 0,
+            "max": 5
+          },
+          "obs": "Praias de areia branca no segundo lago mais profundo do mundo. Saga Beach e Bora Bora Beach sao gratuitas; alguns clubes cobram consumacao minima ou pequena taxa.",
+          "moedaLocal": "0 a 15.000 BIF",
           "wiki": "Lake Tanganyika"
-        },
-        {
-          "slug": "jantar-peixe-mukeke-grelhado",
-          "precoUSD": {
-            "min": 8,
-            "max": 20
-          },
-          "moedaLocal": "22000-57000 BIF",
-          "obs": "Mukeke (peixe local do Tanganyika) grelhado nos restaurantes a beira-lago em Saga Plage. Especialidade absoluta de Bujumbura.",
-          "wiki": ""
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Saga Plage no fim de tarde com pescadores recolhendo redes a partir das 17h",
-        "Mercado Central (Marche Central) para sentir o pulso da cidade entre tecidos, especiarias e comida de rua",
-        "Mausoleu do Principe Louis Rwagasore com vista panoramica de Bujumbura e do lago (entrada gratis)",
-        "Passeio a pe pelo centro com a Catedral Regina Mundi e a avenida principal",
-        "Por do sol sobre o lago Tanganyika a partir dos bares da orla"
+        "Caminhar pelo centro colonial e ver a Casa do Chefe dos Correios e arquitetura francesa",
+        "Praias publicas do lago Tanganica (Saga Beach, Bora Bora) com por do sol sobre o Congo",
+        "Mercado Central de Bujumbura para artesanato, tecidos e produtos frescos",
+        "Centro Cultural Islamico e bairro asiatico para observar a vida local",
+        "Monumento da Unidade Nacional no morro acima da cidade com vista panoramica"
       ],
       "dicasEconomia": [
-        "Cambio em casas de cambio na avenida principal e melhor que aeroporto. Levar USD em notas novas (pos 2013) e nao danificadas.",
-        "Taxi-motos (boda boda) sao baratos para distancias curtas. Sempre combinar o preco antes (geralmente 2000-5000 BIF).",
-        "Comer prato do dia em maquis locais sai 3000-8000 BIF contra 15000+ nos restaurantes para estrangeiros.",
-        "Visto on-arrival custa cerca de 90 USD; conferir exigencia de carta-convite antes do embarque para evitar deportacao."
+        "Negocie taxis colectivos (taxi-velo e taxi-moto) em vez de carros; trajetos curtos saem por 1.000-2.000 BIF",
+        "Coma nos buvettes e barracas locais (brochettes, mukeke do lago) por 1-3 USD em vez de hoteis internacionais",
+        "Junte-se a outros viajantes para dividir 4x4 e guia ate Rusizi NP, que e o gasto fixo mais alto"
       ],
-      "fontes": [
-        "wikivoyage:Bujumbura",
-        "wikipedia:Tourism_in_Burundi",
-        "lonelyplanet.com/burundi/bujumbura",
-        "tripadvisor.com/Attractions-Bujumbura",
-        "burunditravel.bi"
-      ],
-      "confianca": "baixa"
-    },
-    "Gitega": {
       "categoriasMeta": {
         "museu": {
-          "melhorHorario": "manha 9h-12h para evitar calor da tarde no museu sem ar-condicionado",
-          "reservaAntecipada": "nao"
-        },
-        "historico": {
-          "melhorHorario": "manha ou final de tarde para apresentacao dos tambores em Gishora",
-          "reservaAntecipada": "recomendada"
-        },
-        "religioso": {
-          "melhorHorario": "manha cedo evita calor; respeitar horarios de cerimonia",
+          "melhorHorario": "Manha 9h-11h, evita calor do meio-dia",
           "reservaAntecipada": "nao"
         },
         "natureza": {
-          "melhorHorario": "manha 7h-10h com clima mais ameno e neblina nas colinas",
+          "melhorHorario": "Inicio da manha ou fim da tarde para ver hipos",
+          "reservaAntecipada": "recomendada"
+        },
+        "historico": {
+          "melhorHorario": "Manha cedo antes do calor",
+          "reservaAntecipada": "nao"
+        },
+        "religioso": {
+          "melhorHorario": "Fora dos horarios de oracao",
           "reservaAntecipada": "nao"
         },
         "atracao": {
-          "melhorHorario": "abertura ou ultimas 2h evita grupos escolares",
+          "melhorHorario": "Final de tarde para por do sol no lago",
           "reservaAntecipada": "nao"
         }
-      },
+      }
+    },
+    "Gitega": {
+      "fontes": [
+        "tripadvisor National Museum of Gitega",
+        "UNESCO Royal Drummers (Gishora)",
+        "atlasobscura Gishora",
+        "takeyourbackpack Gitega guide"
+      ],
+      "confianca": "alta",
       "especialidades": [
+        {
+          "slug": "museu-nacional-gitega",
+          "precoUSD": {
+            "min": 1.7,
+            "max": 5
+          },
+          "obs": "Museu etnografico nacional com tambores reais, regalia da monarquia, fotos coloniais e utensilios. Estrangeiro paga 5.000 BIF; relatos pontuais ate 15.000 BIF com guia.",
+          "moedaLocal": "5.000 BIF (estrangeiro)",
+          "wiki": "National Museum of Gitega"
+        },
         {
           "slug": "santuario-tambores-gishora",
           "precoUSD": {
             "min": 10,
-            "max": 25
+            "max": 20
           },
-          "moedaLocal": "28000-70000 BIF",
-          "obs": "Apresentacao dos tambores sagrados de Gishora (UNESCO 2014) inclui guia e demonstracao. Avisar com antecedencia via hotel ou operador para garantir grupo de drummers no local.",
-          "wiki": "Karyenda"
+          "obs": "Sitio sagrado a 7 km do centro onde os Tambores Reais do Burundi (Patrimonio Imaterial UNESCO) tocam ao vivo. Taxa inclui visita guiada e apresentacao de tambores.",
+          "moedaLocal": "30.000-60.000 BIF com show",
+          "wiki": "Royal Drummers of Burundi"
         },
         {
-          "slug": "museu-nacional-gitega",
+          "slug": "catedral-gitega",
           "precoUSD": {
-            "min": 5,
-            "max": 8
+            "min": 0,
+            "max": 0
           },
-          "moedaLocal": "14000-23000 BIF",
-          "obs": "Museu Nacional fundado em 1955 com colecao etnografica da corte real, arqueologia e moedas coloniais. Pequeno mas o mais relevante do pais.",
-          "wiki": "National Museum of Gitega"
+          "obs": "Catedral catolica sede da arquidiocese, em estilo colonial belga. Entrada gratuita; bom ponto para entender o peso religioso da nova capital politica.",
+          "moedaLocal": "Gratis",
+          "wiki": "Roman Catholic Archdiocese of Gitega"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Caminhada pelas colinas ao redor de Gitega com vista das plantacoes de cha",
-        "Mercado central de Gitega para roupas tradicionais, cestaria e produtos frescos",
-        "Catedral de Gitega (sede da Igreja Catolica no pais) com entrada livre",
-        "Vista panoramica do morro do Santuario de Gishora antes do bilhete da apresentacao"
+        "Mercado de Gitega com cestos, tecidos e produtos das colinas centrais",
+        "Caminhada ate o topo do morro de Gitega para vista das colinas verdes do interior",
+        "Visita externa a Catedral de Gitega e ao bairro administrativo da nova capital",
+        "Igreja Anglicana e missoes historicas espalhadas pelo centro",
+        "Caminhada pelas vilas vizinhas para ver producao artesanal de tambores e cestaria"
       ],
       "dicasEconomia": [
-        "Combinar Museu Nacional + Gishora no mesmo dia: estao a cerca de 10 km um do outro, taxi compartilhado sai por 15000-25000 BIF.",
-        "Negociar performance de tambores com grupo pequeno (4-6 drummers) reduz preco vs grupo cerimonial completo.",
-        "Hospedar em Gitega e mais barato que em Bujumbura: guesthouses cobram 15-30 USD/noite.",
-        "Levar dinheiro em especie (BIF): cartao quase nao e aceito fora dos hoteis grandes."
+        "Combine museu nacional + Gishora em um so dia com taxi-moto compartilhado (7 km entre os dois) para diluir o custo do transporte",
+        "Coma bugali, ndagala e brochettes em buvettes locais por 1-2 USD em vez de hoteis voltados a ONGs",
+        "Negocie o show de tambores em grupo: o cache fixo do conjunto sai mais barato por pessoa quando dividido"
       ],
-      "fontes": [
-        "wikivoyage:Gitega",
-        "tripadvisor.com/Gitega",
-        "atlasobscura.com/places/gishora-drum-sanctuary-burundi",
-        "ich.unesco.org/en/RL/ritual-dance-of-the-royal-drum-00989",
-        "burunditravel.bi"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "museu": {
+          "melhorHorario": "Manha 9h-12h, fecha cedo",
+          "reservaAntecipada": "nao"
+        },
+        "religioso": {
+          "melhorHorario": "Fora das missas, manha",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "Manha para luz e fotos",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "Gishora: tarde, quando os tambores tocam",
+          "reservaAntecipada": "recomendada"
+        },
+        "natureza": {
+          "melhorHorario": "Inicio da manha para caminhadas pelas colinas",
+          "reservaAntecipada": "nao"
+        }
+      }
     }
   },
   "BJ": {
@@ -13594,52 +13980,64 @@ export const PRECOS_CIDADE = {
       "confianca": "media"
     },
     "Maroua": {
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "manhã cedo (6h-10h) para safári em Waza, evita calor",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "fontes": [
+        "travel.state.gov Cameroon advisory",
+        "gov.uk/foreign-travel-advice/cameroon",
+        "wildtrips.net Maroua"
+      ],
+      "confianca": "baixa",
       "especialidades": [
         {
-          "slug": "safari-waza",
+          "slug": "folere-bissap",
           "precoUSD": {
-            "min": 17,
-            "max": 100
+            "min": 1,
+            "max": 2
           },
-          "moedaLocal": "10000-60000 XAF",
-          "obs": "Entrada Parque Waza ~10000 XAF (estrangeiro) + veículo. Safari completo com 4x4 + guia + ranger sai 50000-100000 XAF/dia saindo de Maroua. Melhor época nov-abr (estação seca), animais se concentram em pontos d'água.",
-          "wiki": "Parque Nacional de Waza"
+          "obs": "Bebida gelada de hibisco vermelho típica do norte sahariano, vendida em copos ou garrafas no centro de Maroua",
+          "moedaLocal": "300-1000 XAF"
         },
         {
-          "slug": "artesanato-couro-maroua",
+          "slug": "kilishi",
           "precoUSD": {
-            "min": 3,
+            "min": 2,
+            "max": 6
+          },
+          "obs": "Carne bovina seca e apimentada estilo Sahel, especialidade do norte camaronês vendida em tiras nos mercados",
+          "moedaLocal": "1000-3500 XAF"
+        },
+        {
+          "slug": "artesanato-couro-kapsiki",
+          "precoUSD": {
+            "min": 5,
             "max": 30
           },
-          "moedaLocal": "2000-20000 XAF",
-          "obs": "Maroua é famosa pelo artesanato em couro (sandálias, bolsas, cintos) de tradição Fulani/Peul. Mercado central tem oficinas; negocie metade do preço inicial."
+          "obs": "Bolsas, cintos e sandálias de couro curtido pelos artesãos do Centre Artisanal de Maroua, com cerca de 50 mestres locais",
+          "moedaLocal": "3000-18000 XAF"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Mercado central de Maroua: cores e cultura Fulani gratuitas",
-        "Caminhada pelo rio Kaliao (no leito seco virou avenida)",
-        "Bairro dos artesãos de couro"
+        "Centre Artisanal de Maroua: visita aos ateliês de tanoeiros, oleiros e tecelões é gratuita",
+        "Grande mercado de Maroua: caminhada livre entre tecidos peul, especiarias e cestaria",
+        "Vista do Hosséré Mindif (Dente de Mindif) a 30 km: caminhada livre na base",
+        "Bairros tradicionais com casas saré de adobe e telhados cônicos",
+        "Rio Kaliao no entardecer com vista das colinas do entorno"
       ],
       "dicasEconomia": [
-        "Junte ida ao Waza com Rhumsiki/Mandara em rota 3-5 dias — corta custo de viagem em 40%",
-        "Aluguel de 4x4 com motorista em Maroua: 40000-60000 XAF/dia; melhor que tour de Yaoundé (300+ USD)",
-        "Hospede-se em hotel local (15000-30000 XAF) em vez dos voltados a missões internacionais",
-        "ATENÇÃO: Extremo Norte tem alerta de segurança (Boko Haram); confirme com embaixada antes"
+        "Atenção: governos americano e britânico mantêm Do Not Travel para o Extremo Norte (terrorismo Boko Haram, sequestros)",
+        "Sem voos comerciais regulares (Air France suspendeu em nov/2025); chegar requer logística cara",
+        "Se decidir ir, contrate guia local credenciado e siga apenas regiões liberadas no momento"
       ],
-      "fontes": [
-        "national-parks.org/cameroon/waza",
-        "takeyourbackpack.com/waza-national-park",
-        "wikipedia:Waza_National_Park",
-        "wikivoyage:Maroua"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "atracao": {
+          "melhorHorario": "Verificar situação de segurança antes; manhã com guia",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "natureza": {
+          "melhorHorario": "Estação seca nov-fev, evitar chuvas jun-set",
+          "reservaAntecipada": "obrigatoria"
+        }
+      }
     },
     "Rhumsiki": {
       "categoriasMeta": {
@@ -20428,39 +20826,80 @@ export const PRECOS_CIDADE = {
       "confianca": "media"
     },
     "Foro": {
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "Manha cedo antes das 10h por causa do calor costeiro",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "fontes": [
+        "lonelyplanet.com/eritrea/attractions/adulis-archaeological-site",
+        "againstthecompass.com/en/eritrea-itinerary",
+        "traveloeritrea.com/places-to-visit/foro-town",
+        "eritreatravelandtours.com/day-tours/massawa"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "peixe-fresco-zula",
+          "slug": "feira-quinta-feira-afar",
           "precoUSD": {
-            "min": 5,
-            "max": 10
+            "min": 0,
+            "max": 0
           },
-          "obs": "Pescado da baia de Zula servido nas tabernas da estrada",
-          "moedaLocal": "75-150 ERN"
+          "obs": "Mercado semanal toda quinta-feira; ponto de encontro do povo Afar; entrada livre, compre cha ou ingera local por menos de 2 USD",
+          "moedaLocal": "Nakfa eritreio (ERN)"
+        },
+        {
+          "slug": "ruinas-adulis-porto-axumita",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Sitio arqueologico a 6 km a leste de Foro; porto principal do Imperio Axumita; sem bilheteria nem taxa de entrada; basilica bizantina seculo V",
+          "wiki": "https://en.wikipedia.org/wiki/Adulis"
+        },
+        {
+          "slug": "confluencia-rios-haddas-aligide-comaile",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Cidade construida no encontro dos tres rios; passeio pela margem gratuito; bom para fotos do entorno arido"
         }
       ],
-      "passesCombo": [],
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "Manha cedo, antes do calor extremo",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "Quinta de manha (dia de feira)",
+          "reservaAntecipada": "nao"
+        },
+        "natureza": {
+          "melhorHorario": "Outubro a abril (estacao seca)",
+          "reservaAntecipada": "nao"
+        }
+      },
+      "passesCombo": [
+        {
+          "nome": "Tour Massawa + Adulis + Foro (1 dia)",
+          "precoUSD": 120,
+          "cobre": [
+            "Transporte privado de Massawa",
+            "Guia local em ingles ou italiano",
+            "Adulis",
+            "Foro"
+          ],
+          "economia": "Inclui licenca de viagem e fica mais barato que organizar sozinho"
+        }
+      ],
       "gratuitosCurados": [
-        "Sitio arqueologico de Adulis a ceu aberto - antigo porto do reino Aksumita",
-        "Vista da baia de Zula no caminho",
-        "Vilarejos de pescadores Afar pela estrada"
+        "Feira de quinta-feira no centro de Foro com povo Afar",
+        "Ruinas de Adulis sem taxa de entrada (a 6 km)",
+        "Caminhada pela confluencia dos tres rios",
+        "Vista para o deserto de Danakil saindo da cidade",
+        "Posto de chai (cha) local por menos de 1 USD"
       ],
       "dicasEconomia": [
-        "Combinar com tour saindo de Massawa: 50km ao sul, evita ida-e-volta de Asmara",
-        "Permite arqueologico do National Museum em Asmara antes de viajar",
-        "Compartilhar 4x4 com outros viajantes: o trecho final exige tracao"
-      ],
-      "fontes": [
-        "eritreatravelandtours.com/day-tours/massawa/archeological-wonderland-adulis-foro-and-zula",
-        "etichotels.com/journal/10-beautiful-places-to-visit-in-eritrea"
-      ],
-      "confianca": "baixa"
+        "Va num bate-volta de Massawa em vez de dormir; nao ha hotel em Foro",
+        "Combine Foro + Adulis na mesma quinta-feira pra otimizar transporte",
+        "Leve agua e lanche de Massawa; quase nada a venda em Foro"
+      ]
     },
     "Keren": {
       "categoriasMeta": {
@@ -20572,40 +21011,68 @@ export const PRECOS_CIDADE = {
       "confianca": "media"
     },
     "Nefasit": {
-      "categoriasMeta": {
-        "religioso": {
-          "melhorHorario": "Inicio manha 6h-7h para subir antes do calor (caminhada de 3-4h)",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "takeyourbackpack.com/backpacking-in-eritrea/visit-nefasit",
+        "tripadvisor.com Debre Bizen Monastery",
+        "visiteritrea.net/debre-bizen",
+        "traveloeritrea.com/places-to-visit/nefasit-town"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "cafe-eritreu-tradicional",
+          "slug": "mosteiro-debre-bizen-trilha",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Trilha de 7 km e 825 m de desnivel ate o mosteiro (2.450 m); 4+ horas; mosteiro nao cobra entrada; SOMENTE HOMENS podem entrar",
+          "wiki": "https://en.wikipedia.org/wiki/Debre_Bizen"
+        },
+        {
+          "slug": "ferrovia-italiana-asmara-nefasit",
+          "precoUSD": {
+            "min": 10,
+            "max": 25
+          },
+          "obs": "Trecho de ferrovia colonial italiana que ocasionalmente opera entre Asmara e Nefasit; experiencia historica unica; horarios irregulares",
+          "moedaLocal": "Nakfa eritreio (ERN)"
+        },
+        {
+          "slug": "mercado-central-adi-kulu",
           "precoUSD": {
             "min": 1,
-            "max": 2
+            "max": 5
           },
-          "obs": "Cerimonia do cafe nas tabernas da vila com graos torrados na hora",
-          "moedaLocal": "15-30 ERN"
+          "obs": "Mercado de rua com produtos frescos e especiarias; bairro Adi Kulu tem trilhas curtas nos morros; vista das terras altas eritreias"
         }
       ],
+      "categoriasMeta": {
+        "religioso": {
+          "melhorHorario": "Comecar trilha as 6h para evitar calor",
+          "reservaAntecipada": "recomendada"
+        },
+        "natureza": {
+          "melhorHorario": "Outubro a marco (cooler months)",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "Manha para o mercado central",
+          "reservaAntecipada": "nao"
+        }
+      },
       "passesCombo": [],
       "gratuitosCurados": [
-        "Trilha de 3-4h ate o mosteiro Debre Bizen no alto da montanha",
-        "Vistas espetaculares do planalto eritreu durante a subida",
-        "Manuscritos antigos no mosteiro (apenas homens podem entrar)"
+        "Mosteiro Debre Bizen (sem taxa, mas apenas homens)",
+        "Trilhas curtas nos morros do Adi Kulu",
+        "Mercado central com vendedores de rua",
+        "Vista panoramica do trecho Asmara-Nefasit (uma das mais bonitas da Eritreia)",
+        "Caminhada pelo centro compacto da cidade"
       ],
       "dicasEconomia": [
-        "Pegar trem a vapor Asmara-Nefasit em viagem programada: experiencia + transporte",
-        "Levar agua e comida da Asmara: nao ha lojas no mosteiro",
-        "Doacao voluntaria ao mosteiro 5-10 USD em vez de taxa fixa"
-      ],
-      "fontes": [
-        "eritrea.be/old/eritrea-hamasien.htm",
-        "en.wikipedia.org/wiki/Debre_Bizen",
-        "adulistravel.com/tour/eritrea-cultural-tour"
-      ],
-      "confianca": "baixa"
+        "Bate-volta de Asmara (25 km); nao ha hotel em Nefasit",
+        "Pegue minibus compartilhado de Asmara em vez de taxi privado",
+        "Permissao para mosteiros se tira em Asmara gratis (so paciencia)"
+      ]
     }
   },
   "ES": {
@@ -26583,37 +27050,64 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Ureca": {
-      "categoriasMeta": {
-        "experiencia": {
-          "melhorHorario": "noite (20h-2h) na estação de desova (nov-fev)",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "civitatis.com (tour noturno oficial)",
+        "rumbomalabo.com (operador GQ)",
+        "Lonely Planet (Bioko Island - Ureca)",
+        "Sandee / Wildtrips guia"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "peixe-defumado-bubi",
+          "slug": "observacao-tartarugas-marinhas-noturna",
           "precoUSD": {
-            "min": 3,
-            "max": 7
+            "min": 150,
+            "max": 280
           },
-          "obs": "Peixe defumado preparado por famílias bubi da vila; servido com fufu de mandioca"
+          "moedaLocal": "90.000-170.000 XAF",
+          "obs": "Tour noturno guiado outubro-marco para ver tartarugas verdes, de couro, oliva e cabecuda desovando. Inclui Moaba Turtle Research Camp"
+        },
+        {
+          "slug": "trilha-cachoeiras-selva-tropical",
+          "precoUSD": {
+            "min": 90,
+            "max": 180
+          },
+          "moedaLocal": "55.000-110.000 XAF",
+          "obs": "Caminhada com guia por cachoeiras na selva e praias de areia preta. Um dos lugares mais chuvosos do planeta"
+        },
+        {
+          "slug": "transfer-malabo-ureca-pernoite",
+          "precoUSD": {
+            "min": 200,
+            "max": 450
+          },
+          "moedaLocal": "120.000-270.000 XAF",
+          "obs": "Pacote tipico saindo de Malabo (1h30 de carro + caminhada). Pernoite rustico na vila ou no Moaba Camp"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Praia de Moaba e areia preta vulcânica de Ureca, considerada o lugar mais chuvoso da África",
-        "Cachoeiras escondidas na trilha do sul de Bioko (gratuitas com guia da vila)",
-        "Observação de pássaros endêmicos na floresta primária ao redor da vila"
+        "Praia de Ureca: areia vulcanica preta entre selva e Atlantico",
+        "Caminhada livre pela vila de San Antonio de Ureca para conhecer a comunidade Bubi",
+        "Avistamento de macacos e aves endemicas na trilha de acesso",
+        "Por do sol na enseada (sem custo se ja estiver no local)"
       ],
       "dicasEconomia": [
-        "Combine o tour de tartarugas com o Bioko Biodiversity Protection Program para preço justo",
-        "Hospede-se em casa comunitária da vila (camping bubi) em vez de tour fechado",
-        "Vá entre novembro e fevereiro: fora da estação não há tartarugas e a estrada fecha pelas chuvas"
+        "Forme grupo de 4-6 pessoas: operadores exigem minimo de 4 para abrir tour e o custo per capita cai pela metade",
+        "Va na estacao de chuvas leves (outubro-novembro) para combinar tartarugas e tarifas menores que o pico de janeiro",
+        "Leve comida e agua de Malabo: na vila nao ha mercado e bebidas custam 3x o preco urbano"
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "Noite (21h-3h) para tartarugas; manha para cachoeiras",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "atracao": {
+          "melhorHorario": "Outubro a marco para temporada de desova",
+          "reservaAntecipada": "obrigatoria"
+        }
+      }
     }
   },
   "GR": {
@@ -38605,55 +39099,69 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Kaesong": {
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "Manhã 09h-12h via bate-volta de Pyongyang",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "wikivoyage.org/wiki/Kaesong",
+        "whc.unesco.org/en/list/1278",
+        "koryogroup.com",
+        "north-korea-travel.com/kaesong.html"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "pansanggi-kaesong",
+          "slug": "pansanggi-banquete",
           "precoUSD": {
             "min": 15,
             "max": 30
           },
-          "obs": "Refeição tradicional real em 12 pratinhos de bronze servida no Tongil Restaurant"
+          "obs": "Banquete real da dinastia Koryo com 11-12 tigelas de bronze, especialidade unica de Kaesong",
+          "moedaLocal": "EUR 15-30",
+          "wiki": "https://en.wikipedia.org/wiki/Korean_royal_court_cuisine"
         },
         {
-          "slug": "ginseng-koryo",
+          "slug": "koryo-insam-ginseng",
           "precoUSD": {
-            "min": 10,
+            "min": 5,
             "max": 50
           },
-          "obs": "Ginseng vermelho local famoso vendido em lojas estatais para turistas"
+          "obs": "Ginseng de Kaesong (Koryo insam) considerado o melhor do Extremo Oriente, vendido em diversas formas",
+          "moedaLocal": "EUR 5-50"
         },
         {
-          "slug": "bocaditos-doces-kaesong",
+          "slug": "kaesong-yakbap",
           "precoUSD": {
-            "min": 2,
+            "min": 3,
             "max": 8
           },
-          "obs": "Doces tradicionais de arroz e mel típicos da antiga capital Koryo"
+          "obs": "Arroz doce com ginseng e mel, sobremesa tradicional servida nos restaurantes da cidade antiga",
+          "moedaLocal": "EUR 3-8"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Vista externa da cidade histórica de Kaesong",
-        "Túmulo do Rei Wanggon perímetro externo",
-        "Ponte Sonjuk com placas históricas",
-        "Mirante da DMZ lado norte com guia militar",
-        "Estátua de Kim Il-sung no centro de Kaesong"
+        "Ponte Sonjuk - monumento historico do seculo 13 com acesso livre",
+        "Portao Namdaemun de Kaesong - vista externa gratuita",
+        "Caminhada pela cidade antiga com casas Hanok preservadas",
+        "Cataratas Pakyon - acesso pago mas vista do mirante gratuita"
       ],
       "dicasEconomia": [
-        "Bate-volta DMZ + Kaesong vendido como pacote único incluso no tour principal",
-        "Não há custo extra além do pacote pré-pago em Pequim ou online",
-        "Compras de ginseng só em loja estatal; sem barganha possível"
+        "DMZ + Kaesong cabem no mesmo dia desde Pyongyang - tour combinado sai mais barato",
+        "Compre ginseng diretamente na fabrica de Kaesong, mais barato que em Pyongyang",
+        "Hospede-se no Kaesong Folk Hotel (Hanok) - cobra menos que hoteis modernos"
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "Manha 9h-12h apos chegada de Pyongyang",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "museu": {
+          "melhorHorario": "Tarde 13h-16h",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "natureza": {
+          "melhorHorario": "Tarde com luz oblique sobre Pakyon",
+          "reservaAntecipada": "obrigatoria"
+        }
+      }
     },
     "Kangwon": {
       "categoriasMeta": {
@@ -38707,67 +39215,70 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Pyongyang": {
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "Manhã 09h-11h em dias úteis",
-          "reservaAntecipada": "obrigatoria"
-        },
-        "atracao": {
-          "melhorHorario": "Tarde 14h-16h com guia",
-          "reservaAntecipada": "obrigatoria"
-        },
-        "museu": {
-          "melhorHorario": "Manhã 10h-12h",
-          "reservaAntecipada": "obrigatoria"
-        },
-        "experiencia": {
-          "melhorHorario": "Abril durante Maratona anual",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "wikivoyage.org/wiki/Pyongyang",
+        "lonelyplanet.com/north-korea/pyongyang",
+        "koryogroup.com",
+        "youngpioneertours.com"
+      ],
+      "confianca": "media",
       "especialidades": [
         {
-          "slug": "naengmyeon-pyongyang",
+          "slug": "naengmyeon-okryu",
           "precoUSD": {
             "min": 5,
             "max": 15
           },
-          "obs": "Macarrão frio típico servido em restaurantes turísticos designados como o Okryu-gwan"
+          "obs": "Macarrao frio de trigo sarraceno servido no historico restaurante Okryu, prato emblematico da capital",
+          "moedaLocal": "EUR 5-15",
+          "wiki": "https://en.wikipedia.org/wiki/Naengmyeon"
         },
         {
-          "slug": "kimchi-norte-coreano",
+          "slug": "taedonggang-beer",
           "precoUSD": {
-            "min": 2,
-            "max": 5
+            "min": 1,
+            "max": 3
           },
-          "obs": "Acompanhamento padrão em todas refeições incluídas no pacote do tour"
+          "obs": "Cerveja nacional produzida em Pyongyang, servida nos cervejarias locais como Taedonggang Beer Hall",
+          "moedaLocal": "EUR 1-3"
         },
         {
-          "slug": "soju-coreano",
+          "slug": "sinseollo-banquete",
           "precoUSD": {
-            "min": 3,
-            "max": 10
+            "min": 10,
+            "max": 25
           },
-          "obs": "Destilado local servido em jantares; preço incluso ou avulso conforme operadora"
+          "obs": "Panela quente real coreana servida em restaurantes turisticos como o Pyongyang Koryo Hotel",
+          "moedaLocal": "EUR 10-25"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Praça Kim Il-sung (acesso livre mas sempre com guia obrigatório)",
-        "Grandes Monumentos do Monte Mansu com reverência obrigatória",
-        "Arco do Triunfo de Pyongyang vista externa",
-        "Navio espião USS Pueblo no rio Pothong",
-        "Palácio do Sol de Kumsusan apenas domingos e feriados"
+        "Praca Kim Il Sung - entrada livre durante tour guiado",
+        "Monumento Mansudae - homenagem com flores opcional",
+        "Arco do Triunfo - vista externa gratuita",
+        "Parque Moranbong - passeio publico ao ar livre",
+        "Margens do rio Taedong ao por do sol"
       ],
       "dicasEconomia": [
-        "Turismo independente é proibido; só via operadora autorizada com tudo incluso",
-        "Pacotes de 4 a 5 dias custam US$ 1.200 a 2.000 incluindo voo desde Pequim",
-        "Levar euros ou yuans em espécie pois cartões internacionais não funcionam"
+        "Tours em grupo com Koryo, YPT ou KTG saem mais baratos que individuais (a partir de EUR 800-1200)",
+        "Metro de Pyongyang ja vem incluido no tour - peca pra visitar varias estacoes",
+        "Compre suvenires no loja da Torre Juche ou Mansudae, evitando hoteis"
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "Manha 9h-11h, evitar feriados oficiais",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "atracao": {
+          "melhorHorario": "Tarde 14h-17h com luz suave",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "religioso": {
+          "melhorHorario": "Manha cedo",
+          "reservaAntecipada": "obrigatoria"
+        }
+      }
     },
     "Ryanggang": {
       "categoriasMeta": {
@@ -43675,42 +44186,58 @@ export const PRECOS_CIDADE = {
     },
     "Kufra": {
       "fontes": [
-        "v1-only"
+        "takeyourbackpack.com/backpacking-in-libya/visit-kufra-oasis",
+        "nomadmania.com/kufra-libya-trip-report",
+        "theamericanscholar.org/kufra-libyas-poisoned-oasis"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "novembro a fevereiro, fora do calor extremo",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "confianca": "media",
       "especialidades": [
         {
-          "slug": "tamaras-de-kufra",
+          "slug": "trekking-camelo",
           "precoUSD": {
-            "min": 2,
-            "max": 5
+            "min": 50,
+            "max": 150
           },
-          "obs": "tamaras do oasis remoto, variedades raras como deglet nour"
+          "obs": "Passeio de camelo de meio a um dia pelas dunas e palmeirais, organizado com beduinos locais.",
+          "moedaLocal": "250-750 LYD"
         },
         {
-          "slug": "leite-de-camela",
+          "slug": "permissao-acesso-kufra",
           "precoUSD": {
-            "min": 1,
-            "max": 3
+            "min": 100,
+            "max": 300
           },
-          "obs": "bebida tradicional dos beduinos do oasis"
+          "obs": "Permissoes especiais e escolta exigidas; arranjadas exclusivamente por agencia, custo embutido no pacote.",
+          "moedaLocal": "500-1500 LYD"
+        },
+        {
+          "slug": "tamaras-locais",
+          "precoUSD": {
+            "min": 2,
+            "max": 8
+          },
+          "obs": "Tamaras de Al-Jawf vendidas em mercado local, qualidade reconhecida em todo o Saara.",
+          "moedaLocal": "10-40 LYD"
         }
       ],
-      "passesCombo": [],
       "gratuitosCurados": [
-        "Lagos salgados de Kufra",
-        "Palmeirais do oasis ao por do sol"
+        "Palmeirais e ruelas de Al-Jawf, coracao do oasis",
+        "Salinas e lagos salgados ao redor do oasis principal",
+        "Observacao de estrelas com horizonte 360 graus, ceu limpissimo",
+        "Mercado local com produtos do Saara e influencia sudanesa"
       ],
       "dicasEconomia": [
-        "Acesso so com permissao e tour, viaje em grupo grande para diluir",
-        "Leve mantimentos basicos, abastecimento local e caro e limitado"
-      ]
+        "Custo principal e o 4x4 e o combustivel de Sebha ate Kufra (mais de 900 km)",
+        "Tour combinado com Murzuq e Acacus dilui o frete da expedicao",
+        "Levar dolares em especie, agua e remedios; nada disso e facil de achar localmente"
+      ],
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "Madrugada e por do sol nas dunas e palmeirais",
+          "reservaAntecipada": "obrigatoria"
+        }
+      },
+      "passesCombo": []
     },
     "Sabha": {
       "fontes": [
@@ -43753,42 +44280,62 @@ export const PRECOS_CIDADE = {
     },
     "Sabratha": {
       "fontes": [
-        "v1-only"
+        "whc.unesco.org/en/list/184",
+        "tourslibya.com/tripolitania/sabratha",
+        "africanworldheritagesites.org",
+        "worldheritagesite.org/list/sabratha"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manha cedo ou fim de tarde",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "couscous-libio",
+          "slug": "ingresso-sitio-romano",
           "precoUSD": {
-            "min": 3,
-            "max": 7
-          },
-          "obs": "couscous com cordeiro e legumes, prato base do almoco litoraneo"
-        },
-        {
-          "slug": "peixe-grelhado-mediterraneo",
-          "precoUSD": {
-            "min": 5,
+            "min": 8,
             "max": 12
           },
-          "obs": "pescado fresco grelhado nos restaurantes proximos a costa"
+          "obs": "Entrada ao sitio UNESCO com o famoso teatro romano de tres niveis voltado para o mar.",
+          "moedaLocal": "40-60 LYD"
+        },
+        {
+          "slug": "museu-de-sabratha",
+          "precoUSD": {
+            "min": 3,
+            "max": 6
+          },
+          "obs": "Dois museus no sitio guardam mosaicos e objetos de tumbas; o museu maior tem entrada separada simbolica.",
+          "moedaLocal": "15-30 LYD"
+        },
+        {
+          "slug": "guia-local-meio-periodo",
+          "precoUSD": {
+            "min": 15,
+            "max": 40
+          },
+          "obs": "Guia em ingles para destrinchar o teatro, o forum e os mosaicos mitologicos.",
+          "moedaLocal": "75-200 LYD"
         }
       ],
-      "passesCombo": [],
       "gratuitosCurados": [
-        "Praia publica de Sabratha proxima ao sitio",
-        "Caminhada pelo centro antigo da cidade moderna"
+        "Vista do teatro romano contra o mar Mediterraneo desde a entrada externa",
+        "Caminhar pela orla a oeste do sitio, com runias visiveis na praia",
+        "Centro de Sabratha contemporanea, com mercado e mesquita"
       ],
       "dicasEconomia": [
-        "Va de bate-volta de Tripoli, evita custo de hospedagem local",
-        "Almoce em barracas de rua ao inves de restaurantes turisticos"
-      ]
+        "Combinar Sabratha com Leptis Magna no mesmo dia (70 km a oeste de Tripoli + 130 km a leste) usando carro alugado com motorista",
+        "Visitar de outubro a abril; verao tem entrada cara via guia obrigatorio por seguranca",
+        "Pegar carona com excursao saindo de Tripoli divide o custo do 4x4"
+      ],
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "Fim de tarde, 15h-17h, sol baixo no teatro voltado pro mar",
+          "reservaAntecipada": "recomendada"
+        },
+        "museu": {
+          "melhorHorario": "Manha, 9h-12h",
+          "reservaAntecipada": "nao"
+        }
+      },
+      "passesCombo": []
     },
     "Shahhat": {
       "fontes": [
@@ -66179,58 +66726,65 @@ export const PRECOS_CIDADE = {
     },
     "Cartum": {
       "fontes": [
-        "v1-only"
+        "wikipedia.org/National_Museum_of_Sudan",
+        "lonelyplanet.com/sudan/khartoum",
+        "tripadvisor.com Khartoum",
+        "wikivoyage.org/Sudan"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "museu": {
-          "melhorHorario": "manhã (9h-12h)",
-          "reservaAntecipada": "nao"
-        },
-        "natureza": {
-          "melhorHorario": "pôr do sol",
-          "reservaAntecipada": "nao"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "ful-medames",
+          "slug": "museu-nacional-sudao",
           "precoUSD": {
-            "min": 1,
-            "max": 3
+            "min": 5,
+            "max": 10
           },
-          "obs": "Prato nacional servido em quase toda esquina de Cartum no café da manhã."
+          "obs": "Acervo de Kerma, Kush e Nubia. ATENCAO: pesado dano em 2025 (guerra), reabertura incerta. Confirme status atual"
         },
         {
-          "slug": "shawarma-sudanesa",
+          "slug": "confluencia-nilos-al-mogran",
           "precoUSD": {
-            "min": 2,
+            "min": 0,
             "max": 5
           },
-          "obs": "Versão local com tahine, picles e pão pita; abundante em bairros como Amarat."
+          "obs": "Encontro do Nilo Branco com o Nilo Azul. Vista gratuita das margens; passeio de barco curto cobra extra"
         },
         {
-          "slug": "jebena-coffee",
+          "slug": "souq-omdurman",
           "precoUSD": {
-            "min": 1,
-            "max": 2
+            "min": 0,
+            "max": 0
           },
-          "obs": "Café com cardamomo e gengibre, preparado em bule de barro pelas 'sit el shay' (mulheres do chá)."
+          "obs": "Maior mercado do Sudao em Omdurman. Entrada gratis; abre 8h ao por do sol. Artesanato, especiarias, prata nubia"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Encontro dos Nilos (Mogran) ao entardecer da ponte",
-        "Caminhada pelo bairro Tuti Island via balsa fluvial",
-        "Souk Arabi para mergulhar na vida cotidiana sudanesa",
-        "Mesquita Al-Kabir vista externa e jardins",
-        "Bairro de Souq Two com mulheres do chá ao crepúsculo"
+        "Souq de Omdurman (gratis 8h-por do sol)",
+        "Dervixes giradores de Hamed al-Nil sexta a tarde (ritual sufi gratuito)",
+        "Caminhada na confluencia dos Nilos (al-Mogran)",
+        "Casa do Califa (Khalifa House) - exterior gratis",
+        "Mesquita de Omdurman e tumulo do Mahdi (exterior, gratis)"
       ],
       "dicasEconomia": [
-        "Use rikshaws (tuk-tuks) para deslocamentos curtos (0,50-1 USD)",
-        "Refeições em lokandas custam 2-3 USD vs 10+ USD em hotéis",
-        "Câmbio paralelo de USD dá taxa 2-3x melhor que oficial"
-      ]
+        "Visite Omdurman na sexta para combinar souq + dervixes giradores em um dia sem custo",
+        "Use riksha (tuk-tuk) entre Cartum e Omdurman; muito mais barato que taxi",
+        "Cambio de dolar no mercado paralelo costuma render mais que bancos"
+      ],
+      "categoriasMeta": {
+        "museu": {
+          "melhorHorario": "manha 9h-11h, antes do calor",
+          "reservaAntecipada": "nao"
+        },
+        "religioso": {
+          "melhorHorario": "sexta 16h-18h (dervixes)",
+          "reservaAntecipada": "nao"
+        },
+        "natureza": {
+          "melhorHorario": "fim de tarde no por do sol",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Dinder": {
       "fontes": [
@@ -66332,101 +66886,115 @@ export const PRECOS_CIDADE = {
     },
     "Kerma": {
       "fontes": [
-        "v1-only"
+        "wikipedia.org/Kerma_Museum",
+        "lonelyplanet.com/sudan/kerma",
+        "kerma.ch/en/museum",
+        "quitandgotravel.com Abri and Kerma"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manhã (7h-10h)",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "ful-nubio",
+          "slug": "deffufa-ocidental",
           "precoUSD": {
-            "min": 1,
-            "max": 3
+            "min": 3,
+            "max": 8
           },
-          "obs": "Versão nubiana do ful com manteiga clarificada e queijo, café da manhã forte da região."
+          "obs": "Plataforma de tijolo de barro de 18m, uma das estruturas nubias mais antigas. Ingresso unico com o museu"
         },
         {
-          "slug": "tâmaras-secas",
+          "slug": "museu-kerma",
           "precoUSD": {
-            "min": 2,
-            "max": 4
+            "min": 3,
+            "max": 8
           },
-          "obs": "Tâmaras de Dongola, das melhores do Sudão; vendidas em sacos no mercado."
+          "obs": "Inaugurado em 2008. Sete estatuas de granito negro dos faraos nubios. Fecha segunda mas guardiao abre se pedir"
         },
         {
-          "slug": "lentilhas-adas",
+          "slug": "necropole-leste",
           "precoUSD": {
-            "min": 1,
-            "max": 3
+            "min": 0,
+            "max": 5
           },
-          "obs": "Sopa espessa de lentilha com cominho, servida com pão; refeição barata e nutritiva."
+          "obs": "Tumulos reais nubios; geralmente incluso no ingresso do sitio principal"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Vista externa da Western Deffufa (maior estrutura de barro da África antiga)",
-        "Caminhada pelas margens do Nilo até a aldeia nubia",
-        "Mercado semanal de Kerma com cerâmica tradicional"
+        "Vista do topo da Deffufa Ocidental para o Nilo e palmeirais (incluso no ingresso)",
+        "Caminhada pelas vilas nubias ao redor do sitio (gratis, hospitalidade local)",
+        "Mercado de tamaras e produtos locais em Kerma cidade"
       ],
       "dicasEconomia": [
-        "Hospede-se em casa nubiana via Museu de Kerma (acomodação simbólica)",
-        "Combine Kerma + Soleb + Sai Island com mesmo motorista de Dongola",
-        "Coma no refeitório do museu (mais barato que vilarejo)"
-      ]
+        "Pergunte por Mohamad Hassan (diretor do museu, fala ingles) para acesso fora de horario",
+        "Combine Kerma + Sai + Old Dongola em um road trip do norte para diluir custos",
+        "Hospede em casa de familia nubia local; muito mais barato e autentico"
+      ],
+      "categoriasMeta": {
+        "museu": {
+          "melhorHorario": "manha 9h-11h",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "fim de tarde para fotos da Deffufa",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Meroé": {
       "fontes": [
-        "v1-only"
+        "whc.unesco.org/Island_of_Meroe",
+        "wikipedia.org/Meroe",
+        "lonelyplanet Sudan",
+        "againstthecompass.com Sudan"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manhã cedo (6h-9h), pôr do sol",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "ful-medames",
+          "slug": "piramides-meroe",
           "precoUSD": {
-            "min": 1,
-            "max": 3
+            "min": 5,
+            "max": 10
           },
-          "obs": "Prato nacional sudanês: fava cozida com azeite, limão e pão. Café da manhã universal em Meroé."
+          "obs": "Mais de 200 piramides nubias UNESCO. Ingresso pago em libras sudanesas; varia conforme cambio"
         },
         {
-          "slug": "asida",
+          "slug": "passeio-camelo-dunas",
           "precoUSD": {
-            "min": 1,
-            "max": 3
+            "min": 5,
+            "max": 15
           },
-          "obs": "Mingau espesso de sorgo servido com molho de carne ou vegetais. Comum em vilas próximas aos sítios."
+          "obs": "Beduinos oferecem passeio curto de camelo entre as piramides. Negociavel"
         },
         {
-          "slug": "kisra",
+          "slug": "cidade-real-meroe",
           "precoUSD": {
-            "min": 1,
-            "max": 2
+            "min": 0,
+            "max": 5
           },
-          "obs": "Pão fino de sorgo fermentado, base de quase toda refeição local com molhos (mullah)."
+          "obs": "Ruinas do palacio e banhos romanos a 4 km das piramides. Geralmente incluido no mesmo ingresso"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Pôr do sol nas dunas ao redor das pirâmides (visão externa, sem ingresso)",
-        "Caminhada pelo wadi e vista panorâmica das pirâmides Norte ao amanhecer",
-        "Conversas com guias beduínos locais (cultura nubiana viva)"
+        "Caminhada nas dunas ao redor do sitio (gratis fora do perimetro pago)",
+        "Por do sol e nascer do sol sobre as piramides (luz dourada, sem custo extra)",
+        "Acampamento sob estrelas no deserto (com tour, custo do tour cobre)"
       ],
       "dicasEconomia": [
-        "Pague ingresso em libras sudanesas (SDG) na taxa de rua, não em USD oficial",
-        "Acampamento próximo às pirâmides (15-20 USD) inclui jantar e guia local",
-        "Compartilhe transporte desde Cartum/Atbara para diluir custo do 4x4"
-      ]
+        "Combine Meroe + Naqa + Musawwarat em um unico road trip a partir de Cartum para diluir custo do 4x4",
+        "Evite alta temporada (dez-jan); precos de tour caem 30-40% em marco-abril",
+        "Pague em libra sudanesa local; preco em dolar sai mais caro"
+      ],
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "nascer do sol ou 16h-18h",
+          "reservaAntecipada": "nao"
+        },
+        "natureza": {
+          "melhorHorario": "por do sol nas dunas",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Musawwarat": {
       "fontes": [
@@ -66479,52 +67047,59 @@ export const PRECOS_CIDADE = {
     },
     "Naqa": {
       "fontes": [
-        "v1-only"
+        "whc.unesco.org/Island_of_Meroe",
+        "wikipedia.org/Naqa",
+        "wikivoyage.org/Sudan",
+        "quitandgotravel.com Naqa"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manhã cedo (antes das 10h)",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "agashe",
+          "slug": "templo-apedemak-leao",
           "precoUSD": {
-            "min": 2,
-            "max": 5
+            "min": 3,
+            "max": 8
           },
-          "obs": "Espetinho de carne grelhada com amendoim moído e especiarias, lanche típico de viagem no deserto."
+          "obs": "Templo do deus-leao Apedemak, exemplo classico de arquitetura kushita. Pagamento ao guarda no local"
         },
         {
-          "slug": "gurassa",
+          "slug": "templo-amon-naqa",
           "precoUSD": {
-            "min": 1,
-            "max": 2
+            "min": 0,
+            "max": 0
           },
-          "obs": "Pão chato grosso de trigo, comum em refeições levadas para o sítio."
+          "obs": "Templo de 100m de comprimento, geralmente incluido no ingresso unico do sitio"
         },
         {
-          "slug": "karkadeh",
+          "slug": "quiosque-romano",
           "precoUSD": {
-            "min": 1,
-            "max": 2
+            "min": 0,
+            "max": 0
           },
-          "obs": "Bebida gelada de hibisco (rosela), refresco essencial no calor do semi-deserto."
+          "obs": "Pequena estrutura hibrida greco-romana-kushita, unica no mundo. Incluido no ingresso"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Vista do quiosque romano de Naqa sem entrar no perímetro principal",
-        "Caminhada entre as ruínas espalhadas pelo wadi",
-        "Observação de fauna do deserto (gazelas) ao amanhecer"
+        "Caminhada entre os tres templos (incluida no ingresso)",
+        "Por do sol no sitio (frequentemente sem outros visitantes)",
+        "Observacao do ceu estrelado no deserto (sem poluicao luminosa)"
       ],
       "dicasEconomia": [
-        "Visite Naqa e Musawwarat no mesmo dia (próximos) com motorista compartilhado",
-        "Leve água e comida de Shendi para evitar gastar no caminho",
-        "Negocie ingresso combinado com guia da região"
-      ]
+        "Visite Naqa + Musawwarat es-Sufra + Meroe no mesmo dia para diluir custo do 4x4",
+        "Saida da Nile Petrol Station (1h15 norte de Cartum) com GPS evita gastar com guia",
+        "Pague em libras sudanesas; negociar com o guarda costuma reduzir o preco"
+      ],
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "manha 8h-11h ou fim de tarde",
+          "reservaAntecipada": "nao"
+        },
+        "religioso": {
+          "melhorHorario": "manha cedo (sombra nas paredes)",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Omdurman": {
       "fontes": [
@@ -69255,54 +69830,65 @@ export const PRECOS_CIDADE = {
   "SO": {
     "Berbera": {
       "fontes": [
-        "v1-only"
+        "kanaga-at.com/berbera",
+        "takeyourbackpack.com/visit-berbera",
+        "wardheernews.com/an-ottoman-city-in-africa-berbera",
+        "journeysbydesign.com/somaliland/berbera"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "manha cedo ou fim de tarde fugindo do calor extremo",
-          "reservaAntecipada": "nao"
-        }
-      },
+      "confianca": "media",
       "especialidades": [
         {
-          "slug": "peixe-grelhado-golfo-aden",
+          "slug": "peixe-fresco-gulf-aden",
           "precoUSD": {
-            "min": 6,
+            "min": 5,
             "max": 12
           },
-          "obs": "Peixe fresco do mercado portuario grelhado na hora com arroz e vegetais"
+          "obs": "Peixe fresco do Golfo de Aden grelhado em restaurantes simples do porto"
         },
         {
-          "slug": "lagosta-berbera",
+          "slug": "mergulho-snorkel-recife",
           "precoUSD": {
-            "min": 15,
-            "max": 30
+            "min": 30,
+            "max": 70
           },
-          "obs": "Lagosta do Golfo de Aden em restaurantes a beira-mar, negocie direto com pescadores"
+          "obs": "Saída de snorkel ou mergulho em recifes rasos com operador local, equipamento incluso"
         },
         {
-          "slug": "muqmad-carne-seca",
+          "slug": "lagosta-marisco",
           "precoUSD": {
-            "min": 3,
-            "max": 6
+            "min": 10,
+            "max": 25
           },
-          "obs": "Carne seca em tiras conservada em ghee, lanche tradicional do litoral"
+          "obs": "Lagosta e mariscos do dia em restaurantes da orla, preço por kg varia"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Praia de Batalaale ou Baathela a oeste da cidade, agua turquesa quase deserta",
-        "Caminhada pela arquitetura otomana em ruinas no centro velho",
-        "Mercado de peixe pela manha (espetaculo cru de Berbera)",
-        "Por do sol no porto velho com vista pro Golfo de Aden",
-        "Mesquitas de pedra coralina no bairro antigo"
+        "Caminhar entre as mansões otomanas em ruínas e a Mesquita Mecid-i Turk no centro velho",
+        "Praias quase desertas ao longo do Golfo de Aden para banho calmo",
+        "Farol de Berbera e vista do porto histórico de fora",
+        "Mercado de peixe ao amanhecer quando os barcos chegam",
+        "Passeio pela orla observando arquitetura indiana, árabe e judaica em decadência"
       ],
       "dicasEconomia": [
-        "Onibus compartilhado de Hargeisa pra Berbera custa 5 USD (vs 100+ USD em 4x4 privado)",
-        "Pousadas locais cobram 10-25 USD/noite; hoteis na praia passam de 60 USD",
-        "Refeicoes em eateries locais 3-6 USD"
-      ]
+        "Evite junho-setembro, calor extremo dobra gasto com hotel com AC",
+        "Hospede em guesthouse local em vez de resort para economizar 60 por cento",
+        "Compartilhe taxi de Hargeisa a Berbera com outros viajantes, divide o custo"
+      ],
+      "categoriasMeta": {
+        "praia": {
+          "melhorHorario": "Outubro a marco, manha cedo ou fim de tarde",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "Manha cedo antes do sol forte",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "Saidas de mergulho saem 8h",
+          "reservaAntecipada": "recomendada"
+        }
+      }
     },
     "Erigavo": {
       "fontes": [
@@ -69349,58 +69935,65 @@ export const PRECOS_CIDADE = {
     },
     "Hargeisa": {
       "fontes": [
-        "v1-only"
+        "en.wikivoyage.org/wiki/Hargeisa",
+        "somalilandtravel.com/hargeisa-city-tour-guide",
+        "thetravelcamel.com/somaliland-things-to-do",
+        "againstthecompass.com/somaliland-itinerary"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "passeio": {
-          "melhorHorario": "manha 8h-11h antes do calor",
-          "reservaAntecipada": "nao"
-        },
-        "historico": {
-          "melhorHorario": "manha cedo com guia obrigatorio",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "canjeero-laxoox",
+          "slug": "hilib-geel-camel",
           "precoUSD": {
-            "min": 2,
-            "max": 4
+            "min": 5,
+            "max": 8
           },
-          "obs": "Pao fermentado tipo crepe servido no cafe da manha com mel ou ghee"
+          "obs": "Carne de camelo com arroz em restaurante local perto do monumento do MIG, porção generosa"
         },
         {
-          "slug": "hilib-ari-cabra",
+          "slug": "chai-camel-milk",
           "precoUSD": {
-            "min": 6,
-            "max": 12
+            "min": 0.15,
+            "max": 0.5
           },
-          "obs": "Cabra assada com arroz especiado, prato dominante no almoco em Somaliland"
+          "obs": "Chá com leite de camelo (shaah caano geel) por cerca de 1500 xelins somalilanders"
         },
         {
-          "slug": "shaah-cha-cardamomo",
+          "slug": "anjero-baasto",
           "precoUSD": {
             "min": 1,
-            "max": 2
+            "max": 3
           },
-          "obs": "Cha preto com cardamomo e leite servido em copo pequeno o dia inteiro"
+          "obs": "Anjero (panqueca fermentada) ou baasto (massa somali) em maqaayad com chão acarpetado"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Caminhada pela Cidade Velha e mercado de cambio a ceu aberto",
-        "Foto no Monumento do MiG (memorial da guerra civil)",
-        "Hargeisa Cultural Centre tem entrada gratuita ou simbolica",
-        "Mercado Central de Hargeisa pela manha (pratique gastos em xelim)",
-        "Por do sol no bairro alto da cidade"
+        "Monumento da Guerra com caça MIG-17 na Praça da Liberdade, entrada livre",
+        "Mercado Central de Hargeisa para mergulhar no cotidiano somalilander",
+        "Mercado de animais com camelos, cabras e vacas, abre cedo",
+        "Cambistas de rua perto do Hotel Oriental empilhando maços de xelins, fenômeno único",
+        "Mercado Hidda Dhowr e bairros vivos ao redor do hotel Oriental"
       ],
       "dicasEconomia": [
-        "Trocar USD por xelim de Somaliland direto nos mercados de rua rende cambio melhor que hoteis",
-        "Compartilhar 4x4 e escolta com outros viajantes na pousada baixa custo de Laas Geel de 145 USD pra 50 USD por pessoa",
-        "Refeicao em local cafe 3-5 USD; evite restaurantes de hotel que cobram 3x mais"
-      ]
+        "Compartilhe carro e escolta SPU para Laas Geel com outros viajantes do Hotel Oriental",
+        "Coma em maqaayad local por menos de 5 USD em vez de hotel internacional",
+        "Troque dinheiro com cambistas de rua, taxa melhor que banco"
+      ],
+      "categoriasMeta": {
+        "mercado": {
+          "melhorHorario": "Manha 8h-11h, mercado de animais ao amanhecer",
+          "reservaAntecipada": "nao"
+        },
+        "museu": {
+          "melhorHorario": "Saryan Museum tarde 14h-17h",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "Manha cedo no monumento da guerra",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Kismayo": {
       "fontes": [
@@ -69445,70 +70038,65 @@ export const PRECOS_CIDADE = {
     },
     "Mogadíscio": {
       "fontes": [
-        "v1-only"
+        "wikipedia.org/wiki/Lido_Beach,_Mogadishu",
+        "visitmogadishu.com",
+        "wewillnomad.com/destination/somalia",
+        "tripadvisor.com/Mogadishu"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "fim de tarde com escolta",
-          "reservaAntecipada": "recomendada"
-        },
-        "religioso": {
-          "melhorHorario": "manha cedo fora do horario de oracao",
-          "reservaAntecipada": "nao"
-        },
-        "passeio": {
-          "melhorHorario": "manha com guia local",
-          "reservaAntecipada": "obrigatoria"
-        },
-        "historico": {
-          "melhorHorario": "manha com escolta",
-          "reservaAntecipada": "recomendada"
-        },
-        "experiencia": {
-          "melhorHorario": "dia inteiro com PSD",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "confianca": "media",
       "especialidades": [
         {
-          "slug": "camel-meat-suqaar",
+          "slug": "peixe-grelhado-lido",
           "precoUSD": {
-            "min": 5,
-            "max": 10
+            "min": 6,
+            "max": 15
           },
-          "obs": "Suqaar de camelo com arroz basmati em restaurantes locais; pagamento em USD ou xelim somali"
+          "obs": "Peixe e lagosta grelhados nos restaurantes da praia Lido em USD ou xelins somalis"
         },
         {
-          "slug": "sambusa-somali",
-          "precoUSD": {
-            "min": 1,
-            "max": 3
-          },
-          "obs": "Sambusa frito recheado de carne ou lentilha vendido em barracas e cafes"
-        },
-        {
-          "slug": "baasto-somali",
+          "slug": "camel-meat-rice",
           "precoUSD": {
             "min": 4,
             "max": 8
           },
-          "obs": "Massa estilo italiano com molho de carne, heranca da colonizacao; comum no almoco"
+          "obs": "Hilib geel (carne de camelo) com arroz é prato típico vendido em maqaayad locais"
+        },
+        {
+          "slug": "anjero-pancake",
+          "precoUSD": {
+            "min": 1,
+            "max": 3
+          },
+          "obs": "Panqueca fermentada somali servida no café da manhã com chá doce ou ensopado"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Praia de Lido no fim de tarde com escolta contratada",
-        "Caminhada pela Mesquita Arba'a Rukun por fora (uma das mais antigas da Africa)",
-        "Vista do farol e porto velho ao entardecer",
-        "Ruinas da Catedral italiana (somente fachada, sem entrar)",
-        "Atmosfera do Mercado de Bakaara com guia (alto risco, so com PSD)"
+        "Caminhar pela Praia Lido ao entardecer no fim de semana, gratuito mas movimentado",
+        "Visitar o Mercado Bakara para sentir o pulso da cidade, entrar não custa nada",
+        "Ruínas da Catedral de Mogadíscio e arquitetura colonial italiana de fora",
+        "Cidade Velha de Hamarweyne com casas de coral e mesquitas antigas",
+        "Vista do farol de Mogadíscio e enseada do porto antigo"
       ],
       "dicasEconomia": [
-        "Pagar refeicoes em xelim somali (SOS) sai mais barato que em USD",
-        "Compartilhar custo de PSD (security detail) com outros viajantes corta a diaria pela metade",
-        "Comer em restaurantes locais (Al Nasri, Shujaac) custa 5-10 USD por refeicao completa"
-      ]
+        "Tour só faz sentido com agência local com escolta armada, negocie diária fechada",
+        "Pague em USD em hotéis e tours, pequenos gastos em xelins no mercado",
+        "Refeição em maqaayad local custa metade do que em hotel internacional"
+      ],
+      "categoriasMeta": {
+        "praia": {
+          "melhorHorario": "Sextas e sabados ao entardecer, 16h-18h",
+          "reservaAntecipada": "nao"
+        },
+        "mercado": {
+          "melhorHorario": "Manha 8h-11h, antes do calor do meio-dia",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "Manha cedo com guia e escolta",
+          "reservaAntecipada": "obrigatoria"
+        }
+      }
     },
     "Zeila": {
       "fontes": [
@@ -69990,70 +70578,154 @@ export const PRECOS_CIDADE = {
   },
   "SS": {
     "Bandingilo": {
-      "categoriasMeta": {
-        "parque": {
-          "melhorHorario": "janeiro a marco para migracao do white-eared kob",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "en.wikipedia.org/wiki/Bandingilo_National_Park",
+        "africanparks.org/the-parks/badingilo-boma",
+        "africageographic.com badingilo-boma-greatest-migration"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "carne-grelhada-na-fogueira",
+          "slug": "migracao-white-eared-kob",
           "precoUSD": {
-            "min": 5,
-            "max": 12
+            "min": 700,
+            "max": 2500
           },
-          "obs": "refeicao tipica de acampamento de safari; estimativa v1-only"
+          "obs": "Game drive na migracao do kob-de-orelha-branca (~6 milhoes de antilopes), 2a maior do mundo. Preco diario por pessoa em pacote.",
+          "moedaLocal": "USD",
+          "wiki": "https://en.wikipedia.org/wiki/Bandingilo_National_Park"
+        },
+        {
+          "slug": "encontro-mundari",
+          "precoUSD": {
+            "min": 100,
+            "max": 300
+          },
+          "obs": "Visita a acampamento de pastores Mundari com gado Ankole-Watusi no corredor do parque; contribuicao + guia.",
+          "moedaLocal": "USD",
+          "wiki": "https://en.wikipedia.org/wiki/Mundari_people"
+        },
+        {
+          "slug": "birding-shoebill",
+          "precoUSD": {
+            "min": 50,
+            "max": 200
+          },
+          "obs": "Birding com chance de avistar shoebill (bico-de-sapato) nas areas alagadas; tarifa de guia/dia.",
+          "moedaLocal": "USD",
+          "wiki": "https://en.wikipedia.org/wiki/Shoebill"
         }
       ],
-      "passesCombo": [],
       "gratuitosCurados": [
-        "Avistamento da segunda maior migracao de mamiferos do mundo",
-        "Caminhadas guiadas pela savana com rangers",
-        "Por do sol no acampamento com vista aberta"
+        "Vista da planicie inundavel na estacao seca (dez-mar).",
+        "Encontro espontaneo com gazelas Mongalla nos camps.",
+        "Observacao de aves no entorno dos charcos.",
+        "Por do sol na savana sem infraestrutura turistica.",
+        "Conversa com rangers em camp comunitario."
+      ],
+      "passesCombo": [
+        {
+          "nome": "Combo Bandingilo + Boma (African Parks)",
+          "precoUSD": 4500,
+          "cobre": [
+            "Charter Juba-Bandingilo-Boma",
+            "Camps tendados",
+            "Game drives",
+            "Rangers + permissoes"
+          ],
+          "economia": "Dilui charter de 2k+ entre 2 parques"
+        }
       ],
       "dicasEconomia": [
-        "Va em grupo de 4-6 para dividir o custo fixo do voo charter e dos rangers",
-        "Pacote so faz sentido em junho-marco; fora disso, animais ja migraram",
-        "Leve seu proprio binoculo, aluguel no local e raro e caro"
+        "Va entre dez-mar (pico migracao) para nao desperdicar dias de safari caro.",
+        "Compartilhe 4x4 e camp com outros viajantes via operador local.",
+        "Combine com visita a Mundari (caminho) em vez de extensao separada."
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "06h-10h e 16h-19h",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "parque": {
+          "melhorHorario": "estacao seca dez-mar",
+          "reservaAntecipada": "obrigatoria"
+        }
+      }
     },
     "Boma": {
-      "categoriasMeta": {
-        "parque": {
-          "melhorHorario": "estacao seca (dezembro a marco), saida cedo",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "en.wikipedia.org/wiki/Boma_National_Park",
+        "africanparks.org/the-parks/badingilo-boma",
+        "whc.unesco.org tentativelists 6277"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "guisado-de-cabra",
+          "slug": "safari-migracao-kob",
           "precoUSD": {
-            "min": 3,
-            "max": 8
+            "min": 800,
+            "max": 3000
           },
-          "obs": "prato comum em acampamentos e mercados locais; preco estimado v1-only"
+          "obs": "Safari na migracao do white-eared kob no Planalto de Boma; preco diario por pessoa em pacote com voo charter e camp.",
+          "moedaLocal": "USD (operadores cobram em dolar)",
+          "wiki": "https://en.wikipedia.org/wiki/White-eared_kob"
+        },
+        {
+          "slug": "planalto-boma-trekking",
+          "precoUSD": {
+            "min": 50,
+            "max": 150
+          },
+          "obs": "Caminhada no Planalto de Boma (~1.500m) com guia ranger; valor por dia, fora pacote.",
+          "moedaLocal": "USD",
+          "wiki": "https://en.wikipedia.org/wiki/Boma_Plateau"
+        },
+        {
+          "slug": "encontro-toposa-jiye",
+          "precoUSD": {
+            "min": 30,
+            "max": 100
+          },
+          "obs": "Visita cultural a vilas Toposa/Jiye no entorno; contribuicao comunitaria + taxa de guia.",
+          "moedaLocal": "USD",
+          "wiki": "https://en.wikipedia.org/wiki/Toposa_people"
         }
       ],
-      "passesCombo": [],
       "gratuitosCurados": [
-        "Caminhada pelo planalto de Boma com vistas amplas da savana",
-        "Observacao de aves nativas nos arredores das aldeias",
-        "Convivencia com comunidades pastoris locais"
+        "Vista do escarpamento do Planalto de Boma ao por do sol.",
+        "Observacao de aves na transicao savana-floresta (sem taxa, so guia).",
+        "Caminhada por trilhas curtas perto dos camps de ranger.",
+        "Acompanhar manada de kob em movimento em epoca de migracao.",
+        "Encontros informais com pastores Murle no entorno."
+      ],
+      "passesCombo": [
+        {
+          "nome": "Pacote Boma + Badingilo (African Parks / operadores)",
+          "precoUSD": 4500,
+          "cobre": [
+            "Voo charter Juba-Boma-Badingilo",
+            "Camp tendado",
+            "Game drives migracao",
+            "Rangers e licencas"
+          ],
+          "economia": "Voo avulso passa de 2k; combo dilui custo"
+        }
       ],
       "dicasEconomia": [
-        "So vale a pena via operador organizando logistica desde Juba; ir por conta sai mais caro",
-        "Leve dinheiro vivo em USD em notas pequenas, nao ha caixas eletronicos",
-        "Combine com Bandingilo no mesmo tour para diluir custo do transporte"
+        "So vale combinar Boma + Badingilo na mesma expedicao para diluir charter.",
+        "Va na alta da migracao (nov-mar) para nao gastar dias procurando bichos.",
+        "Feche pacote com African Parks ou operador local: evita 'cascata' de taxas."
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "06h-09h e 16h-18h game drive",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "parque": {
+          "melhorHorario": "estacao seca nov-abr",
+          "reservaAntecipada": "obrigatoria"
+        }
+      }
     },
     "Bor": {
       "categoriasMeta": {
@@ -70089,67 +70761,71 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Juba": {
+      "fontes": [
+        "wikivoyage.org/Juba",
+        "tripadvisor.com Juba attractions",
+        "magicalsouthsudan.com / silverbackgorillatours.com"
+      ],
+      "confianca": "alta",
+      "especialidades": [
+        {
+          "slug": "boat-ride-nilo-branco",
+          "precoUSD": {
+            "min": 15,
+            "max": 40
+          },
+          "obs": "Passeio de barco no Nilo Branco saindo de Juba; preco negociado direto com barqueiros locais, varia por duracao e grupo.",
+          "moedaLocal": "SSP (libra sul-sudanesa)",
+          "wiki": "https://en.wikipedia.org/wiki/White_Nile"
+        },
+        {
+          "slug": "mausoleu-john-garang",
+          "precoUSD": {
+            "min": 0,
+            "max": 5
+          },
+          "obs": "Mausoleu do heroi da independencia John Garang; entrada simbolica ou gratuita conforme acesso.",
+          "moedaLocal": "SSP",
+          "wiki": "https://en.wikipedia.org/wiki/John_Garang"
+        },
+        {
+          "slug": "jebel-kujur-trilha",
+          "precoUSD": {
+            "min": 5,
+            "max": 20
+          },
+          "obs": "Trilha curta no morro Jebel Kujur com vista da cidade; costuma exigir guia local pela seguranca.",
+          "moedaLocal": "SSP",
+          "wiki": "https://en.wikipedia.org/wiki/Juba"
+        }
+      ],
+      "gratuitosCurados": [
+        "Konyo Konyo Market: mercado central caotico e fotogenico, melhor de manha cedo.",
+        "Mercado Maasai (souvenirs e artesanato sul-sudanes).",
+        "Caminhada pela margem do Nilo Branco no centro de Juba.",
+        "Praca da Independencia (Freedom Square) em datas civicas.",
+        "Centro Cultural Nyakuron em dias de evento aberto."
+      ],
+      "passesCombo": [],
+      "dicasEconomia": [
+        "Negocie sempre tuk-tuk e barco antes de embarcar; tabela oficial nao existe.",
+        "Refeicoes em barracas de Konyo Konyo custam fracao de hotel internacional.",
+        "Va em grupo: guias e transfers cobram quase o mesmo por 1 ou 4 pessoas."
+      ],
       "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manha cedo, antes do calor",
-          "reservaAntecipada": "nao"
-        },
-        "religioso": {
-          "melhorHorario": "domingo durante missas ou fim de tarde",
-          "reservaAntecipada": "nao"
-        },
-        "passeio": {
-          "melhorHorario": "manha, mercado em pleno funcionamento",
+        "mercado": {
+          "melhorHorario": "06h30-09h00 (Konyo Konyo cedo)",
           "reservaAntecipada": "nao"
         },
         "natureza": {
-          "melhorHorario": "fim de tarde para por do sol",
+          "melhorHorario": "fim de tarde no Nilo",
+          "reservaAntecipada": "recomendada"
+        },
+        "historico": {
+          "melhorHorario": "10h-15h dias uteis",
           "reservaAntecipada": "nao"
         }
-      },
-      "especialidades": [
-        {
-          "slug": "ful-medames",
-          "precoUSD": {
-            "min": 1,
-            "max": 3
-          },
-          "obs": "fava cozida com oleo, cebola e pao; cafe da manha popular herdado do norte v1-only"
-        },
-        {
-          "slug": "asida-com-molho-de-quiabo",
-          "precoUSD": {
-            "min": 2,
-            "max": 5
-          },
-          "obs": "polenta de sorgo com molho viscoso de quiabo (waika); prato tradicional v1-only"
-        },
-        {
-          "slug": "peixe-frito-do-nilo",
-          "precoUSD": {
-            "min": 4,
-            "max": 10
-          },
-          "obs": "tilapia ou perca frita servida com kisra ou arroz, comum em barracas a beira-rio v1-only"
-        }
-      ],
-      "passesCombo": [],
-      "gratuitosCurados": [
-        "Mausoleu de John Garang com vista da cidade",
-        "Catedral de Todos os Santos no centro",
-        "Mercado Konyo-Konyo para imersao cultural",
-        "Por do sol nas margens do Nilo Branco",
-        "Caminhada pelo memorial da independencia"
-      ],
-      "dicasEconomia": [
-        "Hospede-se em guesthouse fora do circuito de ONGs; hoteis cobram 200+ USD",
-        "Use boda-boda (mototaxi) curto em vez de taxi de hotel para economizar",
-        "Compre SIM local logo no aeroporto; dados sao baratos comparado a roaming"
-      ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      }
     },
     "Kapoeta": {
       "categoriasMeta": {
@@ -70185,41 +70861,67 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Nimule": {
+      "fontes": [
+        "en.wikipedia.org/wiki/Nimule",
+        "en.wikipedia.org/wiki/Fula_Rapids",
+        "nationalparksassociation.org Nimule National Park"
+      ],
+      "confianca": "alta",
+      "especialidades": [
+        {
+          "slug": "safari-elefantes-opekoloe",
+          "precoUSD": {
+            "min": 60,
+            "max": 200
+          },
+          "obs": "Game drive em Nimule National Park (540 km2) com chance de ver manada de ~70 elefantes na ilha Opekoloe; tarifa parque + guia.",
+          "moedaLocal": "USD/SSP",
+          "wiki": "https://en.wikipedia.org/wiki/Nimule_National_Park"
+        },
+        {
+          "slug": "fula-falls-rafting",
+          "precoUSD": {
+            "min": 100,
+            "max": 400
+          },
+          "obs": "Rafting grau 4 nas Fula Rapids (~6,5 km ao norte de Nimule, Nilo Branco); preco por pessoa em operador especializado.",
+          "moedaLocal": "USD",
+          "wiki": "https://en.wikipedia.org/wiki/Fula_Rapids"
+        },
+        {
+          "slug": "boat-safari-nilo",
+          "precoUSD": {
+            "min": 40,
+            "max": 120
+          },
+          "obs": "Boat safari pelo Nilo Branco com hipopotamos e crocodilos (Nimule e um dos poucos parques que permite barco).",
+          "moedaLocal": "USD",
+          "wiki": "https://en.wikipedia.org/wiki/Nimule_National_Park"
+        }
+      ],
+      "gratuitosCurados": [
+        "Posto de fronteira Nimule-Elegu (Uganda): foto e movimentacao transfronteirica.",
+        "Vista das Fula Rapids do mirante na margem (sem rafting).",
+        "Mercado de Nimule, com produtos vindos do Uganda.",
+        "Beira-rio do Nilo Branco no centro da cidade.",
+        "Caminhos perto da entrada do parque ao amanhecer."
+      ],
+      "passesCombo": [],
+      "dicasEconomia": [
+        "De Juba e estrada asfaltada (~190 km, 3h): faca como bate-volta longo.",
+        "Pegue boat safari em vez de 4x4 inteiro: cobre os mesmos bichos por menos.",
+        "Hospede do lado ugandes (Elegu/Atiak) se quiser cortar custo."
+      ],
       "categoriasMeta": {
         "natureza": {
-          "melhorHorario": "estacao seca, manha cedo",
+          "melhorHorario": "06h-10h game drive / boat",
           "reservaAntecipada": "recomendada"
         },
         "parque": {
-          "melhorHorario": "novembro a marco, saida ao amanhecer",
+          "melhorHorario": "estacao seca dez-mar",
           "reservaAntecipada": "recomendada"
         }
-      },
-      "especialidades": [
-        {
-          "slug": "kisra-com-molho",
-          "precoUSD": {
-            "min": 1,
-            "max": 4
-          },
-          "obs": "pao fino de sorgo servido com guisado; comum na fronteira com Uganda v1-only"
-        }
-      ],
-      "passesCombo": [],
-      "gratuitosCurados": [
-        "Vista das Cataratas de Fula no rio Nilo",
-        "Observacao de hipopotamos a partir das margens",
-        "Travessia da ponte sobre o Nilo no centro da cidade"
-      ],
-      "dicasEconomia": [
-        "Entrada no parque cobrada em USD; leve trocado para evitar cambio ruim",
-        "Cruze de Kampala em onibus direto; voo ate Juba sai bem mais caro",
-        "Contrate ranger no portao em vez de operador internacional"
-      ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      }
     },
     "Terekeka": {
       "categoriasMeta": {
@@ -71028,163 +71730,202 @@ export const PRECOS_CIDADE = {
   },
   "SY": {
     "Alepo": {
+      "fontes": [
+        "wikivoyage.org/wiki/Aleppo",
+        "visitdamascussyria.com/aleppo-citadel",
+        "takeyourbackpack.com/backpacking-in-syria/visit-aleppo",
+        "syrianguides.com/syria-sets-new-entrance-fees-for-2026"
+      ],
+      "confianca": "alta",
       "categoriasMeta": {
         "historico": {
-          "melhorHorario": "manha, 09h-12h",
+          "melhorHorario": "Manhã (09h-11h) antes do calor",
           "reservaAntecipada": "nao"
         },
-        "passeio": {
-          "melhorHorario": "fim de tarde, 16h-19h",
+        "atracao": {
+          "melhorHorario": "Manhã para a Citadela, tarde para o souq",
           "reservaAntecipada": "nao"
         },
         "religioso": {
-          "melhorHorario": "fora das oracoes",
+          "melhorHorario": "Manhã fora de horários de oração",
           "reservaAntecipada": "nao"
         }
       },
       "especialidades": [
         {
-          "slug": "kebab-halabi",
-          "precoUSD": {
-            "min": 3,
-            "max": 7
-          },
-          "obs": "kebab de Alepo com cerejas acidas; prato-assinatura da cidade"
-        },
-        {
-          "slug": "muhammara",
-          "precoUSD": {
-            "min": 2,
-            "max": 4
-          },
-          "obs": "pasta de pimenta vermelha, nozes e melaco de roma; origem alepina"
-        },
-        {
-          "slug": "sabao-de-alepo",
-          "precoUSD": {
-            "min": 3,
-            "max": 10
-          },
-          "obs": "nao e comida mas e a especialidade local mais famosa, com azeite e louro"
-        }
-      ],
-      "passesCombo": [],
-      "gratuitosCurados": [
-        "Bairro Al-Jdeideh com casas armenias restauradas",
-        "Caminhada pelo souk reconstruido pos-guerra",
-        "Vista externa da Citadela ao por do sol",
-        "Igreja dos Quarenta Martires (armenia)",
-        "Praca Saadallah al-Jabiri no centro novo"
-      ],
-      "dicasEconomia": [
-        "Hospedagem no bairro cristao costuma ser mais barata e segura",
-        "Taxi compartilhado (servees) custa centavos entre bairros",
-        "Mercado de Bab Antakya tem produtos locais mais baratos que souks turisticos"
-      ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
-    },
-    "Bosra": {
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manha cedo pra evitar calor",
-          "reservaAntecipada": "nao"
-        }
-      },
-      "especialidades": [
-        {
-          "slug": "mansaf-druso",
+          "slug": "kebab-karaz",
           "precoUSD": {
             "min": 4,
-            "max": 8
+            "max": 10
           },
-          "obs": "cordeiro com iogurte fermentado e arroz, prato regional do Jabal al-Druze"
+          "obs": "Cherry kebab - prato icônico de Alepo com cordeiro moído e cerejas ácidas (wishna) sobre pão e pinhões, único na cidade",
+          "moedaLocal": "40.000-100.000 SYP",
+          "wiki": "https://en.wikipedia.org/wiki/Cherry_kebab"
         },
         {
-          "slug": "azeite-de-hauran",
+          "slug": "kibbeh-safarjalieh",
           "precoUSD": {
-            "min": 5,
-            "max": 12
+            "min": 3,
+            "max": 8
           },
-          "obs": "azeite da regiao de Hauran vendido em garrafas locais"
+          "obs": "Kibbeh de marmelo com carne em molho de tomate e melaço de romã, receita exclusiva de Alepo entre 77 variações locais de kibbeh",
+          "moedaLocal": "30.000-80.000 SYP"
+        },
+        {
+          "slug": "sabao-aleppo",
+          "precoUSD": {
+            "min": 3,
+            "max": 15
+          },
+          "obs": "Sabão tradicional de azeite e óleo de louro feito há séculos em Alepo; comprado por barra no Souq Al-Madina como souvenir autêntico",
+          "moedaLocal": "30.000-150.000 SYP"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Caminhada pela cidade antiga de basalto preto fora do teatro",
-        "Mesquita Omar (uma das mais antigas em uso)",
-        "Ruinas externas das termas romanas"
+        "Caminhar pelo Souq Al-Madina restaurado, um dos maiores mercados cobertos do mundo (13km de extensão)",
+        "Praça em torno da Citadela com vista da fortaleza otomana iluminada à noite",
+        "Bairro armênio de Jdeydeh com casas tradicionais",
+        "Mesquita dos Omíadas de Alepo (em restauração, pátio externo livre)",
+        "Khan al-Wazir e outros caravançarais otomanos no centro velho"
       ],
       "dicasEconomia": [
-        "Bate-volta de Damasco em onibus publico custa cerca de 2 USD ida e volta",
-        "Ingresso do teatro romano e cobrado em libras sirias: pagar em cambio paralelo",
-        "Levar comida: opcoes em Bosra sao limitadas"
-      ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+        "Citadela 100.000 SYP (~US$10) a partir de janeiro 2026; Museu Nacional de Alepo 100.000 SYP",
+        "Restaurantes armênios em Jdeydeh (ex.: Qurtuba) servem refeição completa por US$8-12 com qualidade superior",
+        "Hospedagem em hotéis pequenos do centro velho ficam US$25-50/noite, metade dos hotéis turísticos"
+      ]
     },
-    "Damasco": {
+    "Bosra": {
+      "fontes": [
+        "wikivoyage.org/wiki/Bosra",
+        "whc.unesco.org/en/list/22",
+        "visitdamascussyria.com/bosra",
+        "syrianguides.com/syria-sets-new-entrance-fees-for-2026"
+      ],
+      "confianca": "alta",
       "categoriasMeta": {
         "historico": {
-          "melhorHorario": "manha cedo, 08h-11h",
+          "melhorHorario": "Manhã (09h-11h) ou fim de tarde, sol forte ao meio-dia",
           "reservaAntecipada": "nao"
         },
+        "atracao": {
+          "melhorHorario": "09h-17h conforme horário do sítio",
+          "reservaAntecipada": "nao"
+        }
+      },
+      "especialidades": [
+        {
+          "slug": "teatro-romano-basalto",
+          "precoUSD": {
+            "min": 10,
+            "max": 10
+          },
+          "obs": "Teatro romano do século 2 d.C. feito de basalto negro, capacidade 17.000 lugares, um dos mais bem preservados do Império Romano; envolto em fortaleza aiúbida",
+          "moedaLocal": "100.000 SYP",
+          "wiki": "https://en.wikipedia.org/wiki/Roman_Theatre_at_Bosra"
+        },
+        {
+          "slug": "mesquita-omar",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Mesquita Al-Omari de 720 d.C., uma das mais antigas mesquitas em pé do mundo islâmico, em pleno centro da cidade velha",
+          "moedaLocal": "0 SYP"
+        },
+        {
+          "slug": "catedral-bosra",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Ruínas da Catedral dos Santos Sérgio, Baco e Leôncio (512 d.C.), uma das primeiras igrejas cristãs em planta circular do mundo",
+          "moedaLocal": "0 SYP"
+        }
+      ],
+      "passesCombo": [],
+      "gratuitosCurados": [
+        "Caminhar pelas ruas da cidade velha entre casas de basalto negro habitadas",
+        "Mesquita Al-Omari (uma das mais antigas do islã)",
+        "Ruínas da Catedral de Bosra e do palácio episcopal",
+        "Mercado romano (Nymphaeum) e arco de Caracala fora do recinto pago",
+        "Cardo Maximus e ruas colunadas espalhadas pela cidade aberta"
+      ],
+      "dicasEconomia": [
+        "Day trip de Damasco (~140km, 2-3h de carro) por taxi compartilhado ou tour US$40-80",
+        "Único ingresso pago é o Teatro/Fortaleza (100.000 SYP/~US$10); o resto da cidade velha é circulação livre",
+        "Vá em dia útil para evitar grupos sírios em fim de semana e ganhar fotos vazias do teatro"
+      ]
+    },
+    "Damasco": {
+      "fontes": [
+        "wikivoyage.org/wiki/Damascus",
+        "visitdamascussyria.com",
+        "syrianguides.com/syria-sets-new-entrance-fees-for-2026",
+        "en.wikipedia.org/wiki/Umayyad_Mosque"
+      ],
+      "confianca": "alta",
+      "categoriasMeta": {
         "religioso": {
-          "melhorHorario": "fora dos horarios de oracao",
+          "melhorHorario": "Manhã cedo, fora dos horários de oração",
           "reservaAntecipada": "nao"
         },
         "museu": {
-          "melhorHorario": "manha, 09h-12h",
+          "melhorHorario": "Manhã (09h-12h)",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "Fim de tarde para fotos no souq",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "Manhã ou fim de tarde",
           "reservaAntecipada": "nao"
         }
       },
       "especialidades": [
         {
-          "slug": "kibbeh",
+          "slug": "fatteh-damascena",
           "precoUSD": {
             "min": 2,
             "max": 5
           },
-          "obs": "bolinho de trigo com carne; classico sirio servido em qualquer restaurante popular"
+          "obs": "Café da manhã clássico de Damasco com pão árabe, grão-de-bico, iogurte e tahine; servido em restaurantes locais da Cidade Velha",
+          "moedaLocal": "20.000-50.000 SYP",
+          "wiki": "https://en.wikipedia.org/wiki/Fatteh"
         },
         {
-          "slug": "fattoush",
-          "precoUSD": {
-            "min": 2,
-            "max": 4
-          },
-          "obs": "salada com pao sirio torrado e sumac; entrada tradicional"
-        },
-        {
-          "slug": "shawarma-damasco",
+          "slug": "shawarma-souq-hamidiyah",
           "precoUSD": {
             "min": 1,
             "max": 3
           },
-          "obs": "versao damascena no pao com picles e alho; barracas na Cidade Velha"
+          "obs": "Sanduíche de shawarma de cordeiro nos vendedores ao redor do Souq Al-Hamidiyah, comida de rua barata e rápida",
+          "moedaLocal": "10.000-30.000 SYP"
+        },
+        {
+          "slug": "sorvete-bakdash",
+          "precoUSD": {
+            "min": 1,
+            "max": 3
+          },
+          "obs": "Sorvete tradicional de leite de cabra com pistache, batido à mão na sorveteria Bakdash dentro do Souq Al-Hamidiyah desde 1885",
+          "moedaLocal": "10.000-30.000 SYP"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Caminhar pela Rua Reta (Via Recta) na Cidade Velha",
-        "Souk Al-Hamidiyeh: maior mercado coberto da Siria",
-        "Patio externo da Mesquita dos Omiadas (entrada do patio nao cobra)",
-        "Bairro cristao de Bab Touma ao entardecer",
-        "Vista do Monte Qasioun sobre a cidade"
+        "Caminhar pelo Souq Al-Hamidiyah, mercado coberto otomano",
+        "Andar pela Rua Reta (Via Recta), eixo romano da Cidade Velha citada nos Atos dos Apóstolos",
+        "Pátio externo da Mesquita Omíada (entrada com taxa, mas exteriores e portões livres)",
+        "Bairro cristão de Bab Touma e suas igrejas históricas",
+        "Vista panorâmica do Monte Qasioun ao pôr do sol"
       ],
       "dicasEconomia": [
-        "Levar dolares em especie: cartoes nao funcionam por causa das sancoes",
-        "Cambio paralelo da muito mais libras sirias que a taxa oficial",
-        "Comer em barracas do souk: refeicao completa por 2-3 USD"
-      ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+        "Tabela 2026 SYP: Mesquita Omíada ~25.000 SYP (US$2,5), Museu Nacional 100.000 SYP (US$10); pagamento em libra síria no portão",
+        "Coma nos restaurantes pequenos de família na Cidade Velha em vez de hotéis - refeição completa por US$5-8",
+        "Use service taxis (micro-ônibus compartilhados) para deslocar-se: US$0,20-0,50 por trecho"
+      ]
     },
     "Hama": {
       "categoriasMeta": {
@@ -71357,45 +72098,66 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Palmira": {
+      "fontes": [
+        "wikivoyage.org/wiki/Palmyra",
+        "whc.unesco.org/en/list/23",
+        "koryogroup.com/travel-guide/palmyra-syria",
+        "syrianguides.com/syria-sets-new-entrance-fees-for-2026"
+      ],
+      "confianca": "alta",
       "categoriasMeta": {
         "historico": {
-          "melhorHorario": "nascer ou por do sol pra fotos e calor menor",
-          "reservaAntecipada": "nao"
+          "melhorHorario": "Nascer ou pôr do sol para luz dourada nas colunas",
+          "reservaAntecipada": "recomendada"
+        },
+        "atracao": {
+          "melhorHorario": "Manhã cedo (07h-10h) antes do calor do deserto",
+          "reservaAntecipada": "recomendada"
         }
       },
       "especialidades": [
         {
-          "slug": "cha-beduino",
+          "slug": "templo-de-bel-ruinas",
           "precoUSD": {
-            "min": 1,
-            "max": 2
+            "min": 0,
+            "max": 3
           },
-          "obs": "cha preto forte com acucar servido em barracas perto das ruinas"
+          "obs": "Templo do século 1 d.C. parcialmente destruído pelo ISIS em 2015, mas o portal monumental e fragmentos ainda visitáveis; entrada simbólica ou livre",
+          "moedaLocal": "0-25.000 SYP",
+          "wiki": "https://en.wikipedia.org/wiki/Temple_of_Bel"
         },
         {
-          "slug": "tamaras-de-tadmur",
+          "slug": "vale-dos-tumulos",
           "precoUSD": {
-            "min": 2,
-            "max": 5
+            "min": 0,
+            "max": 3
           },
-          "obs": "tamaras do oasis local vendidas a quilo"
+          "obs": "Necrópole com torres funerárias palmirenses de 1km a oeste das ruínas; acesso geralmente livre, algumas tumbas internas exigem guia local",
+          "moedaLocal": "0-25.000 SYP"
+        },
+        {
+          "slug": "tetrapilo-colunata",
+          "precoUSD": {
+            "min": 0,
+            "max": 3
+          },
+          "obs": "Avenida colunada de 1,1km com Tetrapilo de 16 colunas remontado; entrada simbólica em SYP no portão quando há guarda",
+          "moedaLocal": "0-25.000 SYP"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Vista panoramica do Castelo Arabe (Qalaat Shirkuh) ao por do sol",
-        "Oasis de palmeiras que cerca a cidade moderna",
-        "Necropole com tumbas-torre visiveis da estrada"
+        "Caminhar pela colunata principal e Tetrapilo (acesso 24h sem cobrança consistente em 2025-2026)",
+        "Subir até o Castelo Árabe (Qalat Ibn Maan) para vista panorâmica das ruínas no pôr do sol",
+        "Vale dos Túmulos a oeste do sítio, livre acesso",
+        "Teatro Romano de Palmira, parcialmente danificado mas visitável",
+        "Ágora e Tariff Court na zona central das ruínas"
       ],
       "dicasEconomia": [
-        "Bate-volta de Damasco em servees economiza hospedagem",
-        "Levar agua e comida: opcoes locais sao caras pos-destruicao",
-        "Guia local cobra 10-20 USD e e essencial pra contexto pos-ISIS"
-      ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+        "Visitas exigem guia/tour autorizado partindo de Damasco ou Homs; tour de 1 dia US$80-150 por pessoa em grupo",
+        "Sítio arqueológico em si tem cobrança intermitente (~US$2,5 quando aberto) - leve dinheiro em SYP",
+        "Combine com Krak des Chevaliers ou Apameia no mesmo roteiro para amortizar custo de transporte"
+      ]
     }
   },
   "SZ": {
@@ -76076,75 +76838,70 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Funafuti": {
+      "fontes": [
+        "en.wikipedia.org/wiki/Funafuti",
+        "timelesstuvalu.com",
+        "southpacificislands.travel",
+        "en.wikipedia.org/wiki/Funafuti_Conservation_Area"
+      ],
+      "confianca": "media",
+      "especialidades": [
+        {
+          "slug": "funafuti-conservation-area",
+          "precoUSD": {
+            "min": 30,
+            "max": 80
+          },
+          "obs": "Area marinha protegida de 33 km2 com 6 motus, recifes e tartarugas verdes; acesso so via barco fretado a partir de Fongafale",
+          "wiki": "en.wikipedia.org/wiki/Funafuti_Conservation_Area",
+          "moedaLocal": "AUD 45-120 por pessoa em barco"
+        },
+        {
+          "slug": "davids-drill",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Te Vili O Tavita: marco do furo de 1897 da Royal Society que testou a teoria de Darwin sobre atois; gratuito, marco a beira da pista",
+          "wiki": "commonwealthwalkway.info"
+        },
+        {
+          "slug": "fatele-no-maneapa",
+          "precoUSD": {
+            "min": 0,
+            "max": 10
+          },
+          "obs": "Cancoes-danca tradicionais polinesias apresentadas a noite nos maneapa (casas comunitarias); experiencia cultural unica de Tuvalu",
+          "moedaLocal": "contribuicao AUD 10-15"
+        }
+      ],
+      "gratuitosCurados": [
+        "Caminhar pela pista do aeroporto que vira praca comunitaria quando nao ha voo",
+        "Assistir kilikiti (criquete local) ou te ano (bola tradicional) ao entardecer",
+        "Por do sol no lado da lagoa em Fongafale",
+        "Visita ao maneapa central de Vaiaku",
+        "Bunkers e destrocos de avioes da Segunda Guerra na praia"
+      ],
+      "dicasEconomia": [
+        "Hospede em homestay/lodge familiar (Filamona, Esfam) por ~AUD 50/noite em vez de hotel",
+        "Coma nos kai si (lanchonetes) locais perto de Vaiaku: prato AUD 5-10",
+        "Alugue bike ou moto por AUD 10-20/dia: a ilha tem so 12 km"
+      ],
+      "passesCombo": [],
       "categoriasMeta": {
         "natureza": {
-          "melhorHorario": "manhã cedo (06h-10h) com maré baixa",
+          "melhorHorario": "manha cedo (mar calmo)",
           "reservaAntecipada": "recomendada"
         },
         "historico": {
-          "melhorHorario": "fim de tarde (16h-18h)",
+          "melhorHorario": "final da tarde",
           "reservaAntecipada": "nao"
         },
-        "religioso": {
-          "melhorHorario": "domingo de manhã (10h culto principal)",
-          "reservaAntecipada": "nao"
-        },
-        "experiencia": {
-          "melhorHorario": "entardecer (18h-20h) na pista",
-          "reservaAntecipada": "recomendada"
-        },
-        "passeio": {
-          "melhorHorario": "manhã (08h-11h)",
-          "reservaAntecipada": "nao"
-        },
-        "atracao": {
-          "melhorHorario": "horário comercial dias úteis",
+        "cultural": {
+          "melhorHorario": "noite (fatele)",
           "reservaAntecipada": "nao"
         }
-      },
-      "especialidades": [
-        {
-          "slug": "pulaka-taro-gigante",
-          "precoUSD": {
-            "min": 5,
-            "max": 12
-          },
-          "obs": "tubérculo cultivado em borrow pits, base da dieta local, servido cozido ou em pudim"
-        },
-        {
-          "slug": "peixe-cru-coco",
-          "precoUSD": {
-            "min": 8,
-            "max": 18
-          },
-          "obs": "atum ou peixe-papagaio marinado em leite de coco e limão, prato cerimonial"
-        },
-        {
-          "slug": "fekei-pudim-coco",
-          "precoUSD": {
-            "min": 4,
-            "max": 8
-          },
-          "obs": "sobremesa tradicional de coco ralado com pulaka ou banana, servida em festas Fatele"
-        }
-      ],
-      "passesCombo": [],
-      "gratuitosCurados": [
-        "Pista do aeroporto ao entardecer (futebol, motos e socialização da ilha inteira)",
-        "Snorkel direto da praia da lagoa de Funafuti (recife a poucos metros da costa)",
-        "Culto dominical na Igreja Ekalesia Kelisiano com cânticos polifônicos",
-        "David's Drill e memorial da Segunda Guerra dos EUA (caminhada curta)",
-        "Visita ao Maneapa nacional e ao edifício do Parlamento"
-      ],
-      "dicasEconomia": [
-        "Hospede-se em guesthouse familiar (Filamona, Esfam) com café incluso por USD 60-90/noite",
-        "Compre peixe direto dos pescadores no porto de manhã (até 50% mais barato que restaurante)",
-        "Alugue moto/bicicleta por dia (USD 10-15) em vez de táxi; o atol tem só uma estrada"
-      ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      }
     }
   },
   "TW": {
@@ -79255,91 +80012,94 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Cidade do Vaticano": {
-      "categoriasMeta": {
-        "museu": {
-          "melhorHorario": "Abertura 9h ou ultima entrada 16h (sextas noite)",
-          "reservaAntecipada": "obrigatoria"
-        },
-        "religioso": {
-          "melhorHorario": "Cedo (7h-9h) antes das filas",
-          "reservaAntecipada": "nao"
-        },
-        "atracao": {
-          "melhorHorario": "Manha cedo ou fim de tarde",
-          "reservaAntecipada": "recomendada"
-        },
-        "historico": {
-          "melhorHorario": "Manha (tours em horarios fixos)",
-          "reservaAntecipada": "obrigatoria"
-        },
-        "parque": {
-          "melhorHorario": "Manha com tour guiado",
-          "reservaAntecipada": "obrigatoria"
-        },
-        "experiencia": {
-          "melhorHorario": "Quarta de manha (audiencia) ou sexta a noite (tour noturno)",
-          "reservaAntecipada": "recomendada"
-        },
-        "passeio": {
-          "melhorHorario": "Sabado de manha (trem do Vaticano)",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "museivaticani.va",
+        "basilicasanpietro.va",
+        "wikipedia-tourism-vatican-city",
+        "wikivoyage-vatican-city"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "cacio-e-pepe",
+          "slug": "ingresso-museus-vaticanos",
           "precoUSD": {
-            "min": 12,
-            "max": 18
+            "min": 22,
+            "max": 28
           },
-          "obs": "Massa romana classica nas trattorias do entorno (Borgo Pio, Prati)"
+          "obs": "Bilhete oficial dos Museus Vaticanos inclui Capela Sistina; reduzido (7-18 anos e estudantes ate 25) custa metade; reserva online tem taxa de 5 EUR",
+          "moedaLocal": "20-25 EUR",
+          "wiki": "Musei_Vaticani"
         },
         {
-          "slug": "pizza-al-taglio",
+          "slug": "cupula-sao-pedro",
           "precoUSD": {
-            "min": 4,
-            "max": 8
+            "min": 9,
+            "max": 12
           },
-          "obs": "Pizza romana em fatia retangular vendida por peso, otima opcao rapida"
+          "obs": "Subida a Cupola di San Pietro: 10 EUR de elevador+escada ou 8 EUR so escada; bilheteria oficial em basilicasanpietro.va; criancas abaixo de 6 anos gratis",
+          "moedaLocal": "8-10 EUR",
+          "wiki": "St._Peter's_Basilica"
         },
         {
-          "slug": "supplì",
+          "slug": "jardins-vaticanos",
           "precoUSD": {
-            "min": 2,
-            "max": 4
+            "min": 35,
+            "max": 45
           },
-          "obs": "Bolinho de arroz frito recheado com mussarela, street food romano tradicional"
-        }
-      ],
-      "passesCombo": [
-        {
-          "nome": "Omnia Vatican & Rome Card (3 dias)",
-          "precoUSD": 130,
-          "cobre": [
-            "Museus do Vaticano",
-            "Basilica de Sao Pedro fast-track",
-            "Transporte Roma",
-            "2 atracoes Roma"
-          ],
-          "economia": "Pula filas e cobre Roma+Vaticano"
+          "obs": "Visita guiada aos Jardins do Vaticano so com tour oficial (a pe ou de onibus eletrico); reserva obrigatoria pelo site dos museus",
+          "moedaLocal": "33-40 EUR",
+          "wiki": "Vatican_Gardens"
         }
       ],
       "gratuitosCurados": [
-        "Basilica de Sao Pedro (entrada livre, chegar 7h-8h para evitar filas longas)",
-        "Praca de Sao Pedro com colunata de Bernini",
-        "Audiencia Papal nas quartas-feiras (pegar ingresso gratis na Prefeitura da Casa Pontificia)",
-        "Bencao Urbi et Orbi do Papa aos domingos ao meio-dia",
-        "Grutas Vaticanas com tumulos papais (entrada gratis pela basilica)"
+        "Basilica de Sao Pedro: entrada gratuita; fila grande de manha, ir cedo (07h) ou no fim da tarde",
+        "Praca de Sao Pedro: aberta 24h, gratuita, melhor luz para fotos no nascer e por do sol",
+        "Audiencia Papal de quarta-feira: gratuita mediante reserva pela Casa Pontificia",
+        "Angelus de domingo ao meio-dia: Papa aparece na janela do Palacio Apostolico, sem ingresso",
+        "Ultimo domingo do mes: Museus Vaticanos com entrada gratuita das 9h as 14h (ultima entrada 12h30)"
+      ],
+      "passesCombo": [
+        {
+          "nome": "Museus Vaticanos + Capela Sistina (oficial)",
+          "precoUSD": 28,
+          "cobre": [
+            "Museus Vaticanos",
+            "Capela Sistina",
+            "Salas de Rafael",
+            "Galeria dos Mapas"
+          ],
+          "economia": "Bilhete unico para todo o complexo museologico"
+        },
+        {
+          "nome": "Cupula + Basilica + Grutas (fast track)",
+          "precoUSD": 35,
+          "cobre": [
+            "Subida a Cupula",
+            "Basilica de Sao Pedro com audioguia",
+            "Grutas Vaticanas"
+          ],
+          "economia": "Evita a fila externa da Basilica que pode passar de 2h"
+        }
       ],
       "dicasEconomia": [
-        "Ultimo domingo do mes: Museus do Vaticano gratis (chegar 7h, filas enormes)",
-        "Comer em Borgo Pio ou Prati em vez do entorno imediato da praca (precos 30-40% menores)",
-        "Reservar Museus do Vaticano online direto no site oficial evita gente do reservation fee inflado"
+        "Ultimo domingo do mes os Museus Vaticanos sao gratis: chegue antes das 8h pra fila andar rapido",
+        "Reserve a Audiencia Papal de quarta com 2 meses de antecedencia pelo bilhete gratuito da Casa Pontificia",
+        "Compre o ingresso so no site oficial museivaticani.va; sites .com cobram ate 3x mais por reserva"
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "religioso": {
+          "melhorHorario": "Basilica 07h-08h ou 17h-18h evita fila",
+          "reservaAntecipada": "nao"
+        },
+        "museu": {
+          "melhorHorario": "Terca a sexta logo na abertura (09h) ou apos 14h",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "historico": {
+          "melhorHorario": "Praca de Sao Pedro no nascer ou por do sol",
+          "reservaAntecipada": "nao"
+        }
+      }
     }
   },
   "VC": {
@@ -79561,40 +80321,65 @@ export const PRECOS_CIDADE = {
       "confianca": "media"
     },
     "Mustique": {
-      "categoriasMeta": {
-        "experiencia": {
-          "melhorHorario": "dia inteiro, terças e quintas há voo de Mustique Airways",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "mustique-island.com",
+        "en.wikipedia.org",
+        "audleytravel.com"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "basil-bar-cocktail",
+          "slug": "ilha-privada-luxo",
           "precoUSD": {
-            "min": 15,
-            "max": 25
+            "min": 1500,
+            "max": 50000
           },
-          "obs": "coquetel no lendário Basil's Bar, ponto de encontro de celebridades na ilha",
-          "moedaLocal": "EC$ 40-67"
+          "obs": "100+ vilas privadas administradas pela Mustique Company, aluguel semanal de US$10k a US$350k. Cotton House Hotel (17 quartos) ~US$1500-3500/noite.",
+          "moedaLocal": "US$1500+/noite",
+          "wiki": "Mustique"
+        },
+        {
+          "slug": "macaroni-beach",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Praia mais icônica da ilha - areia branca, águas turquesa, sombras de uva-da-praia. Acesso gratuito para hóspedes da ilha.",
+          "moedaLocal": "Gratuito (hóspedes)",
+          "wiki": "Mustique"
+        },
+        {
+          "slug": "basils-bar",
+          "precoUSD": {
+            "min": 20,
+            "max": 80
+          },
+          "obs": "Bar lendário sobre o mar, ponto de encontro da realeza britânica e Mick Jagger. Almoço/jantar US$40-80, festas de quarta famosas.",
+          "moedaLocal": "US$40-80",
+          "wiki": "Basil's Bar"
         }
       ],
       "passesCombo": [],
       "gratuitosCurados": [
-        "Macaroni Beach (acesso livre, areia branca)",
-        "Caminhada pela ilha sem barreiras de propriedade",
-        "Vista de Britannia Bay",
-        "Avistamento de tartarugas em Pasture Bay",
-        "Pôr do sol em L'Ansecoy Beach"
+        "Macaroni Beach (acesso só para hóspedes da ilha)",
+        "Mustique Tennis Club com 5 quadras iluminadas (hóspedes)",
+        "Trilhas a pé/cavalo pela ilha (28 km estradas internas)"
       ],
       "dicasEconomia": [
-        "Dia em Mustique cobra ~US$ 180 com lancha de Bequia: vá em grupo para dividir",
-        "Almoço no Basil's em vez de jantar economiza ~40%",
-        "Não há ATM: leve dinheiro contado, evite gorjeta inflada de hotel"
+        "Day trip por iate fundeado fora das águas privadas - acesso só ao Basil's Bar",
+        "Mustique Airways de Barbados (50 min) é a rota mais barata vs jato privado",
+        "Sem 'opção barata' real - Mustique é destino de luxo por desenho"
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "Manhã para Macaroni Beach",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "atracao": {
+          "melhorHorario": "Pôr do sol no Basil's Bar",
+          "reservaAntecipada": "obrigatoria"
+        }
+      }
     },
     "Owia": {
       "categoriasMeta": {
@@ -79665,38 +80450,77 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Wallilabou": {
-      "categoriasMeta": {
-        "atracao": {
-          "melhorHorario": "final da tarde, luz dourada para fotos",
-          "reservaAntecipada": "nao"
-        }
-      },
+      "fontes": [
+        "wallilabou.com",
+        "tripadvisor.com",
+        "komoot.com"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "rum-punch-wallilabou",
+          "slug": "set-piratas-do-caribe",
           "precoUSD": {
-            "min": 4,
-            "max": 8
+            "min": 0,
+            "max": 0
           },
-          "obs": "rum punch servido no Wallilabou Anchorage Bar, antigo set de filmagem",
-          "moedaLocal": "EC$ 10-22"
+          "obs": "Locação de 'Port Royal' em Piratas do Caribe. Restos do cenário (doca, fachadas, rocha icônica) ainda visíveis. Acesso gratuito pela baía.",
+          "moedaLocal": "Gratuito",
+          "wiki": "Wallilabou Bay"
+        },
+        {
+          "slug": "wallilabou-anchorage",
+          "precoUSD": {
+            "min": 50,
+            "max": 65
+          },
+          "obs": "Hotel de 12 quartos sobre a doca, EC$130-150 (US$50-65). Restaurante caribenho com peixe e lagosta locais. Boia de iate EC$25 (US$10) por noite.",
+          "moedaLocal": "EC$130-150",
+          "wiki": "Wallilabou Anchorage"
+        },
+        {
+          "slug": "praia-areia-preta",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Praia de areia preta vulcânica, águas calmas para snorkel e mergulho. Cascata de Wallilabou Falls a curta caminhada.",
+          "moedaLocal": "Gratuito",
+          "wiki": "Wallilabou Bay"
         }
       ],
-      "passesCombo": [],
+      "passesCombo": [
+        {
+          "nome": "Tour Piratas do Caribe (saindo de Kingstown)",
+          "precoUSD": 60,
+          "cobre": [
+            "Wallilabou Bay",
+            "Buccament Beach",
+            "transporte rodoviário"
+          ],
+          "economia": "Inclui guia e transporte vs táxi privativo US$80+"
+        }
+      ],
       "gratuitosCurados": [
-        "Cenário original de Piratas do Caribe na baía",
-        "Arco natural de rocha vulcânica",
-        "Mirante da estrada costeira"
+        "Cenário remanescente do filme na doca",
+        "Cascata de Wallilabou Falls (~10 min de caminhada)",
+        "Praia de areia preta vulcânica",
+        "Wi-Fi grátis no bar do Anchorage com qualquer consumo"
       ],
       "dicasEconomia": [
-        "Combine Wallilabou + Dark View Falls em um único dia de ônibus",
-        "Não pague por tour exclusivo: ônibus público chega perto por EC$ 6",
-        "Beba água de coco local em vez de garrafa por EC$ 8"
+        "Vá por conta com ônibus de Kingstown (~EC$10) em vez de tour US$60",
+        "Almoce o prato do dia caribenho no Anchorage (US$15-25) vs tour com almoço incluso",
+        "Boia EC$25/noite economiza vs marinas pagas em Bequia ou Union"
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "atracao": {
+          "melhorHorario": "Manhã ou fim de tarde para a luz da baía",
+          "reservaAntecipada": "nao"
+        },
+        "natureza": {
+          "melhorHorario": "Manhã para mar calmo no snorkel",
+          "reservaAntecipada": "nao"
+        }
+      }
     }
   },
   "VE": {
@@ -79822,109 +80646,133 @@ export const PRECOS_CIDADE = {
     },
     "Caracas": {
       "fontes": [
-        "v1-only"
+        "wikivoyage.org/wiki/Caracas",
+        "wikitravel.org/en/Caracas",
+        "tripadvisor.com"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "museu": {
-          "melhorHorario": "ter-dom 09h-17h (fechados segunda)",
-          "reservaAntecipada": "nao"
-        },
-        "parque": {
-          "melhorHorario": "manhã cedo fim de semana (06h-10h)",
-          "reservaAntecipada": "nao"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
-        {
-          "slug": "pabellon-criollo",
-          "precoUSD": {
-            "min": 5,
-            "max": 12
-          },
-          "obs": "Prato nacional; melhor em restaurantes tradicionais de Sabana Grande e Chacao"
-        },
         {
           "slug": "arepa-reina-pepiada",
           "precoUSD": {
             "min": 2,
             "max": 5
           },
-          "obs": "Arepa com frango, abacate e maionese; ícone caraqueño"
+          "obs": "Arepa recheada com salada de frango e abacate, criada em Caracas nos anos 50, venda em areperas de bairro"
         },
         {
-          "slug": "cachapa-queso-mano",
+          "slug": "pabellon-criollo",
+          "precoUSD": {
+            "min": 5,
+            "max": 12
+          },
+          "obs": "Prato nacional: carne desfiada, arroz, feijao preto e banana frita, servido em restaurantes tradicionais"
+        },
+        {
+          "slug": "cachapa-con-queso-de-mano",
           "precoUSD": {
             "min": 3,
             "max": 7
           },
-          "obs": "Panqueca de milho doce com queijo branco fresco"
+          "obs": "Panqueca doce de milho com queijo branco fresco, vendida em barracas e areperas pela cidade"
         }
       ],
-      "passesCombo": [],
       "gratuitosCurados": [
-        "Galería de Arte Nacional (entrada gratuita)",
-        "Museo de Arte Contemporáneo (entrada gratuita)",
-        "Plaza Bolívar e Casa Natal de Bolívar",
-        "Parque Los Caobos",
-        "Jardim Botânico de Caracas"
+        "Plaza Bolivar e centro colonial historico com Catedral e Capitolio",
+        "Casa Natal de Simon Bolivar - entrada gratuita",
+        "Parque del Este (Generalisimo Francisco de Miranda) - 700 hectares",
+        "Bulevar de Sabana Grande - principal corredor comercial",
+        "Mirante del Calvario com vista para o vale de Caracas"
       ],
+      "passesCombo": [],
       "dicasEconomia": [
-        "Use Metrocable e Metro (USD 0,10-0,30); táxi de app é mais seguro que rua",
-        "Áreas seguras concentradas em Chacao, Altamira e Las Mercedes; evite descer ao centro à noite",
-        "Pague em USD em cash; câmbio paralelo dá mais bolívares que oficial"
-      ]
+        "Pague em dolares em cedulas pequenas - cartoes internacionais nem sempre funcionam",
+        "Use taxis recomendados pelo hotel, evite parar carros na rua por seguranca",
+        "Areperas locais saem por 2-5 USD vs restaurantes turisticos 15-30 USD"
+      ],
+      "categoriasMeta": {
+        "museu": {
+          "melhorHorario": "Terca a sexta 10h-12h, evitar fins de semana",
+          "reservaAntecipada": "nao"
+        },
+        "religioso": {
+          "melhorHorario": "Manha 9h-11h fora de missas",
+          "reservaAntecipada": "nao"
+        },
+        "parque": {
+          "melhorHorario": "Manha cedo 7h-10h por temperatura e seguranca",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "Teleferico do Avila: sabado/domingo 8h-10h",
+          "reservaAntecipada": "recomendada"
+        }
+      }
     },
     "Coro": {
       "fontes": [
-        "v1-only"
+        "wikivoyage.org/wiki/Coro",
+        "whc.unesco.org/es/list/658",
+        "wikivoyage.org/wiki/Médanos_de_Coro_National_Park"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "pôr-do-sol (16h-18h)",
-          "reservaAntecipada": "nao"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "chivo-coro",
+          "slug": "sandboard-medanos-de-coro",
           "precoUSD": {
-            "min": 6,
-            "max": 12
+            "min": 5,
+            "max": 15
           },
-          "obs": "Cabrito guisado; prato emblemático de Falcón e Coro"
+          "obs": "Aluguel de prancha para descer dunas de 30m no Parque Nacional Medanos, unico deserto da Venezuela"
         },
         {
-          "slug": "dulce-leche-cabra",
+          "slug": "tour-arquitetonico-bahareque",
           "precoUSD": {
-            "min": 2,
-            "max": 5
+            "min": 10,
+            "max": 30
           },
-          "obs": "Doce de leite de cabra típico da região semiárida"
+          "obs": "City tour por casas coloniais em tecnica bahareque (barro, madeira, cana), fusao mudéjar/holandesa unica no Caribe"
         },
         {
-          "slug": "arepa-coro",
+          "slug": "passeio-buggy-quadriciclo-dunas",
           "precoUSD": {
-            "min": 1,
-            "max": 3
+            "min": 25,
+            "max": 60
           },
-          "obs": "Arepa recheada com queijo de cabra local"
+          "obs": "Passeio em quadriciclo ou buggy 4x4 pelas dunas, 1-2h, com guia local"
         }
       ],
-      "passesCombo": [],
       "gratuitosCurados": [
-        "Centro histórico de Coro (Patrimônio UNESCO)",
-        "Médanos de Coro (entrada gratuita ao parque das dunas)",
-        "Catedral de Coro (mais antiga da Venezuela)",
-        "Casa de las Ventanas de Hierro",
-        "Plaza Bolívar de Coro"
+        "Centro historico UNESCO com 602 edificios coloniais",
+        "Catedral de Coro - primeira catedral de Venezuela (1583)",
+        "Iglesia de San Clemente com cruz original de fundacao",
+        "Plaza Bolivar e Casa de las Ventanas de Hierro",
+        "Parque Nacional Medanos de Coro - entrada livre nas dunas"
       ],
+      "passesCombo": [],
       "dicasEconomia": [
-        "Dunas são gratuitas; pague apenas USD 5-10 se quiser sandboard alugado",
-        "Coma em areperas locais (USD 2-4) em vez de restaurantes turísticos",
-        "Caminhe pelo centro histórico; tudo está em raio de 10 quadras"
-      ]
+        "Onibus Carabobo leva ate Medanos por menos de 1 USD vs taxi 10+",
+        "Centro historico todo a pe - nao precisa de taxi entre atracoes",
+        "Visite ao por do sol nas dunas - foto incrivel e fresco evita gasto com agua"
+      ],
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "Manha 8h-11h fora do calor",
+          "reservaAntecipada": "nao"
+        },
+        "religioso": {
+          "melhorHorario": "Catedral: 9h-12h",
+          "reservaAntecipada": "nao"
+        },
+        "parque": {
+          "melhorHorario": "Medanos: por do sol 17h-18h",
+          "reservaAntecipada": "nao"
+        },
+        "museu": {
+          "melhorHorario": "Terca a domingo 10h-16h",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Falcón": {
       "fontes": [
@@ -80040,115 +80888,145 @@ export const PRECOS_CIDADE = {
     },
     "Los Roques": {
       "fontes": [
-        "v1-only"
+        "wikivoyage.org/wiki/Los_Roques",
+        "frommers.com/destinations/los-roques-national-park",
+        "takeyourbackpack.com"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "estação seca (dez-mai)",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "langosta-roques",
+          "slug": "voo-charter-caracas-los-roques",
           "precoUSD": {
-            "min": 25,
-            "max": 50
+            "min": 250,
+            "max": 385
           },
-          "obs": "Lagosta espinhosa caribenha; especialidade do arquipélago em temporada"
+          "obs": "Voo ida e volta de Caracas para Gran Roque em pequeno aviao, 30-40 min, unica forma viavel de chegar"
         },
         {
-          "slug": "pescado-rabo-amarillo",
+          "slug": "penero-cayo-tour-diario",
           "precoUSD": {
-            "min": 15,
-            "max": 30
+            "min": 20,
+            "max": 100
           },
-          "obs": "Peixe fresco grelhado servido nas posadas de Gran Roque"
+          "obs": "Lancha rapida ate cayos isolados (Madrisqui, Francisqui, Crasqui) saindo do porto de Gran Roque"
         },
         {
-          "slug": "ceviche-roques",
+          "slug": "mergulho-recife",
           "precoUSD": {
-            "min": 10,
-            "max": 18
+            "min": 60,
+            "max": 150
           },
-          "obs": "Ceviche de peixe local com limão e cebola roxa"
-        }
-      ],
-      "passesCombo": [
-        {
-          "nome": "Pacote Los Roques 1 dia",
-          "precoUSD": 200,
-          "cobre": [
-            "voo Caracas-Gran Roque",
-            "almoço",
-            "tour de cayo",
-            "taxa parque"
-          ],
-          "economia": "voo avulso já custa USD 150+"
+          "obs": "Mergulho com cilindro nos recifes de coral, partindo dos dive centers de Gran Roque"
         }
       ],
       "gratuitosCurados": [
-        "Praias de Gran Roque (caminhada)",
-        "Vista do farol de Gran Roque",
-        "Pôr-do-sol sobre as ilhotas",
-        "Snorkel na praia em frente ao vilarejo"
+        "Caminhada por Gran Roque - vilarejo de pescadores com 3 ruas de areia",
+        "Mirante El Faro com vista 360 do arquipelago",
+        "Praia central de Gran Roque - snorkel raso gratuito",
+        "Observacao de aves marinhas pelo Refugio de Fauna Silvestre",
+        "Por do sol no porto de Gran Roque"
+      ],
+      "passesCombo": [
+        {
+          "nome": "Taxa de entrada Parque Nacional Los Roques",
+          "precoUSD": 50,
+          "cobre": [
+            "acesso ao parque",
+            "uso das cayos",
+            "valido toda estadia"
+          ]
+        }
       ],
       "dicasEconomia": [
-        "Reserve posada com pensão completa: refeições avulsas em Gran Roque custam USD 30-50",
-        "Tour de cayo compartilhado é metade do preço de privado",
-        "Lagosta só pode ser pescada de nov a abril; fora disso evite (multas e qualidade)"
-      ]
+        "Posadas de pacote ja incluem taxa do parque, peneros e pensao completa - compara antes",
+        "Mochileiros em dorm pagam 20-40 USD/noite, posada turistica fica 150+",
+        "Compre snorkel em Caracas - aluguel em Gran Roque sai 10 USD/dia"
+      ],
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "Dezembro a abril (seca), mar mais calmo",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "atracao": {
+          "melhorHorario": "Voo manha cedo, retorno tarde",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "parque": {
+          "melhorHorario": "Cayos pela manha antes do vento",
+          "reservaAntecipada": "recomendada"
+        }
+      }
     },
     "Mérida": {
       "fontes": [
-        "v1-only"
+        "wikivoyage.org/wiki/Mérida_(city,_Venezuela)",
+        "en.wikipedia.org/wiki/Mérida_cable_car",
+        "venezuela.com.ve"
       ],
-      "confianca": "baixa",
-      "categoriasMeta": {
-        "atracao": {
-          "melhorHorario": "manhã cedo (07h-09h)",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "pabellon-criollo",
+          "slug": "teleferico-mukumbari",
           "precoUSD": {
-            "min": 4,
-            "max": 8
+            "min": 25,
+            "max": 60
           },
-          "obs": "Prato nacional venezuelano: carne desfiada, arroz, feijão preto e banana frita"
+          "obs": "Maior e mais alto teleferico do mundo, 12.5km ate Pico Espejo (4765m), 5 estacoes"
         },
         {
-          "slug": "arepa-andina",
+          "slug": "helado-coromoto-200-sabores",
           "precoUSD": {
             "min": 1,
             "max": 3
           },
-          "obs": "Arepa recheada típica dos Andes; comum no café da manhã"
+          "obs": "Sorveteria Coromoto, recorde Guinness com mais de 900 sabores ja servidos, gelo curioso de cogumelo a cerveja"
         },
         {
-          "slug": "trucha-andina",
+          "slug": "parapente-tandem-andes",
           "precoUSD": {
-            "min": 6,
-            "max": 12
+            "min": 60,
+            "max": 120
           },
-          "obs": "Truta criada nos rios andinos; especialidade local de Mérida"
+          "obs": "Voo duplo de parapente sobre vale dos Andes, 30-40 min, decolagem em Las Gonzales ou Tierra Negra"
         }
       ],
-      "passesCombo": [],
       "gratuitosCurados": [
-        "Plaza Bolívar e centro histórico de Mérida",
-        "Mirador da Cordilheira Andina",
-        "Catedral Metropolitana de Mérida",
-        "Parque Las Heroínas (base do teleférico)"
+        "Plaza Bolivar e Catedral de Merida no centro historico",
+        "Jardim Botanico da Universidade de Los Andes - 44 hectares",
+        "Mercado Principal de Merida - artesanato e comida andina",
+        "Plaza de las Heroinas com vista da Sierra Nevada",
+        "Caminhada gratuita pelo Parque La Isla"
+      ],
+      "passesCombo": [
+        {
+          "nome": "Mukumbari Roundtrip Pico Espejo",
+          "precoUSD": 50,
+          "cobre": [
+            "4 estacoes em 4 teleféricos",
+            "ida e volta",
+            "acesso a mirantes"
+          ]
+        }
       ],
       "dicasEconomia": [
-        "Use bolívares em dinheiro ou Zelle (USD); cartões internacionais raramente funcionam",
-        "Restaurantes locais cobram em USD ou bolívar ao câmbio paralelo, sempre mais barato que em hotéis",
-        "Teleférico fecha por manutenção e clima; confirme operação no mesmo dia"
-      ]
+        "Suba o teleferico ate Loma Redonda (3) por metade do preco e veja paisagem similar",
+        "Andes de Merida e a area mais barata e segura da Venezuela para mochileiros",
+        "Mercado Principal serve almoco completo por 3-5 USD vs 15+ em restaurantes"
+      ],
+      "categoriasMeta": {
+        "atracao": {
+          "melhorHorario": "Teleferico: 7h30 abertura, ceu mais limpo manha cedo",
+          "reservaAntecipada": "recomendada"
+        },
+        "natureza": {
+          "melhorHorario": "Dezembro a abril (seca), manhas claras",
+          "reservaAntecipada": "recomendada"
+        },
+        "parque": {
+          "melhorHorario": "Jardim Botanico: 9h-15h",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Nueva Esparta": {
       "fontes": [
@@ -80982,234 +81860,277 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Espiritu Santo": {
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "Manha para Blue Hole (luz melhor)",
-          "reservaAntecipada": "recomendada"
-        },
-        "experiencia": {
-          "melhorHorario": "Manha para mergulho no Coolidge",
-          "reservaAntecipada": "obrigatoria"
-        },
-        "passeio": {
-          "melhorHorario": "Meio do dia em Matevulu",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "fontes": [
+        "vanuatu.travel (oficial)",
+        "wikivoyage.org",
+        "wikipedia.org SS President Coolidge"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "santo-beef-steak",
+          "slug": "ss-president-coolidge-dive",
           "precoUSD": {
-            "min": 12,
-            "max": 25
+            "min": 80,
+            "max": 180
           },
-          "obs": "Carne famosa de Santo criada em plantacoes de coco; servida em restaurantes de Luganville"
+          "obs": "Maior naufragio mergulhavel do mundo (luxuoso liner virado transporte militar afundado em 1942). Mergulho duplo com operadora certificada.",
+          "moedaLocal": "9.000-21.000 VUV",
+          "wiki": "https://en.wikipedia.org/wiki/SS_President_Coolidge"
         },
         {
-          "slug": "peixe-do-mercado",
+          "slug": "champagne-beach",
           "precoUSD": {
-            "min": 3,
-            "max": 6
+            "min": 5,
+            "max": 18
           },
-          "obs": "Refeicoes com peixe ou arroz nas barracas do mercado de Luganville por ~400 vatu"
+          "obs": "Praia de areia branca com bolhas naturais vulcanicas. Entrada 500 VUV por pessoa ou 2000 VUV por carro.",
+          "moedaLocal": "500-2.000 VUV",
+          "wiki": "https://en.wikivoyage.org/wiki/Espiritu_Santo"
         },
         {
-          "slug": "bougna",
+          "slug": "millennium-cave-trek",
           "precoUSD": {
-            "min": 4,
-            "max": 8
+            "min": 70,
+            "max": 100
           },
-          "obs": "Vegetais com carne e leite de coco em folhas de bananeira; pratos tradicionais em hoteis e vilarejos"
+          "obs": "Maior caverna de Vanuatu, expedicao de dia inteiro: trekking, travessia de rio e canoa de bambu. Inclui guia da vila.",
+          "moedaLocal": "8.500-12.000 VUV",
+          "wiki": "https://www.vanuatu.travel/au/plan/where-to-go/santo"
         }
+      ],
+      "gratuitosCurados": [
+        "Million Dollar Point (artefatos da WWII expostos no mar, raso, snorkel livre)",
+        "Mercado de Luganville (frutas, peixe, artesanato Ni-Van)",
+        "Mama's Handicraft Shop (vitrines gratuitas na rua principal)",
+        "South Pacific WWII Museum jardim externo e fachada",
+        "Praias publicas ao longo da Segond Channel"
       ],
       "passesCombo": [],
-      "gratuitosCurados": [
-        "Praia Champagne Beach em baixa temporada (taxa minima)",
-        "Caminhada pelo centro historico de Luganville",
-        "Mercado de Luganville (provar e ver produtos)",
-        "Vista do canal Segond (antiga base americana WWII)"
-      ],
       "dicasEconomia": [
-        "Coma no mercado de Luganville por ~400 vatu",
-        "Viaje entre junho e agosto para hospedagem mais barata",
-        "Junte grupo para alugar 4WD (10.000 vatu/dia)"
+        "Para Champagne Beach: alugue carro em grupo e divida os 2000 VUV de entrada por veiculo - sai mais barato que por pessoa.",
+        "Para Blue Holes: va de bicicleta (aluguel ~1500 VUV/dia) em vez de tour - taxas de entrada sao baixas (300-500 VUV).",
+        "Mergulho no Coolidge: feche pacote de 4-5 mergulhos com Allan Power ou Aquamarine - desconto vs avulso."
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "Blue Holes e Champagne: manha (08h-11h)",
+          "reservaAntecipada": "nao"
+        },
+        "historico": {
+          "melhorHorario": "Mergulho Coolidge: manha (07h-10h), visibilidade",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "museu": {
+          "melhorHorario": "WWII Museum: tarde (13h-16h)",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Pentecost": {
-      "categoriasMeta": {
-        "experiencia": {
-          "melhorHorario": "Salto de manha (Naghol ocorre abril-julho)",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "vanuatu.travel (oficial)",
+        "wikivoyage.org / wikitravel",
+        "lonelyplanet.com"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "yam-assado",
+          "slug": "naghol-land-diving",
           "precoUSD": {
-            "min": 2,
-            "max": 4
+            "min": 100,
+            "max": 130
           },
-          "obs": "Inhame eh sagrado em Pentecost (ligado ao Naghol); servido cozido em festas locais"
+          "obs": "Ritual ancestral que inspirou o bungee jump: homens saltam de torres de 20-30m com cipos nos tornozelos. So abril-junho, semanal.",
+          "moedaLocal": "10.000-12.000 VUV",
+          "wiki": "https://en.wikipedia.org/wiki/Land_diving"
         },
         {
-          "slug": "laplap-de-bananeira",
+          "slug": "homestay-bunlap-pangi",
           "precoUSD": {
-            "min": 2,
-            "max": 5
+            "min": 25,
+            "max": 45
           },
-          "obs": "Versao tradicional preparada em forno de pedra; comum em vilarejos do norte"
+          "obs": "Diaria em casa de folha tradicional nas vilas de Bunlap, Pangi ou Lonorore. Inclui refeicoes e vida comunitaria.",
+          "moedaLocal": "3.000-5.500 VUV",
+          "wiki": "https://www.vanuatu.travel/en/places/pentecost-maewo"
+        },
+        {
+          "slug": "wailapa-melsisi-falls",
+          "precoUSD": {
+            "min": 10,
+            "max": 20
+          },
+          "obs": "Cachoeiras escondidas no interior montanhoso. Acesso por trilha com guia da vila vizinha.",
+          "moedaLocal": "1.200-2.500 VUV",
+          "wiki": "https://www.vanuatu.travel/au/provinces/penama-province/pentecost"
         }
+      ],
+      "gratuitosCurados": [
+        "Praias de areia preta vulcanica ao longo da costa oeste",
+        "Caminhada pela espinha verde central de Pentecost",
+        "Visita informal a vilas costeiras de Lonorore",
+        "Mirantes naturais nos picos vulcanicos do interior",
+        "Observacao de pescadores tradicionais ao amanhecer"
       ],
       "passesCombo": [
         {
-          "nome": "Naghol Land Diving day tour",
-          "precoUSD": 460,
+          "nome": "Pacote Day Tour Naghol (Air Taxi Vanuatu)",
+          "precoUSD": 600,
           "cobre": [
-            "voo Port Vila-Pentecost",
-            "transporte terrestre",
-            "entrada do salto",
-            "almoco"
+            "Voo Port Vila-Pentecost ida/volta",
+            "Transfer terrestre",
+            "Entrada do ritual",
+            "Almoco",
+            "Guia"
           ],
-          "economia": "Pacote sai mais barato que avulso"
+          "economia": "~25% vs montar separado"
+        }
+      ],
+      "dicasEconomia": [
+        "So va em abril-junho - fora dessa janela, o land diving nao acontece e a ilha tem zero infra turistica.",
+        "Compre passagem aerea direto com Air Vanuatu (Lonoreo ou Sara) em vez de pacote completo - economia ~30%.",
+        "Homestay nas vilas custa 1/3 do pacote turistico e inclui refeicoes."
+      ],
+      "categoriasMeta": {
+        "atracao": {
+          "melhorHorario": "Naghol: sabados abril-junho, manha",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "natureza": {
+          "melhorHorario": "Trilhas: manha (06h-10h)",
+          "reservaAntecipada": "recomendada"
+        }
+      }
+    },
+    "Port Vila": {
+      "fontes": [
+        "vanuatu.travel (oficial)",
+        "wikivoyage.org",
+        "lonelyplanet.com"
+      ],
+      "confianca": "alta",
+      "especialidades": [
+        {
+          "slug": "underwater-post-office-hideaway",
+          "precoUSD": {
+            "min": 25,
+            "max": 50
+          },
+          "obs": "Unico no mundo: cartao postal a prova d'agua entregue por mergulho na Hideaway Island. Inclui ferry de 2min + entrada.",
+          "moedaLocal": "3.000-6.000 VUV",
+          "wiki": "https://en.wikivoyage.org/wiki/Port-Vila"
+        },
+        {
+          "slug": "mele-cascades",
+          "precoUSD": {
+            "min": 15,
+            "max": 25
+          },
+          "obs": "Cachoeira em cascata de 35m com piscinas naturais, a 20min de Port Vila. Entrada para trilha e banho.",
+          "moedaLocal": "2.000-3.000 VUV",
+          "wiki": "https://www.vanuatu.travel/au/places/portvila"
+        },
+        {
+          "slug": "ekasup-cultural-village",
+          "precoUSD": {
+            "min": 20,
+            "max": 35
+          },
+          "obs": "Aldeia cultural com guias locais ensinando caca, culinaria e costumes ancestrais Ni-Vanuatu.",
+          "moedaLocal": "2.500-4.000 VUV",
+          "wiki": "https://www.vanuatu.travel/en/explore/port-vila"
         }
       ],
       "gratuitosCurados": [
-        "Caminhadas pelas cachoeiras das ravinas de Pentecost",
-        "Vilarejos kastom (visita com doacao)",
-        "Praias selvagens do leste"
+        "Port Vila Market (mercado central com frutas tropicais e artesanato)",
+        "Caminhada pela orla da Vila Bay com vista pro porto",
+        "Parlamento Nacional e jardins externos",
+        "Praia de Pango (acesso publico, ao sul da cidade)",
+        "Independence Park e monumento da independencia"
       ],
+      "passesCombo": [],
       "dicasEconomia": [
-        "Compre o tour Naghol em pacote (mais barato que voo+entrada separados)",
-        "Hospede-se em guesthouses locais como Noda (~3.500 vatu/noite)",
-        "Leve dinheiro vivo; nao tem ATM na ilha"
+        "Pegue o bus local (van branca com B na placa) por 150 VUV em vez de taxi - cobra por trecho.",
+        "Coma no mercado central: pratos quentes Ni-Van por 500-800 VUV (1/3 do preco de restaurante).",
+        "Va a Mele Cascades cedo (antes 10h) - cruzeiros chegam tarde e sobem o preco do transporte."
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
-    },
-    "Port Vila": {
       "categoriasMeta": {
         "natureza": {
-          "melhorHorario": "Manha cedo para Mele Cascades antes dos onibus",
-          "reservaAntecipada": "recomendada"
+          "melhorHorario": "Manha cedo (07h-10h) para Mele Cascades",
+          "reservaAntecipada": "nao"
         },
         "museu": {
-          "melhorHorario": "Manha entre 9h e 12h",
+          "melhorHorario": "Tarde (14h-16h), evita calor",
           "reservaAntecipada": "nao"
         },
         "atracao": {
-          "melhorHorario": "Mercado Municipal de manha (mais fresco)",
-          "reservaAntecipada": "nao"
-        },
-        "experiencia": {
-          "melhorHorario": "Manha para tour cultural Ekasup",
+          "melhorHorario": "Hideaway Island: manha (09h-12h)",
           "reservaAntecipada": "recomendada"
         }
-      },
-      "especialidades": [
-        {
-          "slug": "laplap-no-mercado",
-          "precoUSD": {
-            "min": 1,
-            "max": 3
-          },
-          "obs": "Versao fresca no Mercado Municipal por ~200 vatu; barata e autentica"
-        },
-        {
-          "slug": "poulet-fish-grelhado",
-          "precoUSD": {
-            "min": 4,
-            "max": 8
-          },
-          "obs": "Peixe local snapper grelhado, sabor delicado, em barracas e restaurantes do mercado"
-        },
-        {
-          "slug": "tuluk-sopa",
-          "precoUSD": {
-            "min": 3,
-            "max": 5
-          },
-          "obs": "Sopa tradicional com peixe, mariscos e legumes; servida em barracas locais"
-        }
-      ],
-      "passesCombo": [],
-      "gratuitosCurados": [
-        "Mercado Municipal de Port Vila (caminhar e provar)",
-        "Calcadao da orla e Independence Park",
-        "Praia de Erakor Lagoon (acesso publico)",
-        "Igreja Presbiteriana historica do centro"
-      ],
-      "dicasEconomia": [
-        "Almoce nas barracas do mercado por 200-400 vatu",
-        "Use o onibus local (minivan) por 150 vatu no lugar de taxi",
-        "Compre Tusker (cerveja local) no supermercado em vez de bar"
-      ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      }
     },
     "Tanna": {
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "Fim de tarde para o por do sol no Yasur",
-          "reservaAntecipada": "obrigatoria"
-        },
-        "experiencia": {
-          "melhorHorario": "Tarde com retorno noturno",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "vanuatu.travel (oficial)",
+        "wikivoyage.org",
+        "lonelyplanet.com"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "laplap-tradicional",
+          "slug": "mount-yasur-volcano-rim",
           "precoUSD": {
-            "min": 2,
-            "max": 5
+            "min": 80,
+            "max": 120
           },
-          "obs": "Prato nacional de Vanuatu feito com inhame ralado e leite de coco; comum em refeicoes em vilarejos kastom"
+          "obs": "Vulcao mais acessivel do mundo: 4WD chega a 150m da cratera ativa. Entrada do parque + guia obrigatorio. Por do sol e' o auge.",
+          "moedaLocal": "10.000-15.000 VUV",
+          "wiki": "https://en.wikivoyage.org/wiki/Tanna"
         },
         {
-          "slug": "kava-cerimonial",
+          "slug": "blue-cave-tanna",
           "precoUSD": {
-            "min": 2,
-            "max": 5
+            "min": 25,
+            "max": 50
           },
-          "obs": "Bebida tradicional servida em nakamals locais; Tanna eh famosa pela kava mais forte de Vanuatu"
-        }
-      ],
-      "passesCombo": [
+          "obs": "Gruta marinha azul-eletrico acessivel so nadando por passagem submersa. Inclui guia local da vila vizinha.",
+          "moedaLocal": "3.000-6.000 VUV",
+          "wiki": "https://www.vanuatu.travel/au/plan/where-to-go/tanna"
+        },
         {
-          "nome": "Tour de meio dia Mt Yasur com transporte 4WD",
-          "precoUSD": 120,
-          "cobre": [
-            "transporte 4WD",
-            "entrada do vulcao",
-            "guia local"
-          ],
-          "economia": "Inclui taxa de 9.750 vatu e 4WD"
+          "slug": "kastom-village-yakel",
+          "precoUSD": {
+            "min": 30,
+            "max": 60
+          },
+          "obs": "Visita guiada a vila tradicional (Yakel/Ikunala) - sem escola, lojas ou TV. Ritual de kava com chefes.",
+          "moedaLocal": "3.500-7.000 VUV",
+          "wiki": "https://www.lonelyplanet.com/articles/vanuatu-adventure-guide-tanna"
         }
       ],
       "gratuitosCurados": [
-        "Caminhada pelo canyon de cinzas na base do Mt Yasur",
-        "Praias selvagens de Port Resolution",
-        "Visita a vilarejo kastom (doacao sugerida)",
-        "Fontes termais naturais perto de Port Resolution"
+        "Praias de areia preta de Port Resolution (acesso livre)",
+        "Banyan tree gigante de Yakel (entrada nao obrigatoria fora da visita)",
+        "Trilha curta ate Louniel ou Lenuingao Falls (sem taxa formal)",
+        "Caminhada pela planicie de cinzas de Yasur a distancia segura",
+        "Sulphur Bay e vista da fumarola do litoral"
       ],
+      "passesCombo": [],
       "dicasEconomia": [
-        "Junte grupo para dividir o 4WD do Yasur (mais barato por pessoa)",
-        "Hospede-se em bungalow local de vilarejo no lugar de resort",
-        "Leve agua e snacks de Port Vila; quase nada vende perto do vulcao"
+        "Va a Yasur no final da tarde (entrada 16h30) - paga uma vez e ve dia + noite com lava.",
+        "Junte-se a grupo de hospedes da pousada pra dividir o 4WD - economia de 40-60%.",
+        "Reserve Yasur direto com guesthouse local em vez de agencia em Port Vila (poupa 20-30%)."
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "Yasur: 16h30-19h (entrada + por do sol)",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "atracao": {
+          "melhorHorario": "Blue Cave: 10h-14h com sol alto",
+          "reservaAntecipada": "recomendada"
+        }
+      }
     }
   },
   "WS": {
@@ -82048,55 +82969,72 @@ export const PRECOS_CIDADE = {
   },
   "YE": {
     "Aden": {
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manha cedo ou fim de tarde, calor litoraneo intenso",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "fontes": [
+        "wikivoyage.org/Aden",
+        "tripadvisor.com/Aden",
+        "yemenheritagetours.com",
+        "wikipedia.org/Aden"
+      ],
+      "confianca": "media",
       "especialidades": [
         {
-          "slug": "samak-mashwi",
-          "precoUSD": {
-            "min": 4,
-            "max": 12
-          },
-          "obs": "peixe grelhado do Golfo de Aden servido com arroz basmati e limao"
-        },
-        {
-          "slug": "zurbian",
-          "precoUSD": {
-            "min": 4,
-            "max": 10
-          },
-          "obs": "arroz aromatico com cordeiro estilo Aden, influencia indiana"
-        },
-        {
-          "slug": "shai-adani",
+          "slug": "cisternas-tawila",
           "precoUSD": {
             "min": 1,
             "max": 3
           },
-          "obs": "cha de leite com cardamomo e canela, ritual de fim de tarde em Aden"
+          "obs": "Cisternas de Tawila (seculo I), sistema de reservatorios escavado na cratera vulcanica. Entrada simbolica em rial; jardim ao redor e gratis.",
+          "moedaLocal": "rial iemenita (YER)",
+          "wiki": "Cisterns_of_Tawila"
+        },
+        {
+          "slug": "castelo-sirah",
+          "precoUSD": {
+            "min": 0,
+            "max": 3
+          },
+          "obs": "Forte Sira (Sirah) sobre rocha vulcanica com vista do porto. Subida gratuita; pequena taxa no museu militar interno (quando aberto).",
+          "moedaLocal": "rial iemenita (YER)",
+          "wiki": "Sira_Fortress"
+        },
+        {
+          "slug": "praia-gold-mohur",
+          "precoUSD": {
+            "min": 0,
+            "max": 5
+          },
+          "obs": "Gold Mohur Beach com agua morna do Golfo de Aden e areia clara. Acesso publico gratuito; lugares com guarda-sol cobram 3-5 USD.",
+          "moedaLocal": "rial iemenita (YER)",
+          "wiki": "Aden"
         }
       ],
-      "passesCombo": [],
       "gratuitosCurados": [
-        "Cisternas de Tawila escavadas em rocha vulcanica, com jardim tropical",
-        "Cratera (Crater District), centro historico no vulcao extinto",
-        "Mirante de Sira Fortress sobre a baia e o porto",
-        "Praia de Gold Mohur ao por do sol",
-        "Caminhada pela orla de Tawahi com cafes locais"
+        "Bairro de Crater dentro da antiga cratera vulcanica com bazar e arquitetura colonial",
+        "Vista panoramica do porto natural de Aden a partir do mirante do Forte Sira",
+        "Praia de Gold Mohur (acesso publico) para banho no Golfo",
+        "Bazar Crater no fim de tarde com vendedores de incenso e prata",
+        "Promenade do porto com restos arquitetonicos do periodo britanico"
       ],
+      "passesCombo": [],
       "dicasEconomia": [
-        "Aden tem mais opcoes de hospedagem que o norte e precos em USD mais estaveis",
-        "Comer peixe fresco perto do porto sai por 4-6 USD por refeicao",
-        "Audio guia improvisado com guia local custa 10-20 USD/dia"
+        "Aden e mais quente que Sanaa: visitar entre nov-mar evita gasto com hotel com ar condicionado bom",
+        "Pegar minibus (dababs) entre Crater, Tawahi e Khormaksar custa ~0,30 USD",
+        "Peixe fresco grelhado na orla custa metade do que em restaurante de hotel"
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "manha ou fim de tarde",
+          "reservaAntecipada": "nao"
+        },
+        "natureza": {
+          "melhorHorario": "nov-mar",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "fim de tarde",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Manakhah": {
       "categoriasMeta": {
@@ -82315,118 +83253,149 @@ export const PRECOS_CIDADE = {
       "confianca": "baixa"
     },
     "Shibam": {
-      "categoriasMeta": {
-        "historico": {
-          "melhorHorario": "manha cedo ou fim de tarde, evitar calor extremo",
-          "reservaAntecipada": "recomendada"
-        }
-      },
+      "fontes": [
+        "whc.unesco.org/list/192",
+        "wikipedia.org/Shibam",
+        "youngpioneertours.com",
+        "yemenheritagetours.com"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "mandi-hadrami",
+          "slug": "torres-adobe-shibam",
           "precoUSD": {
-            "min": 4,
-            "max": 10
-          },
-          "obs": "versao do Hadramaut do arroz com carne assada em forno de terra"
-        },
-        {
-          "slug": "madfun",
-          "precoUSD": {
-            "min": 3,
-            "max": 7
-          },
-          "obs": "carne enterrada e cozida lentamente em fogo subterraneo, tradicao do deserto"
-        },
-        {
-          "slug": "fatta-hadramiya",
-          "precoUSD": {
-            "min": 2,
+            "min": 0,
             "max": 5
           },
-          "obs": "pao desfiado com caldo e ghee, cafe da manha tipico do Hadramaut"
+          "obs": "Cidade murada de Shibam, Patrimonio UNESCO desde 1982, e habitada. Passeio entre as ~500 torres de adobe (5-11 andares) e gratis; guia 5-10 USD.",
+          "moedaLocal": "rial iemenita (YER)",
+          "wiki": "Shibam"
+        },
+        {
+          "slug": "mirante-shibam",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Mirante do outro lado do wadi e o lugar classico para fotografar a 'Manhattan do deserto' ao por do sol. Acesso gratis a pe ou de carro.",
+          "moedaLocal": "rial iemenita (YER)",
+          "wiki": "Shibam"
+        },
+        {
+          "slug": "mercado-shibam",
+          "precoUSD": {
+            "min": 0,
+            "max": 0
+          },
+          "obs": "Pequeno suq dentro da cidade murada com tamaras, mel local e tecidos. Sem entrada; compras simbolicas em rial.",
+          "moedaLocal": "rial iemenita (YER)",
+          "wiki": "Shibam"
         }
+      ],
+      "gratuitosCurados": [
+        "Caminhar entre os primeiros 'arranha-ceus' de adobe do mundo (UNESCO)",
+        "Mirante a oeste do wadi para foto classica do skyline de Shibam",
+        "Muralha externa de adobe ao por do sol",
+        "Pracinha central com o portao principal da cidade murada",
+        "Observar pedreiros locais restaurando as fachadas de adobe"
       ],
       "passesCombo": [],
-      "gratuitosCurados": [
-        "Vista panoramica da 'Manhattan do Deserto' do mirante a oeste, melhor no por do sol",
-        "Caminhar pelas ruelas entre as torres de barro de ate 11 andares (Patrimonio UNESCO)",
-        "Observar tecnicas tradicionais de construcao em adobe e reboco de cal",
-        "Mercado local de Shibam para cha e dialogo com moradores",
-        "Por do sol sobre o wadi com as torres iluminadas em laranja"
-      ],
       "dicasEconomia": [
-        "Acesso so com escolta armada paga (centenas de USD por dia) por conta da situacao de seguranca",
-        "Leve agua e dolar em especie; nao ha caixa nem cartao funcionando",
-        "Pernoite recomendado em Seiyun, mais estruturada que Shibam"
+        "Visitar junto com Seiyun e Tarim no mesmo dia: estao a <30 min de carro entre si",
+        "Carro com motorista local saindo de Seiyun cobra ~40 USD pelo dia inteiro",
+        "Comer mandi de cabrito em Seiyun rende metade do preco de um restaurante turistico"
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "historico": {
+          "melhorHorario": "fim de tarde, com luz dourada",
+          "reservaAntecipada": "nao"
+        },
+        "atracao": {
+          "melhorHorario": "por do sol no mirante",
+          "reservaAntecipada": "nao"
+        }
+      }
     },
     "Socotra": {
-      "categoriasMeta": {
-        "natureza": {
-          "melhorHorario": "outubro a abril, fora da moncao, sair ao amanhecer",
-          "reservaAntecipada": "obrigatoria"
-        }
-      },
+      "fontes": [
+        "nationalgeographic.com",
+        "wikipedia.org/Socotra",
+        "socotra-adventure.com",
+        "tripbase.com"
+      ],
+      "confianca": "alta",
       "especialidades": [
         {
-          "slug": "peixe-grelhado-socotri",
+          "slug": "dragoeiros-diksam",
           "precoUSD": {
-            "min": 5,
+            "min": 0,
             "max": 15
           },
-          "obs": "peixe fresco do dia grelhado na brasa, base da dieta da ilha"
+          "obs": "Plato de Diksam e o lugar classico para ver o Dracaena cinnabari (dragoeiro). Geralmente incluido em tour 4x4; taxa ambiental 10-15 USD.",
+          "moedaLocal": "USD em cash",
+          "wiki": "Dracaena_cinnabari"
         },
         {
-          "slug": "tamara-socotri",
+          "slug": "dunas-hayf-arher",
           "precoUSD": {
-            "min": 1,
-            "max": 4
+            "min": 0,
+            "max": 10
           },
-          "obs": "tamaras da ilha, doces e fibrosas, vendidas em mercados de Hadibo"
+          "obs": "Praia de Arher com dunas brancas encostando na montanha verde, unica no mundo. Acesso por estrada de terra; taxa de protecao ~5-10 USD.",
+          "moedaLocal": "USD em cash",
+          "wiki": "Socotra"
         },
         {
-          "slug": "leite-camela-socotri",
+          "slug": "piscina-natural-homhil",
           "precoUSD": {
-            "min": 1,
-            "max": 3
+            "min": 0,
+            "max": 10
           },
-          "obs": "leite fresco de camela, comum no interior da ilha"
+          "obs": "Reserva de Homhil com piscina natural com vista para o oceano e bosques de incenso (Boswellia). Tour 4x4 obrigatorio; taxa ~5-10 USD.",
+          "moedaLocal": "USD em cash",
+          "wiki": "Socotra"
         }
+      ],
+      "gratuitosCurados": [
+        "Snorkeling em Dihamri Marine Protected Area com corais vivos",
+        "Por do sol nas dunas de Arher com brisa do monsom",
+        "Caminhada pelas piscinas naturais de Wadi Dirhur",
+        "Observar aves endemicas (estorninho-de-socotra, tarambola)",
+        "Praia de Qalansiya e laguna de Detwah ao entardecer"
       ],
       "passesCombo": [
         {
-          "nome": "Expedicao 7-8 dias com operador (voo charter + permits + acampamento)",
-          "precoUSD": 1200,
+          "nome": "Tour 4x4 8 dias all-inclusive Socotra",
+          "precoUSD": 1500,
           "cobre": [
-            "voo charter de Abu Dhabi ou Cairo",
-            "permits e taxas de parque",
-            "acampamento e refeicoes",
-            "guia 4x4 e motorista"
+            "voo charter de Abu Dhabi",
+            "guia local",
+            "transporte 4x4",
+            "barracas e refeicoes",
+            "taxas de areas protegidas"
           ],
-          "economia": "fechado, dificil otimizar"
+          "economia": "voo charter sozinho ja custa ~900 USD ida e volta"
         }
       ],
-      "gratuitosCurados": [
-        "Floresta de Dragoeiros em Dixam (arvore-simbolo da ilha, endemica)",
-        "Piscina natural de Homhil com vista para o mar",
-        "Dunas de Arher onde o deserto encontra o oceano",
-        "Caverna de Hoq, com formacoes calcarias e pinturas antigas",
-        "Pernoite em barraca na praia, ceu sem poluicao luminosa"
-      ],
       "dicasEconomia": [
-        "Voo charter custa metade do orcamento; fechar em grupo de 6-8 pessoas reduz USD por cabeca",
-        "Pacote tudo-incluso e mais barato que tentar montar logistica solo na ilha",
-        "Levar dolar em especie em notas novas; nao ha caixa eletronico funcionando"
+        "Voo charter so opera de Abu Dhabi (terca-feira); reservar com 2-3 meses de antecedencia poupa ate 30%",
+        "Levar todo dinheiro em USD em cash: nao tem ATM funcionando na ilha",
+        "Acampar em barracas (incluso nos tours) e mais barato que as poucas pousadas de Hadibo"
       ],
-      "fontes": [
-        "v1-only"
-      ],
-      "confianca": "baixa"
+      "categoriasMeta": {
+        "natureza": {
+          "melhorHorario": "out-abr (pos-monsom)",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "parque": {
+          "melhorHorario": "manha cedo ou fim de tarde",
+          "reservaAntecipada": "obrigatoria"
+        },
+        "atracao": {
+          "melhorHorario": "out a abril",
+          "reservaAntecipada": "obrigatoria"
+        }
+      }
     },
     "Wadi Dhar": {
       "categoriasMeta": {
@@ -83787,15 +84756,15 @@ export const PRECOS_CIDADE = {
 
 export const PRECOS_META = {
   "pesquisadoEm": "2026-06-06",
-  "metodologia": "Workflow multiagente - 1 agent por pais, fontes oficiais + Wikivoyage + agregador",
+  "metodologia": "Workflow multiagente - 1 agent por pais, fontes oficiais + Wikivoyage + agregador + re-verify das baixas",
   "moedaPivo": "USD",
   "paisesPesquisados": 205,
   "paisesTotalV1": 205,
   "cidadesPesquisadas": 1483,
   "cidadesCobertura": {
-    "alta": 1028,
-    "media": 301,
-    "baixa": 154
+    "alta": 1066,
+    "media": 311,
+    "baixa": 106
   },
   "paisesFalhas": [],
   "versaoSchema": 2,
