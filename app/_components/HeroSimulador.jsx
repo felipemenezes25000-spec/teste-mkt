@@ -102,8 +102,7 @@ export function HeroSimulador() {
               ))}
             </div>
             <p className="mt-3 text-[11px] text-inksoft">
-              {t('simulador.decisaoCompleta')}{' '}
-              <Link href="/decisao" className="text-pine font-semibold hover:underline focusring"></Link>
+              <Link href="/decisao" className="text-pine font-semibold hover:underline focusring">{t('simulador.decisaoCompleta')}</Link>
             </p>
           </div>
         ) : (

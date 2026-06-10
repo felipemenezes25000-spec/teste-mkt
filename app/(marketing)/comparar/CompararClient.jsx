@@ -8,7 +8,7 @@ import { custoEstadia } from '../../_lib/custos.js';
 import { carregarPerfil, perfilDoPreset, PERFIL_EVENT, topInteresses } from '../../_engine/perfil.js';
 import { recomendarDestinos, dimensoesDoDestino } from '../../_engine/decisao.js';
 import { Gate } from '../../_components/Gate.jsx';
-import { EmptyState } from '../../_components/EmptyState.jsx';
+import { EmptyState } from '../../_ui/EmptyState.jsx';
 import { Skeleton } from '../../_components/Skeleton.jsx';
 import { mundoScoreDestino, alertaHumanoDestino } from '../../_lib/editorial.js';
 

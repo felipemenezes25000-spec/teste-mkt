@@ -55,9 +55,10 @@ export async function POST(req) {
       method: 'POST',
       headers: { authorization: `Bearer ${SECRET}`, 'content-type': 'application/x-www-form-urlencoded' },
       body: form.toString(),
+      signal: AbortSignal.timeout(20000),
     });
-    const data = await res.json();
-    if (!res.ok) return erro('Falha ao criar sessão de pagamento.', 502);
+    const data = await res.json().catch(() => null);
+    if (!res.ok || !data || !data.url) return erro('Falha ao criar sessão de pagamento.', 502);
     return Response.json({ url: data.url });
   } catch {
     return erro('Falha ao falar com o Stripe.', 502);

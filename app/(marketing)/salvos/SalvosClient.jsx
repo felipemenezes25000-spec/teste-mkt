@@ -5,7 +5,7 @@ import { lerFavoritos, FAV_EVENT } from '../../_lib/favoritos.js';
 import { destinoPorCode, DESTINOS } from '../../_lib/destinos.js';
 import { imagemWiki } from '../../_lib/wiki.js';
 import { DestinoCard } from '../../_components/DestinoCard.jsx';
-import { EmptyState } from '../../_components/EmptyState.jsx';
+import { EmptyState } from '../../_ui/EmptyState.jsx';
 import { CardsSkeleton } from '../../_components/Skeleton.jsx';
 import { alertaHumanoDestino, mundoScoreDestino } from '../../_lib/editorial.js';
 

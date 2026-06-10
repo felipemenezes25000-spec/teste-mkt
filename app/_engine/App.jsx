@@ -581,9 +581,11 @@ export default function App() {
             </div>
 
             {plan.legs.length === 0 ? (
-              <EmptyState title="Sua rota está vazia." action={<Button variant="secondary" onClick={carregarExemplo}>Carregar exemplo</Button>}>
-                Adicione países abaixo (já vêm com custo, estação e visto estimados) ou carregue o exemplo de demonstração.
-              </EmptyState>
+              <EmptyState
+                title="Sua rota está vazia."
+                subtitle="Adicione países abaixo (já vêm com custo, estação e visto estimados) ou carregue o exemplo de demonstração."
+                action={<Button variant="secondary" onClick={carregarExemplo}>Carregar exemplo</Button>}
+              />
             ) : (
               <div role="list">
                 {calc.trechos.map((t, i) => (

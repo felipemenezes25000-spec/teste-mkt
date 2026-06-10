@@ -53,6 +53,26 @@ export function temV2(code, cidade) {
   return getCidadeData(code, cidade) !== null;
 }
 
+// Fatia V2 completa de um país, pronta pra atravessar a fronteira server→client
+// como prop: o catálogo inteiro (~2.9MB) fica no bundle do servidor e só as
+// cidades do país viajam serializadas no HTML. Consumida por OQueFazer.
+export function dadosV2DoPais(code) {
+  const cidades = cidadesComV2(code);
+  if (!cidades.length) return null;
+  const porCidade = {};
+  for (const cidade of cidades) {
+    porCidade[cidade] = {
+      dicas: dicasDe(code, cidade),
+      passes: passesDe(code, cidade),
+      especialidades: especialidadesDe(code, cidade),
+      gratuitos: gratuitosCuradosDe(code, cidade),
+      fontes: fontesCidade(code, cidade),
+      confianca: confiancaCidade(code, cidade),
+    };
+  }
+  return { cidades, porCidade, meta: precosMeta() };
+}
+
 export function precosMeta() {
   const pesquisadoEm = PRECOS_META?.pesquisadoEm;
   let diasDesdePesquisa = 0;

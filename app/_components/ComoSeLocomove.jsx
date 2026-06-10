@@ -1,11 +1,14 @@
 'use client';
-import { precosDoPais } from '../_engine/precosTransporte.js';
 import { useCambioBRL } from '../_lib/cambioClient.js';
 import { useIdioma } from '../_lib/i18n.js';
 
 // Bloco "Como se locomove" — tabela de preços REAIS de transporte do país:
 // Uber/app, táxi, ônibus urbano, metrô, aluguel de carro, combustível e voo
 // doméstico. Valores em USD (pesquisa) convertidos pra BRL ao vivo (cambioClient).
+//
+// `precos` vem como PROP do Server Component (página de destino) — a tabela
+// mundial (precosTransporte.js) fica no bundle do servidor; só a fatia do país
+// é serializada no HTML.
 //
 // Cada linha só renderiza se o serviço existe no país (null = oculto). A nota (obs)
 // dá o contexto que o número sozinho não dá (qual app domina, se tem metrô, etc).
@@ -49,8 +52,8 @@ function fmt(usd, brl) {
   return { rStr, uStr };
 }
 
-export function ComoSeLocomove({ code }) {
-  const p = precosDoPais(code);
+export function ComoSeLocomove({ precos = null }) {
+  const p = precos;
   const cambio = useCambioBRL();
   const { idioma } = useIdioma();
   const L = LABELS[idioma] || LABELS.pt;

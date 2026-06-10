@@ -2,24 +2,14 @@
 import { useMemo, useState } from 'react';
 import { useCambioBRL } from '../_lib/cambioClient.js';
 import { useIdioma } from '../_lib/i18n.js';
-import {
-  cidadesComV2,
-  dicasDe,
-  passesDe,
-  especialidadesDe,
-  gratuitosCuradosDe,
-  fontesCidade,
-  confiancaCidade,
-  precosMeta,
-} from '../_engine/precos.js';
 
 // "O que fazer e quanto custa" — lista de atrações/museus/passeios com preço de
 // ingresso ou tour (V1) + camada V2 por cidade: dicas de economia, passes,
 // especialidade da cidade, grátis curados, e fontes.
 //
-// `itens` vem como PROP do Server Component (página de destino) — assim a tabela
-// completa de ~2.870 itens fica no bundle do servidor, e só a fatia do país
-// (~14 itens) é serializada no HTML.
+// `itens` (V1) e `v2` (dadosV2DoPais) vêm como PROPS do Server Component (página
+// de destino) — assim as tabelas completas (V1 ~485KB + V2 ~2.9MB) ficam no
+// bundle do servidor, e só a fatia do país é serializada no HTML.
 
 const CAT_ICON = {
   museu: '🏛️', passeio: '🚶', atracao: '🎡', parque: '🌳',
@@ -43,27 +33,28 @@ function fmtFaixaBRL(min, max, brl) {
   return `R$ ${a.toLocaleString('pt-BR')}–${b.toLocaleString('pt-BR')}`;
 }
 
-export function OQueFazer({ itens = [], code, cidadePrincipal }) {
+export function OQueFazer({ itens = [], v2 = null, cidadePrincipal }) {
   const cambio = useCambioBRL();
   const { t } = useIdioma();
   const [filtro, setFiltro] = useState('todos');
 
-  const cidadesV2 = useMemo(() => (code ? cidadesComV2(code) : []), [code]);
+  const cidadesV2 = v2?.cidades ?? [];
 
-  const cidadeInicial = useMemo(() => {
-    if (cidadePrincipal && cidadesV2.includes(cidadePrincipal)) return cidadePrincipal;
-    return cidadesV2[0] ?? null;
-  }, [cidadePrincipal, cidadesV2]);
+  const cidadeInicial = (cidadePrincipal && cidadesV2.includes(cidadePrincipal))
+    ? cidadePrincipal
+    : (cidadesV2[0] ?? null);
 
   const [cidadeV2, setCidadeV2] = useState(cidadeInicial);
 
-  const dicas = useMemo(() => (code && cidadeV2 ? dicasDe(code, cidadeV2) : []), [code, cidadeV2]);
-  const passes = useMemo(() => (code && cidadeV2 ? passesDe(code, cidadeV2) : []), [code, cidadeV2]);
-  const especialidades = useMemo(() => (code && cidadeV2 ? especialidadesDe(code, cidadeV2) : []), [code, cidadeV2]);
-  const gratuitos = useMemo(() => (code && cidadeV2 ? gratuitosCuradosDe(code, cidadeV2) : []), [code, cidadeV2]);
-  const fontes = useMemo(() => (code && cidadeV2 ? fontesCidade(code, cidadeV2) : []), [code, cidadeV2]);
-  const conf = useMemo(() => (code && cidadeV2 ? confiancaCidade(code, cidadeV2) : null), [code, cidadeV2]);
-  const meta = useMemo(() => precosMeta(), []);
+  // Lookups O(1) na fatia serializada — sem useMemo porque não há cálculo caro.
+  const dadosCidade = (cidadeV2 && v2?.porCidade?.[cidadeV2]) || null;
+  const dicas = dadosCidade?.dicas ?? [];
+  const passes = dadosCidade?.passes ?? [];
+  const especialidades = dadosCidade?.especialidades ?? [];
+  const gratuitos = dadosCidade?.gratuitos ?? [];
+  const fontes = dadosCidade?.fontes ?? [];
+  const conf = dadosCidade?.confianca ?? null;
+  const meta = v2?.meta ?? null;
   const temAlgoV2 = dicas.length || passes.length || especialidades.length || gratuitos.length;
 
   const categorias = useMemo(() => {
@@ -138,12 +129,12 @@ export function OQueFazer({ itens = [], code, cidadePrincipal }) {
       </div>
       <p className="mt-2 text-[11px] text-inksoft">{t('destino.fazerNota')}</p>
 
-      {code && cidadesV2.length > 0 && temAlgoV2 ? (
+      {cidadesV2.length > 0 && temAlgoV2 ? (
         <div className="mt-6 rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
           <header className="px-4 sm:px-5 py-3 border-b border-line flex items-center justify-between gap-3 flex-wrap">
             <div className="min-w-0">
               <h3 className="font-display text-lg text-ink leading-tight">🏙️ {t('destino.fazerV2Titulo')} {cidadeV2}</h3>
-              <p className="text-[11px] text-inksoft mt-0.5">{t('destino.fazerV2Sub')} {meta.pesquisadoEm}.</p>
+              <p className="text-[11px] text-inksoft mt-0.5">{t('destino.fazerV2Sub')} {meta?.pesquisadoEm}.</p>
             </div>
             {cidadesV2.length > 1 ? (
               <div className="flex flex-wrap gap-1.5">

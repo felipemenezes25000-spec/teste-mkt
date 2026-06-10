@@ -31,6 +31,9 @@ import { ComoSeLocomove } from '../../../_components/ComoSeLocomove.jsx';
 import { PasseiosIngressos } from '../../../_components/PasseiosIngressos.jsx';
 import { OQueFazer } from '../../../_components/OQueFazer.jsx';
 import { atracoesPrecosDoPais } from '../../../_engine/atracoesPrecos.js';
+import { atracoesPagasDoPais } from '../../../_engine/precosAtracoes.js';
+import { dadosV2DoPais } from '../../../_engine/precos.js';
+import { precosDoPais } from '../../../_engine/precosTransporte.js';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -322,13 +325,13 @@ export default async function DestinoPage(props) {
         )}
 
         {/* O QUE FAZER E QUANTO CUSTA — atrações/museus/passeios com preço de ingresso/tour */}
-        <OQueFazer itens={atracoesPrecosDoPais(d.code)} code={d.code} cidadePrincipal={d.cidadePrincipal} />
+        <OQueFazer itens={atracoesPrecosDoPais(d.code)} v2={dadosV2DoPais(d.code)} cidadePrincipal={d.cidadePrincipal} />
 
         {/* COMO SE LOCOMOVE — preços reais de transporte (Uber/táxi/ônibus/metrô/aluguel/voo) */}
-        <ComoSeLocomove code={d.code} />
+        <ComoSeLocomove precos={precosDoPais(d.code)} />
 
         {/* PASSEIOS & INGRESSOS — atrações reais com preço de entrada (deep research multiagente) */}
-        <PasseiosIngressos code={d.code} nomePais={d.nome} />
+        <PasseiosIngressos itens={atracoesPagasDoPais(d.code)} nomePais={d.nome} />
 
         {/* ONDE FICA — mapa real */}
         <MapaDestino coords={d.coords} nome={d.nome} />

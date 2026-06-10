@@ -3,7 +3,19 @@ import { num } from './utils.js';
 import { tokenAtual } from './supabase.js';
 
 /* ===== Câmbio (FX) — API gratuita, sem chave, com timeout e degradação segura ===== */
-export async function buscarCambio() {
+// Dedup de chamadas concorrentes: várias instâncias de useCambioBRL montam juntas
+// na mesma página (OQueFazer, PasseiosIngressos, ComoSeLocomove...) e, sem cache
+// fresco, cada uma dispararia seu próprio fetch. Enquanto houver request em voo,
+// todas compartilham a mesma Promise; ao terminar (ok ou erro), libera pra próxima.
+let _cambioEmVoo = null;
+
+export function buscarCambio() {
+  if (_cambioEmVoo) return _cambioEmVoo;
+  _cambioEmVoo = buscarCambioDireto().finally(() => { _cambioEmVoo = null; });
+  return _cambioEmVoo;
+}
+
+async function buscarCambioDireto() {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), 15000);
   try {

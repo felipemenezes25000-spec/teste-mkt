@@ -1,6 +1,5 @@
 'use client';
 import { useMemo, useState } from 'react';
-import { atracoesDoPais as atracoesPagas } from '../_engine/precosAtracoes.js';
 import { useCambioBRL } from '../_lib/cambioClient.js';
 import { useIdioma } from '../_lib/i18n.js';
 
@@ -8,6 +7,10 @@ import { useIdioma } from '../_lib/i18n.js';
 // entrada/ingresso em USD convertido pra BRL ao vivo. Vem de pesquisa
 // multiagente (precosAtracoes.js): museus, parques, tours, shows, aventuras,
 // sítios arqueológicos, mercados etc.
+//
+// `itens` vem como PROP do Server Component (página de destino) — mesmo padrão
+// do OQueFazer: o catálogo de ~650KB fica no bundle do servidor e só a fatia
+// do país é serializada no HTML.
 //
 // Filtros por categoria (chips) + ordenação por preço. Renderiza max 30 itens
 // por default e expande on click. Cada item link pra Google Maps.
@@ -61,8 +64,8 @@ function fmt(usd, brl, L) {
   return { rStr, uStr };
 }
 
-export function PasseiosIngressos({ code, nomePais }) {
-  const lista = atracoesPagas(code);
+export function PasseiosIngressos({ itens = [], nomePais }) {
+  const lista = itens;
   const cambio = useCambioBRL();
   const { idioma } = useIdioma();
   const [catSel, setCatSel] = useState('todos');

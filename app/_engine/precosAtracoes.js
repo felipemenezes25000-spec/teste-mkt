@@ -21759,4 +21759,6 @@ export const ATRACOES_PAGAS = {
   ]
 };
 
-export function atracoesDoPais(code) { return ATRACOES_PAGAS[code] || []; }
+// Renomeado de `atracoesDoPais` para evitar colisão com o getter homônimo de
+// atracoes.js (atrações para a página de destino). Aqui são as atrações PAGAS.
+export function atracoesPagasDoPais(code) { return ATRACOES_PAGAS[code] || []; }

@@ -34,9 +34,19 @@ function planoDoPrice(priceId) {
 }
 
 async function stripeGet(path) {
-  const res = await fetch('https://api.stripe.com/v1/' + path, { headers: { authorization: `Bearer ${SECRET}` } });
+  const res = await fetch('https://api.stripe.com/v1/' + path, {
+    headers: { authorization: `Bearer ${SECRET}` },
+    signal: AbortSignal.timeout(15000),
+  });
   if (!res.ok) throw new Error(`Stripe API ${res.status} em ${path}`);
   return res.json();
+}
+
+// supabase-js v2 NÃO lança em falha de query — devolve { error }. Sem este check,
+// uma gravação que falhou responderia 200 ao Stripe e o evento se perderia pra
+// sempre (o Stripe só re-tenta em 4xx/5xx).
+function exigeOk({ error }, contexto) {
+  if (error) throw new Error(`${contexto}: ${error.message}`);
 }
 
 export async function POST(req) {
@@ -58,30 +68,36 @@ export async function POST(req) {
     if (evt.type === 'checkout.session.completed' && obj.client_reference_id && obj.subscription) {
       const s = await stripeGet(`subscriptions/${obj.subscription}`);
       const priceId = s.items && s.items.data && s.items.data[0] && s.items.data[0].price && s.items.data[0].price.id;
-      await db.from('subscriptions').upsert(
-        {
-          user_id: obj.client_reference_id,
-          plan: planoDoPrice(priceId),
-          status: s.status || 'active',
-          stripe_customer_id: obj.customer || null,
-          stripe_subscription_id: obj.subscription,
-          current_period_end: s.current_period_end ? new Date(s.current_period_end * 1000).toISOString() : null,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: 'user_id' },
+      exigeOk(
+        await db.from('subscriptions').upsert(
+          {
+            user_id: obj.client_reference_id,
+            plan: planoDoPrice(priceId),
+            status: s.status || 'active',
+            stripe_customer_id: obj.customer || null,
+            stripe_subscription_id: obj.subscription,
+            current_period_end: s.current_period_end ? new Date(s.current_period_end * 1000).toISOString() : null,
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: 'user_id' },
+        ),
+        'upsert subscriptions',
       );
     } else if (evt.type === 'customer.subscription.updated' || evt.type === 'customer.subscription.deleted') {
       const cancelado = evt.type.endsWith('deleted');
       const priceId = obj.items && obj.items.data && obj.items.data[0] && obj.items.data[0].price && obj.items.data[0].price.id;
-      await db
-        .from('subscriptions')
-        .update({
-          plan: cancelado ? 'free' : planoDoPrice(priceId),
-          status: cancelado ? 'canceled' : obj.status,
-          current_period_end: obj.current_period_end ? new Date(obj.current_period_end * 1000).toISOString() : null,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('stripe_subscription_id', obj.id);
+      exigeOk(
+        await db
+          .from('subscriptions')
+          .update({
+            plan: cancelado ? 'free' : planoDoPrice(priceId),
+            status: cancelado ? 'canceled' : obj.status,
+            current_period_end: obj.current_period_end ? new Date(obj.current_period_end * 1000).toISOString() : null,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('stripe_subscription_id', obj.id),
+        'update subscriptions',
+      );
     }
   } catch (e) {
     console.error('[stripe-webhook]', e && e.message);
