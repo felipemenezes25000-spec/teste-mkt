@@ -25,7 +25,8 @@ import { VerdictCard } from '../../../_components/VerdictCard.jsx';
 import { TravelFitScore } from '../../../_components/TravelFitScore.jsx';
 import { ValeIrAgora } from '../../../_components/ValeIrAgora.jsx';
 import { OQueNinguemConta } from '../../../_components/OQueNinguemConta.jsx';
-import { MapaDestino } from '../../../_components/MapaDestino.jsx';
+import { MapaPais } from '../../../_components/mapa/MapaPais.jsx';
+import { pontosDoPais } from '../../../_lib/geo.js';
 import { T } from '../../../_components/T.jsx';
 import { ComoSeLocomove } from '../../../_components/ComoSeLocomove.jsx';
 import { PasseiosIngressos } from '../../../_components/PasseiosIngressos.jsx';
@@ -353,7 +354,7 @@ export default async function DestinoPage(props) {
 
           <section id="logistica" className="scroll-mt-32 space-y-8">
             <ComoSeLocomove precos={precosDoPais(d.code)} />
-            <MapaDestino coords={d.coords} nome={d.nome} />
+            <MapaPais nome={d.nome} centro={d.coords} {...pontosDoPais(d)} />
           </section>
 
           <section id="antes" className="scroll-mt-32 space-y-6">
