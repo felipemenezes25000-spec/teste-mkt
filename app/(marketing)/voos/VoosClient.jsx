@@ -113,7 +113,7 @@ export function VoosClient() {
       {res && (
         <div className="mt-5">
           <div className="mb-3 rounded-lg border border-ochre/40 bg-ochre/10 text-warn px-3 py-2 text-xs font-medium">
-            <Icon emoji="⚠" /> Valores, horários e companhias são <b>ilustrativos</b> (estimativa por distância), não preços reais. Confirme nos links “Reservar de verdade” abaixo.
+            <Icon name="alert" size={14} /> <b>Cenários estimados</b> por distância e número de escalas — não são ofertas nem preços reais (busca de voos ao vivo depende de contrato com provedor). Use para comparar o <b>tipo</b> de voo; confirme preço e horário nos links “Reservar de verdade”.
           </div>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
             <p className="text-sm text-inksoft">

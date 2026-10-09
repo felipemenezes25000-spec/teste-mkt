@@ -1,6 +1,10 @@
 // Deep-links de reserva/serviços. As URLs base abrem a busca certa no parceiro;
 // `withAffiliate` injeta a tag de afiliado quando a env existe (no-op seguro sem ela).
-import { withAffiliate } from '../_engine/afiliados.js';
+import { withAffiliate as decorar } from '../_engine/afiliados.js';
+import { linkSaida } from './saida.js';
+
+// Toda saída monetizável passa pelo redirecionador rastreado (/api/out).
+const withAffiliate = (url, parceiro, produto) => linkSaida(decorar(url, parceiro), parceiro, produto || parceiro);
 
 const enc = encodeURIComponent;
 

@@ -17,7 +17,7 @@ export function siteUrl() {
   );
 }
 
-// Rotas indexáveis. /salvos e /conta são pessoais → ficam de fora do índice.
+// Rotas indexáveis. /salvos, /conta e /viagens são pessoais → ficam de fora do índice.
 const ROTAS_CORE = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/explorar', priority: 0.9, changeFrequency: 'weekly' },
@@ -28,6 +28,7 @@ const ROTAS_CORE = [
   { path: '/voos', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/comparar', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/planos', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/fontes', priority: 0.5, changeFrequency: 'monthly' },
 ];
 
 export function construirSitemap(destinos = [], baseUrl = '', lastmod = new Date()) {

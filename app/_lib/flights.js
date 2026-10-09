@@ -2,7 +2,6 @@
 // + SEAM pronto pra API real (Amadeus/Kiwi/Duffel). Sem chave → mock.
 import { distanciaKm, estimarPrecoVoo } from '../_engine/utils.js';
 
-const COMPANHIAS = ['LATAM', 'Gol', 'Azul', 'TAP', 'Iberia', 'Air France', 'Qatar Airways', 'Emirates', 'Turkish Airlines', 'KLM', 'Avianca', 'Copa'];
 
 // Hash + PRNG (mulberry32) → mesma rota/data sempre gera os mesmos voos (sem Math.random).
 function hash(str) {
@@ -41,7 +40,9 @@ export function buscarVoosMock({ origemIata, origemCoords, destinoIata, destinoC
     const partida = 0.18 + r() * 0.62;
     resultados.push({
       id: 'f' + i,
-      companhia: COMPANHIAS[Math.floor(r() * COMPANHIAS.length)],
+      // sem nome de companhia real: é um CENÁRIO estimado, não uma oferta (V4 §29/§30)
+      companhia: `Cenário estimado ${String.fromCharCode(65 + i)}`,
+      _sorteioCompanhia: r(),
       escalas,
       preco,
       duracaoH: dur,
