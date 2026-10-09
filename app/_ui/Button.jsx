@@ -1,11 +1,11 @@
 // Botão do Design System. Variants e tamanhos padronizados, com estado loading/disabled.
-const SIZES = { sm: 'text-xs px-3 py-1.5', md: 'text-sm px-4 py-2', lg: 'text-base px-5 py-2.5' };
+const SIZES = { sm: 'text-xs px-3 h-8', md: 'text-sm px-4 h-10', lg: 'text-base px-5 h-12' };
 const VARIANTS = {
-  primary: 'bg-pine text-onpine hover:bg-pinedk shadow-sm',
-  secondary: 'border border-line bg-card text-inksoft hover:text-pine',
-  ghost: 'text-inksoft hover:text-pine',
-  danger: 'border border-clay/40 bg-white text-clay hover:bg-clay/5',
-  accent: 'bg-ochre text-onochre shadow-md hover:brightness-95',
+  primary: 'bg-pine text-onpine hover:bg-pinedk',
+  secondary: 'border border-line bg-card text-ink hover:border-pine/50',
+  ghost: 'text-inksoft hover:text-ink',
+  danger: 'border border-danger-bd bg-danger-bg text-danger hover:brightness-95',
+  accent: 'bg-coral text-oncoral hover:brightness-95',
 };
 
 export function Button({ variant = 'primary', size = 'md', loading = false, className = '', children, ...props }) {

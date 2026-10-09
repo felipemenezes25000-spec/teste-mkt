@@ -24,7 +24,7 @@ const POSTHOG = 'https://us.i.posthog.com https://us-assets.i.posthog.com';
 // Provedores de dados abertos usados no browser (docs/PROVIDER-MATRIX.md):
 // mapas (OpenFreeMap/OSM), rotas (OSRM), clima (Open-Meteo), câmbio (Frankfurter/BCE).
 const MAPAS = 'https://tiles.openfreemap.org';
-const ABERTOS = 'https://router.project-osrm.org https://api.open-meteo.com https://archive-api.open-meteo.com https://api.frankfurter.dev https://api.frankfurter.app';
+const ABERTOS = 'https://routing.openstreetmap.de https://router.project-osrm.org https://api.open-meteo.com https://archive-api.open-meteo.com https://api.frankfurter.dev https://api.frankfurter.app';
 
 export function buildSecurityHeaders({ production = true, vercel = false } = {}) {
   const dev = !production;

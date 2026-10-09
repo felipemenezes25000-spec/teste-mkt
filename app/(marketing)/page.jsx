@@ -167,7 +167,7 @@ export default async function Home() {
           </div>
           <dl className="grid gap-px bg-line border border-line rounded-2xl overflow-hidden sm:grid-cols-2">
             {[
-              ['LIVE', 'Câmbio de hoje', 'Consultado na fonte agora (ex.: taxa de referência do dia), com horário.'],
+              ['LIVE', 'Previsão do tempo', 'Consultada na fonte agora, com horário — e envelhece: depois de minutos vira “recente”.'],
               ['ESTIMATE', 'Custo da sua viagem', 'Calculado pelo nosso modelo a partir dos seus dias, estilo e pessoas.'],
               ['HISTORICAL', 'Preço de ingresso', 'Pesquisa de referência (jun/2026). Pode ter mudado — conferir antes de comprar.'],
               ['UNVERIFIED', 'Regra sem fonte', 'Quando não temos fonte confiável, dizemos — e mandamos você ao órgão oficial.'],

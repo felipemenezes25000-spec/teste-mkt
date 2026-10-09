@@ -1,5 +1,6 @@
 'use client';
-import { useCambioBRL } from '../_lib/cambioClient.js';
+import { useCambioBRL, CambioBadge } from '../_lib/cambioClient.js';
+import { SourceTrust } from '../_ui/SourceTrust.jsx';
 import { useIdioma } from '../_lib/i18n.js';
 import { Icon } from '../_ui/Icon.jsx';
 
@@ -72,7 +73,11 @@ export function ComoSeLocomove({ precos = null }) {
 
   return (
     <section aria-labelledby="como-locomove-titulo">
-      <h2 id="como-locomove-titulo" className="font-display text-2xl text-ink mb-1"><Icon emoji="🚐" /> {L.titulo}</h2>
+      <h2 id="como-locomove-titulo" className="font-display text-[1.75rem] leading-tight text-ink mb-1">{L.titulo}</h2>
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <SourceTrust freshness="HISTORICAL" fonte="Pesquisa de preços Mundo Sem Fim (USD)" data="jun/2026" />
+        <CambioBadge estado={cambio} compact />
+      </div>
       <p className="text-sm text-inksoft mb-4 max-w-2xl">{L.sub}</p>
       <div className="rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
         <ul className="divide-y divide-line">

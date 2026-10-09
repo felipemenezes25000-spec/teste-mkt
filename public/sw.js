@@ -3,13 +3,13 @@
 // offline depois) com fallback pro shell /offline; assets estáticos = stale-while-
 // revalidate. O plano salvo do usuário vive em localStorage → sempre acessível offline.
 // Requests cross-origin (Wikipedia/Supabase/OSM) NÃO são tocados (seguem a CSP normal).
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 3;
 const CACHE = `msf-v${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((c) => c.add(OFFLINE_URL)).then(() => self.skipWaiting())
+    caches.open(CACHE).then((c) => c.addAll([OFFLINE_URL, '/viagens'])).then(() => self.skipWaiting())
   );
 });
 

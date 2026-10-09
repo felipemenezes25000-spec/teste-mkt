@@ -1,6 +1,7 @@
 'use client';
 import { useMemo, useState } from 'react';
-import { useCambioBRL } from '../_lib/cambioClient.js';
+import { useCambioBRL, CambioBadge } from '../_lib/cambioClient.js';
+import { SourceTrust } from '../_ui/SourceTrust.jsx';
 import { useIdioma } from '../_lib/i18n.js';
 import { Icon } from '../_ui/Icon.jsx';
 
@@ -75,7 +76,11 @@ export function OQueFazer({ itens = [], v2 = null, cidadePrincipal }) {
 
   return (
     <section aria-labelledby="oque-fazer-titulo">
-      <h2 id="oque-fazer-titulo" className="font-display text-2xl text-ink mb-1"><Icon emoji="🎟️" /> {t('destino.fazerTitulo')}</h2>
+      <h2 id="oque-fazer-titulo" className="font-display text-[1.75rem] leading-tight text-ink mb-1">{t('destino.fazerTitulo')}</h2>
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <SourceTrust freshness="HISTORICAL" fonte="Pesquisa de preços Mundo Sem Fim (USD)" data="jun/2026" />
+        <CambioBadge estado={cambio} compact />
+      </div>
       <p className="text-sm text-inksoft mb-4 max-w-2xl">{t('destino.fazerSub')}</p>
 
       <div className="flex flex-wrap gap-1.5 mb-4">

@@ -45,7 +45,7 @@ export function MapaPais({ nome, atracoes = [], cidades = [], cobertura = 0, cen
       </div>
       <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_280px]">
         <div className="relative">
-          <MapaInterativo pontos={pontos} selecionado={sel} onSelecionar={setSel} className="h-[420px] lg:h-[480px]" rotulo={`Mapa de ${nome} com ${pontos.length} lugares`} centro={centro} zoom={4} />
+          <MapaInterativo pontos={pontos} selecionado={sel} onSelecionar={setSel} className="h-[420px] lg:h-[480px]" rotulo={`Mapa de ${nome} com ${pontos.length} lugares`} centro={centro} zoom={4} zoomMaximo={9} />
           {atual && (
             <div className="absolute left-3 top-3 right-14 sm:right-auto sm:w-72 rounded-xl border border-line bg-card shadow-e2 p-4 rise">
               <div className="flex items-start justify-between gap-2">

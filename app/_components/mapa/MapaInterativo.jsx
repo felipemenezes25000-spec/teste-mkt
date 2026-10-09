@@ -40,7 +40,7 @@ function geojsonLinhas(linhas) {
 export function MapaInterativo({
   pontos = [], linhas = [], selecionado = null, destacado = null, onSelecionar,
   centro = [10, 20], zoom = 1.3, enquadrar = true, className = 'h-[480px]', rotulo = 'Mapa interativo',
-  rotulosVisiveis = true, cluster = false,
+  rotulosVisiveis = true, cluster = false, zoomMaximo = 8,
 }) {
   const box = useRef(null);
   const mapa = useRef(null);
@@ -147,7 +147,7 @@ export function MapaInterativo({
       const b = new lib.current.LngLatBounds();
       for (const p of pontos) if (Number.isFinite(p.lng) && Number.isFinite(p.lat)) b.extend([p.lng, p.lat]);
       for (const l of linhas) for (const c of l.coords || []) b.extend(c);
-      if (!b.isEmpty()) m.fitBounds(b, { padding: 48, maxZoom: pontos.length === 1 ? 6 : 8, duration: 600 });
+      if (!b.isEmpty()) m.fitBounds(b, { padding: 56, maxZoom: pontos.length === 1 ? Math.min(zoomMaximo, 13) : zoomMaximo, duration: 600 });
     }
     m.once('idle', () => aplicarEstados(m));
     // eslint-disable-next-line react-hooks/exhaustive-deps

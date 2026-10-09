@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { buscarCambio } from '../_engine/services.js';
+import { SourceTrust } from '../_ui/SourceTrust.jsx';
 
 // Câmbio ao vivo, reusável em qualquer client component. Estratégia:
 //   1. SSR/primeiro render → fallback estático (5,40) pra não ter mismatch.
@@ -76,27 +77,31 @@ export function fmtDataCambio(ts) {
   } catch { return ''; }
 }
 
-// Componente pequeno de exibição reutilizável; um "selo" do câmbio com tooltip.
+// Selo do câmbio com frescor HONESTO (OMEGA V4 §22): a fonte publica uma taxa de
+// referência DIÁRIA → 'RECENTE' (com data), nunca "ao vivo". Sem rede → valor fixo
+// de referência marcado como ESTIMATIVA. Taxa do cartão/IOF/spread NÃO incluídos.
+export function freshnessCambio(estado) {
+  if (estado.status === 'fallback') return 'ESTIMATE';
+  if (!estado.atualizadoEm) return 'UNVERIFIED';
+  return Date.now() - estado.atualizadoEm > 48 * 3600 * 1000 ? 'HISTORICAL' : 'RECENT';
+}
+
 export function CambioBadge({ estado, compact = false }) {
-  const ui = {
-    live: { dot: '🟢', label: 'ao vivo', cls: 'text-success' },
-    cache: { dot: '🟡', label: 'cache', cls: 'text-inksoft' },
-    busy: { dot: '⏳', label: 'atualizando…', cls: 'text-inksoft' },
-    fallback: { dot: '⚪', label: 'referência (sem internet)', cls: 'text-warn' },
-  }[estado.status] || { dot: '⚪', label: '—', cls: 'text-inksoft' };
+  const fr = estado.status === 'busy' && !estado.atualizadoEm ? 'UNVERIFIED' : freshnessCambio(estado);
+  const data = estado.atualizadoEm ? fmtDataCambio(estado.atualizadoEm) : estado.status === 'fallback' ? 'valor fixo' : '';
   if (compact) {
     return (
-      <span className={`inline-flex items-center gap-1 text-[11px] ${ui.cls}`} title={estado.atualizadoEm ? `Atualizado ${fmtDataCambio(estado.atualizadoEm)}` : undefined}>
-        <span aria-hidden>{ui.dot}</span>
-        <span className="tnum">R$ {estado.brl.toFixed(2)}/USD</span>
+      <span className="inline-flex items-center gap-1.5 text-[11px] text-inksoft" title={`Câmbio de referência (open.er-api.com)${data ? ` · ${data}` : ''} — sem spread do cartão nem IOF`}>
+        <span className="font-mono text-ink tnum">R$ {estado.brl.toFixed(2)}/US$</span>
+        <SourceTrust freshness={fr} fonte="open.er-api.com (taxa de referência diária)" data={data} compacto />
       </span>
     );
   }
   return (
-    <span className={`inline-flex items-center gap-1.5 text-xs ${ui.cls}`}>
-      <span aria-hidden>{ui.dot}</span>
-      <strong className="text-ink tnum">R$ {estado.brl.toFixed(2)} = US$ 1</strong>
-      <span className="opacity-80">{ui.label}{estado.atualizadoEm && estado.status === 'cache' ? ` (${fmtDataCambio(estado.atualizadoEm)})` : ''}</span>
+    <span className="inline-flex flex-wrap items-center gap-2 text-xs text-inksoft">
+      <strong className="font-mono font-medium text-ink tnum">US$ 1 = R$ {estado.brl.toFixed(2)}</strong>
+      <SourceTrust freshness={fr} fonte="open.er-api.com (taxa de referência diária)" data={data} />
+      <span>sem spread do cartão/IOF</span>
     </span>
   );
 }

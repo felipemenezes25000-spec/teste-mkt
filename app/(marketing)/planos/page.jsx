@@ -15,7 +15,7 @@ const PLANOS = [
   {
     id: 'free', nome: 'Grátis', preco: 'R$ 0', periodo: 'pra sempre', destaque: false,
     frase: 'Para começar a decidir sem cartão.',
-    bullets: ['Descobrir destinos por curadoria', 'Planejar rota com estação × visto × fôlego', '3 favoritos para comparar', 'Câmbio ao vivo'],
+    bullets: ['Descobrir destinos por curadoria', 'Planejar rota com estação × visto × fôlego', '3 favoritos para comparar', 'Câmbio do dia com fonte e data'],
     cta: 'Começar grátis', href: '/planejar',
   },
   {
