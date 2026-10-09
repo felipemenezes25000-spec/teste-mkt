@@ -25,13 +25,15 @@ process.stdout.write('\n');
 const assets = await resolverImagens(herois.filter(Boolean), { largura: 1280 });
 let heroOk = 0, heroLic = 0, heroSemLic = 0, heroSemFoto = 0;
 const semFoto = [];
+const semLicenca = [];
 const licencas = {};
 DESTINOS.forEach((d, i) => {
   const u = herois[i];
   if (!u) { heroSemFoto++; semFoto.push(d.nome); return; }
   heroOk++;
   const a = assets.get(arquivoWikimedia(u) || '');
-  if (a && a.rightsStatus === 'VERIFIED') { heroLic++; licencas[a.license] = (licencas[a.license] || 0) + 1; } else heroSemLic++;
+  if (a && a.rightsStatus === 'VERIFIED') { heroLic++; licencas[a.license] = (licencas[a.license] || 0) + 1; }
+  else { heroSemLic++; semLicenca.push({ code: d.code, nome: d.nome, url: u, motivo: !arquivoWikimedia(u) ? 'fonte não-Commons' : a ? `status ${a.rightsStatus}` : 'metadado ausente no Commons' }); }
 });
 
 // 2) atrações: overrides diretos e reaproveitados (ilustrativos)
@@ -59,6 +61,12 @@ const md = `# Image coverage report
 | Sem foto (fallback honesto “Sem foto verificada”) | ${heroSemFoto} |
 
 Licenças das capas verificadas: ${Object.entries(licencas).sort((a, b) => b[1] - a[1]).map(([l, n]) => `${l} (${n})`).join(', ')}.
+
+${semLicenca.length ? `Capas sem licença verificada (exibidas com crédito da fonte; pendência de regularização):
+
+| País | Motivo | Arquivo |
+|---|---|---|
+${semLicenca.map((x) => `| ${x.nome} (${x.code}) | ${x.motivo} | ${decodeURIComponent(x.url.split('/').pop()).slice(0, 60)} |`).join('\n')}` : ''}
 ${semFoto.length ? `\nSem foto: ${semFoto.join(', ')}.` : ''}
 
 ## Atrações

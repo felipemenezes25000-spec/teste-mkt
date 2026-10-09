@@ -8,11 +8,13 @@
 |---|---|
 | Países no catálogo | 205 |
 | Com foto de capa encontrada | 205 (100.0%) |
-| …com licença livre verificada (Commons) | 199 (97.1%) |
-| …sem licença verificável (fonte não-Commons ou metadado ausente) | 6 |
+| …com licença livre verificada (Commons) | 205 (100.0%) |
+| …sem licença verificável (fonte não-Commons ou metadado ausente) | 0 |
 | Sem foto (fallback honesto “Sem foto verificada”) | 0 |
 
-Licenças das capas verificadas: Public domain (52), CC BY-SA 3.0 (48), CC BY-SA 4.0 (40), CC BY 2.0 (14), CC BY-SA 2.0 (14), CC BY 3.0 (8), CC BY 4.0 (7), CC0 (4), FAL (3), CC BY 2.5 (3), CC BY-SA 2.5 (2), CC BY-SA 3.0 at (1), CC BY-SA 3.0 de (1), GFDL 1.2 (1), CC BY-SA 1.0 (1).
+Licenças das capas verificadas: Public domain (53), CC BY-SA 3.0 (49), CC BY-SA 4.0 (40), CC BY 2.0 (15), CC BY-SA 2.0 (15), CC BY 3.0 (8), CC BY 4.0 (7), CC0 (4), FAL (4), CC BY 2.5 (3), CC BY-SA 2.5 (3), CC BY-SA 3.0 at (1), CC BY-SA 3.0 de (1), GFDL 1.2 (1), CC BY-SA 1.0 (1).
+
+
 
 
 ## Atrações

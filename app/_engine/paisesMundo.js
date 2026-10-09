@@ -557,7 +557,7 @@ export const PAISES_EXTRA = [
    50.586,
    26.2285
   ],
-  "fotoQuery": "Bahrain World Trade Center",
+  "fotoQuery": "Qal'at al-Bahrain",
   "cidades": [
    "Manama",
    "Muharraq",
@@ -1161,7 +1161,7 @@ export const PAISES_EXTRA = [
    51.531,
    25.2854
   ],
-  "fotoQuery": "Museum of Islamic Art, Doha",
+  "fotoQuery": "Souq Waqif",
   "cidades": [
    "Doha",
    "Al Wakrah",
@@ -1689,7 +1689,7 @@ export const PAISES_EXTRA = [
    55.2708,
    25.2048
   ],
-  "fotoQuery": "Burj Khalifa",
+  "fotoQuery": "Al Fahidi Fort",
   "cidades": [
    "Dubai",
    "Abu Dhabi",
@@ -2555,7 +2555,7 @@ export const PAISES_EXTRA = [
    159.9556,
    -9.428
   ],
-  "fotoQuery": "Honiara",
+  "fotoQuery": "Gizo, Solomon Islands",
   "cidades": [
    "Honiara (Guadalcanal)",
    "Gizo",
@@ -2933,7 +2933,7 @@ export const PAISES_EXTRA = [
    47.9774,
    29.3759
   ],
-  "fotoQuery": "Kuwait Towers",
+  "fotoQuery": "Failaka Island",
   "cidades": [
    "Cidade do Kuwait",
    "Hawalli",
@@ -3918,7 +3918,7 @@ export const PAISES_EXTRA = [
    58.4059,
    23.588
   ],
-  "fotoQuery": "Sultan Qaboos Grand Mosque",
+  "fotoQuery": "Nizwa Fort",
   "cidades": [
    "Mascate (Muscat)",
    "Nizwa",
