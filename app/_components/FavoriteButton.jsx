@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { ehFavorito, alternarFavorito, FAV_EVENT } from '../_lib/favoritos.js';
-import { aprenderComFavorito } from '../_engine/perfil.js';
 import { track } from '../_lib/analytics.js';
 
 // Coração de favoritar. Sincroniza entre instâncias via evento custom. Fica FORA
@@ -22,7 +21,8 @@ export function FavoriteButton({ code, nome, className = '' }) {
     const agora = alternarFavorito(code);
     setFav(agora);
     // Favoritar é um sinal forte de preferência → nutre o super-perfil do viajante.
-    if (agora) { aprenderComFavorito(code); track('favorito_add', { code }); }
+    // o motor de perfil (e o catálogo) só carrega quando alguém favorita — fora do bundle inicial
+    if (agora) { import('../_engine/perfil.js').then((m) => m.aprenderComFavorito(code)).catch(() => {}); track('favorito_add', { code }); }
   }
 
   return (

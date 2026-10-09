@@ -1,5 +1,11 @@
 import { cookies } from 'next/headers';
-import { STRINGS, IDIOMA_PADRAO, IDIOMAS } from './i18n.js';
+import { IDIOMA_PADRAO, IDIOMAS } from './i18n.js';
+import pt from './i18n/pt.js';
+import en from './i18n/en.js';
+import es from './i18n/es.js';
+import ja from './i18n/ja.js';
+
+const STRINGS = { pt, en, es, ja };
 
 // Versão server do i18n: lê o cookie msf.lang.v1 via next/headers e devolve
 // idioma + função t(). Usar em Server Components.

@@ -13,8 +13,7 @@ import { PAISES_EXTRA, VISTOS_EXTRA_BR, MOEDAS_EXTRA, FX_EXTRA } from './paisesM
 export const STORAGE_KEY = 'mundosemfim.plan.v3';
 export const REVISADO_EM = 'junho de 2026';
 
-export const MESES_PT = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-export const MESES_PT_LONGO = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+export { MESES_PT, MESES_PT_LONGO } from './meses.js';
 
 // Custo/dia em US$ (referência; cada trecho pode usar a moeda que quiser).
 // coords = [lng, lat] da cidade-hub (p/ o mapa). iata = aeroporto principal (p/ links de voo).

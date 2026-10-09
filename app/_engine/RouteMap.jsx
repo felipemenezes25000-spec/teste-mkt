@@ -23,7 +23,7 @@ export default function RouteMap({ trechos, onSelect }) {
         <span className="text-xs text-inksoft">clique num ponto para ir ao trecho</span>
       </div>
       <div className="px-3 pb-3 grid gap-3 lg:grid-cols-[minmax(0,1fr)_260px]">
-        <MapaInterativo pontos={pontos} linhas={linhas} onSelecionar={onSelect} className="h-[380px] lg:h-[460px]" rotulo="Mapa da rota com os países na ordem da viagem" zoomMaximo={5} />
+        <MapaInterativo ativacao="idle" pontos={pontos} linhas={linhas} onSelecionar={onSelect} className="h-[380px] lg:h-[460px]" rotulo="Mapa da rota com os países na ordem da viagem" zoomMaximo={5} />
         <ol className="rounded-xl border border-line divide-y divide-line max-h-[460px] overflow-y-auto">
           {pts.map((t, i) => (
             <li key={t.id}>

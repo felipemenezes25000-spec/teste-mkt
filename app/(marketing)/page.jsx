@@ -184,7 +184,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <ProvaSocial />
+      <ProvaSocial totalPaises={DESTINOS.length} />
       <HomeSecaoFaq />
       <HomeSecaoCtaFinal />
     </main>

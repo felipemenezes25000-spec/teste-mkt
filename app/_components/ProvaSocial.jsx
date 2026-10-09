@@ -1,6 +1,5 @@
 'use client';
 import { DEPOIMENTOS } from '../_lib/depoimentos.js';
-import { DESTINOS } from '../_lib/destinos.js';
 import { useIdioma } from '../_lib/i18n.js';
 import { Icon } from '../_ui/Icon.jsx';
 
@@ -29,15 +28,16 @@ function Depoimentos() {
   );
 }
 
-export function ProvaSocial() {
+// `totalPaises` vem do servidor: o catálogo (≈63 KB gz) não vai para o navegador só por um número.
+export function ProvaSocial({ totalPaises = 205 }) {
   const { t } = useIdioma();
   const PILARES = [
     { icon: '🤝', titulo: t('prova.neutroTit'), txt: t('prova.neutroTxt') },
     { icon: '🧾', titulo: t('prova.custoTit'), txt: t('prova.custoTxt') },
-    { icon: '🌍', titulo: t('prova.mundoTit'), txt: `${DESTINOS.length} ${t('prova.mundoTxt')}` },
+    { icon: '🌍', titulo: t('prova.mundoTit'), txt: `${totalPaises} ${t('prova.mundoTxt')}` },
   ];
   const STATS = [
-    { n: String(DESTINOS.length), l: t('prova.statPaises') },
+    { n: String(totalPaises), l: t('prova.statPaises') },
     { n: '2.000+', l: t('prova.statPontos') },
     { n: '100+', l: t('prova.statMoedas') },
     { n: t('prova.statGratis'), l: t('prova.statGratisL') },

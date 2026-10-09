@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { Icon } from '../../_ui/Icon.jsx';
+import { useIdioma } from '../../_lib/i18n.js';
 
 // Mapa interativo MERIDIANO (OMEGA V4 §15/§21/§29): MapLibre GL + tiles OpenFreeMap
 // (base OpenStreetMap, sem chave; atribuição automática e obrigatória). Carregado
@@ -40,13 +41,17 @@ function geojsonLinhas(linhas) {
 export function MapaInterativo({
   pontos = [], linhas = [], selecionado = null, destacado = null, onSelecionar,
   centro = [10, 20], zoom = 1.3, enquadrar = true, className = 'h-[480px]', rotulo = 'Mapa interativo',
-  rotulosVisiveis = true, cluster = false, zoomMaximo = 8,
+  rotulosVisiveis = true, cluster = false, zoomMaximo = 8, ativacao = 'interacao',
 }) {
   const box = useRef(null);
   const mapa = useRef(null);
   const lib = useRef(null);
   const dados = useRef({ pontos, linhas, selecionado, destacado });
   const [estado, setEstado] = useState('carregando'); // carregando | pronto | erro
+  // V5 F10/EXP-10: o MapLibre (≈1 MB) só carrega quando o mapa é usado. Até lá, uma
+  // prévia leve em SVG com os MESMOS pontos (projeção Web Mercator). 'idle' = carrega
+  // sozinho quando o navegador fica ocioso (telas em que o mapa é o conteúdo principal).
+  const [ativo, setAtivo] = useState(ativacao === 'idle');
   const cb = useRef(onSelecionar);
   cb.current = onSelecionar;
   dados.current = { pontos, linhas, selecionado, destacado };
@@ -93,15 +98,19 @@ export function MapaInterativo({
     }
   }
 
-  // inicializa uma vez
+  // seleção vinda da lista também ativa o mapa (sincronização lista → mapa)
+  useEffect(() => { if (selecionado != null && selecionado !== '' && !ativo) setAtivo(true); }, [selecionado]); // eslint-disable-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
+
+  // inicializa uma vez (quando ativado)
   useEffect(() => {
+    if (!ativo) return undefined;
     let vivo = true;
     let obs;
     let ro;
     (async () => {
       try {
         // espera o navegador ficar ocioso: o mapa (≈1 MB) não compete com a 1ª pintura
-        await new Promise((r) => ('requestIdleCallback' in window ? window.requestIdleCallback(r, { timeout: 2000 }) : setTimeout(r, 300)));
+        if (ativacao === 'idle') await new Promise((r) => ('requestIdleCallback' in window ? window.requestIdleCallback(r, { timeout: 2000 }) : setTimeout(r, 300)));
         const maplibregl = (await import('maplibre-gl')).default;
         if (!vivo || !box.current) return;
         lib.current = maplibregl;
@@ -137,7 +146,7 @@ export function MapaInterativo({
     })();
     return () => { vivo = false; if (obs) obs.disconnect(); if (ro) ro.disconnect(); if (mapa.current) { mapa.current.remove(); mapa.current = null; } };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ativo]);
 
   // dados mudaram
   useEffect(() => {
@@ -173,7 +182,8 @@ export function MapaInterativo({
     <div className={`relative rounded-2xl overflow-hidden border border-line bg-paper2 ${className}`}>
       {/* inline: o CSS do MapLibre força position:relative em .maplibregl-map */}
       <div ref={box} style={{ position: 'absolute', inset: 0 }} role="region" aria-label={rotulo} />
-      {estado === 'carregando' && (
+      {!ativo && <PreviaMapa pontos={pontos} linhas={linhas} selecionado={selecionado} rotulo={rotulo} onAtivar={() => setAtivo(true)} />}
+      {ativo && estado === 'carregando' && (
         <div className="absolute inset-0 grid place-items-center pointer-events-none">
           <span className="eyebrow flex items-center gap-2"><span className="signal-dot" />Carregando mapa…</span>
         </div>
@@ -187,6 +197,55 @@ export function MapaInterativo({
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// ---------- prévia leve (sem WebGL, sem tiles) ----------
+// Projeção equirretangular (x = lng + 180, y = 90 − lat), a mesma do contorno de
+// terra Natural Earth 110m (domínio público) usado no planejador.
+const ex = (lng) => lng + 180;
+const ey = (lat) => 90 - lat;
+
+/** Enquadra os pontos (com margem) no plano 360×180. Sem pontos → mundo. Puro. */
+export function enquadrarPrevia(pontos, margem = 0.12) {
+  const ps = (pontos || []).filter((p) => Number.isFinite(p.lng) && Number.isFinite(p.lat));
+  if (!ps.length) return { x0: 0, y0: 0, w: 360, h: 180 };
+  let x0 = 360, x1 = 0, y0 = 180, y1 = 0;
+  for (const p of ps) { x0 = Math.min(x0, ex(p.lng)); x1 = Math.max(x1, ex(p.lng)); y0 = Math.min(y0, ey(p.lat)); y1 = Math.max(y1, ey(p.lat)); }
+  const w = Math.max(x1 - x0, 2), h = Math.max(y1 - y0, 2);
+  return { x0: x0 - w * margem, y0: y0 - h * margem, w: w * (1 + 2 * margem), h: h * (1 + 2 * margem) };
+}
+
+function PreviaMapa({ pontos, linhas, selecionado, rotulo, onAtivar }) {
+  const { t } = useIdioma();
+  const [terra, setTerra] = useState('');
+  useEffect(() => {
+    let vivo = true;
+    import('../../_engine/worldGeo.js').then((m) => { if (vivo) setTerra(m.WORLD_LAND_PATH); }).catch(() => {});
+    return () => { vivo = false; };
+  }, []);
+  const q = enquadrarPrevia(pontos);
+  const r = Math.max(q.w, q.h) / 150;
+  const grade = [];
+  for (let lng = -180; lng <= 180; lng += 30) grade.push(<line key={`v${lng}`} x1={ex(lng)} x2={ex(lng)} y1={0} y2={180} />);
+  for (let lat = -60; lat <= 60; lat += 30) grade.push(<line key={`h${lat}`} x1={0} x2={360} y1={ey(lat)} y2={ey(lat)} />);
+  return (
+    <div className="absolute inset-0 bg-paper2" onPointerEnter={(e) => { if (e.pointerType === 'mouse') onAtivar(); }}>
+      <svg viewBox={`${q.x0} ${q.y0} ${q.w} ${q.h}`} preserveAspectRatio="xMidYMid meet" className="absolute inset-0 w-full h-full" role="img" aria-label={rotulo}>
+        <g stroke="rgb(var(--c-line))" strokeWidth={r / 5}>{grade}</g>
+        {terra && <path d={terra} fill="rgb(var(--c-ink) / .08)" fillRule="evenodd" stroke="rgb(var(--c-ink) / .18)" strokeWidth={r / 6} />}
+        {(linhas || []).filter((l) => (l.coords || []).length > 1).map((l) => (
+          <polyline key={l.id} points={l.coords.map(([a, b]) => `${ex(a)},${ey(b)}`).join(' ')} fill="none" stroke="rgb(var(--c-pine))" strokeWidth={r / 2} strokeDasharray={l.estimada ? `${r} ${r}` : undefined} />
+        ))}
+        {(pontos || []).filter((p) => Number.isFinite(p.lng)).map((p) => {
+          const sel = String(p.id) === String(selecionado);
+          return <circle key={p.id} cx={ex(p.lng)} cy={ey(p.lat)} r={sel ? r * 1.8 : r} fill={p.cor || 'rgb(var(--c-pine))'} stroke="rgb(var(--c-card))" strokeWidth={r / 3} />;
+        })}
+      </svg>
+      <button type="button" onClick={onAtivar} className="absolute left-1/2 bottom-4 -translate-x-1/2 inline-flex items-center gap-2 h-11 px-4 rounded-full bg-card/95 border border-line shadow-e2 text-sm font-semibold text-ink whitespace-nowrap focusring">
+        <Icon name="map" size={16} /> {t('exp.abrirMapa')}
+      </button>
     </div>
   );
 }

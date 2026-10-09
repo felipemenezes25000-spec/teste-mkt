@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { buscarCambio } from '../_engine/services.js';
 import { SourceTrust } from '../_ui/SourceTrust.jsx';
+import { buscarCambio } from '../_engine/cambioRede.js';
 
 // Câmbio ao vivo, reusável em qualquer client component. Estratégia:
 //   1. SSR/primeiro render → fallback estático (5,40) pra não ter mismatch.

@@ -1,4 +1,4 @@
-import { MESES_PT } from './data.js';
+import { MESES_PT } from './meses.js';
 
 let _idc = 0;
 export function uid() { return 't' + Date.now().toString(36) + (_idc++).toString(36) + Math.floor(Math.random() * 1e6).toString(36); }

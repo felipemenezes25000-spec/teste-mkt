@@ -333,7 +333,7 @@ function Roteiro({ v, exec, lugares }) {
 
       {/* mapa do dia */}
       <div className="min-w-0 lg:sticky lg:top-24 self-start space-y-2">
-        <MapaInterativo pontos={pontosMapa} linhas={linhas} selecionado={sel} onSelecionar={setSel} className="h-[380px] lg:h-[560px]" rotulo={tf('v2.mapaDia', { d: fmtDia(dia, locale) })} zoomMaximo={15}
+        <MapaInterativo ativacao="idle" pontos={pontosMapa} linhas={linhas} selecionado={sel} onSelecionar={setSel} className="h-[380px] lg:h-[560px]" rotulo={tf('v2.mapaDia', { d: fmtDia(dia, locale) })} zoomMaximo={15}
           centro={lugares.centro || [0, 20]} zoom={lugares.centro ? 4 : 1.3} />
         <p className="text-[11px] text-inksoft flex flex-wrap items-center gap-2">
           {rota && rota.status === 'LIVE' ? <><SourceTrust freshness="LIVE" fonte="OSRM/FOSSGIS" compacto /> {t('ws.rotaLive')} ({ATRIBUICAO_ROTAS}).</>
