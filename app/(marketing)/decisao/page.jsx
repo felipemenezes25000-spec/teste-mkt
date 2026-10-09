@@ -1,5 +1,7 @@
 import { DESTINOS } from '../../_lib/destinos.js';
-import { imagemWiki } from '../../_lib/wiki.js';
+import { fotoCapa } from '../../_lib/wiki.js';
+import { resolverImagens } from '../../_lib/media.js';
+import { arquivoWikimedia } from '../../_lib/wikiThumb.js';
 import { DecisaoClient } from './DecisaoClient.jsx';
 
 // Imagens buscadas no servidor (cacheadas). O ranking e o score rodam no client,
@@ -13,7 +15,10 @@ export const metadata = {
 };
 
 export default async function DecisaoPage() {
-  const imgs = await Promise.all(DESTINOS.map((d) => imagemWiki(d.fotoQuery || d.nome)));
+  const brutas = await Promise.all(DESTINOS.map((d) => fotoCapa(d)));
+  // URL em largura segura (≤ original) + crédito, via serviço de mídia
+  const assets = await resolverImagens(brutas.filter(Boolean), { largura: 500 });
+  const imgs = brutas.map((u) => { const a = u ? assets.get(arquivoWikimedia(u) || '') : null; return a ? a.url : u; });
   const destinos = DESTINOS.map((d, i) => ({
     code: d.code, nome: d.nome, slug: d.slug, regiao: d.regiao,
     custoDia: d.custoDia, estacao: d.estacao, img: imgs[i],
@@ -21,9 +26,9 @@ export default async function DecisaoPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-      <section className="rounded-[2rem] border border-line bg-card p-6 sm:p-10 shadow-[var(--e-1)]">
-        <span className="inline-block text-xs font-bold uppercase tracking-[0.18em] text-pine bg-pine/10 px-3 py-1 rounded-full">Camada de decisão antes da reserva</span>
-        <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.03] text-ink">Descubra a viagem que realmente combina com você.</h1>
+      <section className="rounded-2xl border border-line bg-card p-6 sm:p-10 shadow-e1">
+        <span className="eyebrow">Camada de decisão antes da reserva</span>
+        <h1 className="mt-4 font-display text-4xl sm:text-6xl tracking-tightest leading-[.98] text-ink">Descubra a viagem que realmente combina com você.</h1>
         <p className="mt-4 text-lg text-inksoft max-w-3xl">
           Coloque dias, orçamento e tolerância a perrengue. O Mundo Sem Fim cruza custo real, clima, segurança e ritmo para dizer onde vale ir — e onde é melhor não gastar agora.
         </p>

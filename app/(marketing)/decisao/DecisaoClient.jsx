@@ -18,6 +18,8 @@ import { useIdioma } from '../../_lib/i18n.js';
 import { FavoriteButton } from '../../_components/FavoriteButton.jsx';
 import { CardsSkeleton } from '../../_components/Skeleton.jsx';
 import { Icon } from '../../_ui/Icon.jsx';
+import { Foto } from '../../_ui/Foto.jsx';
+import { wikiThumb } from '../../_lib/wikiThumb.js';
 
 // Ordem e rótulo das 8 dimensões do score.
 const DIM = [
@@ -300,12 +302,7 @@ export function DecisaoClient({ destinos }) {
                 </div>
                 <Link href={`/destino/${d.slug}`} className="block rounded-2xl border border-line bg-card overflow-hidden hover:shadow-[var(--e-1)] hover:-translate-y-0.5 transition focusring">
                   <div className="relative h-36 bg-paper2 overflow-hidden">
-                    {img ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={img} alt={d.nome} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                    ) : (
-                      <div className="w-full h-full grid place-items-center bg-gradient-to-br from-pine/15 to-ochre/15 text-3xl" aria-hidden><Icon emoji="🗺️" /></div>
-                    )}
+                    <Foto src={img ? wikiThumb(img, 500) : null} alt={d.nome} className="absolute inset-0" imgClassName="group-hover:scale-[1.03] transition duration-700" mostrarCredito={false} largura={500} altura={300} />
                   </div>
                   <div className="p-3.5">
                     <div className="flex items-center justify-between gap-2">
