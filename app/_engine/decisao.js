@@ -58,22 +58,30 @@ export function ranquear(opcoes, pesos) {
     ...o,
     posicao: idx + 1,
     porque: explicar(o, w),
+    // mesmos motivos, estruturados, para a UI montar a frase no idioma da página
+    motivos: motivos(o, w),
   }));
 }
 
 // Explica a recomendação: 2 dimensões onde mais pontua (peso×nota) + alerta se
 // uma dimensão muito valorizada pelo perfil está fraca.
-function explicar(opcao, w) {
+function motivos(opcao, w) {
   const dim = opcao.dimensoes || {};
   const porContrib = Object.entries(opcao.contrib || {}).sort((a, b) => b[1] - a[1]);
-  const fortes = porContrib.slice(0, 2).filter(([, c]) => c > 0).map(([k]) => DIM_LABEL[k]);
-
+  const fortes = porContrib.slice(0, 2).filter(([, c]) => c > 0).map(([k]) => k);
   // Alerta: dimensão de alto peso (perfil) com nota baixa (<45).
   let alerta = null;
   const pesosOrd = Object.entries(w).sort((a, b) => b[1] - a[1]);
   for (const [k] of pesosOrd) {
-    if (num(dim[k]) < 45) { alerta = DIM_LABEL[k]; break; }
+    if (num(dim[k]) < 45) { alerta = k; break; }
   }
+  return { fortes, alerta };
+}
+
+function explicar(opcao, w) {
+  const m = motivos(opcao, w);
+  const fortes = m.fortes.map((k) => DIM_LABEL[k]);
+  const alerta = m.alerta ? DIM_LABEL[m.alerta] : null;
 
   let txt = fortes.length ? `Forte em ${fortes.join(' e ')}, alinhado ao seu perfil.` : 'Opção equilibrada.';
   if (alerta) txt += ` Atenção: ${alerta} abaixo do ideal.`;

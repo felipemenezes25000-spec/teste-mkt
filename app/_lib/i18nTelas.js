@@ -1,3 +1,4 @@
+import { SIM2 } from './i18nSimulador.js';
 import { PLAT, RODAPE_PLAT } from './i18nPlataforma.js';
 // Dicionário das telas criadas no OMEGA V4 (pt/en/es/ja), fundido em STRINGS por
 // i18n.js. Chave ausente num idioma → cai para pt (nunca quebra).
@@ -450,3 +451,6 @@ Object.assign(TELAS.ja.v2, { exDoc: '例：アナのパスポート' });
 
 // Plataforma (marketplace, agências, API, Trip Pass).
 for (const l of Object.keys(PLAT)) { TELAS[l].plat = PLAT[l]; Object.assign(TELAS[l].rodape, RODAPE_PLAT[l]); }
+
+// Simulador da Home (V5 F1).
+for (const l of Object.keys(SIM2)) TELAS[l].sim2 = SIM2[l];

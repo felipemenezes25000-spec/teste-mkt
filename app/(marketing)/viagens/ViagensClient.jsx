@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { DESTINOS } from '../../_lib/destinos.js';
@@ -31,6 +31,15 @@ export function ViagensClient() {
   const [salvando, setSalvando] = useState(false);
   const viagens = estado ? estado.viagens : [];
   const ordenadas = useMemo(() => [...viagens].sort((a, b) => a.inicio.localeCompare(b.inicio)), [viagens]);
+
+  // vindo do simulador da Home (/viagens?destino=JP): abre o formulário com o destino escolhido
+  useEffect(() => {
+    try {
+      const c = new URLSearchParams(window.location.search).get('destino');
+      const d = c ? DESTINOS.find((x) => x.code === c.toUpperCase()) : null;
+      if (d) { setDestino(d); setAbrir(true); } // eslint-disable-line react-hooks/set-state-in-effect
+    } catch { /* sem parâmetro */ }
+  }, []);
 
   function exemploJapao() {
     const jp = DESTINOS.find((d) => d.code === 'JP');

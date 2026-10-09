@@ -73,8 +73,9 @@ export default async function Home() {
         <div className="absolute inset-0 pointer-events-none" aria-hidden
           style={{ backgroundImage: 'linear-gradient(rgb(var(--grid-ink) / .07) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--grid-ink) / .07) 1px, transparent 1px)', backgroundSize: '96px 96px' }} />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-16 sm:pt-20 lg:pt-24 lg:pb-24 grid gap-10 lg:gap-14 lg:grid-cols-[1.05fr_1fr] items-end">
-          <div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-16 sm:pt-20 lg:pt-24 lg:pb-24 grid gap-10 lg:gap-14 lg:grid-cols-[1.05fr_1fr] items-start">
+          {/* título fixo ao lado enquanto o simulador cresce com os resultados */}
+          <div className="lg:sticky lg:top-28 lg:pt-16">
             <div className="flex flex-wrap items-center gap-3">
               <span className="signal-dot" aria-hidden />
               <span className="eyebrow !text-ink/80">{DESTINOS.length} <T k="home2.eyebrow" fallback="países · decisões com fonte e data" /></span>
