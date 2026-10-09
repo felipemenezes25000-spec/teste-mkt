@@ -196,3 +196,15 @@ export async function creditoImagem(imgUrl, { revalidate = DIA } = {}) {
     return null;
   }
 }
+
+// Foto de CAPA de um destino com a cascata completa (verbete do ponto de foto →
+// verbete do país → galeria do artigo → busca no Commons). Única fonte para
+// Explorar/Home/Salvos/auditoria, para todos mostrarem a mesma capa.
+export async function fotoCapa(d, { revalidate = DIA } = {}) {
+  if (!d) return null;
+  return (await imagemWiki(d.fotoQuery || d.nome, { revalidate }))
+    || (d.fotoQuery && d.fotoQuery !== d.nome ? await imagemWiki(d.nome, { revalidate }) : null)
+    || (await imagensDe(d.fotoQuery || d.nome, { n: 1, revalidate }))[0]
+    || (await imagemCommons(d.fotoQuery || d.nome, { revalidate }))
+    || null;
+}

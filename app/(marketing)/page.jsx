@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { destinosDestaque, DESTINOS } from '../_lib/destinos.js';
-import { imagemWiki, resumoWiki } from '../_lib/wiki.js';
+import { fotoCapa, resumoWiki } from '../_lib/wiki.js';
 import { resolverImagens, resolverImagem } from '../_lib/media.js';
 import { arquivoWikimedia, wikiThumb } from '../_lib/wikiThumb.js';
 import { DestinoCard } from '../_components/DestinoCard.jsx';
@@ -44,7 +44,7 @@ export default async function Home() {
   const reviewsLd = jsonLdReviews(DEPOIMENTOS, siteUrl());
   const [heroWiki, ...imgs] = await Promise.all([
     resumoWiki(HERO.titulo),
-    ...destaques.map((d) => imagemWiki(d.fotoQuery || d.nome)),
+    ...destaques.map((d) => fotoCapa(d)),
   ]);
   const [heroAsset, assets] = await Promise.all([
     heroWiki?.img ? resolverImagem(heroWiki.img, { largura: 1920 }) : null,

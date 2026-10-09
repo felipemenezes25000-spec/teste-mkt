@@ -55,10 +55,10 @@ export function GlobalSearch() {
         role="combobox" aria-expanded={open && results.length > 0} aria-autocomplete="list"
         aria-controls={listId}
         aria-activedescendant={open && results.length > 0 ? `${listId}-${ativo}` : undefined}
-        className="w-full md:w-56 xl:w-64 h-9 pl-9 pr-3 rounded-lg border border-line bg-input text-ink text-sm placeholder:text-inksoft focusring"
+        className="w-full 2xl:w-64 h-9 pl-9 pr-3 rounded-lg border border-line bg-input text-ink text-sm placeholder:text-inksoft focusring"
       />
       {open && results.length > 0 && (
-        <ul id={listId} className="absolute z-50 mt-1 left-0 w-64 max-h-80 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox">
+        <ul id={listId} className="absolute z-50 mt-1 left-0 w-full min-w-[16rem] max-h-80 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox">
           {results.map((d, i) => (
             <li key={d.code} id={`${listId}-${i}`} role="option" aria-selected={i === ativo}>
               <button

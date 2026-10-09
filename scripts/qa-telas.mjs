@@ -13,23 +13,24 @@ import path from 'node:path';
 
 const BASE = (process.argv[2] || 'http://localhost:3000').replace(/\/$/, '');
 const OUT = process.argv[3] || path.join('docs/plataforma/_proof', 'qa-' + new Date().toISOString().replace(/[:.]/g, '-'));
-const WIDTHS = (process.env.QA_WIDTHS || '320,390,768,1280,1440,1920').split(',').map(Number);
+const WIDTHS = (process.env.QA_WIDTHS || '320,390,768,1024,1280,1440,1920').split(',').map(Number);
 const FULL_AT = new Set([390, 1440]);
 const DEFAULT_ROUTES = [
   '/', '/explorar', '/destino/japao', '/destino/tailandia', '/destino/italia', '/destino/brasil',
   '/decisao', '/comparar', '/custo-real', '/roteiro', '/voos', '/planos', '/salvos', '/conta',
-  '/planejar', '/offline', '/rota-que-nao-existe',
+  '/planejar', '/viagens', '/fontes', '/offline', '/rota-que-nao-existe',
 ];
 const ROUTES = process.env.QA_ROUTES ? process.env.QA_ROUTES.split(',') : DEFAULT_ROUTES;
 const THEMES = (process.env.QA_THEMES || 'light,dark').split(',');
 
 // Ruído conhecido de terceiros que não indica bug do app.
 const IGNORAR = [/Download the React DevTools/i, /\[HMR\]/i, /Fast Refresh/i];
+const ROTA_404 = '/rota-que-nao-existe'; // 404 esperado: o recurso 404 é a própria página
 
 fs.mkdirSync(OUT, { recursive: true });
 const slug = (r) => (r === '/' ? 'home' : r.replace(/^\//, '').replace(/[/?=&]/g, '_'));
 
-const browser = await chromium.launch();
+const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const resultados = [];
 
 for (const theme of THEMES) {
@@ -44,6 +45,7 @@ for (const theme of THEMES) {
       page.on('console', (m) => {
         if (m.type() === 'error' || m.type() === 'warning') {
           const t = m.text();
+          if (rota === ROTA_404 && /status of 404/.test(t)) return;
           if (!IGNORAR.some((re) => re.test(t))) r.console.push(`${m.type()}: ${t.slice(0, 300)}`);
         }
       });

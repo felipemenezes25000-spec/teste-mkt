@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
 import { GlobalSearch } from './GlobalSearch.jsx';
+import { BuscaCompacta } from './BuscaCompacta.jsx';
 import { MobileMenu } from './MobileMenu.jsx';
 import { IdiomaSwitcher } from './IdiomaSwitcher.jsx';
 import { useIdioma } from '../_lib/i18n.js';
@@ -101,9 +102,9 @@ export default function AppNav() {
 
   return (
     <header className="sticky top-0 z-40 bg-paper/85 backdrop-blur-md border-b border-line">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-3" aria-label="Principal">
+      <nav className="max-w-7xl mx-auto px-3 sm:px-6 h-16 flex items-center gap-2 sm:gap-3" aria-label="Principal">
         <Link href="/" aria-label="Mundo Sem Fim — início" className="shrink-0 focusring rounded-lg mr-2">
-          <Marca size={34} />
+          <Marca size={34} wordmarkClassName="hidden min-[400px]:inline" />
         </Link>
 
         <div className="hidden lg:flex items-center gap-1">
@@ -112,7 +113,7 @@ export default function AppNav() {
             return (
               <Link key={l.href} href={l.href} aria-current={a ? 'page' : undefined}
                 className={`relative inline-flex items-center gap-2 px-3 h-9 rounded-lg text-sm font-medium transition focusring ${a ? 'text-ink bg-card shadow-e1' : 'text-inksoft hover:text-ink'}`}>
-                <Icon name={l.icon} size={16} className={a ? 'text-pine' : ''} />
+                <Icon name={l.icon} size={16} className={`hidden xl:inline-block ${a ? 'text-pine' : ''}`} />
                 {l.label}
                 {a && <span className="absolute -bottom-[13px] left-3 right-3 h-[2px] bg-pine rounded-full" aria-hidden />}
               </Link>
@@ -121,9 +122,10 @@ export default function AppNav() {
           <MenuFerramentas itens={ferramentas} path={path} />
         </div>
 
-        <div className="hidden md:block ml-auto"><GlobalSearch /></div>
+        <div className="hidden 2xl:block ml-auto"><GlobalSearch /></div>
 
-        <div className="flex items-center gap-1 ml-auto md:ml-2 shrink-0">
+        <div className="flex items-center gap-1 ml-auto 2xl:ml-2 shrink-0">
+          <div className="2xl:hidden"><BuscaCompacta /></div>
           {alerta > 0 && (
             <Link href="/decisao" aria-label={`${alerta} alerta(s) na sua rota`}
               title="Sua rota tem alertas (visto/orçamento) que podem estragar a viagem"

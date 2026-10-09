@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { lerFavoritos, FAV_EVENT } from '../../_lib/favoritos.js';
-import { destinoPorCode } from '../../_lib/destinos.js';
+import { destinoPorCode, destinoPorSlug, DESTINOS } from '../../_lib/destinos.js';
+import { Autocomplete } from '../../_components/Autocomplete.jsx';
 import { vistoDe, MESES_PT } from '../../_engine/data.js';
 import { custoEstadia } from '../../_lib/custos.js';
 import { carregarPerfil, perfilDoPreset, PERFIL_EVENT, topInteresses } from '../../_engine/perfil.js';
@@ -15,11 +16,18 @@ import { Icon } from '../../_ui/Icon.jsx';
 
 const meses = (arr = []) => (arr.length ? arr.map((m) => MESES_PT[m - 1]).join(', ') : '—');
 
+const PESOS_PADRAO = { custo: 3, seguranca: 2, gastronomia: 1, score: 2 };
+
 export function CompararClient() {
   const [codes, setCodes] = useState(null);
+  const [extras, setExtras] = useState([]); // vindos da URL (?d=slug,slug) ou adicionados aqui
+  const [removidos, setRemovidos] = useState([]);
+  const [pesos, setPesos] = useState(PESOS_PADRAO);
   const [perfil, setPerfil] = useState(null);
 
   useEffect(() => {
+    const d = new URLSearchParams(window.location.search).get('d');
+    if (d) setExtras(d.split(',').map(destinoPorSlug).filter(Boolean).map((x) => x.code).slice(0, 4)); // eslint-disable-line react-hooks/set-state-in-effect
     const sync = () => setCodes(lerFavoritos());
     sync();
     window.addEventListener(FAV_EVENT, sync);
@@ -34,7 +42,26 @@ export function CompararClient() {
     };
   }, []);
 
-  const destinos = (codes || []).map(destinoPorCode).filter(Boolean);
+  const todos = [...new Set([...extras, ...(codes || [])])].filter((c) => !removidos.includes(c)).slice(0, 4);
+  const destinos = todos.map(destinoPorCode).filter(Boolean);
+  const adicionar = (d) => { if (!d) return; setRemovidos((r) => r.filter((c) => c !== d.code)); setExtras((e) => [d.code, ...e.filter((c) => c !== d.code)].slice(0, 4)); };
+  const remover = (code) => setRemovidos((r) => [...r, code]);
+  const seletor = (
+    <div className="flex flex-wrap items-end gap-3">
+      <div className="w-full sm:w-80">
+        <Autocomplete items={DESTINOS.filter((d) => !todos.includes(d.code))} value={null} onChange={adicionar} toText={(d) => d.nome} toKey={(d) => d.code} toRight={(d) => d.regiao}
+          label={destinos.length >= 4 ? 'Máximo de 4 destinos' : 'Adicionar destino à comparação'} placeholder="Buscar país…" />
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {destinos.map((d) => (
+          <span key={d.code} className="inline-flex items-center gap-1.5 h-9 pl-3 pr-1 rounded-lg border border-line bg-card text-sm text-ink">
+            {d.nome}
+            <button type="button" onClick={() => remover(d.code)} aria-label={`Remover ${d.nome} da comparação`} className="w-7 h-7 grid place-items-center rounded-md text-inksoft hover:text-danger focusring"><Icon name="x" size={14} /></button>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
 
   if (codes === null) return (
     <div className="mt-6 space-y-3" role="status" aria-label="Carregando" aria-busy="true">
@@ -45,12 +72,13 @@ export function CompararClient() {
 
   if (destinos.length < 2) {
     return (
-      <div className="mt-6">
+      <div className="mt-6 space-y-5">
+        {seletor}
         <EmptyState
           icon="⚖️"
-          title="Salve pelo menos 2 destinos pra comparar."
-          subtitle="Toque no coração nos destinos que te interessam — aqui eles aparecem lado a lado (custo, visto, melhor época)."
-          actions={[{ href: '/explorar', label: 'Explorar destinos', primary: true }, { href: '/salvos', label: 'Ver salvos' }]}
+          title={destinos.length ? 'Escolha mais um destino para comparar.' : 'Escolha 2 a 4 destinos para comparar.'}
+          subtitle="Busque acima ou salve destinos com o coração — eles aparecem lado a lado: custo, segurança, visto e melhor época, com o vencedor de cada critério."
+          actions={[{ href: '/explorar', label: 'Explorar o mapa', primary: true }, { href: '/salvos', label: 'Ver salvos' }]}
         />
       </div>
     );
@@ -70,7 +98,7 @@ export function CompararClient() {
     { k: 'Cansaço logístico', kind: 'num', sentido: 'alto', get: (d) => mundoScoreDestino(d).subnotas.cansacoLogistico, fmt: (v) => `${v}/100 (alto = menos cansaço)` },
     { k: 'Risco de arrependimento', kind: 'risco', sentido: 'baixo', get: (d) => mundoScoreDestino(d).chanceArrependimento, fmt: (v) => v },
     { k: 'Melhor época', kind: 'texto', get: (d) => meses(d.melhoresMeses) },
-    { k: 'Visto (BR)', kind: 'texto', get: (d) => { const v = vistoDe(d.code, 'BR'); return v ? `${v.tipo} · ${v.dias}d` : '—'; } },
+    { k: 'Visto (BR)', kind: 'texto', get: (d) => { const v = vistoDe(d.code, 'BR'); return v ? `${v.tipo}${v.dias ? ` · ${v.dias}d` : ''}` : '—'; } },
     { k: 'Região', kind: 'texto', get: (d) => d.regiao },
   ];
 
@@ -95,10 +123,34 @@ export function CompararClient() {
     score: mundoScoreDestino(d).total,
     alerta: alertaHumanoDestino(d),
   }));
-  const vencedor = [...placar].sort((a, b) => (b.vitorias * 5 + b.score) - (a.vitorias * 5 + a.score))[0];
+  // Veredito com PESOS do usuário (V4 §75 "pesos ajustáveis"): normaliza cada
+  // dimensão entre os destinos comparados (0–1) e soma ponderado.
+  const norm = (vals, alto) => { const mn = Math.min(...vals), mx = Math.max(...vals); return vals.map((v) => (mx === mn ? 1 : alto ? (v - mn) / (mx - mn) : (mx - v) / (mx - mn))); };
+  const dims = {
+    custo: norm(destinos.map((d) => d.custoDia), false),
+    seguranca: norm(destinos.map((d) => dimensoesDoDestino(d).seguranca), true),
+    gastronomia: norm(destinos.map((d) => dimensoesDoDestino(d).gastronomia), true),
+    score: norm(destinos.map((d) => mundoScoreDestino(d).total), true),
+  };
+  const somaPesos = Object.values(pesos).reduce((a, b) => a + b, 0) || 1;
+  placar.forEach((p, i) => { p.ponderado = Math.round((Object.keys(dims).reduce((acc, k) => acc + dims[k][i] * pesos[k], 0) / somaPesos) * 100); });
+  const vencedor = [...placar].sort((a, b) => b.ponderado - a.ponderado || b.score - a.score)[0];
 
   return (
     <div className="mt-6 space-y-5">
+      {seletor}
+      <fieldset className="rounded-2xl border border-line bg-card p-4">
+        <legend className="eyebrow px-1">O que pesa mais pra você</legend>
+        <div className="mt-1 grid gap-3 sm:grid-cols-4">
+          {[['custo', 'Custo baixo'], ['seguranca', 'Segurança'], ['gastronomia', 'Gastronomia'], ['score', 'Mundo Score']].map(([k, l]) => (
+            <label key={k} className="text-xs text-inksoft">
+              <span className="flex justify-between"><span>{l}</span><span className="font-mono text-ink">{pesos[k]}</span></span>
+              <input type="range" min="0" max="5" step="1" value={pesos[k]} onChange={(e) => setPesos({ ...pesos, [k]: Number(e.target.value) })} className="w-full accent-[rgb(var(--c-pine))]" />
+            </label>
+          ))}
+        </div>
+        <p className="mt-2 text-xs text-inksoft">Pelos seus pesos, o melhor é <strong className="text-ink">{vencedor.nome}</strong> ({vencedor.ponderado}/100). Mude os pesos e o veredito recalcula — comissão de parceiro não entra na conta.</p>
+      </fieldset>
       {/* MATRIZ — cada linha um critério, cada coluna um destino, vencedor destacado */}
       <div className="overflow-x-auto rounded-3xl border border-line bg-card shadow-[var(--e-1)]">
         <table className="w-full border-collapse min-w-[640px]">
@@ -125,7 +177,7 @@ export function CompararClient() {
                     return (
                       <td key={d.code} className={`p-3 text-sm align-top ${isVenc ? 'bg-success-bg' : ''}`}>
                         <div className={`${isVenc ? 'text-success font-semibold' : 'text-ink'} flex items-center gap-1.5`}>
-                          {isVenc && <span aria-label="Vencedor neste critério" title="Vencedor" className="text-[10px] font-bold uppercase bg-success text-white px-1.5 py-0.5 rounded">melhor</span>}
+                          {isVenc && <span aria-label="Vencedor neste critério" title="Vencedor" className="text-[10px] font-mono uppercase bg-success text-success-bg px-1.5 py-0.5 rounded">melhor</span>}
                           <span>{c.fmt ? c.fmt(valor) : valor}</span>
                         </div>
                       </td>

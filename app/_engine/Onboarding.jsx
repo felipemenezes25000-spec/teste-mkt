@@ -8,15 +8,30 @@ const KEY = 'mundosemfim.onboarded.v1';
 // Boas-vindas de 1ª execução: explica o tripé (estação × visto × fôlego).
 // Mostra uma vez (flag no localStorage). Reabrível pelo botão "Ajuda".
 export default function Onboarding({ forcado, onClose }) {
+  // 1ª visita: faixa INLINE dispensável (não bloqueia o primeiro valor — OMEGA V4 §30).
+  // "Ajuda" (forcado) abre a versão em modal.
   const [open, setOpen] = useState(false);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     try { if (!localStorage.getItem(KEY)) setOpen(true); } catch (e) {}
   }, []);
-  useEffect(() => { if (forcado) setOpen(true); }, [forcado]);
+  useEffect(() => { if (forcado) { setOpen(true); setModal(true); } }, [forcado]);
 
   if (!open) return null;
-  const fechar = () => { try { localStorage.setItem(KEY, '1'); } catch (e) {} setOpen(false); onClose && onClose(); };
+  const fechar = () => { try { localStorage.setItem(KEY, '1'); } catch (e) {} setOpen(false); setModal(false); onClose && onClose(); };
+
+  if (!modal) {
+    return (
+      <div className="rise rounded-2xl border border-pine/30 bg-pine/5 p-4 flex flex-col sm:flex-row sm:items-center gap-3" role="note">
+        <div className="flex-1 text-sm text-ink">
+          <b>Como funciona:</b> arraste os países (ou use ▲▼) e tudo recalcula na hora —
+          <span className="text-inksoft"> estação (chegar na seca), visto (não estourar os dias) e fôlego (quando a grana acaba).</span>
+        </div>
+        <button type="button" onClick={fechar} className="shrink-0 inline-flex items-center gap-1.5 h-9 px-3 rounded-lg border border-line bg-card text-sm text-ink focusring"><Icon name="check" size={15} /> Entendi</button>
+      </div>
+    );
+  }
 
   const Card = ({ icon, t, children }) => (
     <div className="rounded-lg border border-line bg-paper2/50 p-3">

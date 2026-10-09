@@ -11,12 +11,12 @@ export function MarcaIcone({ size = 32, className = '' }) {
   );
 }
 
-export function Marca({ size = 32, wordmark = true, className = '' }) {
+export function Marca({ size = 32, wordmark = true, className = '', wordmarkClassName = '' }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <MarcaIcone size={size} />
       {wordmark && (
-        <span className="font-display text-[1.05rem] leading-none text-ink tracking-tighter">
+        <span className={`font-display text-[1.05rem] leading-none text-ink tracking-tighter ${wordmarkClassName}`}>
           Mundo<span className="text-inksoft font-medium"> Sem </span>Fim
         </span>
       )}

@@ -24,8 +24,12 @@ describe('wikiThumb', () => {
   test('original do Commons → FilePath em largura padrão', () => {
     expect(wikiThumb(ORIG, 640)).toBe(FP + 'Lagoa_das_Sete_Cidades3.jpg?width=500');
   });
-  test('thumb existente → mesmo arquivo, largura padrão', () => {
+  test('thumb existente fora do padrão → FilePath em largura padrão', () => {
     expect(wikiThumb(THUMB, 960)).toBe(FP + 'Wat_Arun.JPG?width=960');
+  });
+  test('thumb já em largura padrão (resolvido no servidor) fica intacto', () => {
+    const seguro = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Cittadimatera1.jpg/500px-Cittadimatera1.jpg';
+    expect(wikiThumb(seguro, 960)).toBe(seguro);
   });
   test('padrão é 500', () => {
     expect(wikiThumb(ORIG)).toBe(FP + 'Lagoa_das_Sete_Cidades3.jpg?width=500');

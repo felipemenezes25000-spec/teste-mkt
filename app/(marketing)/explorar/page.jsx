@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { DESTINOS } from '../../_lib/destinos.js';
-import { imagemWiki } from '../../_lib/wiki.js';
+import { fotoCapa } from '../../_lib/wiki.js';
 import { ExplorarClient } from './ExplorarClient.jsx';
 
 // World Explorer: imagens resolvidas no servidor (cacheadas 1 dia); mapa, filtros,
@@ -14,7 +14,7 @@ export const metadata = {
 };
 
 export default async function ExplorarPage() {
-  const imgs = await Promise.all(DESTINOS.map((d) => imagemWiki(d.fotoQuery || d.nome)));
+  const imgs = await Promise.all(DESTINOS.map((d) => fotoCapa(d)));
   const destinos = DESTINOS.map((d, i) => ({ ...d, img: imgs[i] }));
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-8">

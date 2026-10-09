@@ -111,6 +111,8 @@ export function MapaInterativo({
         m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
         m.on('error', (e) => { if (/style|tiles|Failed to fetch/i.test(String(e && e.error && e.error.message))) setEstado((s) => (s === 'pronto' ? s : 'erro')); });
         m.on('style.load', () => { montarCamadas(m); setEstado('pronto'); });
+        // alguns estilos citam ícones ausentes do sprite (ex.: circle-11): imagem vazia evita ruído
+        m.on('styleimagemissing', (e) => { if (!m.hasImage(e.id)) m.addImage(e.id, { width: 1, height: 1, data: new Uint8Array(4) }); });
         m.on('click', 'msf-pontos', (e) => { const f = e.features && e.features[0]; if (f && cb.current) cb.current(f.properties.id); });
         m.on('click', 'msf-cluster', (e) => {
           const f = e.features && e.features[0];

@@ -13,12 +13,12 @@ e descubra a **ordem dos países que não te quebra**.
 
 [![Ao vivo](https://img.shields.io/badge/Ao_vivo-mundo--sem--fim.vercel.app-0E5A4E?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0E5A4E)](https://mundo-sem-fim.vercel.app)
 
-[![Next.js 14](https://img.shields.io/badge/Next.js-14-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
-[![React 18](https://img.shields.io/badge/React-18-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React-19-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Tailwind CSS 3](https://img.shields.io/badge/Tailwind-3-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%2B%20RLS-3FCF8E?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com/)
 [![Stripe](https://img.shields.io/badge/Stripe-pagamentos-635BFF?style=flat-square&logo=stripe&logoColor=white)](https://stripe.com/)
-[![Vitest](https://img.shields.io/badge/Vitest-33_suites-6E9F18?style=flat-square&logo=vitest&logoColor=white)](https://vitest.dev/)
+[![Vitest](https://img.shields.io/badge/Vitest-39_suites-6E9F18?style=flat-square&logo=vitest&logoColor=white)](https://vitest.dev/)
 [![PWA](https://img.shields.io/badge/PWA-offline-5A0FC8?style=flat-square&logo=pwa&logoColor=white)](#seo-pwa-e-performance)
 [![i18n](https://img.shields.io/badge/i18n-pt_en_es_ja-0E5A4E?style=flat-square)](#internacionalização)
 
@@ -130,11 +130,13 @@ não scraping genérico.
 | 💱 Moedas suportadas | **145+** |
 | 🗣️ Idiomas | **4** (pt · en · es · ja) |
 
-Cada um dos 205 países vira uma rota estática `/destino/:slug` com **veredito editorial, Mundo Score, custo real,
-passeios com preço, transporte local, "o que ninguém te conta" e "vale ir agora?"**.
+Cada um dos 205 países tem a página `/destino/:slug` (8 pré-renderizadas + ISR de 1 dia) com **veredito editorial,
+Mundo Score, ficha técnica com selo de frescor, custo de referência, atlas com atrações/cidades geolocalizadas,
+passeios com preço de referência e "vale ir agora?"**.
 
-Câmbio **ao vivo** (USD→BRL e 145+ moedas) via `open.er-api.com`, com cache local de 12h e fallback offline —
-porque *"o custo aparece em US$, mas o brasileiro paga em R$ — e o cartão do banco ainda come IOF + spread."*
+> **Honestidade dos números:** preços de atrações, transporte e custo diário são **pesquisa de referência (jun/2026)**,
+> exibidos com o selo **HISTÓRICO**. Câmbio é a **taxa de referência do dia** (open.er-api / BCE), com data — não a
+> taxa do cartão. Detalhes em `/fontes` e `docs/PRICE-FRESHNESS-SLA.md`.
 
 ---
 
@@ -260,14 +262,16 @@ Plano compartilhável via hash (`#r=`) — sem nunca expor chave de IA.
 
 | Camada | Tecnologia |
 | :-- | :-- |
-| Framework | **Next.js 14** (App Router, JSX) |
-| UI | **React 18** + **Tailwind CSS 3** + tokens CSS (RGB, dark mode) |
-| Tipografia | Fraunces + Hanken Grotesk (`next/font/google`) |
+| Framework | **Next.js 16** (App Router, JSX; contratos de domínio com JSDoc + `tsc --checkJs`) |
+| UI | **React 19** + **Tailwind CSS 3** + tokens MERIDIANO (RGB, dark mode) — ver `docs/BRAND-RATIONALE.md` |
+| Tipografia | Bricolage Grotesque + Geist + Geist Mono (`next/font/google`) |
 | Auth & dados | **Supabase** (Postgres + RLS) |
 | Pagamentos | **Stripe** (REST, sem SDK; webhook HMAC manual) |
 | IA | LLM **OpenAI-compatível** server-side (Groq/OpenRouter via `AI_BASE_URL`), com cota diária |
-| Câmbio | `open.er-api.com` (ao vivo, base USD; cache 12h; fallback offline) |
-| Testes | **Vitest** — 33 suítes (ambiente `node`) |
+| Câmbio | `open.er-api.com` (taxa de referência diária) + Frankfurter/BCE para despesas — rotulado RECENTE com data |
+| Mapas e rotas | MapLibre + OpenFreeMap (OSM) · OSRM/FOSSGIS · coordenadas Wikipedia/Wikidata |
+| Clima | Open-Meteo (gratuito só p/ uso não comercial) |
+| Testes | **Vitest** — 39 suítes / 277 testes · RLS em Postgres real (Docker) · QA tela a tela + E2E (Playwright) |
 | Analytics | GTM + PostHog (opcionais, *no-op* seguro) |
 | PWA | Service worker + manifest + shell offline |
 | Deploy | **Vercel** (recomendado) + **Render** (Blueprint) |
@@ -276,7 +280,7 @@ Plano compartilhável via hash (`#r=`) — sem nunca expor chave de IA.
 
 ## Rodando localmente
 
-> **Pré-requisito:** Node **≥ 18.17** (os deploys fixam Node 20).
+> **Pré-requisito:** Node **≥ 20.9** (exigência do Next 16; os deploys fixam Node 20).
 
 ```bash
 # 1. instalar dependências
@@ -295,6 +299,10 @@ npm run dev                  # http://localhost:3000
 | `npm run build` | Build de produção (`next build`) |
 | `npm start` | Servir o build (`next start`) |
 | `npm test` | Suíte de testes (`vitest run`) |
+| `npm run lint` / `npm run typecheck` | ESLint 9 · `tsc` do domínio |
+| `npm run verify` | lint + typecheck + testes |
+| `npm run test:rls` | RLS real em Postgres (Docker) — 34 casos |
+| `npm run qa -- <url>` | QA tela a tela (19 rotas × 7 larguras × claro/escuro) |
 
 > 💡 **Degradação graciosa:** sem nenhuma variável de ambiente, IA, login, Stripe, afiliados e analytics viram
 > *no-op* seguro — o app abre e funciona. As chaves só **destravam** recursos; nada quebra sem elas.
@@ -326,7 +334,7 @@ Copie `.env.example` para `.env.local` (git-ignored) e preencha **só o que quis
 npm test          # vitest run (execução única, sem watch)
 ```
 
-**33 suítes Vitest** cobrindo a lógica de domínio (funções puras), no ambiente `node`:
+**39 suítes Vitest (277 testes)** cobrindo domínio, motor e bibliotecas, mais RLS real (`npm run test:rls`), E2E da jornada (`scripts/e2e-viagem.mjs`) e QA visual (`scripts/qa-telas.mjs`):
 
 - **`app/_engine` (25 suítes)** — score, custo total, orçamento, rateio de grupo, câmbio, roteiro, otimizar, decisão, cenários, oportunidades, afiliados, previsão de voo, perfil, checklist, dicas, exportar, share, storage…
 - **`app/_lib` (8 suítes)** — flights, security (CSP/headers), wiki/wikiClient/wikiThumb, editorial, seo, destinos-prioritários.
@@ -410,9 +418,10 @@ mundo-sem-fim-app/
 
 ## Status do produto
 
-Dos **10 diferenciais obrigatórios** da spec de produto: **7 prontos · 2 parciais · 1 planejado**.
-O núcleo de decisão (motor, custo total, score de 8 dimensões, comparador, roteiro IA, central de oportunidades)
-está **pronto e no ar**.
+Execução do prompt **OMEGA V4** (2026-10-09): status real por lote em [`docs/OMEGA-V4-STATUS.md`](docs/OMEGA-V4-STATUS.md),
+retomada em [`docs/CONTINUATION.md`](docs/CONTINUATION.md), provedores em [`docs/PROVIDER-MATRIX.md`](docs/PROVIDER-MATRIX.md).
+Integrações que dependem de chave/contrato (voos, hotéis, experiências, Stripe, Supabase, IA) estão prontas no
+código e marcadas como `BLOCKED_EXTERNAL`/`ADAPTER_READY` — nada é exibido como “ao vivo” sem ser.
 
 ---
 

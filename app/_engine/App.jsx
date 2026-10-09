@@ -15,6 +15,7 @@ import { EmptyState } from '../_ui/EmptyState.jsx';
 import { Button } from '../_ui/Button.jsx';
 import { Tabs } from '../_ui/Tabs.jsx';
 import Onboarding from './Onboarding.jsx';
+import { Marca } from '../_ui/Marca.jsx';
 import CustosView from './CustosView.jsx';
 import { supabaseConfigurado, usuarioAtual, carregarViagemNuvem, salvarViagemNuvem, entrarComEmail, sair } from './supabase.js';
 import { identify, track } from '../_lib/analytics.js';
@@ -467,7 +468,6 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <Toasts items={toasts} onClose={(id) => setToasts(t => t.filter(x => x.id !== id))} />
-      <Onboarding forcado={ajuda} />
       {confirmElement}
       {showLogin && (
         <LoginModal
@@ -482,15 +482,16 @@ export default function App() {
           fx={plan.settings.fx} moedasEmUso={moedasEmUso} onAtualizarCambio={() => atualizarCambio(false)} cambioBusy={cambioBusy} onSetRate={setRate} />
       )}
 
-      <header className="sticky top-0 z-30 backdrop-blur bg-paper/80 border-b border-line">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <Link href="/" title="Início / Explorar destinos" className="flex items-center gap-2.5 mr-auto focusring rounded-lg">
-            <div className="w-9 h-9 rounded-xl bg-pine text-onpine grid place-items-center font-display text-lg shadow-md" aria-hidden>∞</div>
-            <div className="leading-tight">
-              <div className="font-display text-xl text-ink">Mundo Sem Fim</div>
-              <div className="text-[11px] text-inksoft -mt-0.5">Estação × Visto × Fôlego, na ordem certa</div>
-            </div>
+      <header className="sticky top-0 z-30 backdrop-blur-md bg-paper/85 border-b border-line">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <Link href="/" title="Início" className="flex items-center gap-3 mr-auto focusring rounded-lg">
+            <Marca size={34} wordmarkClassName="hidden min-[400px]:inline" />
+            <span className="hidden md:inline eyebrow border-l border-line pl-3">Planejador de rota</span>
           </Link>
+          <nav className="hidden lg:flex items-center gap-1 text-sm" aria-label="Atalhos">
+            <Link href="/explorar" className="px-3 h-9 inline-flex items-center rounded-lg text-inksoft hover:text-ink focusring">Explorar</Link>
+            <Link href="/viagens" className="px-3 h-9 inline-flex items-center rounded-lg text-inksoft hover:text-ink focusring">Viagens</Link>
+          </nav>
 
           <div className="flex flex-wrap items-center justify-end gap-1.5">
             <SaveStatus estado={saveState} naNuvem={naNuvem} onRetry={tentarSincronizar} />
@@ -518,9 +519,9 @@ export default function App() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-6">
         <div className="rise">
-          <h1 className="font-display text-3xl sm:text-[40px] leading-[1.05] text-ink max-w-3xl">
+          <h1 className="font-display text-4xl sm:text-5xl tracking-tighter leading-[1] text-ink max-w-3xl">
             Monte sua volta ao mundo <span className="text-pine">na ordem que não te quebra.</span>
           </h1>
           <p className="mt-2 text-inksoft max-w-2xl">
@@ -528,6 +529,8 @@ export default function App() {
             Arraste os trechos e veja, em tempo real, o cruzamento de <b className="text-ink">estação</b>, <b className="text-ink">visto</b> e <b className="text-ink">fôlego de dinheiro</b>.
           </p>
         </div>
+
+        <Onboarding forcado={ajuda} />
 
         <ParametrosViagem settings={plan.settings} base={base} onSet={setSettings} onBase={trocarBase} onPassaporte={trocarPassaporte} />
 

@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { Icon } from './_ui/Icon.jsx';
+import { MarcaIcone } from './_ui/Marca.jsx';
 
 // Error boundary global (App Router): qualquer erro de runtime nas rotas cai aqui
 // em vez da tela crua do Next. Com a cara do produto, igual ao not-found.jsx.
@@ -15,8 +16,8 @@ export default function Error({ error, reset }) {
   return (
     <main className="min-h-screen grid place-items-center bg-paper px-6 py-16 text-center">
       <div className="max-w-md">
-        <span className="w-14 h-14 rounded-2xl bg-pine text-onpine grid place-items-center font-display text-3xl shadow-md mx-auto" aria-hidden>∞</span>
-        <h1 className="mt-6 font-display text-2xl text-ink">Algo saiu da rota.</h1>
+        <MarcaIcone size={56} className="mx-auto" />
+        <h1 className="mt-6 font-display text-3xl tracking-tighter text-ink">Algo saiu da rota.</h1>
         <p className="mt-2 text-inksoft">
           Deu um erro inesperado ao montar esta página. Geralmente é passageiro —
           tente de novo; se insistir, volte ao início.
@@ -25,15 +26,15 @@ export default function Error({ error, reset }) {
           <button
             type="button"
             onClick={() => reset()}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-onpine font-semibold px-5 py-3 hover:bg-pinedk transition focusring"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-coral text-oncoral font-semibold px-5 h-12 hover:brightness-95 transition focusring"
           >
-            <span aria-hidden><Icon emoji="🔄" /></span>Tentar de novo
+            <Icon name="refresh" size={18} />Tentar de novo
           </button>
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-card text-ink font-semibold px-5 py-3 hover:text-pine transition focusring"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-line bg-card text-ink font-semibold px-5 h-12 hover:border-pine/50 transition focusring"
           >
-            <span aria-hidden><Icon emoji="🏠" /></span>Voltar ao início
+            <Icon name="home" size={18} />Voltar ao início
           </Link>
         </div>
       </div>

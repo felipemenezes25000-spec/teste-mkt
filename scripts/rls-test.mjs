@@ -8,6 +8,7 @@
 import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const NOME = 'msf-rls-test';
 const IMG = process.env.RLS_PG_IMAGE || 'postgres:15-alpine';
@@ -109,6 +110,34 @@ caso('moeda inválida é rejeitada', () => !como(A, `insert into expenses(trip_i
 caso('membro sai da viagem por conta própria', () => ultimo(como(A, `with d as (delete from trip_members where trip_id='${TB}' and user_id='${A}' returning 1) select count(*) from d;`)) === '1');
 caso('após sair, A perde acesso', () => ultimo(como(A, `select count(*) from trips where id='${TB}';`)) === '0');
 caso('LGPD: A exclui a própria conta (cascata)', () => como(A, `select excluir_minha_conta();`).ok && ultimo(psql(`select count(*) from trips where user_id='${A}';`)) === '0');
+
+// Compatibilidade REAL do adaptador de sync (app/_lib/viagens/sync.js) com o schema:
+// as linhas geradas por paraLinhas() são inseridas como o próprio usuário (RLS ativo).
+const { paraLinhas } = await import(pathToFileURL(path.resolve('app/_lib/viagens/sync.js')).href);
+const st = await import(pathToFileURL(path.resolve('app/_lib/viagens/store.js')).href);
+const lit = (v) => (v === null || v === undefined ? 'null' : typeof v === 'number' || typeof v === 'boolean' ? String(v) : typeof v === 'object' ? `'${JSON.stringify(v).replace(/'/g, "''")}'::jsonb` : `'${String(v).replace(/'/g, "''")}'`);
+const ins = (tabela, row) => `insert into ${tabela} (${Object.keys(row).join(',')}) values (${Object.values(row).map(lit).join(',')})`;
+caso('adaptador de sync grava viagem completa no schema real (como o usuário)', () => {
+  let e = st.adicionarViagem(st.estadoVazio(), st.novaViagem({ titulo: 'Sync JP', destinoCode: 'JP', destinoNome: 'Japão', inicio: '2026-11-01', fim: '2026-11-02', orcamento: 9000, timeZone: 'Asia/Tokyo' }));
+  const vid = e.viagens[0].id;
+  e = st.adicionarItem(e, vid, { dia: '2026-11-01', titulo: 'Fushimi', lat: 34.96, lng: 135.77, fixoInicio: '09:00' });
+  e = st.adicionarReserva(e, vid, { tipo: 'LODGING', provider: 'Booking.com', preco: 800, moeda: 'BRL', confirmada: true, inicioLocal: '2026-11-01T15:00' });
+  e = st.adicionarDespesa(e, vid, { valor: 3200, moeda: 'JPY', categoria: 'ALIMENTACAO', taxa: 0.0317, data: '2026-11-01' });
+  e = st.adicionarDocumento(e, vid, { tipo: 'PASSAPORTE', titulo: 'Passaporte', validade: '2030-01-01' });
+  const L = paraLinhas(e.viagens[0], B);
+  const r = como(B, `${ins('trips', L.trip)};
+    ${L.itens.map((x) => ins('itinerary_items', { ...x, trip_id: '__T__' })).join(';')};
+    ${L.reservas.map((x) => ins('reservations', { ...x, trip_id: '__T__' })).join(';')};
+    ${L.despesas.map((x) => ins('expenses', { ...x, trip_id: '__T__' })).join(';')};
+    ${L.documentos.map((x) => ins('trip_documents', { ...x, trip_id: '__T__' })).join(';')};
+    select (select count(*) from itinerary_items i join trips t on t.id=i.trip_id where t.local_id='${vid}')
+         + (select count(*) from reservations r join trips t on t.id=r.trip_id where t.local_id='${vid}')
+         + (select count(*) from expenses x join trips t on t.id=x.trip_id where t.local_id='${vid}')
+         + (select count(*) from trip_documents d join trips t on t.id=d.trip_id where t.local_id='${vid}');`
+    .replace(/'__T__'/g, `(select id from trips where local_id='${vid}')`));
+  if (!r.ok) console.error(r.err.slice(0, 300));
+  return r.ok && ultimo(r) === '4';
+});
 
 let falhas = 0;
 for (const c of casos) {

@@ -3,7 +3,6 @@ import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { lerFavoritos, FAV_EVENT } from '../../_lib/favoritos.js';
 import { destinoPorCode, DESTINOS } from '../../_lib/destinos.js';
-import { imagemWiki } from '../../_lib/wiki.js';
 import { DestinoCard } from '../../_components/DestinoCard.jsx';
 import { EmptyState } from '../../_ui/EmptyState.jsx';
 import { CardsSkeleton } from '../../_components/Skeleton.jsx';
@@ -30,15 +29,14 @@ export function SalvosClient() {
   }, []);
   const aMostrar = vazio ? recomendados : destinos;
 
-  // Busca as imagens no client (Wikipedia REST tem CORS aberto).
+  // Fotos resolvidas no servidor (/api/fotos): URL em largura segura + crédito.
   useEffect(() => {
     let vivo = true;
-    aMostrar.forEach((d) => {
-      if (imgs[d.code] !== undefined) return;
-      imagemWiki(d.fotoQuery || d.nome).then((src) => {
-        if (vivo) setImgs((p) => ({ ...p, [d.code]: src || null }));
-      });
-    });
+    const faltam = aMostrar.filter((d) => imgs[d.code] === undefined).map((d) => d.code);
+    if (!faltam.length) return undefined;
+    fetch(`/api/fotos?codes=${faltam.join(',')}`).then((r) => (r.ok ? r.json() : {})).then((j) => {
+      if (vivo) setImgs((p) => ({ ...p, ...Object.fromEntries(faltam.map((c) => [c, j[c] || { img: null }])) }));
+    }).catch(() => {});
     return () => { vivo = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codes]);
@@ -55,7 +53,7 @@ export function SalvosClient() {
           actions={[{ href: '/decisao', label: 'Descobrir o que combina', primary: true }, { href: '/explorar', label: 'Explorar curadoria' }]}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {recomendados.map((d) => <DestinoCard key={d.code} d={d} img={imgs[d.code]} />)}
+            {recomendados.map((d) => <DestinoCard key={d.code} d={d} img={imgs[d.code]?.img} credito={imgs[d.code]?.credito} />)}
           </div>
         </EmptyState>
       </div>
@@ -121,7 +119,7 @@ export function SalvosClient() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {destinos.map((d) => <DestinoCard key={d.code} d={d} img={imgs[d.code]} />)}
+        {destinos.map((d) => <DestinoCard key={d.code} d={d} img={imgs[d.code]?.img} credito={imgs[d.code]?.credito} />)}
       </div>
       <p className="mt-6 text-xs text-inksoft border-t border-line pt-4">
         <Icon emoji="💾" /> Seus salvos ficam neste navegador. Sua rota no{' '}

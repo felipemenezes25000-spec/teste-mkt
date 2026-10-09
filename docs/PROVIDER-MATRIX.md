@@ -1,0 +1,38 @@
+# Provider matrix
+
+> Gerado por `scripts/docs/gerar-matrizes.mjs` a partir de `app/_lib/provedores.js` (fonte única; também exibido em /fontes). Verificado em 2026-10-09 com requisições reais deste ambiente. Estados conforme OMEGA V4 §28 — **ADAPTER_READY nunca é tratado como LIVE**.
+
+| Provedor | Domínio | Estado | Uso | Acesso | Limite | Custo | Se falhar | Atribuição | Nota |
+|---|---|---|---|---|---|---|---|---|---|
+| OpenFreeMap (tiles OSM) | Mapas | `LIVE_VERIFIED` (Ativo e verificado) | Mapa interativo (Explorar, destino, roteiro) | sem chave · browser | Sem limite declarado; serviço doado, “as is” | Grátis (doações) | Lista textual equivalente; aviso “mapa indisponível” | © OpenMapTiles · dados © OpenStreetMap (automática no mapa) | Uso comercial permitido com atribuição. |
+| OSRM · FOSSGIS (routing.openstreetmap.de) | Rotas | `LIVE_VERIFIED` (Ativo e verificado) | Rota real a pé/bike/carro no roteiro e no Modo Viagem | sem chave · browser | ≤ 1 req/s, uso leve (respeitado por fila no cliente) | Grátis | Tempo estimado por distância, rotulado ESTIMATIVA | OSRM · FOSSGIS · © OpenStreetMap | Escala de produção exige servidor OSRM/Valhalla próprio ou provedor pago → bloqueio de escala. |
+| Transporte público em tempo real (GTFS-RT) | Rotas | `RESEARCHED` (Pesquisado) | Horários reais de metrô/ônibus/trem | — · — | — | Varia por cidade/agregador | Tempo de transporte ESTIMADO, rotulado | — | Requer agregador (ex.: Google Routes, Navitia, Transitland) com contrato. |
+| Wikipedia + Wikidata (coordenadas) | Geo | `LIVE_VERIFIED` (Ativo e verificado) | Coordenadas canônicas de 2.755 atrações e 1.063 cidades | sem chave (User-Agent identificado) · build/servidor | Boas práticas de API (lotes de 50) | Grátis | Sem pino (melhor que pino errado) | Wikipedia / Wikidata (CC BY-SA / CC0) | Gerado por scripts/geo/geocodificar.mjs em 2026-10-09. |
+| Wikimedia Commons | Fotos | `LIVE_VERIFIED` (Ativo e verificado) | Fotos de países, cidades e atrações com autor e licença | sem chave · servidor (resolução) + browser (thumb) | Somente larguras padrão de thumbnail; originais têm limite de taxa | Grátis | Foto ilustrativa ROTULADA ou placeholder honesto | Autor + licença por foto (botão ©) | Corrigido o uso de larguras não padrão (400/429) achado no QA do Lote 0. |
+| Wikipedia (resumos) | Conteúdo | `LIVE_VERIFIED` (Ativo e verificado) | “Sobre o país” e história dos lugares | sem chave · servidor + browser | Boas práticas | Grátis | Contexto editorial do país | Link “Ler na Wikipédia” |  |
+| Openverse | Fotos | `LIVE_VERIFIED` (Ativo e verificado) | Fallback de foto com licença CC comercial | sem chave · servidor | Anônimo com limite baixo | Grátis | Próximo da cascata | Autor + licença + link |  |
+| flagcdn | Ícones | `LIVE_VERIFIED` (Ativo e verificado) | Bandeiras | sem chave · browser | — | Grátis | Sem bandeira | Domínio público |  |
+| Frankfurter (taxas do BCE) | Câmbio | `LIVE_VERIFIED` (Ativo e verificado) | Conversão de despesas | sem chave · browser | — | Grátis | open.er-api; senão despesa salva sem conversão (avisado) | BCE via frankfurter.dev | Taxa de referência diária (dias úteis) — não é a taxa do cartão. |
+| ExchangeRate-API (open.er-api.com) | Câmbio | `LIVE_VERIFIED` (Ativo e verificado) | Câmbio USD→BRL dos preços de referência e moedas fora do BCE | sem chave · browser | Atualização diária; uso razoável | Grátis (plano aberto) | Valor fixo de referência rotulado ESTIMATIVA | ExchangeRate-API |  |
+| Open-Meteo | Clima | `CONTRACT_REQUIRED` (Precisa de contrato) | Previsão do dia, fuso do destino, Plano B de chuva | sem chave · browser | 10.000 chamadas/dia (gratuito) | Gratuito só para uso NÃO comercial; API comercial paga | Sem previsão (aviso) | Open-Meteo.com (CC BY 4.0) | Funciona hoje (verificado); antes de lançar com receita, contratar a API comercial — bloqueio externo. |
+| Busca de voos ao vivo (Duffel / Travelpayouts / Amadeus) | Voos | `KEY_REQUIRED` (Precisa de chave) | Ofertas reais com preço total e bagagem | chave de API · servidor | — | Conforme contrato | CENÁRIOS ESTIMADOS por distância (sem nomes de companhias) + links para buscadores | — | Sem chave/contrato → nenhuma oferta é exibida como real. |
+| Hospedagem (Expedia Rapid / Booking Affiliate) | Hotéis | `CONTRACT_REQUIRED` (Precisa de contrato) | Preço total com taxas e disponibilidade | contrato de parceiro · servidor | — | Comissão | DEEPLINK para busca no parceiro (você sai do site, avisado) | — |  |
+| Experiências (Viator / GetYourGuide / Civitatis / Klook) | Experiências | `KEY_REQUIRED` (Precisa de chave) | Ingressos com horário e disponibilidade | chave de parceiro · servidor | — | Comissão | Preço de referência HISTÓRICO + DEEPLINK | — |  |
+| Tags de afiliado (Booking, Viator, GYG, Klook, Civitatis, Travelpayouts, Wise, SafetyWing) | Monetização | `ADAPTER_READY` (Integração pronta, falta credencial) | Comissão em links de saída | IDs públicos por env · browser (links) | — | — | Link sem tag (no-op seguro) | Aviso de saída + rel="sponsored" | Cadastro nos programas é do dono do produto. A comissão nunca entra no ranking (teste automatizado). |
+| Stripe | Pagamentos | `ADAPTER_READY` (Integração pronta, falta credencial) | Assinaturas Premium/Pro | chave secreta + webhook · servidor | — | Taxa por transação | Plano grátis (no-op seguro) | — | Webhook com assinatura, dedupe e ordem. Falta chave/preço do dono para SANDBOX_VERIFIED. |
+| Supabase | Conta e sync | `ADAPTER_READY` (Integração pronta, falta credencial) | Login, assinaturas, sync de viagens | anon key + service role · browser + servidor | — | Plano Supabase | Tudo local no aparelho | — | RLS testado em Postgres real (34 casos). Precisa aplicar as migrations no projeto do dono. |
+| LLM (OpenAI-compatível) | IA | `KEY_REQUIRED` (Precisa de chave) | Roteiro e oportunidades com IA | chave de API · servidor | Cota diária por usuário | Por token | Modo sem IA / chave do próprio usuário | — | Só para usuário logado; IA não define visto nem preço. |
+| Regras de entrada (visto/saúde) oficiais | Documentos | `RESEARCHED` (Pesquisado) | Visto por passaporte e país | — · catálogo | — | APIs especializadas (ex.: Sherpa, Timatic) são pagas | “Consultar consulado” quando não há regra | Compilação jun/2026 | Sempre com aviso de confirmar no órgão oficial. |
+
+## Bloqueios externos (dependem do dono do produto)
+
+- **Transporte público em tempo real (GTFS-RT)** — `RESEARCHED`: Requer agregador (ex.: Google Routes, Navitia, Transitland) com contrato.
+- **Open-Meteo** — `CONTRACT_REQUIRED`: Funciona hoje (verificado); antes de lançar com receita, contratar a API comercial — bloqueio externo.
+- **Busca de voos ao vivo (Duffel / Travelpayouts / Amadeus)** — `KEY_REQUIRED`: Sem chave/contrato → nenhuma oferta é exibida como real.
+- **Hospedagem (Expedia Rapid / Booking Affiliate)** — `CONTRACT_REQUIRED`: Comissão
+- **Experiências (Viator / GetYourGuide / Civitatis / Klook)** — `KEY_REQUIRED`: Comissão
+- **Tags de afiliado (Booking, Viator, GYG, Klook, Civitatis, Travelpayouts, Wise, SafetyWing)** — `ADAPTER_READY`: Cadastro nos programas é do dono do produto. A comissão nunca entra no ranking (teste automatizado).
+- **Stripe** — `ADAPTER_READY`: Webhook com assinatura, dedupe e ordem. Falta chave/preço do dono para SANDBOX_VERIFIED.
+- **Supabase** — `ADAPTER_READY`: RLS testado em Postgres real (34 casos). Precisa aplicar as migrations no projeto do dono.
+- **LLM (OpenAI-compatível)** — `KEY_REQUIRED`: Só para usuário logado; IA não define visto nem preço.
+- **Regras de entrada (visto/saúde) oficiais** — `RESEARCHED`: Sempre com aviso de confirmar no órgão oficial.

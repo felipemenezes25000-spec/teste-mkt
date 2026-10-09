@@ -23,6 +23,11 @@ export function wikiThumb(url, width = 500) {
   // Wikidata (wdt:P18) devolve http://commons… → https senão a CSP bloqueia.
   url = url.replace(/^http:\/\//, 'https://');
   const w = larguraPadrao(width);
+  // Já é thumbnail em largura PADRÃO (ex.: resolvido pelo servidor em _lib/media.js,
+  // que garante largura ≤ original) → não mexe: reescrever poderia pedir largura maior
+  // que o original e cair no "unscaled" (429).
+  const jaThumb = url.match(/\/thumb\/.+\/(\d+)px-[^/]+$/);
+  if (jaThumb && LARGURAS_PADRAO.includes(Number(jaThumb[1]))) return url;
   if (url.includes('Special:FilePath/')) {
     return url.split('?')[0] + '?width=' + w;
   }

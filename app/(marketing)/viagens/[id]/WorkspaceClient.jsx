@@ -14,6 +14,8 @@ import { rotaDoDia, ATRIBUICAO_ROTAS } from '../../../_lib/roteamento.js';
 import { previsao, descreverTempo, ATRIBUICAO_CLIMA } from '../../../_lib/clima.js';
 import { taxa as taxaFx } from '../../../_lib/fx.js';
 import { flagUrl } from '../../../_lib/flags.js';
+import { supabase, supabaseConfigurado, usuarioAtual } from '../../../_engine/supabase.js';
+import { sincronizarViagem } from '../../../_lib/viagens/sync.js';
 import { Icon } from '../../../_ui/Icon.jsx';
 import { SourceTrust } from '../../../_ui/SourceTrust.jsx';
 
@@ -518,6 +520,32 @@ function Documentos({ v, exec }) {
 }
 
 /* ---------------- RESUMO ---------------- */
+function Sincronizar({ v, exec }) {
+  const [st, setSt] = useState({ fase: 'idle' });
+  async function sync() {
+    setSt({ fase: 'enviando' });
+    const u = await usuarioAtual();
+    if (!u) { setSt({ fase: 'login' }); return; }
+    const r = await sincronizarViagem(supabase, v, u.id);
+    if (r.ok) { exec((s) => atualizarViagem(s, v.id, { sincronizadaEm: r.em })); setSt({ fase: 'ok' }); } else setSt({ fase: 'erro', msg: r.erro });
+  }
+  return (
+    <div className="rounded-2xl border border-line bg-card p-5 lg:col-span-2">
+      <div className="eyebrow">Conta e outros aparelhos</div>
+      {!supabaseConfigurado ? (
+        <p className="mt-2 text-sm text-inksoft">Esta viagem está guardada só neste aparelho. A sincronização com a conta fica disponível quando o login estiver configurado no servidor.</p>
+      ) : (
+        <div className="mt-2 flex flex-wrap items-center gap-3">
+          <button type="button" onClick={sync} disabled={st.fase === 'enviando'} className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-pine text-onpine text-sm font-semibold disabled:opacity-60 focusring"><Icon name="refresh" size={16} />{st.fase === 'enviando' ? 'Sincronizando…' : 'Sincronizar com a conta'}</button>
+          <span className="text-sm text-inksoft" role="status">
+            {st.fase === 'ok' ? 'Sincronizada agora.' : st.fase === 'login' ? <>Entre na sua conta para sincronizar. <Link href="/conta" className="text-pine underline">Entrar</Link></> : st.fase === 'erro' ? <span className="text-danger">Falhou: {st.msg}</span> : v.sincronizadaEm ? `Última sincronização: ${new Date(v.sincronizadaEm).toLocaleString('pt-BR')}` : 'Ainda não sincronizada.'}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Resumo({ v, exec, irPara }) {
   const p = prontidao(v);
   const custoEst = v.itens.reduce((s, i) => s + (i.custoEstimado || 0), 0);
@@ -543,6 +571,7 @@ function Resumo({ v, exec, irPara }) {
         </div>
         <p className="mt-3 text-sm text-inksoft">Ingressos do roteiro (referência histórica): <span className="font-mono text-ink">US$ {custoEst.toLocaleString('pt-BR')}</span> por pessoa. <Link href="/custo-real" className="text-pine hover:underline">Ver custo real completo</Link></p>
       </div>
+      <Sincronizar v={v} exec={exec} />
     </div>
   );
 }
