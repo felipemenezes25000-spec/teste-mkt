@@ -58,7 +58,7 @@ export const STRINGS = {
       faqSelo: 'FAQ', faqH2: 'Perguntas que todo viajante faz',
       ctaFinalH2: 'Antes de comprar a passagem, veja se essa viagem fecha a conta.',
       ctaFinalP: 'Em 30 segundos: 3 destinos que combinam com seu perfil, mês e orçamento — com o custo real da viagem inteira, não só do voo.',
-      ctaFinalCusto: 'Abrir custo real', ctaFinalRodape: 'Grátis para começar · sem cartão · conselho neutro (não vendemos a reserva).',
+      ctaFinalCusto: 'Abrir custo real', ctaFinalRodape: 'Grátis para começar · sem cartão · a comissão de parceiros nunca muda o ranking.',
     },
     destino: {
       pontosTuristicos: 'Pontos turísticos', cidadesBases: 'Cidades & bases', ondefica: 'Onde fica',

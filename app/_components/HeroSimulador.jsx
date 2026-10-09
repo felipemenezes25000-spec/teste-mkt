@@ -6,6 +6,7 @@ import { recomendarDestinos } from '../_engine/decisao.js';
 import { perfilDoPreset, PERFIS_PRONTOS } from '../_engine/perfil.js';
 import { MESES_PT } from '../_engine/data.js';
 import { useIdioma } from '../_lib/i18n.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 const ESTILOS = Object.entries(PERFIS_PRONTOS).map(([id, p]) => ({ id, label: p.nome }));
 
@@ -40,19 +41,19 @@ export function HeroSimulador() {
     }));
   }
 
-  const field = 'mt-1 w-full px-3 py-2 rounded-lg border border-line bg-input text-ink focusring text-sm';
+  const field = 'mt-1.5 w-full h-11 px-3 rounded-lg border border-line bg-input text-ink focusring text-sm';
   const nd = Number(dias) || 14;
 
   return (
-    <section className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-12">
-      <div className="rounded-3xl border border-line bg-card shadow-[var(--e-2)] p-5 sm:p-7">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-oncoral bg-coral px-2.5 py-1 rounded-full">{t('simulador.badge30s')}</span>
-          <h2 className="font-display text-xl sm:text-2xl text-ink">{t('simulador.titulo')}</h2>
+    <section aria-labelledby="sim-titulo" className="relative">
+      <div className="rounded-2xl border border-line bg-card/95 backdrop-blur shadow-e2 p-5 sm:p-6">
+        <div className="flex items-center justify-between gap-3">
+          <h2 id="sim-titulo" className="font-display text-xl sm:text-2xl text-ink">{t('simulador.titulo')}</h2>
+          <span className="shrink-0 font-mono text-[10px] uppercase tracking-widest text-oncoral bg-coral px-2 py-1 rounded">{t('simulador.badge30s')}</span>
         </div>
 
-        <form onSubmit={simular} className="mt-4 grid grid-cols-2 lg:grid-cols-5 gap-3 items-end">
-          <label className="text-xs text-inksoft font-medium col-span-2 lg:col-span-1">{t('simulador.estilo')}
+        <form onSubmit={simular} className="mt-5 grid grid-cols-2 gap-3 items-end">
+          <label className="text-xs text-inksoft font-medium col-span-2">{t('simulador.estilo')}
             <select value={estilo} onChange={(e) => setEstilo(e.target.value)} className={field}>
               {ESTILOS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
             </select>
@@ -69,24 +70,24 @@ export function HeroSimulador() {
               {MESES_PT.map((m, i) => <option key={m} value={i + 1}>{m}</option>)}
             </select>
           </label>
-          <button type="submit" className="col-span-2 lg:col-span-1 inline-flex items-center justify-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 transition focusring">
-            {t('simulador.cta')}
+          <button type="submit" className="col-span-2 inline-flex items-center justify-center gap-2 rounded-lg bg-coral text-oncoral font-semibold px-4 h-12 hover:brightness-95 transition focusring">
+            {t('simulador.cta')} <Icon name="arrow-right" size={17} />
           </button>
         </form>
 
         {res ? (
           <div className="mt-5">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 gap-2.5">
               {res.map((d, i) => (
-                <div key={d.code} className="rounded-2xl border border-line bg-paper2/60 p-4 flex flex-col">
+                <div key={d.code} className="rounded-xl border border-line bg-paper2/60 p-4 flex flex-col">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-bold bg-pine text-onpine w-6 h-6 grid place-items-center rounded-full">{i + 1}º</span>
-                    <span className="text-[11px] text-inksoft">{d.regiao}</span>
+                    <span className="font-mono text-[11px] text-pine">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="eyebrow">{d.regiao}</span>
                   </div>
-                  <h3 className="mt-2 font-display text-lg text-ink">{d.nome}</h3>
+                  <h3 className="mt-1 font-display text-xl text-ink">{d.nome}</h3>
                   <p className="text-xs text-inksoft mt-0.5 line-clamp-2 grow">{d.porque}</p>
                   <div className="mt-2 flex flex-wrap items-baseline gap-x-1.5">
-                    <span className="text-sm font-semibold text-ink tnum">~US$ {d.custoTerra.toLocaleString('pt-BR')}</span>
+                    <span className="font-mono text-sm font-medium text-ink tnum">~US$ {d.custoTerra.toLocaleString('pt-BR')}</span>
                     <span className="text-[11px] text-inksoft">{nd} {t('simulador.dias').toLowerCase()} · {t('simulador.emTerra')}</span>
                   </div>
                   <div className="mt-1.5 flex flex-wrap gap-1">

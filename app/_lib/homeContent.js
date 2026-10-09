@@ -119,9 +119,9 @@ export const HOME_COMPARACAO = {
 
 export const HOME_FAQ = {
   pt: [
-    { q: 'Isso substitui o Booking ou o Airbnb?', a: 'Não. O Mundo Sem Fim é a camada que vem antes. A gente decide se vale ir e quanto a viagem inteira custa. Depois você reserva onde quiser — não temos comissão de hotel.' },
-    { q: 'Os preços são exatos?', a: 'Não. São estimativas calibradas por país, perfil e mês, com fontes públicas (câmbio do BCB, dados de visto, custo médio diário). A função é evitar surpresa, não substituir o orçamento real da reserva.' },
-    { q: 'Como vocês calculam o custo real?', a: 'Voo (cotado por rota e mês) + hospedagem por perfil + alimentação por padrão (mochila/médio/conforto) + transporte local + seguro viagem + eSIM + visto + passeios médios + 10% de contingência. A página /custo-real mostra item por item.' },
+    { q: 'Isso substitui o Booking ou o Airbnb?', a: 'Não. O Mundo Sem Fim é a camada que vem antes. A gente decide se vale ir e quanto a viagem inteira custa. Depois você reserva onde quiser. Alguns links de parceiros podem nos pagar comissão — e ela nunca entra no ranking nem muda a recomendação.' },
+    { q: 'Os preços são exatos?', a: 'Não. São estimativas calibradas por país, perfil e mês, a partir de pesquisa de referência (jun/2026), câmbio do dia com fonte e horário, e regras de visto compiladas — cada número mostra se é estimativa, histórico ou ao vivo. A função é evitar surpresa, não substituir o orçamento real da reserva.' },
+    { q: 'Como vocês calculam o custo real?', a: 'Voo (estimativa por rota e mês — não é cotação) + hospedagem por perfil + alimentação por padrão (mochila/médio/conforto) + transporte local + seguro viagem + eSIM + visto + passeios médios + 10% de contingência. A página /custo-real mostra item por item.' },
     { q: 'Posso usar para viagem de casal, família ou mochilão?', a: 'Sim. O perfil muda os pesos do score: conforto pesa mais em família, custo pesa mais em mochilão, segurança pesa mais em solo. Você troca o perfil em /decisao a qualquer momento.' },
     { q: 'O que tem no plano grátis?', a: 'Descobrir destinos pelo perfil, comparar 3 favoritos, planejar rota com estação × visto × fôlego, câmbio ao vivo. Sem cartão.' },
     { q: 'Qual a diferença pro Premium?', a: 'Premium: testar quantas versões da viagem quiser, custo real completo, alertas de preço de voo, exportar PDF. Pro: rota multi-país com cansaço otimizado, colaboração e suporte prioritário.' },
@@ -129,7 +129,7 @@ export const HOME_FAQ = {
     { q: 'Vocês vendem passagem?', a: 'Não. Por isso o conselho é neutro. Quando achamos que não vale comprar agora, a gente fala — uma OTA jamais diria isso.' },
   ],
   en: [
-    { q: 'Does this replace Booking or Airbnb?', a: 'No. Mundo Sem Fim is the layer that comes before. We decide if it\'s worth going and how much the whole trip costs. Then you book wherever you want — we have no hotel commission.' },
+    { q: 'Does this replace Booking or Airbnb?', a: 'No. Mundo Sem Fim is the layer that comes before. We decide if it\'s worth going and how much the whole trip costs. Then you book wherever you want — some partner links may pay us a commission, which never affects the ranking.' },
     { q: 'Are the prices exact?', a: 'No. They are estimates calibrated by country, profile and month, with public sources (Brazilian Central Bank exchange, visa data, average daily cost). The function is to avoid surprises, not replace the real booking budget.' },
     { q: 'How do you calculate the real cost?', a: 'Flight (quoted per route and month) + lodging by profile + food by standard (backpack/medium/comfort) + local transport + travel insurance + eSIM + visa + average tours + 10% contingency. The /custo-real page shows item by item.' },
     { q: 'Can I use it for couple, family or backpacking trips?', a: 'Yes. The profile changes the score weights: comfort weighs more in family, cost weighs more in backpacking, safety weighs more solo. You change the profile in /decisao at any time.' },
@@ -139,7 +139,7 @@ export const HOME_FAQ = {
     { q: 'Do you sell tickets?', a: 'No. That\'s why advice is neutral. When we think it\'s not worth buying now, we say it — an OTA would never say that.' },
   ],
   es: [
-    { q: '¿Esto reemplaza a Booking o Airbnb?', a: 'No. Mundo Sem Fim es la capa que viene antes. Nosotros decidimos si vale la pena ir y cuánto cuesta el viaje entero. Después reservas donde quieras — no tenemos comisión de hotel.' },
+    { q: '¿Esto reemplaza a Booking o Airbnb?', a: 'No. Mundo Sem Fim es la capa que viene antes. Nosotros decidimos si vale la pena ir y cuánto cuesta el viaje entero. Después reservas donde quieras — algunos enlaces de socios pueden pagarnos comisión, que nunca cambia el ranking.' },
     { q: '¿Los precios son exactos?', a: 'No. Son estimaciones calibradas por país, perfil y mes, con fuentes públicas (tipo de cambio BCB, datos de visa, coste medio diario). La función es evitar sorpresas, no sustituir el presupuesto real de la reserva.' },
     { q: '¿Cómo calculan el coste real?', a: 'Vuelo (cotizado por ruta y mes) + alojamiento por perfil + comida por estándar (mochila/medio/confort) + transporte local + seguro de viaje + eSIM + visa + tours promedio + 10% contingencia. La página /custo-real muestra ítem por ítem.' },
     { q: '¿Puedo usarlo para viaje de pareja, familia o mochila?', a: 'Sí. El perfil cambia los pesos del score: confort pesa más en familia, coste pesa más en mochila, seguridad pesa más solo. Cambias el perfil en /decisao en cualquier momento.' },

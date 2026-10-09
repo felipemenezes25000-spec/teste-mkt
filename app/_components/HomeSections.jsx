@@ -239,23 +239,24 @@ export function HomeSecaoCtaFinal() {
 
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-      <div className="rounded-3xl bg-pine text-onpine p-8 sm:p-12 text-center shadow-[var(--e-2)]">
-        <h2 className="font-display text-3xl sm:text-5xl leading-[1.05] max-w-3xl mx-auto">{t('home.ctaFinalH2')}</h2>
-        <p className="mt-4 text-white/85 max-w-2xl mx-auto">{t('home.ctaFinalP')}</p>
-        <div className="mt-7 flex flex-wrap gap-3 justify-center">
+      <div data-theme="dark" className="relative overflow-hidden rounded-2xl bg-paper text-ink border border-line p-8 sm:p-14 text-center shadow-e2">
+        <div className="absolute inset-0 pointer-events-none" aria-hidden style={{ backgroundImage: 'linear-gradient(rgb(var(--grid-ink) / .08) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--grid-ink) / .08) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
+        <h2 className="relative font-display text-3xl sm:text-5xl tracking-tighter leading-[1.02] max-w-3xl mx-auto">{t('home.ctaFinalH2')}</h2>
+        <p className="relative mt-4 text-inksoft max-w-2xl mx-auto">{t('home.ctaFinalP')}</p>
+        <div className="relative mt-7 flex flex-wrap gap-3 justify-center">
           <Link
             href="/decisao"
             onClick={onClick}
             data-ab-variante={cta.id}
-            className="inline-flex items-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-5 py-3 hover:brightness-95 focusring"
+            className="inline-flex items-center gap-2 rounded-lg bg-coral text-oncoral font-semibold px-5 h-12 hover:brightness-95 focusring"
           >
             {cta.label}
           </Link>
-          <Link href="/custo-real" className="inline-flex items-center gap-2 rounded-xl border border-white/40 bg-white/10 text-white font-semibold px-5 py-3 hover:bg-white/20 focusring">
-            <Icon emoji="🧾" /> {t('home.ctaFinalCusto')}
+          <Link href="/custo-real" className="inline-flex items-center gap-2 rounded-lg border border-line text-ink font-semibold px-5 h-12 hover:bg-paper2 focusring">
+            <Icon name="receipt" size={17} /> {t('home.ctaFinalCusto')}
           </Link>
         </div>
-        <p className="mt-5 text-xs text-white/70">{t('home.ctaFinalRodape')}</p>
+        <p className="relative mt-5 text-xs text-inksoft">{t('home.ctaFinalRodape')}</p>
         {hidratado && (
           <span className="sr-only" data-ab-test="cta-home-final" data-ab-variante={cta.id}>
             Variante {cta.id} ativa

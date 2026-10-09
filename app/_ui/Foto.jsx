@@ -15,7 +15,7 @@ export function Foto({
   const [abrirCredito, setAbrirCredito] = useState(false);
 
   return (
-    <figure className={`relative overflow-hidden bg-paper2 ${className}`}>
+    <figure className={`${/(^|\s)(absolute|fixed)(\s|$)/.test(className) ? '' : 'relative'} overflow-hidden bg-paper2 ${className}`}>
       {!falhou ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
