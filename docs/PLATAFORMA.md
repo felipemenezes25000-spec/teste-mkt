@@ -28,7 +28,7 @@
 | API v1 | `app/api/v1/{destinos,destinos/[code],custo,visto,openapi.json}` + `_comum.js` (auth, limite, CORS, meta) |
 | Checkout | `app/api/stripe/checkout/route.js` (assinatura + produtos), webhook grava `purchases` (`compraDaSessao`) |
 | Telas | `/agencias`, `/proposta` (visão do cliente, fora da navegação), `/marketplace`, `/marketplace/r/[slug]` (SSG), `/marketplace/c/[slug]`, `/desenvolvedores`, Trip Pass em `/planos` |
-| i18n | `app/_lib/i18nPlataforma.js` (pt/en/es/ja; paridade testada) |
+| i18n | `app/_lib/i18n/{pt,en,es,ja}.js` (paridade testada em `app/_lib/i18n.test.js`) |
 
 ## Garantias testadas
 

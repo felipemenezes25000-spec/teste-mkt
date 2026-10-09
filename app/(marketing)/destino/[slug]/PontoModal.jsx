@@ -40,6 +40,7 @@ export function PontoModal({ ponto, onClose }) {
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={imgGrande} alt={ponto.nome} width="960" height="540" decoding="async"
+          crossOrigin={/^https:\/\/upload\.wikimedia\.org\//.test(imgGrande || '') ? 'anonymous' : undefined}
           className="w-full h-52 sm:h-64 object-cover rounded-xl bg-paper2 bg-cover bg-center"
           style={{ backgroundImage: `url("${wikiThumb(imgGrande, 32)}")` }}
         />

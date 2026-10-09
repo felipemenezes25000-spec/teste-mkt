@@ -373,7 +373,7 @@ i18n **caseiro** (`app/_lib/i18n.js`), sem framework, com **4 idiomas**:
 
 - Hook `useIdioma()` com `t()` e fallback triplo (idioma → `pt` → a própria chave).
 - Persistência em `localStorage` + cookie `msf.lang.v1`, com `CustomEvent('msf:lang')` pra sincronizar a UI.
-- Telas de produto e plataforma nos 4 idiomas (dicionários `i18nTelas.js`/`i18nPlataforma.js`, paridade testada); conteúdo editorial longo segue em pt-BR.
+- Telas de produto e plataforma nos 4 idiomas (dicionários por idioma em `app/_lib/i18n/` — só o pt no bundle, os demais sob demanda; 947 chaves com paridade testada); conteúdo editorial longo segue em pt-BR.
 - `MoedaPicker` acessível com **146 moedas** (27 base + 119 extra), busca por código/nome.
 
 ---

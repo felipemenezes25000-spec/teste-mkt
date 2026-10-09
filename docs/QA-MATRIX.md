@@ -16,6 +16,7 @@
 
 Resultado final da fase 1: **266/266 combinações sem problema detectado** (19 rotas × 320/390/768/1024/1280/1440/1920 × claro/escuro).
 
+| OMEGA V5 (b91fcfe) | build V5 | 24 rotas × 7 larguras × 2 temas (Chromium) | **0 / 336** | simulador novo, barra móvel, prévia de mapa, capas trocadas |
 | Fase 2 (i18n + plataforma) | build final | 24 rotas × 7 larguras × 2 temas (Chromium) | PASS (336/336 sem problema) | rotas novas: marketplace, roteiro, agências, desenvolvedores, proposta |
 
 ## Outras verificações

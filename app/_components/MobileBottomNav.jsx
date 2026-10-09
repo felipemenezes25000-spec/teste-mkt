@@ -5,22 +5,11 @@ import { usePathname } from 'next/navigation';
 import { Icon } from '../_ui/Icon.jsx';
 import { useIdioma } from '../_lib/i18n.js';
 import { carregar, CHAVE } from '../_lib/viagens/store.js';
+import { viagemDoMomento } from '../_lib/viagens/momento.js';
 
 // Navegação inferior do celular (V5 F7): adaptativa ao momento da viagem. Quando há
 // viagem em andamento (ou começando em até 3 dias), o atalho "Hoje" aparece e leva
 // direto ao Modo Viagem. Respeita a safe area do iPhone e alvos de toque ≥ 44 px.
-const hojeISO = () => new Date().toISOString().slice(0, 10);
-const somaDias = (iso, n) => { const d = new Date(iso + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
-
-/** Viagem "do momento": em curso, senão a próxima que começa em até 3 dias. */
-export function viagemDoMomento(viagens, hoje = hojeISO()) {
-  const lista = viagens || [];
-  const emCurso = lista.find((v) => v.inicio <= hoje && v.fim >= hoje);
-  if (emCurso) return emCurso;
-  const limite = somaDias(hoje, 3);
-  return [...lista].filter((v) => v.inicio > hoje && v.inicio <= limite).sort((a, b) => a.inicio.localeCompare(b.inicio))[0] || null;
-}
-
 export function MobileBottomNav() {
   const path = usePathname() || '/';
   const { t } = useIdioma();

@@ -49,7 +49,7 @@ describe('dicionários (pt/en/es/ja)', () => {
 
 describe('prévia do mapa', () => {
   it('enquadra pontos com margem e cai no mundo sem pontos', async () => {
-    const { enquadrarPrevia } = await import('../_components/mapa/MapaInterativo.jsx');
+    const { enquadrarPrevia } = await import('../_components/mapa/previa.js');
     const w = enquadrarPrevia([]);
     expect(w).toEqual({ x0: 0, y0: 0, w: 360, h: 180 });
     const q = enquadrarPrevia([{ lng: 0, lat: 0 }, { lng: 10, lat: 10 }]);

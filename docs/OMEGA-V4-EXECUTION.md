@@ -44,7 +44,7 @@ Prompt: `MUNDO_SEM_FIM_OMEGA_V4_DEFINITIVO_RECOVERY_FIRST.md` (o arquivo V3 é i
 
 - B2B/agências + white-label, API pública v1, marketplace de criadores e consultores e checkout nativo de produtos próprios: ver `docs/PLATAFORMA.md` (decisões, RLS, testes).
 - Checkout de **reserva de viagem** (V4 §30 modos 3-4) continua fora de propósito: exige licença de agência e contrato com consolidadora; reservas seguem em `DEEPLINK` honesto.
-- i18n das telas novas em pt/en/es/ja (paridade testada em `app/_lib/i18nTelas.test.js`).
+- i18n das telas novas em pt/en/es/ja (paridade testada em `app/_lib/i18n.test.js`).
 - Ainda pendente: monitoramento de produção (SLO, alertas) e medição em dispositivo real.
 
 ## Como verificar localmente

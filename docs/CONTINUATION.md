@@ -1,5 +1,7 @@
 # CONTINUATION — retomada entre sessões (OMEGA V4 §48)
 
+> **Fase atual: OMEGA V5** — retomar por `docs/OMEGA-V5-CONTINUATION.md` (branch `feat/omega-v5`).
+>
 > Leia isto e o `git log` antes de qualquer alteração. Não presuma que algo está pronto
 > só porque está escrito aqui — rode as verificações.
 

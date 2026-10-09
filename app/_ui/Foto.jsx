@@ -26,7 +26,9 @@ export function Foto({
       {!falhou ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          ref={imgRef} src={src} srcSet={srcSet} alt={alt || ''} width={largura} height={altura} sizes={srcSet ? (sizes || '100vw') : sizes}
+          ref={imgRef} src={src} srcSet={srcSet} alt={alt || ''}
+          // sem credenciais no CDN do Wikimedia (CORS liberado): o navegador não grava o cookie de terceiro WMF-Uniq
+          crossOrigin={/^https:\/\/upload\.wikimedia\.org\//.test(src || '') ? 'anonymous' : undefined} width={largura} height={altura} sizes={srcSet ? (sizes || '100vw') : sizes}
           loading={prioridade ? 'eager' : 'lazy'} decoding="async" fetchPriority={prioridade ? 'high' : undefined}
           onError={() => setFalhou(true)}
           className={`w-full h-full object-cover ${imgClassName}`}

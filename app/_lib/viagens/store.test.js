@@ -79,7 +79,7 @@ describe('viagens/store', () => {
 
 describe('viagem do momento (navegação móvel)', () => {
   it('em curso tem prioridade; senão a próxima em até 3 dias; senão nenhuma', async () => {
-    const { viagemDoMomento } = await import('../../_components/MobileBottomNav.jsx');
+    const { viagemDoMomento } = await import('./momento.js');
     const v = (id, inicio, fim) => ({ id, inicio, fim });
     const hoje = '2026-10-09';
     expect(viagemDoMomento([v('a', '2026-10-01', '2026-10-20'), v('b', '2026-10-10', '2026-10-12')], hoje).id).toBe('a');
