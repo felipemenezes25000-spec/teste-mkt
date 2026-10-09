@@ -81,3 +81,11 @@ input, select, button, textarea { font-family: inherit; }
   }
   body { background: #fff !important; }
 }
+
+/* Controles do MapLibre no tema escuro (V5 F3): zoom e atribuição acompanham a noite atlas */
+[data-theme="dark"] .maplibregl-ctrl-group { background: rgb(var(--c-card)); box-shadow: 0 0 0 1px rgb(var(--c-line)); }
+[data-theme="dark"] .maplibregl-ctrl-group button + button { border-top-color: rgb(var(--c-line)); }
+[data-theme="dark"] .maplibregl-ctrl-group button .maplibregl-ctrl-icon { filter: invert(1) brightness(1.4); }
+[data-theme="dark"] .maplibregl-ctrl-attrib, [data-theme="dark"] .maplibregl-ctrl-attrib.maplibregl-compact { background: rgb(var(--c-card) / .92); color: rgb(var(--c-ink-soft)); }
+[data-theme="dark"] .maplibregl-ctrl-attrib a { color: rgb(var(--c-ink)); }
+[data-theme="dark"] .maplibregl-ctrl-attrib-button { filter: invert(1); }

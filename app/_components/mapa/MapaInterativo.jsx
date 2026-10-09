@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { Icon } from '../../_ui/Icon.jsx';
 import { useIdioma } from '../../_lib/i18n.js';
+import { estiloMeridiano } from './paletaMapa.js';
 
 // Mapa interativo MERIDIANO (OMEGA V4 §15/§21/§29): MapLibre GL + tiles OpenFreeMap
 // (base OpenStreetMap, sem chave; atribuição automática e obrigatória). Carregado
@@ -111,11 +112,14 @@ export function MapaInterativo({
       try {
         // espera o navegador ficar ocioso: o mapa (≈1 MB) não compete com a 1ª pintura
         if (ativacao === 'idle') await new Promise((r) => ('requestIdleCallback' in window ? window.requestIdleCallback(r, { timeout: 2000 }) : setTimeout(r, 300)));
-        const maplibregl = (await import('maplibre-gl')).default;
+        const [maplibregl, estiloInicial] = await Promise.all([
+          import('maplibre-gl').then((m) => m.default),
+          estiloMeridiano(ESTILO[temaAtual()], temaAtual()),
+        ]);
         if (!vivo || !box.current) return;
         lib.current = maplibregl;
         const m = new maplibregl.Map({
-          container: box.current, style: ESTILO[temaAtual()], center: centro, zoom,
+          container: box.current, style: estiloInicial, center: centro, zoom,
           attributionControl: { compact: true }, cooperativeGestures: false, dragRotate: false, pitchWithRotate: false,
         });
         mapa.current = m;
@@ -135,7 +139,7 @@ export function MapaInterativo({
           m.on('mouseleave', l, () => { m.getCanvas().style.cursor = ''; });
         }
         // tema
-        obs = new MutationObserver(() => { const t = temaAtual(); m.setStyle(ESTILO[t]); });
+        obs = new MutationObserver(() => { const t = temaAtual(); estiloMeridiano(ESTILO[t], t).then((e) => { if (mapa.current) m.setStyle(e); }); });
         obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
         // o container pode mudar de tamanho depois do init (layout, aba mobile, sidebar)
         ro = new ResizeObserver(() => { try { m.resize(); } catch { /* removido */ } });
