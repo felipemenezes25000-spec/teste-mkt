@@ -9,6 +9,7 @@ import { rotaDoDia } from '../../../../_lib/roteamento.js';
 import { previsao, descreverTempo } from '../../../../_lib/clima.js';
 import { Icon } from '../../../../_ui/Icon.jsx';
 import { SourceTrust } from '../../../../_ui/SourceTrust.jsx';
+import { useIdioma } from '../../../../_lib/i18n.js';
 
 // MODO VIAGEM (OMEGA V4 §20 / §75 "Viagem / Hoje"): responde em segundos — onde
 // estou, qual a próxima atividade, quando sair, qual rota, onde está o ingresso,
@@ -17,6 +18,7 @@ import { SourceTrust } from '../../../../_ui/SourceTrust.jsx';
 const AR_LIVRE = /parque|jardim|praia|trilha|monte|mirante|bambu|floresta|lago|cachoeira|vulc|ilha|caminhada|natureza|torii|santu|vale|baía|costa/i;
 
 export function HojeClient({ id }) {
+  const { t, tf, locale } = useIdioma();
   const { estado, aplicar, carregando } = useViagens();
   const v = estado && estado.viagens.find((x) => x.id === id);
   const [agora, setAgora] = useState(null);
@@ -101,7 +103,7 @@ export function HojeClient({ id }) {
   }
 
   if (carregando || !agora) return <main className="max-w-lg mx-auto px-4 py-10"><div className="h-72 rounded-2xl skel" /></main>;
-  if (!v) return <main className="max-w-lg mx-auto px-4 py-16 text-center"><h1 className="font-display text-2xl text-ink">Viagem não encontrada neste aparelho</h1><Link href="/viagens" className="mt-4 inline-block text-pine underline">Minhas viagens</Link></main>;
+  if (!v) return <main className="max-w-lg mx-auto px-4 py-16 text-center"><h1 className="font-display text-2xl text-ink">{t('hoje.naoEncontrada')}</h1><Link href="/viagens" className="mt-4 inline-block text-pine underline">{t('ws.voltar')}</Link></main>;
 
   const gastoHoje = v.despesas.filter((d) => d.data === hojeLocal).reduce((s, d) => s + (d.moeda === v.moeda ? d.valor : d.taxa ? d.valor * d.taxa : 0), 0);
   const porDia = v.orcamento ? v.orcamento / v.dias.length : 0;
@@ -115,18 +117,18 @@ export function HojeClient({ id }) {
         <div className="flex items-center justify-between">
           <Link href={`/viagens/${v.id}`} className="inline-flex items-center gap-1.5 text-sm text-inksoft hover:text-ink focusring rounded"><Icon name="arrow-left" size={15} /> {v.titulo}</Link>
           <span className={`inline-flex items-center gap-1.5 font-mono text-[11px] px-2 py-1 rounded ${online ? 'bg-success-bg text-success' : 'bg-warn-bg text-warn'}`}>
-            <Icon name={online ? 'wifi' : 'wifi-off'} size={13} />{online ? 'ONLINE' : 'OFFLINE · dados do aparelho'}
+            <Icon name={online ? 'wifi' : 'wifi-off'} size={13} />{online ? t('hoje.online') : t('hoje.offline')}
           </span>
         </div>
 
         <div>
-          <div className="eyebrow">{emViagem ? `Hoje · ${v.destinoNome}` : `Pré-visualização · a viagem começa em ${diasParaIr > 0 ? `${diasParaIr} dias` : '—'}`}</div>
+          <div className="eyebrow">{emViagem ? tf('v2.hojeEm', { d: v.destinoNome }) : tf('hoje.previa', { n: diasParaIr > 0 ? diasParaIr : '—' })}</div>
           <div className="mt-1 flex items-baseline gap-3">
             <span className="font-display text-5xl tracking-tighter">{localAgora.slice(11, 16)}</span>
-            <span className="text-sm text-inksoft">hora local ({tz})</span>
+            <span className="text-sm text-inksoft">{t('hoje.horaLocal')} ({tz})</span>
           </div>
           {!emViagem && (
-            <select value={dia} onChange={(e) => setDiaSel(e.target.value)} aria-label="Dia para pré-visualizar" className="mt-2 h-10 px-3 rounded-lg border border-line bg-input text-ink text-sm focusring">
+            <select value={dia} onChange={(e) => setDiaSel(e.target.value)} aria-label={t('hoje.diaPrev')} className="mt-2 h-10 px-3 rounded-lg border border-line bg-input text-ink text-sm focusring">
               {v.dias.map((d, i) => <option key={d} value={d}>Dia {i + 1} · {d}</option>)}
             </select>
           )}
@@ -134,77 +136,77 @@ export function HojeClient({ id }) {
 
         {/* PRÓXIMA ATIVIDADE */}
         <section className="rounded-2xl border border-line bg-card p-5" aria-labelledby="prox-h">
-          <div className="flex items-center gap-2"><span className="signal-dot" /><h2 id="prox-h" className="eyebrow !text-ink">Próximo passo</h2></div>
+          <div className="flex items-center gap-2"><span className="signal-dot" /><h2 id="prox-h" className="eyebrow !text-ink">{t('hoje.proximo')}</h2></div>
           {prox ? (
             <>
               <div className="mt-3 font-display text-3xl leading-tight">{prox.nome}</div>
-              <div className="mt-1 font-mono text-sm text-inksoft">{prox.inicio}–{prox.fim}{proxItem && proxItem.fixoInicio ? ' · horário reservado' : ''}</div>
-              {sairAs && <div className="mt-4 rounded-xl bg-coral text-oncoral px-4 py-3 font-semibold flex items-center gap-2"><Icon name="clock" size={18} /> Saia às {sairAs} <span className="font-normal text-sm">(trajeto estimado + 10 min de folga)</span></div>}
+              <div className="mt-1 font-mono text-sm text-inksoft">{prox.inicio}–{prox.fim}{proxItem && proxItem.fixoInicio ? ` · ${t('v2.horarioReservado')}` : ''}</div>
+              {sairAs && <div className="mt-4 rounded-xl bg-coral text-oncoral px-4 py-3 font-semibold flex items-center gap-2"><Icon name="clock" size={18} /> {tf('v2.saia', { h: sairAs })} <span className="font-normal text-sm">{t('hoje.folga')}</span></div>}
               <div className="mt-4 grid grid-cols-2 gap-2">
                 {proxItem && Number.isFinite(proxItem.lat) ? (
-                  <a href={`https://www.google.com/maps/dir/?api=1&destination=${proxItem.lat},${proxItem.lng}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 h-12 rounded-lg bg-pine text-onpine font-semibold focusring"><Icon name="route" size={18} /> Navegar</a>
-                ) : <span className="inline-flex items-center justify-center h-12 rounded-lg border border-line text-xs text-inksoft px-2 text-center">Sem coordenada para navegar</span>}
-                <button type="button" onClick={pedirLocalizacao} className="inline-flex items-center justify-center gap-2 h-12 rounded-lg border border-line font-medium focusring" aria-describedby="loc-ajuda"><Icon name="pin" size={18} /> Onde estou</button>
+                  <a href={`https://www.google.com/maps/dir/?api=1&destination=${proxItem.lat},${proxItem.lng}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 h-12 rounded-lg bg-pine text-onpine font-semibold focusring"><Icon name="route" size={18} /> {t('hoje.navegar')}</a>
+                ) : <span className="inline-flex items-center justify-center h-12 rounded-lg border border-line text-xs text-inksoft px-2 text-center">{t('hoje.semNav')}</span>}
+                <button type="button" onClick={pedirLocalizacao} className="inline-flex items-center justify-center gap-2 h-12 rounded-lg border border-line font-medium focusring" aria-describedby="loc-ajuda"><Icon name="pin" size={18} /> {t('hoje.ondeEstou')}</button>
               </div>
-              <p id="loc-ajuda" className="mt-2 text-[11px] text-inksoft">Sua localização é usada só agora, neste aparelho, para medir a distância até o próximo lugar. Nada é enviado ao Mundo Sem Fim.</p>
-              {pos.estado === 'pedindo' && <p className="mt-2 text-sm text-inksoft" role="status">Pedindo permissão de localização…</p>}
-              {pos.estado === 'negado' && <p className="mt-2 text-sm text-warn" role="status">Localização negada — tudo bem. Use “Navegar” para abrir o trajeto no app de mapas.</p>}
-              {pos.estado === 'erro' && <p className="mt-2 text-sm text-warn" role="status">Não foi possível obter a localização (GPS indisponível).</p>}
+              <p id="loc-ajuda" className="mt-2 text-[11px] text-inksoft">{t('hoje.locAviso')}</p>
+              {pos.estado === 'pedindo' && <p className="mt-2 text-sm text-inksoft" role="status">{t('hoje.pedindo')}</p>}
+              {pos.estado === 'negado' && <p className="mt-2 text-sm text-warn" role="status">{t('hoje.negado')}</p>}
+              {pos.estado === 'erro' && <p className="mt-2 text-sm text-warn" role="status">{t('hoje.erroGps')}</p>}
               {pos.estado === 'ok' && proxItem && Number.isFinite(proxItem.lat) && (
                 <div className="mt-3 rounded-xl border border-line p-3 text-sm" role="status">
-                  Você está a <span className="font-mono">{distanciaKm(pos, proxItem).toFixed(1)} km</span> (precisão ±{pos.precisao} m).
-                  {rota && rota.trechos[0] && rota.trechos[0].durationSeconds != null && <> Trajeto: <span className="font-mono">{Math.round(rota.trechos[0].durationSeconds / 60)} min</span> <SourceTrust freshness={rota.trechos[0].freshness} fonte={rota.trechos[0].provider} compacto /></>}
+                  {tf('v2.voceEsta', { km: distanciaKm(pos, proxItem).toFixed(1), m: pos.precisao })}
+                  {rota && rota.trechos[0] && rota.trechos[0].durationSeconds != null && <> <span className="font-mono">{tf('v2.trajeto', { min: Math.round(rota.trechos[0].durationSeconds / 60) })}</span> <SourceTrust freshness={rota.trechos[0].freshness} fonte={rota.trechos[0].provider} compacto /></>}
                 </div>
               )}
             </>
           ) : itens.length ? (
-            <p className="mt-3 text-inksoft">Atividades do dia concluídas. Bom descanso!</p>
+            <p className="mt-3 text-inksoft">{t('hoje.concluido')}</p>
           ) : (
-            <p className="mt-3 text-inksoft">Nada planejado para este dia. <Link href={`/viagens/${v.id}#roteiro`} className="text-pine underline">Montar o dia</Link></p>
+            <p className="mt-3 text-inksoft">{t('hoje.nada')} <Link href={`/viagens/${v.id}#roteiro`} className="text-pine underline">{t('hoje.montar')}</Link></p>
           )}
         </section>
 
         {/* CLIMA + PLANO B */}
         <section className="rounded-2xl border border-line bg-card p-5" aria-labelledby="clima-h">
-          <h2 id="clima-h" className="eyebrow !text-ink">Tempo e riscos</h2>
-          {!online ? <p className="mt-2 text-sm text-inksoft">Sem internet: previsão indisponível agora.</p>
+          <h2 id="clima-h" className="eyebrow !text-ink">{t('hoje.tempoRiscos')}</h2>
+          {!online ? <p className="mt-2 text-sm text-inksoft">{t('hoje.semNet')}</p>
             : climaDia ? (
               <div className="mt-3 flex items-center gap-3">
                 <Icon name={descreverTempo(climaDia.codigo)[1]} size={30} className="text-pine" />
                 <div>
                   <div className="font-medium">{descreverTempo(climaDia.codigo)[0]} · {Math.round(climaDia.min)}–{Math.round(climaDia.max)}°C</div>
-                  <div className="text-sm text-inksoft">Chance de chuva {climaDia.chuva ?? '—'}% <SourceTrust freshness="LIVE" fonte="Open-Meteo" compacto /></div>
+                  <div className="text-sm text-inksoft">{tf('v2.chance', { n: climaDia.chuva ?? '—' })} <SourceTrust freshness="LIVE" fonte="Open-Meteo" compacto /></div>
                 </div>
               </div>
-            ) : <p className="mt-2 text-sm text-inksoft">{itens.some((i) => Number.isFinite(i.lat)) ? 'Previsão disponível até 16 dias antes.' : 'Adicione lugares com coordenada para ver o tempo.'}</p>}
+            ) : <p className="mt-2 text-sm text-inksoft">{itens.some((i) => Number.isFinite(i.lat)) ? t('hoje.climaAte') : t('hoje.addCoord')}</p>}
           {chuvaForte && arLivreHoje.length > 0 && (
             <div className="mt-4 rounded-xl border border-warn-bd bg-warn-bg p-4 text-warn">
-              <div className="font-semibold flex items-center gap-2"><Icon name="rain" size={17} /> Plano B sugerido</div>
-              {planoB === 'aplicado' ? <p className="mt-1 text-sm">Feito: atividades ao ar livre movidas. Você pode desfazer no roteiro.</p>
+              <div className="font-semibold flex items-center gap-2"><Icon name="rain" size={17} /> {t('hoje.planoB')}</div>
+              {planoB === 'aplicado' ? <p className="mt-1 text-sm">{t('hoje.planoBFeito')}</p>
                 : sugestaoPlanoB && sugestaoPlanoB.mover ? (
                   <>
-                    <ul className="mt-2 text-sm space-y-1">{sugestaoPlanoB.mover.map((m) => <li key={m.item.id}>• Mover <strong>{m.item.titulo}</strong> para {m.para} (menos chuva prevista)</li>)}</ul>
+                    <ul className="mt-2 text-sm space-y-1">{sugestaoPlanoB.mover.map((m) => <li key={m.item.id}>• {tf('v2.mover', { a: m.item.titulo, d: m.para })}</li>)}</ul>
                     <div className="mt-3 flex gap-2">
-                      <button type="button" onClick={aplicarPlanoB} className="h-10 px-4 rounded-lg bg-ink text-paper text-sm font-semibold focusring">Aplicar troca</button>
-                      <button type="button" onClick={() => setPlanoB('ignorado')} className="h-10 px-4 rounded-lg border border-warn-bd text-sm focusring">Manter</button>
+                      <button type="button" onClick={aplicarPlanoB} className="h-10 px-4 rounded-lg bg-ink text-paper text-sm font-semibold focusring">{t('hoje.aplicarTroca')}</button>
+                      <button type="button" onClick={() => setPlanoB('ignorado')} className="h-10 px-4 rounded-lg border border-warn-bd text-sm focusring">{t('hoje.manter')}</button>
                     </div>
-                    <p className="mt-2 text-[11px]">Reservas com horário fixo não são movidas. Confira se o lugar abre no outro dia.</p>
+                    <p className="mt-2 text-[11px]">{t('hoje.planoBNota')}</p>
                   </>
-                ) : <p className="mt-1 text-sm">Chuva provável e nenhum dia seco na previsão — leve capa e priorize lugares cobertos.</p>}
+                ) : <p className="mt-1 text-sm">{t('hoje.semSeco')}</p>}
             </div>
           )}
         </section>
 
         {/* INGRESSOS E RESERVAS DO DIA */}
         <section className="rounded-2xl border border-line bg-card p-5" aria-labelledby="res-h">
-          <h2 id="res-h" className="eyebrow !text-ink">Reservas e ingressos do dia</h2>
-          {reservasHoje.length === 0 ? <p className="mt-2 text-sm text-inksoft">Nenhuma reserva para este dia.</p> : (
+          <h2 id="res-h" className="eyebrow !text-ink">{t('hoje.reservasDia')}</h2>
+          {reservasHoje.length === 0 ? <p className="mt-2 text-sm text-inksoft">{t('hoje.semReservaDia')}</p> : (
             <ul className="mt-3 space-y-2">
               {reservasHoje.map((r) => (
                 <li key={r.id} className="rounded-xl border border-line p-3">
                   <div className="flex items-center justify-between gap-2"><span className="font-medium">{r.provider}</span><span className="font-mono text-[11px] text-inksoft">{(r.inicioLocal || '').slice(11, 16)}</span></div>
                   {r.localizador && <div className="mt-1 font-mono text-2xl tracking-wider">{r.localizador}</div>}
-                  <div className="text-[11px] text-inksoft">{r.confirmedBy === 'import_manual' ? 'Confirmação informada por você' : r.status}</div>
+                  <div className="text-[11px] text-inksoft">{r.confirmedBy === 'import_manual' ? t('hoje.informadaVoce') : r.status}</div>
                 </li>
               ))}
             </ul>
@@ -213,20 +215,20 @@ export function HojeClient({ id }) {
 
         {/* DINHEIRO */}
         <section className="rounded-2xl border border-line bg-card p-5" aria-labelledby="din-h">
-          <h2 id="din-h" className="eyebrow !text-ink">Quanto posso gastar hoje</h2>
+          <h2 id="din-h" className="eyebrow !text-ink">{t('hoje.gastar')}</h2>
           {porDia ? (
             <div className="mt-3">
-              <div className="flex items-baseline justify-between"><span className="font-mono text-2xl">{(porDia - gastoHoje).toLocaleString('pt-BR', { maximumFractionDigits: 0 })} {v.moeda}</span><span className="text-xs text-inksoft">de {porDia.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}/dia</span></div>
+              <div className="flex items-baseline justify-between"><span className="font-mono text-2xl">{(porDia - gastoHoje).toLocaleString(locale, { maximumFractionDigits: 0 })} {v.moeda}</span><span className="text-xs text-inksoft">/ {porDia.toLocaleString(locale, { maximumFractionDigits: 0 })}{t('hoje.porDia')}</span></div>
               <div className="mt-2 h-2 rounded-full bg-paper2 overflow-hidden"><div className={`h-full ${gastoHoje > porDia ? 'bg-danger' : 'bg-pine'}`} style={{ width: `${Math.min(100, (gastoHoje / porDia) * 100)}%` }} /></div>
-              <Link href={`/viagens/${v.id}#despesas`} className="mt-3 inline-flex items-center gap-1.5 text-sm text-pine focusring">Lançar gasto <Icon name="arrow-right" size={14} /></Link>
+              <Link href={`/viagens/${v.id}#despesas`} className="mt-3 inline-flex items-center gap-1.5 text-sm text-pine focusring">{t('hoje.lancar')} <Icon name="arrow-right" size={14} /></Link>
             </div>
-          ) : <p className="mt-2 text-sm text-inksoft">Defina um orçamento na viagem para ver o limite diário.</p>}
+          ) : <p className="mt-2 text-sm text-inksoft">{t('hoje.semOrc')}</p>}
         </section>
 
         {/* AGENDA COMPLETA */}
         {sim.passos.length > 0 && (
           <section className="rounded-2xl border border-line bg-card p-5" aria-labelledby="agenda-h">
-            <h2 id="agenda-h" className="eyebrow !text-ink">Agenda do dia</h2>
+            <h2 id="agenda-h" className="eyebrow !text-ink">{t('hoje.agenda')}</h2>
             <ol className="mt-3 space-y-2">
               {sim.passos.map((p, i) => (
                 <li key={p.id} className={`flex items-center gap-3 ${i < idxProx ? 'opacity-50' : ''}`}>

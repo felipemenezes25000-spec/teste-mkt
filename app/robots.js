@@ -5,7 +5,7 @@ import { siteUrl } from './_lib/seo.js';
 export default function robots() {
   const base = siteUrl();
   return {
-    rules: [{ userAgent: '*', allow: '/', disallow: ['/api/', '/conta', '/salvos', '/viagens'] }],
+    rules: [{ userAgent: '*', allow: '/', disallow: ['/api/', '/conta', '/salvos', '/viagens', '/proposta', '/marketplace/c/'] }],
     sitemap: `${base}/sitemap.xml`,
     host: base,
   };

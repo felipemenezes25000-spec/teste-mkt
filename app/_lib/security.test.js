@@ -67,3 +67,15 @@ describe('buildSecurityHeaders — cabeçalhos de segurança', () => {
     expect(asMap(local)['Strict-Transport-Security']).toBeUndefined();
   });
 });
+
+describe('CSP modo nonce', () => {
+  it('troca unsafe-inline por nonce + strict-dynamic', async () => {
+    const { buildSecurityHeaders } = await import('./security.mjs');
+    const csp = buildSecurityHeaders({ production: true, nonce: 'abc' }).find((h) => h.key === 'Content-Security-Policy').value;
+    const script = csp.split(';').find((d) => d.trim().startsWith('script-src'));
+    expect(script).toContain("'nonce-abc'");
+    expect(script).toContain("'strict-dynamic'");
+    expect(script).not.toContain("'unsafe-inline'");
+    expect(buildSecurityHeaders({ semCsp: true }).some((h) => h.key === 'Content-Security-Policy')).toBe(false);
+  });
+});

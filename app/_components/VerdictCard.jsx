@@ -4,7 +4,7 @@ import { Icon } from '../_ui/Icon.jsx';
 export function VerdictCard({ destino }) {
   const veredito = vereditoDestino(destino);
   return (
-    <section className="rounded-3xl border border-line bg-gradient-to-br from-card to-paper2/70 p-5 sm:p-6 shadow-[var(--e-1)]">
+    <section className="rounded-2xl border border-line bg-card p-5 sm:p-6 shadow-e1">
       <div className="flex flex-col lg:flex-row gap-5">
         <div className="lg:w-[42%]">
           <p className="text-xs uppercase tracking-[0.18em] text-pine font-bold">Veredito humano</p>

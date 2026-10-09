@@ -30,7 +30,7 @@ export function Toasts({ items, onClose }) {
           className={`rise rounded-xl border px-4 py-3 shadow-lg text-sm flex items-start gap-2 ${t.tipo === 'erro' ? 'bg-danger-bg border-danger-bd text-danger' : 'bg-success-bg border-success-bd text-success'}`}>
           <span className="font-bold" aria-hidden><Icon emoji={t.tipo === 'erro' ? '⚠' : '✓'} /></span>
           <span className="flex-1">{t.msg}</span>
-          <button onClick={() => onClose(t.id)} className="opacity-60 hover:opacity-100 focusring" aria-label="Fechar aviso"><Icon emoji="✕" /></button>
+          <button onClick={() => onClose(t.id)} className="text-inksoft hover:text-ink focusring" aria-label="Fechar aviso"><Icon emoji="✕" /></button>
         </div>
       ))}
     </div>
@@ -53,7 +53,7 @@ export function SaveStatus({ estado = 'saved', naNuvem = false, onRetry }) {
   const conteudo = (
     <Badge tone={r.tone} className={podeTentar ? 'cursor-pointer hover:brightness-95' : ''}>
       {r.spinner
-        ? <span className="inline-block w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin opacity-70" aria-hidden />
+        ? <span className="inline-block w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin" aria-hidden />
         : <span aria-hidden><Icon emoji={r.icone} /></span>}
       <span className="sm:hidden">{r.textoCurto}</span>
       <span className="hidden sm:inline">{r.texto}</span>
@@ -133,7 +133,7 @@ export function Tripe({ calc }) {
   const pct = clamp((calc.orcamento > 0 ? calc.custoTotal / calc.orcamento : 1) * 100, 0, 100);
 
   return (
-    <section className="rise rounded-3xl border border-line bg-card shadow-[0_24px_60px_-30px_rgba(34,45,43,0.45)] overflow-hidden" aria-label="Diagnóstico da viagem">
+    <section className="rise rounded-2xl border border-line bg-card shadow-e2 overflow-hidden" aria-label="Diagnóstico da viagem">
       <div className="grid lg:grid-cols-[1.25fr_1fr]">
         <div className="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-line relative">
           <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-pine/5 blur-2xl" aria-hidden></div>

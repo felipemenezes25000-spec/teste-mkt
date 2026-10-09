@@ -26,10 +26,16 @@ const POSTHOG = 'https://us.i.posthog.com https://us-assets.i.posthog.com';
 const MAPAS = 'https://tiles.openfreemap.org';
 const ABERTOS = 'https://routing.openstreetmap.de https://router.project-osrm.org https://api.open-meteo.com https://archive-api.open-meteo.com https://api.frankfurter.dev https://api.frankfurter.app';
 
-export function buildSecurityHeaders({ production = true, vercel = false } = {}) {
+// Modo NONCE (CSP_NONCE=1): script-src sem 'unsafe-inline' — cada requisição recebe
+// um nonce (proxy.js) e 'strict-dynamic' propaga confiança aos chunks do Next. Custo:
+// todas as páginas passam a renderizar por requisição (sem SSG/ISR). Por isso é opt-in;
+// o padrão mantém as 230 páginas estáticas (ver docs/PRIVACY-SECURITY.md).
+export function buildSecurityHeaders({ production = true, vercel = false, nonce = null, semCsp = false } = {}) {
   const dev = !production;
 
-  const scriptSrc = ["'self'", "'unsafe-inline'", POSTHOG, dev && "'unsafe-eval'"].filter(Boolean).join(' ');
+  const scriptSrc = nonce
+    ? [`'self'`, `'nonce-${nonce}'`, "'strict-dynamic'", POSTHOG, dev && "'unsafe-eval'"].filter(Boolean).join(' ')
+    : ["'self'", "'unsafe-inline'", POSTHOG, dev && "'unsafe-eval'"].filter(Boolean).join(' ');
   const connectSrc = [
     "'self'", SUPABASE, 'wss://*.supabase.co',
     WIKI, 'https://query.wikidata.org', 'https://open.er-api.com', IA_BYOK, MAPAS, ABERTOS,
@@ -58,7 +64,7 @@ export function buildSecurityHeaders({ production = true, vercel = false } = {})
   ].filter(Boolean).join('; ');
 
   const headers = [
-    { key: 'Content-Security-Policy', value: csp },
+    ...(semCsp ? [] : [{ key: 'Content-Security-Policy', value: csp }]),
     { key: 'X-Content-Type-Options', value: 'nosniff' },
     { key: 'X-Frame-Options', value: 'DENY' },
     { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },

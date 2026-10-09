@@ -165,3 +165,13 @@ describe('jsonLdReviews — só com depoimentos REAIS (nunca markup falso)', () 
     expect(j.review[0].reviewRating.ratingValue).toBe(5);
   });
 });
+
+describe('construirSitemap — plataforma', () => {
+  it('inclui marketplace, agências, API e rotas extras', () => {
+    const urls = construirSitemap([], 'https://exemplo.com', new Date('2026-10-09'), ['/marketplace/r/japao-4-dias']).map((e) => e.url);
+    expect(urls).toContain('https://exemplo.com/marketplace');
+    expect(urls).toContain('https://exemplo.com/agencias');
+    expect(urls).toContain('https://exemplo.com/desenvolvedores');
+    expect(urls).toContain('https://exemplo.com/marketplace/r/japao-4-dias');
+  });
+});

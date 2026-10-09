@@ -8,6 +8,7 @@
 // (client-side, direto no navegador). Camada extra: cota diária por usuário
 // (AI_DAILY_LIMIT) via RPC atômica no Postgres.
 import { createClient } from '@supabase/supabase-js';
+import { limitar } from '../../_lib/rateLimit.js';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -51,6 +52,8 @@ async function dentroDaCota(supa) {
 }
 
 export async function POST(req) {
+  const bloqueio = limitar(req, 'ai', { limite: 20 });
+  if (bloqueio) return bloqueio;
   const key = process.env.OPENAI_API_KEY;
   if (!key) return erro('IA não configurada no servidor.', 503);
 

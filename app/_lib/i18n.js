@@ -24,6 +24,9 @@ export const IDIOMAS = [
 ];
 
 export const IDIOMA_PADRAO = 'pt';
+// Locale BCP 47 para datas e números de cada idioma da interface.
+export const LOCALES = { pt: 'pt-BR', en: 'en-US', es: 'es-ES', ja: 'ja-JP' };
+import { TELAS } from './i18nTelas.js';
 const STORAGE_KEY = 'msf.lang.v1';
 
 // Strings traduzidas. Chaves agrupadas por contexto.
@@ -693,6 +696,21 @@ function gravarStorage(code) {
   } catch {}
 }
 
+/** Substitui {chave} por vars.chave. */
+export function interpolar(str, vars) {
+  if (!vars) return str;
+  return String(str).replace(/\{(\w+)\}/g, (m, k) => (vars[k] !== undefined ? String(vars[k]) : m));
+}
+
+// Junta o dicionário das telas novas (i18nTelas.js) ao STRINGS legado.
+function fundir(alvo, fonte) {
+  for (const [k, v] of Object.entries(fonte)) {
+    if (v && typeof v === 'object' && !Array.isArray(v)) { alvo[k] = alvo[k] && typeof alvo[k] === 'object' ? alvo[k] : {}; fundir(alvo[k], v); }
+    else alvo[k] = v;
+  }
+}
+for (const [lang, dict] of Object.entries(TELAS)) { STRINGS[lang] = STRINGS[lang] || {}; fundir(STRINGS[lang], dict); }
+
 // Hook React: devolve { idioma, definir, t } onde t(chavePath) → string traduzida.
 // Inicializa com pt no SSR pra não dar hydration mismatch; troca após mount.
 export function useIdioma() {
@@ -703,6 +721,12 @@ export function useIdioma() {
     const escolhido = salvo || detectarIdiomaBrowser();
     if (escolhido !== IDIOMA_PADRAO) setIdiomaState(escolhido);
     if (typeof document !== 'undefined') document.documentElement.lang = escolhido;
+    // troca feita em OUTRO componente (seletor) ou outra aba: todos acompanham
+    const onLang = (e) => { const c = e.detail && e.detail.code; if (c) setIdiomaState(c); };
+    const onStorage = (e) => { if (e.key === STORAGE_KEY && e.newValue) setIdiomaState(e.newValue); };
+    window.addEventListener('msf:lang', onLang);
+    window.addEventListener('storage', onStorage);
+    return () => { window.removeEventListener('msf:lang', onLang); window.removeEventListener('storage', onStorage); };
   }, []);
 
   function definir(code) {
@@ -728,8 +752,11 @@ export function useIdioma() {
     };
     return tentar(STRINGS[idioma]) || tentar(STRINGS[IDIOMA_PADRAO]) || path;
   }
+  // t com interpolação: tf('exp.destinos', { n: 3 })
+  const tf = (path, vars) => interpolar(t(path), vars);
 
-  return { idioma, definir, t };
+  const locale = LOCALES[idioma] || 'pt-BR';
+  return { idioma, definir, t, tf, locale };
 }
 
 // Para componentes server-side que só precisam ler o idioma do cookie.

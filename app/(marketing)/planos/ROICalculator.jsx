@@ -44,9 +44,9 @@ export function ROICalculator() {
   }
 
   return (
-    <div className="mt-10 rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
+    <div className="mt-10 rounded-2xl border border-line bg-card overflow-hidden shadow-e1">
       <div className="p-6 sm:p-8 border-b border-line bg-paper2/40">
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-pine">{t('planos.roiSelo')}</span>
+        <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-pine">{t('planos.roiSelo')}</span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.05]">
           {t('planos.roiH2')}
         </h2>
@@ -87,7 +87,7 @@ export function ROICalculator() {
         </ul>
 
         <div className="p-5 sm:p-6 bg-paper2/30 lg:border-l border-line">
-          <div className="rounded-3xl bg-pine text-onpine p-5 shadow-[var(--e-1)]">
+          <div className="rounded-2xl bg-pine text-onpine p-5 shadow-e1">
             <div className="text-[11px] font-bold uppercase tracking-wide opacity-85">{t('planos.custoErros')}</div>
             <div className="mt-1 font-display text-5xl tnum">R$ {total.toLocaleString('pt-BR')}</div>
             <p className="mt-2 text-xs opacity-85">{t('planos.umaViagem')}</p>

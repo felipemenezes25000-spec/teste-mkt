@@ -67,7 +67,7 @@ export function SalvosClient() {
         {destinos.length >= 2 && <Link href="/comparar" className="text-sm font-semibold text-pine hover:underline focusring"><Icon emoji="⚖️" /> Comparar <Icon emoji="→" /></Link>}
       </div>
 
-      <div className="rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)] mb-6">
+      <div className="rounded-2xl border border-line bg-card overflow-hidden shadow-e1 mb-6">
         <div className="px-4 py-3 border-b border-line bg-paper2/70">
           <h2 className="font-display text-xl text-ink">Comparação rápida</h2>
           <p className="text-xs text-inksoft">O que vale, o que pesa e onde você pode se arrepender.</p>

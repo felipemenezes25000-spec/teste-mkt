@@ -26,8 +26,8 @@ export default function CustoRealPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-      <section className="rounded-[2rem] border border-line bg-card p-6 sm:p-10 shadow-[var(--e-1)]">
-        <span className="inline-block text-xs font-bold uppercase tracking-[0.18em] text-oncoral bg-coral px-3 py-1 rounded-full">
+      <section className="rounded-2xl border border-line bg-card p-6 sm:p-10 shadow-e1">
+        <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-oncoral bg-coral px-3 py-1 rounded-full">
           <T k="custoReal.heroSelo" fallback="Vitrine × custo real" />
         </span>
         <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.03] text-ink">

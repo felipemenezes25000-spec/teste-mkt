@@ -1,6 +1,7 @@
 // Plano do usuário logado, lido da tabela subscriptions (preenchida pelo webhook
 // do Stripe). Tudo é "no-op seguro": sem Supabase/sem login/sem tabela → 'free'.
 import { createClient } from '@supabase/supabase-js';
+import { limitar } from '../../../_lib/rateLimit.js';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -12,6 +13,8 @@ const SERVICE = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const free = (extra) => Response.json({ plano: 'free', ...extra });
 
 export async function GET(req) {
+  const bloqueio = limitar(req, 'plan', { limite: 60 });
+  if (bloqueio) return bloqueio;
   if (!SUPA_URL || !ANON) return free({ config: false });
   try {
     const header = req.headers.get('authorization') || '';
@@ -33,10 +36,13 @@ export async function GET(req) {
       .eq('user_id', u.user.id)
       .maybeSingle();
 
-    if (error || !data) return free();
-    const ativo = data.status === 'active' || data.status === 'trialing';
-    const venceu = data.current_period_end && new Date(data.current_period_end) < new Date();
-    return Response.json({ plano: ativo && !venceu ? data.plan : 'free', status: data.status });
+    const ativo = !error && data && (data.status === 'active' || data.status === 'trialing');
+    const venceu = ativo && data.current_period_end && new Date(data.current_period_end) < new Date();
+    if (ativo && !venceu && data.plan !== 'free') return Response.json({ plano: data.plan, status: data.status });
+    // Trip Pass (pagamento único): Premium por 30 dias a partir da compra
+    const { data: ate } = await supaAuth.rpc('trip_pass_ativo_ate');
+    if (ate && new Date(ate) > new Date()) return Response.json({ plano: 'premium', status: 'trip_pass', ate });
+    return free(data ? { status: data.status } : undefined);
   } catch (e) {
     console.warn('[me/plan]', e && e.message);
     return free();

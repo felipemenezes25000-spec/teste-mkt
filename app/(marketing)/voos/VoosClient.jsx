@@ -82,7 +82,7 @@ export function VoosClient() {
 
   return (
     <div className="mt-6">
-      <div className="rounded-3xl border border-line bg-card p-5 grid sm:grid-cols-2 lg:grid-cols-6 gap-3 items-end shadow-[var(--e-1)]">
+      <div className="rounded-2xl border border-line bg-card p-5 grid sm:grid-cols-2 lg:grid-cols-6 gap-3 items-end shadow-e1">
         <Autocomplete
           label={t('voos.origem')} items={ORIGENS} value={origem} onChange={setOrigem}
           toText={(o) => `${o.cidade} (${o.iata})`} toSearch={(o) => `${o.cidade} ${o.iata}`}

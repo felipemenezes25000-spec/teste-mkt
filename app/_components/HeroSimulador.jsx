@@ -1,14 +1,16 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { DESTINOS, destinoPorCode } from '../_lib/destinos.js';
-import { recomendarDestinos } from '../_engine/decisao.js';
-import { perfilDoPreset, PERFIS_PRONTOS } from '../_engine/perfil.js';
-import { MESES_PT } from '../_engine/data.js';
+// Motor e catálogo são importados SOB DEMANDA no envio (fora do bundle inicial da home).
+const MESES_PT = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+const ESTILOS = [
+  ['equilibrado', 'Equilibrado'], ['mochileiro', 'Mochileiro'], ['luxo', 'Luxo'], ['gastronomico', 'Gastronômico'], ['romantico', 'Romântico'],
+  ['familia', 'Família'], ['aventura', 'Aventura'], ['cultural', 'Cultural'], ['praia', 'Praia & relax'],
+  ['primeira-viagem', 'Primeira viagem internacional'], ['descansar', 'Eu só quero descansar'], ['casal-economico', 'Casal sem estourar o cartão'], ['mochilao-sem-perrengue', 'Mochilão sem perrengue'],
+].map(([id, label]) => ({ id, label }));
 import { useIdioma } from '../_lib/i18n.js';
 import { Icon } from '../_ui/Icon.jsx';
 
-const ESTILOS = Object.entries(PERFIS_PRONTOS).map(([id, p]) => ({ id, label: p.nome }));
 
 // Card que transforma a vitrine em PRODUTO logo no topo: em ~30s o visitante
 // escolhe estilo/dias/orçamento/mês e recebe 3 destinos REAIS — reusando o mesmo
@@ -21,8 +23,12 @@ export function HeroSimulador() {
   const [res, setRes] = useState(null);
   const { t } = useIdioma();
 
-  function simular(e) {
+  async function simular(e) {
     e.preventDefault();
+    const [{ DESTINOS, destinoPorCode }, { recomendarDestinos }, { perfilDoPreset }] = await Promise.all([
+      import('../_lib/destinos.js'), import('../_engine/decisao.js'), import('../_engine/perfil.js'),
+    ]);
+    const naBoaEpoca = (code, m) => { const d = destinoPorCode(code); return d && (d.melhoresMeses || []).includes(m) ? 1 : 0; };
     const perfil = perfilDoPreset(estilo);
     const nd = Math.max(1, Number(dias) || 14);
     const orc = Number(orcamento) || 0;
@@ -112,9 +118,4 @@ export function HeroSimulador() {
       </div>
     </section>
   );
-}
-
-function naBoaEpoca(code, mes) {
-  const d = destinoPorCode(code);
-  return d && (d.melhoresMeses || []).includes(mes) ? 1 : 0;
 }

@@ -1,4 +1,5 @@
 import { ContaClient } from './ContaClient.jsx';
+import { T } from '../../_components/T.jsx';
 
 export const metadata = {
   title: 'Conta — Mundo Sem Fim',
@@ -8,8 +9,8 @@ export const metadata = {
 export default function ContaPage() {
   return (
     <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
-      <h1 className="font-display text-3xl sm:text-4xl text-ink">Sua conta</h1>
-      <p className="mt-1 text-inksoft">Plano, assinatura e preferências.</p>
+      <h1 className="font-display text-3xl sm:text-4xl text-ink"><T k="conta.h1" fallback="Sua conta" /></h1>
+      <p className="mt-1 text-inksoft"><T k="conta.sub" fallback="Plano, assinatura e preferências." /></p>
       <ContaClient />
     </main>
   );

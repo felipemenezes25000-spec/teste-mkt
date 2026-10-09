@@ -7,7 +7,7 @@
 //   baseUrl  padrão http://localhost:3000
 //   saida    padrão docs/plataforma/_proof/qa-<timestamp>   (pasta ignorada pelo git)
 // Flags por env: QA_WIDTHS="390,1440"  QA_ROUTES="/,/explorar"  QA_FULL=1 (full page em todas)
-import { chromium } from 'playwright';
+import { chromium, firefox, webkit } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -18,7 +18,7 @@ const FULL_AT = new Set([390, 1440]);
 const DEFAULT_ROUTES = [
   '/', '/explorar', '/destino/japao', '/destino/tailandia', '/destino/italia', '/destino/brasil',
   '/decisao', '/comparar', '/custo-real', '/roteiro', '/voos', '/planos', '/salvos', '/conta',
-  '/planejar', '/viagens', '/fontes', '/offline', '/rota-que-nao-existe',
+  '/planejar', '/viagens', '/fontes', '/marketplace', '/marketplace/r/japao-4-dias', '/agencias', '/desenvolvedores', '/proposta', '/offline', '/rota-que-nao-existe',
 ];
 const ROUTES = process.env.QA_ROUTES ? process.env.QA_ROUTES.split(',') : DEFAULT_ROUTES;
 const THEMES = (process.env.QA_THEMES || 'light,dark').split(',');
@@ -30,7 +30,10 @@ const ROTA_404 = '/rota-que-nao-existe'; // 404 esperado: o recurso 404 é a pr�
 fs.mkdirSync(OUT, { recursive: true });
 const slug = (r) => (r === '/' ? 'home' : r.replace(/^\//, '').replace(/[/?=&]/g, '_'));
 
-const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+// QA_BROWSER=chromium|firefox|webkit (WebKit = motor do Safari)
+const NAV = process.env.QA_BROWSER || 'chromium';
+const browser = NAV === 'firefox' ? await firefox.launch() : NAV === 'webkit' ? await webkit.launch()
+  : await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const resultados = [];
 
 for (const theme of THEMES) {
@@ -52,7 +55,7 @@ for (const theme of THEMES) {
       page.on('pageerror', (e) => r.pageErrors.push(String(e.message || e).slice(0, 300)));
       page.on('requestfailed', (q) => {
         const err = q.failure()?.errorText || '';
-        if (!/ERR_ABORTED/.test(err)) r.failed.push(`${err} ${q.url().slice(0, 160)}`);
+        if (!/ERR_ABORTED|cancelled|NS_BINDING_ABORTED/i.test(err)) r.failed.push(`${err} ${q.url().slice(0, 160)}`);
       });
       page.on('response', (s) => { if (s.status() >= 400 && !s.url().endsWith('/rota-que-nao-existe')) r.failed.push(`${s.status()} ${s.url().slice(0, 160)}`); });
       try {

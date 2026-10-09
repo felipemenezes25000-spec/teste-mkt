@@ -109,6 +109,70 @@ caso('despesa negativa é rejeitada', () => !como(A, `insert into expenses(trip_
 caso('moeda inválida é rejeitada', () => !como(A, `insert into expenses(trip_id,valor_minor,currency) values ('${TA}',100,'iene');`).ok);
 caso('membro sai da viagem por conta própria', () => ultimo(como(A, `with d as (delete from trip_members where trip_id='${TB}' and user_id='${A}' returning 1) select count(*) from d;`)) === '1');
 caso('após sair, A perde acesso', () => ultimo(como(A, `select count(*) from trips where id='${TB}';`)) === '0');
+// ---------------- plataforma: B2B, white-label, API, marketplace, compras ----------------
+const ORG = '20000000-0000-0000-0000-0000000000b1';
+const TOK = '30000000-0000-0000-0000-0000000000b1';
+caso('B cria a agência e vira owner automaticamente', () => como(B, `insert into organizations(id,slug,nome,owner_id,marca) values ('${ORG}','agencia-b','Agência B','${B}','{"corPrimaria":"#0A7D5A"}');`).ok
+  && ultimo(psql(`select papel from org_members where org_id='${ORG}' and user_id='${B}';`)) === 'owner');
+caso('A NÃO cria organização em nome de B', () => !como(A, `insert into organizations(slug,nome,owner_id) values ('fake-b','Fake','${B}');`).ok);
+caso('IDOR: C não vê a agência de B', () => ultimo(como(C, `select count(*) from organizations where id='${ORG}';`)) === '0');
+caso('C não se adiciona na agência de B', () => !como(C, `insert into org_members(org_id,user_id,papel) values ('${ORG}','${C}','agent');`).ok);
+caso('ninguém cria segundo owner na agência', () => !como(B, `insert into org_members(org_id,user_id,papel) values ('${ORG}','${C}','owner');`).ok);
+caso('B convida C como agente por e-mail', () => ultimo(como(B, `select convidar_para_org('${ORG}','c@x','agent');`)) === 't');
+caso('agente C NÃO convida ninguém', () => !como(C, `select convidar_para_org('${ORG}','a@x','admin');`).ok);
+caso('agente C cria proposta da agência', () => como(C, `insert into proposals(org_id,titulo,cliente_nome,cliente_email,destino_code,pessoas,custo_minor,margem_pct,status,token_publico,itens)
+  values ('${ORG}','Lua de mel no Japão','Ana','ana@cliente.com','JP',2,1000000,15,'enviada','${TOK}','[{"titulo":"Hotel Quioto","dia":1,"tipo":"LODGING","custo_minor":600000}]');`).ok);
+caso('preço da proposta = custo + margem (gerado no banco)', () => ultimo(psql(`select preco_minor from proposals where token_publico='${TOK}';`)) === '1150000');
+caso('agente C NÃO apaga proposta (só admin)', () => ultimo(como(C, `with d as (delete from proposals where token_publico='${TOK}' returning 1) select count(*) from d;`)) === '0');
+caso('IDOR: A não lê propostas da agência de B', () => ultimo(como(A, `select count(*) from proposals where org_id='${ORG}';`)) === '0');
+caso('cliente final vê a proposta por token SEM custo, margem nem e-mail', () => {
+  const r = ultimo(como('', `select proposta_publica('${TOK}')::text;`, 'anon')) || '';
+  return r.includes('Lua de mel') && r.includes('1150000') && !r.includes('1000000') && !r.includes('margem') && !r.includes('custo') && !r.includes('ana@cliente.com');
+});
+caso('token inexistente não revela nada', () => (ultimo(como('', `select coalesce(proposta_publica('${A}')::text,'nulo');`, 'anon')) || '') === 'nulo');
+caso('cliente final aceita a proposta uma única vez', () => ultimo(como('', `select responder_proposta('${TOK}', true);`, 'anon')) === 'aceita'
+  && ultimo(como('', `select responder_proposta('${TOK}', false);`, 'anon')) === 'indisponivel');
+caso('admin não troca o dono da agência', () => !como(B, `update organizations set owner_id='${C}' where id='${ORG}';`).ok);
+caso('agente C NÃO altera a marca (white-label é de admin)', () => ultimo(como(C, `with u as (update organizations set marca='{"corPrimaria":"#FF0000"}' where id='${ORG}' returning 1) select count(*) from u;`)) === '0');
+
+const H1 = 'a'.repeat(64);
+caso('B cria chave de API (só o hash) e o limite é forçado', () => como(B, `insert into api_keys(nome,prefixo,hash,limite_min,escopos) values ('app B','msf_live_AbC123','${H1}',6000,'{admin}');`).ok
+  && ultimo(psql(`select limite_min||'/'||array_to_string(escopos,',') from api_keys where hash='${H1}';`)) === '600/catalogo:ler');
+caso('IDOR: C não vê a chave de B', () => ultimo(como(C, `select count(*) from api_keys;`)) === '0');
+caso('anônimo valida chave pelo hash', () => ultimo(como('', `select count(*) from validar_api_key('${H1}');`, 'anon')) === '1');
+caso('B NÃO troca o hash da chave', () => !como(B, `update api_keys set hash='${'b'.repeat(64)}' where hash='${H1}';`).ok);
+caso('B revoga a chave e ela deixa de validar', () => como(B, `update api_keys set revogada_em=now() where hash='${H1}';`).ok
+  && ultimo(como('', `select count(*) from validar_api_key('${H1}');`, 'anon')) === '0');
+caso('chave revogada não é reativada', () => !como(B, `update api_keys set revogada_em=null where hash='${H1}';`).ok);
+caso('anônimo não lê a tabela de chaves', () => ultimo(como('', `select count(*) from api_keys;`, 'anon')) === '0');
+
+const R1 = '40000000-0000-0000-0000-0000000000c1';
+caso('C vira criador/consultor; "verificado" é ignorado', () => como(C, `insert into creator_profiles(user_id,slug,nome_publico,tipos,verificado,consultoria_preco_minor) values ('${C}','cris-viaja','Cris Viaja','{criador,consultor}',true,25000);`).ok
+  && ultimo(psql(`select verificado from creator_profiles where user_id='${C}';`)) === 'f');
+caso('C NÃO se marca como verificado depois', () => !como(C, `update creator_profiles set verificado=true where user_id='${C}';`).ok);
+caso('C publica roteiro pago com conteúdo', () => como(C, `insert into creator_itineraries(id,slug,titulo,destino_code,dias,resumo,preco_minor,status) values ('${R1}','japao-10-dias','Japão em 10 dias','JP',10,'Tóquio, Quioto e Osaka com trem-bala e dias de respiro.',4900,'publicado');
+  insert into creator_itinerary_content(itinerary_id,dias) values ('${R1}','[{"dia":1,"itens":[{"titulo":"Shibuya"}]}]');`).ok);
+caso('anônimo vê o roteiro publicado mas NÃO o conteúdo pago', () => ultimo(como('', `select (select count(*) from creator_itineraries where id='${R1}')||'/'||(select count(*) from creator_itinerary_content where itinerary_id='${R1}');`, 'anon')) === '1/0');
+caso('B (sem compra) NÃO lê o conteúdo pago', () => ultimo(como(B, `select count(*) from creator_itinerary_content where itinerary_id='${R1}';`)) === '0');
+caso('B NÃO registra compra por conta própria', () => !como(B, `insert into purchases(user_id,produto,produto_id,valor_minor,moeda,status) values ('${B}','roteiro','${R1}',4900,'BRL','pago');`).ok);
+caso('após pagamento (servidor), B lê o conteúdo comprado', () => como('', `insert into purchases(user_id,produto,produto_id,vendedor_id,valor_minor,moeda,taxa_plataforma_minor,stripe_session_id,status,pago_em) values ('${B}','roteiro','${R1}','${C}',4900,'BRL',980,'cs_test_1','pago',now());`, 'service_role').ok
+  && ultimo(como(B, `select count(*) from creator_itinerary_content where itinerary_id='${R1}';`)) === '1');
+caso('vendedor C vê a venda; A não vê', () => ultimo(como(C, `select count(*) from purchases;`)) === '1' && ultimo(como(A, `select count(*) from purchases;`)) === '0');
+caso('compra duplicada pela mesma sessão Stripe é rejeitada', () => !como('', `insert into purchases(user_id,produto,valor_minor,moeda,stripe_session_id,status) values ('${B}','trip_pass',4900,'BRL','cs_test_1','pago');`, 'service_role').ok);
+caso('Trip Pass pago libera 30 dias', () => como('', `insert into purchases(user_id,produto,valor_minor,moeda,stripe_session_id,status,pago_em) values ('${B}','trip_pass',4900,'BRL','cs_test_2','pago',now());`, 'service_role').ok
+  && ultimo(como(B, `select trip_pass_ativo_ate() > now() + interval '29 days';`)) === 't');
+
+const Q1 = '50000000-0000-0000-0000-0000000000d1';
+caso('B pede consultoria a C (nasce "nova", sem preço)', () => como(B, `insert into consult_requests(id,consultor_id,mensagem,destino_code) values ('${Q1}','${C}','Quero ajuda para montar 12 dias no Japão em novembro.','JP');`).ok);
+caso('B NÃO pede consultoria já com preço/aceita', () => !como(B, `insert into consult_requests(consultor_id,mensagem,status,preco_minor) values ('${C}','Pedido que tenta pular etapas.','aceita',1);`).ok);
+caso('cliente B NÃO se marca como pago', () => !como(B, `update consult_requests set status='paga' where id='${Q1}';`).ok);
+caso('consultor C aceita com preço', () => como(C, `update consult_requests set status='aceita', preco_minor=25000 where id='${Q1}';`).ok);
+caso('consultor C NÃO marca como paga (só o servidor)', () => !como(C, `update consult_requests set status='paga' where id='${Q1}';`).ok);
+caso('A não vê a consultoria de B e C', () => ultimo(como(A, `select count(*) from consult_requests;`)) === '0');
+caso('servidor marca paga e consultor conclui', () => como('', `update consult_requests set status='paga' where id='${Q1}';`, 'service_role').ok
+  && como(C, `update consult_requests set status='concluida' where id='${Q1}';`).ok);
+caso('pedir consultoria a quem não é consultor falha', () => !como(C, `insert into consult_requests(consultor_id,mensagem) values ('${B}','Pedido para quem não é consultor.');`).ok);
+
 caso('LGPD: A exclui a própria conta (cascata)', () => como(A, `select excluir_minha_conta();`).ok && ultimo(psql(`select count(*) from trips where user_id='${A}';`)) === '0');
 
 // Compatibilidade REAL do adaptador de sync (app/_lib/viagens/sync.js) com o schema:

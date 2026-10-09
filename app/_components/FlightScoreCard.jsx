@@ -114,7 +114,7 @@ export function FlightScoreCard({ voo, ctx, destaque = false }) {
   const bagagemTxt = voo.bagagem ? 'bagagem inclusa' : 'sem bagagem';
 
   return (
-    <article className={`rounded-2xl border bg-card overflow-hidden ${destaque ? 'border-pine ring-1 ring-pine/20 shadow-[var(--e-1)]' : 'border-line'}`}>
+    <article className={`rounded-2xl border bg-card overflow-hidden ${destaque ? 'border-pine ring-1 ring-pine/20 shadow-e1' : 'border-line'}`}>
       <div className="p-4 sm:p-5 flex flex-wrap items-start gap-x-5 gap-y-3">
         <div className="w-32 sm:w-36 shrink-0">
           <div className="font-semibold text-ink">{voo.companhia || 'Companhia'}</div>
@@ -141,7 +141,7 @@ export function FlightScoreCard({ voo, ctx, destaque = false }) {
           <span>{alerta || recomendacao}</span>
         </div>
         {alerta && (
-          <p className="mt-1 text-xs opacity-90">{recomendacao}</p>
+          <p className="mt-1 text-xs">{recomendacao}</p>
         )}
       </div>
 

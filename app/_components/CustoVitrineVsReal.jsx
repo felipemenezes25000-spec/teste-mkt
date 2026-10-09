@@ -24,7 +24,7 @@ export function CustoVitrineVsReal({ resumo, contexto }) {
 
       <div className="mt-4 grid grid-cols-2 gap-3">
         <div className="rounded-xl bg-paper2 p-3">
-          <p className="text-xs text-inksoft">Preço de vitrine <span className="opacity-70">(voo + hotel)</span></p>
+          <p className="text-xs text-inksoft">Preço de vitrine <span className="">(voo + hotel)</span></p>
           <p className="font-display text-2xl text-inksoft tnum line-through decoration-danger/40">{fmtMoeda(vitrine, 'USD')}</p>
         </div>
         <div className="rounded-xl bg-pine/10 border border-pine/20 p-3">

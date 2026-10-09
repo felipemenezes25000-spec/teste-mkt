@@ -25,6 +25,7 @@ import { VerdictCard } from '../../../_components/VerdictCard.jsx';
 import { TravelFitScore } from '../../../_components/TravelFitScore.jsx';
 import { ValeIrAgora } from '../../../_components/ValeIrAgora.jsx';
 import { OQueNinguemConta } from '../../../_components/OQueNinguemConta.jsx';
+import { dicasOQueNinguemConta } from '../../../_lib/oqueNinguemConta.js';
 import { MapaPais } from '../../../_components/mapa/MapaPais.jsx';
 import { pontosDoPais } from '../../../_lib/geo.js';
 import { T } from '../../../_components/T.jsx';
@@ -37,6 +38,7 @@ import { dadosV2DoPais } from '../../../_engine/precos.js';
 import { precosDoPais } from '../../../_engine/precosTransporte.js';
 import { Icon } from '../../../_ui/Icon.jsx';
 import { Foto } from '../../../_ui/Foto.jsx';
+import { QuandoVisivel } from '../../../_ui/QuandoVisivel.jsx';
 import { SourceTrust } from '../../../_ui/SourceTrust.jsx';
 import { resolverImagens, resolverImagem } from '../../../_lib/media.js';
 import { arquivoWikimedia } from '../../../_lib/wikiThumb.js';
@@ -48,9 +50,10 @@ export const revalidate = 86400;
 // sob demanda (ISR) e fica cacheado — build rápido mesmo com 150+ países.
 export const dynamicParams = true;
 
+// Todos os 205 destinos são pré-gerados no build (SEO e velocidade da 1ª visita);
+// ISR (1 dia) mantém fotos e textos atualizados. Fetches externos são cacheados.
 export function generateStaticParams() {
-  const destaques = DESTINOS.filter((d) => d.destaque);
-  return (destaques.length ? destaques : DESTINOS.slice(0, 12)).map((d) => ({ slug: d.slug }));
+  return DESTINOS.map((d) => ({ slug: d.slug }));
 }
 
 export async function generateMetadata(props) {
@@ -243,7 +246,7 @@ export default async function DestinoPage(props) {
 
       {/* HERO editorial — foto real com crédito, coordenada e ações */}
       <section className="relative h-[62vh] min-h-[420px] max-h-[640px] overflow-hidden bg-ink">
-        <Foto src={heroSrc} alt={`${d.nome} — ${d.fotoQuery || d.nome}`} credito={heroCredito} prioridade className="absolute inset-0" largura={1280} altura={720} rotuloFalha="Sem foto verificada" />
+        <Foto src={heroSrc} srcSet={heroAsset ? heroAsset.srcSet : undefined} sizes="100vw" alt={`${d.nome} — ${d.fotoQuery || d.nome}`} credito={heroCredito} prioridade className="absolute inset-0" largura={1280} altura={720} rotuloFalha="Sem foto verificada" />
         <div className="absolute inset-0 photo-scrim pointer-events-none" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/20 to-transparent pointer-events-none" aria-hidden />
         <FavoriteButton code={d.code} nome={d.nome} className="absolute top-4 right-4 z-20 w-10 h-10" />
@@ -354,11 +357,11 @@ export default async function DestinoPage(props) {
 
           <section id="logistica" className="scroll-mt-32 space-y-8">
             <ComoSeLocomove precos={precosDoPais(d.code)} />
-            <MapaPais nome={d.nome} centro={d.coords} {...pontosDoPais(d)} />
+            <QuandoVisivel altura="h-[480px]" rotulo="Mapa"><MapaPais nome={d.nome} centro={d.coords} {...pontosDoPais(d)} /></QuandoVisivel>
           </section>
 
           <section id="antes" className="scroll-mt-32 space-y-6">
-            <OQueNinguemConta destino={d} />
+            <OQueNinguemConta dicas={dicasOQueNinguemConta(d)} />
             {(() => {
               const dicas = dicasDe(d.code);
               const secoes = SECOES_DICAS.filter((x) => (dicas[x.id] || []).length > 0);

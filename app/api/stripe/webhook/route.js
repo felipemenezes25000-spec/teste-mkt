@@ -2,7 +2,7 @@
 // (tabela stripe_events), descarta eventos fora de ordem (subscriptions.ultimo_evento_em)
 // e grava o plano via service role. 503 se não configurado.
 import { createClient } from '@supabase/supabase-js';
-import { verificarAssinatura, planoDoPrice, eventoForaDeOrdem } from '../../../_lib/stripeWebhook.js';
+import { verificarAssinatura, planoDoPrice, eventoForaDeOrdem, compraDaSessao } from '../../../_lib/stripeWebhook.js';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -75,6 +75,15 @@ export async function POST(req) {
         ),
         'upsert subscriptions',
       );
+    } else if (evt.type === 'checkout.session.completed' && obj && obj.mode === 'payment') {
+      // compra avulsa (Trip Pass, roteiro, consultoria): idempotente por stripe_session_id
+      const compra = compraDaSessao(obj, evt.created);
+      if (compra) {
+        exigeOk(await db.from('purchases').upsert(compra, { onConflict: 'stripe_session_id', ignoreDuplicates: true }), 'upsert purchases');
+        if (compra.produto === 'consultoria') {
+          exigeOk(await db.from('consult_requests').update({ status: 'paga' }).eq('id', compra.produto_id).eq('status', 'aceita'), 'consulta paga');
+        }
+      }
     } else if ((evt.type === 'customer.subscription.updated' || evt.type === 'customer.subscription.deleted') && obj && obj.id) {
       const { data: atual } = await db.from('subscriptions').select('ultimo_evento_em').eq('stripe_subscription_id', obj.id).maybeSingle();
       if (atual && eventoForaDeOrdem(evt.created, atual.ultimo_evento_em)) {

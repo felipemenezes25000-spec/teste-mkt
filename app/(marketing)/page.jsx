@@ -13,6 +13,7 @@ import { HomeSecaoComoDecide, HomeSecaoCustoReal, HomeSecaoFaq, HomeSecaoCtaFina
 import { Icon } from '../_ui/Icon.jsx';
 import { Foto } from '../_ui/Foto.jsx';
 import { SourceTrust } from '../_ui/SourceTrust.jsx';
+import { T } from '../_components/T.jsx';
 
 // Home MERIDIANO (Server Component). Primeiro valor antes de cadastro: o simulador
 // está DENTRO do hero (OMEGA V4 §30). Foto do hero e dos destaques resolvidas pelo
@@ -30,10 +31,10 @@ export const metadata = {
 const HERO = { titulo: 'Lofoten', rotulo: 'LOFOTEN · NORUEGA', coord: '68.15° N · 13.98° E' };
 
 const JORNADA = [
-  { n: '01', icon: 'globe', tit: 'Explorar', txt: `${DESTINOS.length} países num mapa vivo, com custo de referência, melhor época e visto para quem tem passaporte brasileiro.`, href: '/explorar', cta: 'Abrir o mapa' },
-  { n: '02', icon: 'target', tit: 'Decidir', txt: 'Top 3 pelo seu perfil, com nota explicada, riscos e o porquê de cada escolha. A comissão nunca entra no ranking.', href: '/decisao', cta: 'Decidir agora' },
-  { n: '03', icon: 'route', tit: 'Planejar', txt: 'A ordem dos países e dos dias que respeita estação, visto e orçamento — e recalcula quando você muda algo.', href: '/planejar', cta: 'Montar a rota' },
-  { n: '04', icon: 'suitcase', tit: 'Viajar', txt: 'Reservas, documentos, despesas e o próximo passo do dia num só lugar, inclusive offline.', href: '/viagens', cta: 'Minhas viagens' },
+  { n: '01', icon: 'globe', k: 'j1', tit: 'Explorar', txt: `${DESTINOS.length} países num mapa vivo, com custo de referência, melhor época e visto para quem tem passaporte brasileiro.`, href: '/explorar', cta: 'Abrir o mapa' },
+  { n: '02', icon: 'target', k: 'j2', tit: 'Decidir', txt: 'Top 3 pelo seu perfil, com nota explicada, riscos e o porquê de cada escolha. A comissão nunca entra no ranking.', href: '/decisao', cta: 'Decidir agora' },
+  { n: '03', icon: 'route', k: 'j3', tit: 'Planejar', txt: 'A ordem dos países e dos dias que respeita estação, visto e orçamento — e recalcula quando você muda algo.', href: '/planejar', cta: 'Montar a rota' },
+  { n: '04', icon: 'suitcase', k: 'j4', tit: 'Viajar', txt: 'Reservas, documentos, despesas e o próximo passo do dia num só lugar, inclusive offline.', href: '/viagens', cta: 'Minhas viagens' },
 ];
 
 const CTA_LIMA = 'inline-flex items-center justify-center gap-2 rounded-lg bg-coral text-oncoral font-semibold px-5 h-12 hover:brightness-95 transition focusring';
@@ -66,31 +67,30 @@ export default async function Home() {
 
       {/* HERO — sempre escuro (data-theme local), foto real com crédito, simulador embutido */}
       <section data-theme="dark" className="relative overflow-hidden bg-paper text-ink -mt-px">
-        <Foto src={heroSrc} alt="Montanhas e vilarejo de pescadores em Lofoten, Noruega" credito={heroCredito} prioridade className="absolute inset-0 !bg-paper" imgClassName="opacity-95" largura={1920} altura={1080} />
+        <Foto src={heroSrc} srcSet={heroAsset ? heroAsset.srcSet : undefined} sizes="100vw" alt="Montanhas e vilarejo de pescadores em Lofoten, Noruega" credito={heroCredito} prioridade className="absolute inset-0 !bg-paper" imgClassName="opacity-95" largura={1920} altura={1080} />
         <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/75 to-paper/5 pointer-events-none" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/10 to-paper/50 pointer-events-none" aria-hidden />
-        <div className="absolute inset-0 pointer-events-none opacity-60" aria-hidden
+        <div className="absolute inset-0 pointer-events-none" aria-hidden
           style={{ backgroundImage: 'linear-gradient(rgb(var(--grid-ink) / .07) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--grid-ink) / .07) 1px, transparent 1px)', backgroundSize: '96px 96px' }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-16 sm:pt-20 lg:pt-24 lg:pb-24 grid gap-10 lg:gap-14 lg:grid-cols-[1.05fr_1fr] items-end">
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span className="signal-dot" aria-hidden />
-              <span className="eyebrow !text-ink/80">{DESTINOS.length} países · decisões com fonte e data</span>
+              <span className="eyebrow !text-ink/80">{DESTINOS.length} <T k="home2.eyebrow" fallback="países · decisões com fonte e data" /></span>
             </div>
             <h1 className="mt-6 font-display text-[3.1rem] leading-[.95] sm:text-7xl xl:text-[5.6rem] tracking-tightest text-ink">
-              O mundo inteiro,<br /><span className="text-coral">explicado para você.</span>
+              <T k="home2.h1a" fallback="O mundo inteiro," /><br /><span className="text-coral"><T k="home2.h1b" fallback="explicado para você." /></span>
             </h1>
             <p className="mt-6 text-lg text-inksoft max-w-xl leading-relaxed">
-              Pra onde ir pelo seu perfil, quanto a viagem custa de verdade — com fonte e data em cada número —
-              e a rota que respeita estação, visto e orçamento. Do sonho ao retorno.
+              <T k="home2.sub" fallback="Pra onde ir pelo seu perfil, quanto a viagem custa de verdade — com fonte e data em cada número — e a rota que respeita estação, visto e orçamento. Do sonho ao retorno." />
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/decisao" className={CTA_LIMA}><Icon name="target" size={18} /> Decidir minha viagem</Link>
-              <Link href="/explorar" className={CTA_LINHA}><Icon name="globe" size={18} /> Explorar o mapa</Link>
+              <Link href="/decisao" className={CTA_LIMA}><Icon name="target" size={18} /> <T k="home2.ctaDecidir" fallback="Decidir minha viagem" /></Link>
+              <Link href="/explorar" className={CTA_LINHA}><Icon name="globe" size={18} /> <T k="home2.ctaExplorar" fallback="Explorar o mapa" /></Link>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-2 text-xs text-inksoft">
-              <span className="mr-1">Cada dado diz o que é:</span>
+              <span className="mr-1"><T k="home2.cadaDado" fallback="Cada dado diz o que é:" /></span>
               <SourceTrust freshness="LIVE" compacto /><SourceTrust freshness="ESTIMATE" compacto /><SourceTrust freshness="HISTORICAL" compacto />
             </div>
             <div className="mt-10 coord text-inksoft">{HERO.rotulo} — {HERO.coord}</div>
@@ -102,8 +102,8 @@ export default async function Home() {
       {/* JORNADA — quatro passos, uma plataforma */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
         <div className="max-w-2xl">
-          <div className="eyebrow mb-3">Do sonho ao retorno</div>
-          <h2 className="font-display text-4xl sm:text-5xl tracking-tighter text-ink">Uma viagem inteira, sem abrir dez apps.</h2>
+          <div className="eyebrow mb-3"><T k="home2.jornadaEy" fallback="Do sonho ao retorno" /></div>
+          <h2 className="font-display text-4xl sm:text-5xl tracking-tighter text-ink"><T k="home2.jornadaH" fallback="Uma viagem inteira, sem abrir dez apps." /></h2>
         </div>
         <ol className="mt-10 grid gap-px bg-line border border-line rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
           {JORNADA.map((p) => (
@@ -113,9 +113,9 @@ export default async function Home() {
                   <span className="font-mono text-xs text-inksoft">{p.n}</span>
                   <span className="w-10 h-10 rounded-lg bg-pine/10 text-pine grid place-items-center"><Icon name={p.icon} size={20} /></span>
                 </div>
-                <h3 className="mt-8 font-display text-2xl text-ink">{p.tit}</h3>
-                <p className="mt-2 text-sm text-inksoft leading-relaxed flex-1">{p.txt}</p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-pine">{p.cta} <Icon name="arrow-right" size={15} className="group-hover:translate-x-0.5 transition" /></span>
+                <h3 className="mt-8 font-display text-2xl text-ink"><T k={`home2.${p.k}`} fallback={p.tit} /></h3>
+                <p className="mt-2 text-sm text-inksoft leading-relaxed flex-1">{p.k === 'j1' ? `${DESTINOS.length} ` : ''}<T k={`home2.${p.k}t`} fallback={p.k === 'j1' ? p.txt.replace(/^\d+ /, '') : p.txt} /></p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-pine"><T k={`home2.${p.k}c`} fallback={p.cta} /> <Icon name="arrow-right" size={15} className="group-hover:translate-x-0.5 transition" /></span>
               </Link>
             </li>
           ))}
@@ -127,10 +127,10 @@ export default async function Home() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
           <div className="flex flex-wrap items-end justify-between gap-3 mb-8">
             <div>
-              <div className="eyebrow mb-3">Para começar</div>
-              <h2 className="font-display text-4xl sm:text-5xl tracking-tighter text-ink">Destinos em destaque</h2>
+              <div className="eyebrow mb-3"><T k="home2.destEy" fallback="Para começar" /></div>
+              <h2 className="font-display text-4xl sm:text-5xl tracking-tighter text-ink"><T k="home2.destH" fallback="Destinos em destaque" /></h2>
             </div>
-            <Link href="/explorar" className="inline-flex items-center gap-1.5 text-sm font-semibold text-pine hover:underline focusring">Ver os {DESTINOS.length} países <Icon name="arrow-right" size={15} /></Link>
+            <Link href="/explorar" className="inline-flex items-center gap-1.5 text-sm font-semibold text-pine hover:underline focusring"><T k="home2.verTodos" fallback="Ver os {n} países" vars={{ n: DESTINOS.length }} /> <Icon name="arrow-right" size={15} /></Link>
           </div>
           <div className="grid gap-4 lg:grid-cols-3">
             <Link href={`/destino/${principal.d.slug}`} className="group relative block min-h-[420px] lg:row-span-2 rounded-2xl overflow-hidden border border-line focusring">
@@ -141,7 +141,7 @@ export default async function Home() {
                 <div className="mt-1 font-display text-5xl tracking-tighter">{principal.d.nome}</div>
                 <p className="mt-2 text-sm text-white/80 max-w-md line-clamp-2">{principal.d.estacao}</p>
                 <div className="mt-4 flex items-center gap-3 font-mono text-xs text-white/80">
-                  <span>US$ {principal.d.custoDia}/dia</span><span aria-hidden>·</span><span>referência jun/2026</span>
+                  <span>US$ {principal.d.custoDia}/<T k="card.dia" fallback="dia" /></span><span aria-hidden>·</span><span><T k="card.ref" fallback="referência jun/2026" /></span>
                 </div>
               </div>
             </Link>
@@ -157,25 +157,26 @@ export default async function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] items-start">
           <div>
-            <div className="eyebrow mb-3">Sem integração fingida</div>
-            <h2 className="font-display text-4xl sm:text-5xl tracking-tighter text-ink">Cada número diz de onde veio — e quando.</h2>
+            <div className="eyebrow mb-3"><T k="home2.confEy" fallback="Sem integração fingida" /></div>
+            <h2 className="font-display text-4xl sm:text-5xl tracking-tighter text-ink"><T k="home2.confH" fallback="Cada número diz de onde veio — e quando." /></h2>
             <p className="mt-5 text-inksoft leading-relaxed max-w-lg">
-              Preço de referência não é cotação. Câmbio do dia não é taxa do cartão. Regra de visto muda. Por isso todo dado
-              crítico no Mundo Sem Fim carrega um selo, a fonte e a data — e nada é chamado de “ao vivo” sem ter sido consultado agora.
+              <T k="home2.confP" fallback="Preço de referência não é cotação. Câmbio do dia não é taxa do cartão. Regra de visto muda. Por isso todo dado crítico no Mundo Sem Fim carrega um selo, a fonte e a data — e nada é chamado de “ao vivo” sem ter sido consultado agora." />
             </p>
-            <Link href="/fontes" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-pine hover:underline focusring">Ver fontes e metodologia <Icon name="arrow-right" size={15} /></Link>
+            <Link href="/fontes" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-pine hover:underline focusring"><T k="home2.confLink" fallback="Ver fontes e metodologia" /> <Icon name="arrow-right" size={15} /></Link>
           </div>
           <dl className="grid gap-px bg-line border border-line rounded-2xl overflow-hidden sm:grid-cols-2">
             {[
-              ['LIVE', 'Previsão do tempo', 'Consultada na fonte agora, com horário — e envelhece: depois de minutos vira “recente”.'],
-              ['ESTIMATE', 'Custo da sua viagem', 'Calculado pelo nosso modelo a partir dos seus dias, estilo e pessoas.'],
-              ['HISTORICAL', 'Preço de ingresso', 'Pesquisa de referência (jun/2026). Pode ter mudado — conferir antes de comprar.'],
-              ['UNVERIFIED', 'Regra sem fonte', 'Quando não temos fonte confiável, dizemos — e mandamos você ao órgão oficial.'],
-            ].map(([f, t, d]) => (
+              ['LIVE', 'c1', 'Previsão do tempo', 'Consultada na fonte agora, com horário — e envelhece: depois de minutos vira “recente”.'],
+              ['ESTIMATE', 'c2', 'Custo da sua viagem', 'Calculado pelo nosso modelo a partir dos seus dias, estilo e pessoas.'],
+              ['HISTORICAL', 'c3', 'Preço de ingresso', 'Pesquisa de referência (jun/2026). Pode ter mudado — conferir antes de comprar.'],
+              ['UNVERIFIED', 'c4', 'Regra sem fonte', 'Quando não temos fonte confiável, dizemos — e mandamos você ao órgão oficial.'],
+            ].map(([f, ck, t, d]) => (
               <div key={f} className="bg-card p-6">
-                <SourceTrust freshness={f} compacto />
-                <dt className="mt-4 font-display text-xl text-ink">{t}</dt>
-                <dd className="mt-1.5 text-sm text-inksoft leading-relaxed">{d}</dd>
+                <dt>
+                  <SourceTrust freshness={f} compacto />
+                  <span className="mt-4 block font-display text-xl text-ink"><T k={`home2.${ck}`} fallback={t} /></span>
+                </dt>
+                <dd className="mt-1.5 text-sm text-inksoft leading-relaxed"><T k={`home2.${ck}t`} fallback={d} /></dd>
               </div>
             ))}
           </dl>

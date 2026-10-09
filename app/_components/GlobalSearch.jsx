@@ -1,7 +1,6 @@
 'use client';
 import { useState, useMemo, useRef, useEffect, useId } from 'react';
 import { useRouter } from 'next/navigation';
-import { DESTINOS } from '../_lib/destinos.js';
 import { flagUrl } from '../_lib/flags.js';
 import { Icon } from '../_ui/Icon.jsx';
 
@@ -13,13 +12,19 @@ export function GlobalSearch() {
   const ref = useRef(null);
   const listId = useId();
 
+  // catálogo carregado SOB DEMANDA (foco/digitação): fora do bundle inicial de todas as páginas
+  const [destinos, setDestinos] = useState(null);
+  const carregar = () => {
+    if (destinos) return;
+    import('../_lib/destinos.js').then((m) => setDestinos(m.DESTINOS.map((d) => ({ code: d.code, nome: d.nome, slug: d.slug, regiao: d.regiao, cidades: d.cidades || [] }))));
+  };
   const results = useMemo(() => {
     const t = q.trim().toLowerCase();
-    if (!t) return [];
-    return DESTINOS
+    if (!t || !destinos) return [];
+    return destinos
       .filter((d) => (`${d.nome} ${d.regiao} ${(d.cidades || []).join(' ')}`).toLowerCase().includes(t))
       .slice(0, 8);
-  }, [q]);
+  }, [q, destinos]);
 
   useEffect(() => {
     const onDoc = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
@@ -47,8 +52,9 @@ export function GlobalSearch() {
       <Icon name="search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-inksoft pointer-events-none" />
       <input
         value={q}
-        onChange={(e) => { setQ(e.target.value); setOpen(true); }}
-        onFocus={() => setOpen(true)}
+        onChange={(e) => { setQ(e.target.value); setOpen(true); carregar(); }}
+        onFocus={() => { setOpen(true); carregar(); }}
+        onPointerEnter={carregar}
         onKeyDown={onKey}
         placeholder="Buscar país ou cidade…"
         aria-label="Buscar destino"
@@ -58,7 +64,7 @@ export function GlobalSearch() {
         className="w-full 2xl:w-64 h-9 pl-9 pr-3 rounded-lg border border-line bg-input text-ink text-sm placeholder:text-inksoft focusring"
       />
       {open && results.length > 0 && (
-        <ul id={listId} className="absolute z-50 mt-1 left-0 w-full min-w-[16rem] max-h-80 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox">
+        <ul id={listId} className="absolute z-50 mt-1 left-0 w-full min-w-[16rem] max-h-80 overflow-auto rounded-xl border border-line bg-card shadow-e2 py-1" role="listbox">
           {results.map((d, i) => (
             <li key={d.code} id={`${listId}-${i}`} role="option" aria-selected={i === ativo}>
               <button

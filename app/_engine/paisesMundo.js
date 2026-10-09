@@ -1274,7 +1274,7 @@ export const PAISES_EXTRA = [
    33.3636,
    35.1856
   ],
-  "fotoQuery": "Nicosia",
+  "fotoQuery": "Nicósia",
   "cidades": [
    "Nicósia",
    "Limassol",
@@ -1840,7 +1840,7 @@ export const PAISES_EXTRA = [
    -3.7038,
    40.4168
   ],
-  "fotoQuery": "Sagrada Família",
+  "fotoQuery": "Templo Expiatório da Sagrada Família",
   "cidades": [
    "Madri",
    "Barcelona",
@@ -6023,7 +6023,7 @@ export const PAISES_EXTRA = [
      -15.1804,
      11.8636
    ],
-   "fotoQuery": "Bijagós",
+   "fotoQuery": "Arquipélago dos Bijagós",
    "cidades": [
      "Bissau",
      "Bafatá",

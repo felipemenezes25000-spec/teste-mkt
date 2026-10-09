@@ -154,24 +154,24 @@ export function alertasDocumentos(v, hoje = new Date().toISOString().slice(0, 10
   const seisMeses = (iso) => { const d = new Date(iso + 'T00:00:00Z'); d.setUTCMonth(d.getUTCMonth() + 6); return d.toISOString().slice(0, 10); };
   for (const d of v.documentos) {
     if (!d.validade) continue;
-    if (d.validade < hoje) out.push({ sev: 'CRITICO', doc: d, txt: `${d.titulo} está vencido (${d.validade}).` });
-    else if (d.tipo === 'PASSAPORTE' && d.validade < seisMeses(v.fim)) out.push({ sev: 'ATENCAO', doc: d, txt: `${d.titulo} vence em ${d.validade} — muitos países exigem 6 meses de validade após a volta.` });
-    else if (d.validade < v.fim) out.push({ sev: 'ATENCAO', doc: d, txt: `${d.titulo} vence durante a viagem (${d.validade}).` });
+    if (d.validade < hoje) out.push({ sev: 'CRITICO', cod: 'vencido', doc: d, txt: `${d.titulo} está vencido (${d.validade}).` });
+    else if (d.tipo === 'PASSAPORTE' && d.validade < seisMeses(v.fim)) out.push({ sev: 'ATENCAO', cod: 'seisMeses', doc: d, txt: `${d.titulo} vence em ${d.validade} — muitos países exigem 6 meses de validade após a volta.` });
+    else if (d.validade < v.fim) out.push({ sev: 'ATENCAO', cod: 'venceViagem', doc: d, txt: `${d.titulo} vence durante a viagem (${d.validade}).` });
   }
-  if (!v.documentos.some((d) => d.tipo === 'PASSAPORTE')) out.push({ sev: 'INFO', doc: null, txt: 'Cadastre a validade do passaporte para o Mundo Sem Fim checar a regra dos 6 meses.' });
-  if (!v.documentos.some((d) => d.tipo === 'SEGURO') && !v.reservas.some((r) => r.tipo === 'INSURANCE')) out.push({ sev: 'INFO', doc: null, txt: 'Nenhum seguro-viagem registrado (obrigatório em Schengen e em vários países).' });
+  if (!v.documentos.some((d) => d.tipo === 'PASSAPORTE')) out.push({ sev: 'INFO', cod: 'semPassaporte', doc: null, txt: 'Cadastre a validade do passaporte para o Mundo Sem Fim checar a regra dos 6 meses.' });
+  if (!v.documentos.some((d) => d.tipo === 'SEGURO') && !v.reservas.some((r) => r.tipo === 'INSURANCE')) out.push({ sev: 'INFO', cod: 'semSeguro', doc: null, txt: 'Nenhum seguro-viagem registrado (obrigatório em Schengen e em vários países).' });
   return out;
 }
 
 /** Prontidão da viagem (0–100) com o que falta — métrica calculada, não decorativa. */
 export function prontidao(v) {
   const checks = [
-    { ok: v.itens.length > 0, txt: 'Montar o roteiro (pelo menos um lugar)', peso: 20 },
-    { ok: v.reservas.some((r) => r.tipo === 'FLIGHT'), txt: 'Registrar o voo', peso: 20 },
-    { ok: v.reservas.some((r) => r.tipo === 'LODGING'), txt: 'Registrar a hospedagem', peso: 20 },
-    { ok: v.documentos.some((d) => d.tipo === 'PASSAPORTE'), txt: 'Cadastrar passaporte', peso: 15 },
-    { ok: v.documentos.some((d) => d.tipo === 'SEGURO') || v.reservas.some((r) => r.tipo === 'INSURANCE'), txt: 'Seguro-viagem', peso: 15 },
-    { ok: v.orcamento > 0, txt: 'Definir orçamento', peso: 10 },
+    { ok: v.itens.length > 0, cod: 'roteiro', aba: 'roteiro', txt: 'Montar o roteiro (pelo menos um lugar)', peso: 20 },
+    { ok: v.reservas.some((r) => r.tipo === 'FLIGHT'), cod: 'voo', aba: 'reservas', txt: 'Registrar o voo', peso: 20 },
+    { ok: v.reservas.some((r) => r.tipo === 'LODGING'), cod: 'hospedagem', aba: 'reservas', txt: 'Registrar a hospedagem', peso: 20 },
+    { ok: v.documentos.some((d) => d.tipo === 'PASSAPORTE'), cod: 'passaporte', aba: 'documentos', txt: 'Cadastrar passaporte', peso: 15 },
+    { ok: v.documentos.some((d) => d.tipo === 'SEGURO') || v.reservas.some((r) => r.tipo === 'INSURANCE'), cod: 'seguro', aba: 'documentos', txt: 'Seguro-viagem', peso: 15 },
+    { ok: v.orcamento > 0, cod: 'orcamento', aba: 'resumo', txt: 'Definir orçamento', peso: 10 },
   ];
   const nota = checks.reduce((s, c) => s + (c.ok ? c.peso : 0), 0);
   return { nota, faltando: checks.filter((c) => !c.ok) };

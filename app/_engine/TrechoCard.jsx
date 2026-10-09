@@ -51,7 +51,7 @@ export default function TrechoCard(props) {
 
   return (
     <div {...dragHandlers} role="listitem" aria-label={`Trecho ${index + 1}: ${t.nome}`}
-      className={`rise rounded-2xl border bg-card shadow-[0_14px_36px_-26px_rgba(34,45,43,0.5)] transition
+      className={`rise rounded-2xl border bg-card shadow-e1 transition
         ${dragging ? 'dragging' : ''} ${dropTarget ? 'drop-target' : 'border-line'} ${ehQuebra ? 'alert-pulse' : ''}`}>
       <div className="p-4 sm:p-5">
         <div className="flex items-start gap-3">
@@ -106,7 +106,7 @@ export default function TrechoCard(props) {
               <span><Icon emoji="✈" /> <b className="text-ink">{fmtMoeda(t.custoTransporte, base)}</b></span>
               <span>Trecho <b className="text-ink">{fmtMoeda(t.custoTrecho, base)}</b></span>
               <span>Acumulado <b className="text-ink">{fmtMoeda(t.acumulado, base)}</b></span>
-              {t.moeda !== base && <span className="opacity-70">(custos em {t.moeda} <Icon emoji="→" /> {base})</span>}
+              {t.moeda !== base && <span className="">(custos em {t.moeda} <Icon emoji="→" /> {base})</span>}
             </div>
 
             {t.economiaLabel && (
@@ -115,7 +115,7 @@ export default function TrechoCard(props) {
 
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <StatusChip ui={est.chip}><span className={`w-1.5 h-1.5 rounded-full ${est.dot}`} aria-hidden></span>{est.label}</StatusChip>
-              <StatusChip ui={vis.chip}><Icon emoji="🛂" /> {t.visto.nivel === 'over' ? `Fura +${t.visto.excesso}d` : (t.visto.nivel === 'ok' ? `${t.dias}/${t.vistoDias}d` : 'sem limite')} <span className="opacity-60">· {t.vistoTipo}</span></StatusChip>
+              <StatusChip ui={vis.chip}><Icon emoji="🛂" /> {t.visto.nivel === 'over' ? `Fura +${t.visto.excesso}d` : (t.visto.nivel === 'ok' ? `${t.dias}/${t.vistoDias}d` : 'sem limite')} <span className="">· {t.vistoTipo}</span></StatusChip>
               {ehQuebra && <StatusChip ui="bg-danger-bg text-danger border-danger-bd"><Icon emoji="💸" /> A grana acaba aqui ({fmtData(dataQuebra)})</StatusChip>}
             </div>
 

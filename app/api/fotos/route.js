@@ -4,10 +4,13 @@ import { destinoPorCode } from '../../_lib/destinos.js';
 import { fotoCapa } from '../../_lib/wiki.js';
 import { resolverImagens } from '../../_lib/media.js';
 import { arquivoWikimedia } from '../../_lib/wikiThumb.js';
+import { limitar } from '../../_lib/rateLimit.js';
 
 export const runtime = 'nodejs';
 
 export async function GET(req) {
+  const bloqueio = limitar(req, 'fotos', { limite: 60 });
+  if (bloqueio) return bloqueio;
   const codes = [...new Set((new URL(req.url).searchParams.get('codes') || '').toUpperCase().split(',').filter((c) => /^[A-Z]{2}$/.test(c)))].slice(0, 40);
   const dests = codes.map(destinoPorCode).filter(Boolean);
   const brutas = await Promise.all(dests.map((d) => fotoCapa(d)));

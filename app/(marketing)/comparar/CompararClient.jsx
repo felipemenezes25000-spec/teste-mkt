@@ -13,12 +13,14 @@ import { EmptyState } from '../../_ui/EmptyState.jsx';
 import { Skeleton } from '../../_components/Skeleton.jsx';
 import { mundoScoreDestino, alertaHumanoDestino } from '../../_lib/editorial.js';
 import { Icon } from '../../_ui/Icon.jsx';
+import { useIdioma } from '../../_lib/i18n.js';
 
 const meses = (arr = []) => (arr.length ? arr.map((m) => MESES_PT[m - 1]).join(', ') : '—');
 
 const PESOS_PADRAO = { custo: 3, seguranca: 2, gastronomia: 1, score: 2 };
 
 export function CompararClient() {
+  const { t, tf, locale } = useIdioma();
   const [codes, setCodes] = useState(null);
   const [extras, setExtras] = useState([]); // vindos da URL (?d=slug,slug) ou adicionados aqui
   const [removidos, setRemovidos] = useState([]);
@@ -50,7 +52,7 @@ export function CompararClient() {
     <div className="flex flex-wrap items-end gap-3">
       <div className="w-full sm:w-80">
         <Autocomplete items={DESTINOS.filter((d) => !todos.includes(d.code))} value={null} onChange={adicionar} toText={(d) => d.nome} toKey={(d) => d.code} toRight={(d) => d.regiao}
-          label={destinos.length >= 4 ? 'Máximo de 4 destinos' : 'Adicionar destino à comparação'} placeholder="Buscar país…" />
+          label={destinos.length >= 4 ? t('cmp.max') : t('cmp.adicionar')} placeholder={t('cmp.buscar')} />
       </div>
       <div className="flex flex-wrap gap-1.5">
         {destinos.map((d) => (
@@ -76,7 +78,7 @@ export function CompararClient() {
         {seletor}
         <EmptyState
           icon="⚖️"
-          title={destinos.length ? 'Escolha mais um destino para comparar.' : 'Escolha 2 a 4 destinos para comparar.'}
+          title={destinos.length ? t('cmp.vazio1') : t('cmp.vazio2')}
           subtitle="Busque acima ou salve destinos com o coração — eles aparecem lado a lado: custo, segurança, visto e melhor época, com o vencedor de cada critério."
           actions={[{ href: '/explorar', label: 'Explorar o mapa', primary: true }, { href: '/salvos', label: 'Ver salvos' }]}
         />
@@ -85,21 +87,21 @@ export function CompararClient() {
   }
 
   const ranking = perfil ? recomendarDestinos(destinos, perfil) : [];
-  const meusInteresses = perfil ? topInteresses(perfil, 3).map((t) => t.label).join(', ') : '';
+  const meusInteresses = perfil ? topInteresses(perfil, 3).map((x) => x.label).join(', ') : '';
 
   // CRITÉRIOS — cada um sabe extrair um número/texto, definir o sentido (alto
   // ou baixo é melhor) e renderizar a célula. O vencedor é destacado.
   const criterios = [
-    { k: 'Mundo Score', kind: 'num', sentido: 'alto', get: (d) => mundoScoreDestino(d).total, fmt: (v) => `${v}/100` },
-    { k: 'Custo médio/dia', kind: 'num', sentido: 'baixo', get: (d) => d.custoDia, fmt: (v) => `US$ ${v}` },
-    { k: 'Custo 7 dias', kind: 'num', sentido: 'baixo', get: (d) => custoEstadia(d.custoDia, 7, 'medio').total, fmt: (v) => `US$ ${Math.round(v).toLocaleString('pt-BR')}` },
-    { k: 'Segurança', kind: 'num', sentido: 'alto', get: (d) => dimensoesDoDestino(d).seguranca, fmt: (v) => `${v}/100` },
-    { k: 'Gastronomia', kind: 'num', sentido: 'alto', get: (d) => dimensoesDoDestino(d).gastronomia, fmt: (v) => `${v}/100` },
-    { k: 'Cansaço logístico', kind: 'num', sentido: 'alto', get: (d) => mundoScoreDestino(d).subnotas.cansacoLogistico, fmt: (v) => `${v}/100 (alto = menos cansaço)` },
-    { k: 'Risco de arrependimento', kind: 'risco', sentido: 'baixo', get: (d) => mundoScoreDestino(d).chanceArrependimento, fmt: (v) => v },
-    { k: 'Melhor época', kind: 'texto', get: (d) => meses(d.melhoresMeses) },
-    { k: 'Visto (BR)', kind: 'texto', get: (d) => { const v = vistoDe(d.code, 'BR'); return v ? `${v.tipo}${v.dias ? ` · ${v.dias}d` : ''}` : '—'; } },
-    { k: 'Região', kind: 'texto', get: (d) => d.regiao },
+    { k: 'score', l: t('cmp.c_score'), kind: 'num', sentido: 'alto', get: (d) => mundoScoreDestino(d).total, fmt: (v) => `${v}/100` },
+    { k: 'dia', l: t('cmp.c_dia'), kind: 'num', sentido: 'baixo', get: (d) => d.custoDia, fmt: (v) => `US$ ${v}` },
+    { k: '7', l: t('cmp.c_7'), kind: 'num', sentido: 'baixo', get: (d) => custoEstadia(d.custoDia, 7, 'medio').total, fmt: (v) => `US$ ${Math.round(v).toLocaleString(locale)}` },
+    { k: 'seg', l: t('cmp.c_seg'), kind: 'num', sentido: 'alto', get: (d) => dimensoesDoDestino(d).seguranca, fmt: (v) => `${v}/100` },
+    { k: 'gas', l: t('cmp.c_gas'), kind: 'num', sentido: 'alto', get: (d) => dimensoesDoDestino(d).gastronomia, fmt: (v) => `${v}/100` },
+    { k: 'cans', l: t('cmp.c_cans'), kind: 'num', sentido: 'alto', get: (d) => mundoScoreDestino(d).subnotas.cansacoLogistico, fmt: (v) => `${v}/100 ${t('cmp.cansAlto')}` },
+    { k: 'arr', l: t('cmp.c_arr'), kind: 'risco', sentido: 'baixo', get: (d) => mundoScoreDestino(d).chanceArrependimento, fmt: (v) => v },
+    { k: 'epoca', l: t('cmp.c_epoca'), kind: 'texto', get: (d) => meses(d.melhoresMeses) },
+    { k: 'visto', l: t('cmp.c_visto'), kind: 'texto', get: (d) => { const v = vistoDe(d.code, 'BR'); return v ? `${v.tipo}${v.dias ? ` · ${v.dias}d` : ''}` : '—'; } },
+    { k: 'reg', l: t('cmp.c_reg'), kind: 'texto', get: (d) => d.regiao },
   ];
 
   // Vencedor por critério: max ou min dos valores. Em empate, todos marcados.
@@ -140,23 +142,23 @@ export function CompararClient() {
     <div className="mt-6 space-y-5">
       {seletor}
       <fieldset className="rounded-2xl border border-line bg-card p-4">
-        <legend className="eyebrow px-1">O que pesa mais pra você</legend>
+        <legend className="eyebrow px-1">{t('cmp.pesos')}</legend>
         <div className="mt-1 grid gap-3 sm:grid-cols-4">
-          {[['custo', 'Custo baixo'], ['seguranca', 'Segurança'], ['gastronomia', 'Gastronomia'], ['score', 'Mundo Score']].map(([k, l]) => (
+          {[['custo', t('cmp.p_custo')], ['seguranca', t('cmp.p_seg')], ['gastronomia', t('cmp.p_gas')], ['score', t('cmp.p_score')]].map(([k, l]) => (
             <label key={k} className="text-xs text-inksoft">
               <span className="flex justify-between"><span>{l}</span><span className="font-mono text-ink">{pesos[k]}</span></span>
               <input type="range" min="0" max="5" step="1" value={pesos[k]} onChange={(e) => setPesos({ ...pesos, [k]: Number(e.target.value) })} className="w-full accent-[rgb(var(--c-pine))]" />
             </label>
           ))}
         </div>
-        <p className="mt-2 text-xs text-inksoft">Pelos seus pesos, o melhor é <strong className="text-ink">{vencedor.nome}</strong> ({vencedor.ponderado}/100). Mude os pesos e o veredito recalcula — comissão de parceiro não entra na conta.</p>
+        <p className="mt-2 text-xs text-inksoft">{t('cmp.vereditoA')} <strong className="text-ink">{vencedor.nome}</strong> ({vencedor.ponderado}/100). {t('cmp.vereditoB')}</p>
       </fieldset>
       {/* MATRIZ — cada linha um critério, cada coluna um destino, vencedor destacado */}
-      <div className="overflow-x-auto rounded-3xl border border-line bg-card shadow-[var(--e-1)]">
+      <div className="overflow-x-auto rounded-2xl border border-line bg-card shadow-e1">
         <table className="w-full border-collapse min-w-[640px]">
           <thead>
             <tr className="border-b border-line">
-              <th className="text-left p-3 text-xs uppercase tracking-wide text-inksoft w-40 sticky left-0 bg-card">Critério</th>
+              <th className="text-left p-3 text-xs uppercase tracking-wide text-inksoft w-40 sticky left-0 bg-card">{t('cmp.criterio')}</th>
               {destinos.map((d) => (
                 <th key={d.code} className="p-3 text-left">
                   <Link href={`/destino/${d.slug}`} className="font-display text-lg text-ink hover:text-pine focusring block">{d.nome}</Link>
@@ -170,14 +172,14 @@ export function CompararClient() {
               const venc = vencedores[idx];
               return (
                 <tr key={c.k} className="border-b border-line last:border-0">
-                  <td className="p-3 text-xs font-semibold text-inksoft whitespace-nowrap align-top sticky left-0 bg-card">{c.k}</td>
+                  <td className="p-3 text-xs font-semibold text-inksoft whitespace-nowrap align-top sticky left-0 bg-card">{c.l}</td>
                   {destinos.map((d) => {
                     const valor = c.get(d);
                     const isVenc = venc.has(d.code);
                     return (
                       <td key={d.code} className={`p-3 text-sm align-top ${isVenc ? 'bg-success-bg' : ''}`}>
                         <div className={`${isVenc ? 'text-success font-semibold' : 'text-ink'} flex items-center gap-1.5`}>
-                          {isVenc && <span aria-label="Vencedor neste critério" title="Vencedor" className="text-[10px] font-mono uppercase bg-success text-success-bg px-1.5 py-0.5 rounded">melhor</span>}
+                          {isVenc && <span aria-label={t('cmp.vencedor')} title={t('cmp.vencedor')} className="text-[10px] font-mono uppercase bg-success text-success-bg px-1.5 py-0.5 rounded">{t('cmp.melhor')}</span>}
                           <span>{c.fmt ? c.fmt(valor) : valor}</span>
                         </div>
                       </td>
@@ -191,10 +193,10 @@ export function CompararClient() {
       </div>
 
       {/* RESUMO PRESCRITIVO — não esconde a recomendação: a gente fala. */}
-      <div className="rounded-3xl border border-pine/30 bg-pine/[0.05] p-5 sm:p-6">
+      <div className="rounded-2xl border border-pine/30 bg-pine/[0.05] p-5 sm:p-6">
         <div className="flex flex-wrap items-baseline gap-2">
-          <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-pine">Veredito</span>
-          <span className="text-xs text-inksoft">{vencedor.vitorias} de {criterios.filter((c) => c.kind !== 'texto').length} critérios objetivos</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-pine">{t('cmp.veredito')}</span>
+          <span className="text-xs text-inksoft">{tf('cmp.vitorias', { v: vencedor.vitorias, n: criterios.filter((c) => c.kind !== 'texto').length })}</span>
         </div>
         <h3 className="mt-2 font-display text-2xl text-ink">
           Entre estes, <Link href={`/destino/${vencedor.slug}`} className="text-pine underline decoration-pine/30 hover:decoration-pine">{vencedor.nome}</Link> tende a render mais.
@@ -225,10 +227,10 @@ export function CompararClient() {
       </div>
 
       {/* Comparação PELO SEU PERFIL — gated Premium (a tabela acima é grátis). */}
-      <Gate feature="comparar-avancado" titulo="Qual combina mais com VOCÊ" descricao="A comparação acima é factual. O ranking pelo seu perfil de viajante é Premium.">
+      <Gate feature="comparar-avancado" titulo={t('cmp.gateT')} descricao={t('cmp.gateD')}>
         <div className="rounded-2xl border border-line bg-card p-5">
           <div className="flex items-baseline justify-between gap-2 flex-wrap">
-            <h3 className="font-display text-xl text-ink"><Icon emoji="🧠" /> Qual combina mais com você</h3>
+            <h3 className="font-display text-xl text-ink"><Icon emoji="🧠" /> {t('cmp.combina')}</h3>
             {meusInteresses && <span className="text-xs text-inksoft">seu perfil prioriza: {meusInteresses}</span>}
           </div>
           <ol className="mt-3 space-y-2">

@@ -100,6 +100,8 @@ export function MapaInterativo({
     let ro;
     (async () => {
       try {
+        // espera o navegador ficar ocioso: o mapa (≈1 MB) não compete com a 1ª pintura
+        await new Promise((r) => ('requestIdleCallback' in window ? window.requestIdleCallback(r, { timeout: 2000 }) : setTimeout(r, 300)));
         const maplibregl = (await import('maplibre-gl')).default;
         if (!vivo || !box.current) return;
         lib.current = maplibregl;

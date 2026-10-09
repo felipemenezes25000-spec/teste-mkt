@@ -58,7 +58,7 @@ export function AppSkeleton() {
               </div>
             </div>
           </div>
-          <div className="rounded-3xl border border-line bg-card p-4">
+          <div className="rounded-2xl border border-line bg-card p-4">
             <div className="skel h-[420px] rounded-2xl" />
           </div>
           <div className="space-y-3">

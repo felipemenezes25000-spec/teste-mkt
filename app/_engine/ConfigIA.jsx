@@ -29,7 +29,7 @@ export default function ConfigIA({ ai, onSaveAi, onClose, fx, moedasEmUso, onAtu
           <li>Em <b>API Keys</b>, gere uma chave (começa com <code>gsk_</code>).</li>
           <li>Aqui, escolha o provedor <b>Groq (free tier)</b> e cole a chave. Pronto.</li>
         </ol>
-        <p className="mt-1 opacity-80">OpenAI e Anthropic funcionam igual, mas são pagos por uso.</p>
+        <p className="mt-1">OpenAI e Anthropic funcionam igual, mas são pagos por uso.</p>
       </div>
 
       <label className="block text-sm text-ink font-medium">Provedor

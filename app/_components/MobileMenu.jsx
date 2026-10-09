@@ -3,12 +3,14 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { GlobalSearch } from './GlobalSearch.jsx';
 import { Icon } from '../_ui/Icon.jsx';
+import { useIdioma } from '../_lib/i18n.js';
 
 // Drawer de navegação mobile (< lg). Mesma acessibilidade do Modal: role=dialog,
 // foco inicial, FOCUS TRAP (Tab cicla dentro), Esc/backdrop fecham, restaura o foco
 // e trava o scroll do body. Os links têm alvo de toque ≥48px (WCAG 2.5.5).
 export function MobileMenu({ links, path, onClose }) {
   const ref = useRef(null);
+  const { t } = useIdioma();
 
   useEffect(() => {
     const el = ref.current;
@@ -47,7 +49,7 @@ export function MobileMenu({ links, path, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="h-14 px-3 flex items-center justify-between border-b border-line shrink-0">
-          <span className="eyebrow">Navegação</span>
+          <span className="eyebrow">{t('nav2.navegacao')}</span>
           <button onClick={onClose} aria-label="Fechar menu" className="w-11 h-11 grid place-items-center rounded-lg text-inksoft hover:text-ink text-xl leading-none focusring"><Icon emoji="✕" /></button>
         </div>
         <div className="p-3 border-b border-line shrink-0"><GlobalSearch /></div>

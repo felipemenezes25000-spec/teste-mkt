@@ -4,6 +4,8 @@ import { jsonLdProduto, siteUrl } from '../../_lib/seo.js';
 import { ROICalculator } from './ROICalculator.jsx';
 import { T } from '../../_components/T.jsx';
 import { Icon } from '../../_ui/Icon.jsx';
+import { BotaoCheckout } from '../../_components/BotaoCheckout.jsx';
+import { PRODUTOS, fmtMinor } from '../../_lib/plataforma/produtos.js';
 
 export const metadata = {
   title: 'Planos — Mundo Sem Fim',
@@ -38,13 +40,13 @@ export default function PlanosPage() {
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       <JsonLd data={jsonLdProduto(ofertas, siteUrl())} />
       <div className="text-center max-w-3xl mx-auto">
-        <span className="inline-flex rounded-full bg-pine/10 text-pine px-3 py-1 text-xs font-bold uppercase tracking-[0.18em]"><T k="planos.heroSelo" fallback="Economia antes da passagem" /></span>
+        <span className="inline-flex rounded-full bg-pine/10 text-pine px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em]"><T k="planos.heroSelo" fallback="Economia antes da passagem" /></span>
         <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.03] text-ink"><T k="planos.heroH1" fallback="Pague menos para errar menos." /></h1>
         <p className="mt-4 text-lg text-inksoft"><T k="planos.heroP" fallback="O Premium se paga quando evita uma passagem mal comprada, um roteiro corrido demais ou uma viagem barata que fica cara no detalhe." /></p>
       </div>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
         {PLANOS.map((p) => (
-          <div key={p.id} className={`rounded-3xl border bg-card p-6 flex flex-col ${p.destaque ? 'border-pine shadow-[var(--e-2)] ring-1 ring-pine/20 scale-[1.01]' : 'border-line'}`}>
+          <div key={p.id} className={`rounded-2xl border bg-card p-6 flex flex-col ${p.destaque ? 'border-pine shadow-e2 ring-1 ring-pine/20 scale-[1.01]' : 'border-line'}`}>
             {p.destaque && <span className="self-start text-[11px] font-bold uppercase tracking-wide bg-pine text-onpine rounded-full px-2.5 py-0.5 mb-2">Mais popular</span>}
             <h2 className="font-display text-2xl text-ink">{p.nome}</h2>
             <p className="mt-1 text-sm text-inksoft min-h-[40px]">{p.frase}</p>
@@ -61,6 +63,17 @@ export default function PlanosPage() {
           </div>
         ))}
       </div>
+      <section className="mt-6 rounded-2xl border border-line bg-card p-6 grid md:grid-cols-[1fr_auto] gap-6 items-center" aria-labelledby="trip-pass-h">
+        <div>
+          <span className="eyebrow"><T k="plat.tpEy" fallback="Sem assinatura" /></span>
+          <h2 id="trip-pass-h" className="mt-1 font-display text-3xl text-ink"><T k="plat.tpH" fallback="Trip Pass" /> <span className="text-pine">{fmtMinor(PRODUTOS.trip_pass.precoMinor, PRODUTOS.trip_pass.moeda)}</span></h2>
+          <p className="mt-1 text-inksoft"><T k="plat.tpP" fallback="Tudo do Premium por 30 dias, com um pagamento só. Ideal para uma viagem." /></p>
+          <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-inksoft">
+            {['tpB1', 'tpB2', 'tpB3'].map((k) => <li key={k} className="flex gap-1.5"><span className="text-pine" aria-hidden><Icon emoji="✓" /></span><T k={`plat.${k}`} fallback={k} /></li>)}
+          </ul>
+        </div>
+        <div className="md:w-64"><BotaoCheckout produto="trip_pass" rotulo={<T k="plat.tpCta" fallback="Comprar Trip Pass" />} /></div>
+      </section>
       <ROICalculator />
 
       <div className="mt-8 grid sm:grid-cols-3 gap-3 text-sm">

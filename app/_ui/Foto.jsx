@@ -9,7 +9,7 @@ import { Icon } from './Icon.jsx';
 // - falha de carregamento → fallback editorial HONESTO (sem foto falsa).
 export function Foto({
   src, alt, credito, ilustrativa = false, ilustrativaDe, className = '', imgClassName = '',
-  prioridade = false, largura, altura, rotuloFalha = 'Foto indisponível', mostrarCredito = true, sizes,
+  prioridade = false, largura, altura, rotuloFalha = 'Foto indisponível', mostrarCredito = true, sizes, srcSet,
 }) {
   const [falhou, setFalhou] = useState(!src);
   const [abrirCredito, setAbrirCredito] = useState(false);
@@ -19,7 +19,7 @@ export function Foto({
       {!falhou ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={src} alt={alt || ''} width={largura} height={altura} sizes={sizes}
+          src={src} srcSet={srcSet} alt={alt || ''} width={largura} height={altura} sizes={srcSet ? (sizes || '100vw') : sizes}
           loading={prioridade ? 'eager' : 'lazy'} decoding="async" fetchPriority={prioridade ? 'high' : undefined}
           onError={() => setFalhou(true)}
           className={`w-full h-full object-cover ${imgClassName}`}

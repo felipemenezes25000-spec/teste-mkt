@@ -27,3 +27,8 @@ docs/plataforma/_dados/*.json
 .playwright-mcp/
 test-results/
 playwright-report/
+
+# Supabase CLI (estado local do link)
+supabase/.temp/
+
+.vercel

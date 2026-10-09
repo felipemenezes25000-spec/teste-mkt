@@ -1,0 +1,10 @@
+# Nunca enviar segredos nem artefatos locais para a Vercel
+.env
+.env.*
+!.env.example
+.claude/
+supabase/.temp/
+docs/plataforma/_proof/
+test-results/
+playwright-report/
+.tmp-*

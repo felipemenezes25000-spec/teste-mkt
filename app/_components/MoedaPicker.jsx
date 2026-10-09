@@ -37,7 +37,7 @@ export function MoedaPicker({ value, onChange, label, className = '' }) {
         type="button" onClick={() => setOpen((o) => !o)} aria-label={label} aria-haspopup="listbox" aria-expanded={open}
         className={`bg-input border border-line rounded-md px-1.5 py-0.5 text-ink focusring inline-flex items-center gap-1 ${className}`}
       >
-        {value || '—'} <span aria-hidden className="text-[9px] opacity-60">▾</span>
+        {value || '—'} <span aria-hidden className="text-[9px]">▾</span>
       </button>
       {open && (
         <div className="absolute z-30 mt-1 left-0 w-52 rounded-lg border border-line bg-card shadow-lg p-1">

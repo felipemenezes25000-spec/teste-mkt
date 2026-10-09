@@ -135,7 +135,7 @@ export function PasseiosIngressos({ itens = [], nomePais }) {
         </div>
       </div>
 
-      <div className="rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
+      <div className="rounded-2xl border border-line bg-card overflow-hidden shadow-e1">
         <ul className="divide-y divide-line">
           {mostrar.map((a, i) => {
             const preco = fmt(a.precoUSD, cambio.brl, L);

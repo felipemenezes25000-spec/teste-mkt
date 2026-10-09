@@ -19,7 +19,7 @@ export function HomeSecaoProblema() {
     <section className="bg-paper2/40 border-y border-line">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="max-w-3xl">
-          <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-clay">{t('home.problemaSelo')}</span>
+          <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-clay">{t('home.problemaSelo')}</span>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.08]">{t('home.problemaH2')}</h2>
           <p className="mt-3 text-inksoft">{t('home.problemaP')}</p>
         </div>
@@ -42,7 +42,7 @@ export function HomeSecaoComoDecide() {
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
       <div className="text-center max-w-2xl mx-auto">
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-pine">{t('home.comoDecidoSelo')}</span>
+        <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-pine">{t('home.comoDecidoSelo')}</span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.08]">{t('home.comoDecidoH2')}</h2>
         <p className="mt-3 text-inksoft">{t('home.comoDecidoP')}</p>
       </div>
@@ -62,10 +62,10 @@ export function HomeSecaoCustoReal() {
   const { t } = useIdioma();
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
-      <div className="rounded-3xl border border-line bg-card p-6 sm:p-10 shadow-[var(--e-1)]">
+      <div className="rounded-2xl border border-line bg-card p-6 sm:p-10 shadow-e1">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-8 items-start">
           <div>
-            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-pine">{t('home.custoRealSelo')}</span>
+            <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-pine">{t('home.custoRealSelo')}</span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.08]">{t('home.custoRealH2')}</h2>
             <p className="mt-3 text-inksoft">{t('home.custoRealP')}</p>
             <Link href="/custo-real" className="mt-5 inline-flex items-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 focusring">
@@ -102,11 +102,11 @@ export function HomeSecaoOtas() {
     <section className="bg-paper2/40 border-y border-line">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
         <div className="text-center max-w-2xl mx-auto">
-          <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-pine">{t('home.otasSelo')}</span>
+          <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-pine">{t('home.otasSelo')}</span>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.08]">{t('home.otasH2')}</h2>
           <p className="mt-3 text-inksoft">{t('home.otasP')}</p>
         </div>
-        <div className="mt-8 overflow-x-auto rounded-3xl border border-line bg-card shadow-[var(--e-1)]">
+        <div className="mt-8 overflow-x-auto rounded-2xl border border-line bg-card shadow-e1">
           <table className="w-full min-w-[640px] text-sm">
             <thead>
               <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-inksoft">
@@ -145,7 +145,7 @@ export function HomeSecaoFaq() {
   return (
     <section className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
       <div className="text-center">
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-pine">{t('home.faqSelo')}</span>
+        <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-pine">{t('home.faqSelo')}</span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.08]">{t('home.faqH2')}</h2>
       </div>
       <ul className="mt-8 space-y-2">

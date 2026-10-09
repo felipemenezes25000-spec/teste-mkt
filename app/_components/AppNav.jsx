@@ -18,18 +18,21 @@ const PRIMARIOS = [
   { href: '/explorar', i18nKey: 'nav.descobrir', fallback: 'Explorar', icon: 'globe' },
   { href: '/decisao', i18nKey: 'nav.decidir', fallback: 'Decidir', icon: 'target' },
   { href: '/planejar', i18nKey: 'nav.planejar', fallback: 'Planejar', icon: 'route' },
-  { href: '/viagens', i18nKey: 'nav.viagens', fallback: 'Viagens', icon: 'suitcase' },
+  { href: '/viagens', i18nKey: 'nav2.viagens', fallback: 'Viagens', icon: 'suitcase' },
 ];
 const FERRAMENTAS = [
-  { href: '/comparar', i18nKey: 'nav.comparar', fallback: 'Comparar destinos', icon: 'scale', desc: 'Matriz lado a lado com pesos' },
-  { href: '/custo-real', i18nKey: 'nav.custoReal', fallback: 'Custo real', icon: 'receipt', desc: 'Quanto a viagem custa de verdade' },
-  { href: '/voos', i18nKey: 'nav.voos', fallback: 'Voos', icon: 'plane', desc: 'Score do voo e janela de compra' },
-  { href: '/roteiro', i18nKey: 'nav.roteiro', fallback: 'Roteiro com IA', icon: 'spark', desc: 'Dia a dia gerado e explicado' },
-  { href: '/planos', i18nKey: 'nav.precos', fallback: 'Planos', icon: 'star', desc: 'Grátis, Premium e Pro' },
+  { href: '/comparar', i18nKey: 'nav2.l_comparar', fallback: 'Comparar destinos', icon: 'scale', descKey: 'nav2.d_comparar' },
+  { href: '/custo-real', i18nKey: 'nav2.l_custo', fallback: 'Custo real', icon: 'receipt', descKey: 'nav2.d_custo' },
+  { href: '/voos', i18nKey: 'nav2.l_voos', fallback: 'Voos', icon: 'plane', descKey: 'nav2.d_voos' },
+  { href: '/roteiro', i18nKey: 'nav2.l_roteiro', fallback: 'Roteiro com IA', icon: 'spark', descKey: 'nav2.d_roteiro' },
+  { href: '/marketplace', i18nKey: 'plat.l_mk', fallback: 'Marketplace', icon: 'compass', descKey: 'plat.d_mk' },
+  { href: '/agencias', i18nKey: 'plat.l_ag', fallback: 'Para agências', icon: 'flag', descKey: 'plat.d_ag' },
+  { href: '/desenvolvedores', i18nKey: 'plat.l_dev', fallback: 'API pública', icon: 'key', descKey: 'plat.d_dev' },
+  { href: '/planos', i18nKey: 'nav2.l_planos', fallback: 'Planos', icon: 'star', descKey: 'nav2.d_planos' },
 ];
 const ativo = (path, href) => path === href || path.startsWith(href + '/');
 
-function MenuFerramentas({ itens, path }) {
+function MenuFerramentas({ itens, path, rotulo }) {
   const [aberto, setAberto] = useState(false);
   const ref = useRef(null);
   useEffect(() => {
@@ -48,7 +51,7 @@ function MenuFerramentas({ itens, path }) {
         type="button" onClick={() => setAberto((v) => !v)} aria-expanded={aberto} aria-controls="menu-ferramentas"
         className={`inline-flex items-center gap-1.5 px-3 h-9 rounded-lg text-sm font-medium transition focusring ${algumAtivo ? 'text-ink bg-card shadow-e1' : 'text-inksoft hover:text-ink'}`}
       >
-        Ferramentas <Icon name="chevron-down" size={14} className={`transition ${aberto ? 'rotate-180' : ''}`} />
+        {rotulo} <Icon name="chevron-down" size={14} className={`transition ${aberto ? 'rotate-180' : ''}`} />
       </button>
       {aberto && (
         <div id="menu-ferramentas" className="absolute right-0 mt-2 w-80 rounded-xl border border-line bg-card shadow-e2 p-1.5 rise">
@@ -75,7 +78,8 @@ export default function AppNav() {
   const { t } = useIdioma();
   const trad = (l) => {
     const v = t(l.i18nKey);
-    return { ...l, label: v && v !== l.i18nKey ? v : l.fallback };
+    const d = l.descKey ? t(l.descKey) : '';
+    return { ...l, label: v && v !== l.i18nKey ? v : l.fallback, desc: d && d !== l.descKey ? d : l.desc };
   };
   const primarios = PRIMARIOS.map(trad);
   const ferramentas = FERRAMENTAS.map(trad);
@@ -119,7 +123,7 @@ export default function AppNav() {
               </Link>
             );
           })}
-          <MenuFerramentas itens={ferramentas} path={path} />
+          <MenuFerramentas itens={ferramentas} path={path} rotulo={t('nav2.ferramentas')} />
         </div>
 
         <div className="hidden 2xl:block ml-auto"><GlobalSearch /></div>
@@ -133,7 +137,7 @@ export default function AppNav() {
               <Icon name="alert" size={15} /> {alerta}
             </Link>
           )}
-          <Link href="/salvos" aria-label="Salvos" aria-current={ativo(path, '/salvos') ? 'page' : undefined}
+          <Link href="/salvos" aria-label={t('nav2.salvos')} aria-current={ativo(path, '/salvos') ? 'page' : undefined}
             className={`hidden sm:grid w-9 h-9 place-items-center rounded-lg focusring ${ativo(path, '/salvos') ? 'text-pine bg-card' : 'text-inksoft hover:text-ink'}`}>
             <Icon name="heart" size={18} />
           </Link>
@@ -143,7 +147,7 @@ export default function AppNav() {
             className="hidden sm:inline-flex items-center gap-2 h-9 px-3 rounded-lg border border-line bg-card text-sm font-medium text-ink hover:border-pine/50 focusring">
             <Icon name="user" size={16} /> {t('nav.entrar') && t('nav.entrar') !== 'nav.entrar' ? t('nav.entrar') : 'Entrar'}
           </Link>
-          <button type="button" onClick={() => setMenuOpen(true)} aria-label="Abrir menu" aria-haspopup="dialog"
+          <button type="button" onClick={() => setMenuOpen(true)} aria-label={t('nav2.abrirMenu')} aria-haspopup="dialog"
             aria-expanded={menuOpen} aria-controls="mobile-menu"
             className="lg:hidden w-11 h-11 grid place-items-center rounded-lg text-ink hover:bg-paper2 focusring">
             <Icon name="menu" size={22} />
@@ -152,7 +156,7 @@ export default function AppNav() {
       </nav>
       {menuOpen && (
         <MobileMenu
-          links={[...primarios, ...ferramentas, { href: '/salvos', label: 'Salvos', icon: 'heart' }, { href: '/conta', label: 'Conta', icon: 'user' }]}
+          links={[...primarios, ...ferramentas, { href: '/salvos', label: t('nav2.salvos'), icon: 'heart' }, { href: '/conta', label: t('nav2.conta'), icon: 'user' }]}
           path={path} onClose={() => setMenuOpen(false)}
         />
       )}

@@ -27,12 +27,12 @@ export function TravelFitScore({ destino, compact = false }) {
   }
 
   return (
-    <section className="rounded-3xl border border-line bg-card p-5 shadow-[var(--e-1)]" aria-label={`Mundo Score de ${destino.nome}`}>
+    <section className="rounded-2xl border border-line bg-card p-5 shadow-e1" aria-label={`Mundo Score de ${destino.nome}`}>
       <div className="flex items-start gap-4">
-        <div className="w-24 h-24 rounded-3xl bg-pine text-onpine grid place-items-center shrink-0 shadow-md">
+        <div className="w-24 h-24 rounded-2xl bg-pine text-onpine grid place-items-center shrink-0 shadow-md">
           <div className="text-center">
             <div className="font-display text-4xl leading-none tnum">{score.total}</div>
-            <div className="text-[10px] uppercase tracking-widest opacity-80">/100</div>
+            <div className="text-[10px] uppercase tracking-widest">/100</div>
           </div>
         </div>
         <div>

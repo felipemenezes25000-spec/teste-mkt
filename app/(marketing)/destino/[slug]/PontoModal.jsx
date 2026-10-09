@@ -44,7 +44,7 @@ export function PontoModal({ ponto, onClose }) {
           style={{ backgroundImage: `url("${wikiThumb(imgGrande, 32)}")` }}
         />
       ) : (
-        <div className="w-full h-52 sm:h-64 grid place-items-center rounded-xl bg-gradient-to-br from-pine/15 to-ochre/15 text-4xl" aria-hidden><Icon emoji="📍" /></div>
+        <div className="w-full h-52 sm:h-64 grid place-items-center rounded-xl bg-paper2/60 text-4xl" aria-hidden><Icon emoji="📍" /></div>
       )}
 
       {ponto.credito && (

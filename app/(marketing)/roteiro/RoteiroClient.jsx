@@ -87,9 +87,9 @@ export function RoteiroClient() {
   return (
     <div className="mt-6">
       <div className="grid lg:grid-cols-[1fr_0.85fr] gap-5 items-start">
-      <div className="rounded-3xl border border-line bg-card p-5 space-y-4 no-print shadow-[var(--e-1)]">
+      <div className="rounded-2xl border border-line bg-card p-5 space-y-4 no-print shadow-e1">
         <div>
-          <div className="text-xs text-inksoft font-medium mb-1">Tipo de roteiro <span className="opacity-70">(pré-preenche o resto)</span></div>
+          <div className="text-xs text-inksoft font-medium mb-1">Tipo de roteiro <span className="">(pré-preenche o resto)</span></div>
           <div className="flex flex-wrap gap-1.5">
             {TEMAS.map((t) => (
               <button key={t.id} type="button" onClick={() => aplicarTema(t)} aria-pressed={tema === t.id}
@@ -184,7 +184,7 @@ export function RoteiroClient() {
         </div>
       </div>
 
-      <aside className="rounded-3xl border border-line bg-gradient-to-br from-pine/8 to-ochre/10 p-5 sticky top-20">
+      <aside className="rounded-2xl border border-line bg-paper2/60 p-5 sticky top-20">
         <p className="text-xs uppercase tracking-[0.18em] text-pine font-bold">Prévia do que sai</p>
         <h2 className="mt-1 font-display text-2xl text-ink">Dia 1 · chegada sem correria</h2>
         <div className="mt-4 space-y-3 text-sm">
@@ -235,7 +235,7 @@ function RoteiroView({ roteiro, destino, onRegerar }) {
   const { libera: liberaPdf } = useLibera('roteiro-pdf');
   return (
     <div className="mt-6">
-      <div className="rounded-2xl border border-line bg-gradient-to-br from-pine/5 to-ochre/5 p-5">
+      <div className="rounded-2xl border border-line bg-paper2/60 p-5">
         <div className="flex flex-wrap items-start gap-3">
           <div className="mr-auto">
             <h2 className="font-display text-2xl text-ink">{destino.nome} · {roteiro.dias.length} dia(s)</h2>

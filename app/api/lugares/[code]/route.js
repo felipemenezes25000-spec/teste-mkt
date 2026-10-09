@@ -5,11 +5,14 @@ import { pontosDoPais, GEO_META } from '../../../_lib/geo.js';
 import { atracoesDoPais } from '../../../_engine/atracoes.js';
 import { atracoesPrecosDoPais } from '../../../_engine/atracoesPrecos.js';
 import { slugify } from '../../../_lib/slug.js';
+import { limitar } from '../../../_lib/rateLimit.js';
 
 export const runtime = 'nodejs';
 export const revalidate = 86400;
 
-export async function GET(_req, ctx) {
+export async function GET(req, ctx) {
+  const bloqueio = limitar(req, 'lugares', { limite: 120 });
+  if (bloqueio) return bloqueio;
   const { code } = await ctx.params;
   const d = /^[A-Z]{2}$/.test(String(code || '').toUpperCase()) ? destinoPorCode(String(code).toUpperCase()) : null;
   if (!d) return Response.json({ error: 'País não encontrado.' }, { status: 404 });

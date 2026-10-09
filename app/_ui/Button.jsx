@@ -16,7 +16,7 @@ export function Button({ variant = 'primary', size = 'md', loading = false, clas
       disabled={loading || props.disabled}
       {...props}
     >
-      {loading && <span className="inline-block w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin opacity-70" aria-hidden />}
+      {loading && <span className="inline-block w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" aria-hidden />}
       {children}
     </button>
   );

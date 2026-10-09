@@ -103,7 +103,7 @@ export function OQueFazer({ itens = [], v2 = null, cidadePrincipal }) {
         })}
       </div>
 
-      <div className="rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
+      <div className="rounded-2xl border border-line bg-card overflow-hidden shadow-e1">
         <ul className="divide-y divide-line">
           {visiveis.map((it, i) => {
             const p = fmtPreco(it.precoUSD, cambio.brl, t);
@@ -136,7 +136,7 @@ export function OQueFazer({ itens = [], v2 = null, cidadePrincipal }) {
       <p className="mt-2 text-[11px] text-inksoft">{t('destino.fazerNota')}</p>
 
       {cidadesV2.length > 0 && temAlgoV2 ? (
-        <div className="mt-6 rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
+        <div className="mt-6 rounded-2xl border border-line bg-card overflow-hidden shadow-e1">
           <header className="px-4 sm:px-5 py-3 border-b border-line flex items-center justify-between gap-3 flex-wrap">
             <div className="min-w-0">
               <h3 className="font-display text-lg text-ink leading-tight"><Icon emoji="🏙️" /> {t('destino.fazerV2Titulo')} {cidadeV2}</h3>

@@ -48,8 +48,11 @@ function paraAsset(p, larguraDesejada) {
   const altura = w ? Math.round((ii.height * w) / ii.width) : ii.height;
   const licenca = limpaHtml(meta.LicenseShortName && meta.LicenseShortName.value) || null;
   const autor = limpaHtml(meta.Artist && meta.Artist.value).slice(0, 160) || null;
+  // srcset em larguras padrão que cabem no original (o browser escolhe pelo viewport)
+  const srcSet = LARGURAS_PADRAO.filter((l) => l <= ii.width && l >= 330 && l <= 1920).map((l) => `${urlThumbCommons(arquivo, l)} ${l}w`).join(', ') || undefined;
   return {
     id: `commons:${arquivo}`,
+    srcSet,
     provider: 'wikimedia-commons',
     providerAssetId: arquivo,
     url,

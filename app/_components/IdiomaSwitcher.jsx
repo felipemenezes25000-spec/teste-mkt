@@ -48,7 +48,7 @@ export function IdiomaSwitcher() {
         <ul
           role="listbox"
           aria-label="Escolha o idioma"
-          className="absolute right-0 top-full mt-1 z-50 min-w-[10rem] rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1"
+          className="absolute right-0 top-full mt-1 z-50 min-w-[10rem] rounded-xl border border-line bg-card shadow-e2 py-1"
         >
           {IDIOMAS.map((i) => (
             <li key={i.code}>

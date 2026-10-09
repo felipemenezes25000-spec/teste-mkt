@@ -65,7 +65,7 @@ export function Autocomplete({
       />
       </span>
       {open && results.length > 0 && (
-        <ul id={listId} role="listbox" className="absolute z-50 mt-1 left-0 w-full max-h-72 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1">
+        <ul id={listId} role="listbox" className="absolute z-50 mt-1 left-0 w-full max-h-72 overflow-auto rounded-xl border border-line bg-card shadow-e2 py-1">
           {results.map((it, i) => (
             <li key={toKey ? toKey(it) : toText(it)} role="option" aria-selected={i === ativo}>
               <button

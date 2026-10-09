@@ -73,7 +73,7 @@ function AdicionarPais({ onAdd }) {
             className="w-full px-3 py-2 rounded-lg border border-line bg-input text-ink focusring"
           />
           {open && results.length > 0 && (
-            <ul className="absolute z-30 mt-1 w-full max-h-72 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox" id="add-pais-lista">
+            <ul className="absolute z-30 mt-1 w-full max-h-72 overflow-auto rounded-xl border border-line bg-card shadow-e2 py-1" role="listbox" id="add-pais-lista">
               {results.map((p, i) => (
                 <li key={p.code} role="option" aria-selected={i === ativo}>
                   <button onMouseEnter={() => setAtivo(i)} onClick={() => add(p.code)}
@@ -544,7 +544,7 @@ export default function App() {
         {optResumo && (
           <div className="rise rounded-xl border border-warn-bd bg-warn-bg text-warn px-4 py-3 text-sm flex items-start gap-2">
             <span aria-hidden><Icon emoji="🧭" /></span><div className="flex-1"><b>Otimizador:</b> {optResumo}</div>
-            <button onClick={() => setOptResumo('')} aria-label="Fechar resumo" className="opacity-60 hover:opacity-100 focusring"><Icon emoji="✕" /></button>
+            <button onClick={() => setOptResumo('')} aria-label="Fechar resumo" className="text-inksoft hover:text-ink focusring"><Icon emoji="✕" /></button>
           </div>
         )}
 

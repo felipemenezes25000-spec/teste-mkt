@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { GlobalSearch } from './GlobalSearch.jsx';
 import { Icon } from '../_ui/Icon.jsx';
+import { useIdioma } from '../_lib/i18n.js';
 
 // Busca compacta para cabeçalhos estreitos: botão que abre um painel com a busca
 // global. Esc/clique fora fecham; foco vai para o campo ao abrir.
@@ -10,6 +11,7 @@ export function BuscaCompacta() {
   const [aberto, setAberto] = useState(false);
   const ref = useRef(null);
   const path = usePathname();
+  const { t } = useIdioma();
   useEffect(() => { setAberto(false); }, [path]);
   useEffect(() => {
     if (!aberto) return undefined;
@@ -22,7 +24,7 @@ export function BuscaCompacta() {
   }, [aberto]);
   return (
     <div ref={ref} className="relative">
-      <button type="button" onClick={() => setAberto((v) => !v)} aria-expanded={aberto} aria-label="Buscar destino"
+      <button type="button" onClick={() => setAberto((v) => !v)} aria-expanded={aberto} aria-label={t('nav2.buscar')}
         className={`w-9 h-9 grid place-items-center rounded-lg focusring ${aberto ? 'bg-card text-ink shadow-e1' : 'text-inksoft hover:text-ink'}`}>
         <Icon name="search" size={18} />
       </button>

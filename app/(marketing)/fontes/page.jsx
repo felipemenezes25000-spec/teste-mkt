@@ -4,6 +4,7 @@ import { GEO_META } from '../../_lib/geo.js';
 import { FRESHNESS_INFO } from '../../_domain/evidence.js';
 import { SourceTrust } from '../../_ui/SourceTrust.jsx';
 import { Icon } from '../../_ui/Icon.jsx';
+import { T } from '../../_components/T.jsx';
 
 // Fontes e metodologia (OMEGA V4 §22/§27-28/§35): de onde vem cada dado, o que é ao
 // vivo e o que é referência, e o estado REAL de cada integração — sem esconder
@@ -26,18 +27,18 @@ export default function FontesPage() {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-14">
       <header className="max-w-3xl">
-        <div className="eyebrow mb-3">Transparência</div>
-        <h1 className="font-display text-4xl sm:text-6xl tracking-tightest leading-[.98] text-ink">Fontes e metodologia</h1>
-        <p className="mt-4 text-lg text-inksoft">Cada número crítico no Mundo Sem Fim diz o que é. Aqui está de onde vem cada dado e o estado real de cada integração — inclusive o que ainda depende de contrato.</p>
+        <div className="eyebrow mb-3"><T k="fontes2.eyebrow" fallback="Transparência" /></div>
+        <h1 className="font-display text-4xl sm:text-6xl tracking-tightest leading-[.98] text-ink"><T k="fontes2.h1" fallback="Fontes e metodologia" /></h1>
+        <p className="mt-4 text-lg text-inksoft"><T k="fontes2.sub" fallback="Cada número crítico no Mundo Sem Fim diz o que é. Aqui está de onde vem cada dado e o estado real de cada integração — inclusive o que ainda depende de contrato." /></p>
       </header>
 
       <section className="mt-12" aria-labelledby="selos-h">
-        <h2 id="selos-h" className="font-display text-3xl tracking-tighter text-ink">Os selos</h2>
+        <h2 id="selos-h" className="font-display text-3xl tracking-tighter text-ink"><T k="fontes2.selosH" fallback="Os selos" /></h2>
         <dl className="mt-5 grid gap-px bg-line border border-line rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(FRESHNESS_INFO).map(([k, v]) => (
             <div key={k} className="bg-card p-5">
               <dt><SourceTrust freshness={k} compacto /></dt>
-              <dd className="mt-3 text-sm text-inksoft">{v.explica}</dd>
+              <dd className="mt-3 text-sm text-inksoft"><T k={`selo.${k}_x`} fallback={v.explica} /></dd>
             </div>
           ))}
         </dl>
@@ -59,8 +60,8 @@ export default function FontesPage() {
 
       <section className="mt-14" aria-labelledby="prov-h">
         <div className="flex flex-wrap items-end justify-between gap-3">
-          <h2 id="prov-h" className="font-display text-3xl tracking-tighter text-ink">Integrações e provedores</h2>
-          <span className="font-mono text-xs text-inksoft">verificado em {VERIFICADO_EM}</span>
+          <h2 id="prov-h" className="font-display text-3xl tracking-tighter text-ink"><T k="fontes2.provH" fallback="Integrações e provedores" /></h2>
+          <span className="font-mono text-xs text-inksoft"><T k="fontes2.verificado" fallback="verificado em" /> {VERIFICADO_EM}</span>
         </div>
         {dominios.map((dom) => (
           <div key={dom} className="mt-6">
@@ -77,14 +78,14 @@ export default function FontesPage() {
                     {p.nota && <p className="mt-1 text-xs text-ink">{p.nota}</p>}
                   </div>
                   <dl className="text-xs space-y-1">
-                    <div><dt className="inline text-inksoft">Acesso: </dt><dd className="inline text-ink">{p.auth} · {p.onde}</dd></div>
-                    <div><dt className="inline text-inksoft">Limite: </dt><dd className="inline text-ink">{p.limite}</dd></div>
-                    <div><dt className="inline text-inksoft">Custo: </dt><dd className="inline text-ink">{p.custo}</dd></div>
+                    <div><dt className="inline text-inksoft"><T k="fontes2.acesso" fallback="Acesso" />: </dt><dd className="inline text-ink">{p.auth} · {p.onde}</dd></div>
+                    <div><dt className="inline text-inksoft"><T k="fontes2.limite" fallback="Limite" />: </dt><dd className="inline text-ink">{p.limite}</dd></div>
+                    <div><dt className="inline text-inksoft"><T k="fontes2.custo" fallback="Custo" />: </dt><dd className="inline text-ink">{p.custo}</dd></div>
                   </dl>
                   <dl className="text-xs space-y-1">
-                    <div><dt className="inline text-inksoft">Se falhar: </dt><dd className="inline text-ink">{p.fallback}</dd></div>
-                    <div><dt className="inline text-inksoft">Atribuição: </dt><dd className="inline text-ink">{p.atribuicao}</dd></div>
-                    {p.termos && p.termos.startsWith('http') && <div><a href={p.termos} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-pine hover:underline focusring">Termos <Icon name="external" size={12} /></a></div>}
+                    <div><dt className="inline text-inksoft"><T k="fontes2.seFalhar" fallback="Se falhar" />: </dt><dd className="inline text-ink">{p.fallback}</dd></div>
+                    <div><dt className="inline text-inksoft"><T k="fontes2.atrib" fallback="Atribuição" />: </dt><dd className="inline text-ink">{p.atribuicao}</dd></div>
+                    {p.termos && p.termos.startsWith('http') && <div><dt className="sr-only">Termos</dt><dd><a href={p.termos} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-pine hover:underline focusring"><T k="fontes2.termos" fallback="Termos" /> <Icon name="external" size={12} /></a></dd></div>}
                   </dl>
                 </article>
               ))}
@@ -94,14 +95,14 @@ export default function FontesPage() {
       </section>
 
       <section className="mt-14 rounded-2xl border border-line bg-card p-6" aria-labelledby="regras-h">
-        <h2 id="regras-h" className="font-display text-2xl text-ink">Regras que seguimos</h2>
+        <h2 id="regras-h" className="font-display text-2xl text-ink"><T k="fontes2.regrasH" fallback="Regras que seguimos" /></h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 text-sm text-inksoft">
-          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" />Nada é chamado de “ao vivo” sem ter sido consultado agora — e o selo envelhece sozinho.</li>
-          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" />Comissão de parceiro nunca muda o ranking (há teste automatizado que garante isso).</li>
-          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" />Sem regra de visto verificada, dizemos “consultar” — nunca “isento” por padrão.</li>
-          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" />Foto que não é do lugar exato aparece marcada como ilustrativa.</li>
-          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" />Reserva só fica “confirmada pelo fornecedor” com integração; importada por você fica rotulada.</li>
-          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" />Voos sem provedor contratado aparecem como cenários estimados, sem nomes de companhias.</li>
+          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" /><T k="fontes2.r1" fallback="Nada é chamado de “ao vivo” sem ter sido consultado agora — e o selo envelhece sozinho." /></li>
+          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" /><T k="fontes2.r2" fallback="Comissão de parceiro nunca muda o ranking (há teste automatizado que garante isso)." /></li>
+          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" /><T k="fontes2.r3" fallback="Sem regra de visto verificada, dizemos “consultar” — nunca “isento” por padrão." /></li>
+          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" /><T k="fontes2.r4" fallback="Foto que não é do lugar exato aparece marcada como ilustrativa." /></li>
+          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" /><T k="fontes2.r5" fallback="Reserva só fica “confirmada pelo fornecedor” com integração; importada por você fica rotulada." /></li>
+          <li className="flex gap-2"><Icon name="check" size={16} className="text-pine mt-0.5" /><T k="fontes2.r6" fallback="Voos sem provedor contratado aparecem como cenários estimados, sem nomes de companhias." /></li>
         </ul>
         <p className="mt-5 text-sm text-inksoft">Achou um dado errado? <Link href="/conta" className="text-pine hover:underline">Fale com a gente pela sua conta</Link>.</p>
       </section>

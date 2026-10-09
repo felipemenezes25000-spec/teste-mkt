@@ -28,7 +28,7 @@ export function ServicosDaViagem({ totalUSD, taxaBRL, destino }) {
           <p className="text-xs text-inksoft">Sua viagem custa hoje, em reais:</p>
           <div className="mt-1 flex flex-wrap items-end gap-x-5 gap-y-1">
             <div>
-              <p className="text-[11px] text-inksoft">No cartão do banco <span className="opacity-70">(IOF+spread ~{cambio.pctBanco}%)</span></p>
+              <p className="text-[11px] text-inksoft">No cartão do banco <span className="">(IOF+spread ~{cambio.pctBanco}%)</span></p>
               <p className="font-display text-xl text-inksoft tnum">{fmtBRL(cambio.brlBanco)}</p>
             </div>
             <div>

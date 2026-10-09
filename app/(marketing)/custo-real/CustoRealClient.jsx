@@ -126,7 +126,7 @@ export function CustoRealClient({ destinos }) {
   return (
     <div className="mt-8 grid lg:grid-cols-[1fr_1.15fr] gap-6 items-start">
       {/* INPUTS */}
-      <div className="rounded-3xl border border-line bg-card p-5 sm:p-6 shadow-[var(--e-1)] no-print">
+      <div className="rounded-2xl border border-line bg-card p-5 sm:p-6 shadow-e1 no-print">
         <h2 className="font-display text-2xl text-ink">{t('custoReal.detalhe')}</h2>
         <p className="text-xs text-inksoft mt-1">{t('custoReal.detalheP')}</p>
 
@@ -182,7 +182,7 @@ export function CustoRealClient({ destinos }) {
       {/* RESULTADO */}
       <div className="space-y-4">
         {/* Vitrine vs Real */}
-        <div className="rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
+        <div className="rounded-2xl border border-line bg-card overflow-hidden shadow-e1">
           <div className="grid sm:grid-cols-3">
             <div className="p-5 border-r border-line">
               <div className="text-[11px] font-bold uppercase tracking-wide text-inksoft">Preço de vitrine</div>
@@ -198,9 +198,9 @@ export function CustoRealClient({ destinos }) {
             </div>
             <div className="p-5 bg-pine text-onpine">
               <div className="text-[11px] font-bold uppercase tracking-wide opacity-85">Custo real total</div>
-              <div className="text-xs opacity-75 mt-0.5">A viagem inteira, {dias} dias, {pessoas} pessoa(s)</div>
+              <div className="text-xs mt-0.5">A viagem inteira, {dias} dias, {pessoas} pessoa(s)</div>
               <div className="mt-2 font-display text-3xl tnum">{fmtBRL(totalBRL)}</div>
-              <div className="text-[11px] opacity-80 tnum">{fmtUSD(resultado.total)}</div>
+              <div className="text-[11px] tnum">{fmtUSD(resultado.total)}</div>
             </div>
           </div>
           <div className="px-5 py-3 border-t border-line bg-paper2/50 text-xs text-inksoft flex flex-wrap gap-x-5 gap-y-1">
@@ -211,7 +211,7 @@ export function CustoRealClient({ destinos }) {
         </div>
 
         {/* Breakdown */}
-        <div className="rounded-3xl border border-line bg-card p-5 shadow-[var(--e-1)]">
+        <div className="rounded-2xl border border-line bg-card p-5 shadow-e1">
           <h3 className="font-display text-xl text-ink">{t('custoReal.onde')}</h3>
           <ul className="mt-3 space-y-1.5">
             {resultado.categorias.map((c) => {
@@ -237,7 +237,7 @@ export function CustoRealClient({ destinos }) {
         </div>
 
         {/* 3 cenários */}
-        <div className="rounded-3xl border border-line bg-card p-5 shadow-[var(--e-1)]">
+        <div className="rounded-2xl border border-line bg-card p-5 shadow-e1">
           <h3 className="font-display text-xl text-ink">{t('custoReal.cenariosTitulo')}</h3>
           <p className="text-xs text-inksoft">{t('custoReal.cenariosP')}</p>
           <div className="mt-3 grid grid-cols-3 gap-3">
@@ -262,7 +262,7 @@ export function CustoRealClient({ destinos }) {
         </div>
 
         {/* Alerta prescritivo */}
-        <div className="rounded-3xl border border-warn-bd bg-warn-bg p-5">
+        <div className="rounded-2xl border border-warn-bd bg-warn-bg p-5">
           <h3 className="font-display text-lg text-warn">{t('custoReal.atencao')}</h3>
           <ul className="mt-2 space-y-1.5 text-sm text-warn">
             <li>• A maior fatia da sua viagem é <strong>{maiorCategoria.label.toLowerCase()}</strong>. É onde corte ou upgrade pesa mais.</li>

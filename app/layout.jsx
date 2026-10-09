@@ -49,7 +49,16 @@ export const viewport = {
 // Anti-flash: aplica o tema salvo (ou o do sistema) ANTES do paint, no topo do body.
 const themeInit = `(function(){try{var k='mundosemfim.theme',t=localStorage.getItem(k);if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();`;
 
-export default function RootLayout({ children }) {
+// Modo CSP com nonce: o script anti-flash do tema recebe o nonce da requisição.
+// CSP_NONCE é constante de build → no modo padrão nada aqui torna a página dinâmica.
+async function nonceDaRequisicao() {
+  if (process.env.CSP_NONCE !== '1') return undefined;
+  const { headers } = await import('next/headers');
+  return (await headers()).get('x-nonce') || undefined;
+}
+
+export default async function RootLayout({ children }) {
+  const nonce = await nonceDaRequisicao();
   return (
     /* suppressHydrationWarning: o themeInit abaixo modifica data-theme no html
        antes da hidratação React; sem isso o console mostra warning de mismatch. */
@@ -58,7 +67,7 @@ export default function RootLayout({ children }) {
         <AnalyticsScripts />
       </head>
       <body>
-        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeInit }} />
         <AnalyticsNoscript />
         {children}
         <SWRegister />

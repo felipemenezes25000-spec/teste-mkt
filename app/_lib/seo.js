@@ -29,9 +29,12 @@ const ROTAS_CORE = [
   { path: '/comparar', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/planos', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/fontes', priority: 0.5, changeFrequency: 'monthly' },
+  { path: '/marketplace', priority: 0.7, changeFrequency: 'weekly' },
+  { path: '/agencias', priority: 0.6, changeFrequency: 'monthly' },
+  { path: '/desenvolvedores', priority: 0.5, changeFrequency: 'monthly' },
 ];
 
-export function construirSitemap(destinos = [], baseUrl = '', lastmod = new Date()) {
+export function construirSitemap(destinos = [], baseUrl = '', lastmod = new Date(), extras = []) {
   const base = semBarra(baseUrl);
   const lastModified = lastmod instanceof Date ? lastmod : new Date(lastmod);
   const core = ROTAS_CORE.map((r) => ({
@@ -46,7 +49,8 @@ export function construirSitemap(destinos = [], baseUrl = '', lastmod = new Date
     changeFrequency: 'monthly',
     priority: 0.7,
   }));
-  return [...core, ...dest];
+  const mais = extras.map((path) => ({ url: base + path, lastModified, changeFrequency: 'monthly', priority: 0.6 }));
+  return [...core, ...dest, ...mais];
 }
 
 export function jsonLdOrganization(baseUrl = '') {

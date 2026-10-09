@@ -100,12 +100,12 @@ export function ValeIrAgora({ destino, mes }) {
   return (
     <section aria-labelledby="vale-ir-agora-titulo">
       <h2 id="vale-ir-agora-titulo" className="font-display text-2xl text-ink mb-3"><Icon emoji="⏱️" /> {t('destino.valeTitulo')}</h2>
-      <div className={`rounded-3xl border ${ui.borda} ${ui.bg} p-5 sm:p-6`}>
+      <div className={`rounded-2xl border ${ui.borda} ${ui.bg} p-5 sm:p-6`}>
         <div className="flex items-baseline gap-2">
           <span aria-hidden className="text-xl"><Icon emoji={ui.icon} /></span>
           <h3 className={`font-display text-xl ${ui.text}`}>{t(tituloKey)}</h3>
         </div>
-        <p className={`mt-2 text-sm ${ui.text} opacity-90`}>{v.texto}</p>
+        <p className={`mt-2 text-sm ${ui.text}`}>{v.texto}</p>
       </div>
     </section>
   );

@@ -6,6 +6,7 @@ import { coordTexto } from '../_lib/brand.jsx';
 import { alertaHumanoDestino, custoEstimadoDias, fitTagsDestino, mundoScoreDestino } from '../_lib/editorial.js';
 import { Icon } from '../_ui/Icon.jsx';
 import { Foto } from '../_ui/Foto.jsx';
+import { T } from './T.jsx';
 
 // Card de destino MERIDIANO (home, /explorar, salvos). Foto real com crédito/fallback,
 // coordenada como assinatura, custo de REFERÊNCIA rotulado (pesquisa jun/2026).
@@ -38,7 +39,7 @@ export function DestinoCard({ d, img, credito }) {
               <span className="truncate">{d.nome}</span>
             </h3>
             <span className="shrink-0 inline-flex items-baseline gap-1 rounded-md bg-pine/10 text-pine px-2 py-0.5" title="Mundo Score: compatibilidade geral (0–100)">
-              <span className="font-mono text-[10px] tracking-wider">SCORE</span><span className="font-mono font-medium tnum">{score.total}</span>
+              <span className="font-mono text-[10px] tracking-wider"><T k="card.score" fallback="SCORE" /></span><span className="font-mono font-medium tnum">{score.total}</span>
             </span>
           </div>
           <p className="mt-1.5 text-sm text-inksoft leading-snug line-clamp-2">{alerta}</p>
@@ -49,13 +50,13 @@ export function DestinoCard({ d, img, credito }) {
               </span>
             ))}
           </div>
-          <p className="mt-1.5 text-[10px] text-inksoft font-mono">US$ {d.custoDia}/dia · referência jun/2026</p>
+          <p className="mt-1.5 text-[10px] text-inksoft font-mono">US$ {d.custoDia}/<T k="card.dia" fallback="dia" /> · <T k="card.ref" fallback="referência jun/2026" /></p>
           <div className="mt-3 flex flex-wrap gap-1.5">
             {tags.map((tag) => (
               <span key={tag} className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-paper2 text-ink">{tag}</span>
             ))}
           </div>
-          <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-pine">Ver se combina comigo <Icon name="arrow-right" size={15} /></span>
+          <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-pine"><T k="card.verSe" fallback="Ver se combina comigo" /> <Icon name="arrow-right" size={15} /></span>
         </div>
       </Link>
     </div>

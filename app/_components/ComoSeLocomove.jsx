@@ -79,7 +79,7 @@ export function ComoSeLocomove({ precos = null }) {
         <CambioBadge estado={cambio} compact />
       </div>
       <p className="text-sm text-inksoft mb-4 max-w-2xl">{L.sub}</p>
-      <div className="rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
+      <div className="rounded-2xl border border-line bg-card overflow-hidden shadow-e1">
         <ul className="divide-y divide-line">
           {linhas.map((l) => {
             const f = fmt(l.valor, cambio.brl);

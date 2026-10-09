@@ -150,7 +150,7 @@ export function DecisaoClient({ destinos }) {
   return (
     <div className="mt-6 space-y-12">
       {/* ============ WIZARD ============ */}
-      <section aria-labelledby="wizard-h" className="rounded-[2rem] border border-line bg-card p-5 sm:p-6 shadow-[var(--e-1)]">
+      <section aria-labelledby="wizard-h" className="rounded-2xl border border-line bg-card p-5 sm:p-6 shadow-e1">
         <div className="grid lg:grid-cols-[1fr_0.95fr] gap-6">
           <div>
             <p className="text-xs uppercase tracking-[0.18em] text-pine font-bold">{t('decisao.wizardSelo')}</p>
@@ -226,14 +226,14 @@ export function DecisaoClient({ destinos }) {
             </p>
           </div>
 
-          <div className="rounded-3xl border border-line bg-paper2/60 p-4">
+          <div className="rounded-2xl border border-line bg-paper2/60 p-4">
             <div className="flex items-center justify-between gap-3">
               <h3 className="font-display text-xl text-ink">{t('decisao.resultadoInst')}</h3>
               <span className="text-xs text-inksoft">{origem} · {mes > 0 ? MESES_PT[mes - 1] : 'qualquer mês'} · {diasPretendidos} dias · {companhia}</span>
             </div>
             <div className="mt-3 space-y-3">
               {ranked.slice(0, 3).map((destino) => (
-                <Link key={destino.id} href={`/destino/${destino.slug}`} className="block rounded-2xl border border-line bg-card p-3 hover:border-pine/40 hover:shadow-[var(--e-1)] transition focusring">
+                <Link key={destino.id} href={`/destino/${destino.slug}`} className="block rounded-2xl border border-line bg-card p-3 hover:border-pine/40 hover:shadow-e1 transition focusring">
                   <div className="flex items-start gap-3">
                     <div className="w-14 h-14 rounded-2xl bg-pine text-onpine grid place-items-center shrink-0">
                       <span className="font-display text-2xl tnum">{destino.pontos}</span>
@@ -300,7 +300,7 @@ export function DecisaoClient({ destinos }) {
                   <span className="text-[11px] font-bold bg-ink/70 text-white w-6 h-6 grid place-items-center rounded-full">{d.posicao}º</span>
                   <span className="text-[11px] font-bold bg-pine text-onpine px-2 h-6 grid place-items-center rounded-full tnum">{d.pontos}</span>
                 </div>
-                <Link href={`/destino/${d.slug}`} className="block rounded-2xl border border-line bg-card overflow-hidden hover:shadow-[var(--e-1)] hover:-translate-y-0.5 transition focusring">
+                <Link href={`/destino/${d.slug}`} className="block rounded-2xl border border-line bg-card overflow-hidden hover:shadow-e1 hover:-translate-y-0.5 transition focusring">
                   <div className="relative h-36 bg-paper2 overflow-hidden">
                     <Foto src={img ? wikiThumb(img, 500) : null} alt={d.nome} className="absolute inset-0" imgClassName="group-hover:scale-[1.03] transition duration-700" mostrarCredito={false} largura={500} altura={300} />
                   </div>
