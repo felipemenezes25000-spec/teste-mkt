@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Icon } from './Icon.jsx';
 
 // Foto de lugar com proveniência (OMEGA V4 §11-13 / §28):
@@ -12,6 +12,13 @@ export function Foto({
   prioridade = false, largura, altura, rotuloFalha = 'Foto indisponível', mostrarCredito = true, sizes, srcSet,
 }) {
   const [falhou, setFalhou] = useState(!src);
+  const imgRef = useRef(null);
+  // A imagem do HTML do servidor pode falhar ANTES da hidratação (CDN fora, 404):
+  // aí o onError do React nunca dispara. Confere na montagem (V5 DST-11/PER-07).
+  useEffect(() => {
+    const i = imgRef.current;
+    if (i && i.complete && i.naturalWidth === 0) setFalhou(true); // eslint-disable-line react-hooks/set-state-in-effect
+  }, [src]);
   const [abrirCredito, setAbrirCredito] = useState(false);
 
   return (
@@ -19,7 +26,7 @@ export function Foto({
       {!falhou ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={src} srcSet={srcSet} alt={alt || ''} width={largura} height={altura} sizes={srcSet ? (sizes || '100vw') : sizes}
+          ref={imgRef} src={src} srcSet={srcSet} alt={alt || ''} width={largura} height={altura} sizes={srcSet ? (sizes || '100vw') : sizes}
           loading={prioridade ? 'eager' : 'lazy'} decoding="async" fetchPriority={prioridade ? 'high' : undefined}
           onError={() => setFalhou(true)}
           className={`w-full h-full object-cover ${imgClassName}`}
