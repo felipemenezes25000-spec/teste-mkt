@@ -44,7 +44,7 @@ export function PlanosCta({ plano, label, destaque, freeHref }) {
   return (
     <div>
       <button onClick={assinar} disabled={busy}
-        className={`w-full inline-flex items-center justify-center rounded-xl px-4 py-2.5 font-semibold transition focusring disabled:opacity-60 ${destaque ? 'bg-pine text-white hover:bg-pinedk' : 'border border-line bg-card text-ink hover:text-pine'}`}>
+        className={`w-full inline-flex items-center justify-center rounded-xl px-4 py-2.5 font-semibold transition focusring disabled:opacity-60 ${destaque ? 'bg-pine text-onpine hover:bg-pinedk' : 'border border-line bg-card text-ink hover:text-pine'}`}>
         {busy ? 'Abrindo…' : label}
       </button>
       {msg && <p className="mt-2 text-xs text-inksoft text-center">{msg}</p>}

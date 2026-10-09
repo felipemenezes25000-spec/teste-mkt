@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { fmtMoeda } from './utils.js';
 import { sugerirOrcamento } from './budget.js';
 import { Button } from '../_ui/Button.jsx';
+import { Icon } from '../_ui/Icon.jsx';
 
 // MODO ORÇAMENTO (prescritivo): mostra ONDE cortar dias pra caber no teto e aplica
 // os cortes num clique. Toda a lógica vem do motor puro `sugerirOrcamento(calc)`
@@ -28,7 +29,7 @@ export default function BudgetPanel({ calc, onAplicarCortes }) {
   if (r.status === 'cabe') {
     return (
       <div className="mt-4 rounded-xl border border-success-bd bg-success-bg p-3 text-sm text-success">
-        ✓ Sua viagem <b>cabe no teto</b> — sobra {fmtMoeda(r.folga, cur)}. Nada a cortar; dá até pra esticar dias.
+        <Icon emoji="✓" /> Sua viagem <b>cabe no teto</b> — sobra {fmtMoeda(r.folga, cur)}. Nada a cortar; dá até pra esticar dias.
       </div>
     );
   }
@@ -38,7 +39,7 @@ export default function BudgetPanel({ calc, onAplicarCortes }) {
   return (
     <div className="mt-4 rounded-2xl border border-line bg-paper2/40 p-4">
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <h3 className="font-display text-xl text-ink">🎯 Onde cortar pra fechar a conta</h3>
+        <h3 className="font-display text-xl text-ink"><Icon emoji="🎯" /> Onde cortar pra fechar a conta</h3>
         <span className="text-xs text-inksoft">estoura em <b className="text-danger tnum">{fmtMoeda(r.excesso, cur)}</b></span>
       </div>
       <p className="mt-1 text-sm text-inksoft">
@@ -65,7 +66,7 @@ export default function BudgetPanel({ calc, onAplicarCortes }) {
           <span className="text-sm text-inksoft">
             Fecha em <b className="text-ink tnum">{fmtMoeda(r.novoTotal, cur)}</b> · −{r.diasCortados} dias no total
           </span>
-          <Button variant="accent" size="sm" onClick={aplicar}>Aplicar cortes →</Button>
+          <Button variant="accent" size="sm" onClick={aplicar}>Aplicar cortes <Icon emoji="→" /></Button>
         </div>
       ) : (
         <div className="mt-3 rounded-xl border border-danger-bd bg-danger-bg p-3 text-sm text-danger">

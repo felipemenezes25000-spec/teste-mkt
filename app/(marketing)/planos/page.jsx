@@ -3,6 +3,7 @@ import { JsonLd } from '../../_components/JsonLd.jsx';
 import { jsonLdProduto, siteUrl } from '../../_lib/seo.js';
 import { ROICalculator } from './ROICalculator.jsx';
 import { T } from '../../_components/T.jsx';
+import { Icon } from '../../_ui/Icon.jsx';
 
 export const metadata = {
   title: 'Planos — Mundo Sem Fim',
@@ -44,7 +45,7 @@ export default function PlanosPage() {
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
         {PLANOS.map((p) => (
           <div key={p.id} className={`rounded-3xl border bg-card p-6 flex flex-col ${p.destaque ? 'border-pine shadow-[var(--e-2)] ring-1 ring-pine/20 scale-[1.01]' : 'border-line'}`}>
-            {p.destaque && <span className="self-start text-[11px] font-bold uppercase tracking-wide bg-pine text-white rounded-full px-2.5 py-0.5 mb-2">Mais popular</span>}
+            {p.destaque && <span className="self-start text-[11px] font-bold uppercase tracking-wide bg-pine text-onpine rounded-full px-2.5 py-0.5 mb-2">Mais popular</span>}
             <h2 className="font-display text-2xl text-ink">{p.nome}</h2>
             <p className="mt-1 text-sm text-inksoft min-h-[40px]">{p.frase}</p>
             <div className="mt-1 flex items-end gap-1">
@@ -52,7 +53,7 @@ export default function PlanosPage() {
               <span className="text-inksoft text-sm mb-1">{p.periodo}</span>
             </div>
             <ul className="mt-4 space-y-2 text-sm text-inksoft flex-1">
-              {p.bullets.map((b) => <li key={b} className="flex gap-2"><span className="text-pine shrink-0" aria-hidden>✓</span>{b}</li>)}
+              {p.bullets.map((b) => <li key={b} className="flex gap-2"><span className="text-pine shrink-0" aria-hidden><Icon emoji="✓" /></span>{b}</li>)}
             </ul>
             <div className="mt-6">
               <PlanosCta plano={p.id} label={p.cta} destaque={p.destaque} freeHref={p.id === 'free' ? p.href : undefined} />

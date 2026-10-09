@@ -2,6 +2,7 @@
 // ponto/cidade. Usa a Action API com `exchars=1200` (limite máximo da Wikipédia)
 // pra trazer 3-4 parágrafos de história REAL — não o lead seco da REST summary.
 // O resultado é texto rico: história + curiosidades + contexto cultural.
+import { wikiThumb } from './wikiThumb.js';
 //
 // Estratégia em camadas:
 //   1. cache em memória (Map) → 0ms na 2ª chamada do mesmo título
@@ -13,7 +14,7 @@
 
 const cache = new Map();   // titulo -> resultado|{erro:true}
 const emVoo = new Map();   // titulo -> Promise (deduplica chamadas simultâneas)
-const SS_PREFIXO = 'msf.wiki.v2.'; // v2 = invalida cache antigo da REST summary
+const SS_PREFIXO = 'msf.wiki.v3.'; // v2 = invalida cache antigo da REST summary
 
 const EXCHARS = 1200; // limite máximo da Action API; ~3 parágrafos
 const PI_WIDTH = 960; // thumb pro modal (renderizado em 960px)
@@ -67,7 +68,7 @@ async function buscarLang(titulo, lang) {
       extrato,
       url: page.fullurl || `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(String(titulo).replace(/ /g, '_'))}`,
       titulo: page.title || String(titulo),
-      img: (page.original && page.original.source) || (page.thumbnail && page.thumbnail.source) || null,
+      img: wikiThumb((page.original && page.original.source) || (page.thumbnail && page.thumbnail.source) || null, 960),
     };
   } catch {
     return null;

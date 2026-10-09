@@ -1,11 +1,13 @@
 import './_ui/tokens.css';
 import './globals.css';
-import { Fraunces, Hanken_Grotesk } from 'next/font/google';
+import { Bricolage_Grotesque, Geist, Geist_Mono } from 'next/font/google';
 import { SWRegister } from './_components/SWRegister.jsx';
 import { AnalyticsScripts, AnalyticsNoscript } from './_components/AnalyticsScripts.jsx';
 
-const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces', display: 'swap' });
-const hanken = Hanken_Grotesk({ subsets: ['latin'], variable: '--font-hanken', display: 'swap' });
+// MERIDIANO: display expressiva + UI neutra + mono para dados (docs/BRAND-RATIONALE.md)
+const display = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-display', display: 'swap', weight: ['500', '700', '800'] });
+const ui = Geist({ subsets: ['latin'], variable: '--font-ui', display: 'swap' });
+const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap', weight: ['400', '500'] });
 
 // URL pública do site (canonical/og:url). Ordem de resolução: override explícito
 // (domínio próprio) → domínio de produção ESTÁVEL da Vercel (resolve sozinho, sem
@@ -37,7 +39,12 @@ export const metadata = {
   // e twitter-image.jsx (next/og) — não precisam de asset estático.
 };
 
-export const viewport = { themeColor: '#0E5A4E' };
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F3F5F8' },
+    { media: '(prefers-color-scheme: dark)', color: '#070B14' },
+  ],
+};
 
 // Anti-flash: aplica o tema salvo (ou o do sistema) ANTES do paint, no topo do body.
 const themeInit = `(function(){try{var k='mundosemfim.theme',t=localStorage.getItem(k);if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();`;
@@ -46,7 +53,7 @@ export default function RootLayout({ children }) {
   return (
     /* suppressHydrationWarning: o themeInit abaixo modifica data-theme no html
        antes da hidratação React; sem isso o console mostra warning de mismatch. */
-    <html lang="pt-BR" className={`${fraunces.variable} ${hanken.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${display.variable} ${ui.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <AnalyticsScripts />
       </head>

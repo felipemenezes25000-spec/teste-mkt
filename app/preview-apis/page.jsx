@@ -1,3 +1,4 @@
+import { Icon } from '../_ui/Icon.jsx';
 /* PRÉVIA (mockup) — como o Mundo Sem Fim fica com as APIs conectadas.
    Rota isolada, fora de produção, REMOVÍVEL. Reusa o design system real
    (tokens.css + Fraunces/Hanken + padrão TOM_UI). Dados são ILUSTRATIVOS. */
@@ -54,14 +55,14 @@ function TelaVoos() {
     <section className="mb-16">
       <SecaoHeader
         rota="/voos"
-        titulo="Voos GRU → Bangkok"
+        titulo="Voos GRU Bangkok"
         sub="14 dias · ida e volta · 1 pessoa"
         badge={<LiveBadge>● Preços ao vivo · Aviasales (Travelpayouts)</LiveBadge>}
       />
 
       {/* Veredito comprar/esperar — agora REAL (substitui o mock) */}
       <div className="rounded-2xl border border-solar/50 bg-solar/15 p-5 sm:p-6 mb-6 flex flex-wrap items-center gap-4">
-        <div className="text-4xl">⏳</div>
+        <div className="text-4xl"><Icon emoji="⏳" /></div>
         <div className="grow min-w-[260px]">
           <div className="font-display text-xl text-ink">Espere pra comprar</div>
           <p className="text-sm text-inksoft mt-0.5">O preço desta rota costuma <strong>cair ~12% nas próximas 3 semanas</strong>. Histórico de 12 meses via Aviasales Data API.</p>
@@ -91,7 +92,7 @@ function TelaVoos() {
             </div>
           ))}
         </div>
-        <p className="text-xs text-inksoft mt-3">🟡 <strong>Maio</strong> é o melhor mês desta rota — ~19% abaixo da média anual.</p>
+        <p className="text-xs text-inksoft mt-3"><Icon emoji="🟡" /> <strong>Maio</strong> é o melhor mês desta rota — ~19% abaixo da média anual.</p>
       </div>
 
       {/* Ofertas de voo (FlightScoreCard real + CTA de reserva monetizado) */}
@@ -105,7 +106,7 @@ function TelaVoos() {
                   <div className="font-semibold text-ink">{v.companhia}</div>
                   {v.destaque && <span className="text-[11px] font-bold text-pine">Melhor custo-benefício</span>}
                 </div>
-                <div className="text-sm text-ink tnum">{v.partida} → {v.chegada}</div>
+                <div className="text-sm text-ink tnum">{v.partida} <Icon emoji="→" /> {v.chegada}</div>
                 <div className="text-xs text-inksoft">{v.duracao}</div>
                 <div className="text-xs text-inksoft">{v.escalas}</div>
                 <div className="ml-auto text-right">
@@ -117,17 +118,17 @@ function TelaVoos() {
                   <span className="text-[10px] uppercase tracking-wider text-inksoft font-bold">/100</span>
                 </div>
                 <a className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-1.5 rounded-xl bg-coral text-oncoral font-semibold px-5 py-2.5 hover:brightness-95 transition">
-                  Reservar no Kiwi →
+                  Reservar no Kiwi <Icon emoji="→" />
                 </a>
               </div>
               <div className={`px-4 sm:px-5 py-2.5 border-t ${ui.faixa} flex items-center gap-2 text-sm`}>
-                <span>{ui.icon}</span><strong>{ui.label}:</strong><span>{v.nota}</span>
+                <span><Icon emoji={ui.icon} /></span><strong>{ui.label}:</strong><span>{v.nota}</span>
               </div>
             </article>
           );
         })}
       </div>
-      <p className="text-[11px] text-inksoft mt-3">💰 Cada reserva paga ~3% de comissão (Kiwi via Travelpayouts) · *“Direto” quando disponível na rota.</p>
+      <p className="text-[11px] text-inksoft mt-3"><Icon emoji="💰" /> Cada reserva paga ~3% de comissão (Kiwi via Travelpayouts) · *“Direto” quando disponível na rota.</p>
     </section>
   );
 }
@@ -152,7 +153,7 @@ function TelaDestino() {
         {PASSEIOS.map((p) => (
           <article key={p.nome} className="rounded-2xl border border-line bg-card overflow-hidden flex flex-col">
             <div className={`h-32 bg-gradient-to-br ${p.grad} relative`}>
-              <span className="absolute top-2 right-2 bg-card/90 text-ink text-xs font-bold px-2 py-1 rounded-full tnum">⭐ {p.rating}</span>
+              <span className="absolute top-2 right-2 bg-card/90 text-ink text-xs font-bold px-2 py-1 rounded-full tnum"><Icon emoji="⭐" /> {p.rating}</span>
             </div>
             <div className="p-4 flex flex-col grow">
               <h3 className="font-semibold text-ink leading-snug">{p.nome}</h3>
@@ -173,18 +174,18 @@ function TelaDestino() {
         ))}
       </div>
       <div className="flex items-center justify-between flex-wrap gap-2 mb-8">
-        <LiveBadge tone="money">💰 Você ganha 8% por reserva · cookie 30 dias</LiveBadge>
+        <LiveBadge tone="money"><Icon emoji="💰" /> Você ganha 8% por reserva · cookie 30 dias</LiveBadge>
         <span className="text-xs text-inksoft">via Viator Partner API</span>
       </div>
 
       {/* Hospedagem (Booking) */}
       <div className="rounded-2xl border border-line bg-paper2/50 p-5 flex flex-wrap items-center gap-4">
-        <div className="text-3xl">🏨</div>
+        <div className="text-3xl"><Icon emoji="🏨" /></div>
         <div className="grow min-w-[240px]">
           <div className="font-display text-lg text-ink">Onde ficar em Bangkok</div>
           <p className="text-sm text-inksoft">328 hotéis disponíveis nas suas datas · <strong className="text-ink tnum">a partir de US$ 28/noite</strong></p>
         </div>
-        <a className="inline-flex items-center gap-1.5 rounded-xl bg-pine text-white font-semibold px-5 py-2.5 hover:bg-pinedk transition">Ver hotéis no Booking →</a>
+        <a className="inline-flex items-center gap-1.5 rounded-xl bg-pine text-onpine font-semibold px-5 py-2.5 hover:bg-pinedk transition">Ver hotéis no Booking <Icon emoji="→" /></a>
       </div>
     </section>
   );
@@ -195,17 +196,17 @@ const DIA = [
   { hora: '09:00', cat: 'passeio', tit: 'Grande Palácio & Wat Phra Kaew', desc: 'Reserve cedo — fila grande depois das 10h.', cta: { label: 'Reservar passeio · Viator', icon: '🎟️', tom: 'coral' } },
   { hora: '13:00', cat: 'comida', tit: 'Almoço: Pad Thai na Thip Samai', desc: 'O melhor pad thai da cidade. ~US$ 4.', cta: null },
   { hora: '16:00', cat: 'transporte', tit: 'Barco pelo Chao Phraya até Icon Siam', desc: 'Express boat — US$ 0,50. Vista do rio.', cta: { label: 'Como chegar', icon: '🧭', tom: 'ghost' } },
-  { hora: '20:00', cat: 'hospedagem', tit: 'Check-in · Riva Surya Bangkok', desc: 'Beira-rio, 4★. Cancelamento grátis até amanhã.', cta: { label: 'Reservar · Booking', icon: '🏨', tom: 'pine' } },
+  { hora: '20:00', cat: 'hospedagem', tit: 'Check-in · Riva Surya Bangkok', desc: 'Beira-rio, 4. Cancelamento grátis até amanhã.', cta: { label: 'Reservar · Booking', icon: '🏨', tom: 'pine' } },
 ];
 
 function CtaBtn({ cta }) {
   if (!cta) return null;
   const cls = {
     coral: 'bg-coral text-oncoral',
-    pine: 'bg-pine text-white',
+    pine: 'bg-pine text-onpine',
     ghost: 'border border-line bg-card text-ink',
   }[cta.tom];
-  return <a className={`inline-flex items-center gap-1.5 rounded-xl font-semibold text-sm px-4 py-2 hover:brightness-95 transition ${cls}`}>{cta.icon} {cta.label}</a>;
+  return <a className={`inline-flex items-center gap-1.5 rounded-xl font-semibold text-sm px-4 py-2 hover:brightness-95 transition ${cls}`}><Icon emoji={cta.icon} /> {cta.label}</a>;
 }
 
 function TelaRoteiro() {
@@ -215,7 +216,7 @@ function TelaRoteiro() {
         rota="/roteiro"
         titulo="Dia 3 · Bangkok"
         sub="Cada parada já vira reserva — sem sair do roteiro"
-        badge={<LiveBadge tone="money">💰 CTAs monetizados</LiveBadge>}
+        badge={<LiveBadge tone="money"><Icon emoji="💰" /> CTAs monetizados</LiveBadge>}
       />
       <div className="space-y-3">
         {DIA.map((it) => (
@@ -244,7 +245,7 @@ export default function PreviewApis() {
             <strong> Booking</strong> (hospedagem) e <strong>Aviasales/Kiwi</strong> (preços de voo) ligados.
           </p>
           <p className="text-[11px] text-inksoft mt-2 inline-block bg-warn-bg text-warn border border-warn-bd rounded-full px-3 py-1">
-            ⚠️ Mockup — dados ilustrativos, mesmo design do site real
+            <Icon emoji="⚠️" /> Mockup — dados ilustrativos, mesmo design do site real
           </p>
         </header>
         <TelaVoos />

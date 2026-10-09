@@ -1,4 +1,5 @@
 import { custoPorDia, TIERS_LABEL } from '../_lib/custos.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Mostra os 3 níveis de custo/dia (mochila/médio/conforto) com quebra por categoria
 // e o total pra X dias. Server-safe (puro).
@@ -20,7 +21,7 @@ export function CustoTiers({ custoDia, dias = 7 }) {
             <ul className="mt-3 space-y-1.5 text-xs text-inksoft">
               {n.categorias.map((c) => (
                 <li key={c.id} className="flex items-center justify-between gap-2">
-                  <span>{c.icon} {c.label}</span>
+                  <span><Icon emoji={c.icon} /> {c.label}</span>
                   <span className="tnum text-ink">US$ {c.valor}</span>
                 </li>
               ))}

@@ -6,8 +6,8 @@ export default function manifest() {
     description: 'Decide pra onde ir pelo seu perfil, mostra o custo real e monta o roteiro que recalcula. O mundo inteiro num app.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#F4EDDE',
-    theme_color: '#0E5A4E',
+    background_color: '#070B14',
+    theme_color: '#070B14',
     lang: 'pt-BR',
     icons: [
       { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },

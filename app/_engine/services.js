@@ -1,6 +1,7 @@
 import { AI_PROVIDERS, SYSTEM_PROMPT_OTIMIZADOR, SYSTEM_PROMPT_OPORTUNIDADES, SYSTEM_PROMPT_ROTEIRO, MESES_PT, MESES_PT_LONGO } from './data.js';
 import { num } from './utils.js';
 import { tokenAtual } from './supabase.js';
+import { wikiThumb } from '../_lib/wikiThumb.js';
 
 /* ===== Câmbio (FX) — API gratuita, sem chave, com timeout e degradação segura ===== */
 // Dedup de chamadas concorrentes: várias instâncias de useCambioBRL montam juntas
@@ -47,7 +48,8 @@ export function buscarLugar(query) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const d = await res.json();
       return {
-        img: (d.thumbnail && d.thumbnail.source) || (d.originalimage && d.originalimage.source) || null,
+        // largura PADRÃO do Wikimedia (o summary às vezes devolve o original "unscaled" → 429)
+        img: wikiThumb((d.originalimage && d.originalimage.source) || (d.thumbnail && d.thumbnail.source) || null, 500),
         extract: d.extract || '',
         url: (d.content_urls && d.content_urls.desktop && d.content_urls.desktop.page) || null,
       };

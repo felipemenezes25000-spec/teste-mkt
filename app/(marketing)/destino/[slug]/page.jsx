@@ -34,6 +34,13 @@ import { atracoesPrecosDoPais } from '../../../_engine/atracoesPrecos.js';
 import { atracoesPagasDoPais } from '../../../_engine/precosAtracoes.js';
 import { dadosV2DoPais } from '../../../_engine/precos.js';
 import { precosDoPais } from '../../../_engine/precosTransporte.js';
+import { Icon } from '../../../_ui/Icon.jsx';
+import { Foto } from '../../../_ui/Foto.jsx';
+import { SourceTrust } from '../../../_ui/SourceTrust.jsx';
+import { resolverImagens, resolverImagem } from '../../../_lib/media.js';
+import { arquivoWikimedia } from '../../../_lib/wikiThumb.js';
+import { coordTexto } from '../../../_lib/brand.jsx';
+import { vistoDe } from '../../../_engine/data.js';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -125,18 +132,46 @@ export default async function DestinoPage(props) {
     const c = await imagemCommons(busca);
     if (c) return { src: c, credito: creditoCommonsLite(c) };
     const p = piso(i);
-    return { src: p, credito: creditoCommonsLite(p) };
+    // PISO = foto do país, NÃO do lugar: rotulada como ilustrativa (V4 §11 — nunca
+    // apresentar a foto de outro lugar como se fosse este).
+    return { src: p, credito: creditoCommonsLite(p), ilustrativa: true };
   };
+  // Overrides que reaproveitam a MESMA foto para várias atrações do país são
+  // fotos-landmark de piso (ex.: Burj Khalifa em "Louvre Abu Dhabi") → ilustrativas.
+  const usoOverride = {};
+  for (const a of pontos) { const u = ATRACOES_IMG[`${d.code}:${a.nome}`]; if (u) usoOverride[u] = (usoOverride[u] || 0) + 1; }
   const [atracoes, pontosInfo, cidadeInfo] = await Promise.all([
     atracoesDe(d.wikidataId, { limite: 8 }),
     Promise.all(pontos.map((a, i) => {
       // Override de IMAGEM DIRETA (auditoria jun/2026): atrações sem título wiki bom recebem aqui uma URL de
       // foto real conferida por agente (Commons específica ou foto-landmark do país). Vem ANTES da cascata.
       const direta = ATRACOES_IMG[`${d.code}:${a.nome}`];
-      return direta ? Promise.resolve({ src: direta, credito: creditoCommonsLite(direta) }) : fotoGarantida(a.wiki || a.nome, `${a.nome} ${a.cidade || ''} ${d.nome}`, i);
+      return direta
+        ? Promise.resolve({ src: direta, credito: creditoCommonsLite(direta), ilustrativa: usoOverride[direta] > 1 })
+        : fotoGarantida(a.wiki || a.nome, `${a.nome} ${a.cidade || ''} ${d.nome}`, i);
     })),
     Promise.all(cidadesLista.map((c, i) => fotoGarantida(cidadeWiki(d.code, c), `${c} ${d.nome}`, i))),
   ]);
+
+  // Mídia: resolve TODAS as fotos do Commons de uma vez → URL em largura padrão que
+  // existe (sem 400/429), autor e licença reais (V4 §12-13).
+  const commons = [...pontosInfo, ...cidadeInfo].map((x) => x && x.src).filter((u) => u && arquivoWikimedia(u));
+  const [assets, heroAsset] = await Promise.all([
+    resolverImagens(commons, { largura: 500 }),
+    heroImg ? resolverImagem(heroImg, { largura: 1280 }) : null,
+  ]);
+  const comAsset = (info) => {
+    if (!info || !info.src) return info;
+    const a = assets.get(arquivoWikimedia(info.src) || '');
+    if (!a) return info;
+    return { ...info, src: a.url, credito: { fonte: 'Wikimedia Commons', autor: a.photographer, licenca: a.license, link: a.pageUrl } };
+  };
+  for (let i = 0; i < pontosInfo.length; i++) pontosInfo[i] = comAsset(pontosInfo[i]);
+  for (let i = 0; i < cidadeInfo.length; i++) cidadeInfo[i] = comAsset(cidadeInfo[i]);
+  const heroSrc = heroAsset ? heroAsset.url : heroImg ? wikiThumb(heroImg, 1280) : null;
+  const heroCredito = heroAsset
+    ? { fonte: 'Wikimedia Commons', autor: heroAsset.photographer, licenca: heroAsset.license, link: heroAsset.pageUrl }
+    : credito ? { fonte: 'Wikimedia', autor: credito.autor, licenca: credito.licenca, link: credito.fileUrl } : null;
 
   // Galeria de pontos turísticos: prioriza a lista CURADA (foto buscada por atração),
   // com fallback pro Wikidata. Garante cobertura em todos os 205 países.
@@ -146,7 +181,7 @@ export default async function DestinoPage(props) {
   const contextoPais = sobrePais?.extrato || sobre?.extrato || null;
   const urlPais = sobrePais?.url || sobre?.url || null;
   const galeria = pontos.length
-    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: wikiThumb(pontosInfo[i].src, 480), credito: pontosInfo[i].credito, wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais, fora: !!a.fora }))
+    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: pontosInfo[i].src, credito: pontosInfo[i].credito, ilustrativa: !!pontosInfo[i].ilustrativa, ilustrativaDe: pontosInfo[i].ilustrativa ? d.nome : null, wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais, fora: !!a.fora }))
     : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: wikiThumb(a.img, 480), credito: creditoCommonsLite(a.img), wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais, fora: false }));
 
   // Cidades & bases: mesma estrutura da galeria pra abrir o mesmo modal (decisão do
@@ -154,8 +189,10 @@ export default async function DestinoPage(props) {
   const cidadesData = cidadesLista.map((c, i) => ({
     nome: c,
     sub: d.nome,
-    img: wikiThumb(cidadeInfo[i].src, 480),
+    img: cidadeInfo[i].src,
     credito: cidadeInfo[i].credito,
+    ilustrativa: !!cidadeInfo[i].ilustrativa,
+    ilustrativaDe: cidadeInfo[i].ilustrativa ? d.nome : null,
     wiki: cidadeWiki(d.code, c),
     maps: mapsUrl(`${c}, ${d.nome}`),
     contextoPais,
@@ -172,15 +209,24 @@ export default async function DestinoPage(props) {
     { pergunta: `Qual a melhor época para visitar ${d.nome}?`, resposta: `${meses !== '—' ? `Melhores meses: ${meses}. ` : ''}${d.estacao || ''}`.trim() },
     { pergunta: `Quanto custa viajar para ${d.nome}?`, resposta: `Custo médio de referência: ~US$ ${d.custoDia}/dia (perfil econômico, em terra). O custo real da viagem (com voo, seguro e visto) aparece na página.` },
   ]);
-  const fatos = [
-    { k: 'Região', v: d.regiao },
-    { k: 'Moeda local', v: d.moeda },
-    { k: 'Custo médio', v: `~US$ ${d.custoDia}/dia` },
-    { k: 'Melhor época', v: meses },
+  const visto = vistoDe(d.code, 'BR');
+  const VISTO_TXT = { isento: 'Isento', 'e-visa': 'e-Visa', 'on-arrival': 'Na chegada', visto: 'Visto consular', eta: 'ETA eletrônica', consultar: 'Consultar' };
+  const ficha = [
+    { k: 'Melhor época', v: meses, fr: 'HISTORICAL', fonte: 'Pesquisa climática Mundo Sem Fim', data: 'jun/2026' },
+    { k: 'Custo de referência', v: `US$ ${d.custoDia}/dia`, fr: 'HISTORICAL', fonte: 'Pesquisa de custos Mundo Sem Fim (perfil econômico)', data: 'jun/2026' },
+    { k: 'Visto · passaporte BR', v: `${VISTO_TXT[visto.tipo] || visto.tipo}${visto.dias ? ` · até ${visto.dias} dias` : ''}`, fr: visto.tipo === 'consultar' ? 'UNVERIFIED' : 'HISTORICAL', fonte: 'Regras consulares compiladas — confirme no Itamaraty/consulado', data: 'jun/2026', nota: visto.nota },
+    { k: 'Moeda', v: d.moeda, fr: 'HISTORICAL', fonte: 'ISO 4217' },
+    { k: 'Cidade de entrada', v: `${d.cidadePrincipal || '—'}${d.iata ? ` · ${d.iata}` : ''}`, fr: 'HISTORICAL', fonte: 'Catálogo Mundo Sem Fim' },
+  ];
+  const SECOES = [
+    ['visao', 'Visão geral'], ['custos', 'Custos'], ['lugares', 'Lugares'], ['fazer', 'O que fazer'],
+    ['logistica', 'Logística'], ['antes', 'Antes de ir'], ['reservar', 'Reservar'],
   ];
 
-  const btnPrimary = 'inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-white font-semibold px-4 py-2.5 hover:bg-pinedk transition focusring shrink-0';
-  const btnGhost = 'inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2.5 hover:text-pine transition focusring shrink-0';
+  const btnLima = 'inline-flex items-center justify-center gap-2 rounded-lg bg-coral text-oncoral font-semibold px-4 h-11 hover:brightness-95 transition focusring shrink-0';
+  const btnClaro = 'inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 bg-white/10 backdrop-blur text-white font-semibold px-4 h-11 hover:bg-white/20 transition focusring shrink-0';
+  const btnGhost = 'inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-card text-ink font-semibold px-4 h-11 hover:border-pine/50 transition focusring shrink-0';
+  const H2 = 'font-display text-[1.75rem] leading-tight text-ink';
 
   return (
     <main>
@@ -193,212 +239,201 @@ export default async function DestinoPage(props) {
         ])}
       />
       {faqLd && <JsonLd data={faqLd} />}
-      {/* HERO */}
-      <section className="relative h-[42vh] min-h-[260px] max-h-[440px] overflow-hidden bg-paper2">
-        {heroImg ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={wikiThumb(heroImg, 1280)} alt={d.nome} width="1280" height="538" fetchPriority="high"
-            className="w-full h-full object-cover bg-cover bg-center"
-            style={{ backgroundImage: `url("${wikiThumb(heroImg, 32)}")` }}
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-pine/20 to-ochre/20" aria-hidden />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-        <FavoriteButton code={d.code} nome={d.nome} className="absolute top-3 right-3 z-20 w-10 h-10 text-lg" />
-        <div className="absolute bottom-0 left-0 right-0">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-5">
-            <Link href="/explorar" className="text-white/85 hover:text-white text-sm focusring">← Explorar</Link>
-            <h1 className="font-display text-4xl sm:text-5xl text-white drop-shadow mt-1 flex items-center gap-3">
+
+      {/* HERO editorial — foto real com crédito, coordenada e ações */}
+      <section className="relative h-[62vh] min-h-[420px] max-h-[640px] overflow-hidden bg-ink">
+        <Foto src={heroSrc} alt={`${d.nome} — ${d.fotoQuery || d.nome}`} credito={heroCredito} prioridade className="absolute inset-0" largura={1280} altura={720} rotuloFalha="Sem foto verificada" />
+        <div className="absolute inset-0 photo-scrim pointer-events-none" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/20 to-transparent pointer-events-none" aria-hidden />
+        <FavoriteButton code={d.code} nome={d.nome} className="absolute top-4 right-4 z-20 w-10 h-10" />
+        <div className="absolute inset-x-0 bottom-0">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-8 sm:pb-10">
+            <nav aria-label="Trilha" className="flex items-center gap-2 text-white/80 text-sm">
+              <Link href="/explorar" className="hover:text-white focusring rounded">Explorar</Link>
+              <Icon name="chevron" size={14} />
+              <span className="text-white/90">{d.regiao}</span>
+            </nav>
+            <div className="mt-3 coord text-coral">{coordTexto(d.coords)}</div>
+            <h1 className="mt-1 font-display text-5xl sm:text-7xl text-white tracking-tightest flex items-center gap-4">
               {flagUrl(d.code) && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={flagUrl(d.code)} alt="" width="48" height="36" loading="lazy" className="rounded-[3px] shadow-md ring-1 ring-white/40 shrink-0" />
+                <img src={flagUrl(d.code)} alt="" width="52" height="38" loading="lazy" className="rounded-[3px] ring-1 ring-white/40 shrink-0 hidden sm:block" />
               )}
               <span>{d.nome}</span>
             </h1>
-            <div className="mt-2 flex flex-wrap items-center gap-2">
-              <p className="text-white/90 text-sm">{d.estacao}</p>
+            <p className="mt-3 max-w-2xl text-white/85 text-base sm:text-lg leading-snug">{d.estacao}</p>
+            <div className="mt-5 flex flex-wrap items-center gap-2.5">
+              <AddToRouteButton code={d.code} nome={d.nome} className={btnLima}><Icon name="plus" size={18} /> Adicionar à rota</AddToRouteButton>
+              <Link href={`/roteiro?destino=${d.slug}`} className={btnClaro}><Icon name="spark" size={17} /> Gerar roteiro</Link>
               <TravelFitScore destino={d} compact />
             </div>
           </div>
         </div>
-        {(credito?.fileUrl || wiki?.url) && (
-          <a
-            href={credito?.fileUrl || wiki.url} target="_blank" rel="noopener noreferrer"
-            className="absolute top-3 left-3 z-20 text-[11px] bg-ink/55 text-white px-2 py-0.5 rounded focusring max-w-[70%] truncate"
-            title="Fonte e licença da imagem"
-          >
-            Foto: {credito?.autor ? credito.autor : 'Wikimedia'}{credito?.licenca ? ` · ${credito.licenca}` : ''} ↗
-          </a>
-        )}
       </section>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
-        {/* FATOS */}
-        <section className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {fatos.map((f) => (
-            <div key={f.k} className="rounded-xl border border-line bg-card p-3">
-              <div className="text-[11px] uppercase tracking-wide text-inksoft">{f.k}</div>
-              <div className="font-display text-lg text-ink mt-0.5">{f.v}</div>
-            </div>
+      {/* Navegação por seções (sticky) */}
+      <nav aria-label="Seções do destino" className="sticky top-16 z-30 bg-paper/90 backdrop-blur border-b border-line">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex gap-1 overflow-x-auto no-scrollbar">
+          {SECOES.map(([id, label]) => (
+            <a key={id} href={`#${id}`} className="shrink-0 px-3 py-3 text-sm font-medium text-inksoft hover:text-ink border-b-2 border-transparent hover:border-pine focusring">{label}</a>
           ))}
-        </section>
+        </div>
+      </nav>
 
-        <VerdictCard destino={d} />
-
-        {/* VALE IR AGORA — veredito prescritivo baseado no mês corrente x melhor época */}
-        <ValeIrAgora destino={d} />
-
-        <TravelFitScore destino={d} />
-
-        {/* CUSTOS por nível */}
-        <section>
-          <div className="flex items-baseline justify-between gap-2 mb-3">
-            <h2 className="font-display text-2xl text-ink">💰 Quanto custa por dia</h2>
-            <span className="text-xs text-inksoft">estimativa · do mochilão ao conforto</span>
-          </div>
-          <CustoTiers custoDia={d.custoDia} dias={7} />
-        </section>
-
-        {/* CUSTO HONESTO — vitrine vs real (exemplo de 7 dias) */}
-        <section>
-          <CustoVitrineVsReal
-            resumo={resumoVitrineVsReal(calcExemploDestino(d, 7))}
-            contexto={`Exemplo de 7 dias em ${d.nome} (com voo do Brasil) — o custo real além do que as OTAs mostram:`}
-          />
-        </section>
-
-        {/* O QUE NINGUÉM TE CONTA — alertas honestos por país que blog/influencer não fala */}
-        <OQueNinguemConta destino={d} />
-
-        {/* SOBRE — sempre o país; fallback honesto pro ponto de referência se faltar */}
-        {sobre && (
-          <section>
-            <h2 className="font-display text-2xl text-ink mb-2">
-              {sobre.doPais ? `Sobre ${d.nome}` : `Sobre ${sobre.titulo}`}
-            </h2>
-            {!sobre.doPais && <p className="text-xs text-inksoft mb-1">Ponto de referência em {d.nome}.</p>}
-            <p className="text-inksoft leading-relaxed">{sobre.extrato}</p>
-            {sobre.url && <a href={sobre.url} target="_blank" rel="noopener noreferrer" className="inline-block mt-1 text-sm text-pine hover:underline focusring">Ler na Wikipédia ↗</a>}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="space-y-14 min-w-0">
+          <section id="visao" className="scroll-mt-32 space-y-6">
+            <VerdictCard destino={d} />
+            <ValeIrAgora destino={d} />
+            <TravelFitScore destino={d} />
+            {sobre && (
+              <div>
+                <div className="eyebrow mb-2">{sobre.doPais ? 'Contexto' : 'Ponto de referência'}</div>
+                <h2 className={H2}>{sobre.doPais ? `Sobre ${d.nome}` : `Sobre ${sobre.titulo}`}</h2>
+                <p className="mt-3 text-inksoft leading-relaxed max-w-3xl">{sobre.extrato}</p>
+                {sobre.url && <a href={sobre.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-2 text-sm text-pine hover:underline focusring">Ler na Wikipédia <Icon name="external" size={14} /></a>}
+              </div>
+            )}
           </section>
-        )}
 
-        {/* PONTOS TURÍSTICOS — galeria curada (uma foto por atração, todos os 167) */}
-        {galeria.length > 0 && (
-          <section>
-            <div className="flex items-baseline justify-between gap-2 mb-3">
-              <h2 className="font-display text-2xl text-ink">📸 <T k="destino.pontosTuristicos" fallback="Pontos turísticos" /></h2>
-              <span className="text-xs text-inksoft">{galeria.length} <T k="destino.lugares" fallback="lugares" /></span>
+          <section id="custos" className="scroll-mt-32 space-y-6">
+            <div className="flex flex-wrap items-end justify-between gap-2">
+              <div>
+                <div className="eyebrow mb-2">Dinheiro</div>
+                <h2 className={H2}>Quanto custa por dia</h2>
+              </div>
+              <SourceTrust freshness="HISTORICAL" fonte="Pesquisa de custos Mundo Sem Fim" data="jun/2026" />
             </div>
-            <GaleriaLugares lugares={galeria} layout="ponto" />
-            <p className="mt-2 text-[11px] text-inksoft">Fotos de fontes de licença livre (Wikimedia Commons, Flickr-CC via Openverse e outras) — autor e licença no detalhe de cada lugar. Toque na foto para ver a história e abrir no mapa.</p>
+            <CustoTiers custoDia={d.custoDia} dias={7} />
+            <CustoVitrineVsReal
+              resumo={resumoVitrineVsReal(calcExemploDestino(d, 7))}
+              contexto={`Exemplo de 7 dias em ${d.nome} (com voo do Brasil) — o custo real além do que as OTAs mostram:`}
+            />
           </section>
-        )}
 
-        {/* CIDADES */}
-        {cidadesData.length > 0 && (
-          <section>
-            <h2 className="font-display text-2xl text-ink mb-3"><T k="destino.cidadesBases" fallback="Cidades & bases" /></h2>
-            <GaleriaLugares lugares={cidadesData} layout="cidade" />
+          {galeria.length > 0 && (
+            <section id="lugares" className="scroll-mt-32">
+              <div className="flex flex-wrap items-end justify-between gap-2 mb-4">
+                <div>
+                  <div className="eyebrow mb-2">Galeria</div>
+                  <h2 className={H2}><T k="destino.pontosTuristicos" fallback="Pontos turísticos" /></h2>
+                </div>
+                <span className="font-mono text-xs text-inksoft">{galeria.length} <T k="destino.lugares" fallback="lugares" /></span>
+              </div>
+              <GaleriaLugares lugares={galeria} layout="ponto" />
+              <p className="mt-3 text-xs text-inksoft">Fotos com licença livre (Wikimedia Commons e outras), autor e licença no detalhe. Quando não há foto confiável do lugar exato, mostramos uma foto do país marcada como <strong className="text-ink">ilustrativa</strong>.</p>
+              {cidadesData.length > 0 && (
+                <div className="mt-10">
+                  <h3 className="font-display text-xl text-ink mb-3"><T k="destino.cidadesBases" fallback="Cidades & bases" /></h3>
+                  <GaleriaLugares lugares={cidadesData} layout="cidade" />
+                </div>
+              )}
+            </section>
+          )}
+
+          <section id="fazer" className="scroll-mt-32 space-y-8">
+            <OQueFazer itens={atracoesPrecosDoPais(d.code)} v2={dadosV2DoPais(d.code)} cidadePrincipal={d.cidadePrincipal} />
+            <PasseiosIngressos itens={atracoesPagasDoPais(d.code)} nomePais={d.nome} />
+            {comidas.length > 0 && (
+              <div>
+                <div className="flex items-end justify-between gap-2 mb-3">
+                  <h2 className={H2}>Comidas obrigatórias</h2>
+                  <span className="font-mono text-xs text-inksoft">{comidas.length} pra provar</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {comidas.map((c, i) => (
+                    <span key={i} className={`inline-flex items-center gap-1.5 text-sm rounded-md px-3 py-1.5 border ${c.tipo === 'doce' ? 'bg-ochre/10 border-ochre/30' : c.tipo === 'bebida' ? 'bg-pine/8 border-pine/25' : 'bg-card border-line'} text-ink`}>
+                      <Icon emoji={COMIDA_ICON[c.tipo] || '🍽️'} size={15} className="text-inksoft" />{c.nome}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
-        )}
 
-        {/* COMIDA — comidas obrigatórias com tipo (salgado/doce/bebida/lanche) */}
-        {comidas.length > 0 && (
-          <section>
-            <div className="flex items-baseline justify-between gap-2 mb-2">
-              <h2 className="font-display text-2xl text-ink">🍽️ Comidas obrigatórias</h2>
-              <span className="text-xs text-inksoft">{comidas.length} pra provar</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {comidas.map((c, i) => (
-                <span
-                  key={i}
-                  className={`text-sm rounded-full px-3 py-1.5 border ${c.tipo === 'doce' ? 'bg-clay/10 border-clay/30' : c.tipo === 'bebida' ? 'bg-pine/8 border-pine/25' : 'bg-card border-line'} text-ink`}
-                >
-                  <span aria-hidden className="mr-1">{COMIDA_ICON[c.tipo] || '🍽️'}</span>{c.nome}
-                </span>
+          <section id="logistica" className="scroll-mt-32 space-y-8">
+            <ComoSeLocomove precos={precosDoPais(d.code)} />
+            <MapaDestino coords={d.coords} nome={d.nome} />
+          </section>
+
+          <section id="antes" className="scroll-mt-32 space-y-6">
+            <OQueNinguemConta destino={d} />
+            {(() => {
+              const dicas = dicasDe(d.code);
+              const secoes = SECOES_DICAS.filter((x) => (dicas[x.id] || []).length > 0);
+              if (secoes.length === 0) return null;
+              return (
+                <div>
+                  <h2 className={`${H2} mb-4`}>Antes de ir</h2>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {secoes.map((x) => (
+                      <div key={x.id} className="rounded-xl border border-line bg-card p-4">
+                        <h3 className="font-semibold text-ink flex items-center gap-2"><Icon emoji={x.icon} size={17} className="text-pine" /> {x.label}</h3>
+                        <ul className="mt-2 space-y-1.5 text-sm text-inksoft">
+                          {dicas[x.id].map((t, i) => <li key={i} className="flex gap-2"><span className="text-pine shrink-0" aria-hidden>—</span>{t}</li>)}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="mt-2 text-xs text-inksoft">Dicas de referência por região — confira visto, vacinas e alertas atuais na fonte oficial (Itamaraty, embaixada, Anvisa).</p>
+                </div>
+              );
+            })()}
+          </section>
+
+          <section id="reservar" className="scroll-mt-32">
+            <div className="eyebrow mb-2">Parceiros · você sai do Mundo Sem Fim</div>
+            <h2 className={`${H2} mb-4`}>Onde ficar & reservar</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {linksDestino(d.cidadePrincipal || d.nome, d.nome).map((l) => (
+                <a key={l.id} href={l.url} target="_blank" rel="noopener noreferrer sponsored"
+                  className="rounded-xl border border-line bg-card p-3.5 hover:border-pine/50 hover:shadow-e1 transition focusring flex items-center gap-3">
+                  <span className="w-9 h-9 rounded-md bg-paper2 text-pine grid place-items-center shrink-0"><Icon emoji={l.icon} size={18} /></span>
+                  <span className="min-w-0">
+                    <span className="flex items-center gap-1 text-sm font-semibold text-ink">{l.label} <Icon name="external" size={13} className="text-inksoft" /></span>
+                    <span className="block text-[11px] text-inksoft truncate">{l.desc}</span>
+                  </span>
+                </a>
               ))}
             </div>
+            <p className="mt-2 text-xs text-inksoft">Modo <span className="font-mono">DEEPLINK</span>: os links abrem a busca no parceiro; preço, disponibilidade, pagamento e suporte são do parceiro. Podemos receber comissão — ela nunca muda a recomendação.</p>
           </section>
-        )}
 
-        {/* O QUE FAZER E QUANTO CUSTA — atrações/museus/passeios com preço de ingresso/tour */}
-        <OQueFazer itens={atracoesPrecosDoPais(d.code)} v2={dadosV2DoPais(d.code)} cidadePrincipal={d.cidadePrincipal} />
+          <section className="rounded-2xl border border-line bg-card p-5">
+            <ShareButtons
+              url={`${base}/destino/${d.slug}`}
+              titulo={`${d.nome} — guia de viagem`}
+              texto={`Olha ${d.nome} no Mundo Sem Fim: melhor época, custo real e o que fazer.`}
+            />
+          </section>
+        </div>
 
-        {/* COMO SE LOCOMOVE — preços reais de transporte (Uber/táxi/ônibus/metrô/aluguel/voo) */}
-        <ComoSeLocomove precos={precosDoPais(d.code)} />
-
-        {/* PASSEIOS & INGRESSOS — atrações reais com preço de entrada (deep research multiagente) */}
-        <PasseiosIngressos itens={atracoesPagasDoPais(d.code)} nomePais={d.nome} />
-
-        {/* ONDE FICA — mapa real */}
-        <MapaDestino coords={d.coords} nome={d.nome} />
-
-        {/* ANTES DE IR — dicas práticas (segurança/golpes/saúde/transporte/chip) */}
-        {(() => {
-          const dicas = dicasDe(d.code);
-          const secoes = SECOES_DICAS.filter((s) => (dicas[s.id] || []).length > 0);
-          if (secoes.length === 0) return null;
-          return (
-            <section>
-              <h2 className="font-display text-2xl text-ink mb-3">✈️ Antes de ir</h2>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {secoes.map((s) => (
-                  <div key={s.id} className="rounded-2xl border border-line bg-card p-4">
-                    <h3 className="font-semibold text-ink flex items-center gap-2"><span aria-hidden>{s.icon}</span> {s.label}</h3>
-                    <ul className="mt-2 space-y-1.5 text-sm text-inksoft">
-                      {dicas[s.id].map((t, i) => <li key={i} className="flex gap-2"><span className="text-pine shrink-0" aria-hidden>•</span>{t}</li>)}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-2 text-[11px] text-inksoft">Dicas de referência por região — confira visto, vacinas e alertas atuais na fonte oficial (Itamaraty/embaixada/Anvisa).</p>
-            </section>
-          );
-        })()}
-
-        {/* RESERVAR (deep-links reais) */}
-        <section>
-          <h2 className="font-display text-2xl text-ink mb-3">🏨 Onde ficar & reservar</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {linksDestino(d.cidadePrincipal || d.nome, d.nome).map((l) => (
-              <a key={l.id} href={l.url} target="_blank" rel="noopener noreferrer"
-                className="rounded-xl border border-line bg-card p-3 hover:border-pine/50 hover:shadow-[var(--e-1)] transition focusring flex items-center gap-2.5">
-                <span className="text-xl shrink-0" aria-hidden>{l.icon}</span>
-                <span className="min-w-0">
-                  <span className="block text-sm font-semibold text-ink">{l.label} ↗</span>
-                  <span className="block text-[11px] text-inksoft truncate">{l.desc}</span>
-                </span>
-              </a>
-            ))}
+        {/* FICHA TÉCNICA — cada dado com fonte e frescor */}
+        <aside className="lg:sticky lg:top-32 self-start space-y-4">
+          <div className="rounded-2xl border border-line bg-card overflow-hidden">
+            <div className="px-5 pt-5 pb-3 flex items-center justify-between">
+              <span className="eyebrow">Ficha técnica</span>
+              <span className="font-mono text-[11px] text-inksoft">{d.code}</span>
+            </div>
+            <dl className="divide-y divide-line">
+              {ficha.map((f) => (
+                <div key={f.k} className="px-5 py-3">
+                  <dt className="text-xs text-inksoft flex items-center justify-between gap-2">{f.k}<SourceTrust freshness={f.fr} fonte={f.fonte} data={f.data} compacto /></dt>
+                  <dd className="mt-1 text-[15px] font-medium text-ink">{f.v}</dd>
+                  {f.nota && <dd className="mt-1 text-xs text-inksoft leading-snug">{f.nota}</dd>}
+                </div>
+              ))}
+            </dl>
+            <div className="p-4 border-t border-line bg-paper2/50 flex flex-col gap-2">
+              <AddToRouteButton code={d.code} nome={d.nome} className={btnLima}><Icon name="plus" size={18} /> Adicionar à rota</AddToRouteButton>
+              <Link href={`/comparar?d=${d.slug}`} className={btnGhost}><Icon name="scale" size={17} /> Comparar com outro destino</Link>
+            </div>
           </div>
-          <p className="mt-2 text-[11px] text-inksoft">Links abrem a busca no parceiro. Preços e disponibilidade no site de cada um.</p>
-        </section>
-
-        {/* CTA */}
-        <section className="rounded-2xl border border-line bg-gradient-to-br from-pine/5 to-ochre/5 p-6 flex flex-col sm:flex-row sm:items-center gap-3">
-          <div className="mr-auto">
-            <h3 className="font-display text-xl text-ink">Pronto pra colocar {d.nome} na rota?</h3>
-            <p className="text-sm text-inksoft">Adicione à sua rota (já vem com custo, estação e visto) ou gere um roteiro dia a dia com IA.</p>
-          </div>
-          <AddToRouteButton code={d.code} nome={d.nome} className={btnPrimary}>🗺️ Adicionar à rota</AddToRouteButton>
-          <Link href={`/roteiro?destino=${d.slug}`} className={btnGhost}>✨ Gerar roteiro</Link>
-        </section>
-
-        {/* COMPARTILHAR — cada destino é público e tem OG próprio (card bonito no link) */}
-        <section className="rounded-2xl border border-line bg-card p-5">
-          <ShareButtons
-            url={`${base}/destino/${d.slug}`}
-            titulo={`${d.nome} — guia de viagem`}
-            texto={`Olha ${d.nome} no Mundo Sem Fim: melhor época, custo real e o que fazer.`}
-          />
-        </section>
-
-        <p className="text-xs text-inksoft border-t border-line pt-4">
-          Custos e melhor época são estimativas (perfil econômico) — confira na fonte oficial. Conteúdo e fotos: Wikipédia/Wikidata/Wikimedia Commons, com autoria e licença na origem.
-        </p>
+          <p className="text-[11px] text-inksoft leading-relaxed px-1">
+            <strong className="text-ink">Histórico</strong> = pesquisa de referência (jun/2026), não cotação. Antes de comprar, confira preço,
+            visto e saúde na fonte oficial.
+          </p>
+        </aside>
       </div>
     </main>
   );

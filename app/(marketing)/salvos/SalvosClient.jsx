@@ -8,6 +8,7 @@ import { DestinoCard } from '../../_components/DestinoCard.jsx';
 import { EmptyState } from '../../_ui/EmptyState.jsx';
 import { CardsSkeleton } from '../../_components/Skeleton.jsx';
 import { alertaHumanoDestino, mundoScoreDestino } from '../../_lib/editorial.js';
+import { Icon } from '../../_ui/Icon.jsx';
 
 export function SalvosClient() {
   const [codes, setCodes] = useState(null); // null = ainda lendo localStorage
@@ -65,7 +66,7 @@ export function SalvosClient() {
     <div className="mt-6">
       <div className="flex items-center justify-between gap-3 mb-4">
         <p className="text-sm text-inksoft" aria-live="polite">{destinos.length} destino(s) salvo(s)</p>
-        {destinos.length >= 2 && <Link href="/comparar" className="text-sm font-semibold text-pine hover:underline focusring">⚖️ Comparar →</Link>}
+        {destinos.length >= 2 && <Link href="/comparar" className="text-sm font-semibold text-pine hover:underline focusring"><Icon emoji="⚖️" /> Comparar <Icon emoji="→" /></Link>}
       </div>
 
       <div className="rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)] mb-6">
@@ -94,7 +95,7 @@ export function SalvosClient() {
                       <div className="text-xs text-inksoft">{d.regiao}</div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-pine text-white font-display text-xl tnum">{score.total}</span>
+                      <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-pine text-onpine font-display text-xl tnum">{score.total}</span>
                       <div className="text-[11px] text-inksoft mt-1">arrependimento {score.chanceArrependimento}</div>
                     </td>
                     <td className="px-4 py-3 tnum">
@@ -103,7 +104,7 @@ export function SalvosClient() {
                     </td>
                     <td className="px-4 py-3 text-inksoft max-w-sm">{alertaHumanoDestino(d)}</td>
                     <td className="px-4 py-3">
-                      <Link href={`/destino/${d.slug}`} className="text-pine font-semibold hover:underline focusring">Ver se combina →</Link>
+                      <Link href={`/destino/${d.slug}`} className="text-pine font-semibold hover:underline focusring">Ver se combina <Icon emoji="→" /></Link>
                     </td>
                   </tr>
                 );
@@ -114,7 +115,7 @@ export function SalvosClient() {
       </div>
 
       <div className="mb-5 flex flex-wrap gap-2">
-        <Link href="/decisao" className="inline-flex rounded-xl bg-pine text-white font-semibold px-4 py-2.5 hover:bg-pinedk focusring">Decidir entre estes</Link>
+        <Link href="/decisao" className="inline-flex rounded-xl bg-pine text-onpine font-semibold px-4 py-2.5 hover:bg-pinedk focusring">Decidir entre estes</Link>
         <Link href="/planejar" className="inline-flex rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2.5 hover:text-pine focusring">Criar rota com estes</Link>
         <Link href="/comparar" className="inline-flex rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2.5 hover:text-pine focusring">Comparar custo real</Link>
       </div>
@@ -123,7 +124,7 @@ export function SalvosClient() {
         {destinos.map((d) => <DestinoCard key={d.code} d={d} img={imgs[d.code]} />)}
       </div>
       <p className="mt-6 text-xs text-inksoft border-t border-line pt-4">
-        💾 Seus salvos ficam neste navegador. Sua rota no{' '}
+        <Icon emoji="💾" /> Seus salvos ficam neste navegador. Sua rota no{' '}
         <Link href="/planejar" className="text-pine hover:underline focusring font-semibold">Planejador</Link>{' '}
         sincroniza na nuvem quando você entra na conta — aí você abre de qualquer aparelho.
       </p>

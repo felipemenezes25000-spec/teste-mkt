@@ -155,7 +155,9 @@ export const VISTOS = {
 // Resolve a regra de visto p/ país e passaporte, com fallback seguro.
 export function vistoDe(code, passaporte) {
   const tab = VISTOS[passaporte] || VISTOS.generico;
-  return tab[code] || VISTOS.generico[code] || { tipo:'isento', dias:90, nota:'Sem dado para este país — preencha a regra real do seu passaporte.' };
+  // Sem regra verificada NÃO é "isento": OMEGA V4 §35 proíbe inventar política de visto.
+  // 'consultar' + dias 0 → statusVisto devolve 'na' e a UI pede a fonte oficial.
+  return tab[code] || VISTOS.generico[code] || { tipo:'consultar', dias:0, nota:'Sem regra verificada para este passaporte — consulte o consulado/embaixada antes de comprar.' };
 }
 
 /* ---- Moedas + câmbio ---- */

@@ -61,7 +61,7 @@ export function normalizarPlano(p) {
       transporte: num(l.transporte, 0), transporteNota: l.transporteNota || '',
       melhoresMeses: Array.isArray(l.melhoresMeses) ? l.melhoresMeses : [],
       estacaoLabel: l.estacaoLabel || '',
-      vistoTipo: l.vistoTipo || 'isento', vistoDias: num(l.vistoDias, 0), vistoNota: l.vistoNota || '',
+      vistoTipo: l.vistoTipo || 'consultar', vistoDias: num(l.vistoDias, 0), vistoNota: l.vistoNota || '',
       vistoExtensao: typeof l.vistoExtensao === 'boolean' ? l.vistoExtensao : false,
       vistoExtensaoNota: l.vistoExtensaoNota || '',
       vistoComprovanteSaida: typeof l.vistoComprovanteSaida === 'boolean' ? l.vistoComprovanteSaida : true,

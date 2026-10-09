@@ -1,5 +1,6 @@
 'use client';
 import { useIdioma } from '../_lib/i18n.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Bloco "Vale ir agora?" — pega o destino + (opcional) mês atual e dá um
 // veredito prescritivo. NÃO é "compre agora": pode dizer "espere", "evite",
@@ -98,10 +99,10 @@ export function ValeIrAgora({ destino, mes }) {
   const tituloKey = v.titulo.startsWith('Janela') ? 'destino.valeBomBarato' : (TOM_TO_I18N[v.tom] || 'destino.valeNeutro');
   return (
     <section aria-labelledby="vale-ir-agora-titulo">
-      <h2 id="vale-ir-agora-titulo" className="font-display text-2xl text-ink mb-3">⏱️ {t('destino.valeTitulo')}</h2>
+      <h2 id="vale-ir-agora-titulo" className="font-display text-2xl text-ink mb-3"><Icon emoji="⏱️" /> {t('destino.valeTitulo')}</h2>
       <div className={`rounded-3xl border ${ui.borda} ${ui.bg} p-5 sm:p-6`}>
         <div className="flex items-baseline gap-2">
-          <span aria-hidden className="text-xl">{ui.icon}</span>
+          <span aria-hidden className="text-xl"><Icon emoji={ui.icon} /></span>
           <h3 className={`font-display text-xl ${ui.text}`}>{t(tituloKey)}</h3>
         </div>
         <p className={`mt-2 text-sm ${ui.text} opacity-90`}>{v.texto}</p>

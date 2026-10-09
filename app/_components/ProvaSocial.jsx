@@ -2,6 +2,7 @@
 import { DEPOIMENTOS } from '../_lib/depoimentos.js';
 import { DESTINOS } from '../_lib/destinos.js';
 import { useIdioma } from '../_lib/i18n.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Prova social HONESTA: sinais de confiança VERIFICÁVEIS (sempre visíveis) + uma grade
 // de depoimentos que só aparece quando _lib/depoimentos.js tiver entradas REAIS (não
@@ -16,7 +17,7 @@ function Depoimentos() {
       {reais.map((d, i) => (
         <figure key={d.autor || d.texto} className="rounded-2xl border border-line bg-card p-5">
           {d.nota ? (
-            <div className="text-amberx text-sm" aria-label={`Nota ${d.nota} de 5`}>{'★'.repeat(Math.round(d.nota))}</div>
+            <div className="text-amberx text-sm flex gap-0.5" role="img" aria-label={`Nota ${d.nota} de 5`}>{Array.from({ length: Math.round(d.nota) }, (_, k) => <Icon key={k} name="star" size={14} />)}</div>
           ) : null}
           <blockquote className="mt-2 text-ink leading-relaxed">“{d.texto}”</blockquote>
           <figcaption className="mt-3 text-sm text-inksoft font-semibold">
@@ -53,7 +54,7 @@ export function ProvaSocial() {
       <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
         {PILARES.map((p) => (
           <div key={p.titulo} className="rounded-2xl border border-line bg-card p-5">
-            <div className="text-3xl" aria-hidden>{p.icon}</div>
+            <div className="text-3xl" aria-hidden><Icon emoji={p.icon} /></div>
             <h3 className="mt-2 font-display text-lg text-ink">{p.titulo}</h3>
             <p className="mt-1 text-sm text-inksoft">{p.txt}</p>
           </div>

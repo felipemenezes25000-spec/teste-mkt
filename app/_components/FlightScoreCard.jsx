@@ -1,3 +1,4 @@
+import { Icon } from '../_ui/Icon.jsx';
 // FlightScoreCard — o voo mais barato não é o melhor voo. Esta UI calcula um
 // score 0-100 a partir de preço, duração, escalas, horário de chegada e
 // proporção do orçamento — e traduz para o brasileiro que está prestes a errar.
@@ -119,7 +120,7 @@ export function FlightScoreCard({ voo, ctx, destaque = false }) {
           <div className="font-semibold text-ink">{voo.companhia || 'Companhia'}</div>
           {destaque && <span className="text-[11px] font-bold text-pine">Melhor custo-benefício</span>}
         </div>
-        <div className="text-sm text-ink tnum">{voo.partida} → {voo.chegada}</div>
+        <div className="text-sm text-ink tnum">{voo.partida} <Icon emoji="→" /> {voo.chegada}</div>
         <div className="text-xs text-inksoft">{voo.duracao}</div>
         <div className="text-xs text-inksoft">{escalasTxt}</div>
         <div className="text-xs text-inksoft">{bagagemTxt}</div>
@@ -135,7 +136,7 @@ export function FlightScoreCard({ voo, ctx, destaque = false }) {
 
       <div className={`px-4 sm:px-5 py-3 border-t ${ui.borda} ${ui.cls}`}>
         <div className="flex items-center gap-2 text-sm">
-          <span aria-hidden>{ui.icon}</span>
+          <span aria-hidden><Icon emoji={ui.icon} /></span>
           <strong>{ui.label}:</strong>
           <span>{alerta || recomendacao}</span>
         </div>

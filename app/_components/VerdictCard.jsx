@@ -1,4 +1,5 @@
 import { vereditoDestino } from '../_lib/editorial.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 export function VerdictCard({ destino }) {
   const veredito = vereditoDestino(destino);
@@ -19,7 +20,7 @@ export function VerdictCard({ destino }) {
             <h3 className="font-display text-lg text-success">Eu iria se...</h3>
             <ul className="mt-2 space-y-2 text-sm text-ink">
               {veredito.combina.map((item) => (
-                <li key={item} className="flex gap-2"><span className="text-success shrink-0" aria-hidden>✓</span>{item}</li>
+                <li key={item} className="flex gap-2"><span className="text-success shrink-0" aria-hidden><Icon emoji="✓" /></span>{item}</li>
               ))}
             </ul>
           </div>

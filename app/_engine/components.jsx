@@ -2,6 +2,7 @@ import { MESES_PT, MESES_PT_LONGO } from './data.js';
 import { fmtMoeda, fmtData, clamp, num } from './utils.js';
 import { Badge } from '../_ui/Badge.jsx';
 import { rotuloSalvamento } from './saveStatus.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Cores por nível (strings completas pro Tailwind detectar no build).
 export const ESTACAO_UI = {
@@ -27,9 +28,9 @@ export function Toasts({ items, onClose }) {
       {items.map(t => (
         <div key={t.id} role={t.tipo === 'erro' ? 'alert' : 'status'}
           className={`rise rounded-xl border px-4 py-3 shadow-lg text-sm flex items-start gap-2 ${t.tipo === 'erro' ? 'bg-danger-bg border-danger-bd text-danger' : 'bg-success-bg border-success-bd text-success'}`}>
-          <span className="font-bold" aria-hidden>{t.tipo === 'erro' ? '⚠' : '✓'}</span>
+          <span className="font-bold" aria-hidden><Icon emoji={t.tipo === 'erro' ? '⚠' : '✓'} /></span>
           <span className="flex-1">{t.msg}</span>
-          <button onClick={() => onClose(t.id)} className="opacity-60 hover:opacity-100 focusring" aria-label="Fechar aviso">✕</button>
+          <button onClick={() => onClose(t.id)} className="opacity-60 hover:opacity-100 focusring" aria-label="Fechar aviso"><Icon emoji="✕" /></button>
         </div>
       ))}
     </div>
@@ -53,7 +54,7 @@ export function SaveStatus({ estado = 'saved', naNuvem = false, onRetry }) {
     <Badge tone={r.tone} className={podeTentar ? 'cursor-pointer hover:brightness-95' : ''}>
       {r.spinner
         ? <span className="inline-block w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin opacity-70" aria-hidden />
-        : <span aria-hidden>{r.icone}</span>}
+        : <span aria-hidden><Icon emoji={r.icone} /></span>}
       <span className="sm:hidden">{r.textoCurto}</span>
       <span className="hidden sm:inline">{r.texto}</span>
     </Badge>
@@ -97,7 +98,7 @@ export function MesesPicker({ value, onChange }) {
           <button key={mn} type="button" aria-pressed={on}
             aria-label={`${MESES_PT_LONGO[i]}${on ? ' (marcado como boa época)' : ''}`}
             onClick={() => { const ns = new Set(set); on ? ns.delete(mn) : ns.add(mn); onChange([...ns].sort((a, b) => a - b)); }}
-            className={`px-2 py-1 rounded-md text-xs border transition focusring ${on ? 'bg-pine text-white border-pine' : 'bg-input text-inksoft border-line hover:border-pine/50'}`}>
+            className={`px-2 py-1 rounded-md text-xs border transition focusring ${on ? 'bg-pine text-onpine border-pine' : 'bg-input text-inksoft border-line hover:border-pine/50'}`}>
             {m}
           </button>
         );
@@ -115,7 +116,7 @@ function PillarTile({ icone, titulo, principal, secundario, nivel, borderTop }) 
   return (
     <div className={`p-6 sm:p-7 ${borderTop ? 'border-t border-line' : ''}`}>
       <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-inksoft">
-        <span>{icone} {titulo}</span>
+        <span><Icon emoji={icone} /> {titulo}</span>
         <span className={`px-2 py-0.5 rounded-full border text-[11px] ${ui.bgtile} ${ui.texto}`}>{ui.tag}</span>
       </div>
       <div className={`mt-2 font-display text-2xl leading-tight ${ui.texto}`} aria-live="polite">{principal}</div>
@@ -137,7 +138,7 @@ export function Tripe({ calc }) {
         <div className="p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-line relative">
           <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-pine/5 blur-2xl" aria-hidden></div>
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-inksoft">
-            <span>🧭 Fôlego de grana</span>
+            <span><Icon emoji="🧭" /> Fôlego de grana</span>
             <span className={`px-2 py-0.5 rounded-full border text-[11px] ${fui.bgtile} ${fui.texto}`}>{fui.tag}</span>
           </div>
 
@@ -171,7 +172,7 @@ export function Tripe({ calc }) {
               <div className={`h-full gauge-fill ${fui.barra}`} style={{ width: pct + '%' }}></div>
             </div>
             <div className="mt-1 text-xs text-inksoft tnum">
-              {calc.diasTotais} dias • vida {fmtMoeda(calc.mediaDia, base)}/dia • ✈ transporte {fmtMoeda(calc.custoTransporteTotal, base)} • em {base}
+              {calc.diasTotais} dias • vida {fmtMoeda(calc.mediaDia, base)}/dia • <Icon emoji="✈" /> transporte {fmtMoeda(calc.custoTransporteTotal, base)} • em {base}
             </div>
           </div>
         </div>

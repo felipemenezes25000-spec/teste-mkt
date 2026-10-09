@@ -125,7 +125,7 @@ export const HOME_FAQ = {
     { q: 'Posso usar para viagem de casal, família ou mochilão?', a: 'Sim. O perfil muda os pesos do score: conforto pesa mais em família, custo pesa mais em mochilão, segurança pesa mais em solo. Você troca o perfil em /decisao a qualquer momento.' },
     { q: 'O que tem no plano grátis?', a: 'Descobrir destinos pelo perfil, comparar 3 favoritos, planejar rota com estação × visto × fôlego, câmbio ao vivo. Sem cartão.' },
     { q: 'Qual a diferença pro Premium?', a: 'Premium: testar quantas versões da viagem quiser, custo real completo, alertas de preço de voo, exportar PDF. Pro: rota multi-país com cansaço otimizado, colaboração e suporte prioritário.' },
-    { q: 'Funciona para viagem internacional e mochilão?', a: 'Sim. 205 países no catálogo, com visto pra passaporte BR. Mochilão tem perfil dedicado (custo↑, conforto↓) e funciona melhor com 14+ dias.' },
+    { q: 'Funciona para viagem internacional e mochilão?', a: 'Sim. 205 países no catálogo, com visto pra passaporte BR. Mochilão tem perfil dedicado (custo, conforto) e funciona melhor com 14+ dias.' },
     { q: 'Vocês vendem passagem?', a: 'Não. Por isso o conselho é neutro. Quando achamos que não vale comprar agora, a gente fala — uma OTA jamais diria isso.' },
   ],
   en: [
@@ -135,7 +135,7 @@ export const HOME_FAQ = {
     { q: 'Can I use it for couple, family or backpacking trips?', a: 'Yes. The profile changes the score weights: comfort weighs more in family, cost weighs more in backpacking, safety weighs more solo. You change the profile in /decisao at any time.' },
     { q: 'What\'s in the free plan?', a: 'Discover destinations by profile, compare 3 favorites, plan a route with season × visa × budget, live exchange rate. No credit card.' },
     { q: 'What\'s different in Premium?', a: 'Premium: test as many trip versions as you want, full real cost, flight price alerts, export PDF. Pro: multi-country route with optimized fatigue, collaboration and priority support.' },
-    { q: 'Does it work for international travel and backpacking?', a: 'Yes. 205 countries in the catalog, with visa info for Brazilian passport. Backpacking has a dedicated profile (cost↑, comfort↓) and works better with 14+ days.' },
+    { q: 'Does it work for international travel and backpacking?', a: 'Yes. 205 countries in the catalog, with visa info for Brazilian passport. Backpacking has a dedicated profile (cost, comfort) and works better with 14+ days.' },
     { q: 'Do you sell tickets?', a: 'No. That\'s why advice is neutral. When we think it\'s not worth buying now, we say it — an OTA would never say that.' },
   ],
   es: [
@@ -145,7 +145,7 @@ export const HOME_FAQ = {
     { q: '¿Puedo usarlo para viaje de pareja, familia o mochila?', a: 'Sí. El perfil cambia los pesos del score: confort pesa más en familia, coste pesa más en mochila, seguridad pesa más solo. Cambias el perfil en /decisao en cualquier momento.' },
     { q: '¿Qué tiene el plan gratis?', a: 'Descubrir destinos por perfil, comparar 3 favoritos, planificar ruta con estación × visa × dinero, tipo de cambio en vivo. Sin tarjeta.' },
     { q: '¿Cuál es la diferencia con Premium?', a: 'Premium: probar cuantas versiones del viaje quieras, coste real completo, alertas de precio de vuelo, exportar PDF. Pro: ruta multi-país con cansancio optimizado, colaboración y soporte prioritario.' },
-    { q: '¿Funciona para viaje internacional y mochila?', a: 'Sí. 205 países en el catálogo, con visa para pasaporte BR. Mochila tiene perfil dedicado (coste↑, confort↓) y funciona mejor con 14+ días.' },
+    { q: '¿Funciona para viaje internacional y mochila?', a: 'Sí. 205 países en el catálogo, con visa para pasaporte BR. Mochila tiene perfil dedicado (coste, confort) y funciona mejor con 14+ días.' },
     { q: '¿Venden pasajes?', a: 'No. Por eso el consejo es neutral. Cuando creemos que no vale comprar ahora, lo decimos — una OTA jamás lo diría.' },
   ],
   ja: [
@@ -155,7 +155,7 @@ export const HOME_FAQ = {
     { q: 'カップル、家族、バックパック旅行に使えますか?', a: 'はい。プロフィールでスコアの重みが変わります: 家族では快適、バックパックでは費用、ソロでは安全が重視されます。/decisao でいつでもプロフィールを変更できます。' },
     { q: '無料プランには何がありますか?', a: 'プロフィールでの目的地発見、お気に入り3つの比較、季節×ビザ×予算でのルート計画、リアルタイム為替。カード不要。' },
     { q: 'Premium との違いは?', a: 'Premium: 旅のバージョンを好きなだけテスト、完全な実費、フライト価格アラート、PDFエクスポート。Pro: 疲労最適化された多国ルート、コラボレーション、優先サポート。' },
-    { q: '海外旅行とバックパッキングに使えますか?', a: 'はい。カタログに205か国、ブラジルパスポート向けビザ情報付き。バックパッキング専用プロフィール（費用↑、快適↓）あり、14日以上で最適。' },
+    { q: '海外旅行とバックパッキングに使えますか?', a: 'はい。カタログに205か国、ブラジルパスポート向けビザ情報付き。バックパッキング専用プロフィール（費用、快適）あり、14日以上で最適。' },
     { q: 'チケットを販売しますか?', a: 'いいえ。だからアドバイスは中立です。今買う価値がないと考える時はそう言います — OTAなら絶対に言わないことです。' },
   ],
 };

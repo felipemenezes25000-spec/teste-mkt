@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal } from '../_ui/Modal.jsx';
 import { Button } from '../_ui/Button.jsx';
 import { emailValido } from './utils.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Login por "magic link" (Supabase OTP). Substitui o window.prompt() que
 // bloqueava a aba (e congelava em iframe/automação). onSubmit(email) DEVE lançar
@@ -32,7 +33,7 @@ export default function LoginModal({ onClose, onSubmit, aoUsarChave }) {
 
   return (
     <Modal
-      title={enviado ? 'Confira seu e-mail ✉️' : 'Entrar / criar conta'}
+      title={enviado ? 'Confira seu e-mail ' : 'Entrar / criar conta'}
       onClose={onClose}
       footer={enviado
         ? <Button onClick={onClose}>Entendi</Button>
@@ -75,7 +76,7 @@ export default function LoginModal({ onClose, onSubmit, aoUsarChave }) {
         {aoUsarChave && (
           <div className="mt-4 pt-3 border-t border-line">
             <p className="text-xs text-inksoft mb-2">Não quer criar conta? Use a IA com a <b className="text-ink">sua própria chave</b>, <b className="text-ink">sem login</b> — fica tudo no seu navegador.</p>
-            <Button variant="secondary" className="w-full" onClick={aoUsarChave}>🔑 Usar minha própria chave (sem login)</Button>
+            <Button variant="secondary" className="w-full" onClick={aoUsarChave}><Icon emoji="🔑" /> Usar minha própria chave (sem login)</Button>
           </div>
         )}
         </>

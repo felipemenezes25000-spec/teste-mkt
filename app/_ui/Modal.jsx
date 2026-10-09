@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { Icon } from './Icon.jsx';
 
 export function Modal({ title, onClose, children, footer }) {
   const ref = useRef(null);
@@ -33,7 +34,7 @@ export function Modal({ title, onClose, children, footer }) {
         className="rise w-[min(96vw,580px)] max-h-[90vh] overflow-auto rounded-2xl bg-card border border-line shadow-2xl" onClick={e => e.stopPropagation()}>
         <div className="p-5 border-b border-line flex items-center justify-between sticky top-0 bg-card z-10">
           <h3 className="font-display text-2xl text-ink">{title}</h3>
-          <button onClick={onClose} aria-label="Fechar" className="text-inksoft hover:text-ink focusring text-xl leading-none">✕</button>
+          <button onClick={onClose} aria-label="Fechar" className="text-inksoft hover:text-ink focusring text-xl leading-none"><Icon emoji="✕" /></button>
         </div>
         <div className="p-5 space-y-4">{children}</div>
         {footer && <div className="p-5 border-t border-line flex justify-end gap-2 sticky bottom-0 bg-card">{footer}</div>}

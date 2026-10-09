@@ -2,6 +2,7 @@
 import { useMemo, useState } from 'react';
 import { useCambioBRL } from '../_lib/cambioClient.js';
 import { useIdioma } from '../_lib/i18n.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // "O que fazer e quanto custa" — lista de atrações/museus/passeios com preço de
 // ingresso ou tour (V1) + camada V2 por cidade: dicas de economia, passes,
@@ -74,13 +75,13 @@ export function OQueFazer({ itens = [], v2 = null, cidadePrincipal }) {
 
   return (
     <section aria-labelledby="oque-fazer-titulo">
-      <h2 id="oque-fazer-titulo" className="font-display text-2xl text-ink mb-1">🎟️ {t('destino.fazerTitulo')}</h2>
+      <h2 id="oque-fazer-titulo" className="font-display text-2xl text-ink mb-1"><Icon emoji="🎟️" /> {t('destino.fazerTitulo')}</h2>
       <p className="text-sm text-inksoft mb-4 max-w-2xl">{t('destino.fazerSub')}</p>
 
       <div className="flex flex-wrap gap-1.5 mb-4">
         <button
           type="button" onClick={() => setFiltro('todos')} aria-pressed={filtro === 'todos'}
-          className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition focusring ${filtro === 'todos' ? 'bg-pine text-white border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}
+          className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition focusring ${filtro === 'todos' ? 'bg-pine text-onpine border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}
         >
           {t('destino.fazerTodos')} ({itens.length})
         </button>
@@ -89,9 +90,9 @@ export function OQueFazer({ itens = [], v2 = null, cidadePrincipal }) {
           return (
             <button
               key={c} type="button" onClick={() => setFiltro(c)} aria-pressed={filtro === c}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition focusring ${filtro === c ? 'bg-pine text-white border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition focusring ${filtro === c ? 'bg-pine text-onpine border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}
             >
-              {CAT_ICON[c]} {t(`destino.${CAT_KEY[c]}`)} ({n})
+              <Icon emoji={CAT_ICON[c]} /> {t(`destino.${CAT_KEY[c]}`)} ({n})
             </button>
           );
         })}
@@ -104,12 +105,12 @@ export function OQueFazer({ itens = [], v2 = null, cidadePrincipal }) {
             const tipoLabel = it.precoTipo === 'tour' ? t('destino.precoTour') : it.precoTipo === 'ingresso' ? t('destino.precoIngresso') : it.precoTipo === 'estimado' ? t('destino.precoEstimado') : '';
             return (
               <li key={`${it.nome}-${i}`} className="flex items-center gap-3 px-4 sm:px-5 py-3">
-                <span aria-hidden className="text-lg shrink-0">{CAT_ICON[it.categoria] || '🎫'}</span>
+                <span aria-hidden className="text-lg shrink-0"><Icon emoji={CAT_ICON[it.categoria] || '🎫'} /></span>
                 <div className="min-w-0 flex-1">
                   <div className="text-sm font-semibold text-ink leading-snug">{it.nome}</div>
                   <div className="text-[11px] text-inksoft flex flex-wrap gap-x-2">
-                    {it.cidade && <span>📍 {it.cidade}</span>}
-                    {it.duracao && <span>⏱️ {it.duracao}</span>}
+                    {it.cidade && <span><Icon emoji="📍" /> {it.cidade}</span>}
+                    {it.duracao && <span><Icon emoji="⏱️" /> {it.duracao}</span>}
                   </div>
                 </div>
                 <div className="text-right shrink-0">
@@ -133,7 +134,7 @@ export function OQueFazer({ itens = [], v2 = null, cidadePrincipal }) {
         <div className="mt-6 rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
           <header className="px-4 sm:px-5 py-3 border-b border-line flex items-center justify-between gap-3 flex-wrap">
             <div className="min-w-0">
-              <h3 className="font-display text-lg text-ink leading-tight">🏙️ {t('destino.fazerV2Titulo')} {cidadeV2}</h3>
+              <h3 className="font-display text-lg text-ink leading-tight"><Icon emoji="🏙️" /> {t('destino.fazerV2Titulo')} {cidadeV2}</h3>
               <p className="text-[11px] text-inksoft mt-0.5">{t('destino.fazerV2Sub')} {meta?.pesquisadoEm}.</p>
             </div>
             {cidadesV2.length > 1 ? (
@@ -141,7 +142,7 @@ export function OQueFazer({ itens = [], v2 = null, cidadePrincipal }) {
                 {cidadesV2.map((c) => (
                   <button
                     key={c} type="button" onClick={() => setCidadeV2(c)} aria-pressed={c === cidadeV2}
-                    className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border transition focusring ${c === cidadeV2 ? 'bg-pine text-white border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}
+                    className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border transition focusring ${c === cidadeV2 ? 'bg-pine text-onpine border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}
                   >
                     {c}
                   </button>

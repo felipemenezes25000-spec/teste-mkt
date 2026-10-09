@@ -23,6 +23,7 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@babel/parser": "^7.29.9",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.0",

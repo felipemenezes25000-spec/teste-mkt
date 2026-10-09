@@ -1,5 +1,6 @@
 import { fmtData, linkMapaCoord } from './utils.js';
 import { WORLD_LAND_PATH } from './worldGeo.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Projeção equirectangular: lng/lat -> viewBox 360x180 (igual à do worldGeo.js,
 // então os contornos de terra e os pontos da rota se alinham perfeitamente).
@@ -23,7 +24,7 @@ export default function RouteMap({ trechos, onSelect }) {
   return (
     <section className="rise rounded-3xl border border-line bg-card shadow-[0_18px_50px_-30px_rgba(34,45,43,0.4)] overflow-hidden" aria-label="Mapa da rota">
       <div className="px-5 pt-4 pb-1 flex items-center justify-between gap-2">
-        <h2 className="font-display text-xl text-ink">🗺️ Rota no mapa</h2>
+        <h2 className="font-display text-xl text-ink"><Icon emoji="🗺️" /> Rota no mapa</h2>
         <span className="text-xs text-inksoft">clique num ponto pra ir ao trecho</span>
       </div>
       <div className="px-3 pb-2">
@@ -69,7 +70,7 @@ export default function RouteMap({ trechos, onSelect }) {
           <span key={t.id} className="inline-flex items-center gap-1.5">
             <span className="w-4 h-4 rounded-full bg-ochre text-onochre grid place-items-center text-[9px] font-bold">{i + 1}</span>
             <span className="text-ink">{t.nome}</span>
-            {linkMapaCoord(t.coords) && <a href={linkMapaCoord(t.coords)} target="_blank" rel="noopener noreferrer" className="text-pine hover:underline">↗</a>}
+            {linkMapaCoord(t.coords) && <a href={linkMapaCoord(t.coords)} target="_blank" rel="noopener noreferrer" className="text-pine hover:underline"><Icon emoji="↗" /></a>}
           </span>
         ))}
         {semCoord.length > 0 && <span className="opacity-70">({semCoord.length} trecho(s) sem coordenadas — adicione no país de referência)</span>}

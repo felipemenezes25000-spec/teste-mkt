@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Botões de compartilhamento social. WhatsApp/X são <a> target=_blank (navegação de
 // topo → fora da CSP, sem allowlist). "Copiar" usa clipboard; "📤" usa a Web Share
@@ -34,10 +35,10 @@ export function ShareButtons({ url, titulo, texto }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <span className="text-sm text-inksoft mr-1">Compartilhar:</span>
-      <a href={wa} target="_blank" rel="noopener noreferrer" className={cls}>💬 WhatsApp</a>
+      <a href={wa} target="_blank" rel="noopener noreferrer" className={cls}><Icon emoji="💬" /> WhatsApp</a>
       <a href={x} target="_blank" rel="noopener noreferrer" className={cls} aria-label="Compartilhar no X/Twitter">𝕏 Twitter</a>
-      <button type="button" onClick={copiar} className={cls}>{copiado ? '✓ Copiado!' : '🔗 Copiar link'}</button>
-      <button type="button" onClick={nativo} className={`${cls} sm:hidden`} aria-label="Mais opções de compartilhamento">📤</button>
+      <button type="button" onClick={copiar} className={cls}>{copiado ? 'Copiado!' : 'Copiar link'}</button>
+      <button type="button" onClick={nativo} className={`${cls} sm:hidden`} aria-label="Mais opções de compartilhamento"><Icon emoji="📤" /></button>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { IDIOMAS, useIdioma } from '../_lib/i18n.js';
 import { track } from '../_lib/analytics.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Dropdown compacto de troca de idioma. Botão = bandeira + código (PT/EN/ES/JA).
 // Click → lista com 4 idiomas; Enter/Espaço/Esc/clique-fora fecham; aria-expanded.
@@ -60,7 +61,7 @@ export function IdiomaSwitcher() {
               >
                 <span aria-hidden className="text-base">{i.bandeira}</span>
                 <span className="flex-1">{i.nome}</span>
-                {i.code === idioma && <span aria-hidden className="text-pine">✓</span>}
+                {i.code === idioma && <span aria-hidden className="text-pine"><Icon emoji="✓" /></span>}
               </button>
             </li>
           ))}

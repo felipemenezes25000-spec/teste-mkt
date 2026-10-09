@@ -17,7 +17,7 @@ export function gerarChecklist(plan) {
   const grupos = [];
 
   grupos.push({
-    titulo: '📄 Documentos & seguro',
+    titulo: 'Documentos & seguro',
     itens: [
       { id: 'doc-passaporte', texto: 'Passaporte com 6+ meses de validade na data da volta' },
       { id: 'doc-seguro', texto: 'Seguro viagem com cobertura médica internacional' },
@@ -37,10 +37,10 @@ export function gerarChecklist(plan) {
     }
     if (l.vistoComprovanteSaida) porPais.push({ id: `onward-${l.id}`, texto: `Comprovante de saída de ${nome} (passagem de volta/onward)` });
   });
-  if (porPais.length) grupos.push({ titulo: '🛂 Vistos & entrada (pela sua rota)', itens: porPais });
+  if (porPais.length) grupos.push({ titulo: 'Vistos & entrada (pela sua rota)', itens: porPais });
 
   grupos.push({
-    titulo: '🎒 Antes de embarcar',
+    titulo: 'Antes de embarcar',
     itens: [
       { id: 'prep-chip', texto: 'Chip/eSIM internacional ou plano de dados' },
       { id: 'prep-saude', texto: 'Check-up médico/odontológico e remédios de uso contínuo' },

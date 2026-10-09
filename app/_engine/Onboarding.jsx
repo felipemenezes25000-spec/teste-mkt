@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Modal } from '../_ui/Modal.jsx';
 import { Button } from '../_ui/Button.jsx';
+import { Icon } from '../_ui/Icon.jsx';
 
 const KEY = 'mundosemfim.onboarded.v1';
 
@@ -19,15 +20,15 @@ export default function Onboarding({ forcado, onClose }) {
 
   const Card = ({ icon, t, children }) => (
     <div className="rounded-lg border border-line bg-paper2/50 p-3">
-      <div className="text-lg" aria-hidden>{icon}</div>
+      <div className="text-lg" aria-hidden><Icon emoji={icon} /></div>
       <b className="text-ink text-sm">{t}</b>
       <p className="text-xs text-inksoft mt-0.5">{children}</p>
     </div>
   );
 
   return (
-    <Modal title="Bem-vindo ao Mundo Sem Fim 🧭" onClose={fechar}
-      footer={<Button onClick={fechar}>Começar a planejar →</Button>}>
+    <Modal title="Bem-vindo ao Mundo Sem Fim" onClose={fechar}
+      footer={<Button onClick={fechar}>Começar a planejar <Icon emoji="→" /></Button>}>
       <p className="text-sm text-inksoft">
         O que a gente faz e os apps de férias curtas não fazem: te ajudar a decidir <b className="text-ink">em que ORDEM</b> fazer os países — cruzando os três fatores que quebram um mochilão longo:
       </p>

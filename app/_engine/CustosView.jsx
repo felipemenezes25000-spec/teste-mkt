@@ -1,4 +1,5 @@
 import { fmtMoeda, fmtData } from './utils.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Aba "Custos": quebra de gastos por trecho + detalhe do fôlego. Tudo derivado
 // do mesmo motor (calc), na moeda base.
@@ -16,7 +17,7 @@ export default function CustosView({ calc }) {
               <th className="pr-3 font-semibold">País</th>
               <th className="pr-3 font-semibold">Dias</th>
               <th className="pr-3 font-semibold">Em terra</th>
-              <th className="pr-3 font-semibold">✈ Transp.</th>
+              <th className="pr-3 font-semibold"><Icon emoji="✈" /> Transp.</th>
               <th className="pr-3 font-semibold">Trecho</th>
               <th className="pr-3 font-semibold">Acumulado</th>
             </tr>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { fmtMoeda } from './utils.js';
 import { resumoDe } from './cenarios.js';
 import { Button } from '../_ui/Button.jsx';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Células de métrica de um cenário (reaproveitadas na linha "Atual" e nas salvas).
 function Metricas({ r }) {
@@ -31,12 +32,12 @@ export default function CenariosView({ plan, cenarios, onSalvar, onCarregar, onR
   return (
     <section className="rise rounded-2xl border border-line bg-card p-4 sm:p-5" aria-label="Comparar cenários">
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <h2 className="font-display text-2xl text-ink">⚖️ Comparar cenários</h2>
+        <h2 className="font-display text-2xl text-ink"><Icon emoji="⚖️" /> Comparar cenários</h2>
         <div className="flex items-center gap-2">
           <input value={nome} onChange={(e) => setNome(e.target.value)} placeholder={`Cenário ${cenarios.length + 1}`}
             onKeyDown={(e) => { if (e.key === 'Enter') salvar(); }}
             aria-label="Nome do cenário" className="px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring text-sm w-36" />
-          <Button size="sm" onClick={salvar}>💾 Salvar atual</Button>
+          <Button size="sm" onClick={salvar}><Icon emoji="💾" /> Salvar atual</Button>
         </div>
       </div>
       <p className="mt-1 text-sm text-inksoft">Salve versões da sua rota e compare <b className="text-ink">custo, dias, fôlego, visto e estação</b> lado a lado — pra decidir entre a Rota A e a B.</p>

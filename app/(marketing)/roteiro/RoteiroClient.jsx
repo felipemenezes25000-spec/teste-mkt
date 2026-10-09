@@ -11,6 +11,7 @@ import { CustoVitrineVsReal } from '../../_components/CustoVitrineVsReal.jsx';
 import { calcExemploDestino, resumoVitrineVsReal } from '../../_engine/custoTotal.js';
 import { linkPorCategoria } from '../../_lib/links.js';
 import { track } from '../../_lib/analytics.js';
+import { Icon } from '../../_ui/Icon.jsx';
 
 const RITMOS = [{ id: 'tranquilo', label: 'Tranquilo' }, { id: 'equilibrado', label: 'Equilibrado' }, { id: 'intenso', label: 'Intenso' }];
 const CONFORTOS = [{ id: 'mochila', label: 'Mochila' }, { id: 'médio', label: 'Médio' }, { id: 'conforto', label: 'Conforto' }];
@@ -20,14 +21,14 @@ const CAT_ICON = { cultura: '🏛️', natureza: '🌿', gastronomia: '🍽️',
 
 // Roteiros temáticos = presets que pré-preenchem o form (interesses + conforto + ritmo).
 const TEMAS = [
-  { id: 'gastronomico', label: '🍽️ Gastronômico', interesses: ['Gastronomia', 'Cultura'], conforto: 'médio', ritmo: 'equilibrado' },
-  { id: 'romantico', label: '💞 Romântico', interesses: ['Gastronomia', 'Praia', 'Cultura'], conforto: 'conforto', ritmo: 'tranquilo' },
-  { id: 'familia', label: '👨‍👩‍👧 Família', interesses: ['Natureza', 'Cultura', 'Praia'], conforto: 'médio', ritmo: 'tranquilo' },
-  { id: 'mochileiro', label: '🎒 Mochileiro', interesses: ['Natureza', 'Aventura', 'Cultura'], conforto: 'mochila', ritmo: 'intenso' },
-  { id: 'luxo', label: '✨ Luxo', interesses: ['Gastronomia', 'Cultura'], conforto: 'conforto', ritmo: 'tranquilo' },
-  { id: 'cultural', label: '🏛️ Cultural', interesses: ['Cultura', 'História', 'Gastronomia'], conforto: 'médio', ritmo: 'equilibrado' },
-  { id: 'aventura', label: '⛰️ Aventura', interesses: ['Natureza', 'Aventura'], conforto: 'mochila', ritmo: 'intenso' },
-  { id: 'praia', label: '🏖️ Praia & relax', interesses: ['Praia', 'Natureza'], conforto: 'médio', ritmo: 'tranquilo' },
+  { id: 'gastronomico', label: 'Gastronômico', interesses: ['Gastronomia', 'Cultura'], conforto: 'médio', ritmo: 'equilibrado' },
+  { id: 'romantico', label: 'Romântico', interesses: ['Gastronomia', 'Praia', 'Cultura'], conforto: 'conforto', ritmo: 'tranquilo' },
+  { id: 'familia', label: 'Família', interesses: ['Natureza', 'Cultura', 'Praia'], conforto: 'médio', ritmo: 'tranquilo' },
+  { id: 'mochileiro', label: 'Mochileiro', interesses: ['Natureza', 'Aventura', 'Cultura'], conforto: 'mochila', ritmo: 'intenso' },
+  { id: 'luxo', label: 'Luxo', interesses: ['Gastronomia', 'Cultura'], conforto: 'conforto', ritmo: 'tranquilo' },
+  { id: 'cultural', label: 'Cultural', interesses: ['Cultura', 'História', 'Gastronomia'], conforto: 'médio', ritmo: 'equilibrado' },
+  { id: 'aventura', label: 'Aventura', interesses: ['Natureza', 'Aventura'], conforto: 'mochila', ritmo: 'intenso' },
+  { id: 'praia', label: 'Praia & relax', interesses: ['Praia', 'Natureza'], conforto: 'médio', ritmo: 'tranquilo' },
 ];
 
 export function RoteiroClient() {
@@ -92,7 +93,7 @@ export function RoteiroClient() {
           <div className="flex flex-wrap gap-1.5">
             {TEMAS.map((t) => (
               <button key={t.id} type="button" onClick={() => aplicarTema(t)} aria-pressed={tema === t.id}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition focusring ${tema === t.id ? 'bg-pine text-white border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}>{t.label}</button>
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition focusring ${tema === t.id ? 'bg-pine text-onpine border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}>{t.label}</button>
             ))}
           </div>
         </div>
@@ -164,7 +165,7 @@ export function RoteiroClient() {
               const on = interesses.includes(i);
               return (
                 <button key={i} type="button" onClick={() => toggleInteresse(i)} aria-pressed={on}
-                  className={`px-3 py-1.5 rounded-full text-xs border transition focusring ${on ? 'bg-pine text-white border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}>{i}</button>
+                  className={`px-3 py-1.5 rounded-full text-xs border transition focusring ${on ? 'bg-pine text-onpine border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}>{i}</button>
               );
             })}
           </div>
@@ -178,7 +179,7 @@ export function RoteiroClient() {
           </label>
           <button onClick={gerar} disabled={busy}
             className="ml-auto inline-flex items-center justify-center gap-2 rounded-xl bg-ochre text-onochre font-semibold px-5 py-2.5 shadow-md hover:brightness-95 disabled:opacity-60 focusring">
-            {busy ? <><span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" aria-hidden /> Montando…</> : '✨ Gerar roteiro'}
+            {busy ? <><span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" aria-hidden /> Montando…</> : 'Gerar roteiro'}
           </button>
         </div>
       </div>
@@ -208,7 +209,7 @@ export function RoteiroClient() {
       {erro && (
         <div className="mt-4 rounded-xl border border-danger-bd bg-danger-bg text-danger px-4 py-3 text-sm">
           {erro}{' '}
-          <Link href="/planejar" className="underline font-semibold">Entrar ou configurar a IA →</Link>
+          <Link href="/planejar" className="underline font-semibold">Entrar ou configurar a IA <Icon emoji="→" /></Link>
         </div>
       )}
 
@@ -240,14 +241,14 @@ function RoteiroView({ roteiro, destino, onRegerar }) {
             <h2 className="font-display text-2xl text-ink">{destino.nome} · {roteiro.dias.length} dia(s)</h2>
             {roteiro.resumo && <p className="mt-1 text-sm text-inksoft max-w-2xl">{roteiro.resumo}</p>}
           </div>
-          {roteiro.custoEstimado && <span className="inline-flex items-center gap-1 rounded-full bg-card border border-line px-3 py-1.5 text-sm font-semibold text-ink shrink-0">💰 {roteiro.custoEstimado}</span>}
+          {roteiro.custoEstimado && <span className="inline-flex items-center gap-1 rounded-full bg-card border border-line px-3 py-1.5 text-sm font-semibold text-ink shrink-0"><Icon emoji="💰" /> {roteiro.custoEstimado}</span>}
         </div>
         <div className="mt-3 flex flex-wrap gap-2 no-print">
-          <button onClick={onRegerar} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">↻ Gerar de novo</button>
+          <button onClick={onRegerar} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring"><Icon emoji="↻" /> Gerar de novo</button>
           {liberaPdf ? (
-            <button onClick={() => window.print()} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">⬇ Exportar PDF</button>
+            <button onClick={() => window.print()} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring"><Icon emoji="⬇" /> Exportar PDF</button>
           ) : (
-            <Link href="/planos" title="Exportar PDF é um recurso premium" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-ochre/40 bg-ochre/5 text-ochre hover:brightness-95 focusring">🔒 Exportar PDF (Premium)</Link>
+            <Link href="/planos" title="Exportar PDF é um recurso premium" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-ochre/40 bg-ochre/5 text-ochre hover:brightness-95 focusring"><Icon emoji="🔒" /> Exportar PDF (Premium)</Link>
           )}
         </div>
       </div>
@@ -264,10 +265,10 @@ function RoteiroView({ roteiro, destino, onRegerar }) {
       </div>
 
       <div className="mt-4 grid sm:grid-cols-2 gap-3">
-        <Lista titulo="✅ Checklist" itens={roteiro.checklist} />
-        <Lista titulo="🛂 Documentos & vacinas" itens={roteiro.documentos} />
-        <Lista titulo="🛟 Segurança" itens={roteiro.seguranca} />
-        <Lista titulo="💸 Como economizar" itens={roteiro.economia} />
+        <Lista titulo="Checklist" itens={roteiro.checklist} />
+        <Lista titulo="Documentos & vacinas" itens={roteiro.documentos} />
+        <Lista titulo="Segurança" itens={roteiro.seguranca} />
+        <Lista titulo="Como economizar" itens={roteiro.economia} />
       </div>
 
       <p className="mt-4 text-xs text-inksoft">Roteiro gerado por IA — estimativas e sugestões. Confira horários, preços e regras na fonte oficial antes de ir.</p>
@@ -323,7 +324,7 @@ function DiaCard({ d, destino }) {
             <span className="text-xs font-semibold text-ink tnum whitespace-nowrap">~{leitura.custoDia} (custo do dia)</span>
           )}
         </div>
-        <p className="mt-1.5 text-[11px] text-inksoft">{leitura.ui.txt}.{leitura.alertaDeslocamento ? ' ⚠ Excesso de deslocamento — agrupe atividades por região.' : ''}</p>
+        <p className="mt-1.5 text-[11px] text-inksoft">{leitura.ui.txt}.{leitura.alertaDeslocamento ? 'Excesso de deslocamento — agrupe atividades por região.' : ''}</p>
       </div>
       <ol className="divide-y divide-line">
         {d.itens.map((it) => <ItemRow key={`${it.hora}-${it.atividade}`} it={it} destino={destino} />)}
@@ -342,7 +343,7 @@ function ItemRow({ it, destino }) {
     <li className="p-4 flex gap-3">
       <div className="flex flex-col items-center shrink-0 w-14">
         <span className="text-xs font-bold text-pine tnum">{it.hora || '—'}</span>
-        <span className="text-lg mt-1" aria-hidden>{icon}</span>
+        <span className="text-lg mt-1" aria-hidden><Icon emoji={icon} /></span>
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex flex-wrap items-baseline gap-x-2">
@@ -352,14 +353,14 @@ function ItemRow({ it, destino }) {
         </div>
         {it.local && (
           <div className="text-sm text-inksoft">
-            {maps ? <a href={maps} target="_blank" rel="noopener noreferrer" className="hover:text-pine hover:underline focusring">📍 {it.local} ↗</a> : <>📍 {it.local}</>}
+            {maps ? <a href={maps} target="_blank" rel="noopener noreferrer" className="hover:text-pine hover:underline focusring"><Icon emoji="📍" /> {it.local} <Icon emoji="↗" /></a> : <><Icon emoji="📍" /> {it.local}</>}
           </div>
         )}
-        {it.dica && <div className="text-xs text-inksoft mt-1">💡 {it.dica}</div>}
+        {it.dica && <div className="text-xs text-inksoft mt-1"><Icon emoji="💡" /> {it.dica}</div>}
         {(it.gratis || it.planoB) && (
           <div className="mt-1.5 flex flex-wrap gap-1.5">
-            {it.gratis && <span className="text-[11px] bg-success-bg text-success border border-success-bd rounded-full px-2 py-0.5">🆓 {it.gratis}</span>}
-            {it.planoB && <span className="text-[11px] bg-warn-bg text-warn border border-warn-bd rounded-full px-2 py-0.5">🌧️ {it.planoB}</span>}
+            {it.gratis && <span className="text-[11px] bg-success-bg text-success border border-success-bd rounded-full px-2 py-0.5"><Icon emoji="🆓" /> {it.gratis}</span>}
+            {it.planoB && <span className="text-[11px] bg-warn-bg text-warn border border-warn-bd rounded-full px-2 py-0.5"><Icon emoji="🌧️" /> {it.planoB}</span>}
           </div>
         )}
         {cta && (
@@ -368,7 +369,7 @@ function ItemRow({ it, destino }) {
             onClick={() => track('reservar_click', { categoria: it.categoria || '', parceiro: cta.parceiro, destino: destino && destino.nome })}
             className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-pine bg-pine/10 hover:bg-pine/15 rounded-lg px-2.5 py-1 focusring no-print"
           >
-            {cta.icon} {cta.label} ↗
+            <Icon emoji={cta.icon} /> {cta.label} <Icon emoji="↗" />
           </a>
         )}
       </div>

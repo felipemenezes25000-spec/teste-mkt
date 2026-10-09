@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { track } from '../../_lib/analytics.js';
 import { useIdioma } from '../../_lib/i18n.js';
+import { Icon } from '../../_ui/Icon.jsx';
 
 // Calculadora "quanto custa uma escolha ruim": o usuário marca quais erros já
 // cometeu (ou pode cometer) e a UI soma. Sempre maior que 12 meses de Premium
@@ -45,7 +46,7 @@ export function ROICalculator() {
   return (
     <div className="mt-10 rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
       <div className="p-6 sm:p-8 border-b border-line bg-paper2/40">
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-coral">{t('planos.roiSelo')}</span>
+        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-pine">{t('planos.roiSelo')}</span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.05]">
           {t('planos.roiH2')}
         </h2>
@@ -64,13 +65,13 @@ export function ROICalculator() {
                   type="button"
                   onClick={() => toggle(e.id)}
                   aria-pressed={ativo}
-                  className={`w-full text-left rounded-2xl border p-3 sm:p-4 transition focusring flex items-start gap-3 ${ativo ? 'border-coral bg-coral/[0.06]' : 'border-line bg-paper2/40 hover:border-pine/40'}`}
+                  className={`w-full text-left rounded-2xl border p-3 sm:p-4 transition focusring flex items-start gap-3 ${ativo ? 'border-pine bg-pine/5' : 'border-line bg-paper2/40 hover:border-pine/40'}`}
                 >
                   <span
                     aria-hidden
-                    className={`shrink-0 mt-0.5 w-5 h-5 rounded-md border grid place-items-center text-xs font-bold ${ativo ? 'bg-coral border-coral text-oncoral' : 'border-line bg-card text-transparent'}`}
+                    className={`shrink-0 mt-0.5 w-5 h-5 rounded-md border grid place-items-center text-xs font-bold ${ativo ? 'bg-pine border-pine text-onpine' : 'border-line bg-card text-transparent'}`}
                   >
-                    ✓
+                    <Icon emoji="✓" />
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-2">
@@ -86,7 +87,7 @@ export function ROICalculator() {
         </ul>
 
         <div className="p-5 sm:p-6 bg-paper2/30 lg:border-l border-line">
-          <div className="rounded-3xl bg-pine text-white p-5 shadow-[var(--e-1)]">
+          <div className="rounded-3xl bg-pine text-onpine p-5 shadow-[var(--e-1)]">
             <div className="text-[11px] font-bold uppercase tracking-wide opacity-85">{t('planos.custoErros')}</div>
             <div className="mt-1 font-display text-5xl tnum">R$ {total.toLocaleString('pt-BR')}</div>
             <p className="mt-2 text-xs opacity-85">{t('planos.umaViagem')}</p>

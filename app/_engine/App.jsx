@@ -28,6 +28,7 @@ import CenariosView from './CenariosView.jsx';
 import { carregarCenarios, salvarCenarios, snapshotCenario } from './cenarios.js';
 import ChecklistView from './ChecklistView.jsx';
 import { carregarCheck, salvarCheck } from './checklist.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Quando o backend (Render) tem a chave de IA, a IA funciona sem chave do usuário.
 const AI_SERVIDOR = process.env.NEXT_PUBLIC_AI_SERVER === '1';
@@ -62,7 +63,7 @@ function AdicionarPais({ onAdd }) {
   return (
     <div ref={ref} className="rise rounded-2xl border border-dashed border-pine/40 bg-pine/5 p-4">
       <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-        <div className="text-sm text-pine font-semibold shrink-0">➕ Adicionar país</div>
+        <div className="text-sm text-pine font-semibold shrink-0"><Icon emoji="➕" /> Adicionar país</div>
         <div className="relative flex-1">
           <input
             value={q} onChange={(e) => { setQ(e.target.value); setOpen(true); }} onFocus={() => setOpen(true)} onKeyDown={onKey}
@@ -110,7 +111,7 @@ function ParametrosViagem({ settings, base, onSet, onBase, onPassaporte }) {
     <section className="rise rounded-2xl border border-line bg-card overflow-hidden" aria-label="Parâmetros da viagem">
       <button type="button" onClick={toggle} aria-expanded={aberto}
         className="w-full flex items-center gap-3 px-4 py-3 text-left focusring">
-        <span className="font-display text-lg text-ink whitespace-nowrap">⚙ Parâmetros da viagem</span>
+        <span className="font-display text-lg text-ink whitespace-nowrap"><Icon emoji="⚙" /> Parâmetros da viagem</span>
         {!aberto && (
           <span className="text-xs text-inksoft truncate">
             Início {settings.dataInicio} · Orçamento {fmtMoeda(num(settings.orcamento), base)} · Base {base} · {PASSAPORTES[settings.passaporte]}
@@ -363,7 +364,7 @@ export default function App() {
   function handleOtimizarGratis() {
     if (plan.legs.length < 2) { toast('Adicione pelo menos 2 países pra otimizar.', 'erro'); return; }
     const { order, resumo, melhorou } = otimizarOrdemLocal(plan);
-    if (!melhorou) { toast('A ordem atual já está bem otimizada. 👍'); return; }
+    if (!melhorou) { toast('A ordem atual já está bem otimizada. '); return; }
     setPlan(p => ({ ...p, legs: order.map(id => p.legs.find(l => l.id === id)).filter(Boolean) }));
     setRationales({}); setOptResumo(resumo);
     toast('Rota reordenada pela melhor época e menor zigue-zague — grátis, na hora.');
@@ -484,7 +485,7 @@ export default function App() {
       <header className="sticky top-0 z-30 backdrop-blur bg-paper/80 border-b border-line">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2">
           <Link href="/" title="Início / Explorar destinos" className="flex items-center gap-2.5 mr-auto focusring rounded-lg">
-            <div className="w-9 h-9 rounded-xl bg-pine text-white grid place-items-center font-display text-lg shadow-md" aria-hidden>∞</div>
+            <div className="w-9 h-9 rounded-xl bg-pine text-onpine grid place-items-center font-display text-lg shadow-md" aria-hidden>∞</div>
             <div className="leading-tight">
               <div className="font-display text-xl text-ink">Mundo Sem Fim</div>
               <div className="text-[11px] text-inksoft -mt-0.5">Estação × Visto × Fôlego, na ordem certa</div>
@@ -505,11 +506,11 @@ export default function App() {
                 <span aria-hidden className="text-lg leading-none">⋯</span>
               </summary>
               <div className="absolute right-0 mt-1 w-52 rounded-lg border border-line bg-card shadow-lg p-1 z-40 flex flex-col">
-                <button onClick={compartilhar} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">🔗 Compartilhar (copiar link)</button>
-                <button onClick={() => { if (baixarICS(calc)) toast('Calendário .ics baixado — importe no Google/Apple Calendar.'); }} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">📅 Exportar calendário (.ics)</button>
-                <button onClick={() => { const u = linkMapaRota(plan); if (u) window.open(u, '_blank', 'noopener'); else toast('Adicione 2+ trechos pra ver a rota no Maps.', 'erro'); }} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">🗺️ Ver rota no Google Maps</button>
-                <button onClick={() => exportarPlano(plan)} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">⬇ Exportar JSON</button>
-                <button onClick={() => importRef.current && importRef.current.click()} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring">⬆ Importar JSON</button>
+                <button onClick={compartilhar} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="🔗" /> Compartilhar (copiar link)</button>
+                <button onClick={() => { if (baixarICS(calc)) toast('Calendário .ics baixado — importe no Google/Apple Calendar.'); }} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="📅" /> Exportar calendário (.ics)</button>
+                <button onClick={() => { const u = linkMapaRota(plan); if (u) window.open(u, '_blank', 'noopener'); else toast('Adicione 2+ trechos pra ver a rota no Maps.', 'erro'); }} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="🗺️" /> Ver rota no Google Maps</button>
+                <button onClick={() => exportarPlano(plan)} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="⬇" /> Exportar JSON</button>
+                <button onClick={() => importRef.current && importRef.current.click()} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="⬆" /> Importar JSON</button>
               </div>
             </details>
             <input ref={importRef} type="file" accept="application/json,.json" onChange={handleImport} className="hidden" aria-hidden tabIndex={-1} />
@@ -539,8 +540,8 @@ export default function App() {
 
         {optResumo && (
           <div className="rise rounded-xl border border-warn-bd bg-warn-bg text-warn px-4 py-3 text-sm flex items-start gap-2">
-            <span aria-hidden>🧭</span><div className="flex-1"><b>Otimizador:</b> {optResumo}</div>
-            <button onClick={() => setOptResumo('')} aria-label="Fechar resumo" className="opacity-60 hover:opacity-100 focusring">✕</button>
+            <span aria-hidden><Icon emoji="🧭" /></span><div className="flex-1"><b>Otimizador:</b> {optResumo}</div>
+            <button onClick={() => setOptResumo('')} aria-label="Fechar resumo" className="opacity-60 hover:opacity-100 focusring"><Icon emoji="✕" /></button>
           </div>
         )}
 
@@ -568,12 +569,12 @@ export default function App() {
             <div className="flex flex-wrap items-center gap-3 mb-3">
               <h2 className="font-display text-2xl text-ink mr-auto">Sua rota <span className="text-inksoft text-base font-sans">· {plan.legs.length} trecho(s) · {dur(calc.diasTotais)}</span></h2>
               <label className="text-xs text-inksoft flex items-center gap-1 bg-card border border-line rounded-lg px-2 py-1" title="Origem do 1º voo (busca de passagem).">
-                ✈ Saindo de
+                <Icon emoji="✈" /> Saindo de
                 <input value={plan.settings.origemCidade} onChange={(e) => setSettings({ origemCidade: e.target.value })} aria-label="Cidade de origem" className="w-20 bg-transparent text-ink focusring" />
                 <input value={plan.settings.origemIata} onChange={(e) => setSettings({ origemIata: e.target.value.toUpperCase().slice(0, 3) })} aria-label="Aeroporto de origem (código IATA)" placeholder="IATA" className="w-12 bg-transparent text-ink focusring uppercase" />
               </label>
-              <Button variant="accent" onClick={handleOtimizarGratis}>✨ Otimizar ordem (grátis)</Button>
-              <Button variant="secondary" size="sm" onClick={handleOtimizar} loading={otimizando} title="Reordena e explica o porquê de cada país (usa IA)">{otimizando ? 'IA…' : '🧭 + justificativas (IA)'}</Button>
+              <Button variant="accent" onClick={handleOtimizarGratis}><Icon emoji="✨" /> Otimizar ordem (grátis)</Button>
+              <Button variant="secondary" size="sm" onClick={handleOtimizar} loading={otimizando} title="Reordena e explica o porquê de cada país (usa IA)">{otimizando ? 'IA…' : '+ justificativas (IA)'}</Button>
               <div className="flex items-center gap-1.5">
                 <Button variant="secondary" size="sm" onClick={carregarExemplo}>Exemplo</Button>
                 <Button variant="ghost" size="sm" onClick={limparTudo}>Limpar</Button>
@@ -605,7 +606,7 @@ export default function App() {
                       <div className="route-line py-1.5" aria-hidden>
                         {calc.trechos[i + 1].custoTransporte > 0 && (
                           <span className="ml-3 inline-flex items-center gap-1 text-[11px] text-inksoft bg-paper2 border border-line rounded-full px-2 py-0.5 tnum">
-                            ✈ {fmtMoeda(calc.trechos[i + 1].custoTransporte, base)}
+                            <Icon emoji="✈" /> {fmtMoeda(calc.trechos[i + 1].custoTransporte, base)}
                             {calc.trechos[i + 1].transporteNota ? ` · ${calc.trechos[i + 1].transporteNota}` : ''}
                           </span>
                         )}

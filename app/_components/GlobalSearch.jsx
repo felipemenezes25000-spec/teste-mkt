@@ -3,6 +3,7 @@ import { useState, useMemo, useRef, useEffect, useId } from 'react';
 import { useRouter } from 'next/navigation';
 import { DESTINOS } from '../_lib/destinos.js';
 import { flagUrl } from '../_lib/flags.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 export function GlobalSearch() {
   const [q, setQ] = useState('');
@@ -43,17 +44,18 @@ export function GlobalSearch() {
 
   return (
     <div ref={ref} className="relative">
+      <Icon name="search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-inksoft pointer-events-none" />
       <input
         value={q}
         onChange={(e) => { setQ(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
         onKeyDown={onKey}
-        placeholder="🔍 Buscar país…"
+        placeholder="Buscar país ou cidade…"
         aria-label="Buscar destino"
         role="combobox" aria-expanded={open && results.length > 0} aria-autocomplete="list"
         aria-controls={listId}
         aria-activedescendant={open && results.length > 0 ? `${listId}-${ativo}` : undefined}
-        className="w-28 sm:w-44 px-3 py-1.5 rounded-lg border border-line bg-input text-ink text-sm focusring"
+        className="w-full md:w-56 xl:w-64 h-9 pl-9 pr-3 rounded-lg border border-line bg-input text-ink text-sm placeholder:text-inksoft focusring"
       />
       {open && results.length > 0 && (
         <ul id={listId} className="absolute z-50 mt-1 left-0 w-64 max-h-80 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox">

@@ -6,6 +6,7 @@ import { custoTotalRealista, PREMISSAS_PADRAO } from '../../_engine/custoTotal.j
 import { useCambioBRL, CambioBadge, BRL_FALLBACK } from '../../_lib/cambioClient.js';
 import { track } from '../../_lib/analytics.js';
 import { useIdioma } from '../../_lib/i18n.js';
+import { Icon } from '../../_ui/Icon.jsx';
 
 // Calculadora prescritiva: o usuário escolhe destino + dias + perfil + mês +
 // pessoas; mostramos vitrine (voo+hotel) vs custo real completo, breakdown por
@@ -31,7 +32,7 @@ const ORIGENS = [
 const PERFIS = [
   { id: 'mochila', label: 'Mochilão', mult: 0.7, desc: 'hostel, comida de rua, ônibus' },
   { id: 'medio', label: 'Equilibrado', mult: 1.0, desc: 'pousada, restaurante local, ônibus + esporádico Uber' },
-  { id: 'conforto', label: 'Conforto', mult: 1.9, desc: 'hotel 3-4★, restaurante turístico, transfer' },
+  { id: 'conforto', label: 'Conforto', mult: 1.9, desc: 'hotel 3-4, restaurante turístico, transfer' },
 ];
 
 const MESES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
@@ -195,7 +196,7 @@ export function CustoRealClient({ destinos }) {
               <div className="mt-2 font-display text-3xl text-warn tnum">{fmtBRL(escondidoBRL)}</div>
               <div className="text-[11px] text-warn tnum">{fmtUSD(resultado.escondido)}</div>
             </div>
-            <div className="p-5 bg-pine text-white">
+            <div className="p-5 bg-pine text-onpine">
               <div className="text-[11px] font-bold uppercase tracking-wide opacity-85">Custo real total</div>
               <div className="text-xs opacity-75 mt-0.5">A viagem inteira, {dias} dias, {pessoas} pessoa(s)</div>
               <div className="mt-2 font-display text-3xl tnum">{fmtBRL(totalBRL)}</div>
@@ -203,9 +204,9 @@ export function CustoRealClient({ destinos }) {
             </div>
           </div>
           <div className="px-5 py-3 border-t border-line bg-paper2/50 text-xs text-inksoft flex flex-wrap gap-x-5 gap-y-1">
-            <span>📅 {fmtBRL(resultado.porDia * cambio.brl)} por dia</span>
-            <span>👤 {fmtBRL(resultado.porPessoa * cambio.brl)} por pessoa</span>
-            <span>✈️ voo estimado: {fmtUSD(resultado.vooUSD / Math.max(1, pessoas))}/pessoa</span>
+            <span><Icon emoji="📅" /> {fmtBRL(resultado.porDia * cambio.brl)} por dia</span>
+            <span><Icon emoji="👤" /> {fmtBRL(resultado.porPessoa * cambio.brl)} por pessoa</span>
+            <span><Icon emoji="✈️" /> voo estimado: {fmtUSD(resultado.vooUSD / Math.max(1, pessoas))}/pessoa</span>
           </div>
         </div>
 
@@ -218,7 +219,7 @@ export function CustoRealClient({ destinos }) {
               const isMaior = c.id === maiorCategoria.id;
               return (
                 <li key={c.id} className="grid grid-cols-[24px_1fr_auto] gap-2 items-center">
-                  <span aria-hidden>{c.icon}</span>
+                  <span aria-hidden><Icon emoji={c.icon} /></span>
                   <div className="min-w-0">
                     <div className="flex items-baseline justify-between gap-2">
                       <span className="text-sm text-ink truncate">{c.label}</span>
@@ -274,8 +275,8 @@ export function CustoRealClient({ destinos }) {
             <li>• Câmbio variando R$ 0,30 muda o total em ~{fmtBRL((resultado.total * 0.3 * pessoas) || 200)}. Compre dólar/euro com calma.</li>
           </ul>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href={`/destino/${destino.slug}`} className="inline-flex rounded-xl bg-pine text-white font-semibold px-4 py-2 text-sm hover:bg-pinedk focusring">
-              Ver alertas do destino →
+            <Link href={`/destino/${destino.slug}`} className="inline-flex rounded-xl bg-pine text-onpine font-semibold px-4 py-2 text-sm hover:bg-pinedk focusring">
+              Ver alertas do destino <Icon emoji="→" />
             </Link>
             <Link href={`/roteiro?destino=${destino.slug}`} className="inline-flex rounded-xl border border-warn bg-card text-warn font-semibold px-4 py-2 text-sm hover:bg-warn/10 focusring">
               Montar roteiro neste orçamento

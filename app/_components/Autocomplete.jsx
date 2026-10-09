@@ -1,4 +1,5 @@
 'use client';
+import { Icon } from '../_ui/Icon.jsx';
 import { useState, useMemo, useRef, useEffect, useId } from 'react';
 
 // Combobox acessível e reutilizável: digite pra filtrar, ↑↓ navega, Enter seleciona,
@@ -46,20 +47,23 @@ export function Autocomplete({
     else if (e.key === 'Escape') { setOpen(false); setEditing(false); }
   }
 
-  const field = 'w-full px-3 py-2 rounded-lg border border-line bg-input text-ink focusring text-sm';
+  const field = 'w-full pl-9 pr-3 py-2 rounded-lg border border-line bg-input text-ink focusring text-sm';
   return (
     <div ref={ref} className={`relative ${className}`}>
       {label && <span className="text-xs text-inksoft font-medium block mb-1">{label}</span>}
+      <span className="relative block">
+      <Icon emoji={icon} size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-inksoft pointer-events-none" />
       <input
         value={editing ? q : text}
         onChange={(e) => { setQ(e.target.value); setEditing(true); setOpen(true); }}
         onFocus={() => { setEditing(true); setOpen(true); setQ(''); }}
         onKeyDown={onKey}
-        placeholder={`${icon} ${placeholder}`}
+        placeholder={placeholder}
         aria-label={label || placeholder}
         role="combobox" aria-expanded={open && results.length > 0} aria-controls={listId} aria-autocomplete="list"
         className={field}
       />
+      </span>
       {open && results.length > 0 && (
         <ul id={listId} role="listbox" className="absolute z-50 mt-1 left-0 w-full max-h-72 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1">
           {results.map((it, i) => (

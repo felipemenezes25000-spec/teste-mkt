@@ -3,6 +3,7 @@ import { AI_PROVIDERS, MOEDAS } from './data.js';
 import { fmtTimestamp, num } from './utils.js';
 import { Modal } from '../_ui/Modal.jsx';
 import { Button } from '../_ui/Button.jsx';
+import { Icon } from '../_ui/Icon.jsx';
 
 const nomeMoeda = (code) => (MOEDAS.find(m => m.code === code) || {}).nome || code;
 
@@ -22,7 +23,7 @@ export default function ConfigIA({ ai, onSaveAi, onClose, fx, moedasEmUso, onAtu
       <p className="text-sm text-inksoft">As features de IA chamam o provedor que você escolher, com a <b>sua própria chave</b> — guardada só no seu navegador, nada vai pra servidor nenhum. <b className="text-ink">Funciona sem login.</b></p>
 
       <div className="text-xs bg-success-bg border border-success-bd text-success rounded-lg p-3">
-        <p className="font-semibold mb-1">🎁 Não tem chave? Pegue uma de graça (Groq, ~2 min):</p>
+        <p className="font-semibold mb-1"><Icon emoji="🎁" /> Não tem chave? Pegue uma de graça (Groq, ~2 min):</p>
         <ol className="list-decimal pl-4 space-y-0.5">
           <li>Crie conta em <b>console.groq.com</b> (gratuito).</li>
           <li>Em <b>API Keys</b>, gere uma chave (começa com <code>gsk_</code>).</li>
@@ -58,7 +59,7 @@ export default function ConfigIA({ ai, onSaveAi, onClose, fx, moedasEmUso, onAtu
       <div className="border-t border-line pt-4">
         <div className="flex items-center justify-between gap-2">
           <h4 className="font-display text-lg text-ink">Câmbio</h4>
-          <Button variant="secondary" size="sm" onClick={onAtualizarCambio} loading={cambioBusy}>↻ Atualizar câmbio agora</Button>
+          <Button variant="secondary" size="sm" onClick={onAtualizarCambio} loading={cambioBusy}><Icon emoji="↻" /> Atualizar câmbio agora</Button>
         </div>
         <p className="text-xs text-inksoft mt-1">
           {fx && fx.atualizadoEm ? `Atualizado em ${fmtTimestamp(fx.atualizadoEm)} (fonte gratuita, sem chave).` : 'Usando taxas iniciais aproximadas — clique em atualizar quando tiver internet.'}
@@ -77,7 +78,7 @@ export default function ConfigIA({ ai, onSaveAi, onClose, fx, moedasEmUso, onAtu
       </div>
 
       <div className="text-xs text-inksoft bg-paper2 rounded-lg p-3 border border-line">
-        ⚠ A chave de IA fica em texto no <code>localStorage</code> deste navegador. Não use em computador compartilhado e <b>nunca</b> compartilhe o arquivo exportado (a exportação já remove a chave por segurança).
+        <Icon emoji="⚠" /> A chave de IA fica em texto no <code>localStorage</code> deste navegador. Não use em computador compartilhado e <b>nunca</b> compartilhe o arquivo exportado (a exportação já remove a chave por segurança).
       </div>
     </Modal>
   );

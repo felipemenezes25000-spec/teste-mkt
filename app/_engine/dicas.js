@@ -66,7 +66,7 @@ const POR_PAIS = {
   PE: { saude: ['Cusco (3.400m): aclimatize antes de Machu Picchu; ande devagar no 1º dia.'] },
   ZA: { seguranca: ['Cidade do Cabo/Joanesburgo: não caminhe à noite, use carro/app; pesquise bairros.'] },
   TH: { golpes: ['Aluguel de moto/jetski com "dano pré-existente" cobrado depois — fotografe tudo na retirada.'] },
-  MA: { golpes: ['Na medina de Marraquexe, "o caminho está fechado, eu te levo" → cobra depois. Use maps offline.'] },
+  MA: { golpes: ['Na medina de Marraquexe, "o caminho está fechado, eu te levo" cobra depois. Use maps offline.'] },
 };
 
 const VAZIO = { seguranca: [], golpes: [], saude: [], transporte: [], conectividade: [] };

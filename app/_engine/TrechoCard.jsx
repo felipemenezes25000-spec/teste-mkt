@@ -4,6 +4,7 @@ import { fmtMoeda, fmtData, simbolo, num, clamp, toISO, linksVoo, linkMapaTexto,
 import { buscarLugar } from './services.js';
 import { MoedaPicker } from '../_components/MoedaPicker.jsx';
 import { ESTACAO_UI, VISTO_UI, NumberInput, MesesPicker, StatusChip } from './components.jsx';
+import { Icon } from '../_ui/Icon.jsx';
 
 /* Card de um trecho. v4: foto do local (Wikipedia), busca de voo do trecho (origem→destino),
    e painel de cidades (com Google Maps + fotos) e comidas típicas.
@@ -71,7 +72,7 @@ export default function TrechoCard(props) {
               <div className="relative h-28 sm:h-32 rounded-xl overflow-hidden mb-3 border border-line">
                 <img src={hero.img} alt={`Foto de ${t.nome}`} loading="lazy" className="w-full h-full object-cover" />
                 {hero.url && <a href={hero.url} target="_blank" rel="noopener noreferrer"
-                  className="absolute bottom-1 right-1 text-[10px] bg-ink/55 text-white px-1.5 py-0.5 rounded">Wikipédia ↗</a>}
+                  className="absolute bottom-1 right-1 text-[10px] bg-ink/55 text-white px-1.5 py-0.5 rounded">Wikipédia <Icon emoji="↗" /></a>}
               </div>
             )}
 
@@ -95,34 +96,34 @@ export default function TrechoCard(props) {
               <label className="text-xs text-inksoft">Economia/dia
                 <NumberInput value={t.economiaDia} min={0} max={num(t.custoDia)} onChange={(v) => onPatch({ economiaDia: v })} suffix={sym} className="mt-1" ariaLabel={`Economia por dia em ${t.nome}`} />
               </label>
-              <label className="text-xs text-inksoft">✈ Transporte até aqui
+              <label className="text-xs text-inksoft"><Icon emoji="✈" /> Transporte até aqui
                 <NumberInput value={t.transporte} min={0} max={1e9} onChange={(v) => onPatch({ transporte: v })} suffix={sym} className="mt-1" ariaLabel={`Custo de transporte para chegar em ${t.nome}`} />
               </label>
             </div>
 
             <div className="mt-2 text-xs text-inksoft tnum flex flex-wrap gap-x-3 gap-y-0.5">
               <span>Em terra <b className="text-ink">{fmtMoeda(t.custoTerra, base)}</b></span>
-              <span>✈ <b className="text-ink">{fmtMoeda(t.custoTransporte, base)}</b></span>
+              <span><Icon emoji="✈" /> <b className="text-ink">{fmtMoeda(t.custoTransporte, base)}</b></span>
               <span>Trecho <b className="text-ink">{fmtMoeda(t.custoTrecho, base)}</b></span>
               <span>Acumulado <b className="text-ink">{fmtMoeda(t.acumulado, base)}</b></span>
-              {t.moeda !== base && <span className="opacity-70">(custos em {t.moeda} → {base})</span>}
+              {t.moeda !== base && <span className="opacity-70">(custos em {t.moeda} <Icon emoji="→" /> {base})</span>}
             </div>
 
             {t.economiaLabel && (
-              <div className="mt-2 text-xs text-success">✓ Economia aplicada: <b>{t.economiaLabel}</b> (−{sym} {num(t.economiaDia)}/dia) · <button className="underline hover:no-underline focusring" onClick={() => onPatch({ economiaDia: 0, economiaLabel: '' })}>remover</button></div>
+              <div className="mt-2 text-xs text-success"><Icon emoji="✓" /> Economia aplicada: <b>{t.economiaLabel}</b> (−{sym} {num(t.economiaDia)}/dia) · <button className="underline hover:no-underline focusring" onClick={() => onPatch({ economiaDia: 0, economiaLabel: '' })}>remover</button></div>
             )}
 
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <StatusChip ui={est.chip}><span className={`w-1.5 h-1.5 rounded-full ${est.dot}`} aria-hidden></span>{est.label}</StatusChip>
-              <StatusChip ui={vis.chip}>🛂 {t.visto.nivel === 'over' ? `Fura +${t.visto.excesso}d` : (t.visto.nivel === 'ok' ? `${t.dias}/${t.vistoDias}d` : 'sem limite')} <span className="opacity-60">· {t.vistoTipo}</span></StatusChip>
-              {ehQuebra && <StatusChip ui="bg-danger-bg text-danger border-danger-bd">💸 A grana acaba aqui ({fmtData(dataQuebra)})</StatusChip>}
+              <StatusChip ui={vis.chip}><Icon emoji="🛂" /> {t.visto.nivel === 'over' ? `Fura +${t.visto.excesso}d` : (t.visto.nivel === 'ok' ? `${t.dias}/${t.vistoDias}d` : 'sem limite')} <span className="opacity-60">· {t.vistoTipo}</span></StatusChip>
+              {ehQuebra && <StatusChip ui="bg-danger-bg text-danger border-danger-bd"><Icon emoji="💸" /> A grana acaba aqui ({fmtData(dataQuebra)})</StatusChip>}
             </div>
 
             <div className="mt-2 space-y-0.5 text-xs">
-              <p className={estTxt}>🌤️ {t.estacao.texto}</p>
-              {t.visto.nivel === 'over' && <p className="text-danger">🛂 {t.visto.texto}</p>}
+              <p className={estTxt}><Icon emoji="🌤️" /> {t.estacao.texto}</p>
+              {t.visto.nivel === 'over' && <p className="text-danger"><Icon emoji="🛂" /> {t.visto.texto}</p>}
               {(t.vistoComprovanteSaida || t.vistoExtensao) && (
-                <p className="text-inksoft">🛂 {[
+                <p className="text-inksoft"><Icon emoji="🛂" /> {[
                   t.vistoExtensao ? `extensão possível${t.vistoExtensaoNota ? ` (${t.vistoExtensaoNota})` : ''}` : '',
                   t.vistoComprovanteSaida ? 'leve comprovante de saída' : '',
                 ].filter(Boolean).join(' · ')}</p>
@@ -139,19 +140,19 @@ export default function TrechoCard(props) {
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <a href={voos.google} target="_blank" rel="noopener noreferrer"
                 className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-ochre/15 border border-ochre/40 text-warn hover:bg-ochre/25 focusring"
-                title={`Buscar voo ${origemCidade || ''} → ${t.cidadePrincipal || t.nome} em ${fmtData(t.chegada)}`}>
-                ✈ Buscar voo até aqui
+                title={`Buscar voo ${origemCidade || ''}${t.cidadePrincipal || t.nome} em ${fmtData(t.chegada)}`}>
+                <Icon emoji="✈" /> Buscar voo até aqui
               </a>
-              {voos.skyscanner && <a href={voos.skyscanner} target="_blank" rel="noopener noreferrer" className="text-[11px] text-pine hover:underline focusring">Skyscanner ↗</a>}
-              {estVoo && <span className="text-[11px] text-inksoft tnum" title={`Estimativa grosseira por distância (${estVoo.km} km) — não é preço real`}>✈ ~US$ {estVoo.min}–{estVoo.max}</span>}
+              {voos.skyscanner && <a href={voos.skyscanner} target="_blank" rel="noopener noreferrer" className="text-[11px] text-pine hover:underline focusring">Skyscanner <Icon emoji="↗" /></a>}
+              {estVoo && <span className="text-[11px] text-inksoft tnum" title={`Estimativa grosseira por distância (${estVoo.km} km) — não é preço real`}><Icon emoji="✈" /> ~US$ {estVoo.min}–{estVoo.max}</span>}
               <button onClick={() => setLugaresAberto(a => !a)} aria-expanded={lugaresAberto}
-                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-input text-inksoft hover:text-pine focusring">📍 Cidades & comida</button>
+                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-input text-inksoft hover:text-pine focusring"><Icon emoji="📍" /> Cidades & comida</button>
               <button onClick={() => { setOppAberto(true); onBuscarOpp(); }} disabled={oppBusy}
                 className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-pine/30 bg-pine/5 text-pine hover:bg-pine/10 disabled:opacity-50 focusring">
-                {oppBusy ? 'Buscando…' : (t.oportunidades ? '↻ Oportunidades (IA)' : '✨ Oportunidades (IA)')}
+                {oppBusy ? 'Buscando…' : (t.oportunidades ? 'Oportunidades (IA)' : 'Oportunidades (IA)')}
               </button>
               <button onClick={() => setAjustes(a => !a)} aria-expanded={ajustes}
-                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-input text-inksoft hover:text-pine focusring">{ajustes ? 'Fechar ajustes' : '⚙ Visto & estação'}</button>
+                className="text-xs px-3 py-1.5 rounded-lg border border-line bg-input text-inksoft hover:text-pine focusring">{ajustes ? 'Fechar ajustes' : 'Visto & estação'}</button>
               <button onClick={onRemove} aria-label={`Remover ${t.nome}`}
                 className="text-xs px-3 py-1.5 rounded-lg border border-line bg-input text-inksoft hover:text-clay hover:border-clay/40 focusring ml-auto">Remover</button>
             </div>
@@ -160,7 +161,7 @@ export default function TrechoCard(props) {
             {lugaresAberto && (
               <div className="mt-3 rounded-xl border border-line bg-paper2/60 p-3 space-y-3">
                 <div>
-                  <div className="text-xs font-semibold text-ink mb-1.5">📍 Cidades & pontos (toque pra abrir no Google Maps)</div>
+                  <div className="text-xs font-semibold text-ink mb-1.5"><Icon emoji="📍" /> Cidades & pontos (toque pra abrir no Google Maps)</div>
                   {(t.cidades || []).length === 0 ? <p className="text-xs text-inksoft">Sem cidades cadastradas — adicione no país de referência.</p> : (
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {t.cidades.map(c => (
@@ -171,7 +172,7 @@ export default function TrechoCard(props) {
                               {cidadeImgs[c] === undefined && <div className="w-full h-full skel" />}
                               {cidadeImgs[c] && <img src={cidadeImgs[c]} alt={c} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition" />}
                             </div>
-                            <div className="px-2 py-1 text-[11px] text-ink flex items-center justify-between">{c} <span className="text-pine">↗</span></div>
+                            <div className="px-2 py-1 text-[11px] text-ink flex items-center justify-between">{c} <span className="text-pine"><Icon emoji="↗" /></span></div>
                           </a>
                           <div className="flex items-center gap-1 px-2 py-1 border-t border-line">
                             <span className="text-[10px] text-inksoft shrink-0">~{sym}/dia</span>
@@ -188,7 +189,7 @@ export default function TrechoCard(props) {
                   )}
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-ink mb-1.5">🍽️ Comida típica</div>
+                  <div className="text-xs font-semibold text-ink mb-1.5"><Icon emoji="🍽️" /> Comida típica</div>
                   <div className="flex flex-wrap gap-1.5">
                     {(t.comidas || []).map(f => <span key={f} className="text-xs bg-input border border-line rounded-full px-2.5 py-1 text-ink">{f}</span>)}
                     {(t.comidas || []).length === 0 && <span className="text-xs text-inksoft">Sem pratos cadastrados.</span>}
@@ -213,7 +214,7 @@ export default function TrechoCard(props) {
                         <p className="mt-1 text-xs text-inksoft">{o.descricao}</p>
                         {o.comoComecar && <p className="mt-1 text-xs text-inksoft"><b>Começa assim:</b> {o.comoComecar}</p>}
                         <button onClick={() => onPatch({ economiaDia: clamp(o.economiaDiaEstimada, 0, num(t.custoDia)), economiaLabel: o.tipo })}
-                          className="mt-2 text-xs font-semibold text-pine hover:underline focusring">Aplicar economia →</button>
+                          className="mt-2 text-xs font-semibold text-pine hover:underline focusring">Aplicar economia <Icon emoji="→" /></button>
                       </div>
                     ))}
                   </div>
@@ -230,7 +231,9 @@ export default function TrechoCard(props) {
                       <option value="isento">isento</option>
                       <option value="e-visa">e-visa</option>
                       <option value="on-arrival">on-arrival</option>
-                      <option value="consular">consular</option>
+                      <option value="visto">visto consular</option>
+                      <option value="eta">ETA / autorização eletrônica</option>
+                      <option value="consultar">consultar (sem regra verificada)</option>
                       <option value="outro">outro</option>
                     </select>
                   </label>
@@ -257,8 +260,8 @@ export default function TrechoCard(props) {
                       className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring" />
                   </label>
                 )}
-                <label className="block text-xs text-inksoft">✈ Observação do transporte (voo/ônibus)
-                  <input value={t.transporteNota} onChange={(e) => onPatch({ transporteNota: e.target.value })} placeholder="ex.: voo Bangkok → Hanói"
+                <label className="block text-xs text-inksoft"><Icon emoji="✈" /> Observação do transporte (voo/ônibus)
+                  <input value={t.transporteNota} onChange={(e) => onPatch({ transporteNota: e.target.value })} placeholder="ex.: voo Bangkok Hanói"
                     className="mt-1 w-full px-2.5 py-1.5 rounded-lg border border-line bg-input text-ink focusring" />
                 </label>
                 <div>
@@ -266,7 +269,7 @@ export default function TrechoCard(props) {
                   <MesesPicker value={t.melhoresMeses} onChange={(v) => onPatch({ melhoresMeses: v })} />
                 </div>
                 <p className="text-[11px] text-inksoft bg-paper2 rounded-lg px-2.5 py-1.5 border border-line">
-                  ⚠ {t.vistoNota || 'Regra de visto.'} <b>Referência p/ passaporte {PASSAPORTES[passaporte]}, revisada em {REVISADO_EM} — confirme na fonte oficial (depende do ponto de entrada e pode mudar).</b>
+                  <Icon emoji="⚠" /> {t.vistoNota || 'Regra de visto.'} <b>Referência p/ passaporte {PASSAPORTES[passaporte]}, revisada em {REVISADO_EM} — confirme na fonte oficial (depende do ponto de entrada e pode mudar).</b>
                 </p>
               </div>
             )}

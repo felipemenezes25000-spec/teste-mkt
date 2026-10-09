@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { gerarChecklist } from './checklist.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Checklist de preparativos: itens derivados da rota + universais, com progresso.
 // `done` é um mapa { [id]: true } persistido no App. Itens novos entram desmarcados.
@@ -12,7 +13,7 @@ export default function ChecklistView({ plan, done, onToggle }) {
   return (
     <section className="rise rounded-2xl border border-line bg-card p-4 sm:p-5" aria-label="Checklist de preparativos">
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <h2 className="font-display text-2xl text-ink">📋 Checklist de preparativos</h2>
+        <h2 className="font-display text-2xl text-ink"><Icon emoji="📋" /> Checklist de preparativos</h2>
         <span className="text-sm text-inksoft tnum">{feitos}/{todos.length} prontos</span>
       </div>
       <div className="mt-2 h-2.5 rounded-full bg-paper2 overflow-hidden border border-line"

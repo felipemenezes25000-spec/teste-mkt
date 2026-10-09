@@ -1,5 +1,6 @@
 'use client';
 import { useIdioma, IDIOMAS } from '../_lib/i18n.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Mapa do país centrado, com marcador. Reage ao idioma do usuário (useIdioma):
 // quando ele troca pra ja, as labels do MapTiler ficam em japonês na hora.
@@ -34,7 +35,7 @@ export function MapaDestino({ coords, nome }) {
 
   return (
     <section>
-      <h2 className="font-display text-2xl text-ink mb-3">🗺️ {t('destino.ondefica')} {nome}</h2>
+      <h2 className="font-display text-2xl text-ink mb-3"><Icon emoji="🗺️" /> {t('destino.ondefica')} {nome}</h2>
       <div className="rounded-2xl overflow-hidden border border-line bg-card">
         <iframe
           // key força recriação do iframe quando idioma muda — alguns browsers
@@ -49,7 +50,7 @@ export function MapaDestino({ coords, nome }) {
         <div className="px-3 py-2 text-xs text-inksoft border-t border-line flex justify-between gap-2">
           <span>{maptilerKey ? `MapTiler · ${IDIOMAS.find((i) => i.code === idioma)?.nome || idioma}` : 'OpenStreetMap'}</span>
           <a href={openLargerHref} target="_blank" rel="noopener noreferrer" className="text-pine hover:underline focusring">
-            {t('map.ampliar')} ↗
+            {t('map.ampliar')} <Icon emoji="↗" />
           </a>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { jsonLdOrganization, jsonLdWebSite, jsonLdReviews, siteUrl } from '../_l
 import { ProvaSocial } from '../_components/ProvaSocial.jsx';
 import { HeroSimulador } from '../_components/HeroSimulador.jsx';
 import { DEPOIMENTOS } from '../_lib/depoimentos.js';
+import { Icon } from '../_ui/Icon.jsx';
 import {
   HomeSecaoProblema,
   HomeSecaoComoDecide,
@@ -92,13 +93,13 @@ export default async function Home() {
             <strong className="text-white"> roteiro que recalcula</strong>. Comece grátis.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link href="/decisao" className={CTA_PRIMARY}>🧠 Decidir minha viagem</Link>
-            <Link href="/explorar" className={CTA_LIGHT}>🧭 Explorar {DESTINOS.length} destinos</Link>
+            <Link href="/decisao" className={CTA_PRIMARY}><Icon emoji="🧠" /> Decidir minha viagem</Link>
+            <Link href="/explorar" className={CTA_LIGHT}><Icon emoji="🧭" /> Explorar {DESTINOS.length} destinos</Link>
           </div>
           <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-[13px] text-white/95">
-            <span>✓ Grátis pra começar</span>
-            <span>✓ Sem cartão</span>
-            <span>✓ Conselho neutro (não vendemos a reserva)</span>
+            <span><Icon emoji="✓" /> Grátis pra começar</span>
+            <span><Icon emoji="✓" /> Sem cartão</span>
+            <span><Icon emoji="✓" /> Conselho neutro (não vendemos a reserva)</span>
           </div>
         </div>
       </section>
@@ -120,14 +121,14 @@ export default async function Home() {
         <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {PILARES.map((p, i) => (
             <Link key={p.tit} href={p.href} className="group rounded-2xl border border-line bg-card p-5 hover:border-pine/40 hover:shadow-[var(--e-1)] hover:-translate-y-0.5 transition focusring">
-              <div className="text-3xl" aria-hidden>{p.icon}</div>
+              <div className="text-3xl" aria-hidden><Icon emoji={p.icon} /></div>
               <h3 className="mt-2 font-display text-lg text-ink">
                 {i === 3 ? `${DESTINOS.length}+ ` : ''}
                 <T k={p.tit} fallback={p.tit.split('.').pop()} />
               </h3>
               <p className="mt-1 text-sm text-inksoft"><T k={p.txt} fallback="" /></p>
               <span className="mt-3 inline-block text-sm font-semibold text-pine group-hover:underline">
-                <T k={p.cta} fallback="" /> →
+                <T k={p.cta} fallback="" /> <Icon emoji="→" />
               </span>
             </Link>
           ))}
@@ -147,7 +148,7 @@ export default async function Home() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex items-end justify-between gap-3 mb-4">
           <h2 className="font-display text-2xl sm:text-3xl text-ink">Destinos em destaque</h2>
-          <Link href="/explorar" className="text-sm font-semibold text-pine hover:underline focusring whitespace-nowrap">Ver os {DESTINOS.length} →</Link>
+          <Link href="/explorar" className="text-sm font-semibold text-pine hover:underline focusring whitespace-nowrap">Ver os {DESTINOS.length} <Icon emoji="→" /></Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {destaques.map((d, i) => <DestinoCard key={d.code} d={d} img={imgs[i]} />)}
@@ -160,7 +161,7 @@ export default async function Home() {
         <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
           {PASSOS.map((p) => (
             <div key={p.n} className="relative rounded-2xl border border-line bg-card p-6">
-              <span className="absolute -top-3 left-6 w-9 h-9 grid place-items-center rounded-xl bg-pine text-white font-display text-lg shadow-md">{p.n}</span>
+              <span className="absolute -top-3 left-6 w-9 h-9 grid place-items-center rounded-xl bg-pine text-onpine font-display text-lg shadow-md">{p.n}</span>
               <h3 className="mt-3 font-display text-xl text-ink"><T k={p.tit} fallback={p.tit.split('.').pop()} /></h3>
               <p className="mt-1 text-sm text-inksoft"><T k={p.txt} fallback="" /></p>
             </div>
@@ -185,8 +186,8 @@ export default async function Home() {
             custo total detalhado, alertas que salvam a viagem e exportação em PDF.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link href="/decisao" className={CTA_PRIMARY}>🧠 Começar a decidir (grátis)</Link>
-            <Link href="/planos" className={CTA_GHOST}>⭐ Ver planos</Link>
+            <Link href="/decisao" className={CTA_PRIMARY}><Icon emoji="🧠" /> Começar a decidir (grátis)</Link>
+            <Link href="/planos" className={CTA_GHOST}><Icon emoji="⭐" /> Ver planos</Link>
           </div>
         </div>
       </section>

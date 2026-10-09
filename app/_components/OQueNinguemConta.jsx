@@ -1,5 +1,6 @@
 'use client';
 import { useIdioma } from '../_lib/i18n.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Bloco "O que ninguém te conta" — dicas honestas curadas por país que NÃO
 // aparecem em blog de turismo: golpes comuns, distâncias reais, lotação por
@@ -37,7 +38,7 @@ const CURADO = {
   ],
   MX: [
     { icon: '🌊', txt: 'Cancún hotel zone é resort — não é México de verdade. Pra cultura, vai pra Mérida, Oaxaca ou CDMX.' },
-    { icon: '🚐', txt: 'ADO (ônibus) entre Cancún → Tulum → Mérida é confortável, seguro e barato. Vans piratas, não.' },
+    { icon: '🚐', txt: 'ADO (ônibus) entre Cancún Tulum Mérida é confortável, seguro e barato. Vans piratas, não.' },
     { icon: '🌬️', txt: 'Setembro-outubro é furacão na Riviera Maya. Voo barato porque tem risco real.' },
     { icon: '💉', txt: 'Comida de rua vale a pena, mas escolha barraca cheia. Lugar vazio é alerta de barriga.' },
   ],
@@ -357,7 +358,7 @@ const CURADO = {
     { icon: '💰', txt: 'Tudo é caro como Suíça. Cerveja em bar 100 NOK (R$ 50). Supermercado salva orçamento.' },
     { icon: '🛳️', txt: 'Hurtigruten (linha de costa) é a maneira de ver fiordes. Compre tramo individual, não cruzeiro completo.' },
     { icon: '🌅', txt: 'Sol da meia-noite mai-jul, escuro 24h dez-jan. Planeje energia/sono — não é detalhe.' },
-    { icon: '🚆', txt: 'Bergen Railway é um dos passeios mais bonitos do mundo. Reserve janela à esquerda no sentido Oslo → Bergen.' },
+    { icon: '🚆', txt: 'Bergen Railway é um dos passeios mais bonitos do mundo. Reserve janela à esquerda no sentido Oslo Bergen.' },
   ],
   IS: [
     { icon: '🌋', txt: 'Aurora boreal exige paciência: 3-4 noites mínimo e céu limpo. App "Aurora Forecast" + ficar fora de Reykjavík.' },
@@ -367,7 +368,7 @@ const CURADO = {
   ],
   BE: [
     { icon: '🍫', txt: 'Pierre Marcolini é o Apple do chocolate — caro e bom. Mary, Neuhaus e Leonidas têm 1/2 do preço com qualidade similar.' },
-    { icon: '🚆', txt: 'Bruxelas → Bruges → Ghent → Antuérpia: 30-50min de trem cada. Belgian Rail Pass de 4 viagens vale mais que ticket avulso.' },
+    { icon: '🚆', txt: 'Bruxelas Bruges Ghent Antuérpia: 30-50min de trem cada. Belgian Rail Pass de 4 viagens vale mais que ticket avulso.' },
     { icon: '🍺', txt: 'Cerveja trapista (Westvleteren, Rochefort, Chimay) num bar especializado. Não peça pra "experimentar várias" — cada uma tem cálice próprio.' },
     { icon: '🍟', txt: 'Frietkot (barraca de batata frita) é o jeito autêntico. NÃO é "french fries" — é belga, e cobra molho à parte.' },
   ],
@@ -381,7 +382,7 @@ const CURADO = {
     { icon: '🚲', txt: 'Copenhagen é cidade de bicicleta. Aluguel diário pelo Donkey Republic é prático. Mas estacione respeitando — multa de 1.000 DKK.' },
     { icon: '🌭', txt: 'Pølser (hot dog) de carrinho na rua é tradição. 30 DKK e melhor que restaurante turístico.' },
     { icon: '🎢', txt: 'Tivoli abre temporadas (mai-set + Halloween + Natal). Off-season fecha.' },
-    { icon: '🍴', txt: 'Smørrebrød (sanduíche aberto) em Aamanns ou Schønnemann vale ir. Restaurante 3⭐ Michelin existe (Noma), mas reserva 6 meses antes.' },
+    { icon: '🍴', txt: 'Smørrebrød (sanduíche aberto) em Aamanns ou Schønnemann vale ir. Restaurante 3 Michelin existe (Noma), mas reserva 6 meses antes.' },
   ],
   RO: [
     { icon: '🏰', txt: 'Bran Castle é "do Drácula" só pra turista — não tem relação real com Vlad. Castelo Peles é muito mais bonito e fica perto.' },
@@ -422,7 +423,7 @@ const CURADO = {
   LT: [
     { icon: '🏛️', txt: 'Vilnius é mais bonita que Riga e Tallinn juntas, mas turista vai menos. Use isso a favor.' },
     { icon: '🥖', txt: 'Cepelinai (bolinho de batata recheado) é prato nacional. Pesado — divida entre dois.' },
-    { icon: '🚆', txt: 'Vilnius → Riga → Tallinn de bus (Lux Express) é confortável e barato. Trem entre eles não funciona direito.' },
+    { icon: '🚆', txt: 'Vilnius Riga Tallinn de bus (Lux Express) é confortável e barato. Trem entre eles não funciona direito.' },
     { icon: '⛪', txt: 'Hill of Crosses em Šiauliai vale day trip cultural. Singular no mundo.' },
   ],
   MT: [
@@ -433,7 +434,7 @@ const CURADO = {
   ],
   TW: [
     { icon: '🥟', txt: 'Din Tai Fung em Taipei tem fila eterna. Versão local "Hang Zhou Xiao Long Bao" entrega mesmo prato sem espera.' },
-    { icon: '🚄', txt: 'High Speed Rail (HSR) Taipei → Kaohsiung em 1h40. Reserva online com desconto early bird.' },
+    { icon: '🚄', txt: 'High Speed Rail (HSR) Taipei Kaohsiung em 1h40. Reserva online com desconto early bird.' },
     { icon: '🍴', txt: 'Night market é a refeição típica — Shilin é turístico, Raohe e Ningxia são reais.' },
     { icon: '☔', txt: 'Tufão (jul-set) cancela voo doméstico/Yangmingshan. Seguro com cancelamento amplo é obrigatório.' },
   ],
@@ -487,7 +488,7 @@ const CURADO = {
   ],
   PY: [
     { icon: '🛍️', txt: 'Ciudad del Este é zona franca — eletrônicos baratos. Mas cota brasileira de R$ 500/mês declara na alfândega.' },
-    { icon: '🚌', txt: 'Asunción → Foz por ônibus é a forma mais comum. Voo doméstico é caro e raro.' },
+    { icon: '🚌', txt: 'Asunción Foz por ônibus é a forma mais comum. Voo doméstico é caro e raro.' },
     { icon: '🥤', txt: 'Tereré (mate gelado) é cultura. Não confunda com mate quente argentino.' },
     { icon: '💰', txt: 'Guarani é uma das moedas mais fracas do continente — preço local é dos mais baratos.' },
   ],
@@ -516,7 +517,7 @@ const CURADO = {
     { icon: '🍷', txt: 'Álcool 100% proibido. Não importe, não compre, não traga. Multa pesada.' },
   ],
   OM: [
-    { icon: '🚗', txt: 'Roteiro padrão Muscat → Wahiba Sands → Wadi Shab → Nizwa de SUV (4x4 necessário fora de Muscat).' },
+    { icon: '🚗', txt: 'Roteiro padrão Muscat Wahiba Sands Wadi Shab Nizwa de SUV (4x4 necessário fora de Muscat).' },
     { icon: '🌅', txt: 'Acampamento no deserto Wahiba Sands é experiência única. Reserve 1 noite (não mais).' },
     { icon: '🛂', txt: 'Visto eletrônico para BR sai em 24h. Aeroporto de Muscat é confortável.' },
     { icon: '💵', txt: 'Rial omanense é uma das moedas mais valorizadas (1 OMR ≈ R$ 14). Preço parece baixo mas multiplica.' },
@@ -584,7 +585,7 @@ const CURADO = {
   MM: [
     { icon: '🛂', txt: 'eVisa BR aprovado em 1-3 dias. Conferir status político atual antes de viajar — instável.' },
     { icon: '🎈', txt: 'Bagan ao nascer do sol de balão é caro (US$ 350) mas a foto define. Reservar com antecedência.' },
-    { icon: '🚂', txt: 'Trem Yangon → Mandalay é experiência única — 14h de cama de tropa. Bus é mais confortável e rápido.' },
+    { icon: '🚂', txt: 'Trem Yangon Mandalay é experiência única — 14h de cama de tropa. Bus é mais confortável e rápido.' },
     { icon: '👔', txt: 'Em pagoda, ombro e joelho cobertos. Tirar sapato/meia — chão pode estar quente em sol.' },
   ],
   FJ: [
@@ -619,7 +620,7 @@ const CURADO = {
   ],
   ME: [
     { icon: '🛂', txt: 'Visto BR isento até 90 dias. Montenegro não é UE — controle de fronteira é separado.' },
-    { icon: '🚖', txt: 'Kotor → Budva → Sveti Stefan de carro alugado é o roteiro padrão. Estradas costeiras sinuosas.' },
+    { icon: '🚖', txt: 'Kotor Budva Sveti Stefan de carro alugado é o roteiro padrão. Estradas costeiras sinuosas.' },
     { icon: '🌊', txt: 'Sveti Stefan é vista postal, mas a praia é privada (resort). Pra praia pública, vá pra Mogren ou Jaz.' },
     { icon: '⛴️', txt: 'Ferry pra Bari (Itália) é 9h de travessia noturna. Conexão prática com sul da Itália.' },
   ],
@@ -768,7 +769,7 @@ const CURADO = {
     { icon: '💵', txt: 'SRD (dólar surinamês) tem inflação. EUR em hotel; SRD pra dia-a-dia.' },
   ],
   GY: [
-    { icon: '🛂', txt: 'BR isento até 90 dias. Acesso via Manaus → Boa Vista → Lethem (terrestre) ou voo da Suriname/Caribe.' },
+    { icon: '🛂', txt: 'BR isento até 90 dias. Acesso via Manaus Boa Vista Lethem (terrestre) ou voo da Suriname/Caribe.' },
     { icon: '🌊', txt: 'Kaieteur Falls (4x mais alto que Niágara, ininterrupto) é o motivo de ir. Voo de Cessna.' },
     { icon: '🌳', txt: 'Iwokrama Forest tem onça-pintada (jaguar) em densidade alta. Eco-lodge salvo.' },
     { icon: '💵', txt: 'GYD fraco. USD em hotel sempre.' },
@@ -842,15 +843,15 @@ export function OQueNinguemConta({ destino }) {
   const dicas = dicasOQueNinguemConta(destino);
   return (
     <section aria-labelledby="oque-ninguem-conta-titulo">
-      <h2 id="oque-ninguem-conta-titulo" className="font-display text-2xl text-ink mb-3">🤫 {t('destino.oqueTitulo')}</h2>
+      <h2 id="oque-ninguem-conta-titulo" className="font-display text-2xl text-ink mb-3"><Icon emoji="🤫" /> {t('destino.oqueTitulo')}</h2>
       <p className="text-sm text-inksoft mb-2 max-w-2xl">{t('destino.oqueP')}</p>
       {idioma !== 'pt' && (
-        <p className="text-[11px] text-inksoft mb-4 max-w-2xl italic">📝 {t('destino.oqueNotaIdioma')}</p>
+        <p className="text-[11px] text-inksoft mb-4 max-w-2xl italic"><Icon emoji="📝" /> {t('destino.oqueNotaIdioma')}</p>
       )}
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {dicas.map((d, i) => (
           <li key={i} className="rounded-2xl border border-line bg-card p-4 flex gap-3">
-            <span aria-hidden className="text-xl shrink-0">{d.icon}</span>
+            <span aria-hidden className="text-xl shrink-0"><Icon emoji={d.icon} /></span>
             <p className="text-sm text-ink leading-snug">{d.txt}</p>
           </li>
         ))}

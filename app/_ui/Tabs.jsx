@@ -1,3 +1,4 @@
+import { Icon } from './Icon.jsx';
 // Abas acessíveis (role=tablist/tab) com navegação por seta. tabs: [{id,label,icon}].
 export function Tabs({ tabs, value, onChange, className = '' }) {
   function onKey(e, i) {
@@ -17,7 +18,7 @@ export function Tabs({ tabs, value, onChange, className = '' }) {
           <button key={t.id} role="tab" aria-selected={on} tabIndex={on ? 0 : -1}
             onClick={() => onChange(t.id)} onKeyDown={(e) => onKey(e, i)}
             className={`px-3.5 py-1.5 rounded-lg text-sm font-semibold transition focusring ${on ? 'bg-card text-pine shadow-sm' : 'text-inksoft hover:text-ink'}`}>
-            <span aria-hidden>{t.icon}</span> {t.label}
+            <span aria-hidden><Icon emoji={t.icon} /></span> {t.label}
           </button>
         );
       })}

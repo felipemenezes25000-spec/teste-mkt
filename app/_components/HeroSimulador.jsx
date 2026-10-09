@@ -80,7 +80,7 @@ export function HeroSimulador() {
               {res.map((d, i) => (
                 <div key={d.code} className="rounded-2xl border border-line bg-paper2/60 p-4 flex flex-col">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-bold bg-pine text-white w-6 h-6 grid place-items-center rounded-full">{i + 1}º</span>
+                    <span className="text-[11px] font-bold bg-pine text-onpine w-6 h-6 grid place-items-center rounded-full">{i + 1}º</span>
                     <span className="text-[11px] text-inksoft">{d.regiao}</span>
                   </div>
                   <h3 className="mt-2 font-display text-lg text-ink">{d.nome}</h3>

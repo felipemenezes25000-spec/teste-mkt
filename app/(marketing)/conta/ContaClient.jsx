@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePlano, setDemoPlano, DEMO_HABILITADO } from '../../_lib/usePlano.js';
 import { nomePlano } from '../../_lib/planos.js';
+import { Icon } from '../../_ui/Icon.jsx';
 
 export function ContaClient() {
   const { plano, serverPlano, demo } = usePlano();
@@ -18,7 +19,7 @@ export function ContaClient() {
     <div className="mt-6 space-y-5">
       {ok && (
         <div className="rounded-xl border border-success-bd bg-success-bg text-success px-4 py-3 text-sm">
-          ✓ Assinatura confirmada! Obrigado — seu plano será atualizado em instantes.
+          <Icon emoji="✓" /> Assinatura confirmada! Obrigado — seu plano será atualizado em instantes.
         </div>
       )}
 
@@ -31,7 +32,7 @@ export function ContaClient() {
               {demo && <span className="ml-2 text-xs text-ochre align-middle">(preview)</span>}
             </div>
           </div>
-          <Link href="/planos" className="rounded-xl bg-pine text-white font-semibold px-4 py-2 hover:bg-pinedk focusring">Mudar de plano</Link>
+          <Link href="/planos" className="rounded-xl bg-pine text-onpine font-semibold px-4 py-2 hover:bg-pinedk focusring">Mudar de plano</Link>
         </div>
         <p className="mt-2 text-sm text-inksoft">
           Sua assinatura é gerida com segurança pelo Stripe.{' '}
@@ -40,14 +41,14 @@ export function ContaClient() {
       </div>
 
       {DEMO_HABILITADO && <div className="rounded-2xl border border-dashed border-line bg-paper2/40 p-5">
-        <div className="text-sm font-semibold text-ink">👀 Pré-visualizar planos (demo)</div>
+        <div className="text-sm font-semibold text-ink"><Icon emoji="👀" /> Pré-visualizar planos (demo)</div>
         <p className="text-xs text-inksoft mt-1">Veja como ficam os recursos premium sem pagar — não altera sua assinatura real.</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {PREVIEWS.map((p) => {
             const ativo = p ? demo === p : !demo;
             return (
               <button key={p || 'real'} onClick={() => setDemoPlano(p)}
-                className={`text-xs font-semibold px-3 py-1.5 rounded-lg border focusring ${ativo ? 'bg-pine text-white border-pine' : 'border-line bg-card text-inksoft hover:text-pine'}`}>
+                className={`text-xs font-semibold px-3 py-1.5 rounded-lg border focusring ${ativo ? 'bg-pine text-onpine border-pine' : 'border-line bg-card text-inksoft hover:text-pine'}`}>
                 {p ? `Preview ${nomePlano(p)}` : 'Usar plano real'}
               </button>
             );

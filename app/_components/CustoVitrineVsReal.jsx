@@ -1,4 +1,5 @@
 import { fmtMoeda } from '../_engine/utils.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Bloco "Custo de vitrine vs Custo real" — o gancho de conversão (gap nº 1 do
 // mercado). Recebe o `resumo` de resumoVitrineVsReal(calc). Apresentacional puro:
@@ -14,7 +15,7 @@ export function CustoVitrineVsReal({ resumo, contexto }) {
   return (
     <section className="rounded-2xl border border-line bg-card p-5" aria-label="Custo de vitrine versus custo real">
       <div className="flex items-center gap-2">
-        <span aria-hidden className="text-xl">🧾</span>
+        <span aria-hidden className="text-xl"><Icon emoji="🧾" /></span>
         <h3 className="font-display text-lg text-ink">O que a vitrine esconde</h3>
       </div>
       <p className="mt-1 text-sm text-inksoft">
@@ -40,7 +41,7 @@ export function CustoVitrineVsReal({ resumo, contexto }) {
       <ul className="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-1.5">
         {categorias.map((c) => (
           <li key={c.id} className="flex items-center justify-between gap-2 text-xs rounded-lg bg-paper2 px-2 py-1.5">
-            <span className="text-inksoft truncate"><span aria-hidden>{c.icon}</span> {String(c.label).split('(')[0].trim()}</span>
+            <span className="text-inksoft truncate"><span aria-hidden><Icon emoji={c.icon} /></span> {String(c.label).split('(')[0].trim()}</span>
             <span className="tnum text-ink font-semibold shrink-0">{fmtMoeda(c.valor, 'USD')}</span>
           </li>
         ))}

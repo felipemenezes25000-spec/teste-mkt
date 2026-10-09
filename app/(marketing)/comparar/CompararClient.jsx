@@ -11,6 +11,7 @@ import { Gate } from '../../_components/Gate.jsx';
 import { EmptyState } from '../../_ui/EmptyState.jsx';
 import { Skeleton } from '../../_components/Skeleton.jsx';
 import { mundoScoreDestino, alertaHumanoDestino } from '../../_lib/editorial.js';
+import { Icon } from '../../_ui/Icon.jsx';
 
 const meses = (arr = []) => (arr.length ? arr.map((m) => MESES_PT[m - 1]).join(', ') : '—');
 
@@ -159,8 +160,8 @@ export function CompararClient() {
           ))}
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link href={`/roteiro?destino=${vencedor.slug}`} className="inline-flex rounded-xl bg-pine text-white font-semibold px-4 py-2 text-sm hover:bg-pinedk focusring">
-            Montar roteiro de {vencedor.nome} →
+          <Link href={`/roteiro?destino=${vencedor.slug}`} className="inline-flex rounded-xl bg-pine text-onpine font-semibold px-4 py-2 text-sm hover:bg-pinedk focusring">
+            Montar roteiro de {vencedor.nome} <Icon emoji="→" />
           </Link>
           <Link href="/custo-real" className="inline-flex rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2 text-sm hover:text-pine focusring">
             Ver custo real
@@ -175,13 +176,13 @@ export function CompararClient() {
       <Gate feature="comparar-avancado" titulo="Qual combina mais com VOCÊ" descricao="A comparação acima é factual. O ranking pelo seu perfil de viajante é Premium.">
         <div className="rounded-2xl border border-line bg-card p-5">
           <div className="flex items-baseline justify-between gap-2 flex-wrap">
-            <h3 className="font-display text-xl text-ink">🧠 Qual combina mais com você</h3>
+            <h3 className="font-display text-xl text-ink"><Icon emoji="🧠" /> Qual combina mais com você</h3>
             {meusInteresses && <span className="text-xs text-inksoft">seu perfil prioriza: {meusInteresses}</span>}
           </div>
           <ol className="mt-3 space-y-2">
             {ranking.map((d) => (
               <li key={d.id} className="flex items-center gap-3 rounded-xl bg-paper2 p-3">
-                <span className="shrink-0 w-7 h-7 grid place-items-center rounded-full bg-pine text-white text-xs font-bold">{d.posicao}º</span>
+                <span className="shrink-0 w-7 h-7 grid place-items-center rounded-full bg-pine text-onpine text-xs font-bold">{d.posicao}º</span>
                 <span className="shrink-0 w-11 h-7 grid place-items-center rounded-full bg-pine/10 text-pine text-xs font-bold tnum">{d.pontos}</span>
                 <div className="min-w-0">
                   <Link href={`/destino/${d.slug}`} className="font-semibold text-ink hover:text-pine focusring">{d.nome}</Link>

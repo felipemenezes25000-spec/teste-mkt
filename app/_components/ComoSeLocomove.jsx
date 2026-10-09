@@ -1,6 +1,7 @@
 'use client';
 import { useCambioBRL } from '../_lib/cambioClient.js';
 import { useIdioma } from '../_lib/i18n.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Bloco "Como se locomove" — tabela de preços REAIS de transporte do país:
 // Uber/app, táxi, ônibus urbano, metrô, aluguel de carro, combustível e voo
@@ -18,28 +19,28 @@ const LABELS = {
     titulo: 'Como se locomove', sub: 'Preços médios de referência. O número sozinho engana — leia a nota.',
     uberKm: 'App (Uber/Bolt/Grab)', taxiKm: 'Táxi', onibusUrb: 'Ônibus urbano', metroUrb: 'Metrô',
     aluguelDia: 'Aluguel de carro', combustivelL: 'Gasolina', voo: 'Voo doméstico',
-    porKm: '/km', porDia: '/dia', porL: '/litro', porViagem: '/viagem', estimativa: 'voo médio capital → 2ª cidade',
+    porKm: '/km', porDia: '/dia', porL: '/litro', porViagem: '/viagem', estimativa: 'voo médio capital 2ª cidade',
     nota: 'Estimativas de mercado (2025-2026) — confirme no local. Conversão pelo câmbio atual.',
   },
   en: {
     titulo: 'Getting around', sub: 'Average reference prices. The number alone misleads — read the note.',
     uberKm: 'App (Uber/Bolt/Grab)', taxiKm: 'Taxi', onibusUrb: 'City bus', metroUrb: 'Metro',
     aluguelDia: 'Car rental', combustivelL: 'Gasoline', voo: 'Domestic flight',
-    porKm: '/km', porDia: '/day', porL: '/liter', porViagem: '/ride', estimativa: 'avg flight capital → 2nd city',
+    porKm: '/km', porDia: '/day', porL: '/liter', porViagem: '/ride', estimativa: 'avg flight capital 2nd city',
     nota: 'Market estimates (2025-2026) — confirm locally. Converted at current exchange rate.',
   },
   es: {
     titulo: 'Cómo moverse', sub: 'Precios medios de referencia. El número solo engaña — lee la nota.',
     uberKm: 'App (Uber/Bolt/Grab)', taxiKm: 'Taxi', onibusUrb: 'Autobús urbano', metroUrb: 'Metro',
     aluguelDia: 'Alquiler de coche', combustivelL: 'Gasolina', voo: 'Vuelo doméstico',
-    porKm: '/km', porDia: '/día', porL: '/litro', porViagem: '/viaje', estimativa: 'vuelo medio capital → 2ª ciudad',
+    porKm: '/km', porDia: '/día', porL: '/litro', porViagem: '/viaje', estimativa: 'vuelo medio capital 2ª ciudad',
     nota: 'Estimaciones de mercado (2025-2026) — confirma en el lugar. Convertido al cambio actual.',
   },
   ja: {
     titulo: '移動手段', sub: '平均参考価格。数字だけでは誤解する — 注記を読んでください。',
     uberKm: 'アプリ (Uber/Bolt/Grab)', taxiKm: 'タクシー', onibusUrb: '市バス', metroUrb: '地下鉄',
     aluguelDia: 'レンタカー', combustivelL: 'ガソリン', voo: '国内線',
-    porKm: '/km', porDia: '/日', porL: '/リットル', porViagem: '/乗車', estimativa: '首都→第2都市の平均運賃',
+    porKm: '/km', porDia: '/日', porL: '/リットル', porViagem: '/乗車', estimativa: '首都第2都市の平均運賃',
     nota: '市場推定 (2025-2026) — 現地で確認を。現在の為替レートで換算。',
   },
 };
@@ -71,7 +72,7 @@ export function ComoSeLocomove({ precos = null }) {
 
   return (
     <section aria-labelledby="como-locomove-titulo">
-      <h2 id="como-locomove-titulo" className="font-display text-2xl text-ink mb-1">🚐 {L.titulo}</h2>
+      <h2 id="como-locomove-titulo" className="font-display text-2xl text-ink mb-1"><Icon emoji="🚐" /> {L.titulo}</h2>
       <p className="text-sm text-inksoft mb-4 max-w-2xl">{L.sub}</p>
       <div className="rounded-3xl border border-line bg-card overflow-hidden shadow-[var(--e-1)]">
         <ul className="divide-y divide-line">
@@ -80,7 +81,7 @@ export function ComoSeLocomove({ precos = null }) {
             if (!f) return null;
             return (
               <li key={l.k} className="flex items-center gap-3 px-4 sm:px-5 py-3">
-                <span aria-hidden className="text-xl shrink-0">{l.icon}</span>
+                <span aria-hidden className="text-xl shrink-0"><Icon emoji={l.icon} /></span>
                 <div className="min-w-0 flex-1">
                   <div className="text-sm font-semibold text-ink">{L[l.k]}</div>
                   {l.extra && <div className="text-[11px] text-inksoft">{l.extra}</div>}
@@ -95,7 +96,7 @@ export function ComoSeLocomove({ precos = null }) {
         </ul>
         {p.obs && (
           <div className="px-4 sm:px-5 py-3 border-t border-line bg-paper2/50 text-xs text-inksoft">
-            💡 {p.obs}
+            <Icon emoji="💡" /> {p.obs}
           </div>
         )}
       </div>

@@ -2,6 +2,7 @@
 import { useMemo, useState } from 'react';
 import { useCambioBRL } from '../_lib/cambioClient.js';
 import { useIdioma } from '../_lib/i18n.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Bloco "Passeios & ingressos" — lista de atrações REAIS do país com preço de
 // entrada/ingresso em USD convertido pra BRL ao vivo. Vem de pesquisa
@@ -100,7 +101,7 @@ export function PasseiosIngressos({ itens = [], nomePais }) {
 
   return (
     <section aria-labelledby="passeios-titulo">
-      <h2 id="passeios-titulo" className="font-display text-2xl text-ink mb-1">🎟️ {L.titulo}</h2>
+      <h2 id="passeios-titulo" className="font-display text-2xl text-ink mb-1"><Icon emoji="🎟️" /> {L.titulo}</h2>
       <p className="text-sm text-inksoft mb-3 max-w-2xl">{L.sub}</p>
 
       <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -111,9 +112,9 @@ export function PasseiosIngressos({ itens = [], nomePais }) {
           return (
             <button
               key={c} type="button" onClick={() => setCatSel(c)} aria-pressed={ativo}
-              className={`text-xs font-semibold rounded-full px-3 py-1.5 border transition focusring ${ativo ? 'bg-pine text-white border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}
+              className={`text-xs font-semibold rounded-full px-3 py-1.5 border transition focusring ${ativo ? 'bg-pine text-onpine border-pine' : 'bg-card text-inksoft border-line hover:border-pine/50'}`}
             >
-              <span className="mr-1" aria-hidden>{icon}</span>{label}
+              <span className="mr-1" aria-hidden><Icon emoji={icon} /></span>{label}
             </button>
           );
         })}
@@ -136,14 +137,14 @@ export function PasseiosIngressos({ itens = [], nomePais }) {
             const href = mapsUrl(`${a.nome}, ${a.cidade}, ${nomePais || ''}`);
             return (
               <li key={`${a.nome}-${i}`} className="flex items-start gap-3 px-4 sm:px-5 py-3 hover:bg-paper2/40 transition">
-                <span aria-hidden className="text-xl shrink-0 mt-0.5">{CAT_ICON[a.categoria] || '📍'}</span>
+                <span aria-hidden className="text-xl shrink-0 mt-0.5"><Icon emoji={CAT_ICON[a.categoria] || '📍'} /></span>
                 <div className="min-w-0 flex-1">
                   <a href={href} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-ink hover:text-pine focusring">
-                    {a.nome} <span className="text-pine" aria-hidden>↗</span>
+                    {a.nome} <span className="text-pine" aria-hidden><Icon emoji="↗" /></span>
                   </a>
                   <div className="text-[11px] text-inksoft mt-0.5">
-                    📍 {a.cidade}
-                    {a.duracao && <span> · ⏱ {a.duracao}</span>}
+                    <Icon emoji="📍" /> {a.cidade}
+                    {a.duracao && <span> · <Icon emoji="⏱" /> {a.duracao}</span>}
                     {L.cats[a.categoria] && <span> · {L.cats[a.categoria]}</span>}
                   </div>
                   {a.obs && <div className="text-[11px] text-inksoft mt-0.5 italic">{a.obs}</div>}

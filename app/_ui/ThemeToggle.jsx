@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { Icon } from './Icon.jsx';
 
 // Alterna claro/escuro. O tema é aplicado via data-theme no <html> (ver tokens.css)
 // e persistido. O 1º paint já vem certo pelo script inline em layout.jsx (anti-flash);
@@ -29,7 +30,7 @@ export function ThemeToggle({ className = '' }) {
       title={dark ? 'Tema claro' : 'Tema escuro'}
       className={`inline-flex items-center justify-center w-9 h-9 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring transition ${className}`}
     >
-      <span aria-hidden className="text-base leading-none">{dark ? '☀' : '☾'}</span>
+      <span aria-hidden className="text-base leading-none"><Icon emoji={dark ? '☀' : '☾'} /></span>
     </button>
   );
 }

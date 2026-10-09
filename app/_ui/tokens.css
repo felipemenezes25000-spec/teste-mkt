@@ -1,65 +1,102 @@
 /* ============================================================================
-   Design tokens — fonte única da verdade (cor, espaço, raio, elevação, motion).
-   Importado no layout. Use estes tokens nos componentes do _ui/.
+   MERIDIANO — design tokens do Mundo Sem Fim (OMEGA V4 · Lote 2)
+   Fonte única da verdade de cor, tipo, espaço, raio, elevação e movimento.
+   Racional completo: docs/BRAND-RATIONALE.md.
 
-   Cores são guardadas como TRIPLAS RGB ("R G B"), não hex, para o Tailwind
-   aplicar opacidade via rgb(var(--c-x) / <alpha-value>) — assim utilitários como
-   bg-pine/5 ou border-ochre/40 continuam funcionando. O dark mode é só o bloco
-   [data-theme="dark"] reescrevendo as triplas: todas as classes (bg-paper,
-   text-ink, bg-success-bg…) viram tema automaticamente, sem variantes dark:.
+   Ideia: um instrumento de navegação para o mundo inteiro. Base "tinta de
+   carta náutica" (azul-quase-preto) e "papel polar" (branco frio), um azul
+   MERIDIANO para tudo que é rota/seleção/navegação e um verde-LIMA de sinal
+   reservado à próxima ação. Coordenadas e números em mono tabular.
+
+   Cores em TRIPLAS RGB ("R G B") para o Tailwind aplicar opacidade via
+   rgb(var(--c-x) / <alpha-value>). Os NOMES legados (paper, pine, coral…) foram
+   mantidos como aliases semânticos para o código existente; o significado de
+   cada um está documentado ao lado. Contraste validado (WCAG 2.2 AA) em
+   docs/BRAND-RATIONALE.md.
    ============================================================================ */
 :root {
-  /* Marca / superfícies */
-  --c-paper: 244 237 222; --c-paper-2: 236 226 205; --c-card: 255 253 247;
-  --c-ink: 34 45 43; --c-ink-soft: 84 96 91; --c-line: 228 217 194;
-  --c-pine: 14 90 78; --c-pine-dk: 10 69 59;
-  --c-ochre: 201 138 43; --c-ochre-soft: 230 180 90; --c-clay: 182 69 46;
-  --c-sage: 47 122 87; --c-amberx: 183 121 31;
-  --c-input: 255 255 255;    /* superfície de controles (inputs/selects) */
-  --c-on-ochre: 34 45 43;    /* texto sobre ocre — escuro nos DOIS temas */
-  /* Acentos premium (híbrido): coral = CTA primário; solar = economia/destaque.
-     Definidos só aqui (:root) → valem nos 2 temas. coral c/ branco = 4.9:1 (AA);
-     solar é SEMPRE fundo com texto escuro (on-solar), nunca texto sobre claro. */
-  --c-coral: 198 68 46; --c-on-coral: 255 255 255;
-  --c-solar: 245 184 50; --c-on-solar: 34 45 43;
+  /* Superfícies — "papel polar" (frio, nada de creme) */
+  --c-paper: 243 245 248;      /* fundo da página */
+  --c-paper-2: 232 236 242;    /* faixas/realces */
+  --c-card: 255 255 255;       /* superfícies elevadas */
+  --c-input: 255 255 255;
+  /* Texto */
+  --c-ink: 10 16 32;           /* tinta de carta náutica — 17:1 no papel */
+  --c-ink-soft: 75 85 103;     /* secundário — 6.9:1 */
+  --c-line: 217 223 232;       /* divisores e bordas */
 
-  /* Semânticas de status (texto/fundo/borda) — pares com contraste AA */
-  --c-success: 31 107 72; --c-success-bg: 231 241 234; --c-success-bd: 191 224 205;
-  --c-warn: 138 94 18;    --c-warn-bg: 247 237 214;    --c-warn-bd: 231 211 163;
-  --c-danger: 154 59 39;  --c-danger-bg: 246 226 219;  --c-danger-bd: 231 193 182;
+  /* MERIDIANO — azul de rota/navegação/seleção (alias legado: pine) */
+  --c-pine: 39 66 245;         /* #2742F5 — 6.6:1 com branco */
+  --c-pine-dk: 26 47 214;
+  --c-on-pine: 255 255 255;
 
-  /* Skeleton (shimmer) */
-  --c-skel-1: 239 230 211; --c-skel-2: 247 240 224;
+  /* LIMA — sinal de próxima ação (alias legado: coral). SEMPRE fundo, texto tinta. */
+  --c-coral: 200 250 60;       /* #C8FA3C — tinta sobre lima 15.5:1 */
+  --c-on-coral: 10 16 32;
 
-  /* Espaçamento (escala 4/8) */
-  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
-  /* Raio */
-  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-full: 999px;
-  /* Elevação */
-  --e-1: 0 14px 36px -26px rgba(34,45,43,.5);
-  --e-2: 0 24px 60px -30px rgba(34,45,43,.45);
-  /* Motion */
-  --motion-fast: .18s; --motion: .4s; --ease: cubic-bezier(.2,.7,.3,1);
+  /* ÂMBAR — destaque/economia/atenção suave (aliases: ochre, solar) */
+  --c-ochre: 255 178 36;       /* fundo com texto tinta 10.5:1 */
+  --c-ochre-soft: 255 214 128;
+  --c-on-ochre: 10 16 32;
+  --c-solar: 255 178 36;
+  --c-on-solar: 10 16 32;
+  --c-amberx: 166 98 0;        /* âmbar legível como TEXTO */
+
+  /* INFRAVERMELHO — risco/urgência (alias: clay) */
+  --c-clay: 209 44 31;         /* 5.1:1 no branco */
+  /* MAR — economia/positivo como acento (alias: sage) */
+  --c-sage: 10 127 112;
+
+  /* Semânticas (texto/fundo/borda) */
+  --c-success: 11 122 82;  --c-success-bg: 227 247 238; --c-success-bd: 181 232 209;
+  --c-warn: 138 83 0;      --c-warn-bg: 255 243 220;    --c-warn-bd: 245 217 160;
+  --c-danger: 180 35 35;   --c-danger-bg: 253 231 231;  --c-danger-bd: 245 189 189;
+
+  /* Skeleton */
+  --c-skel-1: 229 233 240; --c-skel-2: 242 244 248;
+
+  /* Graticule (linhas de meridiano/paralelo do fundo) */
+  --grid-ink: 10 16 32; --grid-alpha: .045;
+
+  /* Espaço (4/8) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  /* Raio — instrumento, não bolha */
+  --r-sm: 4px; --r-md: 6px; --r-lg: 10px; --r-xl: 14px; --r-full: 999px;
+  /* Elevação — plana, com borda nítida */
+  --e-1: 0 1px 0 rgba(10,16,32,.04), 0 8px 24px -16px rgba(10,16,32,.28);
+  --e-2: 0 1px 0 rgba(10,16,32,.05), 0 24px 48px -24px rgba(10,16,32,.35);
+  /* Movimento */
+  --motion-fast: .16s; --motion: .32s; --ease: cubic-bezier(.2,.8,.2,1);
+  /* Alvos de toque */
+  --touch: 44px;
 }
 
-/* ===== Dark mode — reescreve só as cores. Paleta "acampamento à luz de lampião":
-   fundo verde-pinho profundo, tinta creme quente, marca levemente clareada para
-   legibilidade. Mantém a alma terrosa/editorial. ===== */
+/* ===== Noite atlas — escuro de verdade, fotos brilham ===== */
 [data-theme="dark"] {
-  --c-paper: 22 30 27; --c-paper-2: 31 42 38; --c-card: 28 38 34;
-  --c-ink: 236 231 216; --c-ink-soft: 167 175 168; --c-line: 51 65 59;
-  --c-pine: 62 158 134; --c-pine-dk: 52 139 117;
-  --c-ochre: 210 154 63; --c-ochre-soft: 230 180 90; --c-clay: 210 112 90;
-  --c-sage: 79 179 137; --c-amberx: 214 163 60;
-  --c-input: 35 47 42;
-  /* --c-on-ochre NÃO muda: ocre é claro nos dois temas → texto escuro sempre */
+  --c-paper: 7 11 20;
+  --c-paper-2: 14 20 34;
+  --c-card: 15 22 38;
+  --c-input: 18 27 46;
+  --c-ink: 234 240 250;
+  --c-ink-soft: 152 163 184;
+  --c-line: 31 42 64;
 
-  --c-success: 127 208 166; --c-success-bg: 23 48 37; --c-success-bd: 44 92 69;
-  --c-warn: 227 182 99;     --c-warn-bg: 46 39 22;    --c-warn-bd: 90 74 35;
-  --c-danger: 232 155 134;  --c-danger-bg: 46 27 23;  --c-danger-bd: 90 52 42;
+  --c-pine: 125 143 255;       /* #7D8FFF — texto 6.8:1 no fundo */
+  --c-pine-dk: 98 117 255;
+  --c-on-pine: 7 11 20;        /* botão azul-claro com texto tinta (6.8:1) */
 
-  --c-skel-1: 35 47 42; --c-skel-2: 46 60 53;
+  --c-ochre: 255 178 36; --c-ochre-soft: 255 214 128;
+  --c-amberx: 245 184 74;
+  --c-clay: 255 122 107;
+  --c-sage: 64 214 186;
 
-  --e-1: 0 14px 36px -26px rgba(0,0,0,.55);
-  --e-2: 0 24px 60px -30px rgba(0,0,0,.5);
+  --c-success: 74 222 155; --c-success-bg: 11 34 25; --c-success-bd: 22 74 53;
+  --c-warn: 245 184 74;    --c-warn-bg: 42 30 8;    --c-warn-bd: 92 66 18;
+  --c-danger: 255 138 128; --c-danger-bg: 44 15 16; --c-danger-bd: 96 34 34;
+
+  --c-skel-1: 18 27 46; --c-skel-2: 27 38 62;
+  --grid-ink: 200 214 255; --grid-alpha: .05;
+
+  --e-1: 0 1px 0 rgba(255,255,255,.03), 0 8px 24px -16px rgba(0,0,0,.7);
+  --e-2: 0 1px 0 rgba(255,255,255,.04), 0 24px 48px -24px rgba(0,0,0,.8);
 }

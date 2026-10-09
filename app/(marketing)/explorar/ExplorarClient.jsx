@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { DestinoCard } from '../../_components/DestinoCard.jsx';
 import { colecoesEditorial, TEMAS_EXPLORAR, temasDoDestino } from '../../_lib/editorial.js';
+import { Icon } from '../../_ui/Icon.jsx';
 
 // Busca + filtros (região/orçamento) + ordenação, no client. Recebe os destinos
 // já com imagem (puxada no servidor) — aqui é só filtrar/ordenar/renderizar.
@@ -69,9 +70,9 @@ export function ExplorarClient({ destinos }) {
               type="button"
               aria-pressed={ativo}
               onClick={() => setTema(ativo ? '' : t.id)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-semibold border transition focusring ${ativo ? 'bg-pine text-white border-pine' : 'bg-card text-ink border-line hover:border-pine/50'}`}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-semibold border transition focusring ${ativo ? 'bg-pine text-onpine border-pine' : 'bg-card text-ink border-line hover:border-pine/50'}`}
             >
-              <span aria-hidden>{t.icon}</span>{t.label}
+              <span aria-hidden><Icon emoji={t.icon} /></span>{t.label}
               <span className={ativo ? 'text-white/80 text-xs' : 'text-inksoft text-xs'}>{n}</span>
             </button>
           );

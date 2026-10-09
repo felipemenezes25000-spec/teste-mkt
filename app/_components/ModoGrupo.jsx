@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { dividirCusto } from '../_engine/split.js';
 import { fmtMoeda } from '../_engine/utils.js';
 import { Gate } from './Gate.jsx';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Rateio do custo total ANTES da viagem (diferencial vs Splitwise, que só divide
 // depois). Gated em 'colaboracao' (Pro). Recebe o custoTotalRealista(calc).
@@ -19,7 +20,7 @@ export function ModoGrupo({ custo }) {
     >
       <div className="rounded-2xl border border-line bg-card p-5">
         <div className="flex items-center justify-between gap-3 flex-wrap">
-          <h3 className="font-display text-lg text-ink">👥 Modo grupo</h3>
+          <h3 className="font-display text-lg text-ink"><Icon emoji="👥" /> Modo grupo</h3>
           <label className="text-sm text-inksoft flex items-center gap-2">
             Viajantes
             <input
@@ -37,7 +38,7 @@ export function ModoGrupo({ custo }) {
         <ul className="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-1.5">
           {r.porCategoria.map((c) => (
             <li key={c.id} className="flex items-center justify-between gap-2 text-xs rounded-lg bg-paper2 px-2 py-1.5">
-              <span className="text-inksoft truncate"><span aria-hidden>{c.icon}</span> {String(c.label).split('(')[0].trim()}</span>
+              <span className="text-inksoft truncate"><span aria-hidden><Icon emoji={c.icon} /></span> {String(c.label).split('(')[0].trim()}</span>
               <span className="tnum text-ink font-semibold shrink-0">{fmtMoeda(c.porPessoa, 'USD')}</span>
             </li>
           ))}

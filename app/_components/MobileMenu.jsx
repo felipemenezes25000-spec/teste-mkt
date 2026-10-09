@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { GlobalSearch } from './GlobalSearch.jsx';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Drawer de navegação mobile (< lg). Mesma acessibilidade do Modal: role=dialog,
 // foco inicial, FOCUS TRAP (Tab cicla dentro), Esc/backdrop fecham, restaura o foco
@@ -46,8 +47,8 @@ export function MobileMenu({ links, path, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="h-14 px-3 flex items-center justify-between border-b border-line shrink-0">
-          <span className="font-display text-lg text-ink">Menu</span>
-          <button onClick={onClose} aria-label="Fechar menu" className="w-11 h-11 grid place-items-center rounded-lg text-inksoft hover:text-ink text-xl leading-none focusring">✕</button>
+          <span className="eyebrow">Navegação</span>
+          <button onClick={onClose} aria-label="Fechar menu" className="w-11 h-11 grid place-items-center rounded-lg text-inksoft hover:text-ink text-xl leading-none focusring"><Icon emoji="✕" /></button>
         </div>
         <div className="p-3 border-b border-line shrink-0"><GlobalSearch /></div>
         <nav className="p-2 overflow-y-auto flex-1">
@@ -61,7 +62,7 @@ export function MobileMenu({ links, path, onClose }) {
                 aria-current={active ? 'page' : undefined}
                 className={`flex items-center gap-3 px-4 min-h-[48px] rounded-xl text-base font-semibold transition focusring ${active ? 'bg-card text-pine' : 'text-ink hover:bg-paper2'}`}
               >
-                <span aria-hidden className={`w-2 h-2 rounded-full ${active ? 'bg-pine' : 'bg-line'}`} />{l.label}
+                {l.icon ? <Icon name={l.icon} size={18} className={active ? 'text-pine' : 'text-inksoft'} /> : <span aria-hidden className={`w-2 h-2 rounded-full ${active ? 'bg-pine' : 'bg-line'}`} />}{l.label}
               </Link>
             );
           })}

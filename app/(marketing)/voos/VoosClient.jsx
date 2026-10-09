@@ -12,6 +12,7 @@ import { FlightScoreCard } from '../../_components/FlightScoreCard.jsx';
 import { useCambioBRL } from '../../_lib/cambioClient.js';
 import { track } from '../../_lib/analytics.js';
 import { useIdioma } from '../../_lib/i18n.js';
+import { Icon } from '../../_ui/Icon.jsx';
 
 function dataPadrao() {
   const d = new Date();
@@ -68,7 +69,7 @@ export function VoosClient() {
       const lista = JSON.parse(localStorage.getItem(key) || '[]');
       lista.push({ origem: origem.iata, destino: destino.iata, data });
       localStorage.setItem(key, JSON.stringify(lista));
-      setAlerta(`Alerta criado para ${origem.iata} → ${destino.iata}. Te avisamos quando o preço cair.`);
+      setAlerta(`Alerta criado para ${origem.iata}${destino.iata}. Te avisamos quando o preço cair.`);
       track('voos_alerta_criado', { origem: origem.iata, destino: destino.iata });
     } catch {
       setAlerta('Não consegui salvar o alerta.');
@@ -104,7 +105,7 @@ export function VoosClient() {
         <label className="text-xs text-inksoft font-medium block">{t('decisao.orcamento')}
           <input type="number" min="500" value={orcamentoTotal} onChange={(e) => setOrcamentoTotal(Math.max(500, Number(e.target.value) || 6500))} className={`${field} mt-1 tnum`} />
         </label>
-        <button onClick={buscar} disabled={busy} className="inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-white font-semibold px-4 py-2.5 hover:bg-pinedk disabled:opacity-60 focusring">
+        <button onClick={buscar} disabled={busy} className="inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-onpine font-semibold px-4 py-2.5 hover:bg-pinedk disabled:opacity-60 focusring">
           {busy ? t('voos.buscando') : t('voos.buscar')}
         </button>
       </div>
@@ -112,16 +113,16 @@ export function VoosClient() {
       {res && (
         <div className="mt-5">
           <div className="mb-3 rounded-lg border border-ochre/40 bg-ochre/10 text-warn px-3 py-2 text-xs font-medium">
-            ⚠ Valores, horários e companhias são <b>ilustrativos</b> (estimativa por distância), não preços reais. Confirme nos links “Reservar de verdade” abaixo.
+            <Icon emoji="⚠" /> Valores, horários e companhias são <b>ilustrativos</b> (estimativa por distância), não preços reais. Confirme nos links “Reservar de verdade” abaixo.
           </div>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
             <p className="text-sm text-inksoft">
-              {origem.iata} → {destino.iata}{res.km ? ` · ${res.km.toLocaleString('pt-BR')} km` : ''} · faixa estimada US$ {res.faixa.min}–{res.faixa.max}
+              {origem.iata} <Icon emoji="→" /> {destino.iata}{res.km ? ` · ${res.km.toLocaleString('pt-BR')} km` : ''} · faixa estimada US$ {res.faixa.min}–{res.faixa.max}
             </p>
             {liberaAlerta ? (
-              <button onClick={criarAlerta} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring">🔔 Criar alerta de preço</button>
+              <button onClick={criarAlerta} className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring"><Icon emoji="🔔" /> Criar alerta de preço</button>
             ) : (
-              <Link href="/planos" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-ochre/40 bg-ochre/5 text-ochre focusring">🔒 Alerta de preço (Premium)</Link>
+              <Link href="/planos" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-ochre/40 bg-ochre/5 text-ochre focusring"><Icon emoji="🔒" /> Alerta de preço (Premium)</Link>
             )}
           </div>
           {alerta && <div className="mb-3 rounded-lg border border-success-bd bg-success-bg text-success px-3 py-2 text-sm">{alerta}</div>}
@@ -144,9 +145,9 @@ export function VoosClient() {
 
           <div className="mt-4 flex flex-wrap gap-2 items-center">
             <span className="text-xs text-inksoft">Reservar de verdade:</span>
-            <a href={voos.google} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-pine hover:bg-paper2 focusring">Google Flights ↗</a>
-            {voos.skyscanner && <a href={voos.skyscanner} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-pine hover:bg-paper2 focusring">Skyscanner ↗</a>}
-            {voos.kayak && <a href={voos.kayak} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-pine hover:bg-paper2 focusring">Kayak ↗</a>}
+            <a href={voos.google} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-pine hover:bg-paper2 focusring">Google Flights <Icon emoji="↗" /></a>
+            {voos.skyscanner && <a href={voos.skyscanner} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-pine hover:bg-paper2 focusring">Skyscanner <Icon emoji="↗" /></a>}
+            {voos.kayak && <a href={voos.kayak} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-line bg-card text-pine hover:bg-paper2 focusring">Kayak <Icon emoji="↗" /></a>}
           </div>
 
           <p className="mt-3 text-xs text-inksoft">
@@ -177,7 +178,7 @@ function PrevisaoVoo({ rota, faixa, precoAtual }) {
   return (
     <div className="mt-4 rounded-2xl border border-line bg-card p-4">
       <div className="flex flex-wrap items-center gap-2">
-        <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full border ${ui.cls}`}>{ui.icon} {ui.label}</span>
+        <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full border ${ui.cls}`}><Icon emoji={ui.icon} /> {ui.label}</span>
         <span className="text-sm text-ink">{veredito.texto}</span>
         {veredito.acao === 'esperar' && veredito.economia > 0 && (
           <span className="text-xs font-semibold text-pine">economia ~US$ {veredito.economia}</span>

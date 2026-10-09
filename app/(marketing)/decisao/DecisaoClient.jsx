@@ -17,6 +17,7 @@ import { track } from '../../_lib/analytics.js';
 import { useIdioma } from '../../_lib/i18n.js';
 import { FavoriteButton } from '../../_components/FavoriteButton.jsx';
 import { CardsSkeleton } from '../../_components/Skeleton.jsx';
+import { Icon } from '../../_ui/Icon.jsx';
 
 // Ordem e rótulo das 8 dimensões do score.
 const DIM = [
@@ -50,7 +51,7 @@ function Barra({ nota, label, icon, texto }) {
   return (
     <div>
       <div className="flex items-center justify-between text-sm">
-        <span className="text-ink"><span aria-hidden className="mr-1">{icon}</span>{label}</span>
+        <span className="text-ink"><span aria-hidden className="mr-1"><Icon emoji={icon} /></span>{label}</span>
         <span className="tnum font-semibold text-ink">{nota}</span>
       </div>
       <div className="mt-1 h-2 rounded-full bg-paper2 overflow-hidden" role="img" aria-label={`${label}: ${nota} de 100`}>
@@ -232,7 +233,7 @@ export function DecisaoClient({ destinos }) {
               {ranked.slice(0, 3).map((destino) => (
                 <Link key={destino.id} href={`/destino/${destino.slug}`} className="block rounded-2xl border border-line bg-card p-3 hover:border-pine/40 hover:shadow-[var(--e-1)] transition focusring">
                   <div className="flex items-start gap-3">
-                    <div className="w-14 h-14 rounded-2xl bg-pine text-white grid place-items-center shrink-0">
+                    <div className="w-14 h-14 rounded-2xl bg-pine text-onpine grid place-items-center shrink-0">
                       <span className="font-display text-2xl tnum">{destino.pontos}</span>
                     </div>
                     <div className="min-w-0">
@@ -265,9 +266,9 @@ export function DecisaoClient({ destinos }) {
                 type="button"
                 aria-pressed={ativo}
                 onClick={() => escolherPreset(id)}
-                className={`px-3.5 py-2 rounded-xl text-sm font-semibold border transition focusring ${ativo ? 'bg-pine text-white border-pine shadow-sm' : 'bg-card text-ink border-line hover:border-pine/40'}`}
+                className={`px-3.5 py-2 rounded-xl text-sm font-semibold border transition focusring ${ativo ? 'bg-pine text-onpine border-pine shadow-sm' : 'bg-card text-ink border-line hover:border-pine/40'}`}
               >
-                <span aria-hidden className="mr-1">{p.emoji}</span>{p.nome}
+                <span aria-hidden className="mr-1"><Icon emoji={p.emoji} /></span>{p.nome}
               </button>
             );
           })}
@@ -295,7 +296,7 @@ export function DecisaoClient({ destinos }) {
                 <FavoriteButton code={d.id} nome={d.nome} className="absolute top-2 right-2 z-10" />
                 <div className="absolute top-2 left-2 z-10 flex items-center gap-1">
                   <span className="text-[11px] font-bold bg-ink/70 text-white w-6 h-6 grid place-items-center rounded-full">{d.posicao}º</span>
-                  <span className="text-[11px] font-bold bg-pine text-white px-2 h-6 grid place-items-center rounded-full tnum">{d.pontos}</span>
+                  <span className="text-[11px] font-bold bg-pine text-onpine px-2 h-6 grid place-items-center rounded-full tnum">{d.pontos}</span>
                 </div>
                 <Link href={`/destino/${d.slug}`} className="block rounded-2xl border border-line bg-card overflow-hidden hover:shadow-[var(--e-1)] hover:-translate-y-0.5 transition focusring">
                   <div className="relative h-36 bg-paper2 overflow-hidden">
@@ -303,7 +304,7 @@ export function DecisaoClient({ destinos }) {
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={img} alt={d.nome} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
                     ) : (
-                      <div className="w-full h-full grid place-items-center bg-gradient-to-br from-pine/15 to-ochre/15 text-3xl" aria-hidden>🗺️</div>
+                      <div className="w-full h-full grid place-items-center bg-gradient-to-br from-pine/15 to-ochre/15 text-3xl" aria-hidden><Icon emoji="🗺️" /></div>
                     )}
                   </div>
                   <div className="p-3.5">
@@ -314,7 +315,7 @@ export function DecisaoClient({ destinos }) {
                     <p className="mt-1 text-xs text-inksoft leading-snug line-clamp-2">{d.porque}</p>
                     <div className="mt-2 flex flex-wrap gap-1">
                       {fortes.map(([k, label, icon]) => (
-                        <span key={k} className="text-[10px] font-semibold px-1.5 py-0.5 rounded-md bg-sage/15 text-pine">{icon} {label}</span>
+                        <span key={k} className="text-[10px] font-semibold px-1.5 py-0.5 rounded-md bg-sage/15 text-pine"><Icon emoji={icon} /> {label}</span>
                       ))}
                     </div>
                   </div>
@@ -335,7 +336,7 @@ export function DecisaoClient({ destinos }) {
             </p>
           </div>
           <Link href="/planejar" className="rounded-xl bg-card border border-line text-ink font-semibold text-sm px-4 py-2 hover:border-pine/40 focusring">
-            {temPlanoSalvo ? 'Abrir no planejador →' : 'Montar minha rota →'}
+            {temPlanoSalvo ? 'Abrir no planejador ' : 'Montar minha rota '}
           </Link>
         </div>
 
@@ -344,7 +345,7 @@ export function DecisaoClient({ destinos }) {
             {/* Nota geral + custo total */}
             <div className="rounded-2xl border border-line bg-card p-5 flex flex-col">
               <div className="flex items-center gap-4">
-                <div className="shrink-0 w-20 h-20 rounded-2xl bg-pine text-white grid place-items-center">
+                <div className="shrink-0 w-20 h-20 rounded-2xl bg-pine text-onpine grid place-items-center">
                   <span className="font-display text-3xl leading-none tnum">{score.geral}</span>
                 </div>
                 <div>
@@ -404,7 +405,7 @@ export function DecisaoClient({ destinos }) {
         </p>
         {ops.length === 0 ? (
           <div className="mt-4 rounded-2xl border border-dashed border-line bg-card p-8 text-center text-inksoft text-sm">
-            Tudo certo por aqui — nenhum furo de visto, estouro de orçamento ou conflito de estação na sua rota. 👏
+            Tudo certo por aqui — nenhum furo de visto, estouro de orçamento ou conflito de estação na sua rota. <Icon emoji="👏" />
           </div>
         ) : (
           <ul className="mt-4 space-y-3">
@@ -414,7 +415,7 @@ export function DecisaoClient({ destinos }) {
                 <div className="min-w-0">
                   <p className="font-semibold text-ink">{o.titulo}</p>
                   <p className="text-sm text-inksoft mt-0.5">{o.descricao}</p>
-                  <p className="text-xs text-pine font-semibold mt-1">→ {o.comoAplicar}{o.economia ? ` · economia ~${fmtMoeda(o.economia, 'USD')}` : ''}</p>
+                  <p className="text-xs text-pine font-semibold mt-1"><Icon emoji="→" /> {o.comoAplicar}{o.economia ? ` · economia ~${fmtMoeda(o.economia, 'USD')}` : ''}</p>
                 </div>
               </li>
             ))}

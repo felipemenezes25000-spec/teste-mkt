@@ -1,23 +1,44 @@
-// Devolve a imagem do Wikimedia Commons numa largura adequada via o endpoint oficial
-// Special:FilePath/<arquivo>?width=N. Esse endpoint lida com os dois casos SEM erro 400:
-// se N ≥ largura do original, redireciona pro original; se N < original, gera o thumb.
-// Assim não precisamos saber o tamanho do original (construir "/thumb/<N>px-" à mão
-// quebra (400) quando o original é menor que N). Pura (server + client).
-export function wikiThumb(url, width = 640) {
-  if (!url) return url;
-  // O Wikidata (wdt:P18) devolve imagens em http://commons… — força https senão a
-  // CSP (img-src https:) bloqueia como mixed content. Vale pra qualquer fonte.
-  url = url.replace(/^http:\/\//, 'https://');
-  // Já é Special:FilePath → só (re)define o width (preserva o host: commons/en/…).
-  if (url.includes('Special:FilePath/')) {
-    return url.split('?')[0] + '?width=' + width;
+// Miniaturas do Wikimedia em LARGURAS PADRÃO. Desde 2025-2026 o Wikimedia só serve
+// thumbnails nas larguras listadas em https://w.wiki/GHai; outras larguras dão 400 e
+// o arquivo original "unscaled" é limitado por taxa (429) para hotlink — era a causa
+// das fotos quebradas no QA do Lote 0. Aqui toda largura pedida é ENCAIXADA na
+// largura padrão mais próxima (teto 1280 no cliente). O lado servidor resolve a
+// largura exata pelo tamanho real do original em _lib/media.js. Pura (server+client).
+
+export const LARGURAS_PADRAO = [120, 250, 330, 500, 960, 1280, 1920];
+
+/** Largura padrão mais próxima (em escala log), limitada a `teto`. */
+export function larguraPadrao(w, teto = 1280) {
+  const alvo = Math.max(1, Math.min(Number(w) || 500, teto));
+  let melhor = LARGURAS_PADRAO[0];
+  for (const l of LARGURAS_PADRAO) {
+    if (l > teto) break;
+    if (Math.abs(Math.log(l / alvo)) < Math.abs(Math.log(melhor / alvo))) melhor = l;
   }
-  // upload.wikimedia.org, original OU thumb, de qualquer projeto:
-  //  /wikipedia/commons/a/ab/Arquivo.ext   (Wikimedia Commons)
-  //  /wikipedia/en/a/ab/Arquivo.ext        (upload local da en.wikipedia, ex.: fair-use)
+  return melhor;
+}
+
+export function wikiThumb(url, width = 500) {
+  if (!url) return url;
+  // Wikidata (wdt:P18) devolve http://commons… → https senão a CSP bloqueia.
+  url = url.replace(/^http:\/\//, 'https://');
+  const w = larguraPadrao(width);
+  if (url.includes('Special:FilePath/')) {
+    return url.split('?')[0] + '?width=' + w;
+  }
+  //  /wikipedia/commons/a/ab/Arquivo.ext  ·  /wikipedia/en/a/ab/Arquivo.ext
   //  /wikipedia/<proj>/thumb/a/ab/Arquivo.ext/123px-Arquivo.ext
   const m = url.match(/\/wikipedia\/([a-z-]+)\/(?:thumb\/)?[0-9a-f]\/[0-9a-f]{2}\/([^/?]+)/);
   if (!m) return url; // não-Wikimedia: passa direto
   const host = m[1] === 'commons' ? 'commons.wikimedia.org' : `${m[1]}.wikipedia.org`;
-  return `https://${host}/wiki/Special:FilePath/${m[2]}?width=${width}`;
+  return `https://${host}/wiki/Special:FilePath/${m[2]}?width=${w}`;
+}
+
+/** Nome do arquivo Commons a partir de qualquer URL do Wikimedia (ou null). */
+export function arquivoWikimedia(url) {
+  if (!url) return null;
+  const fp = url.match(/Special:FilePath\/([^?#]+)/);
+  if (fp) return decodeURIComponent(fp[1]).replace(/ /g, '_');
+  const m = url.match(/\/wikipedia\/[a-z-]+\/(?:thumb\/)?[0-9a-f]\/[0-9a-f]{2}\/([^/?#]+)/);
+  return m ? decodeURIComponent(m[1]).replace(/ /g, '_') : null;
 }

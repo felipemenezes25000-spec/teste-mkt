@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { track } from '../_lib/analytics.js';
 import { useIdioma } from '../_lib/i18n.js';
 import { HOME_PROBLEMAS, HOME_FATORES, HOME_COMPARACAO, HOME_FAQ } from '../_lib/homeContent.js';
+import { Icon } from '../_ui/Icon.jsx';
 
 // Seções editoriais da Home: cada uma reage ao idioma via useIdioma() + arrays
 // em homeContent.js. Sem chave duplicada: fallback automático pra pt quando
@@ -25,7 +26,7 @@ export function HomeSecaoProblema() {
         <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {itens.map((p) => (
             <li key={p.txt} className="rounded-2xl border border-line bg-card p-4 flex gap-3">
-              <span aria-hidden className="text-xl shrink-0">{p.icon}</span>
+              <span aria-hidden className="text-xl shrink-0"><Icon emoji={p.icon} /></span>
               <p className="text-sm text-ink leading-snug">{p.txt}</p>
             </li>
           ))}
@@ -64,11 +65,11 @@ export function HomeSecaoCustoReal() {
       <div className="rounded-3xl border border-line bg-card p-6 sm:p-10 shadow-[var(--e-1)]">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-8 items-start">
           <div>
-            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-coral">{t('home.custoRealSelo')}</span>
+            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-pine">{t('home.custoRealSelo')}</span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.08]">{t('home.custoRealH2')}</h2>
             <p className="mt-3 text-inksoft">{t('home.custoRealP')}</p>
             <Link href="/custo-real" className="mt-5 inline-flex items-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 focusring">
-              {t('home.custoRealCTA')} →
+              {t('home.custoRealCTA')} <Icon emoji="→" />
             </Link>
           </div>
           <div className="grid gap-3">
@@ -120,7 +121,7 @@ export function HomeSecaoOtas() {
                   <td className="px-4 py-3">
                     <span className={`font-display text-lg ${c.destaque ? 'text-pine' : 'text-ink'}`}>{c.rotulo}</span>
                     {c.destaque && (
-                      <span className="ml-2 align-middle text-[10px] font-bold uppercase tracking-wide bg-pine text-white rounded-full px-2 py-0.5">
+                      <span className="ml-2 align-middle text-[10px] font-bold uppercase tracking-wide bg-pine text-onpine rounded-full px-2 py-0.5">
                         {t('home.otasChip')}
                       </span>
                     )}
@@ -228,8 +229,8 @@ export function HomeSecaoCtaFinal() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const labelA = `🧠 ${t('home.ctaFinalCalcular')}`;
-  const labelB = `🧭 ${t('home.ctaFinalDescobrir')}`;
+  const labelA = `${t('home.ctaFinalCalcular')}`;
+  const labelB = `${t('home.ctaFinalDescobrir')}`;
   const cta = { id: variante, label: variante === 'B' ? labelB : labelA };
 
   function onClick() {
@@ -238,7 +239,7 @@ export function HomeSecaoCtaFinal() {
 
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-      <div className="rounded-3xl bg-pine text-white p-8 sm:p-12 text-center shadow-[var(--e-2)]">
+      <div className="rounded-3xl bg-pine text-onpine p-8 sm:p-12 text-center shadow-[var(--e-2)]">
         <h2 className="font-display text-3xl sm:text-5xl leading-[1.05] max-w-3xl mx-auto">{t('home.ctaFinalH2')}</h2>
         <p className="mt-4 text-white/85 max-w-2xl mx-auto">{t('home.ctaFinalP')}</p>
         <div className="mt-7 flex flex-wrap gap-3 justify-center">
@@ -251,7 +252,7 @@ export function HomeSecaoCtaFinal() {
             {cta.label}
           </Link>
           <Link href="/custo-real" className="inline-flex items-center gap-2 rounded-xl border border-white/40 bg-white/10 text-white font-semibold px-5 py-3 hover:bg-white/20 focusring">
-            🧾 {t('home.ctaFinalCusto')}
+            <Icon emoji="🧾" /> {t('home.ctaFinalCusto')}
           </Link>
         </div>
         <p className="mt-5 text-xs text-white/70">{t('home.ctaFinalRodape')}</p>

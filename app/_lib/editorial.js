@@ -150,7 +150,7 @@ const VEREDITOS = {
     oportunidade: 'Maio-setembro: estação seca em Bali, sem monção e com clima ideal pra praia/cachoeiras.',
   },
   VN: {
-    texto: 'O Vietnã é provavelmente o melhor custo-benefício do Sudeste Asiático que brasileiros mochilam. Distâncias bem pensadas (Hanoi → Hoi An → HCMC), comida memorável, custo absurdamente baixo no dia a dia. O contra é o voo: longo, sem direto do Brasil.',
+    texto: 'O Vietnã é provavelmente o melhor custo-benefício do Sudeste Asiático que brasileiros mochilam. Distâncias bem pensadas (Hanoi Hoi An HCMC), comida memorável, custo absurdamente baixo no dia a dia. O contra é o voo: longo, sem direto do Brasil.',
     combina: ['mochilão de 14+ dias', 'interesse forte em comida de rua', 'roteiro norte-sul de trem/ônibus', 'orçamento controlado mas com algumas experiências'],
     naoCombina: ['viagem de menos de 10 dias', 'viagem com criança pequena', 'medo de tráfego caótico nas cidades'],
     oportunidade: 'Outubro-março no sul (HCMC), maio-setembro no norte (Hanoi): país tem clima oposto entre regiões.',

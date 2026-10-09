@@ -32,7 +32,7 @@ export function FavoriteButton({ code, nome, className = '' }) {
       title={fav ? 'Remover dos favoritos' : 'Salvar nos favoritos'}
       className={`inline-flex items-center justify-center w-8 h-8 rounded-full backdrop-blur bg-card/85 border border-line text-base shadow-sm hover:scale-110 transition focusring ${className}`}
     >
-      <span aria-hidden className={fav ? 'text-clay' : 'text-inksoft'}>{fav ? '♥' : '♡'}</span>
+      <span aria-hidden className={fav ? 'text-clay' : 'text-inksoft'}><svg width="16" height="16" viewBox="0 0 24 24" fill={fav ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z" /></svg></span>
     </button>
   );
 }
