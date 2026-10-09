@@ -1,3 +1,4 @@
+import { MobileBottomNav } from '../_components/MobileBottomNav.jsx';
 import Link from 'next/link';
 import AppNav from '../_components/AppNav.jsx';
 import { TourGuiado } from '../_components/TourGuiado.jsx';
@@ -21,7 +22,7 @@ export default function MarketingLayout({ children }) {
       <AppNav />
       <TourGuiado />
       <div id="conteudo" tabIndex={-1} className="min-h-[calc(100vh-4rem)] outline-none">{children}</div>
-      <footer className="mt-16 border-t border-line bg-card/60">
+      <footer className="mt-16 border-t border-line bg-card/60 pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid gap-10 sm:grid-cols-2 md:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div className="max-w-sm">
             <Marca size={36} />
@@ -50,6 +51,7 @@ export default function MarketingLayout({ children }) {
           </div>
         </div>
       </footer>
+      <MobileBottomNav />
     </>
   );
 }

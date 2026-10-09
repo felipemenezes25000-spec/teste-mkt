@@ -454,3 +454,8 @@ for (const l of Object.keys(PLAT)) { TELAS[l].plat = PLAT[l]; Object.assign(TELA
 
 // Simulador da Home (V5 F1).
 for (const l of Object.keys(SIM2)) TELAS[l].sim2 = SIM2[l];
+// Navegação inferior do celular (V5 F7).
+Object.assign(TELAS.pt.nav2, { mobile: 'Navegação rápida' });
+Object.assign(TELAS.en.nav2, { mobile: 'Quick navigation' });
+Object.assign(TELAS.es.nav2, { mobile: 'Navegación rápida' });
+Object.assign(TELAS.ja.nav2, { mobile: 'クイックナビ' });

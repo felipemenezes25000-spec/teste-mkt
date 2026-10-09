@@ -76,3 +76,15 @@ describe('viagens/store', () => {
     expect(migrar({ viagens: [{ id: 'x', titulo: 'antiga' }] }).viagens[0].reservas).toEqual([]);
   });
 });
+
+describe('viagem do momento (navegação móvel)', () => {
+  it('em curso tem prioridade; senão a próxima em até 3 dias; senão nenhuma', async () => {
+    const { viagemDoMomento } = await import('../../_components/MobileBottomNav.jsx');
+    const v = (id, inicio, fim) => ({ id, inicio, fim });
+    const hoje = '2026-10-09';
+    expect(viagemDoMomento([v('a', '2026-10-01', '2026-10-20'), v('b', '2026-10-10', '2026-10-12')], hoje).id).toBe('a');
+    expect(viagemDoMomento([v('b', '2026-10-12', '2026-10-20'), v('c', '2026-10-11', '2026-10-13')], hoje).id).toBe('c');
+    expect(viagemDoMomento([v('d', '2026-10-20', '2026-10-25')], hoje)).toBeNull();
+    expect(viagemDoMomento([], hoje)).toBeNull();
+  });
+});

@@ -75,9 +75,8 @@ function mapsUrl(q) {
   return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
 }
 
-// Último recurso ABSOLUTO de foto (arquivo do Commons que sempre existe) — só usado
-// se nem o país tiver foto, garantindo que NENHUM card renderize sem imagem.
-const FOTO_ULTIMO = 'https://commons.wikimedia.org/wiki/Special:FilePath/Sunset_across_Machu_Picchu.jpg';
+// (V5) Não existe mais "último recurso" com foto de OUTRO lugar: sem foto do país, o
+// card mostra o placeholder honesto do <Foto> (nunca Machu Picchu no lugar de outro país).
 
 // Crédito-lite p/ imagem hospedada no Wikimedia (link da página do arquivo, onde
 // aparecem autor + licença). Para fotos do Openverse o crédito vem pronto da API.
@@ -116,18 +115,18 @@ export default async function DestinoPage(props) {
   const heroImg = wiki?.img || (await imagensDe(d.fotoQuery || d.nome, { n: 1 }))[0] || (await imagemCommons(d.fotoQuery || d.nome)) || null;
   const credito = heroImg ? await creditoImagem(heroImg) : null;
   // Piso: várias fotos do país (cicladas) — o raro item sem foto própria cai aqui sem
-  // repetir sempre a mesma imagem. FOTO_ULTIMO garante não-nulo mesmo no pior caso.
+  // repetir sempre a mesma imagem. Sem nada do país, devolve null (placeholder honesto).
   // Piso do país: fotos do LANDMARK curado (d.fotoQuery) via media-list, que JÁ é filtrada por RUIM (sem
   // bandeira/brasão/mapa). Auditoria jun/2026: a fonte antiga imagensDe(d.nome) puxava o artigo do PAÍS
   // (mapas/pinturas/brasões coloniais) -> ~1.180 cards errados. NÃO prependemos heroImg aqui porque ele vem do
   // summary (pode ser mapa/brasão de lead); ele fica só como último recurso no piso() abaixo (quando a media-list
   // vier vazia). Prova: ~88%->~98% dos cards de pool viraram foto real.
   const poolPais = [...new Set((await imagensDe(d.fotoQuery || d.nome, { n: 6 })).filter(Boolean))];
-  const piso = (i) => (poolPais.length ? poolPais[i % poolPais.length] : (heroImg || FOTO_ULTIMO));
+  const piso = (i) => (poolPais.length ? poolPais[i % poolPais.length] : (heroImg || null));
 
   // Cadeia COM GARANTIA + CRÉDITO de cada item. Ordem: verbete curado → Openverse
   // (Flickr-CC/museus/Commons, traz autor+licença+link) → Commons direto → piso do país
-  // ciclado. Devolve { src, credito } — nunca nulo (piso/FOTO_ULTIMO garantem).
+  // ciclado. Devolve { src, credito }; src null = sem foto confiável (placeholder).
   const fotoGarantida = async (titulo, busca, i) => {
     const w = await imagemWiki(titulo);
     if (w) return { src: w, credito: creditoCommonsLite(w) };
@@ -136,6 +135,7 @@ export default async function DestinoPage(props) {
     const c = await imagemCommons(busca);
     if (c) return { src: c, credito: creditoCommonsLite(c) };
     const p = piso(i);
+    if (!p) return { src: null, credito: null };
     // PISO = foto do país, NÃO do lugar: rotulada como ilustrativa (V4 §11 — nunca
     // apresentar a foto de outro lugar como se fosse este).
     return { src: p, credito: creditoCommonsLite(p), ilustrativa: true };
