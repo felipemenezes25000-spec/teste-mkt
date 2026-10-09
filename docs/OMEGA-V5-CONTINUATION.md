@@ -10,8 +10,8 @@ COMO VERIFICAR    npm run verify · npm run test:rls · npm run build && npx nex
                   node scripts/a11y.mjs http://localhost:3107
                   node scripts/qa-telas.mjs http://localhost:3107
                   node scripts/midia/auditoria.mjs
-PRODUÇÃO          https://mundo-sem-fim-lac.vercel.app ainda roda o build da main (4da2bac) até um
-                  novo deploy autorizado; Supabase `mundo-sem-fim` sem migrations novas nesta fase
+PRODUÇÃO          https://mundo-sem-fim-lac.vercel.app publicado com a V5 (22182d4) em 2026-10-09;
+                  e2e-viagem 12/12 e simulador verificados em produção; Supabase sem migrations novas
 ```
 
 ## Próximos passos com maior impacto (sem duplicar trabalho)
