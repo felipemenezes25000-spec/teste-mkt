@@ -1,63 +1,48 @@
 import Link from 'next/link';
-import { destinosDestaque, DESTINOS } from '../_lib/destinos.js';
-import { fotoCapa, resumoWiki } from '../_lib/wiki.js';
-import { resolverImagens, resolverImagem } from '../_lib/media.js';
-import { arquivoWikimedia, wikiThumb } from '../_lib/wikiThumb.js';
-import { DestinoCard } from '../_components/DestinoCard.jsx';
+import { DESTINOS, destinoPorCode } from '../_lib/destinos.js';
 import { JsonLd } from '../_components/JsonLd.jsx';
 import { jsonLdOrganization, jsonLdWebSite, jsonLdReviews, siteUrl } from '../_lib/seo.js';
 import { ProvaSocial } from '../_components/ProvaSocial.jsx';
-import { HeroSimulador } from '../_components/HeroSimulador.jsx';
 import { DEPOIMENTOS } from '../_lib/depoimentos.js';
-import { HomeSecaoComoDecide, HomeSecaoCustoReal, HomeSecaoFaq, HomeSecaoCtaFinal } from '../_components/HomeSections.jsx';
+import { HomeSecaoComoDecide, HomeSecaoFaq, HomeSecaoCtaFinal } from '../_components/HomeSections.jsx';
+import { HomeCalcadao, HomeVitrine } from '../_components/home/HomeCalcadao.jsx';
+import { HeroSimulador } from '../_components/HeroSimulador.jsx';
+import { todasBases, midiaLeve, CAMBIO_BRL } from '../_lib/figurinhas.js';
+import { simularCustoReal } from '../_engine/custoTotal.js';
 import { Icon } from '../_ui/Icon.jsx';
-import { Foto } from '../_ui/Foto.jsx';
+import { Azulejo, CORES_AZULEJO } from '../_ui/Azulejo.jsx';
 import { SourceTrust } from '../_ui/SourceTrust.jsx';
 import { T } from '../_components/T.jsx';
 
-// Home MERIDIANO (Server Component). Primeiro valor antes de cadastro: o simulador
-// está DENTRO do hero (OMEGA V4 §30). Foto do hero e dos destaques resolvidas pelo
-// serviço de mídia (URL segura + autor/licença). Rede falhou → fallback honesto.
+// Home CALÇADÃO (Server Component). Primeiro valor antes de cadastro: a frase do
+// hero já responde "quantos lugares estão na hora certa" para o mês, os dias, as
+// pessoas e o orçamento escolhidos (OMEGA V4 §30). Figurinhas e placar compartilham
+// o mês. Fotos/vídeos: Wikimedia Commons com autor e licença (_lib/midia.js).
 export const revalidate = 86400;
 
 export const metadata = {
-  title: 'Mundo Sem Fim — o mundo inteiro, explicado para você',
+  title: 'Mundo Sem Fim — o álbum do mundo inteiro, na hora certa',
   description:
-    `Descubra pra onde ir pelo seu perfil, veja o custo real da viagem inteira com fonte e data, monte a rota que respeita estação, visto e orçamento. ${DESTINOS.length} países. Grátis pra começar.`,
+    `Descubra onde está a época certa agora, quanto a viagem custa de verdade e se o seu passaporte entra. ${DESTINOS.length} países com foto, bandeira, melhor época, visto e custo — com fonte e data.`,
   alternates: { canonical: '/' },
 };
 
-// Local do hero: foto + coordenada exibida (assinatura MERIDIANO).
-const HERO = { titulo: 'Lofoten', rotulo: 'LOFOTEN · NORUEGA', coord: '68.15° N · 13.98° E' };
-
 const JORNADA = [
-  { n: '01', icon: 'globe', k: 'j1', tit: 'Explorar', txt: `${DESTINOS.length} países num mapa vivo, com custo de referência, melhor época e visto para quem tem passaporte brasileiro.`, href: '/explorar', cta: 'Abrir o mapa' },
-  { n: '02', icon: 'target', k: 'j2', tit: 'Decidir', txt: 'Top 3 pelo seu perfil, com nota explicada, riscos e o porquê de cada escolha. A comissão nunca entra no ranking.', href: '/decisao', cta: 'Decidir agora' },
-  { n: '03', icon: 'route', k: 'j3', tit: 'Planejar', txt: 'A ordem dos países e dos dias que respeita estação, visto e orçamento — e recalcula quando você muda algo.', href: '/planejar', cta: 'Montar a rota' },
-  { n: '04', icon: 'suitcase', k: 'j4', tit: 'Viajar', txt: 'Reservas, documentos, despesas e o próximo passo do dia num só lugar, inclusive offline.', href: '/viagens', cta: 'Minhas viagens' },
+  { n: '01', k: 'j1', tit: 'Explorar', txt: `${DESTINOS.length} países no álbum do mundo, com custo de referência, melhor época e visto para quem tem passaporte brasileiro.`, href: '/explorar', cta: 'Abrir o álbum' },
+  { n: '02', k: 'j2', tit: 'Decidir', txt: 'Top 3 pelo seu perfil, com nota explicada, riscos e o porquê de cada escolha. A comissão nunca entra no ranking.', href: '/decisao', cta: 'Decidir agora' },
+  { n: '03', k: 'j3', tit: 'Planejar', txt: 'A ordem dos países e dos dias que respeita estação, visto e orçamento — e recalcula quando você muda algo.', href: '/planejar', cta: 'Montar a rota' },
+  { n: '04', k: 'j4', tit: 'Viajar', txt: 'Reservas, documentos, despesas e o próximo passo do dia num só lugar, inclusive offline.', href: '/viagens', cta: 'Minhas viagens' },
 ];
 
-const CTA_LIMA = 'inline-flex items-center justify-center gap-2 rounded-lg bg-coral text-oncoral font-semibold px-5 h-12 hover:brightness-95 transition focusring';
-const CTA_LINHA = 'inline-flex items-center justify-center gap-2 rounded-lg border border-white/25 text-white font-semibold px-5 h-12 hover:bg-white/10 transition focusring';
-
-export default async function Home() {
-  const destaques = destinosDestaque().slice(0, 7);
+export default function Home() {
   const reviewsLd = jsonLdReviews(DEPOIMENTOS, siteUrl());
-  const [heroWiki, ...imgs] = await Promise.all([
-    resumoWiki(HERO.titulo),
-    ...destaques.map((d) => fotoCapa(d)),
-  ]);
-  const [heroAsset, assets] = await Promise.all([
-    heroWiki?.img ? resolverImagem(heroWiki.img, { largura: 1920 }) : null,
-    resolverImagens(imgs.filter(Boolean), { largura: 960 }),
-  ]);
-  const heroSrc = heroAsset ? heroAsset.url : heroWiki?.img ? wikiThumb(heroWiki.img, 1280) : null;
-  const heroCredito = heroAsset ? { fonte: 'Wikimedia Commons', autor: heroAsset.photographer, licenca: heroAsset.license, link: heroAsset.pageUrl } : null;
-  const fotoDe = (u) => {
-    const a = u ? assets.get(arquivoWikimedia(u) || '') : null;
-    return a ? { img: a.url, credito: { fonte: 'Wikimedia Commons', autor: a.photographer, licenca: a.license, link: a.pageUrl } } : { img: u, credito: null };
-  };
-  const [principal, ...resto] = destaques.map((d, i) => ({ d, ...fotoDe(imgs[i]) }));
+  const bases = todasBases();
+  const midia = midiaLeve(bases.map((b) => b.code), { largura: 500, video: false });
+  const mesInicial = new Date().getMonth();
+  // mesmo cenário padrão da calculadora /custo-real: Peru, 8 dias, casal, maio, GRU
+  const peru = destinoPorCode('PE');
+  const sim = simularCustoReal({ destino: peru, dias: 8, pessoas: 2, mes: 5 });
+  const exemplo = { nome: peru.nome, dias: 8, pessoas: 2, vitrine: sim.vitrine, total: sim.total, escondido: sim.escondido };
 
   return (
     <main>
@@ -65,119 +50,70 @@ export default async function Home() {
       <JsonLd data={jsonLdWebSite(siteUrl())} />
       {reviewsLd && <JsonLd data={reviewsLd} />}
 
-      {/* HERO — sempre escuro (data-theme local), foto real com crédito, simulador embutido */}
-      <section data-theme="dark" className="relative overflow-hidden bg-paper text-ink -mt-px">
-        <Foto src={heroSrc} srcSet={heroAsset ? heroAsset.srcSet : undefined} sizes="100vw" alt="Montanhas e vilarejo de pescadores em Lofoten, Noruega" credito={heroCredito} prioridade className="absolute inset-0 !bg-paper" imgClassName="opacity-95" largura={1920} altura={1080} />
-        <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/75 to-paper/5 pointer-events-none" aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/10 to-paper/50 pointer-events-none" aria-hidden />
-        <div className="absolute inset-0 pointer-events-none" aria-hidden
-          style={{ backgroundImage: 'linear-gradient(rgb(var(--grid-ink) / .07) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--grid-ink) / .07) 1px, transparent 1px)', backgroundSize: '96px 96px' }} />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-16 sm:pt-20 lg:pt-24 lg:pb-24 grid gap-10 lg:gap-14 lg:grid-cols-[1.05fr_1fr] items-start">
-          {/* título fixo ao lado enquanto o simulador cresce com os resultados */}
-          <div className="lg:sticky lg:top-28 lg:pt-16">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="signal-dot" aria-hidden />
-              <span className="eyebrow !text-ink/80">{DESTINOS.length} <T k="home2.eyebrow" fallback="países · decisões com fonte e data" /></span>
-            </div>
-            <h1 className="mt-6 font-display text-[3.1rem] leading-[.95] sm:text-7xl xl:text-[5.6rem] tracking-tightest text-ink">
-              <T k="home2.h1a" fallback="O mundo inteiro," /><br /><span className="text-coral"><T k="home2.h1b" fallback="explicado para você." /></span>
-            </h1>
-            <p className="mt-6 text-lg text-inksoft max-w-xl leading-relaxed">
-              <T k="home2.sub" fallback="Pra onde ir pelo seu perfil, quanto a viagem custa de verdade — com fonte e data em cada número — e a rota que respeita estação, visto e orçamento. Do sonho ao retorno." />
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/decisao" className={CTA_LIMA}><Icon name="target" size={18} /> <T k="home2.ctaDecidir" fallback="Decidir minha viagem" /></Link>
-              <Link href="/explorar" className={CTA_LINHA}><Icon name="globe" size={18} /> <T k="home2.ctaExplorar" fallback="Explorar o mapa" /></Link>
-            </div>
-            <div className="mt-8 flex flex-wrap items-center gap-2 text-xs text-inksoft">
-              <span className="mr-1"><T k="home2.cadaDado" fallback="Cada dado diz o que é:" /></span>
-              <SourceTrust freshness="LIVE" compacto /><SourceTrust freshness="ESTIMATE" compacto /><SourceTrust freshness="HISTORICAL" compacto />
-            </div>
-            <div className="mt-10 coord text-inksoft">{HERO.rotulo} — {HERO.coord}</div>
+      <HomeCalcadao bases={bases} midia={midia} mesInicial={mesInicial} cambio={CAMBIO_BRL} />
+      {/* SIMULADOR COMPLETO — Top 3 com custo em terra, passagem e total na sua moeda */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 grid gap-8 lg:gap-12 lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] items-start">
+        <div className="lg:sticky lg:top-28">
+          <span className="ms-rotulo">Simulador · sem cadastro</span>
+          <h2 className="ms-titulo text-[40px] sm:text-[60px] text-ink">os 3 que cabem <span className="text-cobalto">no seu bolso</span></h2>
+          <p className="mt-4 text-lg text-[#33332F] max-w-md leading-relaxed">Diga de onde sai, quantos vão, quantos dias e quanto quer gastar. A gente separa o custo em terra, a passagem e o total provável — na sua moeda, com o câmbio do dia e a fonte.</p>
+          <div className="mt-6 flex flex-wrap items-center gap-2 text-sm text-inksoft">
+            <span className="mr-1"><T k="home2.cadaDado" fallback="Cada dado diz o que é:" /></span>
+            <SourceTrust freshness="LIVE" compacto /><SourceTrust freshness="ESTIMATE" compacto /><SourceTrust freshness="HISTORICAL" compacto />
           </div>
-          <HeroSimulador />
         </div>
+        <HeroSimulador />
       </section>
 
-      {/* JORNADA — quatro passos, uma plataforma */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
-        <div className="max-w-2xl">
-          <div className="eyebrow mb-3"><T k="home2.jornadaEy" fallback="Do sonho ao retorno" /></div>
-          <h2 className="font-display text-4xl sm:text-5xl tracking-tighter text-ink"><T k="home2.jornadaH" fallback="Uma viagem inteira, sem abrir dez apps." /></h2>
-        </div>
-        <ol className="mt-10 grid gap-px bg-line border border-line rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
-          {JORNADA.map((p) => (
-            <li key={p.n} className="bg-card">
-              <Link href={p.href} className="group h-full flex flex-col p-6 hover:bg-paper2/60 transition focusring">
+      <HomeVitrine exemplo={exemplo} cambio={CAMBIO_BRL} />
+
+      {/* JORNADA — quatro passos, cada um com seu azulejo */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
+        <span className="ms-rotulo"><T k="home2.jornadaEy" fallback="Do sonho ao retorno" /></span>
+        <h2 className="ms-titulo text-[40px] sm:text-[60px] text-ink max-w-3xl"><T k="home2.jornadaH" fallback="Uma viagem inteira, sem abrir dez apps." /></h2>
+        <ol className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {JORNADA.map((p, i) => (
+            <li key={p.n}>
+              <Link href={p.href} className="group h-full flex flex-col rounded-[24px] bg-paper2 p-6 hover:bg-coral transition-colors focusring">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-inksoft">{p.n}</span>
-                  <span className="w-10 h-10 rounded-lg bg-pine/10 text-pine grid place-items-center"><Icon name={p.icon} size={20} /></span>
+                  <span className="font-cond font-extrabold text-lg tracking-[.08em]">{p.n}</span>
+                  <Azulejo motivo={i + 1} cor={CORES_AZULEJO[i]} fundo={i === 3 ? '#FFFFFF' : '#FFFFFF'} tam={44} rot={i * 90} />
                 </div>
-                <h3 className="mt-8 font-display text-2xl text-ink"><T k={`home2.${p.k}`} fallback={p.tit} /></h3>
-                <p className="mt-2 text-sm text-inksoft leading-relaxed flex-1">{p.k === 'j1' ? `${DESTINOS.length} ` : ''}<T k={`home2.${p.k}t`} fallback={p.k === 'j1' ? p.txt.replace(/^\d+ /, '') : p.txt} /></p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-pine"><T k={`home2.${p.k}c`} fallback={p.cta} /> <Icon name="arrow-right" size={15} className="group-hover:translate-x-0.5 transition" /></span>
+                <h3 className="mt-8 font-display font-extrabold text-3xl tracking-[-.03em] text-ink"><T k={`home2.${p.k}`} fallback={p.tit} /></h3>
+                <p className="mt-2 text-[15px] text-ink/75 leading-relaxed flex-1">{p.k === 'j1' ? `${DESTINOS.length} ` : ''}<T k={`home2.${p.k}t`} fallback={p.k === 'j1' ? p.txt.replace(/^\d+ /, '') : p.txt} /></p>
+                <span className="mt-5 inline-flex items-center gap-1.5 font-cond font-extrabold uppercase tracking-[.05em] text-ink"><T k={`home2.${p.k}c`} fallback={p.cta} /> <Icon name="arrow-right" size={16} className="group-hover:translate-x-1 transition" /></span>
               </Link>
             </li>
           ))}
         </ol>
       </section>
 
-      {/* DESTAQUES — grade editorial assimétrica */}
-      {principal && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
-          <div className="flex flex-wrap items-end justify-between gap-3 mb-8">
-            <div>
-              <div className="eyebrow mb-3"><T k="home2.destEy" fallback="Para começar" /></div>
-              <h2 className="font-display text-4xl sm:text-5xl tracking-tighter text-ink"><T k="home2.destH" fallback="Destinos em destaque" /></h2>
-            </div>
-            <Link href="/explorar" className="inline-flex items-center gap-1.5 text-sm font-semibold text-pine hover:underline focusring"><T k="home2.verTodos" fallback="Ver os {n} países" vars={{ n: DESTINOS.length }} /> <Icon name="arrow-right" size={15} /></Link>
-          </div>
-          <div className="grid gap-4 lg:grid-cols-3">
-            <Link href={`/destino/${principal.d.slug}`} className="group relative block min-h-[420px] lg:row-span-2 rounded-2xl overflow-hidden border border-line focusring">
-              <Foto src={principal.img} alt={principal.d.nome} credito={principal.credito} className="absolute inset-0" imgClassName="group-hover:scale-[1.02] transition duration-700" largura={960} altura={1200} />
-              <div className="absolute inset-0 photo-scrim pointer-events-none" aria-hidden />
-              <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-                <div className="font-mono text-[11px] tracking-widest text-coral">{principal.d.regiao.toUpperCase()}</div>
-                <div className="mt-1 font-display text-5xl tracking-tighter">{principal.d.nome}</div>
-                <p className="mt-2 text-sm text-white/80 max-w-md line-clamp-2">{principal.d.estacao}</p>
-                <div className="mt-4 flex items-center gap-3 font-mono text-xs text-white/80">
-                  <span>US$ {principal.d.custoDia}/<T k="card.dia" fallback="dia" /></span><span aria-hidden>·</span><span><T k="card.ref" fallback="referência jun/2026" /></span>
-                </div>
-              </div>
-            </Link>
-            {resto.slice(0, 4).map((x) => <DestinoCard key={x.d.code} d={x.d} img={x.img} credito={x.credito} />)}
-          </div>
-        </section>
-      )}
-
       <HomeSecaoComoDecide />
-      <HomeSecaoCustoReal />
 
-      {/* CONFIANÇA — o diferencial: cada número diz o que é */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
+      {/* CONFIANÇA — cada número diz o que é */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] items-start">
           <div>
-            <div className="eyebrow mb-3"><T k="home2.confEy" fallback="Sem integração fingida" /></div>
-            <h2 className="font-display text-4xl sm:text-5xl tracking-tighter text-ink"><T k="home2.confH" fallback="Cada número diz de onde veio — e quando." /></h2>
-            <p className="mt-5 text-inksoft leading-relaxed max-w-lg">
+            <span className="ms-rotulo"><T k="home2.confEy" fallback="Sem integração fingida" /></span>
+            <h2 className="ms-titulo text-[40px] sm:text-[56px] text-ink"><T k="home2.confH" fallback="Cada número diz de onde veio — e quando." /></h2>
+            <p className="mt-5 text-lg text-ink/75 leading-relaxed max-w-lg">
               <T k="home2.confP" fallback="Preço de referência não é cotação. Câmbio do dia não é taxa do cartão. Regra de visto muda. Por isso todo dado crítico no Mundo Sem Fim carrega um selo, a fonte e a data — e nada é chamado de “ao vivo” sem ter sido consultado agora." />
             </p>
-            <Link href="/fontes" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-pine hover:underline focusring"><T k="home2.confLink" fallback="Ver fontes e metodologia" /> <Icon name="arrow-right" size={15} /></Link>
+            <Link href="/fontes" className="mt-6 inline-flex items-center gap-1.5 font-cond font-extrabold text-lg uppercase tracking-[.05em] text-ink border-b-[3px] border-ink hover:border-coral focusring"><T k="home2.confLink" fallback="Ver fontes e metodologia" /> <Icon name="arrow-right" size={16} /></Link>
           </div>
-          <dl className="grid gap-px bg-line border border-line rounded-2xl overflow-hidden sm:grid-cols-2">
+          <dl className="grid gap-4 sm:grid-cols-2">
             {[
               ['LIVE', 'c1', 'Previsão do tempo', 'Consultada na fonte agora, com horário — e envelhece: depois de minutos vira “recente”.'],
               ['ESTIMATE', 'c2', 'Custo da sua viagem', 'Calculado pelo nosso modelo a partir dos seus dias, estilo e pessoas.'],
               ['HISTORICAL', 'c3', 'Preço de ingresso', 'Pesquisa de referência (jun/2026). Pode ter mudado — conferir antes de comprar.'],
               ['UNVERIFIED', 'c4', 'Regra sem fonte', 'Quando não temos fonte confiável, dizemos — e mandamos você ao órgão oficial.'],
             ].map(([f, ck, t, d]) => (
-              <div key={f} className="bg-card p-6">
+              <div key={f} className="rounded-[24px] border border-line p-6">
                 <dt>
                   <SourceTrust freshness={f} compacto />
-                  <span className="mt-4 block font-display text-xl text-ink"><T k={`home2.${ck}`} fallback={t} /></span>
+                  <span className="mt-4 block font-display font-bold text-xl text-ink"><T k={`home2.${ck}`} fallback={t} /></span>
                 </dt>
-                <dd className="mt-1.5 text-sm text-inksoft leading-relaxed"><T k={`home2.${ck}t`} fallback={d} /></dd>
+                <dd className="mt-1.5 text-[15px] text-inksoft leading-relaxed"><T k={`home2.${ck}t`} fallback={d} /></dd>
               </div>
             ))}
           </dl>

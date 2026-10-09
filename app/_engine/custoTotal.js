@@ -122,3 +122,51 @@ export function calcExemploDestino(destino, dias = 7, origemCoords = ORIGEM_PADR
     custoTransporteTotal: voo,
   };
 }
+
+// Alta temporada (heurística): meses ótimos do destino + pico global de viagem
+// (dez-fev, férias de verão BR, e julho). Sem calendário de feriados por país.
+export function mesEhAlto(destino, mes) {
+  const otimos = new Set((destino && destino.melhoresMeses) || []);
+  const picoGlobal = new Set([12, 1, 2, 7]);
+  return otimos.has(mes) || picoGlobal.has(mes);
+}
+
+// Simulação da calculadora /custo-real (e do exemplo da home): vitrine (voo + 40% da
+// vida em terra como hospedagem) × custo real completo (custoTotalRealista + passeios
+// + bagagem), em US$. `mes` em 1–12. Puro — mesma conta nas duas telas.
+export function simularCustoReal({ destino, origemCoords = ORIGEM_PADRAO, dias = 8, pessoas = 2, mes = 5, passeiosDia = 20, bagagem = 80 }) {
+  const km = destino && destino.coords && origemCoords ? distanciaKm(origemCoords, destino.coords) : 0;
+  const faixaVoo = estimarPrecoVoo(km);
+  const vooUSDPP = faixaVoo ? Math.round((faixaVoo.min + faixaVoo.max) / 2) : 600;
+  const ehAltaTemporada = mesEhAlto(destino, mes);
+  const fatorAltaTemp = ehAltaTemporada ? 1.18 : 1.0;
+  const vooUSD = vooUSDPP * pessoas * fatorAltaTemp;
+  const custoTerraPP = Math.max(8, (destino && destino.custoDia) || 30) * dias;
+  const custoTerra = custoTerraPP * pessoas * fatorAltaTemp;
+  const out = custoTotalRealista({
+    trechos: [{ code: destino.code, nome: destino.nome, dias, custoEfetivoDia: destino.custoDia, vistoTipo: destino.vistoTipo || '' }],
+    diasTotais: dias,
+    custoTerraTotal: custoTerra,
+    custoTransporteTotal: vooUSD,
+  });
+  const extras = [
+    { id: 'passeios', label: 'Passeios e ingressos (média/dia × dias × pessoas)', icon: '🎟️', valor: Math.round(passeiosDia * dias * pessoas) },
+    { id: 'bagagem', label: 'Bagagem despachada', icon: '🧳', valor: Math.round(bagagem * pessoas) },
+  ];
+  const total = out.total + extras.reduce((acc, e) => acc + e.valor, 0);
+  const hospedagem = Math.round(custoTerra * 0.40);
+  const vitrine = hospedagem + Math.round(vooUSD);
+  return {
+    vooUSD: Math.round(vooUSD),
+    vitrine,
+    escondido: Math.max(0, total - vitrine),
+    total,
+    porDia: Math.round(total / Math.max(1, dias)),
+    porPessoa: Math.round(total / Math.max(1, pessoas)),
+    categorias: [...out.categorias, ...extras],
+    faixa: out.faixa,
+    ehAltaTemporada,
+    premissas: out.premissas,
+    faixaVoo,
+  };
+}

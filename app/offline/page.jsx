@@ -17,7 +17,7 @@ export default function Offline() {
           Mapas, clima e câmbio voltam quando a internet voltar.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link href="/viagens" className="inline-flex items-center justify-center gap-2 rounded-lg bg-coral text-oncoral font-semibold px-5 h-12 hover:brightness-95 transition focusring">
+          <Link href="/viagens" className="inline-flex items-center justify-center gap-2 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] px-5 h-12 hover:brightness-95 transition focusring">
             <Icon name="suitcase" size={18} /> Minhas viagens
           </Link>
           <Link href="/planejar" className="inline-flex items-center justify-center gap-2 rounded-lg border border-line text-ink font-semibold px-5 h-12 focusring">

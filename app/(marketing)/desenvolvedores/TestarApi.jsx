@@ -40,7 +40,7 @@ export function TestarApi() {
       <div className="flex flex-wrap gap-1.5">
         {EXEMPLOS.map((x) => <button key={x} type="button" onClick={() => setUrl(x)} className="text-[11px] font-mono px-2 py-1 rounded-md border border-line text-inksoft hover:text-ink focusring">{x.replace('/api/v1', '').split('?')[0]}</button>)}
       </div>
-      <button type="submit" disabled={busy} className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-pine text-onpine text-sm font-semibold disabled:opacity-60 focusring"><Icon name="arrow-right" size={16} /> {t('plat.executar')}</button>
+      <button type="submit" disabled={busy} className="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] disabled:opacity-60 focusring"><Icon name="arrow-right" size={16} /> {t('plat.executar')}</button>
       {res && (
         <div>
           <p className="font-mono text-xs text-inksoft">HTTP {res.status}{res.limite ? ` · ${res.resta}/${res.limite} ${t('plat.restantes')}` : ''}</p>

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// QA tela a tela (OMEGA V4 §10/§45): percorre as rotas em várias larguras e nos
-// temas claro/escuro, coletando erros de console, exceções, requests falhos,
+// QA tela a tela (OMEGA V4 §10/§45): percorre as rotas em várias larguras (tema
+// sempre claro desde o redesign Calçadão), coletando erros de console, exceções, requests falhos,
 // overflow horizontal e imagens quebradas. Gera screenshots + JSON + resumo.
 //
 // Uso:  node scripts/qa-telas.mjs [baseUrl] [saida]
@@ -21,7 +21,7 @@ const DEFAULT_ROUTES = [
   '/planejar', '/viagens', '/fontes', '/marketplace', '/marketplace/r/japao-4-dias', '/agencias', '/desenvolvedores', '/proposta', '/offline', '/rota-que-nao-existe',
 ];
 const ROUTES = process.env.QA_ROUTES ? process.env.QA_ROUTES.split(',') : DEFAULT_ROUTES;
-const THEMES = (process.env.QA_THEMES || 'light,dark').split(',');
+const THEMES = (process.env.QA_THEMES || 'light').split(',');
 
 // Ruído conhecido de terceiros que não indica bug do app.
 const IGNORAR = [/Download the React DevTools/i, /\[HMR\]/i, /Fast Refresh/i];
@@ -40,8 +40,6 @@ for (const theme of THEMES) {
   for (const width of WIDTHS) {
     const height = width <= 430 ? 844 : 900;
     const ctx = await browser.newContext({ viewport: { width, height }, colorScheme: theme, deviceScaleFactor: 1 });
-    // O app lê o tema de localStorage ('mundosemfim.theme') antes do paint.
-    await ctx.addInitScript((t) => { try { localStorage.setItem('mundosemfim.theme', t); } catch {} }, theme);
     for (const rota of ROUTES) {
       const page = await ctx.newPage();
       const r = { rota, width, theme, console: [], pageErrors: [], failed: [], status: null };

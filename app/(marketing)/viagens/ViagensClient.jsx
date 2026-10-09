@@ -78,10 +78,10 @@ export function ViagensClient() {
       {dialogo}
       <div className="flex flex-wrap items-center gap-3">
         <button type="button" onClick={() => setAbrir((v) => !v)} aria-expanded={abrir}
-          className="inline-flex items-center gap-2 h-11 px-5 rounded-lg bg-coral text-oncoral font-semibold hover:brightness-95 focusring">
+          className="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] hover:brightness-95 focusring">
           <Icon name="plus" size={18} /> {t('viag.nova')}
         </button>
-        <button type="button" onClick={exemploJapao} className="inline-flex items-center gap-2 h-11 px-4 rounded-lg border border-line bg-card text-ink font-medium hover:border-pine/50 focusring">
+        <button type="button" onClick={exemploJapao} className="inline-flex items-center gap-2 h-11 px-4 rounded-full border-2 border-ink bg-card text-ink font-cond font-extrabold uppercase tracking-[.05em] hover:bg-paper2 focusring">
           <Icon name="spark" size={17} /> {t('viag.exemplo')}
         </button>
         <span className="text-xs text-inksoft flex items-center gap-1.5"><Icon name="phone" size={14} /> {t('viag.local')}</span>
@@ -115,7 +115,7 @@ export function ViagensClient() {
             </select>
           </label>
           <div className="sm:col-span-2 lg:col-span-3 flex items-end gap-3">
-            <button type="submit" disabled={salvando} className="inline-flex items-center gap-2 h-11 px-5 rounded-lg bg-pine text-onpine font-semibold hover:bg-pinedk disabled:opacity-60 focusring">
+            <button type="submit" disabled={salvando} className="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] hover:bg-ink/85 disabled:opacity-60 focusring">
               {salvando ? t('viag.criando') : t('viag.criar')} <Icon name="arrow-right" size={17} />
             </button>
             {erro && <p role="alert" className="text-sm text-danger">{erro}</p>}
@@ -131,7 +131,7 @@ export function ViagensClient() {
           <h2 className="mt-3 font-display text-2xl text-ink">{t('viag.nenhuma')}</h2>
           <p className="mt-2 text-sm text-inksoft max-w-md mx-auto">{t('viag.nenhumaTxt')}</p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <button type="button" onClick={() => setAbrir(true)} className="inline-flex items-center gap-2 h-11 px-5 rounded-lg bg-coral text-oncoral font-semibold focusring"><Icon name="plus" size={18} /> {t('viag.primeira')}</button>
+            <button type="button" onClick={() => setAbrir(true)} className="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] focusring"><Icon name="plus" size={18} /> {t('viag.primeira')}</button>
             <Link href="/decisao" className="inline-flex items-center gap-2 h-11 px-4 rounded-lg border border-line text-ink font-medium focusring"><Icon name="target" size={17} /> {t('viag.naoSei')}</Link>
           </div>
         </div>

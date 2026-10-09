@@ -68,7 +68,7 @@ export function WorkspaceClient({ id }) {
         <Icon name="suitcase" size={30} className="text-inksoft" />
         <h1 className="mt-3 font-display text-3xl text-ink">{t('ws.naoEncontrada')}</h1>
         <p className="mt-2 text-inksoft">{t('ws.naoEncontradaTxt')}</p>
-        <Link href="/viagens" className="mt-6 inline-flex items-center gap-2 h-11 px-5 rounded-lg bg-pine text-onpine font-semibold focusring">{t('ws.verViagens')}</Link>
+        <Link href="/viagens" className="mt-6 inline-flex items-center gap-2 h-11 px-5 rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('ws.verViagens')}</Link>
       </main>
     );
   }
@@ -94,7 +94,7 @@ export function WorkspaceClient({ id }) {
             <div className="flex items-center justify-between text-xs text-inksoft"><span>{t('viag.prontidao')}</span><span className="font-mono text-ink">{p.nota}%</span></div>
             <div className="mt-1.5 h-1.5 rounded-full bg-paper2 overflow-hidden"><div className="h-full bg-pine gauge-fill" style={{ width: `${p.nota}%` }} /></div>
           </div>
-          <Link href={`/viagens/${v.id}/hoje`} className="inline-flex items-center gap-2 h-11 px-4 rounded-lg bg-coral text-oncoral font-semibold hover:brightness-95 focusring"><Icon name="compass" size={18} /> {t('viag.modo')}</Link>
+          <Link href={`/viagens/${v.id}/hoje`} className="inline-flex items-center gap-2 h-11 px-4 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] hover:brightness-95 focusring"><Icon name="compass" size={18} /> {t('viag.modo')}</Link>
         </div>
       </header>
 
@@ -192,7 +192,7 @@ function Roteiro({ v, exec, lugares }) {
   function otimizar() { setProposta(otimizarDia(paradas, { modo, inicio: '09:00', fim: '21:00' })); }
   function aplicarProposta() { exec((s) => reordenarDia(s, v.id, dia, proposta.ordem)); setProposta(null); }
 
-  const pontosMapa = itens.filter((i) => Number.isFinite(i.lat)).map((i, k) => ({ id: i.id, nome: `${k + 1}. ${i.titulo}`, lat: i.lat, lng: i.lng, cor: '#2742F5' }));
+  const pontosMapa = itens.filter((i) => Number.isFinite(i.lat)).map((i, k) => ({ id: i.id, nome: `${k + 1}. ${i.titulo}`, lat: i.lat, lng: i.lng, cor: '#1C3FD1' }));
   const linhas = rota && rota.geometria ? [{ id: 'rota', coords: rota.geometria }] : pontosMapa.length > 1 ? [{ id: 'reta', coords: pontosMapa.map((p) => [p.lng, p.lat]), estimada: true }] : [];
   const climaDia = clima && clima.dias && clima.dias.find((d) => d.data === dia);
   const st = STATUS_ROTEIRO[status];
@@ -299,7 +299,7 @@ function Roteiro({ v, exec, lugares }) {
             )}
             {proposta.avisos.length > 0 && <ul className="mt-2 text-xs text-warn space-y-1">{proposta.avisos.map((a) => <li key={a}>• {a}</li>)}</ul>}
             <div className="mt-3 flex gap-2">
-              {proposta.mudou && <button type="button" onClick={aplicarProposta} className="h-9 px-4 rounded-lg bg-pine text-onpine text-sm font-semibold focusring">{t('ws.aplicar')}</button>}
+              {proposta.mudou && <button type="button" onClick={aplicarProposta} className="h-9 px-4 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('ws.aplicar')}</button>}
               <button type="button" onClick={() => setProposta(null)} className="h-9 px-4 rounded-lg border border-line text-sm text-ink focusring">{proposta.mudou ? t('ws.manter') : t('ws.fecharP')}</button>
             </div>
           </div>
@@ -326,7 +326,7 @@ function Roteiro({ v, exec, lugares }) {
             <label className={lbl}>{t('ws.livreAtv')}<input name="titulo" required maxLength={200} placeholder={t('ws.exAtv')} className={`${field} mt-1`} /></label>
             <label className={lbl}>{t('ws.horaFixa')}<input name="hora" type="time" className={`${field} mt-1 px-2`} /></label>
             <label className={lbl}>Min<input name="dur" type="number" min="10" step="10" defaultValue="60" className={`${field} mt-1 px-2 tnum`} /></label>
-            <button type="submit" className="h-10 px-3 rounded-lg bg-pine text-onpine text-sm font-semibold focusring" aria-label={t('v2.addLivre')}><Icon name="plus" size={17} /></button>
+            <button type="submit" className="h-10 px-3 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring" aria-label={t('v2.addLivre')}><Icon name="plus" size={17} /></button>
           </form>
         </div>
       </div>
@@ -386,7 +386,7 @@ function Reservas({ v, exec }) {
         })}
       </div>
       <div>
-        <button type="button" onClick={() => setAberto((x) => !x)} aria-expanded={aberto} className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-pine text-onpine font-semibold focusring"><Icon name="plus" size={17} /> {t('ws.registrar')}</button>
+        <button type="button" onClick={() => setAberto((x) => !x)} aria-expanded={aberto} className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] focusring"><Icon name="plus" size={17} /> {t('ws.registrar')}</button>
         {aberto && (
           <form onSubmit={add} className="mt-3 rounded-2xl border border-line bg-card p-4 grid grid-cols-2 gap-3 rise">
             <label className={lbl}>{t('ws.tipo')}<select name="tipo" className={`${field} mt-1`}>{Object.keys(TIPOS_RESERVA).map((k) => <option key={k} value={k}>{t(`v2.res.${k}`)}</option>)}</select></label>
@@ -397,7 +397,7 @@ function Reservas({ v, exec }) {
             <label className={lbl}>{t('ws.fim')}<input name="fimLocal" type="datetime-local" className={`${field} mt-1`} /></label>
             <label className={`${lbl} col-span-2`}>{t('ws.cancelAte')}<input name="cancelamentoAte" type="date" className={`${field} mt-1`} /></label>
             <label className="col-span-2 flex items-start gap-2 text-sm text-ink"><input name="confirmada" type="checkbox" className="mt-1" /> <span>{t('ws.jaConfirmada')} <span className="text-inksoft text-xs">{t('ws.informada')}</span></span></label>
-            <button type="submit" className="col-span-2 h-10 rounded-lg bg-coral text-oncoral font-semibold focusring">{t('ws.salvarRes')}</button>
+            <button type="submit" className="col-span-2 h-10 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('ws.salvarRes')}</button>
           </form>
         )}
         <p className="mt-3 text-xs text-inksoft">{t('ws.naoEmite')}</p>
@@ -473,7 +473,7 @@ function Despesas({ v, exec }) {
         <label className={lbl}>{t('ws.categoria')}<select name="categoria" className={`${field} mt-1`}>{Object.keys(CATEGORIAS_DESPESA).map((k) => <option key={k} value={k}>{t(`v2.cat.${k}`)}</option>)}</select></label>
         <label className={lbl}>{t('ws.data')}<input name="data" type="date" defaultValue={new Date().toISOString().slice(0, 10)} className={`${field} mt-1`} /></label>
         <label className={`${lbl} col-span-2`}>{t('ws.descricao')}<input name="descricao" maxLength={300} className={`${field} mt-1`} /></label>
-        <button type="submit" disabled={salvando} className="col-span-2 h-10 rounded-lg bg-coral text-oncoral font-semibold disabled:opacity-60 focusring">{salvando ? t('ws.convertendo') : t('ws.addGasto')}</button>
+        <button type="submit" disabled={salvando} className="col-span-2 h-10 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] disabled:opacity-60 focusring">{salvando ? t('ws.convertendo') : t('ws.addGasto')}</button>
         {erroFx && <p className="col-span-2 text-xs text-warn" role="status">{erroFx}</p>}
         <p className="col-span-2 text-[11px] text-inksoft">{t('ws.taxaRef')}</p>
       </form>
@@ -519,7 +519,7 @@ function Documentos({ v, exec }) {
         <label className={lbl}>{t('ws.validade')}<input name="validade" type="date" className={`${field} mt-1`} /></label>
         <label className={lbl}>{t('ws.titulo')}<input name="titulo" maxLength={160} placeholder={t('v2.exDoc')} className={`${field} mt-1`} /></label>
         <label className={lbl}>{t('ws.titular')}<input name="titular" maxLength={80} className={`${field} mt-1`} /></label>
-        <button type="submit" className="col-span-2 h-10 rounded-lg bg-pine text-onpine font-semibold focusring">{t('ws.salvar')}</button>
+        <button type="submit" className="col-span-2 h-10 rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('ws.salvar')}</button>
       </form>
     </div>
   );
@@ -543,7 +543,7 @@ function Sincronizar({ v, exec }) {
         <p className="mt-2 text-sm text-inksoft">{t('ws.soAparelho')}</p>
       ) : (
         <div className="mt-2 flex flex-wrap items-center gap-3">
-          <button type="button" onClick={sync} disabled={st.fase === 'enviando'} className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-pine text-onpine text-sm font-semibold disabled:opacity-60 focusring"><Icon name="refresh" size={16} />{st.fase === 'enviando' ? t('ws.sincronizando') : t('ws.sincronizar')}</button>
+          <button type="button" onClick={sync} disabled={st.fase === 'enviando'} className="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] disabled:opacity-60 focusring"><Icon name="refresh" size={16} />{st.fase === 'enviando' ? t('ws.sincronizando') : t('ws.sincronizar')}</button>
           <span className="text-sm text-inksoft" role="status">
             {st.fase === 'ok' ? t('ws.sincOk') : st.fase === 'login' ? <>{t('ws.sincLogin')} <Link href="/conta" className="text-pine underline">{t('ws.entrar')}</Link></> : st.fase === 'erro' ? <span className="text-danger">{t('ws.falhou')}: {st.msg}</span> : v.sincronizadaEm ? tf('v2.ultima', { d: new Date(v.sincronizadaEm).toLocaleString(locale) }) : t('ws.nunca')}
           </span>

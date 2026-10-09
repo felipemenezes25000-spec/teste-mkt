@@ -36,7 +36,7 @@ export function ContaClient() {
               {demo && <span className="ml-2 text-xs text-ochre align-middle">(preview)</span>}
             </div>
           </div>
-          <Link href="/planos" className="rounded-xl bg-pine text-onpine font-semibold px-4 py-2 hover:bg-pinedk focusring">{t('conta.mudar')}</Link>
+          <Link href="/planos" className="rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2 hover:bg-ink/85 focusring">{t('conta.mudar')}</Link>
         </div>
         <p className="mt-2 text-sm text-inksoft">
           {t('conta.stripe')}{' '}

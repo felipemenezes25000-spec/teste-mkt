@@ -53,7 +53,7 @@ export function MeusDados() {
       <h2 id="dados-h" className="mt-1 font-display text-2xl text-ink">{t('dados.h')}</h2>
       <p className="mt-1 text-sm text-inksoft">{t('dados.p')}</p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <button type="button" onClick={exportar} className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-pine text-onpine text-sm font-semibold focusring"><Icon name="download" size={16} /> {t('dados.exportar')}</button>
+        <button type="button" onClick={exportar} className="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring"><Icon name="download" size={16} /> {t('dados.exportar')}</button>
         <button type="button" onClick={apagarLocal} className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-line text-sm text-ink hover:border-danger-bd focusring"><Icon name="trash" size={16} /> {t('dados.apagar')}</button>
         {supabaseConfigurado && <button type="button" onClick={excluirConta} className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-danger-bd bg-danger-bg text-danger text-sm font-semibold focusring"><Icon name="x-circle" size={16} /> {t('dados.excluir')}</button>}
       </div>

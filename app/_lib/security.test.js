@@ -41,6 +41,8 @@ describe('buildSecurityHeaders — cabeçalhos de segurança', () => {
     // fotos de fontes de licença livre (Wikimedia, Flickr-CC via Openverse, museus…)
     // vêm de muitos domínios HTTPS → img-src libera https: (imagem não executa código)
     expect(c).toMatch(/img-src[^;]*https:/);
+    // vídeos das figurinhas: só o CDN de mídia da Wikimedia (nada de https: genérico)
+    expect(c).toMatch(/media-src 'self' https:\/\/upload\.wikimedia\.org(;|$)/);
     expect(c).toContain('https://query.wikidata.org');
     expect(c).toContain('https://open.er-api.com');
   });

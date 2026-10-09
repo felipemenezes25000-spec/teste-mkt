@@ -1,13 +1,13 @@
 import './_ui/tokens.css';
 import './globals.css';
-import { Bricolage_Grotesque, Geist, Geist_Mono } from 'next/font/google';
+import { League_Spartan, Barlow, Barlow_Condensed } from 'next/font/google';
 import { SWRegister } from './_components/SWRegister.jsx';
 import { AnalyticsScripts, AnalyticsNoscript } from './_components/AnalyticsScripts.jsx';
 
-// MERIDIANO: display expressiva + UI neutra + mono para dados (docs/BRAND-RATIONALE.md)
-const display = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-display', display: 'swap', weight: ['500', '700', '800'] });
-const ui = Geist({ subsets: ['latin'], variable: '--font-ui', display: 'swap' });
-const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap', weight: ['400', '500'] });
+// CALÇADÃO: League Spartan (títulos e poema) + Barlow (texto) + Barlow Condensed (rótulos, placar, figurinhas)
+const display = League_Spartan({ subsets: ['latin'], variable: '--font-display', display: 'swap', weight: ['600', '700', '800', '900'] });
+const ui = Barlow({ subsets: ['latin'], variable: '--font-ui', display: 'swap', weight: ['400', '500', '600', '700'] });
+const cond = Barlow_Condensed({ subsets: ['latin'], variable: '--font-cond', display: 'swap', weight: ['600', '700', '800', '900'], style: ['normal', 'italic'] });
 
 // URL pública do site (canonical/og:url). Ordem de resolução: override explícito
 // (domínio próprio) → domínio de produção ESTÁVEL da Vercel (resolve sozinho, sem
@@ -39,35 +39,16 @@ export const metadata = {
   // e twitter-image.jsx (next/og) — não precisam de asset estático.
 };
 
-export const viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#F3F5F8' },
-    { media: '(prefers-color-scheme: dark)', color: '#070B14' },
-  ],
-};
+// Tema sempre claro (decisão do dono, 2026-10-09): sem alternância nem script anti-flash.
+export const viewport = { themeColor: '#FFFFFF', colorScheme: 'light' };
 
-// Anti-flash: aplica o tema salvo (ou o do sistema) ANTES do paint, no topo do body.
-const themeInit = `(function(){try{var k='mundosemfim.theme',t=localStorage.getItem(k);if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();`;
-
-// Modo CSP com nonce: o script anti-flash do tema recebe o nonce da requisição.
-// CSP_NONCE é constante de build → no modo padrão nada aqui torna a página dinâmica.
-async function nonceDaRequisicao() {
-  if (process.env.CSP_NONCE !== '1') return undefined;
-  const { headers } = await import('next/headers');
-  return (await headers()).get('x-nonce') || undefined;
-}
-
-export default async function RootLayout({ children }) {
-  const nonce = await nonceDaRequisicao();
+export default function RootLayout({ children }) {
   return (
-    /* suppressHydrationWarning: o themeInit abaixo modifica data-theme no html
-       antes da hidratação React; sem isso o console mostra warning de mismatch. */
-    <html lang="pt-BR" className={`${display.variable} ${ui.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${display.variable} ${ui.variable} ${cond.variable}`}>
       <head>
         <AnalyticsScripts />
       </head>
       <body>
-        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeInit }} />
         <AnalyticsNoscript />
         {children}
         <SWRegister />

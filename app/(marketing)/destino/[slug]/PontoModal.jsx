@@ -21,7 +21,8 @@ export function PontoModal({ ponto, onClose }) {
 
   // No modal, prefere a imagem que o próprio resumo traz; senão a do card. Sempre como
   // thumb de 960px (evita baixar o original de vários MB).
-  const imgGrande = wikiThumb((!hist.carregando && hist.img) || ponto.img || null, 960);
+  // Foto HD curada (ponto.imgGrande, já em largura padrão) vence a do resumo.
+  const imgGrande = ponto.imgGrande || wikiThumb((!hist.carregando && hist.img) || ponto.img || null, 960);
 
   return (
     <Modal
@@ -30,7 +31,7 @@ export function PontoModal({ ponto, onClose }) {
       footer={
         <a
           href={ponto.maps} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-onpine font-semibold px-4 py-2.5 hover:bg-pinedk transition focusring"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2.5 hover:bg-ink/85 transition focusring"
         >
           <Icon emoji="🗺️" /> Abrir no Google Maps <Icon emoji="↗" />
         </a>

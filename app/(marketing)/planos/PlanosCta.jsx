@@ -12,7 +12,7 @@ export function PlanosCta({ plano, label, destaque, freeHref }) {
 
   if (freeHref) {
     return (
-      <Link href={freeHref} className="w-full inline-flex items-center justify-center rounded-xl px-4 py-2.5 font-semibold transition focusring border border-line bg-card text-ink hover:text-pine">
+      <Link href={freeHref} className="w-full inline-flex items-center justify-center rounded-full px-4 py-2.5 font-cond font-extrabold uppercase tracking-[.05em] transition focusring border-2 border-ink bg-card text-ink hover:bg-paper2">
         {label}
       </Link>
     );

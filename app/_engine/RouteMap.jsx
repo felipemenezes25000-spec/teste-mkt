@@ -14,7 +14,7 @@ export default function RouteMap({ trechos, onSelect }) {
   const pts = trechos.filter((t) => Array.isArray(t.coords));
   if (pts.length === 0) return null;
   const semCoord = trechos.filter((t) => !Array.isArray(t.coords));
-  const pontos = pts.map((t, i) => ({ id: t.id, nome: `${i + 1}. ${t.nome}`, lng: t.coords[0], lat: t.coords[1], cor: '#2742F5' }));
+  const pontos = pts.map((t, i) => ({ id: t.id, nome: `${i + 1}. ${t.nome}`, lng: t.coords[0], lat: t.coords[1], cor: '#1C3FD1' }));
   const linhas = pts.length > 1 ? [{ id: 'rota', coords: pts.map((t) => t.coords), estimada: true }] : [];
   return (
     <section className="rise rounded-2xl border border-line bg-card overflow-hidden" aria-label="Mapa da rota">

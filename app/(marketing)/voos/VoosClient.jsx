@@ -105,7 +105,7 @@ export function VoosClient() {
         <label className="text-xs text-inksoft font-medium block">{t('decisao.orcamento')}
           <input type="number" min="500" value={orcamentoTotal} onChange={(e) => setOrcamentoTotal(Math.max(500, Number(e.target.value) || 6500))} className={`${field} mt-1 tnum`} />
         </label>
-        <button onClick={buscar} disabled={busy} className="inline-flex items-center justify-center gap-2 rounded-xl bg-pine text-onpine font-semibold px-4 py-2.5 hover:bg-pinedk disabled:opacity-60 focusring">
+        <button onClick={buscar} disabled={busy} className="inline-flex items-center justify-center gap-2 rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2.5 hover:bg-ink/85 disabled:opacity-60 focusring">
           {busy ? t('voos.buscando') : t('voos.buscar')}
         </button>
       </div>

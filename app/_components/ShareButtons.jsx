@@ -31,7 +31,7 @@ export function ShareButtons({ url, titulo, texto }) {
     try { if (navigator.share) await navigator.share({ title: titulo, text: texto, url }); else await copiar(); } catch { /* cancelado */ }
   };
 
-  const cls = 'inline-flex items-center gap-1.5 rounded-lg border border-line bg-card px-3 py-2 text-sm font-semibold text-ink hover:border-pine/50 transition focusring';
+  const cls = 'inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-card px-3 py-2 text-[15px] font-cond font-extrabold uppercase tracking-[.05em] text-ink hover:bg-paper2 transition focusring';
   return (
     <div className="flex flex-wrap items-center gap-2">
       <span className="text-sm text-inksoft mr-1">Compartilhar:</span>

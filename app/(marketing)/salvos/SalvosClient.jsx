@@ -47,7 +47,7 @@ export function SalvosClient() {
     return (
       <div className="mt-6">
         <EmptyState
-          icon="∞"
+          icon="❤"
           title="Você ainda não salvou destinos."
           subtitle="Comece por destinos que costumam valer muito para brasileiros — depois a gente compara custo, score e alerta lado a lado."
           actions={[{ href: '/decisao', label: 'Descobrir o que combina', primary: true }, { href: '/explorar', label: 'Explorar curadoria' }]}
@@ -113,9 +113,9 @@ export function SalvosClient() {
       </div>
 
       <div className="mb-5 flex flex-wrap gap-2">
-        <Link href="/decisao" className="inline-flex rounded-xl bg-pine text-onpine font-semibold px-4 py-2.5 hover:bg-pinedk focusring">Decidir entre estes</Link>
-        <Link href="/planejar" className="inline-flex rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2.5 hover:text-pine focusring">Criar rota com estes</Link>
-        <Link href="/comparar" className="inline-flex rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2.5 hover:text-pine focusring">Comparar custo real</Link>
+        <Link href="/decisao" className="inline-flex rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2.5 hover:bg-ink/85 focusring">Decidir entre estes</Link>
+        <Link href="/planejar" className="inline-flex rounded-full border-2 border-ink bg-card text-ink font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2.5 hover:bg-paper2 focusring">Criar rota com estes</Link>
+        <Link href="/comparar" className="inline-flex rounded-full border-2 border-ink bg-card text-ink font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2.5 hover:bg-paper2 focusring">Comparar custo real</Link>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

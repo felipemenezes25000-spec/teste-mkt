@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import 'maplibre-gl/dist/maplibre-gl.css';
 import { Icon } from '../../_ui/Icon.jsx';
 import { useIdioma } from '../../_lib/i18n.js';
 import { estiloMeridiano } from './paletaMapa.js';
@@ -18,14 +17,15 @@ const ESTILO = {
   light: 'https://tiles.openfreemap.org/styles/positron',
   dark: 'https://tiles.openfreemap.org/styles/dark',
 };
-const temaAtual = () => (typeof document !== 'undefined' && document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+// Tema sempre claro (Calçadão): o mapa usa só o estilo claro.
+const temaAtual = () => 'light';
 
 function geojsonPontos(pontos) {
   return {
     type: 'FeatureCollection',
     features: (pontos || []).filter((p) => Number.isFinite(p.lng) && Number.isFinite(p.lat)).map((p) => ({
       type: 'Feature', id: undefined,
-      properties: { id: String(p.id), nome: p.nome, cor: p.cor || '#2742F5', rotulo: p.rotulo || '' },
+      properties: { id: String(p.id), nome: p.nome, cor: p.cor || '#1C3FD1', rotulo: p.rotulo || '' },
       geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
     })),
   };
@@ -66,11 +66,11 @@ export function MapaInterativo({
     const ink = temaAtual() === 'dark' ? '#070B14' : '#FFFFFF';
     if (!m.getLayer('msf-linhas')) {
       m.addLayer({ id: 'msf-linhas', type: 'line', source: 'msf-linhas', layout: { 'line-cap': 'round', 'line-join': 'round' },
-        paint: { 'line-color': temaAtual() === 'dark' ? '#7D8FFF' : '#2742F5', 'line-width': 3, 'line-dasharray': ['case', ['get', 'estimada'], ['literal', [1.5, 1.5]], ['literal', [1, 0]]] } });
+        paint: { 'line-color': temaAtual() === 'dark' ? '#7D8FFF' : '#1C3FD1', 'line-width': 3, 'line-dasharray': ['case', ['get', 'estimada'], ['literal', [1.5, 1.5]], ['literal', [1, 0]]] } });
     }
     if (cluster && !m.getLayer('msf-cluster')) {
       m.addLayer({ id: 'msf-cluster', type: 'circle', source: 'msf-pontos', filter: ['has', 'point_count'],
-        paint: { 'circle-color': temaAtual() === 'dark' ? '#7D8FFF' : '#2742F5', 'circle-radius': ['step', ['get', 'point_count'], 13, 10, 17, 30, 22], 'circle-stroke-width': 2, 'circle-stroke-color': ink } });
+        paint: { 'circle-color': temaAtual() === 'dark' ? '#7D8FFF' : '#1C3FD1', 'circle-radius': ['step', ['get', 'point_count'], 13, 10, 17, 30, 22], 'circle-stroke-width': 2, 'circle-stroke-color': ink } });
       m.addLayer({ id: 'msf-cluster-n', type: 'symbol', source: 'msf-pontos', filter: ['has', 'point_count'],
         layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-size': 11, 'text-font': ['Noto Sans Bold'] },
         paint: { 'text-color': temaAtual() === 'dark' ? '#070B14' : '#FFFFFF' } });
@@ -87,7 +87,7 @@ export function MapaInterativo({
     if (rotulosVisiveis && !m.getLayer('msf-rotulos')) {
       m.addLayer({ id: 'msf-rotulos', type: 'symbol', source: 'msf-pontos', filter: ['!', ['has', 'point_count']], minzoom: 2.6,
         layout: { 'text-field': ['get', 'nome'], 'text-size': 12, 'text-offset': [0, 1.15], 'text-anchor': 'top', 'text-font': ['Noto Sans Regular'], 'text-optional': true },
-        paint: { 'text-color': temaAtual() === 'dark' ? '#EAF0FA' : '#0A1020', 'text-halo-color': ink, 'text-halo-width': 1.4 } });
+        paint: { 'text-color': temaAtual() === 'dark' ? '#EAF0FA' : '#111111', 'text-halo-color': ink, 'text-halo-width': 1.4 } });
     }
     aplicarEstados(m);
   }
@@ -113,8 +113,9 @@ export function MapaInterativo({
       try {
         // espera o navegador ficar ocioso: o mapa (≈1 MB) não compete com a 1ª pintura
         if (ativacao === 'idle') await new Promise((r) => ('requestIdleCallback' in window ? window.requestIdleCallback(r, { timeout: 2000 }) : setTimeout(r, 300)));
+        // CSS e JS do MapLibre só descem quando o usuário ativa o mapa (nada antes da interação)
         const [maplibregl, estiloInicial] = await Promise.all([
-          import('maplibre-gl').then((m) => m.default),
+          Promise.all([import('maplibre-gl'), import('maplibre-gl/dist/maplibre-gl.css')]).then(([m]) => m.default),
           estiloMeridiano(ESTILO[temaAtual()], temaAtual()),
         ]);
         if (!vivo || !box.current) return;

@@ -18,8 +18,8 @@ export function EmptyState({ icon = '🗺️', title, subtitle, actions = [], ac
               key={a.href + a.label}
               href={a.href}
               className={a.primary
-                ? 'inline-flex items-center justify-center gap-1.5 rounded-xl bg-pine text-onpine font-semibold px-5 py-2.5 hover:bg-pinedk transition focusring'
-                : 'inline-flex items-center justify-center gap-1.5 rounded-xl border border-line bg-card text-ink font-semibold px-5 py-2.5 hover:text-pine focusring'}
+                ? 'inline-flex items-center justify-center gap-1.5 rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] px-5 py-2.5 hover:bg-ink/85 transition focusring'
+                : 'inline-flex items-center justify-center gap-1.5 rounded-full border-2 border-ink bg-card text-ink font-cond font-extrabold uppercase tracking-[.05em] px-5 py-2.5 hover:bg-paper2 focusring'}
             >
               {a.label}
             </Link>

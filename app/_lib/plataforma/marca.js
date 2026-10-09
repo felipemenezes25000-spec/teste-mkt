@@ -3,7 +3,7 @@
 // ação primária) e o texto sobre ela é escolhido pelo MAIOR contraste WCAG.
 
 const HEX = /^#([0-9a-f]{6})$/i;
-export const MARCA_PADRAO = { nomeExibido: 'Mundo Sem Fim', corPrimaria: '#2742F5', logoUrl: '', rodape: '' };
+export const MARCA_PADRAO = { nomeExibido: 'Mundo Sem Fim', corPrimaria: '#1C3FD1', logoUrl: '', rodape: '' };
 
 export function hexParaRgb(hex) {
   const m = HEX.exec(String(hex || '').trim());

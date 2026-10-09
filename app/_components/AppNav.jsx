@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
 import { GlobalSearch } from './GlobalSearch.jsx';
 import { BuscaCompacta } from './BuscaCompacta.jsx';
 import { MobileMenu } from './MobileMenu.jsx';
@@ -11,7 +10,7 @@ import { useIdioma } from '../_lib/i18n.js';
 import { Icon } from '../_ui/Icon.jsx';
 import { Marca } from '../_ui/Marca.jsx';
 
-// Navegação global MERIDIANO. Arquitetura (OMEGA V4 §9/§30): quatro destinos
+// Navegação global CALÇADÃO. Arquitetura (OMEGA V4 §9/§30): quatro destinos
 // principais que seguem a jornada — Explorar → Decidir → Planejar → Viagens —,
 // ferramentas agrupadas num menu e ações pessoais à direita.
 const PRIMARIOS = [
@@ -49,16 +48,16 @@ function MenuFerramentas({ itens, path, rotulo }) {
     <div ref={ref} className="relative">
       <button
         type="button" onClick={() => setAberto((v) => !v)} aria-expanded={aberto} aria-controls="menu-ferramentas"
-        className={`inline-flex items-center gap-1.5 px-3 h-9 rounded-lg text-sm font-medium transition focusring ${algumAtivo ? 'text-ink bg-card shadow-e1' : 'text-inksoft hover:text-ink'}`}
+        className={`inline-flex items-center gap-1.5 py-1.5 border-b-[3px] font-cond font-bold text-[17px] uppercase tracking-[.06em] transition focusring ${algumAtivo || aberto ? 'border-coral text-ink' : 'border-transparent text-ink hover:border-coral'}`}
       >
         {rotulo} <Icon name="chevron-down" size={14} className={`transition ${aberto ? 'rotate-180' : ''}`} />
       </button>
       {aberto && (
-        <div id="menu-ferramentas" className="absolute right-0 mt-2 w-80 rounded-xl border border-line bg-card shadow-e2 p-1.5 rise">
+        <div id="menu-ferramentas" className="absolute right-0 mt-3 w-80 rounded-2xl border border-line bg-card shadow-e2 p-2 rise">
           {itens.map((l) => (
             <Link key={l.href} href={l.href} aria-current={ativo(path, l.href) ? 'page' : undefined}
-              className={`flex items-start gap-3 rounded-lg px-3 py-2.5 focusring ${ativo(path, l.href) ? 'bg-paper2' : 'hover:bg-paper2'}`}>
-              <span className="mt-0.5 w-8 h-8 rounded-md bg-pine/10 text-pine grid place-items-center shrink-0"><Icon name={l.icon} size={17} /></span>
+              className={`flex items-start gap-3 rounded-xl px-3 py-2.5 focusring ${ativo(path, l.href) ? 'bg-paper2' : 'hover:bg-paper2'}`}>
+              <span className={`mt-0.5 w-9 h-9 rounded-lg grid place-items-center shrink-0 ${ativo(path, l.href) ? 'bg-coral text-ink' : 'bg-paper2 text-ink'}`}><Icon name={l.icon} size={18} /></span>
               <span className="min-w-0">
                 <span className="block text-sm font-semibold text-ink">{l.label}</span>
                 <span className="block text-xs text-inksoft">{l.desc}</span>
@@ -92,12 +91,14 @@ export default function AppNav() {
     (async () => {
       try {
         if (!localStorage.getItem('mundosemfim.plan.v3')) return;
-        const [{ carregarPlano }, { calcular }, { escanearOportunidades }] = await Promise.all([
+        const [{ carregarPlano, ehPlanoExemplo }, { calcular }, { escanearOportunidades }] = await Promise.all([
           import('../_engine/storage.js'),
           import('../_engine/calc.js'),
           import('../_engine/oportunidades.js'),
         ]);
-        const ops = escanearOportunidades(calcular(carregarPlano()));
+        const plano = carregarPlano();
+        if (ehPlanoExemplo(plano)) return; // rota de exemplo não gera alerta para ninguém
+        const ops = escanearOportunidades(calcular(plano));
         if (vivo) setAlerta(ops.filter((o) => o.prioridade === 'P0').length);
       } catch { /* sem alerta */ }
     })();
@@ -105,21 +106,19 @@ export default function AppNav() {
   }, [path]);
 
   return (
-    <header className="sticky top-0 z-40 bg-paper/85 backdrop-blur-md border-b border-line">
-      <nav className="max-w-7xl mx-auto px-3 sm:px-6 h-16 flex items-center gap-2 sm:gap-3" aria-label="Principal">
-        <Link href="/" aria-label="Mundo Sem Fim — início" className="shrink-0 focusring rounded-lg mr-2">
-          <Marca size={34} wordmarkClassName="hidden min-[400px]:inline" />
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-line">
+      <nav className="max-w-7xl mx-auto px-3 sm:px-6 h-[72px] flex items-center gap-2 sm:gap-3" aria-label="Principal">
+        <Link href="/" aria-label="Mundo Sem Fim — início" className="shrink-0 focusring rounded-lg mr-3">
+          <Marca size={38} wordmarkClassName="hidden min-[400px]:inline" />
         </Link>
 
-        <div className="hidden lg:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-6 ml-4">
           {primarios.map((l) => {
             const a = ativo(path, l.href);
             return (
               <Link key={l.href} href={l.href} aria-current={a ? 'page' : undefined}
-                className={`relative inline-flex items-center gap-2 px-3 h-9 rounded-lg text-sm font-medium transition focusring ${a ? 'text-ink bg-card shadow-e1' : 'text-inksoft hover:text-ink'}`}>
-                <Icon name={l.icon} size={16} className={`hidden xl:inline-block ${a ? 'text-pine' : ''}`} />
+                className={`inline-flex items-center gap-2 py-1.5 border-b-[3px] font-cond font-bold text-[17px] uppercase tracking-[.06em] transition focusring ${a ? 'border-coral text-ink' : 'border-transparent text-ink hover:border-coral'}`}>
                 {l.label}
-                {a && <span className="absolute -bottom-[13px] left-3 right-3 h-[2px] bg-pine rounded-full" aria-hidden />}
               </Link>
             );
           })}
@@ -133,23 +132,22 @@ export default function AppNav() {
           {alerta > 0 && (
             <Link href="/decisao" aria-label={`${alerta} alerta(s) na sua rota`}
               title="Sua rota tem alertas (visto/orçamento) que podem estragar a viagem"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-danger-bg text-danger border border-danger-bd px-2.5 h-9 text-xs font-bold focusring">
+              className="inline-flex items-center gap-1.5 rounded-full bg-danger-bg text-danger border border-danger-bd px-3 h-10 text-sm font-bold focusring">
               <Icon name="alert" size={15} /> {alerta}
             </Link>
           )}
           <Link href="/salvos" aria-label={t('nav2.salvos')} aria-current={ativo(path, '/salvos') ? 'page' : undefined}
-            className={`hidden sm:grid w-9 h-9 place-items-center rounded-lg focusring ${ativo(path, '/salvos') ? 'text-pine bg-card' : 'text-inksoft hover:text-ink'}`}>
-            <Icon name="heart" size={18} />
+            className={`hidden sm:grid w-10 h-10 place-items-center rounded-full focusring ${ativo(path, '/salvos') ? 'bg-coral text-ink' : 'text-ink hover:bg-paper2'}`}>
+            <Icon name="heart" size={19} />
           </Link>
           <IdiomaSwitcher />
-          <ThemeToggle />
           <Link href="/conta" aria-current={ativo(path, '/conta') ? 'page' : undefined}
-            className="hidden sm:inline-flex items-center gap-2 h-9 px-3 rounded-lg border border-line bg-card text-sm font-medium text-ink hover:border-pine/50 focusring">
-            <Icon name="user" size={16} /> {t('nav.entrar') && t('nav.entrar') !== 'nav.entrar' ? t('nav.entrar') : 'Entrar'}
+            className="hidden sm:inline-flex ms-btn ms-btn-linha ms-btn-sm ml-1 focusring">
+            {t('nav.entrar') && t('nav.entrar') !== 'nav.entrar' ? t('nav.entrar') : 'Entrar'}
           </Link>
           <button type="button" onClick={() => setMenuOpen(true)} aria-label={t('nav2.abrirMenu')} aria-haspopup="dialog"
             aria-expanded={menuOpen} aria-controls="mobile-menu"
-            className="lg:hidden w-11 h-11 grid place-items-center rounded-lg text-ink hover:bg-paper2 focusring">
+            className="lg:hidden w-11 h-11 grid place-items-center rounded-full text-ink hover:bg-paper2 focusring">
             <Icon name="menu" size={22} />
           </button>
         </div>

@@ -214,13 +214,13 @@ export function CompararClient() {
           ))}
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link href={`/roteiro?destino=${vencedor.slug}`} className="inline-flex rounded-xl bg-pine text-onpine font-semibold px-4 py-2 text-sm hover:bg-pinedk focusring">
+          <Link href={`/roteiro?destino=${vencedor.slug}`} className="inline-flex rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2 text-[15px] hover:bg-ink/85 focusring">
             Montar roteiro de {vencedor.nome} <Icon emoji="→" />
           </Link>
-          <Link href="/custo-real" className="inline-flex rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2 text-sm hover:text-pine focusring">
+          <Link href="/custo-real" className="inline-flex rounded-full border-2 border-ink bg-card text-ink font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2 text-[15px] hover:bg-paper2 focusring">
             Ver custo real
           </Link>
-          <Link href="/decisao" className="inline-flex rounded-xl border border-line bg-card text-inksoft font-semibold px-4 py-2 text-sm hover:text-pine focusring">
+          <Link href="/decisao" className="inline-flex rounded-full border-2 border-ink bg-card text-inksoft font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2 text-[15px] hover:bg-paper2 focusring">
             Recomeçar a decisão
           </Link>
         </div>

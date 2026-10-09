@@ -1,4 +1,41 @@
-# Brand rationale — identidade MERIDIANO
+# Brand rationale — identidade CALÇADÃO
+
+> 2026-10-09. Substitui a identidade MERIDIANO (registrada abaixo como histórico). O dono rejeitou Meridiano
+> e a direção intermediária "Estação" por parecerem genéricas; pediu algo vivo, com identidade própria,
+> **tema claro sempre** e mídia completa (bandeiras, fotos e filmagens dos países e pontos turísticos).
+
+## 1. A ideia
+
+Um **álbum de figurinhas do mundo inteiro**, montado sobre a calçada de Copacabana. Três objetos, uma marca:
+
+| Objeto | De onde vem | O que faz no produto |
+|---|---|---|
+| **Figurinha** | álbum de figurinhas | cada país/lugar: foto ou vídeo real, bandeira oficial, 12 meses, brilho holográfico quando está na hora certa; vira para custo, visto e segurança |
+| **Placar** | painel de partidas de aeroporto (claro) | números vivos: quantos lugares cabem, preço, situação no mês, diagnóstico da rota |
+| **Concreto** | poesia concreta, azulejos de Athos Bulcão, ondas do calçadão | títulos-poema, faixas de azulejo, meses como azulejos, ondas no rodapé e na marca |
+
+Marca: quadrado de tinta com as ondas do calçadão e um sol amarelo (a próxima viagem); wordmark "mundo sem fim"
+em League Spartan minúscula.
+
+## 2. Por que funciona
+
+- **Distinção**: nenhum app de viagem usa álbum + placar + concreto; é brasileiro sem clichê de bandeira verde-amarela.
+- **Dado vira objeto**: a regra "hora certa" (época boa **e** segurança ≥ 4) aparece como brilho na figurinha e
+  como linha do placar — não é um badge perdido. Segurança ≤ 3 vira "Alerta de viagem" em qualquer mês.
+- **Emoção com honestidade**: a foto/vídeo é real (Wikimedia Commons, autor e licença no verso); sem foto
+  verificada, a bandeira oficial é a arte — nunca a foto de outro lugar.
+- **Claro sempre**: fotos e vídeos brilham sobre o branco; o papel `#F3F3F0` separa blocos sem sombras pesadas.
+
+## 3. Cor e tipo
+
+Branco + papel `#F3F3F0`, tinta `#111`, cobalto `#1C3FD1` (rota/seleção), amarelo-álbum `#FFC400` (próxima ação,
+sempre com texto tinta — 12,4:1), verde `#00804D` (época boa; `#006B40` em selos pequenos), risco `#C8281C`,
+rosa `#FF5A7A` (só decoração). League Spartan (títulos), Barlow (texto), Barlow Condensed (rótulos, placar,
+figurinhas). Contraste conferido com axe (AA).
+
+---
+
+# Histórico — identidade MERIDIANO (substituída)
 
 > OMEGA V4 §7-10 · Lote 2 · 2026-10-09. Substitui integralmente a identidade anterior
 > (papel creme, verde-pinho, ocre, Fraunces/Hanken, emojis como ícones), rejeitada pelo

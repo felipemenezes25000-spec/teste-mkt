@@ -1,10 +1,10 @@
-// Identidade cartográfica MERIDIANO (V5 F3) sobre os estilos vetoriais do
+// Identidade cartográfica (V5 F3; paleta clara CALÇADÃO) sobre os estilos vetoriais do
 // OpenFreeMap: só recolore camadas (fundo, água, terra, vias, rótulos, limites).
 // Tiles, fontes, sprites e a atribuição OpenStreetMap continuam os originais.
 export const PALETA = {
   light: {
-    fundo: '#F3F5F8', agua: '#D5DEF2', aguaLinha: '#BCC9E8', verde: '#E4ECE4', urbano: '#ECEFF4', predio: '#E2E7EF',
-    gelo: '#FFFFFF', via: '#FFFFFF', viaBorda: '#D9DFE8', viaPrincipal: '#E8ECF4', texto: '#4B5567', textoAgua: '#4A63B8', halo: '#F3F5F8', limite: '#9AA7C2',
+    fundo: '#F3F3F0', agua: '#D3E0F6', aguaLinha: '#B7CAEE', verde: '#E1EDDD', urbano: '#ECECE7', predio: '#E3E3DD',
+    gelo: '#FFFFFF', via: '#FFFFFF', viaBorda: '#DADAD3', viaPrincipal: '#FFEFB8', texto: '#55554F', textoAgua: '#3550C4', halo: '#F3F3F0', limite: '#8E8E86',
   },
   dark: {
     fundo: '#070B14', agua: '#0D1A35', aguaLinha: '#16264A', verde: '#0B1620', urbano: '#0D1421', predio: '#111A2A',

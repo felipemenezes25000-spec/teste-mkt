@@ -93,7 +93,7 @@ export function PropostaClient() {
           </div>
           {origem === 'conta' && status === 'enviada' && !expirada && (
             <div className="flex gap-2">
-              <button type="button" onClick={() => responder(true)} className="h-11 px-5 rounded-lg bg-pine text-onpine font-semibold focusring">{t('plat.aceitar')}</button>
+              <button type="button" onClick={() => responder(true)} className="h-11 px-5 rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('plat.aceitar')}</button>
               <button type="button" onClick={() => responder(false)} className="h-11 px-4 rounded-lg border border-line text-ink focusring">{t('plat.recusar')}</button>
             </div>
           )}

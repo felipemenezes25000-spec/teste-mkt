@@ -78,6 +78,15 @@ export function normalizarPlano(p) {
   return { version: 3, settings, legs };
 }
 
+// O planner grava a rota de EXEMPLO na primeira visita (auto-save). Ela não é do
+// usuário: alertas globais (furo de visto/orçamento no cabeçalho) não devem vir dela.
+export function ehPlanoExemplo(plan) {
+  if (!plan || !Array.isArray(plan.legs)) return false;
+  const ex = planoExemplo();
+  const assinatura = (p) => JSON.stringify([p.settings && p.settings.orcamento, p.settings && p.settings.dataInicio, p.legs.map((l) => [l.code, Number(l.dias)])]);
+  return assinatura(plan) === assinatura(ex);
+}
+
 export function carregarPlano() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);

@@ -122,10 +122,10 @@ export function ROICalculator() {
           )}
 
           <div className="mt-5 flex flex-wrap gap-2">
-            <Link href="/conta" className="inline-flex rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 focusring">
+            <Link href="/conta" className="inline-flex rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2.5 hover:brightness-95 focusring">
               {t('planos.assinarPremium')}
             </Link>
-            <Link href="/custo-real" className="inline-flex rounded-xl border border-line bg-card text-ink font-semibold px-4 py-2.5 hover:text-pine focusring">
+            <Link href="/custo-real" className="inline-flex rounded-full border-2 border-ink bg-card text-ink font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2.5 hover:bg-paper2 focusring">
               {t('planos.verCustoPrimeiro')}
             </Link>
           </div>

@@ -1,102 +1,74 @@
 /* ============================================================================
-   MERIDIANO — design tokens do Mundo Sem Fim (OMEGA V4 · Lote 2)
+   CALÇADÃO — design tokens do Mundo Sem Fim (redesign 2026-10)
    Fonte única da verdade de cor, tipo, espaço, raio, elevação e movimento.
-   Racional completo: docs/BRAND-RATIONALE.md.
 
-   Ideia: um instrumento de navegação para o mundo inteiro. Base "tinta de
-   carta náutica" (azul-quase-preto) e "papel polar" (branco frio), um azul
-   MERIDIANO para tudo que é rota/seleção/navegação e um verde-LIMA de sinal
-   reservado à próxima ação. Coordenadas e números em mono tabular.
+   Ideia: um álbum de figurinhas do mundo inteiro, montado sobre a calçada de
+   Copacabana. Fundo branco de página, papel claro para blocos, tinta quase
+   preta, COBALTO para rota/seleção/navegação e AMARELO-ÁLBUM para a próxima
+   ação. Azulejos (Athos Bulcão), placar de plaquinhas e figurinhas são os
+   objetos da marca. Tema SEMPRE claro (decisão do dono, 2026-10-09).
 
    Cores em TRIPLAS RGB ("R G B") para o Tailwind aplicar opacidade via
-   rgb(var(--c-x) / <alpha-value>). Os NOMES legados (paper, pine, coral…) foram
-   mantidos como aliases semânticos para o código existente; o significado de
-   cada um está documentado ao lado. Contraste validado (WCAG 2.2 AA) em
-   docs/BRAND-RATIONALE.md.
+   rgb(var(--c-x) / <alpha-value>). Os NOMES legados (paper, pine, coral…) são
+   aliases semânticos usados pelo código existente; o significado de cada um
+   está ao lado. Contrastes conferidos para WCAG 2.2 AA.
    ============================================================================ */
 :root {
-  /* Superfícies — "papel polar" (frio, nada de creme) */
-  --c-paper: 243 245 248;      /* fundo da página */
-  --c-paper-2: 232 236 242;    /* faixas/realces */
+  /* Superfícies */
+  --c-paper: 255 255 255;      /* fundo da página — branco */
+  --c-paper-2: 243 243 240;    /* papel: faixas, blocos, realces (#F3F3F0) */
   --c-card: 255 255 255;       /* superfícies elevadas */
   --c-input: 255 255 255;
   /* Texto */
-  --c-ink: 10 16 32;           /* tinta de carta náutica — 17:1 no papel */
-  --c-ink-soft: 75 85 103;     /* secundário — 6.9:1 */
-  --c-line: 217 223 232;       /* divisores e bordas */
+  --c-ink: 17 17 17;           /* tinta #111 — 18.9:1 no branco */
+  --c-ink-soft: 85 85 79;      /* suave #55554F — 7.6:1 */
+  --c-line: 227 227 221;       /* linha #E3E3DD */
 
-  /* MERIDIANO — azul de rota/navegação/seleção (alias legado: pine) */
-  --c-pine: 39 66 245;         /* #2742F5 — 6.6:1 com branco */
-  --c-pine-dk: 26 47 214;
+  /* COBALTO — rota/navegação/seleção (alias legado: pine) */
+  --c-pine: 28 63 209;         /* #1C3FD1 — 7.4:1 com branco */
+  --c-pine-dk: 21 48 168;
   --c-on-pine: 255 255 255;
 
-  /* LIMA — sinal de próxima ação (alias legado: coral). SEMPRE fundo, texto tinta. */
-  --c-coral: 200 250 60;       /* #C8FA3C — tinta sobre lima 15.5:1 */
-  --c-on-coral: 10 16 32;
+  /* AMARELO-ÁLBUM — próxima ação (alias legado: coral). SEMPRE fundo, texto tinta. */
+  --c-coral: 255 196 0;        /* #FFC400 — tinta sobre amarelo 12.4:1 */
+  --c-on-coral: 17 17 17;
 
-  /* ÂMBAR — destaque/economia/atenção suave (aliases: ochre, solar) */
-  --c-ochre: 255 178 36;       /* fundo com texto tinta 10.5:1 */
-  --c-ochre-soft: 255 214 128;
-  --c-on-ochre: 10 16 32;
-  --c-solar: 255 178 36;
-  --c-on-solar: 10 16 32;
-  --c-amberx: 166 98 0;        /* âmbar legível como TEXTO */
+  /* Amarelo também como destaque/economia (aliases: ochre, solar) */
+  --c-ochre: 255 196 0;
+  --c-ochre-soft: 255 228 140;
+  --c-on-ochre: 17 17 17;
+  --c-solar: 255 196 0;
+  --c-on-solar: 17 17 17;
+  --c-amberx: 154 91 0;        /* âmbar legível como TEXTO (#9A5B00) */
 
-  /* INFRAVERMELHO — risco/urgência (alias: clay) */
-  --c-clay: 209 44 31;         /* 5.1:1 no branco */
-  /* MAR — economia/positivo como acento (alias: sage) */
-  --c-sage: 10 127 112;
+  /* RISCO — urgência/alerta (alias: clay) */
+  --c-clay: 200 40 28;         /* #C8281C — 5.6:1 no branco */
+  /* VERDE — economia/positivo/época boa (alias: sage) */
+  --c-sage: 0 128 77;          /* #00804D — 5.0:1 no branco */
+
+  /* Extras da marca */
+  --c-rosa: 255 90 122;        /* #FF5A7A — só decoração (azulejos, brilho) */
+  --c-amarelo-dk: 184 138 0;   /* sombra do botão álbum */
+  --c-verde-vivo: 0 153 92;
 
   /* Semânticas (texto/fundo/borda) */
-  --c-success: 11 122 82;  --c-success-bg: 227 247 238; --c-success-bd: 181 232 209;
-  --c-warn: 138 83 0;      --c-warn-bg: 255 243 220;    --c-warn-bd: 245 217 160;
-  --c-danger: 180 35 35;   --c-danger-bg: 253 231 231;  --c-danger-bd: 245 189 189;
+  --c-success: 0 107 64;   --c-success-bg: 227 244 236; --c-success-bd: 176 222 199;
+  --c-warn: 154 91 0;      --c-warn-bg: 255 244 204;    --c-warn-bd: 245 214 120;
+  --c-danger: 200 40 28;   --c-danger-bg: 253 232 229;  --c-danger-bd: 245 190 182;
 
   /* Skeleton */
-  --c-skel-1: 229 233 240; --c-skel-2: 242 244 248;
-
-  /* Graticule (linhas de meridiano/paralelo do fundo) */
-  --grid-ink: 10 16 32; --grid-alpha: .045;
+  --c-skel-1: 236 236 232; --c-skel-2: 246 246 243;
 
   /* Espaço (4/8) */
   --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
-  /* Raio — instrumento, não bolha */
-  --r-sm: 4px; --r-md: 6px; --r-lg: 10px; --r-xl: 14px; --r-full: 999px;
-  /* Elevação — plana, com borda nítida */
-  --e-1: 0 1px 0 rgba(10,16,32,.04), 0 8px 24px -16px rgba(10,16,32,.28);
-  --e-2: 0 1px 0 rgba(10,16,32,.05), 0 24px 48px -24px rgba(10,16,32,.35);
+  /* Raio — figurinha e azulejo: cantos macios */
+  --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px; --r-full: 999px;
+  /* Elevação — papel sobre papel, sombra curta */
+  --e-1: 0 1px 0 rgba(17,17,17,.04), 0 10px 24px -18px rgba(17,17,17,.35);
+  --e-2: 0 2px 0 rgba(17,17,17,.04), 0 28px 50px -26px rgba(17,17,17,.42);
   /* Movimento */
-  --motion-fast: .16s; --motion: .32s; --ease: cubic-bezier(.2,.8,.2,1);
+  --motion-fast: .16s; --motion: .32s; --ease: cubic-bezier(.22,1,.36,1);
+  --orbita: cubic-bezier(.22,1,.36,1); --mare: cubic-bezier(.65,0,.35,1);
   /* Alvos de toque */
   --touch: 44px;
-}
-
-/* ===== Noite atlas — escuro de verdade, fotos brilham ===== */
-[data-theme="dark"] {
-  --c-paper: 7 11 20;
-  --c-paper-2: 14 20 34;
-  --c-card: 15 22 38;
-  --c-input: 18 27 46;
-  --c-ink: 234 240 250;
-  --c-ink-soft: 152 163 184;
-  --c-line: 31 42 64;
-
-  --c-pine: 125 143 255;       /* #7D8FFF — texto 6.8:1 no fundo */
-  --c-pine-dk: 98 117 255;
-  --c-on-pine: 7 11 20;        /* botão azul-claro com texto tinta (6.8:1) */
-
-  --c-ochre: 255 178 36; --c-ochre-soft: 255 214 128;
-  --c-amberx: 245 184 74;
-  --c-clay: 255 122 107;
-  --c-sage: 64 214 186;
-
-  --c-success: 74 222 155; --c-success-bg: 11 34 25; --c-success-bd: 22 74 53;
-  --c-warn: 245 184 74;    --c-warn-bg: 42 30 8;    --c-warn-bd: 92 66 18;
-  --c-danger: 255 138 128; --c-danger-bg: 44 15 16; --c-danger-bd: 96 34 34;
-
-  --c-skel-1: 18 27 46; --c-skel-2: 27 38 62;
-  --grid-ink: 200 214 255; --grid-alpha: .05;
-
-  --e-1: 0 1px 0 rgba(255,255,255,.03), 0 8px 24px -16px rgba(0,0,0,.7);
-  --e-2: 0 1px 0 rgba(255,255,255,.04), 0 24px 48px -24px rgba(0,0,0,.8);
 }

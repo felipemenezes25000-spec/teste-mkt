@@ -1,5 +1,35 @@
 # Image coverage report
 
+## Mídia HD do redesign CALÇADÃO (2026-10-09)
+
+> Gerada por `scripts/midia/gerar-midia.mjs` a partir de metadados da Wikimedia Commons (índices de
+> `scripts/midia/indice-midia*.mjs` e `indice-cidades.mjs`). Nada é baixado para o repositório além das bandeiras;
+> fotos e vídeos são servidos pelo CDN da Wikimedia em larguras padrão, com autor, licença e link.
+
+| Métrica | Valor |
+|---|---|
+| Países no catálogo | 205 |
+| Bandeira oficial (Commons, servida em `public/bandeiras`, 0,44 MB) | 205 (100%) |
+| Capa HD de lugar real do país (foto de atração, do artigo do país ou de cidade) | 193 (94%) |
+| Sem capa verificável → a **bandeira oficial é a arte** (nunca foto de outro lugar) | 12: AG, BB, CW, SZ, KW, CF, DJ, LR, MH, FM, NR, KN |
+| Países com vídeo curado (conferido um a um; sem militar, discurso, satélite, bicho fora de contexto) | 82 (87 vídeos) |
+| Atrações do catálogo base com foto HD da Commons | 972 de 2.004 (933 arquivos) |
+
+Licenças das capas: CC BY-SA 3.0 (62), CC BY-SA 4.0 (51), CC BY 2.0 (19), domínio público (16), CC BY-SA 2.0 (13),
+CC BY 2.5 (6), CC BY 3.0 (6), FAL (5), CC BY-SA 2.5 (4), CC BY 4.0 (3), CC0 (2), demais (6).
+
+Filtros aplicados: arquivos que são bandeira, brasão, mapa, localizador, satélite, montagem, gravura ou SVG ficam
+fora; 15 capas foram recusadas no olho (mapa, satélite, retrato, estátua borrada por direito autoral, homônimo
+errado — ex.: Falmouth da Cornualha no lugar de Antígua). Vídeos acima de 12 MB usam a transcodificação 720p/480p
+da própria Commons; todo vídeo tem pôster.
+
+Limites honestos: 123 países não têm vídeo livre relevante na Commons — nesses a figurinha usa a foto HD; a
+correspondência foto↔atração vem do verbete da Wikipédia pt (revisão humana feita só por amostragem).
+
+---
+
+# Histórico — cobertura anterior
+
 > Gerado por `scripts/midia/auditoria.mjs` em 2026-10-09 (requisições reais à Wikipedia/Commons). OMEGA V4 §11-13.
 
 ## Países (foto de capa)

@@ -121,7 +121,7 @@ export function AgenciasClient() {
           <label className={lbl}>{t('plat.logo')}<input name="logoUrl" type="url" defaultValue={estado.marca.logoUrl || ''} placeholder="https://…" className={`${field} mt-1`} /></label>
           <label className={lbl}>{t('plat.rodape')}<input name="rodape" defaultValue={estado.marca.rodape || ''} maxLength={200} placeholder="CNPJ · Cadastur · contato" className={`${field} mt-1`} /></label>
           {tema.ajustadaParaTexto && <p className="text-xs text-warn">{t('plat.corAjustada')}</p>}
-          <button type="submit" className="h-9 px-3 rounded-lg bg-pine text-onpine text-sm font-semibold focusring">{t('ws.salvar')}</button>
+          <button type="submit" className="h-9 px-3 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('ws.salvar')}</button>
         </form>
 
         <div className="rounded-2xl border border-line bg-card p-4">
@@ -158,7 +158,7 @@ export function AgenciasClient() {
             <label className={lbl}>{t('plat.margem')}<input name="margemPct" type="number" min="0" max={MARGEM_MAX} step="0.5" defaultValue="12" className={`${field} mt-1`} /></label>
           </div>
           <label className={lbl}>{t('plat.validaAte')}<input name="validaAte" type="date" min={hoje()} className={`${field} mt-1`} /></label>
-          <button type="submit" className="w-full h-10 rounded-lg bg-coral text-oncoral text-sm font-semibold focusring">{t('plat.criarProposta')}</button>
+          <button type="submit" className="w-full h-10 rounded-full bg-coral text-oncoral text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('plat.criarProposta')}</button>
         </form>
       </aside>
 
@@ -203,13 +203,13 @@ export function AgenciasClient() {
                 <label className={lbl}>{t('ws.tipo')}<select name="tipo" className={`${field} mt-1`}>{TIPOS_ITEM.map((k) => <option key={k} value={k}>{t(`plat.ti_${k}`)}</option>)}</select></label>
                 <label className={lbl}>{t('ws.dia')}<input name="dia" type="number" min="1" max="120" defaultValue="1" className={`${field} mt-1`} /></label>
                 <label className={lbl}>{t('plat.custo')} ({sel.moeda})<input name="custo" type="number" min="0" step="0.01" required className={`${field} mt-1`} /></label>
-                <button type="submit" className="h-10 px-3 rounded-lg bg-pine text-onpine text-sm font-semibold focusring" aria-label={t('plat.addItem')}><Icon name="plus" size={16} /></button>
+                <button type="submit" className="h-10 px-3 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring" aria-label={t('plat.addItem')}><Icon name="plus" size={16} /></button>
                 <label className={`${lbl} sm:col-span-5`}>{t('ws.descricao')}<input name="descricao" maxLength={400} className={`${field} mt-1`} /></label>
               </form>
             </div>
 
             <div className="flex flex-wrap gap-2">
-              <button type="button" onClick={copiarLink} disabled={!sel.itens.length} className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-coral text-oncoral text-sm font-semibold disabled:opacity-50 focusring"><Icon name="link" size={16} /> {t('plat.copiarLink')}</button>
+              <button type="button" onClick={copiarLink} disabled={!sel.itens.length} className="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-coral text-oncoral text-[15px] font-cond font-extrabold uppercase tracking-[.05em] disabled:opacity-50 focusring"><Icon name="link" size={16} /> {t('plat.copiarLink')}</button>
               {supabaseConfigurado && <button type="button" onClick={salvarNaConta} disabled={!sel.itens.length} className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-line text-ink text-sm font-semibold disabled:opacity-50 focusring"><Icon name="save" size={16} /> {t('plat.salvarConta')}</button>}
               {sel.link && <a href={sel.link} target="_blank" rel="noopener" className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-line text-ink text-sm focusring"><Icon name="eye" size={16} /> {t('plat.verComoCliente')}</a>}
             </div>
@@ -224,7 +224,7 @@ export function AgenciasClient() {
               <div className="p-5 bg-card">
                 <p className="font-display text-xl text-ink">{sel.titulo}</p>
                 <p className="mt-1 text-pine font-semibold">{fmtMinor(tot.precoMinor, sel.moeda, locale)}</p>
-                <button type="button" className="mt-3 h-9 px-4 rounded-lg bg-pine text-onpine text-sm font-semibold" tabIndex={-1} aria-hidden>{t('plat.aceitar')}</button>
+                <button type="button" className="mt-3 h-9 px-4 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em]" tabIndex={-1} aria-hidden>{t('plat.aceitar')}</button>
               </div>
             </div>
           </div>

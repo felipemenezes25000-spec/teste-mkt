@@ -16,7 +16,7 @@ export function Gate({ feature, children, titulo = 'Recurso premium', descricao 
       <div className="text-3xl mb-1" aria-hidden><Icon emoji="🔒" /></div>
       <h3 className="font-display text-lg text-ink">{titulo}</h3>
       <p className="text-sm text-inksoft mt-1 max-w-md mx-auto">{descricao || `Disponível no plano ${nomePlano(need)}.`}</p>
-      <Link href="/planos" className="inline-flex mt-3 rounded-xl bg-pine text-onpine font-semibold px-4 py-2 hover:bg-pinedk focusring"><Icon emoji="⭐" /> Ver planos</Link>
+      <Link href="/planos" className="inline-flex mt-3 rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2 hover:bg-ink/85 focusring"><Icon emoji="⭐" /> Ver planos</Link>
     </div>
   );
 }

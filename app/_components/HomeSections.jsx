@@ -5,6 +5,7 @@ import { track } from '../_lib/analytics.js';
 import { useIdioma } from '../_lib/i18n.js';
 import { HOME_PROBLEMAS, HOME_FATORES, HOME_COMPARACAO, HOME_FAQ } from '../_lib/homeContent.js';
 import { Icon } from '../_ui/Icon.jsx';
+import { Azulejo } from '../_ui/Azulejo.jsx';
 
 // Seções editoriais da Home: cada uma reage ao idioma via useIdioma() + arrays
 // em homeContent.js. Sem chave duplicada: fallback automático pra pt quando
@@ -40,17 +41,17 @@ export function HomeSecaoComoDecide() {
   const { idioma, t } = useIdioma();
   const itens = lista(HOME_FATORES, idioma);
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
-      <div className="text-center max-w-2xl mx-auto">
-        <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-pine">{t('home.comoDecidoSelo')}</span>
-        <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.08]">{t('home.comoDecidoH2')}</h2>
-        <p className="mt-3 text-inksoft">{t('home.comoDecidoP')}</p>
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
+      <div className="max-w-3xl">
+        <span className="ms-rotulo">{t('home.comoDecidoSelo')}</span>
+        <h2 className="mt-1 ms-titulo text-[36px] sm:text-[52px] text-ink">{t('home.comoDecidoH2')}</h2>
+        <p className="mt-3 text-lg text-inksoft">{t('home.comoDecidoP')}</p>
       </div>
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {itens.map((f) => (
-          <div key={f.titulo} className="rounded-2xl border border-line bg-card p-4">
-            <h3 className="font-display text-lg text-ink">{f.titulo}</h3>
-            <p className="mt-1 text-sm text-inksoft leading-snug">{f.txt}</p>
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {itens.map((f, i) => (
+          <div key={f.titulo} className="rounded-[20px] border border-line bg-card p-5 border-t-[5px]" style={{ borderTopColor: ['#1C3FD1', '#FFC400', '#00995C', '#FF5A7A'][i % 4] }}>
+            <h3 className="font-display font-bold text-xl text-ink">{f.titulo}</h3>
+            <p className="mt-1.5 text-[15px] text-inksoft leading-snug">{f.txt}</p>
           </div>
         ))}
       </div>
@@ -68,7 +69,7 @@ export function HomeSecaoCustoReal() {
             <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-pine">{t('home.custoRealSelo')}</span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.08]">{t('home.custoRealH2')}</h2>
             <p className="mt-3 text-inksoft">{t('home.custoRealP')}</p>
-            <Link href="/custo-real" className="mt-5 inline-flex items-center gap-2 rounded-xl bg-coral text-oncoral font-semibold px-4 py-2.5 hover:brightness-95 focusring">
+            <Link href="/custo-real" className="mt-5 inline-flex items-center gap-2 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2.5 hover:brightness-95 focusring">
               {t('home.custoRealCTA')} <Icon emoji="→" />
             </Link>
           </div>
@@ -143,16 +144,16 @@ export function HomeSecaoFaq() {
   const { idioma, t } = useIdioma();
   const itens = lista(HOME_FAQ, idioma);
   return (
-    <section className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
-      <div className="text-center">
-        <span className="inline-block font-mono text-[11px] uppercase tracking-[0.14em] text-pine">{t('home.faqSelo')}</span>
-        <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-[1.08]">{t('home.faqH2')}</h2>
+    <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
+      <div>
+        <span className="ms-rotulo">{t('home.faqSelo')}</span>
+        <h2 className="mt-2 ms-titulo text-[36px] sm:text-[48px] text-ink">{t('home.faqH2')}</h2>
       </div>
       <ul className="mt-8 space-y-2">
         {itens.map((item, i) => {
           const isOpen = aberto === i;
           return (
-            <li key={item.q} className="rounded-2xl border border-line bg-card overflow-hidden">
+            <li key={item.q} className={`rounded-2xl overflow-hidden ${isOpen ? 'bg-paper2' : 'bg-card border border-line'}`}>
               <button
                 type="button"
                 onClick={() => setAberto(isOpen ? -1 : i)}
@@ -160,11 +161,11 @@ export function HomeSecaoFaq() {
                 aria-controls={`faq-${i}`}
                 className="w-full px-4 sm:px-5 py-4 flex items-center justify-between gap-3 text-left focusring"
               >
-                <span className="font-display text-lg text-ink">{item.q}</span>
-                <span aria-hidden className={`shrink-0 w-7 h-7 grid place-items-center rounded-full border border-line text-ink transition ${isOpen ? 'rotate-45' : ''}`}>+</span>
+                <span className="font-display font-bold text-lg text-ink">{item.q}</span>
+                <span aria-hidden className={`shrink-0 w-9 h-9 grid place-items-center rounded-full text-ink font-cond font-extrabold text-xl transition ${isOpen ? 'rotate-45 bg-coral' : 'border-2 border-ink'}`}>+</span>
               </button>
               {isOpen && (
-                <div id={`faq-${i}`} className="px-4 sm:px-5 pb-4 -mt-1 text-sm text-inksoft leading-relaxed">{item.a}</div>
+                <div id={`faq-${i}`} className="px-4 sm:px-5 pb-5 -mt-1 text-[15px] text-ink/80 leading-relaxed">{item.a}</div>
               )}
             </li>
           );
@@ -238,25 +239,23 @@ export function HomeSecaoCtaFinal() {
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-      <div data-theme="dark" className="relative overflow-hidden rounded-2xl bg-paper text-ink border border-line p-8 sm:p-14 text-center shadow-e2">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden style={{ backgroundImage: 'linear-gradient(rgb(var(--grid-ink) / .08) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--grid-ink) / .08) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
-        <h2 className="relative font-display text-3xl sm:text-5xl tracking-tighter leading-[1.02] max-w-3xl mx-auto">{t('home.ctaFinalH2')}</h2>
-        <p className="relative mt-4 text-inksoft max-w-2xl mx-auto">{t('home.ctaFinalP')}</p>
-        <div className="relative mt-7 flex flex-wrap gap-3 justify-center">
-          <Link
-            href="/decisao"
-            onClick={onClick}
-            data-ab-variante={cta.id}
-            className="inline-flex items-center gap-2 rounded-lg bg-coral text-oncoral font-semibold px-5 h-12 hover:brightness-95 focusring"
-          >
-            {cta.label}
-          </Link>
-          <Link href="/custo-real" className="inline-flex items-center gap-2 rounded-lg border border-line text-ink font-semibold px-5 h-12 hover:bg-paper2 focusring">
-            <Icon name="receipt" size={17} /> {t('home.ctaFinalCusto')}
-          </Link>
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
+      <div className="relative overflow-hidden rounded-[28px] bg-coral text-ink p-8 sm:p-14 grid gap-8 lg:grid-cols-[1fr_auto] items-center">
+        <div>
+          <h2 className="ms-titulo text-[36px] sm:text-[56px] max-w-3xl">{t('home.ctaFinalH2')}</h2>
+          <p className="mt-4 text-lg max-w-2xl">{t('home.ctaFinalP')}</p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link href="/decisao" onClick={onClick} data-ab-variante={cta.id} className="ms-btn ms-btn-tinta">{cta.label}</Link>
+            <Link href="/custo-real" className="ms-btn ms-btn-linha"><Icon name="receipt" size={18} /> {t('home.ctaFinalCusto')}</Link>
+          </div>
+          <p className="mt-5 text-sm">{t('home.ctaFinalRodape')}</p>
         </div>
-        <p className="relative mt-5 text-xs text-inksoft">{t('home.ctaFinalRodape')}</p>
+        <div className="hidden lg:grid grid-cols-2 gap-1.5" aria-hidden="true">
+          <Azulejo motivo={5} cor="#111111" fundo="#FFFFFF" tam={104} />
+          <Azulejo motivo={1} cor="#1C3FD1" fundo="#FFFFFF" tam={104} rot={90} />
+          <Azulejo motivo={3} cor="#FFFFFF" fundo="#111111" tam={104} />
+          <Azulejo motivo={0} cor="#FF5A7A" fundo="#FFFFFF" tam={104} rot={180} />
+        </div>
         {hidratado && (
           <span className="sr-only" data-ab-test="cta-home-final" data-ab-variante={cta.id}>
             Variante {cta.id} ativa

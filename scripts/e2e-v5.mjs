@@ -63,7 +63,9 @@ try {
     const { ctx, p, erros } = await pagina();
     const mapReq = [];
     p.on('request', (r) => { if (/openfreemap|maplibre/i.test(r.url())) mapReq.push(r.url()); });
-    await p.goto(`${BASE}/explorar`, { waitUntil: 'networkidle' });
+    await p.goto(`${BASE}/explorar?vista=mapa`, { waitUntil: 'networkidle' }); // mapa = visão alternativa do álbum
+    // a visão de mapa monta após a hidratação (lê ?vista=mapa); espera a lista textual aparecer
+    await p.locator('ul[aria-label=Destinos] li').first().waitFor({ timeout: 30000 });
     ok('EXP-10', 'MapLibre e tiles não carregam antes da interação', mapReq.length === 0, `${mapReq.length} requests`);
     ok('ACC-03', 'mapa tem alternativa textual (lista) e prévia com rótulo', (await p.locator('[role=img][aria-label]').count()) > 0 && (await p.locator('li', { hasText: /US\$ \d+\/dia/ }).count()) > 50);
     await p.locator('button', { hasText: /Abrir mapa interativo/ }).first().click();
@@ -73,11 +75,28 @@ try {
     await ctx.close();
   }
   {
+    // ALB-01/02 (redesign Calçadão): o álbum mostra as 205 figurinhas e o mês muda os brilhantes
+    const { ctx, p, erros } = await pagina();
+    await p.goto(`${BASE}/explorar?mes=10`, { waitUntil: 'load' });
+    await p.locator('.ms-fig').first().waitFor({ timeout: 30000 });
+    ok('ALB-01', 'álbum com 205 figurinhas e bandeira oficial local', (await p.locator('.ms-fig').count()) >= 205 && (await p.locator('img[src^="/bandeiras/"]').count()) > 100);
+    const brilho = async () => Number(await p.getByRole('progressbar', { name: /hora certa/ }).getAttribute('aria-valuenow'));
+    const out = await brilho();
+    await p.getByRole('button', { name: 'julho', exact: true }).click();
+    await p.waitForTimeout(400);
+    const jul = await brilho();
+    ok('ALB-02', 'trocar o mês recalcula os brilhantes', out > 0 && jul > 0 && out !== jul, `${out} → ${jul}`);
+    await p.getByRole('button', { name: /Virar figurinha/ }).first().click();
+    ok('ALB-03', 'figurinha vira e mostra custo/visto/segurança com link do destino', await p.locator('.ms-fig.virada').first().getByText('Segurança').isVisible() && await p.getByRole('link', { name: 'Abrir destino' }).first().isVisible());
+    ok('PER-06', 'Álbum sem erros', erros.length === 0, erros.join(' | ').slice(0, 160));
+    await ctx.close();
+  }
+  {
     // EXP-04: sem WebGL a lista continua operando
     const ctx = await b.newContext({ viewport: { width: 1280, height: 900 } });
     await ctx.addInitScript(() => { const orig = HTMLCanvasElement.prototype.getContext; HTMLCanvasElement.prototype.getContext = function (t, ...r) { return /webgl/i.test(t) ? null : orig.call(this, t, ...r); }; });
     const p = await ctx.newPage();
-    await p.goto(`${BASE}/explorar`, { waitUntil: 'load' });
+    await p.goto(`${BASE}/explorar?vista=mapa`, { waitUntil: 'load' });
     await p.locator('button', { hasText: /Abrir mapa interativo/ }).first().click();
     await p.waitForTimeout(6000);
     const aviso = await p.getByText(/Mapa indisponível agora/).isVisible().catch(() => false);

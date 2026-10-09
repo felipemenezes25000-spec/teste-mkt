@@ -33,7 +33,7 @@ const ORDENS = [
   { id: 'barato', k: 'o_barato', label: 'Mais barato' },
   { id: 'caro', k: 'o_caro', label: 'Mais caro' },
 ];
-const COR = { mar: '#0A7F70', meridiano: '#2742F5', ambar: '#E59A00', infra: '#D12C1F', neutro: '#8A94A8' };
+const COR = { mar: '#00804D', meridiano: '#1C3FD1', ambar: '#E0A800', infra: '#C8281C', neutro: '#8E8E86' };
 const VISTO_INFO = {
   isento: { cor: COR.mar, k: 'isento' }, 'e-visa': { cor: COR.meridiano, k: 'evisa' }, eta: { cor: COR.meridiano, k: 'eta' },
   'on-arrival': { cor: COR.ambar, k: 'chegada' }, visto: { cor: COR.infra, k: 'consular' }, consultar: { cor: COR.neutro, k: 'consultar' },
@@ -112,11 +112,12 @@ export function ExplorarClient({ destinos }) {
   useEffect(() => {
     if (!pronto.current) return;
     const p = new URLSearchParams();
+    p.set('vista', 'mapa'); // o álbum (AlbumExplorar) é a visão padrão de /explorar
     if (q) p.set('q', q); if (regiao) p.set('regiao', regiao); if (camada !== 'custo') p.set('camada', camada);
     if (camada === 'epoca') p.set('mes', String(mes)); if (sel) p.set('sel', sel); if (tema) p.set('tema', tema);
     if (ordem !== 'relevancia') p.set('ordem', ordem);
     const s = p.toString();
-    window.history.replaceState(null, '', s ? `?${s}` : window.location.pathname);
+    window.history.replaceState(null, '', `?${s}`);
   }, [q, regiao, camada, mes, sel, tema, ordem]);
 
   const regioes = useMemo(() => [...new Set(destinos.map((d) => d.regiao))].sort(), [destinos]);
@@ -292,7 +293,7 @@ export function ExplorarClient({ destinos }) {
                   </div>
                   <p className="mt-2 text-xs text-inksoft line-clamp-2">{atual.estacao}</p>
                   <div className="mt-3 flex gap-2">
-                    <Link href={`/destino/${atual.slug}`} className="flex-1 inline-flex items-center justify-center gap-1.5 h-10 rounded-lg bg-coral text-oncoral text-sm font-semibold hover:brightness-95 focusring">{t('exp.verDestino')} <Icon name="arrow-right" size={15} /></Link>
+                    <Link href={`/destino/${atual.slug}`} className="flex-1 inline-flex items-center justify-center gap-1.5 h-10 rounded-full bg-coral text-oncoral text-[15px] font-cond font-extrabold uppercase tracking-[.05em] hover:brightness-95 focusring">{t('exp.verDestino')} <Icon name="arrow-right" size={15} /></Link>
                     <Link href={`/comparar?d=${atual.slug}`} className="inline-flex items-center justify-center gap-1.5 h-10 px-3 rounded-lg border border-line text-sm font-medium text-ink hover:border-pine/50 focusring"><Icon name="scale" size={15} />{t('exp.comparar')}</Link>
                   </div>
                 </div>

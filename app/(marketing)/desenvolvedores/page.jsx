@@ -19,7 +19,7 @@ export default function DesenvolvedoresPage() {
         <h1 className="font-display text-4xl sm:text-6xl tracking-tightest leading-[.98] text-ink"><T k="plat.devH" fallback="Os dados do Mundo Sem Fim no seu produto." /></h1>
         <p className="mt-4 text-lg text-inksoft"><T k="plat.devP" fallback="REST somente leitura, JSON, CORS aberto. Cada resposta diz de onde veio o dado e quão fresco ele é — custo de referência não é cotação." /></p>
         <div className="mt-5 flex flex-wrap gap-2 text-sm">
-          <a href="/api/v1/openapi.json" className="inline-flex items-center gap-2 h-10 px-4 rounded-lg border border-line bg-card text-ink font-medium focusring"><Icon name="download" size={16} /> openapi.json</a>
+          <a href="/api/v1/openapi.json" className="inline-flex items-center gap-2 h-10 px-4 rounded-full border-2 border-ink bg-card text-ink font-cond font-extrabold uppercase tracking-[.05em] focusring"><Icon name="download" size={16} /> openapi.json</a>
           <span className="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-paper2 text-inksoft"><Icon name="key" size={16} /> <T k="plat.devLimites" fallback="Sem chave: 30/min · Com chave: 600/min" /></span>
         </div>
       </header>

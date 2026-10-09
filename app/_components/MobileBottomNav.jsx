@@ -34,16 +34,17 @@ export function MobileBottomNav() {
   ].filter(Boolean);
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-40 bg-card/95 backdrop-blur border-t border-line md:hidden no-print pb-[env(safe-area-inset-bottom)]" aria-label={t('nav2.mobile')}>
+    <nav className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-line md:hidden no-print pb-[env(safe-area-inset-bottom)]" aria-label={t('nav2.mobile')}>
       <ul className="flex items-stretch justify-around max-w-lg mx-auto px-1">
         {itens.map((item) => {
           const ativo = item.ativoSe ? item.ativoSe.test(path) : path.startsWith(item.href);
           return (
             <li key={item.href} className="flex-1">
               <Link href={item.href} aria-current={ativo ? 'page' : undefined}
-                className={`flex flex-col items-center justify-center gap-0.5 min-h-[56px] px-1 focusring rounded-lg transition-colors ${ativo ? 'text-pine' : 'text-inksoft hover:text-ink'}`}>
-                <span className={`grid place-items-center w-9 h-7 rounded-full ${item.destaque ? 'bg-coral text-oncoral' : ''}`}><Icon name={item.icon} size={20} strokeWidth={ativo ? 2.2 : 1.75} /></span>
-                <span className="text-[11px] font-semibold leading-none">{item.label}</span>
+                className={`flex flex-col items-center justify-center gap-1 min-h-[60px] px-1 focusring rounded-lg transition-colors ${ativo ? 'text-ink' : 'text-inksoft hover:text-ink'}`}>
+                <span className={`grid place-items-center w-9 h-7 rounded-full ${item.destaque ? 'bg-coral text-oncoral' : ''}`}><Icon name={item.icon} size={21} strokeWidth={ativo ? 2.2 : 1.75} /></span>
+                <span className="font-cond font-extrabold text-[12.5px] uppercase tracking-[.06em] leading-none">{item.label}</span>
+                <span className={`h-1 w-7 rounded-full ${ativo ? 'bg-coral' : 'bg-transparent'}`} aria-hidden="true" />
               </Link>
             </li>
           );

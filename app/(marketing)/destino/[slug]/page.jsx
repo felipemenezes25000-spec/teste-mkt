@@ -37,13 +37,15 @@ import { atracoesPagasDoPais } from '../../../_engine/precosAtracoes.js';
 import { dadosV2DoPais } from '../../../_engine/precos.js';
 import { precosDoPais } from '../../../_engine/precosTransporte.js';
 import { Icon } from '../../../_ui/Icon.jsx';
-import { Foto } from '../../../_ui/Foto.jsx';
 import { QuandoVisivel } from '../../../_ui/QuandoVisivel.jsx';
 import { SourceTrust } from '../../../_ui/SourceTrust.jsx';
 import { resolverImagens, resolverImagem } from '../../../_lib/media.js';
 import { arquivoWikimedia } from '../../../_lib/wikiThumb.js';
 import { coordTexto } from '../../../_lib/brand.jsx';
 import { vistoDe } from '../../../_engine/data.js';
+import { capaPais, videosPais, fotoAtracao } from '../../../_lib/midia.js';
+import { figurinhaDe } from '../../../_lib/figurinhas.js';
+import { HeroDestino } from './HeroDestino.jsx';
 
 export const revalidate = 86400;
 // Pré-renderiza os destaques no build; o restante (catálogo mundial) renderiza
@@ -112,7 +114,10 @@ export default async function DestinoPage(props) {
   // Sem fotoQuery (curados), `wiki` já é o país → reusa sem 2º fetch.
   const sobrePais = (!d.fotoQuery || d.fotoQuery === d.nome) ? wiki : await resumoWiki(d.nome);
   const sobre = escolherSobre({ pais: sobrePais, ponto: wiki });
-  const heroImg = wiki?.img || (await imagensDe(d.fotoQuery || d.nome, { n: 1 }))[0] || (await imagemCommons(d.fotoQuery || d.nome)) || null;
+  // Capa HD curada (_data/midia.js) — sem rede. Só sem ela cai na cadeia antiga.
+  const capaHD = capaPais(d.code, 1280);
+  const videos = videosPais(d.code);
+  const heroImg = capaHD ? null : (wiki?.img || (await imagensDe(d.fotoQuery || d.nome, { n: 1 }))[0] || (await imagemCommons(d.fotoQuery || d.nome)) || null);
   const credito = heroImg ? await creditoImagem(heroImg) : null;
   // Piso: várias fotos do país (cicladas) — o raro item sem foto própria cai aqui sem
   // repetir sempre a mesma imagem. Sem nada do país, devolve null (placeholder honesto).
@@ -149,6 +154,9 @@ export default async function DestinoPage(props) {
     Promise.all(pontos.map((a, i) => {
       // Override de IMAGEM DIRETA (auditoria jun/2026): atrações sem título wiki bom recebem aqui uma URL de
       // foto real conferida por agente (Commons específica ou foto-landmark do país). Vem ANTES da cascata.
+      // Foto HD da atração (Commons, com autor e licença — _data/midia.js) vem primeiro.
+      const hd = fotoAtracao(a.wiki, 500);
+      if (hd) return Promise.resolve({ src: hd.src, srcSet: hd.srcSet, credito: hd.credito, imgGrande: fotoAtracao(a.wiki, 1280).src, hd: true });
       const direta = ATRACOES_IMG[`${d.code}:${a.nome}`];
       return direta
         ? Promise.resolve({ src: direta, credito: creditoCommonsLite(direta), ilustrativa: usoOverride[direta] > 1 })
@@ -159,13 +167,13 @@ export default async function DestinoPage(props) {
 
   // Mídia: resolve TODAS as fotos do Commons de uma vez → URL em largura padrão que
   // existe (sem 400/429), autor e licença reais (V4 §12-13).
-  const commons = [...pontosInfo, ...cidadeInfo].map((x) => x && x.src).filter((u) => u && arquivoWikimedia(u));
+  const commons = [...pontosInfo, ...cidadeInfo].filter((x) => x && !x.hd).map((x) => x && x.src).filter((u) => u && arquivoWikimedia(u));
   const [assets, heroAsset] = await Promise.all([
     resolverImagens(commons, { largura: 500 }),
     heroImg ? resolverImagem(heroImg, { largura: 1280 }) : null,
   ]);
   const comAsset = (info) => {
-    if (!info || !info.src) return info;
+    if (!info || !info.src || info.hd) return info;
     const a = assets.get(arquivoWikimedia(info.src) || '');
     if (!a) return info;
     return { ...info, src: a.url, credito: { fonte: 'Wikimedia Commons', autor: a.photographer, licenca: a.license, link: a.pageUrl } };
@@ -176,6 +184,10 @@ export default async function DestinoPage(props) {
   const heroCredito = heroAsset
     ? { fonte: 'Wikimedia Commons', autor: heroAsset.photographer, licenca: heroAsset.license, link: heroAsset.pageUrl }
     : credito ? { fonte: 'Wikimedia', autor: credito.autor, licenca: credito.licenca, link: credito.fileUrl } : null;
+  // capa do topo: HD curada → foto antiga resolvida (com crédito) → bandeira
+  const capaTopo = capaHD || (heroSrc ? { src: heroSrc, srcSet: heroAsset ? heroAsset.srcSet : undefined, lugar: d.fotoQuery || null, credito: heroCredito } : null);
+  const mesAtual = new Date().getMonth();
+  const fig = figurinhaDe(d.code, mesAtual);
 
   // Galeria de pontos turísticos: prioriza a lista CURADA (foto buscada por atração),
   // com fallback pro Wikidata. Garante cobertura em todos os 205 países.
@@ -185,7 +197,7 @@ export default async function DestinoPage(props) {
   const contextoPais = sobrePais?.extrato || sobre?.extrato || null;
   const urlPais = sobrePais?.url || sobre?.url || null;
   const galeria = pontos.length
-    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: pontosInfo[i].src, credito: pontosInfo[i].credito, ilustrativa: !!pontosInfo[i].ilustrativa, ilustrativaDe: pontosInfo[i].ilustrativa ? d.nome : null, wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais, fora: !!a.fora }))
+    ? pontos.map((a, i) => ({ nome: a.nome, sub: a.cidade, img: pontosInfo[i].src, srcSet: pontosInfo[i].srcSet, imgGrande: pontosInfo[i].imgGrande, credito: pontosInfo[i].credito, ilustrativa: !!pontosInfo[i].ilustrativa, ilustrativaDe: pontosInfo[i].ilustrativa ? d.nome : null, wiki: a.wiki || a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais, fora: !!a.fora }))
     : (atracoes || []).map((a) => ({ nome: a.nome, sub: a.descricao, img: wikiThumb(a.img, 480), credito: creditoCommonsLite(a.img), wiki: a.nome, maps: mapsUrl(`${a.nome}, ${d.nome}`), contextoPais, urlPais, fora: false }));
 
   // Cidades & bases: mesma estrutura da galeria pra abrir o mesmo modal (decisão do
@@ -227,10 +239,9 @@ export default async function DestinoPage(props) {
     ['logistica', 'Logística'], ['antes', 'Antes de ir'], ['reservar', 'Reservar'],
   ];
 
-  const btnLima = 'inline-flex items-center justify-center gap-2 rounded-lg bg-coral text-oncoral font-semibold px-4 h-11 hover:brightness-95 transition focusring shrink-0';
-  const btnClaro = 'inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 bg-white/10 backdrop-blur text-white font-semibold px-4 h-11 hover:bg-white/20 transition focusring shrink-0';
-  const btnGhost = 'inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-card text-ink font-semibold px-4 h-11 hover:border-pine/50 transition focusring shrink-0';
-  const H2 = 'font-display text-[1.75rem] leading-tight text-ink';
+  const btnLima = 'ms-btn ms-btn-album w-full';
+  const btnGhost = 'ms-btn ms-btn-linha ms-btn-sm w-full';
+  const H2 = 'ms-titulo text-[34px] sm:text-[44px] text-ink';
 
   return (
     <main>
@@ -244,42 +255,21 @@ export default async function DestinoPage(props) {
       />
       {faqLd && <JsonLd data={faqLd} />}
 
-      {/* HERO editorial — foto real com crédito, coordenada e ações */}
-      <section className="relative h-[62vh] min-h-[420px] max-h-[640px] overflow-hidden bg-ink">
-        <Foto src={heroSrc} srcSet={heroAsset ? heroAsset.srcSet : undefined} sizes="100vw" alt={`${d.nome} — ${d.fotoQuery || d.nome}`} credito={heroCredito} prioridade className="absolute inset-0" largura={1280} altura={720} rotuloFalha="Sem foto verificada" />
-        <div className="absolute inset-0 photo-scrim pointer-events-none" aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/20 to-transparent pointer-events-none" aria-hidden />
-        <FavoriteButton code={d.code} nome={d.nome} className="absolute top-4 right-4 z-20 w-10 h-10" />
-        <div className="absolute inset-x-0 bottom-0">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-8 sm:pb-10">
-            <nav aria-label="Trilha" className="flex items-center gap-2 text-white/80 text-sm">
-              <Link href="/explorar" className="hover:text-white focusring rounded">Explorar</Link>
-              <Icon name="chevron" size={14} />
-              <span className="text-white/90">{d.regiao}</span>
-            </nav>
-            <div className="mt-3 coord text-coral">{coordTexto(d.coords)}</div>
-            <h1 className="mt-1 font-display text-5xl sm:text-7xl text-white tracking-tightest flex items-center gap-4">
-              {flagUrl(d.code) && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={flagUrl(d.code)} alt="" width="52" height="38" loading="lazy" className="rounded-[3px] ring-1 ring-white/40 shrink-0 hidden sm:block" />
-              )}
-              <span>{d.nome}</span>
-            </h1>
-            <p className="mt-3 max-w-2xl text-white/85 text-base sm:text-lg leading-snug">{d.estacao}</p>
-            <div className="mt-5 flex flex-wrap items-center gap-2.5">
-              <AddToRouteButton code={d.code} nome={d.nome} className={btnLima}><Icon name="plus" size={18} /> Adicionar à rota</AddToRouteButton>
-              <Link href={`/roteiro?destino=${d.slug}`} className={btnClaro}><Icon name="spark" size={17} /> Gerar roteiro</Link>
-              <TravelFitScore destino={d} compact />
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroDestino
+        f={fig} mes={mesAtual} d={d} coord={coordTexto(d.coords)} capa={capaTopo} video={videos[0] || null}
+        acoes={<>
+          <AddToRouteButton code={d.code} nome={d.nome} className="ms-btn ms-btn-album"><Icon name="plus" size={19} /> Adicionar à rota</AddToRouteButton>
+          <Link href={`/roteiro?destino=${d.slug}`} className="ms-btn ms-btn-linha"><Icon name="spark" size={18} /> Gerar roteiro</Link>
+          <FavoriteButton code={d.code} nome={d.nome} className="w-[52px] h-[52px] !rounded-full border-2 border-ink" />
+          <TravelFitScore destino={d} compact />
+        </>}
+      />
 
       {/* Navegação por seções (sticky) */}
-      <nav aria-label="Seções do destino" className="sticky top-16 z-30 bg-paper/90 backdrop-blur border-b border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex gap-1 overflow-x-auto no-scrollbar">
+      <nav aria-label="Seções do destino" className="sticky top-[72px] z-30 bg-white/95 backdrop-blur border-y border-line">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex gap-5 overflow-x-auto no-scrollbar">
           {SECOES.map(([id, label]) => (
-            <a key={id} href={`#${id}`} className="shrink-0 px-3 py-3 text-sm font-medium text-inksoft hover:text-ink border-b-2 border-transparent hover:border-pine focusring">{label}</a>
+            <a key={id} href={`#${id}`} className="shrink-0 py-3.5 font-cond font-bold text-[16px] uppercase tracking-[.06em] text-ink border-b-[3px] border-transparent hover:border-coral focusring">{label}</a>
           ))}
         </div>
       </nav>

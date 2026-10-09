@@ -70,7 +70,7 @@ export function MarketplaceClient() {
             <div className="rounded-2xl border border-dashed border-line bg-card p-8 text-center">
               <p className="font-semibold text-ink">{t('plat.semComunidade')}</p>
               <p className="mt-1 text-sm text-inksoft max-w-md mx-auto">{t('plat.semComunidadeP')}</p>
-              <button type="button" onClick={() => setAba('painel')} className="mt-4 inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-pine text-onpine text-sm font-semibold focusring"><Icon name="plus" size={16} /> {t('plat.publicar')}</button>
+              <button type="button" onClick={() => setAba('painel')} className="mt-4 inline-flex items-center gap-2 h-10 px-4 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring"><Icon name="plus" size={16} /> {t('plat.publicar')}</button>
             </div>
           ) : (
             <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -154,7 +154,7 @@ function Consultores({ consultores, user, t, locale }) {
               {c.especialidades && c.especialidades.length > 0 && <p className="mt-2 text-xs text-inksoft">{c.especialidades.join(' · ')}</p>}
               <p className="mt-3 font-mono text-sm text-ink">{c.consultoria_preco_minor ? `${t('plat.aPartir')} ${fmtMinor(c.consultoria_preco_minor, c.moeda, locale)}` : t('plat.precoCombinar')}</p>
               {user && user.id !== c.user_id
-                ? <button type="button" onClick={() => setAlvo(c)} className="mt-3 h-10 rounded-lg bg-pine text-onpine text-sm font-semibold focusring">{t('plat.pedirConsultoria')}</button>
+                ? <button type="button" onClick={() => setAlvo(c)} className="mt-3 h-10 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('plat.pedirConsultoria')}</button>
                 : !user && <Link href="/conta" className="mt-3 text-sm text-pine hover:underline focusring rounded">{t('plat.entrarPedir')}</Link>}
             </li>
           ))}
@@ -171,7 +171,7 @@ function Consultores({ consultores, user, t, locale }) {
           <label className={`${lbl} sm:col-span-2`}>{t('plat.mensagem')}<textarea name="mensagem" required minLength={10} maxLength={2000} rows={4} className={`${field} mt-1 h-auto py-2`} /></label>
           <p className="sm:col-span-2 text-xs text-inksoft">{t('plat.fluxoConsulta')}</p>
           <div className="sm:col-span-2 flex gap-2">
-            <button type="submit" className="h-10 px-4 rounded-lg bg-coral text-oncoral font-semibold focusring">{t('plat.enviarPedido')}</button>
+            <button type="submit" className="h-10 px-4 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('plat.enviarPedido')}</button>
             <button type="button" onClick={() => setAlvo(null)} className="h-10 px-4 rounded-lg border border-line text-ink focusring">{t('ws.fecharP')}</button>
           </div>
         </form>
@@ -259,7 +259,7 @@ function Painel({ user, perfil, recarregar, t, locale }) {
         <label className="flex items-center gap-2 text-sm text-ink"><input name="consultor" type="checkbox" defaultChecked={perfil ? (perfil.tipos || []).includes('consultor') : false} /> {t('plat.ofereco')}</label>
         <label className={lbl}>{t('plat.precoBase')}<input name="preco" type="number" min="0" step="1" defaultValue={perfil && perfil.consultoria_preco_minor ? perfil.consultoria_preco_minor / 100 : ''} className={`${field} mt-1`} /></label>
         <p className="text-xs text-inksoft">{t('plat.taxaInfo')}</p>
-        <button type="submit" className="h-10 px-4 rounded-lg bg-pine text-onpine text-sm font-semibold focusring">{t('ws.salvar')}</button>
+        <button type="submit" className="h-10 px-4 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('ws.salvar')}</button>
       </form>
 
       {perfil && (
@@ -273,7 +273,7 @@ function Painel({ user, perfil, recarregar, t, locale }) {
             <label className={lbl}>{t('ws.titulo')}<input name="titulo" minLength={4} maxLength={140} className={`${field} mt-1`} /></label>
             <label className={lbl}>{t('plat.resumo')}<textarea name="resumo" required minLength={20} maxLength={600} rows={3} className={`${field} mt-1 h-auto py-2`} /></label>
             <label className={lbl}>{t('plat.precoRoteiro')}<input name="preco" type="number" min="0" step="1" defaultValue="0" className={`${field} mt-1`} /></label>
-            <button type="submit" className="h-10 px-4 rounded-lg bg-coral text-oncoral text-sm font-semibold focusring">{t('plat.publicarBtn')}</button>
+            <button type="submit" className="h-10 px-4 rounded-full bg-coral text-oncoral text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('plat.publicarBtn')}</button>
           </form>
           <div className="rounded-2xl border border-line bg-card p-5">
             <h3 className="eyebrow mb-2">{t('plat.vendas')}</h3>
@@ -291,9 +291,9 @@ function Painel({ user, perfil, recarregar, t, locale }) {
                       <div className="flex justify-between gap-2"><span className="text-ink">{p.destino_code || '—'} · {p.data_inicio || '—'}</span><span className="font-mono text-xs text-inksoft">{t(`plat.st_${p.status}`)}</span></div>
                       <p className="mt-1 text-inksoft">{p.mensagem}</p>
                       <div className="mt-2 flex gap-2">
-                        {p.status === 'nova' && <><button type="button" onClick={() => responder(p, 'aceita')} className="h-8 px-3 rounded-md bg-pine text-onpine text-xs font-semibold focusring">{t('plat.aceitar')}</button>
+                        {p.status === 'nova' && <><button type="button" onClick={() => responder(p, 'aceita')} className="h-8 px-3 rounded-full bg-ink text-white text-[13px] font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('plat.aceitar')}</button>
                           <button type="button" onClick={() => responder(p, 'recusada')} className="h-8 px-3 rounded-md border border-line text-xs focusring">{t('plat.recusar')}</button></>}
-                        {p.status === 'paga' && <button type="button" onClick={() => responder(p, 'concluida')} className="h-8 px-3 rounded-md bg-pine text-onpine text-xs font-semibold focusring">{t('plat.concluir')}</button>}
+                        {p.status === 'paga' && <button type="button" onClick={() => responder(p, 'concluida')} className="h-8 px-3 rounded-full bg-ink text-white text-[13px] font-cond font-extrabold uppercase tracking-[.05em] focusring">{t('plat.concluir')}</button>}
                       </div>
                     </li>
                   ))}

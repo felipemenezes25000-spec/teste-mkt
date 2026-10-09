@@ -2,43 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
+/* CALÇADÃO — tema sempre claro. Componentes da marca usam o prefixo ms- para não
+   colidir com classes existentes (ver _ui/Placar.jsx, Figurinha.jsx, Azulejo.jsx…). */
+/* body com altura MÍNIMA (não fixa): com height:100% o cabeçalho sticky soltava após 1 tela */
+html { height: 100%; }
+body { min-height: 100%; }
 html { color-scheme: light; -webkit-text-size-adjust: 100%; }
-[data-theme="dark"] { color-scheme: dark; }
 
 body {
   background-color: rgb(var(--c-paper));
   color: rgb(var(--c-ink));
   font-family: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
-  font-feature-settings: "ss01", "cv11";
-  /* Assinatura MERIDIANO: graticule (meridianos e paralelos) quase invisível */
-  background-image:
-    linear-gradient(rgb(var(--grid-ink) / var(--grid-alpha)) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--grid-ink) / var(--grid-alpha)) 1px, transparent 1px);
-  background-size: 96px 96px;
-  background-position: -1px -1px;
-  transition: background-color var(--motion) var(--ease), color var(--motion) var(--ease);
+  -webkit-font-smoothing: antialiased;
 }
-.font-display { font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif; letter-spacing: -.035em; font-weight: 700; }
-h1.font-display, .font-display.text-4xl, .font-display.text-5xl, .font-display.text-6xl, .font-display.text-7xl { letter-spacing: -.05em; line-height: .98; }
-.font-mono, .coord { font-family: var(--font-mono), ui-monospace, monospace; }
+/* Display: League Spartan pesada, tracking negativo (títulos, poema, números grandes) */
+.font-display { font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif; letter-spacing: -.035em; font-weight: 800; }
+h1.font-display, .font-display.text-4xl, .font-display.text-5xl, .font-display.text-6xl, .font-display.text-7xl { letter-spacing: -.05em; line-height: .95; }
+/* Condensada: rótulos, navegação, plaquinhas, nomes de figurinha */
+.font-cond { font-family: var(--font-cond), var(--font-ui), sans-serif; }
+/* "mono" do app = dados tabulares (preço, coordenada, código) → condensada com números tabulares */
+.font-mono, .coord { font-family: var(--font-cond), var(--font-ui), sans-serif; font-variant-numeric: tabular-nums; }
+.font-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+pre, code, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .tnum { font-variant-numeric: tabular-nums; }
 
-/* Rótulo técnico (coordenadas, códigos, eyebrow): mono caixa-alta espaçada */
-.eyebrow { font-family: var(--font-mono), ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--c-ink-soft)); }
-.coord { font-size: 11px; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+/* Rótulo: condensada caixa-alta espaçada */
+.eyebrow { font-family: var(--font-cond), var(--font-ui), sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--c-ink-soft)); }
+.coord { font-size: 13px; font-weight: 600; letter-spacing: .08em; }
 
-/* Sinal LIMA: ponto pulsante da "próxima ação" */
+/* Sinal da próxima ação: ponto amarelo pulsante */
 .signal-dot { width: 8px; height: 8px; border-radius: 99px; background: rgb(var(--c-coral)); box-shadow: 0 0 0 0 rgb(var(--c-coral) / .6); animation: signal 2s infinite; }
 @keyframes signal { 0% { box-shadow: 0 0 0 0 rgb(var(--c-coral) / .55); } 70% { box-shadow: 0 0 0 8px rgb(var(--c-coral) / 0); } 100% { box-shadow: 0 0 0 0 rgb(var(--c-coral) / 0); } }
 
-/* Selo legado (agora carimbo de coordenada, sem rotação) */
-.stamp { border: 1.5px solid rgb(var(--c-pine)); color: rgb(var(--c-pine)); font-family: var(--font-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
-/* Linha de rota (timeline): tracejado meridiano */
-.route-line { border-left: 2px dashed rgb(var(--c-pine) / .45); margin-left: 23px; }
+/* Selo (carimbo) */
+.stamp { border: 2px solid rgb(var(--c-ink)); color: rgb(var(--c-ink)); font-family: var(--font-cond), sans-serif; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+/* Linha de rota (timeline) */
+.route-line { border-left: 3px dotted rgb(var(--c-ink) / .35); margin-left: 23px; }
 
-@keyframes riseIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-.rise { animation: riseIn .45s var(--ease) both; }
+@keyframes riseIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.rise { animation: riseIn .5s var(--ease) both; }
 
 @keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
 .skel { background: linear-gradient(90deg, rgb(var(--c-skel-1)) 25%, rgb(var(--c-skel-2)) 37%, rgb(var(--c-skel-1)) 63%); background-size: 800px 100%; animation: shimmer 1.3s infinite linear; }
@@ -48,21 +50,15 @@ h1.font-display, .font-display.text-4xl, .font-display.text-5xl, .font-display.t
 
 .gauge-fill { transition: width .6s var(--ease), background-color .4s ease; }
 
-/* Scrim fotográfico padrão: legibilidade de texto sobre foto sem "gradiente decorativo" */
-.photo-scrim { background: linear-gradient(180deg, rgba(7,11,20,0) 30%, rgba(7,11,20,.55) 70%, rgba(7,11,20,.88) 100%); }
-
-@media (prefers-reduced-motion: reduce) {
-  .rise, .alert-pulse, .skel, .signal-dot { animation: none !important; }
-  body, .gauge-fill { transition: none !important; }
-  * { scroll-behavior: auto !important; }
-}
+/* Scrim fotográfico: legibilidade de texto sobre foto */
+.photo-scrim { background: linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,.55) 70%, rgba(17,17,17,.88) 100%); }
 
 *::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-thumb { background: rgb(var(--c-line)); border-radius: 99px; border: 3px solid rgb(var(--c-paper)); }
 *::-webkit-scrollbar-track { background: transparent; }
 
 input, select, button, textarea { font-family: inherit; }
-.focusring:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid rgb(var(--c-pine)); outline-offset: 2px; }
+.focusring:focus-visible, a:focus-visible, button:focus-visible, [role="button"]:focus-visible { outline: 3px solid rgb(var(--c-pine)); outline-offset: 3px; }
 .dragging { opacity: .45; }
 .drop-target { box-shadow: 0 0 0 2px rgb(var(--c-pine)), 0 10px 30px -12px rgb(var(--c-pine) / 0.4); }
 .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
@@ -71,21 +67,105 @@ input, select, button, textarea { font-family: inherit; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
-@media print {
-  header, footer, nav, .no-print { display: none !important; }
-  * { box-shadow: none !important; }
-  .rise { animation: none !important; }
-  :root, [data-theme="dark"] {
-    --c-paper: 255 255 255; --c-paper-2: 245 245 245; --c-card: 255 255 255;
-    --c-ink: 10 16 32; --c-ink-soft: 75 85 103; --c-line: 210 214 220;
-  }
-  body { background: #fff !important; }
+/* ============================ Componentes da marca ============================ */
+/* Em @layer components: utilitários do Tailwind (hidden, sm:inline-flex, !px-3…) vencem. */
+@layer components {
+
+/* Botões em pílula (Barlow Condensed caixa-alta) */
+.ms-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 999px; border: 2px solid transparent; font-family: var(--font-cond), sans-serif; font-weight: 800; font-size: 19px; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: transform .12s var(--orbita), box-shadow .2s, background-color .2s; white-space: nowrap; }
+.ms-btn:disabled { opacity: .5; cursor: not-allowed; }
+.ms-btn-album { background: rgb(var(--c-coral)); color: rgb(var(--c-ink)); box-shadow: 0 5px 0 rgb(var(--c-amarelo-dk)); }
+.ms-btn-album:hover { background: #FFCD1F; }
+.ms-btn-album:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 rgb(var(--c-amarelo-dk)); }
+.ms-btn-tinta { background: rgb(var(--c-ink)); color: #fff; }
+.ms-btn-tinta:hover { background: #2a2a2a; }
+.ms-btn-linha { background: #fff; color: rgb(var(--c-ink)); border-color: rgb(var(--c-ink)); }
+.ms-btn-linha:hover { background: rgb(var(--c-paper-2)); }
+.ms-btn-sm { min-height: 42px; padding: 0 16px; font-size: 16px; }
+
+/* Rótulo e títulos */
+.ms-rotulo { font-family: var(--font-cond), sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: rgb(var(--c-ink-soft)); }
+.ms-titulo { font-family: var(--font-display), sans-serif; font-weight: 800; letter-spacing: -.035em; line-height: .95; }
+
+/* Poema concreto: cada letra ondula */
+.ms-poema { font-family: var(--font-display), sans-serif; font-weight: 900; letter-spacing: -.05em; line-height: .84; }
+.ms-poema .l { display: flex; gap: .2em; white-space: nowrap; }
+.ms-poema i { font-style: normal; display: inline-block; animation: ms-onda 3.6s cubic-bezier(.45,0,.55,1) infinite; animation-delay: calc(var(--n) * -150ms); }
+@keyframes ms-onda { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-.1em); } }
+.ms-fraco { color: #D8D8D2; }
+
+/* Frase com lacunas (simulador) */
+.ms-frase { font-family: var(--font-display), sans-serif; font-weight: 700; letter-spacing: -.015em; line-height: 1.55; }
+.ms-campo { font: inherit; color: rgb(var(--c-ink)); background: none; border: 0; border-bottom: 5px solid rgb(var(--c-coral)); padding: 0 4px; cursor: pointer; line-height: 1.05; border-radius: 0; }
+.ms-campo:hover, .ms-campo:focus-visible { background: rgb(var(--c-coral)); }
+select.ms-campo { appearance: none; -webkit-appearance: none; }
+
+/* Placar claro: plaquinhas que giram até a letra certa */
+.ms-placas { display: inline-flex; gap: 3px; vertical-align: middle; }
+.ms-placa { position: relative; display: inline-block; overflow: hidden; width: var(--w); height: var(--h); border-radius: 4px; background: linear-gradient(180deg,#FFFFFF 0,#FAFAF7 49.3%,#D6D6CF 49.3%,#D6D6CF 50.7%,#F4F4F0 50.7%,#EFEFEA 100%); box-shadow: inset 0 0 0 1px #DADAD3, 0 2px 0 #CFCFC8; flex: none; }
+.ms-placa .ms-fita { display: flex; flex-direction: column; }
+.ms-placa .ms-fita span { display: block; height: var(--h); line-height: var(--h); text-align: center; font-family: var(--font-cond), sans-serif; font-weight: 800; font-size: calc(var(--h) * .74); color: var(--cor, rgb(var(--c-ink))); }
+.ms-rolaA { animation: ms-rolaA var(--dur) steps(var(--k1), jump-none) var(--atraso) both; }
+.ms-rolaB { animation: ms-rolaB var(--dur) steps(var(--k1), jump-none) var(--atraso) both; }
+@keyframes ms-rolaA { from { transform: translateY(0); } to { transform: translateY(calc(var(--k) * var(--h) * -1)); } }
+@keyframes ms-rolaB { from { transform: translateY(0); } to { transform: translateY(calc(var(--k) * var(--h) * -1)); } }
+
+/* Figurinha: frente (foto/vídeo/bandeira) e verso (dados), brilho na época certa */
+.ms-fig { position: relative; width: var(--fw, 220px); height: var(--fh, 318px); transform-style: preserve-3d; transition: transform .6s var(--orbita); cursor: pointer; border-radius: 16px; flex: none; }
+.ms-fig.virada { transform: rotateY(180deg) !important; }
+.ms-face { position: absolute; inset: 0; border-radius: 16px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #fff; padding: 8px; box-shadow: 0 0 0 1px #E3E3DD, 0 16px 30px -16px rgba(0,0,0,.45); }
+.ms-foto { position: relative; width: 100%; height: 100%; border-radius: 10px; overflow: hidden; background: rgb(var(--c-paper-2)); }
+.ms-foto .ms-arte { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.ms-foto.so-bandeira { display: grid; place-items: center; }
+.ms-foto.so-bandeira .ms-arte { position: static; width: 78%; height: auto; max-height: 52%; object-fit: contain; box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 10px 24px -12px rgba(0,0,0,.35); border-radius: 3px; margin-top: -34px; }
+.ms-num { position: absolute; top: 8px; left: 8px; z-index: 3; padding: 3px 8px; border-radius: 6px; background: rgb(var(--c-ink)); color: #fff; font-family: var(--font-cond), sans-serif; font-weight: 800; font-size: 13px; letter-spacing: .06em; }
+.ms-band { position: absolute; top: 8px; right: 8px; z-index: 3; height: 22px; width: auto; border-radius: 3px; box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(0,0,0,.3); }
+.ms-nome { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 36px 12px 10px; background: linear-gradient(180deg, transparent, rgba(17,17,17,.84)); color: #fff; }
+.so-bandeira .ms-nome { background: none; color: rgb(var(--c-ink)); }
+.ms-nome b { display: block; font-family: var(--font-cond), sans-serif; font-weight: 900; font-style: italic; font-size: 26px; line-height: .92; text-transform: uppercase; overflow-wrap: anywhere; }
+.ms-nome small { display: block; margin-top: 3px; font-family: var(--font-cond), sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .08em; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ms-pips { display: flex; gap: 3px; margin-top: 8px; }
+.ms-pips i { flex: 1; height: 6px; border-radius: 2px; background: rgba(255,255,255,.3); }
+.so-bandeira .ms-pips i { background: #DADAD3; }
+.ms-pips i.on { background: rgb(var(--c-coral)); }
+.ms-pips i.agora { outline: 2px solid currentColor; outline-offset: 1px; }
+.ms-brilho { position: absolute; inset: 0; z-index: 4; pointer-events: none; border-radius: 10px; mix-blend-mode: color-dodge; opacity: .24; background: linear-gradient(115deg, transparent 20%, rgba(255,0,140,.6) 35%, rgba(255,230,0,.6) 45%, rgba(0,255,200,.6) 55%, rgba(80,120,255,.6) 65%, transparent 80%); background-size: 250% 250%; background-position: var(--gx,50%) var(--gy,50%); animation: ms-holo 5s ease-in-out infinite alternate; }
+@keyframes ms-holo { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+.ms-tag { display: inline-block; margin-bottom: 7px; padding: 4px 9px; border-radius: 999px; background: rgb(var(--c-coral)); color: rgb(var(--c-ink)); font-family: var(--font-cond), sans-serif; font-weight: 900; font-style: italic; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.ms-tag.alerta { background: rgb(var(--c-clay)); color: #fff; }
+.ms-tras { transform: rotateY(180deg); background: rgb(var(--c-ink)); color: #fff; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.ms-tras b { font-family: var(--font-cond), sans-serif; font-weight: 900; font-style: italic; font-size: 26px; text-transform: uppercase; line-height: .9; }
+.ms-tras dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 7px 10px; font-size: 13.5px; }
+.ms-tras dt { color: #B8B8B0; }
+.ms-tras dd { margin: 0; font-weight: 700; text-align: right; }
+.ms-tras .ms-credito { margin-top: auto; font-size: 10px; line-height: 14px; color: #D0D0C8; }
+.ms-tras .ms-credito a { color: #fff; text-decoration: underline; }
+.ms-selo-c { position: absolute; top: 38px; right: 8px; z-index: 5; width: 22px; height: 22px; border-radius: 99px; display: grid; place-items: center; background: rgba(17,17,17,.72); color: #fff; font: 700 11px var(--font-ui), sans-serif; }
+.ms-virar { position: absolute; inset: 0; z-index: 6; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 10px; }
+.ms-virar:focus-visible { outline: 3px solid rgb(var(--c-pine)); outline-offset: 4px; }
+
+/* Calçadão (ondas de Copacabana) */
+.ms-calcadao { position: relative; overflow: hidden; background: #fff; }
+.ms-calcadao svg { position: absolute; left: 0; top: 0; animation: ms-mar 20s linear infinite; }
+@keyframes ms-mar { to { transform: translateX(-240px); } }
+
+/* Pacotinho: figurinhas voando para o leque */
+@keyframes ms-voa { from { opacity: 0; translate: -160px 120px; scale: .6; } to { opacity: 1; translate: 0 0; scale: 1; } }
+
+/* Azulejo */
+.ms-azulejo { display: block; flex: none; }
 }
 
-/* Controles do MapLibre no tema escuro (V5 F3): zoom e atribuição acompanham a noite atlas */
-[data-theme="dark"] .maplibregl-ctrl-group { background: rgb(var(--c-card)); box-shadow: 0 0 0 1px rgb(var(--c-line)); }
-[data-theme="dark"] .maplibregl-ctrl-group button + button { border-top-color: rgb(var(--c-line)); }
-[data-theme="dark"] .maplibregl-ctrl-group button .maplibregl-ctrl-icon { filter: invert(1) brightness(1.4); }
-[data-theme="dark"] .maplibregl-ctrl-attrib, [data-theme="dark"] .maplibregl-ctrl-attrib.maplibregl-compact { background: rgb(var(--c-card) / .92); color: rgb(var(--c-ink-soft)); }
-[data-theme="dark"] .maplibregl-ctrl-attrib a { color: rgb(var(--c-ink)); }
-[data-theme="dark"] .maplibregl-ctrl-attrib-button { filter: invert(1); }
+@media (prefers-reduced-motion: reduce) {
+  .rise, .alert-pulse, .skel, .signal-dot, .ms-poema i, .ms-calcadao svg, .ms-brilho, .ms-rolaA, .ms-rolaB, .ms-fig { animation: none !important; }
+  .ms-fig { transition: none; }
+  .gauge-fill { transition: none !important; }
+  * { scroll-behavior: auto !important; }
+}
+
+@media print {
+  header, footer, nav, .no-print, .ms-calcadao { display: none !important; }
+  * { box-shadow: none !important; }
+  .rise { animation: none !important; }
+  body { background: #fff !important; }
+}

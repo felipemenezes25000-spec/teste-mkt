@@ -55,7 +55,7 @@ describe('white-label', () => {
   it('normaliza: cor inválida e logo não-https caem no padrão', () => {
     const m = normalizarMarca({ nomeExibido: '  Agência Sol  ', corPrimaria: 'vermelho', logoUrl: 'javascript:alert(1)' });
     expect(m.nomeExibido).toBe('Agência Sol');
-    expect(m.corPrimaria).toBe('#2742F5');
+    expect(m.corPrimaria).toBe('#1C3FD1');
     expect(m.logoUrl).toBe('');
     expect(normalizarMarca({ logoUrl: 'http://x.com/l.png' }).logoUrl).toBe('');
     expect(normalizarMarca({ logoUrl: 'https://x.com/l.png' }).logoUrl).toBe('https://x.com/l.png');

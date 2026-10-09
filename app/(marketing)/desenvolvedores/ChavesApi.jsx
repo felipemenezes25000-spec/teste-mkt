@@ -51,7 +51,7 @@ export function ChavesApi() {
             <form onSubmit={criar} className="flex gap-2">
               <label className="sr-only" htmlFor="nome-chave">{t('plat.nomeChave')}</label>
               <input id="nome-chave" name="nome" maxLength={80} placeholder={t('plat.nomeChave')} className="flex-1 h-10 px-3 rounded-lg border border-line bg-input text-ink text-sm focusring" />
-              <button type="submit" className="h-10 px-3 rounded-lg bg-pine text-onpine text-sm font-semibold focusring"><Icon name="plus" size={16} /><span className="sr-only">{t('plat.criarChave')}</span></button>
+              <button type="submit" className="h-10 px-3 rounded-full bg-ink text-white text-[15px] font-cond font-extrabold uppercase tracking-[.05em] focusring"><Icon name="plus" size={16} /><span className="sr-only">{t('plat.criarChave')}</span></button>
             </form>
             {nova && (
               <div role="status" className="rounded-lg border border-warn-bd bg-warn-bg p-3 text-sm">

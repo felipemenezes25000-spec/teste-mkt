@@ -250,7 +250,7 @@ flowchart TD
 | `app/_engine` | **Motor de decisão**: lógica pura de cálculo/score/decisão + dados do motor + componentes do planner |
 | `app/_lib` | Utilidades e integrações: catálogo, i18n, SEO, Wikipedia/Wikidata/Places, câmbio, analytics |
 | `app/_components` | 37 componentes de UI de produto |
-| `app/_ui` | Design system (Button, Modal, Tabs, Badge, EmptyState, ThemeToggle) |
+| `app/_ui` | Design system CALÇADÃO (Placar, Figurinha, Azulejo, Calcadao, Poema, Marca, Button, Modal, Tabs, Badge, EmptyState) |
 | `app/api` | 5 rotas Node: `/ai`, `/health`, `/me/plan`, `/stripe/checkout`, `/stripe/webhook` |
 
 **Persistência:** `localStorage` por padrão (chaves `mundosemfim.*`); sync opcional no Supabase quando o usuário entra.
@@ -263,8 +263,8 @@ Plano compartilhável via hash (`#r=`) — sem nunca expor chave de IA.
 | Camada | Tecnologia |
 | :-- | :-- |
 | Framework | **Next.js 16** (App Router, JSX; contratos de domínio com JSDoc + `tsc --checkJs`) |
-| UI | **React 19** + **Tailwind CSS 3** + tokens MERIDIANO (RGB, dark mode) — ver `docs/BRAND-RATIONALE.md` |
-| Tipografia | Bricolage Grotesque + Geist + Geist Mono (`next/font/google`) |
+| UI | **React 19** + **Tailwind CSS 3** + tokens CALÇADÃO (RGB, tema sempre claro) — ver `docs/BRAND-RATIONALE.md` |
+| Tipografia | League Spartan + Barlow + Barlow Condensed (`next/font/google`) |
 | Auth & dados | **Supabase** (Postgres + RLS) |
 | Pagamentos | **Stripe** (REST, sem SDK; webhook HMAC manual) |
 | IA | LLM **OpenAI-compatível** server-side (Groq/OpenRouter via `AI_BASE_URL`), com cota diária |

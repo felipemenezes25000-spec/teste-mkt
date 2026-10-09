@@ -133,9 +133,9 @@ export function HeroSimulador() {
 
   return (
     <section aria-labelledby="sim-titulo" className="relative">
-      <div className="rounded-2xl border border-line bg-card/95 backdrop-blur shadow-e2 p-5 sm:p-6">
+      <div className="rounded-[28px] bg-paper2 p-5 sm:p-7">
         <div className="flex items-center justify-between gap-3">
-          <h2 id="sim-titulo" className="font-display text-xl sm:text-2xl text-ink">{t('simulador.titulo')}</h2>
+          <h2 id="sim-titulo" className="font-display font-extrabold text-2xl sm:text-3xl tracking-[-.03em] text-ink">{t('simulador.titulo')}</h2>
           <span className="shrink-0 font-mono text-[10px] uppercase tracking-widest text-oncoral bg-coral px-2 py-1 rounded">{t('simulador.badge30s')}</span>
         </div>
 
@@ -186,7 +186,7 @@ export function HeroSimulador() {
               {ESTILOS.map(([id, l]) => <option key={id} value={id}>{l}</option>)}
             </select>
           </label>
-          <button type="submit" disabled={busy} className="col-span-6 inline-flex items-center justify-center gap-2 rounded-lg bg-coral text-oncoral font-semibold px-4 h-12 hover:brightness-95 transition focusring disabled:opacity-70">
+          <button type="submit" disabled={busy} className="col-span-6 inline-flex items-center justify-center gap-2 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] px-4 h-12 hover:brightness-95 transition focusring disabled:opacity-70">
             {busy ? t('sim2.calculando') : t('sim2.cta')} <Icon name="arrow-right" size={17} />
           </button>
         </form>
@@ -200,7 +200,7 @@ export function HeroSimulador() {
                 const tom = TOM[(v.codigo.match(/CABE|NO_LIMITE|ACIMA/) || [])[0]];
                 const foto = res.fotos[d.code];
                 return (
-                  <li key={d.code} className="rounded-xl border border-line bg-paper2/60 overflow-hidden">
+                  <li key={d.code} className="rounded-[20px] bg-white overflow-hidden shadow-[0_0_0_1px_#E3E3DD]">
                     <div className="flex gap-3 p-3">
                       <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-paper2">
                         <Foto src={foto && foto.img ? foto.img : null} alt={d.nome} mostrarCredito={false} rotuloFalha="" className="w-full h-full" largura={80} altura={80} />

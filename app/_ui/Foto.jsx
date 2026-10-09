@@ -11,13 +11,17 @@ export function Foto({
   src, alt, credito, ilustrativa = false, ilustrativaDe, className = '', imgClassName = '',
   prioridade = false, largura, altura, rotuloFalha = 'Foto indisponível', mostrarCredito = true, sizes, srcSet,
 }) {
-  const [falhou, setFalhou] = useState(!src);
+  // A falha é lembrada POR URL: se a foto chega depois (ex.: /salvos busca as capas
+  // no cliente), o placeholder some sozinho — antes ficava "Foto indisponível" para sempre.
+  const [falhaDe, setFalhaDe] = useState(null);
+  const falhou = !src || falhaDe === src;
+  const setFalhou = () => setFalhaDe(src);
   const imgRef = useRef(null);
   // A imagem do HTML do servidor pode falhar ANTES da hidratação (CDN fora, 404):
   // aí o onError do React nunca dispara. Confere na montagem (V5 DST-11/PER-07).
   useEffect(() => {
     const i = imgRef.current;
-    if (i && i.complete && i.naturalWidth === 0) setFalhou(true); // eslint-disable-line react-hooks/set-state-in-effect
+    if (i && i.complete && i.naturalWidth === 0) setFalhaDe(src); // eslint-disable-line react-hooks/set-state-in-effect
   }, [src]);
   const [abrirCredito, setAbrirCredito] = useState(false);
 
@@ -30,12 +34,12 @@ export function Foto({
           // sem credenciais no CDN do Wikimedia (CORS liberado): o navegador não grava o cookie de terceiro WMF-Uniq
           crossOrigin={/^https:\/\/upload\.wikimedia\.org\//.test(src || '') ? 'anonymous' : undefined} width={largura} height={altura} sizes={srcSet ? (sizes || '100vw') : sizes}
           loading={prioridade ? 'eager' : 'lazy'} decoding="async" fetchPriority={prioridade ? 'high' : undefined}
-          onError={() => setFalhou(true)}
+          onError={setFalhou}
           className={`w-full h-full object-cover ${imgClassName}`}
         />
       ) : (
         <div className="absolute inset-0 grid place-items-center text-inksoft"
-          style={{ backgroundImage: 'linear-gradient(rgb(var(--grid-ink) / .08) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--grid-ink) / .08) 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
+          style={{ backgroundImage: 'linear-gradient(rgb(var(--c-ink) / .06) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--c-ink) / .06) 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
           <div className="flex flex-col items-center gap-1.5 px-3 text-center">
             <Icon name="pin" size={22} />
             <span className="eyebrow">{rotuloFalha}</span>

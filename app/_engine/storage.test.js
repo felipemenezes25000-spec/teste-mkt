@@ -28,3 +28,17 @@ describe('normalizarPlano — migração dos campos novos (visto granular + cust
     expect(t.cidadesCusto).toEqual({});
   });
 });
+
+describe('ehPlanoExemplo (alerta global só para rota do usuário)', () => {
+  it('reconhece a rota de exemplo gravada pelo auto-save', async () => {
+    const { planoExemplo, ehPlanoExemplo } = await import('./storage.js');
+    expect(ehPlanoExemplo(planoExemplo())).toBe(true);
+  });
+  it('rota editada pelo usuário deixa de ser exemplo', async () => {
+    const { planoExemplo, ehPlanoExemplo } = await import('./storage.js');
+    const p = planoExemplo();
+    p.legs[0].dias = Number(p.legs[0].dias) + 5;
+    expect(ehPlanoExemplo(p)).toBe(false);
+    expect(ehPlanoExemplo(null)).toBe(false);
+  });
+});

@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-// MERIDIANO (docs/BRAND-RATIONALE.md). Cores tema-áveis: cada token vira
-// rgb(var(--c-x) / <alpha-value>), então bg-pine/10, border-ochre/40 etc. funcionam
-// e o dark mode é só reescrever as triplas RGB em _ui/tokens.css.
+// CALÇADÃO (tema sempre claro). Cada token vira rgb(var(--c-x) / <alpha-value>),
+// então bg-pine/10, border-ochre/40 etc. funcionam; as triplas RGB ficam em _ui/tokens.css.
 const c = (v) => `rgb(var(${v}) / <alpha-value>)`;
 
 module.exports = {
@@ -9,12 +8,15 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // Display: Bricolage Grotesque (títulos, expressiva, tracking negativo)
+        // Display: League Spartan (títulos, poema concreto, números grandes)
         display: ['var(--font-display)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        // UI: Geist (texto, controles)
+        // UI: Barlow (texto, controles)
         sans: ['var(--font-ui)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        // Dados: Geist Mono (coordenadas, preços tabulares, códigos IATA)
-        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        // Condensada: Barlow Condensed (rótulos, navegação, placar, figurinhas)
+        cond: ['var(--font-cond)', 'var(--font-ui)', 'sans-serif'],
+        // "mono" = dados tabulares (preço, código IATA) na condensada; código de verdade usa font-code
+        mono: ['var(--font-cond)', 'var(--font-ui)', 'sans-serif'],
+        code: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
       colors: {
         paper: c('--c-paper'), paper2: c('--c-paper-2'), card: c('--c-card'),
@@ -30,10 +32,13 @@ module.exports = {
         success: c('--c-success'), 'success-bg': c('--c-success-bg'), 'success-bd': c('--c-success-bd'),
         warn: c('--c-warn'), 'warn-bg': c('--c-warn-bg'), 'warn-bd': c('--c-warn-bd'),
         danger: c('--c-danger'), 'danger-bg': c('--c-danger-bg'), 'danger-bd': c('--c-danger-bd'),
+        // nomes da marca Calçadão
+        cobalto: c('--c-pine'), amarelo: c('--c-coral'), amarelodk: c('--c-amarelo-dk'), verde: c('--c-sage'),
+        risco: c('--c-clay'), rosa: c('--c-rosa'), papel: c('--c-paper-2'),
       },
-      // Raios de instrumento: mais nítidos que o padrão do Tailwind
+      // Raios de figurinha/azulejo: cantos macios
       borderRadius: {
-        sm: '3px', DEFAULT: '4px', md: '5px', lg: '6px', xl: '8px', '2xl': '12px', '3xl': '16px',
+        sm: '4px', DEFAULT: '6px', md: '8px', lg: '12px', xl: '16px', '2xl': '20px', '3xl': '28px',
       },
       letterSpacing: { tightest: '-.045em', tighter: '-.03em' },
       boxShadow: { e1: 'var(--e-1)', e2: 'var(--e-2)' },

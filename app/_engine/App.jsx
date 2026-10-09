@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import Link from 'next/link';
 import { PAISES_REF, PASSAPORTES, MOEDAS, vistoDe } from './data.js';
 import { uid, num, clamp, dur, fmtMoeda, converter } from './utils.js';
 import { calcular } from './calc.js';
@@ -7,7 +6,7 @@ import { otimizarRota, buscarOportunidades, buscarCambio } from './services.js';
 import { otimizarOrdemLocal } from './otimizar.js';
 import { baixarICS, linkMapaRota } from './exportar.js';
 import { carregarPlano, salvarPlano, normalizarPlano, planoExemplo, exportarPlano, novoTrechoDeRef } from './storage.js';
-import { Toasts, Tripe, SaveStatus } from './components.jsx';
+import { Toasts, Tripe, SaveStatus, PlacarRota, FitaDoAno } from './components.jsx';
 import TrechoCard from './TrechoCard.jsx';
 import ConfigIA from './ConfigIA.jsx';
 import RouteMap from './RouteMap.jsx';
@@ -15,13 +14,12 @@ import { EmptyState } from '../_ui/EmptyState.jsx';
 import { Button } from '../_ui/Button.jsx';
 import { Tabs } from '../_ui/Tabs.jsx';
 import Onboarding from './Onboarding.jsx';
-import { Marca } from '../_ui/Marca.jsx';
 import CustosView from './CustosView.jsx';
 import { supabaseConfigurado, usuarioAtual, carregarViagemNuvem, salvarViagemNuvem, entrarComEmail, sair } from './supabase.js';
 import { identify, track } from '../_lib/analytics.js';
 import LoginModal from './LoginModal.jsx';
 import { useConfirm } from './useConfirm.jsx';
-import { ThemeToggle } from '../_ui/ThemeToggle.jsx';
+import AppNav from '../_components/AppNav.jsx';
 import BudgetPanel from './BudgetPanel.jsx';
 import { aplicarCortes } from './budget.js';
 import { encodePlan, decodePlan } from './share.js';
@@ -482,20 +480,12 @@ export default function App() {
           fx={plan.settings.fx} moedasEmUso={moedasEmUso} onAtualizarCambio={() => atualizarCambio(false)} cambioBusy={cambioBusy} onSetRate={setRate} />
       )}
 
-      <header className="sticky top-0 z-30 backdrop-blur-md bg-paper/85 border-b border-line">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <Link href="/" title="Início" className="flex items-center gap-3 mr-auto focusring rounded-lg">
-            <Marca size={34} wordmarkClassName="hidden min-[400px]:inline" />
-            <span className="hidden md:inline eyebrow border-l border-line pl-3">Planejador de rota</span>
-          </Link>
-          <nav className="hidden lg:flex items-center gap-1 text-sm" aria-label="Atalhos">
-            <Link href="/explorar" className="px-3 h-9 inline-flex items-center rounded-lg text-inksoft hover:text-ink focusring">Explorar</Link>
-            <Link href="/viagens" className="px-3 h-9 inline-flex items-center rounded-lg text-inksoft hover:text-ink focusring">Viagens</Link>
-          </nav>
-
+      <AppNav />
+      <div className="border-b border-line bg-paper2/70">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <span className="eyebrow mr-auto">Planejador de rota</span>
           <div className="flex flex-wrap items-center justify-end gap-1.5">
             <SaveStatus estado={saveState} naNuvem={naNuvem} onRetry={tentarSincronizar} />
-            <ThemeToggle />
             {supabaseConfigurado && (user
               ? <Button variant="secondary" size="sm" onClick={deslogar} title={user.email}>Sair</Button>
               : <Button variant="secondary" size="sm" onClick={entrar}>Entrar</Button>)}
@@ -503,28 +493,28 @@ export default function App() {
             <Button size="sm" onClick={() => setShowConfig(true)}>IA / Config</Button>
             <details className="relative">
               <summary aria-label="Mais ações: compartilhar, exportar, importar" title="Mais ações"
-                className="list-none cursor-pointer inline-flex items-center justify-center w-9 h-9 rounded-lg border border-line bg-card text-inksoft hover:text-pine focusring [&::-webkit-details-marker]:hidden">
+                className="list-none cursor-pointer inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-ink bg-card text-ink hover:bg-paper2 focusring [&::-webkit-details-marker]:hidden">
                 <span aria-hidden className="text-lg leading-none">⋯</span>
               </summary>
-              <div className="absolute right-0 mt-1 w-52 rounded-lg border border-line bg-card shadow-lg p-1 z-40 flex flex-col">
-                <button onClick={compartilhar} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="🔗" /> Compartilhar (copiar link)</button>
-                <button onClick={() => { if (baixarICS(calc)) toast('Calendário .ics baixado — importe no Google/Apple Calendar.'); }} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="📅" /> Exportar calendário (.ics)</button>
-                <button onClick={() => { const u = linkMapaRota(plan); if (u) window.open(u, '_blank', 'noopener'); else toast('Adicione 2+ trechos pra ver a rota no Maps.', 'erro'); }} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="🗺️" /> Ver rota no Google Maps</button>
-                <button onClick={() => exportarPlano(plan)} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="⬇" /> Exportar JSON</button>
-                <button onClick={() => importRef.current && importRef.current.click()} className="text-left text-sm px-3 py-2 rounded-md text-inksoft hover:text-pine hover:bg-paper2 focusring"><Icon emoji="⬆" /> Importar JSON</button>
+              <div className="absolute right-0 mt-2 w-60 rounded-2xl border border-line bg-card shadow-e2 p-1.5 z-40 flex flex-col">
+                <button onClick={compartilhar} className="text-left text-sm px-3 py-2.5 rounded-xl text-ink hover:bg-paper2 focusring"><Icon emoji="🔗" /> Compartilhar (copiar link)</button>
+                <button onClick={() => { if (baixarICS(calc)) toast('Calendário .ics baixado — importe no Google/Apple Calendar.'); }} className="text-left text-sm px-3 py-2.5 rounded-xl text-ink hover:bg-paper2 focusring"><Icon emoji="📅" /> Exportar calendário (.ics)</button>
+                <button onClick={() => { const u = linkMapaRota(plan); if (u) window.open(u, '_blank', 'noopener'); else toast('Adicione 2+ trechos pra ver a rota no Maps.', 'erro'); }} className="text-left text-sm px-3 py-2.5 rounded-xl text-ink hover:bg-paper2 focusring"><Icon emoji="🗺️" /> Ver rota no Google Maps</button>
+                <button onClick={() => exportarPlano(plan)} className="text-left text-sm px-3 py-2.5 rounded-xl text-ink hover:bg-paper2 focusring"><Icon emoji="⬇" /> Exportar JSON</button>
+                <button onClick={() => importRef.current && importRef.current.click()} className="text-left text-sm px-3 py-2.5 rounded-xl text-ink hover:bg-paper2 focusring"><Icon emoji="⬆" /> Importar JSON</button>
               </div>
             </details>
             <input ref={importRef} type="file" accept="application/json,.json" onChange={handleImport} className="hidden" aria-hidden tabIndex={-1} />
           </div>
         </div>
-      </header>
+      </div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-6">
         <div className="rise">
-          <h1 className="font-display text-4xl sm:text-5xl tracking-tighter leading-[1] text-ink max-w-3xl">
-            Monte sua volta ao mundo <span className="text-pine">na ordem que não te quebra.</span>
+          <h1 className="ms-titulo text-[44px] sm:text-[72px] leading-[.9] tracking-[-.05em] text-ink max-w-4xl">
+            a volta ao mundo <span className="text-cobalto">na ordem que não te quebra</span>
           </h1>
-          <p className="mt-2 text-inksoft max-w-2xl">
+          <p className="mt-4 text-lg text-[#33332F] max-w-2xl">
             Errar a ordem dos países custa caro: você chega na monção, fura o visto ou a grana acaba no meio do caminho.
             Arraste os trechos e veja, em tempo real, o cruzamento de <b className="text-ink">estação</b>, <b className="text-ink">visto</b> e <b className="text-ink">fôlego de dinheiro</b>.
           </p>
@@ -534,6 +524,8 @@ export default function App() {
 
         <ParametrosViagem settings={plan.settings} base={base} onSet={setSettings} onBase={trocarBase} onPassaporte={trocarPassaporte} />
 
+        {plan.legs.length > 0 && <PlacarRota calc={calc} />}
+        {plan.legs.length > 0 && <FitaDoAno calc={calc} />}
         <Tripe calc={calc} />
 
         {plan.legs.length > 0 && (

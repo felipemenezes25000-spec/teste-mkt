@@ -26,13 +26,13 @@ export default function Error({ error, reset }) {
           <button
             type="button"
             onClick={() => reset()}
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-coral text-oncoral font-semibold px-5 h-12 hover:brightness-95 transition focusring"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] px-5 h-12 hover:brightness-95 transition focusring"
           >
             <Icon name="refresh" size={18} />Tentar de novo
           </button>
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-line bg-card text-ink font-semibold px-5 h-12 hover:border-pine/50 transition focusring"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border-2 border-ink bg-card text-ink font-cond font-extrabold uppercase tracking-[.05em] px-5 h-12 hover:bg-paper2 transition focusring"
           >
             <Icon name="home" size={18} />Voltar ao início
           </Link>

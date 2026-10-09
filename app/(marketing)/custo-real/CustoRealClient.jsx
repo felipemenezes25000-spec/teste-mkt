@@ -1,8 +1,7 @@
 'use client';
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { distanciaKm, estimarPrecoVoo } from '../../_engine/utils.js';
-import { custoTotalRealista, PREMISSAS_PADRAO } from '../../_engine/custoTotal.js';
+import { simularCustoReal, PREMISSAS_PADRAO } from '../../_engine/custoTotal.js';
 import { useCambioBRL, CambioBadge, BRL_FALLBACK } from '../../_lib/cambioClient.js';
 import { track } from '../../_lib/analytics.js';
 import { useIdioma } from '../../_lib/i18n.js';
@@ -60,58 +59,10 @@ export function CustoRealClient({ destinos }) {
   const destino = destinos.find((d) => d.code === destinoCode) || destinos[0];
   const perfilSel = PERFIS.find((p) => p.id === perfil) || PERFIS[1];
 
-  const resultado = useMemo(() => {
-    const km = destino.coords && origem.coords ? distanciaKm(origem.coords, destino.coords) : 0;
-    const faixaVoo = estimarPrecoVoo(km);
-    const vooUSDPP = faixaVoo ? Math.round((faixaVoo.min + faixaVoo.max) / 2) : 600;
-
-    const ehAltaTemporada = mesEhAlto(destino, mes);
-    const fatorAltaTemp = ehAltaTemporada ? 1.18 : 1.0;
-    const vooUSD = vooUSDPP * pessoas * fatorAltaTemp;
-
-    const custoTerraPP = Math.max(8, destino.custoDia || 30) * dias;
-    const custoTerra = custoTerraPP * pessoas * fatorAltaTemp;
-
-    const calc = {
-      trechos: [{
-        code: destino.code, nome: destino.nome, dias,
-        custoEfetivoDia: destino.custoDia, vistoTipo: destino.vistoTipo || '',
-      }],
-      diasTotais: dias,
-      custoTerraTotal: custoTerra,
-      custoTransporteTotal: vooUSD,
-    };
-    const out = custoTotalRealista(calc);
-
-    const passeiosUSD = Math.round(passeiosDia * dias * pessoas);
-    const bagagemUSD = Math.round(bagagem * pessoas);
-    const extras = [
-      { id: 'passeios', label: 'Passeios e ingressos (média/dia × dias × pessoas)', icon: '🎟️', valor: passeiosUSD },
-      { id: 'bagagem', label: 'Bagagem despachada', icon: '🧳', valor: bagagemUSD },
-    ];
-    const totalExtras = extras.reduce((s, e) => s + e.valor, 0);
-    const total = out.total + totalExtras;
-
-    const hospedagem = Math.round(custoTerra * 0.40);
-    const vitrine = hospedagem + Math.round(vooUSD);
-    const escondido = Math.max(0, total - vitrine);
-
-    const categoriasCompletas = [...out.categorias, ...extras];
-
-    return {
-      vooUSD: Math.round(vooUSD),
-      vitrine,
-      escondido,
-      total,
-      porDia: Math.round(total / Math.max(1, dias)),
-      porPessoa: Math.round(total / Math.max(1, pessoas)),
-      categorias: categoriasCompletas,
-      faixa: out.faixa,
-      ehAltaTemporada,
-      premissas: out.premissas,
-      faixaVoo,
-    };
-  }, [origem, destino, dias, pessoas, perfil, mes, passeiosDia, bagagem]);
+  const resultado = useMemo(
+    () => simularCustoReal({ destino, origemCoords: origem.coords, dias, pessoas, mes, passeiosDia, bagagem }),
+    [origem, destino, dias, pessoas, mes, passeiosDia, bagagem],
+  );
 
   const maiorCategoria = useMemo(() => {
     return resultado.categorias.reduce((a, b) => (a.valor > b.valor ? a : b));
@@ -275,7 +226,7 @@ export function CustoRealClient({ destinos }) {
             <li>• Câmbio variando R$ 0,30 muda o total em ~{fmtBRL((resultado.total * 0.3 * pessoas) || 200)}. Compre dólar/euro com calma.</li>
           </ul>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href={`/destino/${destino.slug}`} className="inline-flex rounded-xl bg-pine text-onpine font-semibold px-4 py-2 text-sm hover:bg-pinedk focusring">
+            <Link href={`/destino/${destino.slug}`} className="inline-flex rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2 text-[15px] hover:bg-ink/85 focusring">
               Ver alertas do destino <Icon emoji="→" />
             </Link>
             <Link href={`/roteiro?destino=${destino.slug}`} className="inline-flex rounded-xl border border-warn bg-card text-warn font-semibold px-4 py-2 text-sm hover:bg-warn/10 focusring">
@@ -289,13 +240,3 @@ export function CustoRealClient({ destinos }) {
 }
 
 function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-
-function mesEhAlto(destino, mes) {
-  // Heurística: meses fora da "melhor época" do destino tendem a ser mais
-  // baratos; pico é normalmente DEZ-FEV (verão BR) + JUL (férias). Como não
-  // temos calendário de feriado por país, marcamos pico genérico nas janelas
-  // mais lotadas globalmente e adicionamos os meses ótimos do destino.
-  const otimos = new Set(destino?.melhoresMeses || []);
-  const picoGlobal = new Set([12, 1, 2, 7]);
-  return otimos.has(mes) || picoGlobal.has(mes);
-}

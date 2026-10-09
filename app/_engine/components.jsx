@@ -3,18 +3,19 @@ import { fmtMoeda, fmtData, clamp, num } from './utils.js';
 import { Badge } from '../_ui/Badge.jsx';
 import { rotuloSalvamento } from './saveStatus.js';
 import { Icon } from '../_ui/Icon.jsx';
+import { Placar } from '../_ui/Placar.jsx';
 
 // Cores por nível (strings completas pro Tailwind detectar no build).
 export const ESTACAO_UI = {
   bom:     { dot:'bg-sage',     chip:'bg-success-bg text-success border-success-bd', label:'Boa época' },
   parcial: { dot:'bg-amberx',   chip:'bg-warn-bg text-warn border-warn-bd', label:'Época parcial' },
   ruim:    { dot:'bg-clay',     chip:'bg-danger-bg text-danger border-danger-bd', label:'Fora de época' },
-  na:      { dot:'bg-stone-400',chip:'bg-stone-100 text-stone-500 border-stone-200', label:'Sem dado' },
+  na:      { dot:'bg-inksoft/50',chip:'bg-paper2 text-inksoft border-line', label:'Sem dado' },
 };
 export const VISTO_UI = {
   ok:   { chip:'bg-success-bg text-success border-success-bd' },
   over: { chip:'bg-danger-bg text-danger border-danger-bd' },
-  na:   { chip:'bg-stone-100 text-stone-500 border-stone-200' },
+  na:   { chip:'bg-paper2 text-inksoft border-line' },
 };
 export const NIVEL_FOLEGO = {
   verde:    { barra:'bg-sage',  texto:'text-success', tag:'Folgado',  bgtile:'bg-success-bg border-success-bd' },
@@ -188,6 +189,84 @@ export function Tripe({ calc }) {
             principal={calc.furosVisto > 0 ? `${calc.furosVisto} trecho(s) furam o visto` : 'Nenhum trecho fura o visto'}
             secundario={calc.furosVisto > 0 ? 'Reduza os dias ou planeje extensão/saída.' : 'Dias planejados dentro dos limites.'}
           />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ===== CALÇADÃO: placar da rota + fita do ano =====
+// Placar com o diagnóstico em 4 linhas (estação, visto, fôlego, dias) — gira quando
+// a ordem/dias mudam — e a fita do ano: cada país vira um trecho proporcional aos
+// dias, amarelo na boa época, âmbar parcial, cinza fora de época.
+const FITA_COR = { bom: 'bg-coral text-ink', parcial: 'bg-ochresoft text-ink', ruim: 'bg-[#DADAD3] text-ink', na: 'bg-paper2 text-inksoft' };
+
+export function PlacarRota({ calc }) {
+  const n = calc.trechos.length || 1;
+  const bons = calc.trechos.filter((t) => t.estacao.nivel === 'bom').length;
+  const parciais = calc.trechos.filter((t) => t.estacao.nivel === 'parcial').length;
+  const pctEstacao = Math.round(((bons + parciais * 0.5) / n) * 100);
+  const f = calc.folego;
+  const valor = (x) => fmtMoeda(Math.abs(x), calc.base).replace(/ /g, ' ');
+  const linhas = [
+    ['ESTAÇÃO', `${pctEstacao}% NA ÉPOCA`, pctEstacao >= 80 ? '#00804D' : pctEstacao >= 50 ? '#9A5B00' : '#C8281C', `estação: ${pctEstacao}% da rota na boa época`],
+    ['VISTO', calc.furosVisto ? `${calc.furosVisto} FURO${calc.furosVisto > 1 ? 'S' : ''}` : 'SEM FURO', calc.furosVisto ? '#C8281C' : '#00804D', calc.furosVisto ? `${calc.furosVisto} trecho(s) furam o visto` : 'nenhum trecho fura o visto'],
+    ['FÔLEGO', f.cobreTudo ? `SOBRA ${valor(f.sobra)}` : `FALTA ${valor(f.falta)}`, f.cobreTudo ? '#111111' : '#C8281C', f.cobreTudo ? `sobra ${valor(f.sobra)}` : `faltam ${valor(f.falta)}`],
+    ['DIAS', `${calc.diasTotais} DIAS · ${calc.trechos.length} PAÍSES`, '#111111', `${calc.diasTotais} dias em ${calc.trechos.length} países`],
+  ];
+  return (
+    <section className="rise rounded-[28px] bg-paper2 p-4 sm:p-6 overflow-x-auto" aria-label="Placar da rota">
+      <span className="ms-rotulo">Placar da rota · gira quando você muda a ordem</span>
+      <div className="mt-3 flex flex-col gap-2.5 min-w-[560px]">
+        {linhas.map(([rot, val, cor, aria], i) => (
+          <div key={rot} className="grid grid-cols-[110px_1fr] items-center gap-3">
+            <span className="ms-rotulo !text-ink">{rot}</span>
+            <Placar texto={val.slice(0, 22).padEnd(22, ' ')} w={20} h={30} cor={cor} atraso={i * 120} passo={18} rotulo={aria} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function FitaDoAno({ calc }) {
+  if (!calc.trechos.length || calc.diasTotais <= 0) return null;
+  const total = calc.diasTotais;
+  // marcas de mês ao longo da fita
+  const marcas = [];
+  const ini = calc.inicio;
+  for (let d = new Date(ini.getFullYear(), ini.getMonth() + 1, 1); d < calc.fimViagem; d = new Date(d.getFullYear(), d.getMonth() + 1, 1)) {
+    const pos = (d - ini) / 86400000 / total;
+    if (pos > 0 && pos < 1) marcas.push([pos, MESES_PT[d.getMonth()].slice(0, 3).toUpperCase()]);
+  }
+  return (
+    <section className="rise rounded-[28px] border border-line p-4 sm:p-6" aria-label="Fita do ano">
+      <div className="flex flex-wrap items-end justify-between gap-2">
+        <span className="ms-rotulo">Fita do ano · {fmtData(calc.inicio)} → {fmtData(calc.fimViagem)}</span>
+        <span className="flex flex-wrap gap-3 text-[12px] text-inksoft">
+          <span className="inline-flex items-center gap-1.5"><i className="w-3 h-3 rounded-sm bg-coral" />boa época</span>
+          <span className="inline-flex items-center gap-1.5"><i className="w-3 h-3 rounded-sm bg-ochresoft" />parcial</span>
+          <span className="inline-flex items-center gap-1.5"><i className="w-3 h-3 rounded-sm bg-[#DADAD3]" />fora de época</span>
+        </span>
+      </div>
+      <div className="mt-4 relative">
+        <ol className="flex gap-1 h-[64px]">
+          {calc.trechos.map((t) => (
+            <li key={t.id} className={`relative min-w-[28px] rounded-lg overflow-hidden flex flex-col justify-between p-1.5 ${FITA_COR[t.estacao.nivel] || FITA_COR.na}`}
+              style={{ flex: `${Math.max(1, t.dias)} 1 0` }} title={`${t.nome}: ${t.dias} dias · ${t.estacao.texto}`}>
+              {t.code && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={`/bandeiras/${t.code}.png`} alt="" className="h-3.5 w-auto self-start rounded-[2px] shadow-[0_0_0_1px_rgba(0,0,0,.12)]" />
+              )}
+              <span className="font-cond font-extrabold text-[13px] uppercase leading-none truncate">{t.dias >= 10 ? t.nome : t.code || ''}</span>
+              <span className="sr-only">{t.nome}, {t.dias} dias, {(ESTACAO_UI[t.estacao.nivel] || ESTACAO_UI.na).label}</span>
+            </li>
+          ))}
+        </ol>
+        <div className="relative h-5 mt-1" aria-hidden="true">
+          {marcas.map(([pos, m]) => (
+            <span key={`${m}${pos}`} className="absolute top-0 -translate-x-1/2 font-cond font-bold text-[11px] tracking-[.08em] text-inksoft" style={{ left: `${pos * 100}%` }}>{m}</span>
+          ))}
         </div>
       </div>
     </section>

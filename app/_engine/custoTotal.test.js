@@ -118,3 +118,15 @@ describe('percentuaisEscondido', () => {
     expect(percentuaisEscondido({ vitrine: 0, real: 0, escondido: 100 })).toEqual({ sobreVitrine: 0, doFinal: 0 });
   });
 });
+
+describe('simularCustoReal (calculadora /custo-real e exemplo da home)', () => {
+  it('Peru, 8 dias, casal, maio, saindo de GRU: vitrine × real batem com a calculadora', async () => {
+    const { simularCustoReal } = await import('./custoTotal.js');
+    const { PAISES_REF } = await import('./data.js');
+    const r = simularCustoReal({ destino: PAISES_REF.find((p) => p.code === 'PE'), dias: 8, pessoas: 2, mes: 5 });
+    expect(r.vitrine).toBe(1044);
+    expect(r.total).toBe(2037);
+    expect(r.escondido).toBe(r.total - r.vitrine);
+    expect(r.ehAltaTemporada).toBe(true); // maio está na melhor época do Peru
+  });
+});

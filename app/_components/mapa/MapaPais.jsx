@@ -16,7 +16,7 @@ export function MapaPais({ nome, atracoes = [], cidades = [], cobertura = 0, cen
   const [sel, setSel] = useState(null);
   const [filtro, setFiltro] = useState('todos');
   const pontos = useMemo(() => [
-    ...(filtro !== 'cidades' ? atracoes.map((p) => ({ ...p, cor: '#2742F5' })) : []),
+    ...(filtro !== 'cidades' ? atracoes.map((p) => ({ ...p, cor: '#1C3FD1' })) : []),
     ...(filtro !== 'atracoes' ? cidades.map((p) => ({ ...p, cor: '#E59A00' })) : []),
   ], [atracoes, cidades, filtro]);
   const atual = pontos.find((p) => p.id === sel);

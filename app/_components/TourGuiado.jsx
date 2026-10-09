@@ -32,7 +32,7 @@ export function TourGuiado() {
   const fechar = () => { try { localStorage.setItem(KEY, '1'); } catch {} setOpen(false); setI(0); };
   const p = PASSOS[i];
   const ultimo = i === PASSOS.length - 1;
-  const btn = 'rounded-xl bg-pine text-onpine font-semibold px-4 py-2 hover:bg-pinedk focusring';
+  const btn = 'rounded-full bg-ink text-white font-cond font-extrabold uppercase tracking-[.05em] px-4 py-2 hover:bg-ink/85 focusring';
 
   return (
     <Modal

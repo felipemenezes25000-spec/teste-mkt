@@ -17,7 +17,7 @@ export function pontosDoPais(d) {
   const atr = (atracoesDoPais(d.code) || []).map((a) => {
     const c = coordDe('atr', d.code, a.nome);
     return c ? { id: `atr:${slugify(a.nome)}`, nome: a.nome, lng: c.lng, lat: c.lat, tipo: 'atracao', sub: a.cidade || '', qid: c.qid } : null;
-  }).filter(Boolean);
+  }).filter((p, i, arr) => p && arr.findIndex((q) => q && q.id === p.id) === i); // catálogo pode repetir a atração
   const cid = (d.cidades || []).map((nome) => {
     const c = coordDe('cid', d.code, nome);
     return c ? { id: `cid:${slugify(nome)}`, nome, lng: c.lng, lat: c.lat, tipo: 'cidade', sub: d.nome, qid: c.qid } : null;

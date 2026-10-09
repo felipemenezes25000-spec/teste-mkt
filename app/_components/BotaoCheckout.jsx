@@ -36,7 +36,7 @@ export function BotaoCheckout({ produto, id = null, rotulo, className = '' }) {
   return (
     <div>
       <button type="button" onClick={comprar} disabled={busy}
-        className={`w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-coral text-oncoral font-semibold hover:brightness-95 disabled:opacity-60 focusring ${className}`}>
+        className={`w-full inline-flex items-center justify-center gap-2 h-11 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] hover:brightness-95 disabled:opacity-60 focusring ${className}`}>
         {busy ? t('plat.abrindo') : rotulo}
       </button>
       {msg && <p role="status" className="mt-2 text-xs text-inksoft text-center">{msg}</p>}

@@ -43,7 +43,7 @@ export function AdaptarRoteiro({ roteiro, centro }) {
         </label>
       </div>
       {erro && <p role="alert" className="text-sm text-danger">{erro}</p>}
-      <button type="submit" disabled={busy} className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-coral text-oncoral font-semibold hover:brightness-95 disabled:opacity-60 focusring">
+      <button type="submit" disabled={busy} className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-full bg-coral text-oncoral font-cond font-extrabold uppercase tracking-[.05em] hover:brightness-95 disabled:opacity-60 focusring">
         <Icon name="suitcase" size={17} /> {busy ? t('viag.criando') : t('plat.adaptarBtn')}
       </button>
     </form>
