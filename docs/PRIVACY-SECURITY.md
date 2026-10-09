@@ -6,7 +6,14 @@
 
 | Controle | Onde | Evidência |
 |---|---|---|
-| RLS em todas as tabelas; papéis owner/editor/viewer; anti-IDOR | `supabase/migrations/*` | `npm run test:rls` → 34/34 (Postgres real) |
+| RLS em todas as tabelas; papéis owner/editor/viewer; anti-IDOR | `supabase/migrations/*` | `npm run test:rls` → 76/76 (Postgres real) |
+| Organizações (owner/admin/agent), propostas, chaves de API, marketplace e compras com RLS | `20261009120000_plataforma.sql` | 41 casos RLS (ver `docs/PLATAFORMA.md`) |
+| Visão pública da proposta sem custo, margem nem e-mail do cliente | RPC `proposta_publica` | caso RLS + E2E |
+| Chave de API só como SHA-256; limite/escopo forçados; revogação definitiva | `api_keys` + `api_key_guard` | casos RLS |
+| Compras só pelo servidor (webhook assinado), idempotentes por sessão Stripe | `purchases`, `compraDaSessao` | casos RLS + `stripeWebhook.test.js` |
+| Rate limit por IP/rota nas APIs (429 + Retry-After) | `app/_lib/rateLimit.js` | `rateLimit.test.js`, E2E |
+| CSP com nonce + `strict-dynamic` (opcional, `CSP_NONCE=1`) | `proxy.js`, `security.mjs` | `security.test.js`; QA no modo nonce |
+| Exportação de dados (LGPD art. 18) e exclusão local/da conta pela UI | `MeusDados.jsx`, `/api/me/export` | `meusDados.test.js` |
 | Dono da viagem imutável; ninguém cria segundo owner nem se autopromove | triggers/policies | casos RLS |
 | Plano/assinatura não editáveis pelo cliente | trigger `profiles_plano_guard`; `subscriptions` só service role | casos RLS |
 | Confirmação verificada de reserva só pelo servidor | trigger `reserva_fonte_guard` | casos RLS |
@@ -33,6 +40,6 @@
 
 ## Pendências conhecidas
 
-- CSP ainda com `'unsafe-inline'` em scripts (exigência do App Router sem nonce); migrar para nonce quando o custo de render dinâmico for aceitável.
-- Rate limit genérico de API (além da cota de IA) não configurado — depende da plataforma de deploy.
-- Exportação de dados (LGPD art. 18) pela UI: viagens podem ser lidas/removidas localmente; export JSON existe no planner; export unificado da conta pendente.
+- CSP padrão mantém `'unsafe-inline'` para preservar as páginas estáticas (CDN). O modo nonce (`CSP_NONCE=1`) remove isso ao custo de render dinâmico — escolha de produção documentada.
+- Rate limit é em memória por instância; em escala horizontal, trocar o armazenamento por Redis/Upstash (mesma API).
+- Repasse a criadores é manual até ativar Stripe Connect (KYC por criador).

@@ -334,7 +334,7 @@ Copie `.env.example` para `.env.local` (git-ignored) e preencha **só o que quis
 npm test          # vitest run (execução única, sem watch)
 ```
 
-**39 suítes Vitest (277 testes)** cobrindo domínio, motor e bibliotecas, mais RLS real (`npm run test:rls`), E2E da jornada (`scripts/e2e-viagem.mjs`) e QA visual (`scripts/qa-telas.mjs`):
+**44 suítes Vitest (313 testes)** cobrindo domínio, motor e bibliotecas, mais RLS real (`npm run test:rls`, 76 casos), E2E da jornada (`scripts/e2e-viagem.mjs`), E2E da plataforma (`scripts/e2e-plataforma.mjs`), acessibilidade (`scripts/a11y.mjs`) e QA visual (`scripts/qa-telas.mjs`):
 
 - **`app/_engine` (25 suítes)** — score, custo total, orçamento, rateio de grupo, câmbio, roteiro, otimizar, decisão, cenários, oportunidades, afiliados, previsão de voo, perfil, checklist, dicas, exportar, share, storage…
 - **`app/_lib` (8 suítes)** — flights, security (CSP/headers), wiki/wikiClient/wikiThumb, editorial, seo, destinos-prioritários.
@@ -373,7 +373,7 @@ i18n **caseiro** (`app/_lib/i18n.js`), sem framework, com **4 idiomas**:
 
 - Hook `useIdioma()` com `t()` e fallback triplo (idioma → `pt` → a própria chave).
 - Persistência em `localStorage` + cookie `msf.lang.v1`, com `CustomEvent('msf:lang')` pra sincronizar a UI.
-- Tradução **parcial por design**: as strings de alta visibilidade vão pros 4 idiomas; o resto fica em pt-BR.
+- Telas de produto e plataforma nos 4 idiomas (dicionários `i18nTelas.js`/`i18nPlataforma.js`, paridade testada); conteúdo editorial longo segue em pt-BR.
 - `MoedaPicker` acessível com **146 moedas** (27 base + 119 extra), busca por código/nome.
 
 ---
@@ -417,6 +417,9 @@ mundo-sem-fim-app/
 ---
 
 ## Status do produto
+
+**Produção:** https://mundo-sem-fim-lac.vercel.app (Vercel, projeto `mundo-sem-fim`) com Supabase `mundo-sem-fim` (São Paulo).
+**Plataforma:** B2B/white-label (`/agencias`), API pública (`/desenvolvedores`, `/api/v1`), marketplace (`/marketplace`) e checkout de produtos próprios — ver [`docs/PLATAFORMA.md`](docs/PLATAFORMA.md).
 
 Execução do prompt **OMEGA V4** (2026-10-09): status real por lote em [`docs/OMEGA-V4-STATUS.md`](docs/OMEGA-V4-STATUS.md),
 retomada em [`docs/CONTINUATION.md`](docs/CONTINUATION.md), provedores em [`docs/PROVIDER-MATRIX.md`](docs/PROVIDER-MATRIX.md).

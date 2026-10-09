@@ -1,0 +1,13 @@
+# Configuração do projeto Supabase de produção (ref ikdodbandfndcgyhbzzp, sa-east-1).
+# `supabase config push` aplica SÓ o que está declarado aqui; o resto fica como está.
+project_id = "mundo-sem-fim"
+
+[auth]
+# Link mágico volta para o site publicado (e para o dev local).
+site_url = "https://mundo-sem-fim-lac.vercel.app"
+additional_redirect_urls = [
+  "https://mundo-sem-fim-lac.vercel.app/**",
+  "https://*-felipemenezes25000-specs-projects.vercel.app/**",
+  "http://localhost:3000/**",
+  "http://localhost:3107/**",
+]

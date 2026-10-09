@@ -4,29 +4,28 @@
 > só porque está escrito aqui — rode as verificações.
 
 ```text
-CURRENT SHA        ver `git log -1` (branch feat/omega-v4-foundation; origem 846eea8 em main)
-BRANCH             feat/omega-v4-foundation  (local, sem push)
-LAST COMPLETED LOT 14 (docs) — todos os lotes 0–14 executados; status real em docs/OMEGA-V4-STATUS.md
-LAST TEST RESULT   npm run verify → lint 0 erros · typecheck OK · vitest 39 arquivos / 277 testes OK
-                   npm run test:rls → 34/34 · e2e-viagem → 12/12 · qa-telas → ver docs/QA-MATRIX.md
-IMPLEMENTED        domínio (dinheiro, frescor, reservas, fuso, provider, rotas); RLS + migrations;
-                   identidade MERIDIANO; home; World Explorer; destino com atlas; mídia com licença;
-                   coordenadas canônicas; comparador com pesos; trip workspace; Modo Viagem; /fontes;
-                   saída rastreada /api/out; webhook Stripe robusto
-PROVIDER STATUS    docs/PROVIDER-MATRIX.md (gerado de app/_lib/provedores.js; página /fontes)
-KNOWN BUGS         nenhum P0/P1 aberto conhecido; P2/P3 em docs/QA-MATRIX.md
-BLOCKERS           (externos, do dono) chaves/contratos: voos (Duffel/Travelpayouts), hotéis (Expedia/
-                   Booking), experiências (Viator/GYG), Stripe (chaves + prices), Supabase (aplicar
-                   migrations), LLM (chave), Open-Meteo comercial antes de lançar com receita,
-                   roteador próprio para escala; deploy de produção exige autorização
-FILES CHANGED      ver `git diff --stat 846eea8..HEAD`
-NEXT EXACT STEP    1) aplicar supabase/migrations no projeto do dono e ligar sync das viagens
-                   (adaptador sobre trips/itinerary_items/reservations/expenses/trip_documents);
-                   2) com chaves de afiliado, registrar comissões no commission_ledger;
-                   3) i18n (en/es/ja) das telas novas; 4) Lighthouse em dispositivo real
-SAFETY WARNINGS    não fazer force push nem reset; backup em
-                   C:\Users\Felipe\Downloads\mundo-sem-fim-backups\mundo-sem-fim-846eea8-2026-10-09.bundle;
-                   nunca commitar .env*; Open-Meteo gratuito é NÃO comercial; FOSSGIS ≤ 1 req/s
+CURRENT SHA        ver `git log -1` (main = feat/omega-v4-foundation após o merge)
+BRANCH             main (publicada em origin) · trabalho feito em feat/omega-v4-foundation
+LAST COMPLETED     lotes 0–14 + fase 2: i18n das telas novas, LGPD, CSP nonce opcional, rate limit,
+                   a11y (axe 0), Firefox/WebKit, Lighthouse, 205 destinos SSG, e a plataforma
+                   (B2B/white-label, API v1, marketplace, checkout próprio) — docs/PLATAFORMA.md
+LAST TEST RESULT   vitest 44 arquivos / 313 testes · test:rls 76/76 · e2e-viagem 12/12 ·
+                   e2e-plataforma 23/23 · qa-telas 336/336 (24 rotas × 7 larguras × 2 temas) ·
+                   Firefox 42/42 · axe 0 violações
+PRODUÇÃO           Vercel projeto `mundo-sem-fim` → https://mundo-sem-fim-lac.vercel.app
+                   (mundo-sem-fim.vercel.app pertence a terceiros); vercel.json fixa framework nextjs.
+                   Supabase projeto `mundo-sem-fim` (ref ikdodbandfndcgyhbzzp, sa-east-1), 5 migrations
+                   aplicadas; auth site_url/redirects via supabase/config.toml (`supabase config push`).
+                   Senha do banco e chaves só em .env.local (não versionado).
+BLOCKERS           (externos, do dono) Stripe (chaves; checkout responde 503 até lá), IA (chave),
+                   afiliados/provedores (voos, hotéis, experiências), Open-Meteo comercial,
+                   Stripe Connect p/ repasse automático, revisão jurídica dos termos do marketplace/API
+NEXT EXACT STEP    1) chaves Stripe + webhook (checkout.session.completed) na Vercel;
+                   2) SUPABASE_SERVICE_ROLE_KEY na Vercel quando o webhook for ligado;
+                   3) domínio próprio e atualizar supabase/config.toml + NEXT_PUBLIC_SITE_URL;
+                   4) monitoramento (SLO/alertas) e teste em iOS/Android reais
+SAFETY WARNINGS    não fazer force push nem reset; nunca commitar .env*; Open-Meteo gratuito é NÃO
+                   comercial; FOSSGIS ≤ 1 req/s; rate limit em memória é por instância
 ```
 
 ## Comandos
@@ -37,4 +36,6 @@ npm run test:rls
 npm run build && npx next start -p 3107
 node scripts/qa-telas.mjs http://localhost:3107
 node scripts/e2e-viagem.mjs http://localhost:3107
+node scripts/e2e-plataforma.mjs http://localhost:3107
+node scripts/a11y.mjs http://localhost:3107
 ```

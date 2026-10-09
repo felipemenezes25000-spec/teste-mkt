@@ -34,8 +34,9 @@ x = await j('/api/v1/openapi.json');
 ok('OpenAPI 3.1 publicado', x.r.status === 200 && x.b.openapi === '3.1.0' && Object.keys(x.b.paths).length === 4);
 const opt = await fetch(BASE + '/api/v1/destinos', { method: 'OPTIONS' });
 ok('preflight CORS', opt.status === 204);
+// endpoint sem cache (parâmetro único) para o limite ser medido na função, não na CDN
 let ultimo = 200;
-for (let i = 0; i < 40 && ultimo !== 429; i++) ultimo = (await fetch(BASE + '/api/v1/visto?code=PT', { headers: { 'x-forwarded-for': '203.0.113.9' } })).status;
+for (let i = 0; i < 45 && ultimo !== 429; i++) ultimo = (await fetch(`${BASE}/api/v1/visto?code=PT&passport=BR&n=${i}-${Date.now()}`, { headers: { 'x-forwarded-for': '203.0.113.9' } })).status;
 ok('limite anônimo devolve 429', ultimo === 429);
 
 // ---------------- telas ----------------
@@ -87,7 +88,7 @@ try {
   await p.goto(`${BASE}/marketplace`, { waitUntil: 'load' });
   const cards = await p.locator('a[href^="/marketplace/r/"]').count();
   ok('marketplace lista roteiros da equipe', cards >= 15, `${cards}`);
-  ok('comunidade honesta: sem servidor explica; com servidor e vazia, convida (sem vitrine falsa)', await p.getByText(/aparecem quando a conta|Nenhum roteiro da comunidade ainda/).first().isVisible());
+  ok('comunidade honesta: sem servidor explica; com servidor e vazia, convida (sem vitrine falsa)', await p.getByText(/aparecem quando a conta|Nenhum roteiro da comunidade ainda/).first().waitFor({ timeout: 15000 }).then(() => true, () => false));
   await shot('03-marketplace');
   await p.goto(`${BASE}/marketplace/r/japao-4-dias`, { waitUntil: 'load' });
   await p.getByRole('button', { name: /Criar minha viagem/ }).click();

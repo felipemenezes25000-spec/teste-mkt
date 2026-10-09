@@ -40,17 +40,17 @@ Prompt: `MUNDO_SEM_FIM_OMEGA_V4_DEFINITIVO_RECOVERY_FIRST.md` (o arquivo V3 é i
 - **L13** — QA tela a tela automatizado, E2E da jornada, gitleaks, npm audit.
 - **L14** — esta documentação + `CONTINUATION.md`.
 
-## Fora do escopo desta sessão (não implementado — registrado, não escondido)
+## Fora do escopo original — entregue a mais (fase 2 da sessão)
 
-- B2B/agências, white-label, marketplace de creators/consultores, portal de API pública (V4 §39/§75): exigem modelo comercial, contratos e multi-tenant em produção. A base de RLS/papéis (`trip_members`) é o ponto de partida.
-- Checkout nativo/embedded de viagens (V4 §30 modos 3-4): exige parceiro e licença; hoje só `DEEPLINK` (honesto).
-- i18n das telas novas (en/es/ja): textos novos estão em pt-BR.
-- Monitoramento de produção (SLO, alertas), Lighthouse em dispositivo real.
+- B2B/agências + white-label, API pública v1, marketplace de criadores e consultores e checkout nativo de produtos próprios: ver `docs/PLATAFORMA.md` (decisões, RLS, testes).
+- Checkout de **reserva de viagem** (V4 §30 modos 3-4) continua fora de propósito: exige licença de agência e contrato com consolidadora; reservas seguem em `DEEPLINK` honesto.
+- i18n das telas novas em pt/en/es/ja (paridade testada em `app/_lib/i18nTelas.test.js`).
+- Ainda pendente: monitoramento de produção (SLO, alertas) e medição em dispositivo real.
 
 ## Como verificar localmente
 
 ```bash
-npm run verify          # lint + typecheck + testes (277)
+npm run verify          # lint + typecheck + testes (313)
 npm run test:rls        # RLS em Postgres real (requer Docker)
 npm run build && npx next start -p 3107
 node scripts/qa-telas.mjs http://localhost:3107       # QA tela a tela

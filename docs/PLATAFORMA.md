@@ -52,4 +52,9 @@
 2. Stripe: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` (evento `checkout.session.completed`),
    `NEXT_PUBLIC_SITE_URL`. Produtos avulsos usam `price_data` — não precisa criar price no painel.
 3. Rate limit em memória é por instância: em escala, trocar o armazenamento de `app/_lib/rateLimit.js` por Redis/Upstash (mesma API).
-4. Termos do marketplace e da API (repasse, reembolso, atribuição) precisam de revisão jurídica antes de abrir vendas.
+4. Firewall da Vercel: após rajadas automatizadas a plataforma passou a responder 403 (desafio de bot) a clientes sem navegador. Para integrações servidor-a-servidor, criar regra de bypass para `/api/v1/*` (Project → Firewall) ou usar domínio próprio com a regra.
+5. Termos do marketplace e da API (repasse, reembolso, atribuição) precisam de revisão jurídica antes de abrir vendas.
+
+## Verificação em produção (2026-10-09)
+
+`https://mundo-sem-fim-lac.vercel.app`: 14 rotas 200 (páginas, `/api/v1/*`, `openapi.json`, `sitemap.xml`, `/api/health`); headers CSP/HSTS/X-Frame; `X-Ratelimit-Limit: 30`. E2E em produção: jornada 12/12; plataforma — fluxos de navegador (B2B, proposta white-label, marketplace com Supabase real, adaptar roteiro, portal, Trip Pass) OK; os passos de API via `fetch` do Node receberam o desafio de bot da Vercel (não contornado), validados por curl.

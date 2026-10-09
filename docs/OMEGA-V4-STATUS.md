@@ -8,7 +8,7 @@
 | Lote | Missão | Status | Evidência principal | O que falta / bloqueio |
 |---|---|---|---|---|
 | 0 | Recuperação, backup, diagnóstico, baseline | **PASS** | bundle `mundo-sem-fim-backups/…846eea8….bundle` verificado; `docs/BASELINE.md`; QA baseline `_proof/omega-v4-lote0-antes` | — |
-| 1 | Foundations, segurança, banco, contratos | **PASS** | `app/_domain/*` (19 testes); `npm run test:rls` 34/34 em Postgres real; webhook Stripe com dedupe/ordem; Next 16 (0 vulnerabilidades); bypass de Premium corrigido | Aplicar migrations no Supabase do dono |
+| 1 | Foundations, segurança, banco, contratos | **PASS** | `app/_domain/*` (19 testes); `npm run test:rls` 76/76 em Postgres real; migrations aplicadas no Supabase `mundo-sem-fim` (sa-east-1); webhook Stripe com dedupe/ordem; CSP com nonce opcional; rate limit nas APIs | — |
 | 2 | Identidade visual, tokens, componentes | **PASS** | `docs/BRAND-RATIONALE.md` (3 direções, contraste medido); tokens MERIDIANO; ~300 emojis-ícone → `Icon`; QA 390–1920 claro/escuro | Revisão humana de gosto (subjetiva) |
 | 3 | Home, World Explorer, descoberta | **PASS** | Home com simulador no hero; `/explorar` mapa⇄lista, 3 camadas, URL compartilhável | — |
 | 4 | Knowledge graph, fotos, POIs | **PASS_WITH_LIMITATIONS** | `docs/IMAGE-COVERAGE-REPORT.md` (205/205 capas, 97,1% licença verificada); `app/_lib/media.js`; foto ilustrativa rotulada; coordenadas 2.755/3.310 atrações + 1.063/1.181 cidades com QID | Revisão humana amostral foto↔POI; fotos de hotel/restaurante dependem de provedor |
@@ -16,12 +16,12 @@
 | 6 | RealCost, pricing, câmbio, budget | **PASS_WITH_LIMITATIONS** | Dinheiro em unidades menores (`money.js`); selos HISTÓRICO/RECENTE; câmbio com data; despesas multimoeda com taxa | Preços de atrações são referência jun/2026 (sem cotação viva) |
 | 7 | Geo, mapas, rotas, otimizador | **PASS_WITH_LIMITATIONS** | Rota real OSRM/FOSSGIS (E2E: LIVE); otimizador com janelas/horário fixo e status; mapa do país | Transporte público só estimado (GTFS-RT exige contrato); FOSSGIS ≤ 1 req/s não escala |
 | 8 | Voos, hotéis, experiências, restaurantes | **BLOCKED_EXTERNAL** | Registro de provedores com estados reais (`/fontes`, `docs/PROVIDER-MATRIX.md`); voos = cenários estimados sem marcas; DEEPLINK honesto | Chaves/contratos: Duffel/Travelpayouts, Expedia/Booking, Viator/GYG |
-| 9 | Trip Workspace, reservas, documentos | **PASS** | `/viagens` local-first; reservas com máquina de estados; documentos com alerta de 6 meses; E2E 12/12 | Sync com conta (adaptador Supabase) depende das migrations aplicadas |
+| 9 | Trip Workspace, reservas, documentos | **PASS** | `/viagens` local-first; reservas com máquina de estados; documentos com alerta de 6 meses; E2E 12/12; sync com a conta sobre o Supabase real | — |
 | 10 | Trip Mode, offline, clima, Plano B | **PASS_WITH_LIMITATIONS** | `/viagens/[id]/hoje`; localização consentida; Plano B revisável; offline (E2E) | Open-Meteo gratuito é não comercial → contratar antes de lançar |
-| 11 | Monetização, Stripe, afiliados, B2B, API | **PASS_WITH_LIMITATIONS** | `/api/out` com allowlist + registro de clique; ledger `commission_ledger` com RLS; Stripe webhook robusto | Chaves Stripe/afiliados; B2B/white-label/API pública não implementados (ver EXECUTION §Fora do escopo desta sessão) |
-| 12 | SEO, conteúdo, idiomas, growth | **PASS_WITH_LIMITATIONS** | sitemap/robots corretos (pessoais fora); OG por destino na marca nova; 205 destinos via ISR | i18n de páginas novas só em pt-BR |
-| 13 | QA global, segurança, red team, observabilidade | **PASS_WITH_LIMITATIONS** | `scripts/qa-telas.mjs` (19 rotas × 6 larguras × 2 temas); E2E jornada; gitleaks (0 segredos reais); npm audit 0 | Lighthouse/CWV em dispositivo real e monitoramento de produção não configurados |
-| 14 | Hardening, rollout, docs | **PASS_WITH_LIMITATIONS** | docs §47; `docs/CONTINUATION.md`; commits por lote na branch | Deploy de produção não executado (exige autorização do dono) |
+| 11 | Monetização, Stripe, afiliados, B2B, API | **PASS_WITH_LIMITATIONS** | `/api/out` com allowlist; B2B `/agencias` + white-label `/proposta`; API pública `/api/v1` (OpenAPI 3.1, chaves com hash); marketplace `/marketplace` (criadores/consultores); checkout nativo de produtos próprios (Trip Pass, roteiro, consultoria) — `docs/PLATAFORMA.md`; E2E 23/23 | Chaves Stripe (sem elas o checkout responde 503 honesto); Stripe Connect para repasse automático; revisão jurídica dos termos |
+| 12 | SEO, conteúdo, idiomas, growth | **PASS_WITH_LIMITATIONS** | sitemap/robots (pessoais e propostas fora); 205 destinos pré-gerados (SSG) + 20 roteiros; telas novas em pt/en/es/ja com paridade testada | Conteúdo editorial longo (alertas, coleções) segue em pt-BR |
+| 13 | QA global, segurança, red team, observabilidade | **PASS_WITH_LIMITATIONS** | QA tela a tela PASS (336/336 sem problema); axe 0 violações (21 rotas × 2 temas), teclado e zoom 200%; Firefox 157 e WebKit; Lighthouse mobile (home 79, destino 76); E2E 12/12 + 23/23 | Dispositivo real (iOS/Android) e monitoramento de produção (SLO/alertas) |
+| 14 | Hardening, rollout, docs | **PASS** | docs §47 + `docs/PLATAFORMA.md`; Supabase `mundo-sem-fim` com migrations; deploy na Vercel (projeto `mundo-sem-fim`); `main` atualizada | — |
 
 ## Alegações antigas do README/docs × realidade
 
