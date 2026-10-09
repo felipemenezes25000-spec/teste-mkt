@@ -11,6 +11,8 @@ const securityHeaders = buildSecurityHeaders({
 
 const nextConfig = {
   reactStrictMode: true,
+  // raiz explícita: um package-lock.json solto na pasta do usuário confundia o Turbopack
+  turbopack: { root: import.meta.dirname },
   async headers() {
     return [{ source: '/(.*)', headers: securityHeaders }];
   },

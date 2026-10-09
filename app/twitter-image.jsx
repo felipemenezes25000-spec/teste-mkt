@@ -3,7 +3,7 @@
 // aqui porque o Next precisa analisá-los estaticamente.
 import OgImage from './opengraph-image';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const alt = 'Mundo Sem Fim — monte sua volta ao mundo na ordem que não te quebra';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';

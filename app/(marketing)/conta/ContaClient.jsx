@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePlano, setDemoPlano } from '../../_lib/usePlano.js';
+import { usePlano, setDemoPlano, DEMO_HABILITADO } from '../../_lib/usePlano.js';
 import { nomePlano } from '../../_lib/planos.js';
 
 export function ContaClient() {
@@ -39,7 +39,7 @@ export function ContaClient() {
         </p>
       </div>
 
-      <div className="rounded-2xl border border-dashed border-line bg-paper2/40 p-5">
+      {DEMO_HABILITADO && <div className="rounded-2xl border border-dashed border-line bg-paper2/40 p-5">
         <div className="text-sm font-semibold text-ink">👀 Pré-visualizar planos (demo)</div>
         <p className="text-xs text-inksoft mt-1">Veja como ficam os recursos premium sem pagar — não altera sua assinatura real.</p>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -53,7 +53,7 @@ export function ContaClient() {
             );
           })}
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

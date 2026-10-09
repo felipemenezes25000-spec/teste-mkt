@@ -6,7 +6,7 @@ import { MESES_PT } from '../../../_engine/data.js';
 // social próprio (nome + custo + melhor época), em vez do card genérico da marca.
 // Casa com os botões de compartilhar do destino. Edge + fonte via fetch (mesmo
 // motivo do opengraph-image raiz: dodge do bug de path do @vercel/og no Windows).
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const alt = 'Guia de viagem — Mundo Sem Fim';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';

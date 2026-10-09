@@ -66,12 +66,12 @@ function AdicionarPais({ onAdd }) {
         <div className="relative flex-1">
           <input
             value={q} onChange={(e) => { setQ(e.target.value); setOpen(true); }} onFocus={() => setOpen(true)} onKeyDown={onKey}
-            placeholder="Buscar entre os 167 países…" aria-label="Buscar país para adicionar"
-            role="combobox" aria-expanded={open && results.length > 0} aria-autocomplete="list"
+            placeholder="Buscar entre os 205 países…" aria-label="Buscar país para adicionar"
+            role="combobox" aria-controls="add-pais-lista" aria-expanded={open && results.length > 0} aria-autocomplete="list"
             className="w-full px-3 py-2 rounded-lg border border-line bg-input text-ink focusring"
           />
           {open && results.length > 0 && (
-            <ul className="absolute z-30 mt-1 w-full max-h-72 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox">
+            <ul className="absolute z-30 mt-1 w-full max-h-72 overflow-auto rounded-xl border border-line bg-card shadow-[var(--e-2)] py-1" role="listbox" id="add-pais-lista">
               {results.map((p, i) => (
                 <li key={p.code} role="option" aria-selected={i === ativo}>
                   <button onMouseEnter={() => setAtivo(i)} onClick={() => add(p.code)}

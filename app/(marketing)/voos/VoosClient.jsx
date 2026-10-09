@@ -127,7 +127,7 @@ export function VoosClient() {
           {alerta && <div className="mb-3 rounded-lg border border-success-bd bg-success-bg text-success px-3 py-2 text-sm">{alerta}</div>}
 
           <div className="mb-3 rounded-2xl border border-line bg-paper2/50 px-4 py-3 text-sm text-inksoft">
-            <strong className="text-ink">O voo mais barato pode custar o primeiro dia da viagem.</strong> Cada card abaixo tem um score 0-100 considerando preço, escalas, duração e horário de chegada. Toque em "Como calculamos" pra ver o porquê.
+            <strong className="text-ink">O voo mais barato pode custar o primeiro dia da viagem.</strong> Cada card abaixo tem um score 0-100 considerando preço, escalas, duração e horário de chegada. Toque em “Como calculamos” pra ver o porquê.
           </div>
           <div className="space-y-3">
             {res.resultados.map((f) => (

@@ -6,21 +6,30 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint app scripts",
+    "typecheck": "tsc -p tsconfig.typecheck.json",
+    "test:rls": "node scripts/rls-test.mjs",
+    "qa": "node scripts/qa-telas.mjs",
+    "verify": "npm run lint && npm run typecheck && npm test"
   },
   "engines": {
     "node": ">=18.17.0"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.47.10",
-    "next": "^14.2.15",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.0",
+    "playwright": "^1.62.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
+    "typescript": "^5.6.3",
     "vitest": "^2.1.8"
   }
 }

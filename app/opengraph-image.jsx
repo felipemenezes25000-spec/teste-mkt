@@ -5,7 +5,7 @@ import { ImageResponse } from 'next/og';
 // Edge runtime: o @vercel/og em edge carrega fontes via fetch/WASM (sem
 // fileURLToPath), evitando o bug de path do Windows no `next start`. Funciona em
 // Vercel (edge nativo) e Render (next start emula edge). Gera sob demanda.
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const alt = 'Mundo Sem Fim — monte sua volta ao mundo na ordem que não te quebra';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
