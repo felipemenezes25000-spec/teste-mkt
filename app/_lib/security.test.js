@@ -10,7 +10,7 @@ describe('buildSecurityHeaders — cabeçalhos de segurança', () => {
     expect(h['X-Content-Type-Options']).toBe('nosniff');
     expect(h['X-Frame-Options']).toBe('DENY');
     expect(h['Referrer-Policy']).toBe('strict-origin-when-cross-origin');
-    expect(h['Permissions-Policy']).toContain('geolocation=()');
+    expect(h['Permissions-Policy']).toContain('geolocation=(self)');
     expect(h['Permissions-Policy']).toContain('camera=()');
     expect(h['Permissions-Policy']).toContain('microphone=()');
     expect(h['Content-Security-Policy']).toBeTruthy();

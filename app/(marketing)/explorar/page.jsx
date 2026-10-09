@@ -1,33 +1,36 @@
+import { Suspense } from 'react';
 import { DESTINOS } from '../../_lib/destinos.js';
 import { imagemWiki } from '../../_lib/wiki.js';
 import { ExplorarClient } from './ExplorarClient.jsx';
 
-// Busca as imagens no servidor (cacheadas) e entrega a grade + filtros pro client.
+// World Explorer: imagens resolvidas no servidor (cacheadas 1 dia); mapa, filtros,
+// camadas e lista no client.
 export const revalidate = 86400;
 
 export const metadata = {
-  title: 'Explorar destinos — Mundo Sem Fim',
-  description: 'Navegue por destinos do mundo todo: melhor época, custo médio e o que fazer. Filtre por região, estilo e orçamento.',
+  title: 'Explorar o mundo — Mundo Sem Fim',
+  description: 'Mapa interativo com 205 países: custo de referência por dia, melhor época por mês e visto para passaporte brasileiro. Filtre, compare e salve.',
+  alternates: { canonical: '/explorar' },
 };
 
 export default async function ExplorarPage() {
   const imgs = await Promise.all(DESTINOS.map((d) => imagemWiki(d.fotoQuery || d.nome)));
   const destinos = DESTINOS.map((d, i) => ({ ...d, img: imgs[i] }));
   return (
-    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-      <section className="relative overflow-hidden rounded-[2rem] border border-line bg-card p-6 sm:p-10 shadow-[var(--e-1)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgb(var(--c-ochre)/0.18),transparent_32%),radial-gradient(circle_at_12%_12%,rgb(var(--c-pine)/0.14),transparent_30%)]" aria-hidden />
-        <div className="relative max-w-3xl">
-          <span className="inline-flex rounded-full bg-pine/10 text-pine px-3 py-1 text-xs font-bold uppercase tracking-[0.18em]">Descobrir com curadoria</span>
-          <h1 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.03] text-ink">
-            Não escolha no alfabeto. Escolha pelo sentido da viagem.
-          </h1>
-          <p className="mt-4 text-lg text-inksoft max-w-2xl">
-            {DESTINOS.length} destinos organizados por intenção humana: barato saindo do Brasil, primeira viagem internacional, Europa sem falir, Ásia que vale o voo e lugares lindos que podem sair caros.
-          </p>
-        </div>
-      </section>
-      <ExplorarClient destinos={destinos} />
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-8">
+      <header className="mb-8 max-w-3xl">
+        <div className="eyebrow mb-3">World Explorer · {DESTINOS.length} países</div>
+        <h1 className="font-display text-4xl sm:text-6xl tracking-tightest leading-[.98] text-ink">
+          Explore o mundo pelo que importa <span className="text-pine">pra você.</span>
+        </h1>
+        <p className="mt-4 text-lg text-inksoft">
+          Troque a camada do mapa para ver custo por dia, quem está na melhor época no mês da sua viagem ou o tipo de visto
+          para brasileiros. Clique num ponto ou na lista — os dois andam juntos.
+        </p>
+      </header>
+      <Suspense fallback={null}>
+        <ExplorarClient destinos={destinos} />
+      </Suspense>
     </main>
   );
 }

@@ -21,6 +21,10 @@ const IA_BYOK = 'https://api.openai.com https://api.groq.com https://api.anthrop
 // PostHog carrega `array.js` (capture script) e envia eventos via XHR. O domínio
 // us.i.posthog.com cobre script + ingestão; us-assets cobre alguns assets estáticos.
 const POSTHOG = 'https://us.i.posthog.com https://us-assets.i.posthog.com';
+// Provedores de dados abertos usados no browser (docs/PROVIDER-MATRIX.md):
+// mapas (OpenFreeMap/OSM), rotas (OSRM), clima (Open-Meteo), câmbio (Frankfurter/BCE).
+const MAPAS = 'https://tiles.openfreemap.org';
+const ABERTOS = 'https://router.project-osrm.org https://api.open-meteo.com https://archive-api.open-meteo.com https://api.frankfurter.dev https://api.frankfurter.app';
 
 export function buildSecurityHeaders({ production = true, vercel = false } = {}) {
   const dev = !production;
@@ -28,7 +32,7 @@ export function buildSecurityHeaders({ production = true, vercel = false } = {})
   const scriptSrc = ["'self'", "'unsafe-inline'", POSTHOG, dev && "'unsafe-eval'"].filter(Boolean).join(' ');
   const connectSrc = [
     "'self'", SUPABASE, 'wss://*.supabase.co',
-    WIKI, 'https://query.wikidata.org', 'https://open.er-api.com', IA_BYOK,
+    WIKI, 'https://query.wikidata.org', 'https://open.er-api.com', IA_BYOK, MAPAS, ABERTOS,
     POSTHOG,
     dev && 'ws:', dev && 'http://localhost:*',
   ].filter(Boolean).join(' ');
@@ -58,7 +62,8 @@ export function buildSecurityHeaders({ production = true, vercel = false } = {})
     { key: 'X-Content-Type-Options', value: 'nosniff' },
     { key: 'X-Frame-Options', value: 'DENY' },
     { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-    { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()' },
+    // geolocalização só para o próprio site (Modo Viagem, com consentimento explícito)
+    { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self), browsing-topics=()' },
   ];
   // HSTS só faz sentido (e só é seguro) sob HTTPS de deploy — fora em http://localhost.
   if (vercel) {
